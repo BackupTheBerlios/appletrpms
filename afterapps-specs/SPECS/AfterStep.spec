@@ -1,7 +1,7 @@
 %define	name	AfterStep
 %define	fver	2.00.03
 %define	version	2.00.03
-%define	release	3
+%define	release	1
 %define	prefix	/usr/X11R6
 %define gdesk   /usr/share
 
