@@ -22,12 +22,15 @@ $(APPLET_LIST):
 mdk-i586: all
 	cd $(RPMS)/i586/ && genhdlist .
 
-dist: all mdk-i586
+fc3-i385: all
+	cd $(RPMS)/i386/ && createrepo .
+
+#dist: all mdk-i586
 	
 
 clean:
 	./buildme clean
-	find $(BUILD) . -name \* | grep -v keepme | xargs rm -f 
+	find $(BUILD) -name \* | grep -v keepme | xargs rm -f 
 	find . -name \*~ | xargs rm -f
 
 

@@ -14,7 +14,7 @@ Vendor:		Sasha Vasko <sashav@sprintmail.com>
 URL:		http://aterm.sourceforge.net
 Source:		%{name}-%{version}.tar.gz
 Buildroot:	/var/tmp/%{name}-%{version}-root
-Requires:   AfterStep-%{asversion}
+Requires:   AfterStep = %{asversion}
 
 %description
 aterm, version %{version}, is a colour vt102 terminal emulator based on
