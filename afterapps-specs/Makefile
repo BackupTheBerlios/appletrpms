@@ -3,27 +3,28 @@ SRPMS=$(shell ls *.spec | grep -v base.spec | sed 's/spec/src.rpm/')
 RPMDIR=rpmdir
 SRPMDIR=srpmdir
 
-all: rpms srpms hdlist
+BUILD=BUILD
+SOURCES=SOURCES
+SPECS=SPECS
+TEST=asapm.rpm
 
-rpms: $(RPMDIR) $(RPMS) 
+include include/*inc
 
-srpms: $(SRPMDIR) $(SRPMS)
+all: 
+	$(foreach app, $(APPLET_LIST), \
+		make $(app).rpm ) \
+		&& /bin/true
 
-hdlist: $(RPMDIR) $(SRPMDIR) 
-	cd $(RPMDIR) && genhdlist .
-	cd $(SRPMDIR) && genhdlist .
+%.done: %.rpm
 
-$(RPMDIR):
-	mkdir -p $(RPMDIR)
+%.rpm:
+	echo $(patsubst %.rpm,%,$@)
+	rm -f $(SOURCES)/$($(patsubst %.rpm,%,$@)_TAR)
+	wget -O $(SOURCES)/$($(patsubst %.rpm,%,$@)_TAR) $($(patsubst %.rpm,%,$@)_URL)
+	rpm --define='_topdir $(PWD)' -bs $(SPECS)/$($(patsubst %.rpm,%,$@)_NAME).spec
+	rpm --define='_topdir $(PWD)' -ba $(SPECS)/$($(patsubst %.rpm,%,$@)_NAME).spec
+	touch $(patsubst %.rpm,%.done,$@)
 
-$(SRPMDIR):
-	mkdir -p $(SRPMDIR)
+.SUFFIXES: done rpm
 
-%.i586.rpm: %.spec
-	cp -a $(shell rpm -bb $< | grep 'Wrote: ' | sed 's/Wrote: //') $(RPMDIR)
-
-%.src.rpm: %.spec
-	cp -a $(shell rpm -bs $< | grep 'Wrote: ' | sed 's/Wrote: //') $(SRPMDIR)
-
-clean:
-	rm -f $(RPMDIR)/* $(SRPMDIR)/*
+.PHONY: clean $(patsubst %,%.done,$(APPLET_LIST))
