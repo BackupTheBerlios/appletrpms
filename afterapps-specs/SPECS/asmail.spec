@@ -1,6 +1,6 @@
 %define prefix /usr/X11R6
 %define name asmail
-%define version 1.6 
+%define version 1.7
 %define release 1
 
 Summary: Afterstep Mail Applet
@@ -63,6 +63,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Feb 26 2005 Sean Dague <sean@dague.net> 1.7-1
+- update to 1.7
+
 * Thu Nov 13 2003 Sean Dague <sean@dague.net> 1.6 -1
 - Intial build
 
