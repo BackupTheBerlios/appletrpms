@@ -1,8 +1,9 @@
 %define	name	AfterStep
-%define	fver	2.00.02
-%define	version	2.00.02
+%define	fver	2.00.03
+%define	version	2.00.03
 %define	release	3
 %define	prefix	/usr/X11R6
+%define gdesk   /usr/share
 
 Summary:	AfterStep Window Manager (NeXTalike)
 Name:		%{name}
@@ -12,11 +13,13 @@ Copyright:	GPL
 Group:		User Interface/Desktops
 URL:		http://www.afterstep.org
 Vendor:		The AfterStep Team (see TEAM in docdir)
-Source:		ftp://ftp.afterstep.org/stable/%{name}-%{fver}.tar.gz
+Source0:	ftp://ftp.afterstep.org/stable/%{name}-%{fver}.tar.bz2
+Source1:	Xclients.afterstep
+Source2:	afterstep
 Distribution:	The AfterStep TEAM
 Packager:	Sean Dague <sean at dague dot net>
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
-Requires: %{name}-libs qiv
+Requires:	%{name}-libs xloadimage
 
 %description
   AfterStep is a Window Manager for X which started by emulating the
@@ -53,20 +56,39 @@ Requires: %{name}-libs
 %description devel
   AftterStep libs include files
 
+%package fedora-config
+Summary: Setup files for use with Fedora gdm, switchdesk
+Group: 	 User Interface/Desktops
+Requires: %{name} = %{version}-%{release}
+
+%description fedora-config
+Setup files for use with Fedora gdm, switchdesk.
+
+Install this package if you want to be able to switch between AfterStep
+and other window managers on Fedora.
+
 %prep
 %setup -q -n %{name}-%{fver}
-#%patch0 -p1
-
-# RedHat's version of the startmenu
-# rm -rf afterstep/start
-# tar xzf $RPM_SOURCE_DIR/AfterStep-redhat.tar.gz
 
 CFLAGS=$RPM_OPT_FLAGS \
-./configure --prefix=%{prefix} --datadir=%{prefix}/share \
-    --disable-staticlibs --enable-sharedlibs \
-	--with-helpcommand="aterm -e man" \
+./configure \
+	--prefix=%{prefix}                        \
+	--datadir=%{prefix}/share                 \
+	--disable-staticlibs                      \
+	--enable-sharedlibs                       \
+	--with-xpm                                \
+	--with-jpeg                               \
+	--with-png                                \
+	--with-ttf                                \
+	--with-tiff                               \
+	--with-gif                                \
+	--with-jpeg                               \
+	--enable-ascp                             \
+	--enable-i18n                             \
+	--with-helpcommand="aterm -e man"         \
 	--with-desktops=1 --with-deskgeometry=2x3 \
-        --with-imageloader="qiv --root"
+	--with-imageloader="xsetbg"               \
+	--disable-send-postcard-to-developer
 
 %build
 make
@@ -83,11 +105,18 @@ rm -f $RPM_BUILD_ROOT%{prefix}/bin/{sessreg,xpmroot}
 for f in libAfter{Base,Conf,Image,Step}; do
    cp -a $f/$f.so* %{buildroot}%{prefix}/lib
 done
-# add desktop files
-mkdir -p $RPM_BUILD_ROOT/usr/share/applications
-install -m 644 AfterStep.desktop.final $RPM_BUILD_ROOT/usr/share/applications/AfterStep.desktop
-mkdir -p $RPM_BUILD_ROOT/usr/share/gnome/wm-properties
-install -m 644 AfterStep.desktop.final $RPM_BUILD_ROOT/usr/share/gnome/wm-properties/AfterStep.desktop
+
+#fedora-config prep
+install -d $RPM_BUILD_ROOT%{gdesk}/switchdesk/
+install -m 0644 %{SOURCE1} $RPM_BUILD_ROOT%{gdesk}/switchdesk/
+install -d $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/
+install -m 0644 %{SOURCE2} $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/
+install -d %{buildroot}%{gdesk}/xsessions/
+install -m 0644 AfterStep.desktop.final %{buildroot}%{gdesk}/xsessions/afterstep.desktop
+install -d %{buildroot}%{gdesk}/gnome/wm-properties/
+install -m 0644 AfterStep.desktop.final %{buildroot}%{gdesk}/gnome/wm-properties/afterstep.desktop
+rm -f %{buildroot}/usr/X11R6/share/xsessions/AfterStep.desktop
+rmdir %{buildroot}/usr/X11R6/share/xsessions/
 
 %clean
 rm -rf %{buildroot}
@@ -98,9 +127,6 @@ rm -rf %{buildroot}
 %{prefix}/bin/*
 %dir %{prefix}/share/afterstep
 %config %{prefix}/share/afterstep/*
-%config /usr/share/gnome/wm-properties/AfterStep.desktop
-%config /usr/share/applications/AfterStep.desktop
-%config /usr/X11R6/share/xsessions/AfterStep.desktop
 
 %files libs
 %defattr(-,root,root)
@@ -119,6 +145,11 @@ rm -rf %{buildroot}
 %{prefix}/include/libAfterImage/*
 %{prefix}/include/libAfterStep/*
 
+%files fedora-config
+/etc/X11/gdm/Sessions/afterstep
+%{gdesk}/switchdesk/Xclients.afterstep
+%{gdesk}/xsessions/afterstep.desktop
+%{gdesk}/gnome/wm-properties/afterstep.desktop
 
 %pre
 for i in /usr /usr/local /usr/X11R6 ; do
@@ -137,6 +168,10 @@ done
 %postun -p /sbin/ldconfig
 
 %changelog
+* Thu Mar 03 2005 J.Krebs <rpm_speedy@yahoo.com> 2.00.03-1
+- brought up to 2.00.03 release
+- separated Fedora desktop config files into a separate rpm
+
 * Sat Feb 26 2005 Sean Dague <sean@dague.net> 2.00.02-2
 - brought up to 2.00.02 release
 
