@@ -1,14 +1,13 @@
 %define	name	AfterStep
 %define	fver	2.00.02
 %define	version	2.00.02
-%define	release	2
+%define	release	3
 %define	prefix	/usr/X11R6
 
 Summary:	AfterStep Window Manager (NeXTalike)
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-Serial:		%{serial}
 Copyright:	GPL
 Group:		User Interface/Desktops
 URL:		http://www.afterstep.org
