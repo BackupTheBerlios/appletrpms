@@ -13,7 +13,7 @@ Vendor:		Sasha Vasko <sashav@sprintmail.com>
 URL:		http://aterm.sourceforge.net
 Source:		%{name}-%{version}.tar.gz
 Buildroot:	/var/tmp/%{name}-%{version}-root
-BuildRequires:	AfterStep >= 2.00.00
+BuildRequires:	AfterStep-devel >= 2.00.00
 Requires:	AfterStep >= 2.00.00
 
 %description

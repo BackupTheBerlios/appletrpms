@@ -13,7 +13,7 @@ Copyright:	GPL
 Group:		User Interface/Desktops
 URL:		http://www.afterstep.org
 Vendor:		The AfterStep Team (see TEAM in docdir)
-Source0:	ftp://ftp.afterstep.org/stable/%{name}-%{fver}.tar.bz2
+Source0:	ftp://ftp.afterstep.org/stable/%{name}-%{fver}.tar.gz
 Source1:	Xclients.afterstep
 Source2:	afterstep
 Distribution:	The AfterStep TEAM

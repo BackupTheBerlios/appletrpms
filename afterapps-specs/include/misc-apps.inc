@@ -11,20 +11,22 @@ ASCD-THEMES_URL=http://worldserver.oleane.com/rsn/Archives/$(ASCD-THEMES_TAR)
 APPLET_LIST += ASCD-THEMES
 
 #this is the second of three tarballs needed to build ascd-themes
+DWING_NOSPEC=YES
 DWING_NAME=dwing
 DWING_VERSION=1.10
 DWING_TAR=$(DWING_NAME).tgz
 DWING_URL=http://worldserver.oleane.com/rsn/Archives/$(DWING_TAR)
 
-APPLET_LIST += DWING
+#APPLET_LIST += DWING
 
 #this is the third of three tarballs needed to build ascd-themes
+LCD_NOSPEC=YES
 LCD_NAME=lcd
 LCD_VERSION=1.10
 LCD_TAR=$(LCD_NAME).tar.gz
 LCD_URL=http://worldserver.oleane.com/rsn/Archives/$(LCD_TAR)
 
-APPLET_LIST += LCD
+#APPLET_LIST += LCD
 
 MIXER.APP_NAME=Mixer.app
 MIXER.APP_VERSION=1.8.0

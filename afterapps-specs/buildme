@@ -76,8 +76,10 @@ sub make_target {
     verbose("",1); # we want seperation if more verbose
     verbose("building $target");
     make_download($target);
-    make_srpm($target);
-    make_rpm($target);
+    unless(exists $map{uc $target}->{NOSPEC}) { 
+        make_srpm($target);
+        make_rpm($target);
+    }
 }
 
 sub gen_syms {
@@ -174,6 +176,9 @@ sub build_target_map {
             if(/^\s*([^\#\s]+)_TAR\s*\=\s*(\S+)/) {
                 $map{$1}->{TAR} = $2;
             }
+	    if(/^\s*([^\#\s]+)_NOSPEC\s*\=\s*(\S+)/) {
+		$map{$1}->{NOSPEC} = $2;
+	    }
         }
         close(IN);
     }
