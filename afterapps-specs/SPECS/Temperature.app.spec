@@ -1,7 +1,7 @@
 %define prefix /usr/X11R6
 %define name Temperature.app
 %define version 1.4
-%define release as2
+%define release as3
 
 Summary: WM applet gets temperature every 15 minutes
 Name: %name
@@ -16,9 +16,11 @@ Patch1: Temperature.app-1.4-frog-5.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
-This WM applet has been modified to work under AfterStep.  Some
-WM dock information in the source has been elimated; it may not
-work properly under WindowMaker.  It works fine in AfterStep :).
+This WM applet includes two binaries: "Temperature.app" for
+WindowMaker (and perhaps other window managers too) and
+"Temperature.app.as", a version modified to work with AfterStep.
+The AS version has been modified to work under AfterStep and will
+not work properly under WindowMaker.  It works fine in AfterStep :).
 
 Additionally, the patch from Frog at:
 
@@ -36,11 +38,15 @@ and displays it (in Celsius or Fahrenheit).
 %prep
 %setup -q -n Temperature.app-%{version}
 
-%patch0 -p1 -b .as
 %patch1 -p1 -b .frog
+%patch0 -p1 -b .as
 
 %build
-#./configure --prefix=%prefix
+make
+
+mv -f Temperature.app Temperature.app.as
+cp -f Temperature.cc.as Temperature.cc
+
 make
 
 %install
@@ -48,6 +54,7 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%prefix/bin
 
 install -s -m 755 Temperature.app $RPM_BUILD_ROOT%prefix/bin/Temperature.app
+install -s -m 755 Temperature.app.as $RPM_BUILD_ROOT%prefix/bin/Temperature.app.as
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -59,6 +66,10 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Mar 21 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.4-as3
+- Added build for two binaries, one standard and one for
+- AfterStep.
+
 * Mon Feb 21 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.4-as2
 - Added Frog's patch to include wind, windchill, and pressure.
 

@@ -1,7 +1,7 @@
 %define prefix /usr/X11R6
 %define name Mixer.app
 %define version 1.8.0
-%define release as1
+%define release as2
 
 Summary: WM applet sound mixer based-on Rob Malda's asmixer
 Name: %name
@@ -15,9 +15,11 @@ Patch0: Mixer.app-1.8.0.as.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
-This WM applet has been modified to work under AfterStep.  Some
-WM dock information in the source has been elimated; it may not
-work properly under WindowMaker.  It works fine in AfterStep :).
+This WM applet includes two binaries: "Mixer.app" for
+WindowMaker (and perhaps other window managers too) and
+"Mixer.app.as", a version modified to work with AfterStep.
+The AS version has been modified to work under AfterStep and will
+not work properly under WindowMaker.  It works fine in AfterStep :).
 
 Mixer.app is a mixer utility for Linux/FreeBSD/OpenBSD systems.
 It is designed to be docked in Window Maker. This utility has
@@ -32,7 +34,11 @@ support.
 %patch0 -p1 -b .as
 
 %build
-#./configure --prefix=%prefix
+make
+
+mv -f Mixer.app Mixer.app.as
+cp -f Mixer.cc.as Mixer.cc
+
 make
 
 %install
@@ -40,6 +46,7 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%prefix/bin
 
 install -s -m 755 Mixer.app $RPM_BUILD_ROOT%prefix/bin/Mixer.app
+install -s -m 755 Mixer.app.as $RPM_BUILD_ROOT%prefix/bin/Mixer.app.as
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -51,6 +58,10 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Mar 21 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.8.0-as2
+- Added build for two binaries, one standard and one for
+- AfterStep.
+
 * Fri Feb 18 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.8.0-as1
 - Included AfterStep Wharf patch. Probably now broken under WM.
 
