@@ -3,7 +3,7 @@
 %define version 2.4
 %define release 1
 
-Summary: WM Weather Applet
+Summary: A dock app for displaying weather information
 Name: %name
 Version: %version
 Release: %release
@@ -12,11 +12,12 @@ Group: AfterStep/Applets
 URL: http://afterstep.org
 Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: libpcre-devel libwraster-devel
+BuildRequires: libpcre-devel libwraster-devel w3c-libwww-devel
 
 %description
-This is an AfterStep look & feel CPU statistics monitor tool
-for computers running Linux, FreeBSD, HP-UX or AIX.
+wmweather+ downloads current conditions, forecast data, and optionally a
+radar image. It will also watch for various warnings and display them using an
+external command.
 
 %prep
 %setup -q
@@ -28,9 +29,8 @@ make
 %install
 mkdir -p $RPM_BUILD_ROOT%prefix/bin
 mkdir -p $RPM_BUILD_ROOT%prefix/man/man1
-make AFTER_BIN_DIR=$RPM_BUILD_ROOT%prefix/bin \
-    AFTER_MAN_DIR=$RPM_BUILD_ROOT%prefix/man/man1 \
-    install install.man
+make prefix=$RPM_BUILD_ROOT%prefix \
+    install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -39,11 +39,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %prefix/bin/*
 %prefix/man/man1/*
-%doc CHANGES INSTALL LICENSE README TODO example.conf
+%doc ChangeLog README HINTS example.conf
 
 
 %changelog
-* Fri Aug 22 2003 Sean Dague <sean@dague.net> - Aug 30, 2003
+* Fri Aug 22 2003 Sean Dague <sean@dague.net> - 2.4-1
 - Initial build.
 
 
