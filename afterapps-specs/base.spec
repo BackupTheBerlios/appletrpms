@@ -1,7 +1,7 @@
 %define prefix /usr/X11R6
 %define name ascpu
 %define version 1.9
-%define release 2
+%define release 1
 
 Summary: CPU monitor
 Name: %name
@@ -11,7 +11,6 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://afterstep.org
 Source0: %{name}-%{version}.tar.gz
-Packager: Sean Dague <sean@dague.net>
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -43,10 +42,7 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
-* Fri Aug 29 2003 Sean Dague <sean@dague.net> - 1.9-2
-- added docs in
-
-* Fri Aug 22 2003 Sean Dague <sean@dague.net> - 1.9-1
+* Fri Aug 22 2003 Sean Dague <sean@dague.net> - 
 - Initial build.
 
 
