@@ -2,6 +2,7 @@
 %define	fver	2.00.03
 %define	version	2.00.03
 %define release 2
+%define epoch   20
 %define	prefix	/usr/X11R6
 %define gdesk   /usr/share
 %define generic 1
@@ -20,6 +21,7 @@ Summary:	AfterStep Window Manager (NeXTalike)
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
+Epoch:		%{epoch}
 Copyright:	GPL
 Group:		User Interface/Desktops
 URL:		http://www.afterstep.org
