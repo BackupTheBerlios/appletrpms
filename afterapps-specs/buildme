@@ -13,6 +13,8 @@ use Data::Dumper;
 
 our $SOURCES = "SOURCES";
 our $SPECS = "SPECS";
+our $RPMS = "RPMS";
+our $SRPMS = "SRPMS";
 our $RPM = "rpmbuild --define='_topdir $ENV{PWD}'";
 
 my $target = shift;
@@ -50,21 +52,42 @@ sub make_target {
     make_rpm($target);
 }
 
+sub gen_syms {
+    my $target = shift;
+    my $n = $map{uc $target}->{NAME};
+    my $v = $map{uc $target}->{VERSION};
+    my $t = $map{uc $target}->{TAR};
+    my $u = $map{uc $target}->{URL};
+    return ($n, $v, $t, $u);
+}
+
 sub make_srpm {
     my $target = shift;
-    verbose("  building srpm for " . $map{uc $target}->{NAME});
-    my $spec = $SPECS . "/" . $map{uc $target}->{NAME} . ".spec";
+    my ($name, $version, $tar, $url) = gen_syms($target); 
+    verbose("building srpm for $name");
+    my $spec = "$SPECS/$name.spec";
     # need to add timing logic here
-    system("$RPM -bs $spec");
+    if(check_deps("$SRPMS/$name*.src.rpm", 
+                  $spec, "$SOURCES/$tar")) {
+        system("$RPM -bs $spec");
+    } else {
+        verbose("  already latest version");
+    }
     verbose("  done");
 }
 
 sub make_rpm {
     my $target = shift;
-    verbose("  building rpm for " . $map{uc $target}->{NAME});
-    my $spec = $SPECS . "/" . $map{uc $target}->{NAME} . ".spec";
-    # need to add timing logic here
-    system("$RPM -bb $spec");
+    my ($name, $version, $tar, $url) = gen_syms($target); 
+    verbose("building rpm for $name");
+    my $spec = "$SPECS/$name.spec";
+    if(check_deps("$RPMS/*/$name*rpm", 
+                  $spec, "$SOURCES/$tar")) {
+        # need to add timing logic here
+        system("$RPM -bb $spec");
+    } else {
+        verbose("  already latest version");
+    }
     verbose("  done");
 }
 
@@ -119,6 +142,50 @@ sub build_target_map {
     }
     verbose("built target map");
     return %map;
+}
+
+sub check_deps {
+    my $target = shift;
+    my @tmp = @_;
+    
+    my @targets = glob($target);
+    print "Targets: @targets\n";
+    
+    # glob of an array returns an array of arrays
+    my @deps = ();
+    for my $t (@tmp) {
+        push @deps, glob($t);
+    }
+
+    if(!scalar(@targets) or !scalar(@deps)) {
+        # we have no idea what is going on so we return fail
+        return 1;
+    }
+    my $mtimet = 2000000000; # pretty close to 2038
+    my $mtimed = 0;
+    
+    # this finds the oldest target
+    for my $t (@targets) {
+        my $m = (stat($t))[9];
+        if($m < $mtimet) {
+            $mtimet = $m;
+        }
+    }
+
+    # this finds the youngest dep
+    for my $d (@deps) {
+        my $m = (stat($d))[9];
+        if($m > $mtimed) {
+            $mtimed = $m;
+        }
+    }
+ 
+    if($mtimed >= $mtimet) {
+        # a dep is younger than a target
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 sub verbose {
