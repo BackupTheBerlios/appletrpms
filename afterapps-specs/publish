@@ -1,0 +1,15 @@
+#!/usr/bin/perl
+
+use strict;
+
+system("rsync -avP -e ssh SRPMS/*.src.rpm afterstep\@spring.webconquest.com:~/www.afterstep.org/rpms/SRPMS/");
+
+my $arch = `uname -a`;
+if($arch =~ /mdk/) {
+    system("rsync -avP -e ssh RPMS/i586/*.rpm RPMS/i586/*cz afterstep\@spring.webconquest.com:~/www.afterstep.org/rpms/RPMS/mdk/10.1/i586/");
+} 
+if($arch =~ /morbo/) {
+    system("rsync -avP -e ssh RPMS/i386/*.rpm afterstep\@spring.webconquest.com:~/www.afterstep.org/rpms/RPMS/fc/3/i386/");
+}
+
+
