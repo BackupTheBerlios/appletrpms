@@ -19,7 +19,8 @@ our $RPM = "rpmbuild --define='_topdir $ENV{PWD}'";
 
 my $target = shift;
 
-my %map = build_target_map("include/as-apps.inc");
+my %map = build_target_map("include/as-apps.inc",
+                           "include/wm-apps.inc");
 %map = interpolate_map(%map);
 
 runtarget($target);
