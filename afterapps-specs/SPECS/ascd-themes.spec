@@ -37,7 +37,7 @@ tar xvf themes.tar
 tar xvzf dwing.tgz
 tar xvzf lcd.tar.gz
 
-rm -f tar xvf themes.tar
+rm -f themes.tar
 rm -f dwing.tgz
 rm -f lcd.tar.gz
 
