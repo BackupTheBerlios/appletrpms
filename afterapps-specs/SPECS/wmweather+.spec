@@ -11,8 +11,9 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://afterstep.org
 Source0: %{name}-%{version}.tar.gz
+Patch0: wmweather+-fedorafix.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: libpcre-devel libwraster-devel w3c-libwww-devel
+BuildRequires: w3c-libwww-devel
 
 %description
 wmweather+ downloads current conditions, forecast data, and optionally a
@@ -21,6 +22,7 @@ external command.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 ./configure --prefix=%prefix

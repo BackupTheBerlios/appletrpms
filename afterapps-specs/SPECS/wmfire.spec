@@ -12,7 +12,6 @@ Group: AfterStep/Applets
 URL: http://www.swanson.ukfsn.org/wmfire/
 Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: libgtop2.0-devel
 
 %description
 This is an update of the original wmfire dock applet. It uses

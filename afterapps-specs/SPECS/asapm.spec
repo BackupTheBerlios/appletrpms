@@ -12,7 +12,7 @@ Group: AfterStep/Applets
 URL: http://afterstep.org
 Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: libxpm-devel, libjpeg-devel
+BuildRequires: libjpeg-devel
 
 %description
 This is an AfterStep look & feel Advanced Power Management (APM) 
