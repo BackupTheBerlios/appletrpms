@@ -21,7 +21,9 @@ my $target = shift;
 
 my %map = build_target_map("include/as-apps.inc",
                            "include/wm-apps.inc",
-                           "include/misc-apps.inc",);
+                           "include/misc-apps.inc",
+                           "include/core-apps.inc");
+
 %map = interpolate_map(%map);
 
 runtarget($target);
