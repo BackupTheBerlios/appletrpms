@@ -2,19 +2,29 @@
 #
 # misc applets that didn't seem to be specific to any wm
 
-#DCWING_NAME=dcwing
-#DCWING_VERSION=1.10
-#DCWING_TAR=$(DCWING_NAME).tgz
-#DCWING_URL=http://worldserver.oleane.com/rsn/Archives/$(DCWING_TAR)
+#this is the first of three tarballs needed to build ascd-themes
+ASCD-THEMES_NAME=ascd-themes
+ASCD-THEMES_VERSION=1.13
+ASCD-THEMES_TAR=ascd-0.13pr6-themes.tgz
+ASCD-THEMES_URL=http://worldserver.oleane.com/rsn/Archives/$(ASCD-THEMES_TAR)
 
-#APPLET_LIST += DCWING
+APPLET_LIST += ASCD-THEMES
 
-#LCD_NAME=lcd
-#LCD_VERSION=1.10
-#LCD_TAR=$(LCD_NAME).tar.gz
-#LCD_URL=http://worldserver.oleane.com/rsn/Archives/$(LCD_TAR)
+#this is the second of three tarballs needed to build ascd-themes
+DWING_NAME=dwing
+DWING_VERSION=1.10
+DWING_TAR=$(DWING_NAME).tgz
+DWING_URL=http://worldserver.oleane.com/rsn/Archives/$(DWING_TAR)
 
-#APPLET_LIST += LCD
+APPLET_LIST += DWING
+
+#this is the third of three tarballs needed to build ascd-themes
+LCD_NAME=lcd
+LCD_VERSION=1.10
+LCD_TAR=$(LCD_NAME).tar.gz
+LCD_URL=http://worldserver.oleane.com/rsn/Archives/$(LCD_TAR)
+
+APPLET_LIST += LCD
 
 MIXER.APP_NAME=Mixer.app
 MIXER.APP_VERSION=1.8.0
