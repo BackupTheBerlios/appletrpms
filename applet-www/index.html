@@ -1,20 +1,180 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <title>Applet RPMS</title>
-  </head>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>AfterStep - Welcome to the Official AfterStep website</title>
+  <script language="JavaScript">
+      <!--
+      function MM_swapImgRestore() { //v3.0
+         var i, x, a=document.MM_sr; 
+         for (i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) 
+            x.src=x.oSrc;
+      }
 
-  <body>
-    <h1>Applet RPMS</h1>
-    This is a repository of Applet RPMS, which is of most interest to
-    users of AfterStep, WindowMaker or other similar window managers.
+      function MM_preloadImages() { //v3.0
+         var d=document; 
+         if (d.images) { 
+            if (!d.MM_p) 
+               d.MM_p=new Array();      
+            var i,j=d.MM_p.length,a=MM_preloadImages.arguments; 
+            for (i=0; i<a.length; i++)
+               if (a[i].indexOf("#")!=0) { 
+                  d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];
+               }
+         }
+      }
 
+      function MM_findObj(n, d) { //v4.0
+         var p,i,x;  
+         if (!d) 
+            d=document; 
+         if ((p=n.indexOf("?"))>0&&parent.frames.length) {
+            d=parent.frames[n.substring(p+1)].document; 
+            n=n.substring(0,p);
+         }
+         if (!(x=d[n])&&d.all) 
+            x=d.all[n]; 
+         for (i=0;!x&&i<d.forms.length;i++) 
+            x=d.forms[i][n];
+         for (i=0;!x&&d.layers&&i<d.layers.length;i++) 
+            x=MM_findObj(n,d.layers[i].document);
+         if (!x && document.getElementById) 
+            x=document.getElementById(n); 
+         return x;
+      }
 
-    <hr>
-    <address><a href="mailto:sean@dague.net">Sean Dague</a></address>
-<!-- Created: Tue Sep  2 00:11:26 EDT 2003 -->
-<!-- hhmts start -->
-Last modified: Tue Sep  2 00:12:28 EDT 2003
-<!-- hhmts end -->
-  </body>
+      function MM_swapImage() { //v3.0
+         var i,j=0,x,a=MM_swapImage.arguments; 
+         document.MM_sr=new Array; 
+         for (i=0;i<(a.length-2);i+=3)
+            if ((x=MM_findObj(a[i]))!=null) {
+               document.MM_sr[j++]=x; 
+               if (!x.oSrc) 
+                  x.oSrc=x.src; 
+               x.src=a[i+2];
+            }
+       }
+      //-->
+   </script>
+  <style type="text/css">
+      <!--
+
+      body {
+         margin-top: 10px;
+      }
+      
+      .copy {
+         margin-left: 10%;
+         margin-right: 10%;
+      }
+      
+      .copy a:link, .copy a:visited {
+         color:#0FF;
+         text-decoration:none
+      }
+      
+      .copy a:active, .copy a:hover {
+         color:#FC3;
+         text-decoration:underline
+      }
+      -->
+   </style>
+</head>
+<body bgcolor="#333333" text="#fffffe" leftmargin="0" topmargin="10"
+ marginwidth="0" marginheight="0"
+ onload="MM_preloadImages('images/home2.gif','images/news2.gif','images/download2.gif','images/documentation2.gif','images/look2.gif','images/mail.gif')">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="center">
+      <h1>Applet RPM Repository<br>
+      </h1>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" bgcolor="#ffcc33"><img src="spacer.gif"
+ width="1" height="1"></td>
+    </tr>
+    <tr>
+      <td align="center" bgcolor="#ffcc33"><img src="spacer.gif"
+ width="1" height="1"></td>
+    </tr>
+    <tr>
+      <td>
+      <div class="copy">
+      <p><font face="Tahoma, Arial, Verdana, Helvetica" size="-1"><span
+ style="font-weight: bold;">What is an Applet?<br>
+      </span></font></p>
+      <p><font face="Tahoma, Arial, Verdana, Helvetica" size="-1">Applets
+(or Dock Apps) are small applications designed for use with <a
+ href="http://www.afterstep.org">AfterStep</a>, <a
+ href="http://www.windowmaker.org">WindowMaker</a>, <a
+ href="http://blackboxwm.sourceforge.net/">BlackBox</a>, <a
+ href="http://www.students.tut.fi/%7Etuomov/pwm/">PWM</a>, or <a
+ href="http://fluxbox.sourceforge.net/">Fluxbox</a>.<br>
+      </font></p>
+      <p><font face="Tahoma, Arial, Verdana, Helvetica" size="-1"><span
+ style="font-weight: bold;">What is this Project about?<br>
+      </span></font></p>
+      <p><font face="Tahoma, Arial, Verdana, Helvetica" size="-1">Applets
+are rairly packaged with Linux distributions as most of the effort of
+distributions are spent on GNOME and KDE.&nbsp; This project is
+designed to build both source and binary rpms for major Linux
+distributions so that users can easily install applets on their
+machines.<br>
+      </font></p>
+      <p><font face="Tahoma, Arial, Verdana, Helvetica" size="-1"><span
+ style="font-weight: bold;">What is here so far?</span></font><br>
+      </p>
+      <ul>
+        <li>Source RPMS - <a
+ href="ftp://ftp.berlios.de/pub/appletrpms/srpms">ftp://ftp.berlios.de/pub/appletrpms/srpms</a></li>
+        <li>Mandrake 9.1 i586 RPMS - <a
+ href="ftp://ftp.berlios.de/pub/appletrpms/rpms">ftp://ftp.berlios.de/pub/appletrpms/rpms</a><br>
+        </li>
+      </ul>
+      <p><font face="Tahoma, Arial, Verdana, Helvetica" size="-1"><span
+ style="font-weight: bold;"></span></font></p>
+      <p><font face="Tahoma, Arial, Verdana, Helvetica" size="-1"><span
+ style="font-weight: bold;"><span style="font-weight: bold;">But wait,
+Applet YYY isn't there yet, why not?<br>
+      </span></span></font></p>
+      <p><font face="Tahoma, Arial, Verdana, Helvetica" size="-1">Time
+is a limitted resource.&nbsp; I started with the applets I needed on my
+new laptop, and will work through the applets that I most often
+use.&nbsp; Please let me know what other applets your would like by <a
+ href="https://developer.berlios.de/bugs/?group_id=975">registering a
+bug</a>.&nbsp; Make sure to set the category to "new applet request".<br>
+      </font></p>
+      <p><font face="Tahoma, Arial, Verdana, Helvetica" size="-1"><span
+ style="font-weight: bold;">Did you write these applets?<br>
+      </span></font></p>
+      <p><font face="Tahoma, Arial, Verdana, Helvetica" size="-1">No.&nbsp;
+I'm just harvesting applets from the <a
+ href="http://www.tigr.net/afterstep/">AfterStep Applets Distribution</a>
+and <a href="http://www.bensinclair.com/dockapp/">Dock App Warehouse</a>,
+and turning them into rpms.&nbsp; Please see the README files in each
+rpm for more information about the authors of each individual applet.<br>
+      </font></p>
+      <p><font face="Tahoma, Arial, Verdana, Helvetica" size="-1">&nbsp;</font></p>
+      <font face="Tahoma, Arial, Verdana, Helvetica" size="-1"> </font></div>
+      <font face="Tahoma, Arial, Verdana, Helvetica" size="-1"> </font></td>
+    </tr>
+    <tr>
+      <td align="center" bgcolor="#ffcc33"><img src="spacer.gif"
+ width="1" height="1"></td>
+    </tr>
+    <tr>
+      <td align="center" height="20">
+      <div class="copy"> <font
+ face="Verdana, Arial, Helvetica, sans-serif" size="-2">Last update:
+September 2, 2003 - <a href="http://dague.net">Sean Dague</a><br>
+Web Design based on <a href="http://www.afterstep.org">AfterStep.org</a>
+site by <a href="http://www.grfxgirl.com">grfxgirl</a></font></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
 </html>
