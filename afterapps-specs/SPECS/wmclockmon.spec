@@ -1,7 +1,7 @@
 %define prefix /usr/X11R6
 %define name wmclockmon
 %define version 0.8.0
-%define release 1
+%define release 2
 
 Summary: digital clock with 7 different styles in either LCD or LED style
 Name: %name
@@ -31,13 +31,13 @@ make
 %install
 mkdir -p $RPM_BUILD_ROOT%prefix/bin/
 mkdir -p $RPM_BUILD_ROOT%prefix/man/man1/
-mkdir -p $RPM_BUILD_ROOT/usr/share/wmclockmon/styles/
+mkdir -p $RPM_BUILD_ROOT%prefix/share/wmclockmon/styles/
 
 install -s -m 755 src/wmclockmon $RPM_BUILD_ROOT%prefix/bin/
 install -s -m 755 wmclockmon-config/wmclockmon-config $RPM_BUILD_ROOT%prefix/bin/
 install -s -m 755 wmclockmon-cal/wmclockmon-cal $RPM_BUILD_ROOT%prefix/bin/
 install -m 644 doc/*.1 $RPM_BUILD_ROOT%prefix/man/man1/
-install -m 644 styles/* $RPM_BUILD_ROOT/usr/share/wmclockmon/styles/
+install -m 644 styles/* $RPM_BUILD_ROOT%prefix/share/wmclockmon/styles/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -46,11 +46,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %prefix/bin/*
 %prefix/man/man1/*
-/usr/share/wmclockmon/styles/*
+%prefix/share/wmclockmon/styles/*
 %doc doc/sample*.wmclockmonrc AUTHORS BUGS COPYING ChangeLog INSTALL NEWS README THANKS TODO
 
 
 %changelog
+* Fri Mar 04 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.8.0-2
+- Changed styles dir to /usr/X11R6/share from /usr/share.
+
 * Tue Feb 22 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.8.0-1
 - Initial build.
 
