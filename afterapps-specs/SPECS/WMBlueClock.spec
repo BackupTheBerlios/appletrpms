@@ -11,7 +11,6 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://sheepmakers.ath.cx/utils/wmblueclock/
 Source0: %{name}.tar.gz
-Packager: J. Krebs <jkrebs@tconl.com>
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description

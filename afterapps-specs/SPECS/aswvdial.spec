@@ -11,7 +11,6 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://www.ma-scha.de/
 Source0: %{name}-%{version}.tar.bz2
-Packager: J. Krebs <jkrebs@tconl.com>
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: libxml-devel
 Requires: libxml
