@@ -1,6 +1,6 @@
 %define prefix /usr/X11R6
 %define name asmon
-%define version 0.62
+%define version 0.63
 %define release 1
 
 Summary: AS system monitor
@@ -35,7 +35,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %prefix/bin/*
-%doc AUTHOR Changelog CHANGES COPYING INSTALL 
+%doc AUTHOR CHANGES COPYING INSTALL 
 
 
 %changelog

@@ -1,21 +1,29 @@
 RPMS=$(shell ls *.spec | grep -v base.spec | sed 's/spec/i586.rpm/')
 SRPMS=$(shell ls *.spec | grep -v base.spec | sed 's/spec/src.rpm/')
-BUILDDIR=build
+RPMDIR=rpmdir
+SRPMDIR=srpmdir
 
-all: $(BUILDDIR) rpms srpms
+all: rpms srpms hdlist
 
-rpms: $(RPMS) 
+rpms: $(RPMDIR) $(RPMS) 
 
-srpms: $(SRPMS)
+srpms: $(SRPMDIR) $(SRPMS)
 
-$(BUILDDIR):
-	mkdir -p $(BUILDDIR)
+hdlist: $(RPMDIR) $(SRPMDIR) 
+	cd $(RPMDIR) && genhdlist .
+	cd $(SRPMDIR) && genhdlist .
+
+$(RPMDIR):
+	mkdir -p $(RPMDIR)
+
+$(SRPMDIR):
+	mkdir -p $(SRPMDIR)
 
 %.i586.rpm: %.spec
-	cp -a $(shell rpm -bb $< | grep 'Wrote: ' | sed 's/Wrote: //') $(BUILDDIR)
+	cp -a $(shell rpm -bb $< | grep 'Wrote: ' | sed 's/Wrote: //') $(RPMDIR)
 
 %.src.rpm: %.spec
-	cp -a $(shell rpm -bs $< | grep 'Wrote: ' | sed 's/Wrote: //') $(BUILDDIR)
+	cp -a $(shell rpm -bs $< | grep 'Wrote: ' | sed 's/Wrote: //') $(SRPMDIR)
 
 clean:
-	rm -f $(BUILDDIR)/*
+	rm -f $(RPMDIR)/* $(SRPMDIR)/*
