@@ -1,6 +1,7 @@
+%define prefix /usr/X11R6
 %define name ascd-themes
 %define version 1.0
-%define release 2
+%define release 3
 
 Summary: Themes for ascd, the AfterStep CD player.
 Name: %name
@@ -18,20 +19,20 @@ Requires: ascd
 %description
 Themes for ascd, the AfterStep CD player.  Includes ten from
 Denis Bourez and one from Michele Campeotto.  These install to
-/usr/share/ascd/Themes.
+%prefix/share/ascd/Themes.
 
 %prep
 %setup -q -n ascd-0.13pr6-themes
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/usr/share/ascd/Themes/
+mkdir -p $RPM_BUILD_ROOT%prefix/share/ascd/Themes/
 
-cp themes.tar $RPM_BUILD_ROOT/usr/share/ascd/Themes/
-cp %{SOURCE1} $RPM_BUILD_ROOT/usr/share/ascd/Themes/
-cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/ascd/Themes/
+cp themes.tar $RPM_BUILD_ROOT%prefix/share/ascd/Themes/
+cp %{SOURCE1} $RPM_BUILD_ROOT%prefix/share/ascd/Themes/
+cp %{SOURCE2} $RPM_BUILD_ROOT%prefix/share/ascd/Themes/
 
-cd $RPM_BUILD_ROOT/usr/share/ascd/Themes/
+cd $RPM_BUILD_ROOT%prefix/share/ascd/Themes/
 
 tar xvf themes.tar
 tar xvzf dwing.tgz
@@ -46,10 +47,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-/usr/share/ascd/Themes/*/*
+%prefix/share/ascd/Themes/*/*
 
 
 %changelog
+* Fri Mar 04 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.0-3
+- Changed Themes path to /usr/X11R6/share/ascd/Themes.
+
 * Tue Feb 22 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.0-2
 - Revamped the tarball setup.
 

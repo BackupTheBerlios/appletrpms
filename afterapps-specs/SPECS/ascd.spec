@@ -1,7 +1,7 @@
 %define prefix /usr/X11R6
 %define name ascd
 %define version 0.13.2
-%define release 3
+%define release 4
 
 Summary: Audio CD player
 Name: %name
@@ -37,8 +37,8 @@ make
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%prefix/bin
 mkdir -p $RPM_BUILD_ROOT%prefix/man/man1
-mkdir -p $RPM_BUILD_ROOT/usr/share/ascd/Default/
-mkdir -p $RPM_BUILD_ROOT/usr/share/ascd/Themes/default/quick/
+mkdir -p $RPM_BUILD_ROOT%prefix/share/ascd/Default/
+mkdir -p $RPM_BUILD_ROOT%prefix/share/ascd/Themes/default/quick/
 
 install -s -m 755 ascd/ascd $RPM_BUILD_ROOT%prefix/bin/
 install -m 644 ascd/ascd.man $RPM_BUILD_ROOT%prefix/man/man1/ascd.1
@@ -48,13 +48,13 @@ tar xvf default.tar
 tar xvf themes.tar
 gunzip themes-manual.ps.gz
 
-install -m 644 Default/* $RPM_BUILD_ROOT/usr/share/ascd/Default/
+install -m 644 Default/* $RPM_BUILD_ROOT%prefix/share/ascd/Default/
 cd Themes
-install -m 644 default/*.xpm $RPM_BUILD_ROOT/usr/share/ascd/Themes/default/
-install -m 644 default/Theme $RPM_BUILD_ROOT/usr/share/ascd/Themes/default/
+install -m 644 default/*.xpm $RPM_BUILD_ROOT%prefix/share/ascd/Themes/default/
+install -m 644 default/Theme $RPM_BUILD_ROOT%prefix/share/ascd/Themes/default/
 
 cd default
-install -m 644 quick/* $RPM_BUILD_ROOT/usr/share/ascd/Themes/default/quick/
+install -m 644 quick/* $RPM_BUILD_ROOT%prefix/share/ascd/Themes/default/quick/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -63,12 +63,15 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %prefix/bin/*
 %prefix/man/man1/*
-/usr/share/ascd/Default/*
-/usr/share/ascd/Themes/default/*
+%prefix/share/ascd/Default/*
+%prefix/share/ascd/Themes/default/*
 %doc README ascd/doc/* ascd/themes/themes-manual.ps
 
 
 %changelog
+* Fri Mar 04 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.13.2-4
+- Changed Themes dir to /usr/X11R6/share/ascd/Themes.
+
 * Sat Feb 27 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.13.2-3
 - Changed tarball to that provided by tigr.net/afterstep/.
 
