@@ -1,8 +1,7 @@
 %define prefix  /usr/X11R6
 %define	name	aterm
 %define	version	1.00.beta2
-%define	release	1
-%define asversion 2.00.02
+%define	release	2
 
 Summary:	aterm - terminal emulator in an X window
 Name:		%{name}
@@ -14,7 +13,8 @@ Vendor:		Sasha Vasko <sashav@sprintmail.com>
 URL:		http://aterm.sourceforge.net
 Source:		%{name}-%{version}.tar.gz
 Buildroot:	/var/tmp/%{name}-%{version}-root
-Requires:   AfterStep = %{asversion}
+BuildRequires:	AfterStep >= 2.00.00
+Requires:	AfterStep >= 2.00.00
 
 %description
 aterm, version %{version}, is a colour vt102 terminal emulator based on
@@ -57,6 +57,13 @@ make DESTDIR=$RPM_BUILD_ROOT install
 #%config(missingok) /etc/X11/wmconfig/aterm
 
 %changelog
+* Thu Mar 03 2005 J. Krebs <rpm_speedy@yahoo.com> 1.00beta2-2
+- changed AS absolute require to >= require
+- added AS buildrequire
+
+* Sat Feb 26 2005 Sean Dague <sean@dague.net> 1.00beta2-1
+- new version.
+
 * Thu Jul 13 2000 Ryan Weaver <ryanw@infohwy.com> 0.4.0-1
 - rxvt.h: fixed compile errors in utmp.c with some wierd wtmpx systems.
 - pixmap.c: fixed bug in libasimage and pixmap.c causing no transparency 
