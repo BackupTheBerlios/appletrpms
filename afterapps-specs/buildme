@@ -148,16 +148,16 @@ sub build_target_map {
     for my $file (@files) {
         open(IN, "<$file");
         while(<IN>) {
-            if(/^\s*(\w+)_NAME\s*\=\s*(\S+)/) {
+            if(/^\s*(\S+)_NAME\s*\=\s*(\S+)/) {
                 $map{$1}->{NAME} = $2;
             }
-            if(/^\s*(\w+)_VERSION\s*\=\s*(\S+)/) {
+            if(/^\s*(\S+)_VERSION\s*\=\s*(\S+)/) {
                 $map{$1}->{VERSION} = $2;
             }
-            if(/^\s*(\w+)_URL\s*\=\s*(\S+)/) {
+            if(/^\s*(\S+)_URL\s*\=\s*(\S+)/) {
                 $map{$1}->{URL} = $2;
             }
-            if(/^\s*(\w+)_TAR\s*\=\s*(\S+)/) {
+            if(/^\s*(\S+)_TAR\s*\=\s*(\S+)/) {
                 $map{$1}->{TAR} = $2;
             }
         }
