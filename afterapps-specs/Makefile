@@ -23,5 +23,8 @@ $(APPLET_LIST):
 
 clean:
 	./buildme clean
+	find $(BUILD) . -name \* | grep -v keepme | xargs rm -f 
+	find . -name \*~ | xargs rm -f
+
 
 
