@@ -18,8 +18,10 @@ A swallowable applet monitors the modem.
 
 %prep
 tar -tvzf ../SOURCES/%{name}-%{version}-1.tar.gz
-mv %{name}-%{version}-1 %{name}-%{version}
-tar -cvzf ../SOURCES/%{name}-%{version}-1.tar.gz %{name}-%{version}
+if [ -d  %{name}-%{version}-1 ] ; then 
+    mv %{name}-%{version}-1 %{name}-%{version} 
+    tar -cvzf ../SOURCES/%{name}-%{version}-1.tar.gz %{name}-%{version} 
+fi
 rm -rf %{name}-%{version}
 %setup -q
 
