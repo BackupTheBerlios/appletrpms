@@ -2,6 +2,7 @@
 %define name bubblemon-dockapp
 %define version 1.46
 %define release 1
+%define mandrake 0
 %{?_with_mandrake:%define mandrake 1}
 
 Summary: system monitoring dockapp based-on GNOME BubbleMon.
