@@ -1,7 +1,7 @@
 %define prefix /usr/X11R6
 %define name wmxkb
 %define version 1.2.2
-%define release 2
+%define release 3
 
 Summary: A dockable/swallowed XKB groups indicator and switch
 Name: %name
@@ -26,14 +26,14 @@ run whenever a particular group is activated.
 %setup -q
 
 %build
-./configure --prefix=%prefix
+./configure --with-rpm --prefix=%prefix
 make
 
 %install
 mkdir -p $RPM_BUILD_ROOT%prefix/bin
-mkdir -p $RPM_BUILD_ROOT/usr/share/pixmaps/wmxkb/
+mkdir -p $RPM_BUILD_ROOT%prefix/share/pixmaps/wmxkb/
 install -s -m 755 wmxkb $RPM_BUILD_ROOT%prefix/bin/
-install -m 644 pixmaps/*.xpm $RPM_BUILD_ROOT/usr/share/pixmaps/wmxkb/
+install -m 644 pixmaps/*.xpm $RPM_BUILD_ROOT%prefix/share/pixmaps/wmxkb/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -41,11 +41,14 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %prefix/bin/*
-/usr/share/pixmaps/wmxkb/*.xpm
+%prefix/share/pixmaps/wmxkb/*.xpm
 %doc COPYING README manual.html WMxkb_flexy WMxkb_nonflexy
 
 
 %changelog
+* Fri Mar 04 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-3
+- changed pixmaps to /usr/X11R6/share/pixmaps/wmxkb.
+
 * Fri Feb 18 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-2
 - src.rpm script barfed under Fedora. Tweaked it.
 
