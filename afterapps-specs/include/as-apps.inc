@@ -50,4 +50,62 @@ ASMEM_URL=http://tigr.net/afterstep/download/$(ASMEM_NAME)/$(ASMEM_TAR)
 
 APPLET_LIST += ASMEM
 
+ASMIX_NAME=asmix
+ASMIX_VERSION=1.5
+ASMIX_TAR=$(ASMIX_NAME)-$(ASMIX_VERSION).tar.gz
+ASMIX_URL=http://tigr.net/afterstep/download/$(ASMIX_NAME)/$(ASMIX_TAR)
+
+APPLET_LIST += ASMIX
+
+ASMIXER_NAME=asmixer
+ASMIXER_VERSION=0.5
+ASMIXER_TAR=$(ASMIXER_NAME)-$(ASMIXER_VERSION).tar.gz
+ASMIXER_URL=http://tigr.net/afterstep/download/$(ASMIXER_NAME)/$(ASMIXER_TAR)
+
+APPLET_LIST += ASMIXER
+
+ASMODEM_NAME=asmodem
+ASMODEM_VERSION=0.6
+ASMODEM_TAR=$(ASMODEM_NAME)-$(ASMODEM_VERSION)-1.tar.gz
+ASMODEM_URL=http://tigr.net/afterstep/download/$(ASMODEM_NAME)/$(ASMODEM_TAR)
+
+APPLET_LIST += ASMODEM
+
+# there is a "newer" version at http://rio.vg/asmon/, but I think that is hijacked
+# >= 0.63 works fine with 2.6 kernel
+ASMON_NAME=asmon
+ASMON_VERSION=0.65
+ASMON_TAR=$(ASMON_NAME)-$(ASMON_VERSION).tar.gz
+ASMON_URL=http://tigr.net/afterstep/download/$(ASMON_NAME)/$(ASMON_TAR)
+
+APPLET_LIST += ASMON
+
+ASMOUNT_NAME=asmount
+ASMOUNT_VERSION=1.0.0
+ASMOUNT_TAR=$(ASMOUNT_NAME)-$(ASMOUNT_VERSION).tar.gz
+ASMOUNT_URL=http://tigr.net/afterstep/download/$(ASMOUNT_NAME)/$(ASMOUNT_TAR)
+
+APPLET_LIST += ASMOUNT
+
+ASPOSTIT_NAME=aspostit
+ASPOSTIT_VERSION=1.3
+ASPOSTIT_TAR=$(ASPOSTIT_NAME)-$(ASPOSTIT_VERSION).tar.gz
+ASPOSTIT_URL=http://tigr.net/afterstep/download/$(ASPOSTIT_NAME)/$(ASPOSTIT_TAR)
+
+APPLET_LIST += ASPOSTIT
+
+ASTIME_NAME=astime
+ASTIME_VERSION=2.8
+ASTIME_TAR=$(ASTIME_NAME)-$(ASTIME_VERSION).tar.gz
+ASTIME_URL=http://tigr.net/afterstep/download/$(ASTIME_NAME)/$(ASTIME_TAR)
+
+APPLET_LIST += ASTIME
+
+ASMEM_NAME=asmem
+ASMEM_VERSION=1.10
+ASMEM_TAR=$(ASMEM_NAME)-$(ASMEM_VERSION).tar.gz
+ASMEM_URL=http://tigr.net/afterstep/download/$(ASMEM_NAME)/$(ASMEM_TAR)
+
+APPLET_LIST += ASMEM
+
 

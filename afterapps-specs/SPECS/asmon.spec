@@ -1,6 +1,6 @@
 %define prefix /usr/X11R6
 %define name asmon
-%define version 0.63
+%define version 0.65
 %define release 1
 
 Summary: AS system monitor
