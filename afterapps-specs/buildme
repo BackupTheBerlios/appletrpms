@@ -35,19 +35,38 @@ sub runtarget {
         make_all();
     } elsif (exists $map{uc $target}) {
         make_target($target);
+    } elsif ($target =~ /^clean$/) {
+        system("rm -f $SOURCES/*tar.gz");
+        system("rm -f $SRPMS/*.src.rpm");
+        system("rm -f $RPMS/*/*rpm");
     }
 }
 
+#########################################
+#
+#  make_all - loop through all build targets
+#
+#########################################
+
 sub make_all {
-    verbose("\building all");
+    verbose("building all");
     for my $t (sort keys %map) {
         make_target($t);
     }
 }
 
+#########################################
+#
+# make_target - build 1 target by name
+#              * dowload
+#              * build srpm
+#              * build rpm
+#########################################
+
 sub make_target {
     my $target = shift;
-    verbose("\nbuilding $target");
+    verbose("",1); # we want seperation if more verbose
+    verbose("building $target");
     make_download($target);
     make_srpm($target);
     make_rpm($target);
@@ -65,43 +84,44 @@ sub gen_syms {
 sub make_srpm {
     my $target = shift;
     my ($name, $version, $tar, $url) = gen_syms($target); 
-    verbose("building srpm for $name");
+    verbose("building srpm for $name",1);
     my $spec = "$SPECS/$name.spec";
     # need to add timing logic here
     if(check_deps("$SRPMS/$name*.src.rpm", 
                   $spec, "$SOURCES/$tar")) {
         system("$RPM -bs $spec");
     } else {
-        verbose("  already latest version");
+        verbose("  already latest version",1);
     }
-    verbose("  done");
+    verbose("  done",1);
 }
 
 sub make_rpm {
     my $target = shift;
     my ($name, $version, $tar, $url) = gen_syms($target); 
-    verbose("building rpm for $name");
+    verbose("building rpm for $name",1);
     my $spec = "$SPECS/$name.spec";
     if(check_deps("$RPMS/*/$name*rpm", 
                   $spec, "$SOURCES/$tar")) {
         # need to add timing logic here
-        system("$RPM -bb $spec");
+        !system("$RPM -bb $spec") or bail("failed to build $name rpm") ;
     } else {
-        verbose("  already latest version");
+        verbose("  already latest version",1);
     }
-    verbose("  done");
+    verbose("  done",1);
 }
 
 sub make_download {
     my $target = shift;
     my $tar = $map{uc $target}->{TAR};
     my $url = $map{uc $target}->{URL};
-    verbose("  downloading $tar from $url");
-    if(!-e "$SOURCES/$tar") {
+    verbose("  downloading $tar from $url",1);
+    if(!-e "$SOURCES/$tar" or
+       system("tar -tzf $SOURCES/$tar >/dev/null")) {
         system("wget -O $SOURCES/$tar $url");
-        verbose("  done");
+        verbose("  done",1);
     } else {
-        verbose("  $SOURCES/$tar already exists");
+        verbose("  $SOURCES/$tar already exists",2);
     }
 }
 
@@ -118,7 +138,7 @@ sub interpolate_map {
         $map{$key}->{URL} =~ s/\$\($version\)/$map{$key}->{VERSION}/g;
         $map{$key}->{URL} =~ s/\$\($name\)/$map{$key}->{NAME}/g;
     }
-    verbose("added make interpolation to target map");
+    verbose("added make interpolation to target map",2);
     return %map;
 }
 
@@ -143,7 +163,7 @@ sub build_target_map {
         }
         close(IN);
     }
-    verbose("built target map");
+    verbose("built target map",2);
     return %map;
 }
 
@@ -152,7 +172,7 @@ sub check_deps {
     my @tmp = @_;
     
     my @targets = glob($target);
-    print "Targets: @targets\n";
+    #print "Targets: @targets\n";
     
     # glob of an array returns an array of arrays
     my @deps = ();
@@ -191,6 +211,19 @@ sub check_deps {
     }
 }
 
+sub bail {
+    my $msg = shift;
+    print STDERR "***********************************************************\n";
+    print STDERR "********                 BUILD ERROR\n";
+    print STDERR "********   $msg\n";
+    print STDERR "***********************************************************\n";
+    unless($ENV{FORCE}) {exit(1);}
+}
+
 sub verbose {
-    print STDERR shift, "\n";
+    my $msg = shift;
+    my $level = shift;
+    if($ENV{VERBOSE} >= $level) {
+        print STDERR "$msg\n";
+    }
 }
