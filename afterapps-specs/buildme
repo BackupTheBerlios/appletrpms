@@ -19,6 +19,8 @@ our $RPM = "rpmbuild --define='_topdir $ENV{PWD}'";
 
 my $target = shift;
 
+$RPM .= with_flags();
+
 my %map = build_target_map("include/as-apps.inc",
                            "include/wm-apps.inc",
                            "include/misc-apps.inc",
@@ -260,6 +262,16 @@ applet rpms.
 END
     close(OUT);
     system("$RPM -bb $SPECS/afterstep-apps.spec");
+}
+
+sub with_flags() {
+    if(-e "/etc/mandrake-release") {
+        return " --with mandrake";
+    }
+    if(-e "/etc/redhat-release") {
+        return " --with fedora";
+    }
+    return "";
 }
 
 sub bail {

@@ -1,0 +1,49 @@
+#!/usr/sbin/install-menu
+#   -*- mode: shell-script; -*-
+
+compat="menu-1"
+!include menu.h
+
+compat="menu-2"
+
+# removed ifnempty($hotkey,"&" toupper($hotkey))
+#  can't figure out how to do hotkeys properly...
+# added MiniPixmap display
+function mod($var,$com)=" " $var " \"" 
+          title()
+          "\" exec " $com "\n"
+          ifnempty($icon," MiniPixmap \"" $icon "\"\n");
+
+function ex($com)=mod("Exec",$com);
+
+supported;
+  asmodule=   mod("Module", $command);
+  fvwmmodule= mod("Exec",   $command);
+  wm=         mod("Restart",$command);
+  x11fvwm=    ex($command);
+  x11=        ex($command);
+  text=       ex(term());
+endsupported;
+
+# start- and endmenu entries not needed because afterstep
+# menu is a directory. submenutitle also removed.
+startmenu="";
+endmenu="";
+
+# Standard preoutput breaks menu entries, removed
+preoutput="";
+
+# Clean up directory before making menu
+prerun="rm -rf " prefix() "/Mandrake";
+
+postrun="find " prefix() " -name \"nop\" -print | xargs rm";
+
+# AfterStep start menu: single files containing the menu entries
+# I coudn't turn off generating files for the submenu titles,
+# so i just call them "nop" and they get removed by postrun.
+genmenu=parent(replacewith($section," ","_"))
+        "/" ifelse($command,replacewith($title," ","_"),"nop");
+
+rootprefix="/usr/X11R6/share/afterstep/start/";
+userprefix=".afterstep/start/";
+mainmenutitle="Mandrake Menu";

@@ -19,14 +19,17 @@ meta_rpm:
 $(APPLET_LIST):
 	./buildme $@
 
-mdk-i586: all
+mdk-i586: 
 	cd $(RPMS)/i586/ && genhdlist .
 
-fc3-i385: all
+fc3-i386: 
 	cd $(RPMS)/i386/ && createrepo .
 
 #dist: all mdk-i586
 	
+
+publish: all meta_rpm
+	./publish
 
 clean:
 	./buildme clean

@@ -1,9 +1,20 @@
 %define	name	AfterStep
 %define	fver	2.00.03
 %define	version	2.00.03
-%define	release	1
+%define release 2
 %define	prefix	/usr/X11R6
 %define gdesk   /usr/share
+%define generic 1
+%define fedora 0
+%{?_with_fedora:%define fedora 1}
+%define mandrake 0
+%{?_with_mandrake:%define mandrake 1}
+%if %{fedora}
+   %define generic 0
+%endif
+%if %{mandrake}
+   %define generic 0
+%endif
 
 Summary:	AfterStep Window Manager (NeXTalike)
 Name:		%{name}
@@ -16,10 +27,14 @@ Vendor:		The AfterStep Team (see TEAM in docdir)
 Source0:	ftp://ftp.afterstep.org/stable/%{name}-%{fver}.tar.gz
 Source1:	Xclients.afterstep
 Source2:	afterstep
+Source3: AfterStep.kdm
+Source4: AfterStep.menu
+Source5: AfterStep.menumethod
 Distribution:	The AfterStep TEAM
 Packager:	Sean Dague <sean at dague dot net>
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
-Requires:	%{name}-libs xloadimage
+Requires:	%{name}-libs = %{version}
+Requires: xloadimage
 
 %description
   AfterStep is a Window Manager for X which started by emulating the
@@ -51,21 +66,10 @@ version:	%{version}
 release:	%{release}
 copyright:	GPL
 group:		User Interface/Desktops
-Requires: %{name}-libs
+Requires: %{name}-libs = %{version}
 
 %description devel
   AftterStep libs include files
-
-%package fedora-config
-Summary: Setup files for use with Fedora gdm, switchdesk
-Group: 	 User Interface/Desktops
-Requires: %{name} = %{version}-%{release}
-
-%description fedora-config
-Setup files for use with Fedora gdm, switchdesk.
-
-Install this package if you want to be able to switch between AfterStep
-and other window managers on Fedora.
 
 %prep
 %setup -q -n %{name}-%{fver}
@@ -106,6 +110,7 @@ for f in libAfter{Base,Conf,Image,Step}; do
    cp -a $f/$f.so* %{buildroot}%{prefix}/lib
 done
 
+%if %{fedora}
 #fedora-config prep
 install -d $RPM_BUILD_ROOT%{gdesk}/switchdesk/
 install -m 0644 %{SOURCE1} $RPM_BUILD_ROOT%{gdesk}/switchdesk/
@@ -115,8 +120,20 @@ install -d %{buildroot}%{gdesk}/xsessions/
 install -m 0644 AfterStep.desktop.final %{buildroot}%{gdesk}/xsessions/afterstep.desktop
 install -d %{buildroot}%{gdesk}/gnome/wm-properties/
 install -m 0644 AfterStep.desktop.final %{buildroot}%{gdesk}/gnome/wm-properties/afterstep.desktop
-rm -f %{buildroot}/usr/X11R6/share/xsessions/AfterStep.desktop
-rmdir %{buildroot}/usr/X11R6/share/xsessions/
+rm -f %{buildroot}%{prefix}/share/xsessions/AfterStep.desktop
+rmdir %{buildroot}%{prefix}/share/xsessions/
+%endif
+%if %{mandrake}
+# mandrake menu items
+install -d $RPM_BUILD_ROOT/etc/X11/wmsession.d/
+install -m 0644 %{SOURCE3} $RPM_BUILD_ROOT/etc/X11/wmsession.d/42AfterStep
+install -d $RPM_BUILD_ROOT/usr/lib/menu/afterstep
+install -m 0644 %{SOURCE4} $RPM_BUILD_ROOT/usr/lib/menu/afterstep
+install -d $RPM_BUILD_ROOT/etc/menu-methods/
+install -m 0755 %{SOURCE5} $RPM_BUILD_ROOT/etc/menu-methods/AfterStep
+rm -f %{buildroot}%{prefix}/share/xsessions/AfterStep.desktop
+rmdir %{buildroot}%{prefix}/share/xsessions/
+%endif
 
 %clean
 rm -rf %{buildroot}
@@ -126,7 +143,21 @@ rm -rf %{buildroot}
 %doc ChangeLog NEW README* TEAM UPGRADE doc/languages doc/licences doc/code TODO doc/*.html
 %{prefix}/bin/*
 %dir %{prefix}/share/afterstep
-%config %{prefix}/share/afterstep/*
+%{prefix}/share/afterstep/*
+%if %{fedora}
+/etc/X11/gdm/Sessions/afterstep
+%{gdesk}/switchdesk/Xclients.afterstep
+%{gdesk}/xsessions/afterstep.desktop
+%{gdesk}/gnome/wm-properties/afterstep.desktop
+%endif
+%if %{mandrake}
+/etc/X11/wmsession.d/42AfterStep
+/usr/lib/menu/afterstep
+/etc/menu-methods/AfterStep
+%endif
+%if %{generic}
+%{prefix}/share/xsessions/AfterStep.desktop
+%endif
 
 %files libs
 %defattr(-,root,root)
@@ -145,12 +176,6 @@ rm -rf %{buildroot}
 %{prefix}/include/libAfterImage/*
 %{prefix}/include/libAfterStep/*
 
-%files fedora-config
-/etc/X11/gdm/Sessions/afterstep
-%{gdesk}/switchdesk/Xclients.afterstep
-%{gdesk}/xsessions/afterstep.desktop
-%{gdesk}/gnome/wm-properties/afterstep.desktop
-
 %pre
 for i in /usr /usr/local /usr/X11R6 ; do
 	if [ -d $i/share/afterstep_old ]; then
@@ -168,6 +193,9 @@ done
 %postun -p /sbin/ldconfig
 
 %changelog
+* Sun Mar  6 2005 Sean Dague <sean@dague.net> 2.00.03-2
+- add with tagging to fedora vs. mandrake issues
+
 * Thu Mar 03 2005 J.Krebs <rpm_speedy@yahoo.com> 2.00.03-1
 - brought up to 2.00.03 release
 - separated Fedora desktop config files into a separate rpm

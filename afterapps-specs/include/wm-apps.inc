@@ -103,7 +103,7 @@ APPLET_LIST += WMND
 WMPOWER_NAME=wmpower
 WMPOWER_VERSION=0.4.1
 WMPOWER_TAR=$(WMPOWER_NAME)-$(WMPOWER_VERSION).tar.bz2
-WMPOWER_URL=http://gentoo.ccccom.com/distfiles/$(WMPOWER_TAR)
+WMPOWER_URL=http://unc.dl.sourceforge.net/sourceforge/$(WMPOWER_NAME)/$(WMPOWER_TAR)
 
 APPLET_LIST += WMPOWER
 

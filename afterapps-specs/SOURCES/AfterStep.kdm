@@ -1,0 +1,6 @@
+NAME=AfterStep
+ICON=afterstep.xpm
+EXEC=/usr/X11R6/bin/afterstep
+DESC=Lightweight Next Like desktop environment
+SCRIPT:
+exec /usr/X11R6/bin/afterstep

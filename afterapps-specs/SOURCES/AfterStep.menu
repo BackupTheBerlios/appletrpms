@@ -1,0 +1,1 @@
+?package(AfterStep):needs=wm    section="System/Session/Windowmanagers" icon="AfterStep.png"    title="AfterStep"       longtitle="AfterStep Window Manager"    command="afterstep"
