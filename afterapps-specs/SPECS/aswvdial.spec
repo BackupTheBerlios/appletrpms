@@ -44,7 +44,7 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
-* Fri Mar 04 2005 J. Krebs <jkrebs@tconl.com> - 1.7-1
+* Fri Mar 04 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.7-1
 - Initial build.
 
 
