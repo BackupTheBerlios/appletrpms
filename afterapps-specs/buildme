@@ -13,6 +13,7 @@ use Data::Dumper;
 
 our $SOURCES = "SOURCES";
 our $SPECS = "SPECS";
+our $RPM = "rpmbuild --define='_topdir $ENV{PWD}'";
 
 my $target = shift;
 
@@ -36,17 +37,40 @@ sub runtarget {
 
 sub make_target {
     my $target = shift;
+    verbose("\nbuilding $target");
     make_download($target);
-    #make_srpm($target);
-    #make_rpm($target);
+    make_srpm($target);
+    make_rpm($target);
+}
+
+sub make_srpm {
+    my $target = shift;
+    verbose("  building srpm for " . $map{uc $target}->{NAME});
+    my $spec = $SPECS . "/" . $map{uc $target}->{NAME} . ".spec";
+    # need to add timing logic here
+    system("$RPM -bs $spec");
+    verbose("  done");
+}
+
+sub make_rpm {
+    my $target = shift;
+    verbose("  building rpm for " . $map{uc $target}->{NAME});
+    my $spec = $SPECS . "/" . $map{uc $target}->{NAME} . ".spec";
+    # need to add timing logic here
+    system("$RPM -bb $spec");
+    verbose("  done");
 }
 
 sub make_download {
     my $target = shift;
     my $tar = $map{uc $target}->{TAR};
     my $url = $map{uc $target}->{URL};
+    verbose("  downloading $tar from $url");
     if(!-e "$SOURCES/$tar") {
         system("wget -O $SOURCES/$tar $url");
+        verbose("  done");
+    } else {
+        verbose("  $SOURCES/$tar already exists");
     }
 }
 
@@ -61,6 +85,7 @@ sub interpolate_map {
         $map{$key}->{TAR} =~ s/\$\($version\)/$map{$key}->{VERSION}/;
         $map{$key}->{URL} =~ s/\$\($tar\)/$map{$key}->{TAR}/;
     }
+    verbose("added make interpolation to target map");
     return %map;
 }
 
@@ -85,5 +110,10 @@ sub build_target_map {
         }
         close(IN);
     }
+    verbose("built target map");
     return %map;
+}
+
+sub verbose {
+    print STDERR shift, "\n";
 }
