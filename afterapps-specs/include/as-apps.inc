@@ -8,6 +8,14 @@ ASAPM_URL=http://tigr.net/afterstep/download/asapm/$(ASAPM_TAR)
 
 APPLET_LIST += ASAPM
 
+#This version of ascd includes the source to libworkman
+ASCD_NAME=ascd
+ASCD_VERSION=0.13.2
+ASCD_TAR=$(ASCD_NAME)-$(ASCD_VERSION).tar.gz
+ASCD_URL=http://tigr.net/afterstep/download/$(ASCD_NAME)/$(ASCD_TAR)
+
+APPLET_LIST += ASCD
+
 ASCLOCK_NAME=asclock
 ASCLOCK_VERSION=2.0.12
 ASCLOCK_TAR=$(ASCLOCK_NAME)-$(ASCLOCK_VERSION).tar.gz
