@@ -1,7 +1,12 @@
+%define prefix /usr/X11R6
+%define name asapm
+%define version 2.13
+%define release 3
+
 Summary: APM monitor
-Name: asapm
-Version: 2.13
-Release: 2
+Name: %name
+Version: %version
+Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://afterstep.org
@@ -41,14 +46,14 @@ Basically, the tool shows you the following:
 %setup -q
 
 %build
-./configure --prefix=/usr/X11R6
+./configure --prefix=%prefix
 make
 
 %install
-mkdir -p $RPM_BUILD_ROOT/usr/X11R6/bin
-mkdir -p $RPM_BUILD_ROOT/usr/X11R6/man/man1
-make AFTER_BIN_DIR=$RPM_BUILD_ROOT/usr/X11R6/bin \
-    AFTER_MAN_DIR=$RPM_BUILD_ROOT/usr/X11R6/man/man1 \
+mkdir -p $RPM_BUILD_ROOT%prefix/bin
+mkdir -p $RPM_BUILD_ROOT%prefix/man/man1
+make AFTER_BIN_DIR=$RPM_BUILD_ROOT%prefix/bin \
+    AFTER_MAN_DIR=$RPM_BUILD_ROOT%prefix/man/man1 \
     install
 
 %clean
@@ -56,8 +61,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-/usr/X11R6/bin/*
-/usr/X11R6/man/man1/*
+%prefix/bin/*
+%prefix/man/man1/*
 %doc CHANGES COPYING INSTALL LICENSE NOTES README TODO asapmrc
 
 
