@@ -1,6 +1,6 @@
 %define prefix /usr/X11R6
 %define name ascpu
-%define version 1.9
+%define version 1.10
 %define release 2
 
 Summary: CPU monitor

@@ -111,9 +111,11 @@ sub interpolate_map {
         my $version = $key . "_VERSION";
         my $tar = $key . "_TAR";
 
-        $map{$key}->{TAR} =~ s/\$\($name\)/$map{$key}->{NAME}/;
-        $map{$key}->{TAR} =~ s/\$\($version\)/$map{$key}->{VERSION}/;
-        $map{$key}->{URL} =~ s/\$\($tar\)/$map{$key}->{TAR}/;
+        $map{$key}->{TAR} =~ s/\$\($name\)/$map{$key}->{NAME}/g;
+        $map{$key}->{TAR} =~ s/\$\($version\)/$map{$key}->{VERSION}/g;
+        $map{$key}->{URL} =~ s/\$\($tar\)/$map{$key}->{TAR}/g;
+        $map{$key}->{URL} =~ s/\$\($version\)/$map{$key}->{VERSION}/g;
+        $map{$key}->{URL} =~ s/\$\($name\)/$map{$key}->{NAME}/g;
     }
     verbose("added make interpolation to target map");
     return %map;
