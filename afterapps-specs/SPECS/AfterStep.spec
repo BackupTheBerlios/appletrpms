@@ -1,7 +1,7 @@
 %define	name	AfterStep
 %define	fver	2.00.04
 %define	version	2.00.04
-%define release 1
+%define release 2
 %define epoch   20
 %define	prefix	/usr/X11R6
 %define gdesk   /usr/share
@@ -94,8 +94,7 @@ CFLAGS=$RPM_OPT_FLAGS \
 	--enable-i18n                             \
 	--with-helpcommand="aterm -e man"         \
 	--with-desktops=1 --with-deskgeometry=2x3 \
-	--with-imageloader="xsetbg"               \
-	--disable-send-postcard-to-developer
+	--with-imageloader="xsetbg"
 
 %build
 make
@@ -200,6 +199,9 @@ done
 %postun -p /sbin/ldconfig
 
 %changelog
+* Mon Mar 28 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.00.04-2
+- Activated postcard-to-developer.
+
 * Tue Mar 22 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.00.04-1
 - brought up to 2.00.04 release
 
