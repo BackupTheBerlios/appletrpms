@@ -20,7 +20,8 @@ our $RPM = "rpmbuild --define='_topdir $ENV{PWD}'";
 my $target = shift;
 
 my %map = build_target_map("include/as-apps.inc",
-                           "include/wm-apps.inc");
+                           "include/wm-apps.inc",
+                           "include/misc-apps.inc",);
 %map = interpolate_map(%map);
 
 runtarget($target);
@@ -148,16 +149,16 @@ sub build_target_map {
     for my $file (@files) {
         open(IN, "<$file");
         while(<IN>) {
-            if(/^\s*(\S+)_NAME\s*\=\s*(\S+)/) {
+            if(/^\s*([^\#\s]+)_NAME\s*\=\s*(\S+)/) {
                 $map{$1}->{NAME} = $2;
             }
-            if(/^\s*(\S+)_VERSION\s*\=\s*(\S+)/) {
+            if(/^\s*([^\#\s]+)_VERSION\s*\=\s*(\S+)/) {
                 $map{$1}->{VERSION} = $2;
             }
-            if(/^\s*(\S+)_URL\s*\=\s*(\S+)/) {
+            if(/^\s*([^\#\s]+)_URL\s*\=\s*(\S+)/) {
                 $map{$1}->{URL} = $2;
             }
-            if(/^\s*(\S+)_TAR\s*\=\s*(\S+)/) {
+            if(/^\s*([^\#\s]+)_TAR\s*\=\s*(\S+)/) {
                 $map{$1}->{TAR} = $2;
             }
         }

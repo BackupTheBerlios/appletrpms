@@ -65,6 +65,7 @@ ASMIXER_URL=http://tigr.net/afterstep/download/$(ASMIXER_NAME)/$(ASMIXER_TAR)
 APPLET_LIST += ASMIXER
 
 ASMODEM_NAME=asmodem
+
 ASMODEM_VERSION=0.6
 ASMODEM_TAR=$(ASMODEM_NAME)-$(ASMODEM_VERSION)-1.tar.gz
 ASMODEM_URL=http://tigr.net/afterstep/download/$(ASMODEM_NAME)/$(ASMODEM_TAR)
@@ -101,11 +102,5 @@ ASTIME_URL=http://tigr.net/afterstep/download/$(ASTIME_NAME)/$(ASTIME_TAR)
 
 APPLET_LIST += ASTIME
 
-ASMEM_NAME=asmem
-ASMEM_VERSION=1.10
-ASMEM_TAR=$(ASMEM_NAME)-$(ASMEM_VERSION).tar.gz
-ASMEM_URL=http://tigr.net/afterstep/download/$(ASMEM_NAME)/$(ASMEM_TAR)
-
-APPLET_LIST += ASMEM
 
 
