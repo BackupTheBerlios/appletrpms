@@ -3,7 +3,7 @@
 %define version 0.09
 %define release 1
 
-Summary: wmnd shows basic network info for all available interfaces
+Summary: wmifinfo shows basic network info for all available interfaces
 Name: %name
 Version: %version
 Release: %release
