@@ -17,13 +17,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 A swallowable applet monitors the modem.
 
 %prep
-tar -tvzf ../SOURCES/%{name}-%{version}-1.tar.gz
-if [[ -d  %{name}-%{version}-1 ]] ; then 
-    mv %{name}-%{version}-1 %{name}-%{version} 
-    tar -cvzf ../SOURCES/%{name}-%{version}-1.tar.gz %{name}-%{version} 
-fi
-rm -rf %{name}-%{version}
-%setup -q
+%setup -q -n %{name}-%{version}-1
 
 %build
 ./configure --prefix=%prefix
