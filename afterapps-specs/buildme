@@ -1,0 +1,89 @@
+#!/usr/bin/perl
+
+# for each target
+#  * pull source from url to tarball - depends on tarball
+#  * build srpm from tarball - depends on tarball, specfile
+#  * build rpm from tarball - depends on tarball, specfile
+#  * build meta files required - urpmi/apt-get etc
+#  * build rpm dist
+#  * build srpm dist
+
+use strict;
+use Data::Dumper;
+
+our $SOURCES = "SOURCES";
+our $SPECS = "SPECS";
+
+my $target = shift;
+
+my %map = build_target_map("include/as-apps.inc");
+%map = interpolate_map(%map);
+
+runtarget($target);
+
+sub runtarget {
+    unless(exists $map{uc $target} or
+       $target =~ /^(clean|all|download)/) {
+        die "No such target $target";
+    }
+    
+    if($target =~ /^all$/) {
+        make_all();
+    } elsif (exists $map{uc $target}) {
+        make_target($target);
+    }
+}
+
+sub make_target {
+    my $target = shift;
+    make_download($target);
+    #make_srpm($target);
+    #make_rpm($target);
+}
+
+sub make_download {
+    my $target = shift;
+    my $tar = $map{uc $target}->{TAR};
+    my $url = $map{uc $target}->{URL};
+    if(!-e "$SOURCES/$tar") {
+        system("wget -O $SOURCES/$tar $url");
+    }
+}
+
+sub interpolate_map {
+    my %map = (@_);
+    foreach my $key (sort keys %map) { 
+        my $name = $key . "_NAME";
+        my $version = $key . "_VERSION";
+        my $tar = $key . "_TAR";
+
+        $map{$key}->{TAR} =~ s/\$\($name\)/$map{$key}->{NAME}/;
+        $map{$key}->{TAR} =~ s/\$\($version\)/$map{$key}->{VERSION}/;
+        $map{$key}->{URL} =~ s/\$\($tar\)/$map{$key}->{TAR}/;
+    }
+    return %map;
+}
+
+sub build_target_map {
+    my %map = ();
+    my @files = @_;
+    for my $file (@files) {
+        open(IN, "<$file");
+        while(<IN>) {
+            if(/^\s*(\w+)_NAME\s*\=\s*(\S+)/) {
+                $map{$1}->{NAME} = $2;
+            }
+            if(/^\s*(\w+)_VERSION\s*\=\s*(\S+)/) {
+                $map{$1}->{VERSION} = $2;
+            }
+            if(/^\s*(\w+)_URL\s*\=\s*(\S+)/) {
+                $map{$1}->{URL} = $2;
+            }
+            if(/^\s*(\w+)_TAR\s*\=\s*(\S+)/) {
+                $map{$1}->{TAR} = $2;
+            }
+        }
+        close(IN);
+    }
+    return %map;
+}
