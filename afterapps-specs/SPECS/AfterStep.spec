@@ -1,7 +1,7 @@
 %define	name	AfterStep
 %define	fver	2.00.03
 %define	version	2.00.03
-%define release 2
+%define release 3
 %define epoch   20
 %define	prefix	/usr/X11R6
 %define gdesk   /usr/share
@@ -58,6 +58,7 @@ version:	%{version}
 release:	%{release}
 copyright:	GPL
 group:		User Interface/Desktops
+Provides: %{name}-libs = %{version}
 
 %description libs
   Libraries neeeded by AfterStep 2.0
@@ -143,9 +144,12 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 %doc ChangeLog NEW README* TEAM UPGRADE doc/languages doc/licences doc/code TODO doc/*.html
+%doc src/ASDocGen/html/*html
+
 %{prefix}/bin/*
 %dir %{prefix}/share/afterstep
 %{prefix}/share/afterstep/*
+%{prefix}/man/man1/*
 %if %{fedora}
 /etc/X11/gdm/Sessions/afterstep
 %{gdesk}/switchdesk/Xclients.afterstep
@@ -163,9 +167,8 @@ rm -rf %{buildroot}
 
 %files libs
 %defattr(-,root,root)
-%doc libAfterImage/README src/ASDocGen/html/*
+%doc libAfterImage/README 
 %{prefix}/lib/*
-%{prefix}/man/*/*
 
 %files devel
 %defattr(-,root,root)
@@ -177,6 +180,8 @@ rm -rf %{buildroot}
 %{prefix}/include/libAfterConf/*
 %{prefix}/include/libAfterImage/*
 %{prefix}/include/libAfterStep/*
+%{prefix}/man/man3/*
+%doc src/ASDocGen/html/API/*html
 
 %pre
 for i in /usr /usr/local /usr/X11R6 ; do
@@ -195,6 +200,9 @@ done
 %postun -p /sbin/ldconfig
 
 %changelog
+* Mon Mar  7 2005 Sean Dague <sean@dague.net> 20:2.00.03-3
+- set provides manually on libs, move some docs to main and devel
+
 * Sun Mar  6 2005 Sean Dague <sean@dague.net> 2.00.03-2
 - add with tagging to fedora vs. mandrake issues
 
