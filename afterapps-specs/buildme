@@ -241,6 +241,9 @@ sub make_meta_rpm {
     my $requires = "";
 
     for my $key (sort keys %map) {
+	if($key =~ /^(DWING|LCD)/) {
+	    next;
+	}
         $requires .= $map{$key}->{NAME} . " ";
     }
     open(OUT,">$SPECS/afterstep-apps.spec");

@@ -2,6 +2,7 @@
 %define name bubblemon-dockapp
 %define version 1.46
 %define release 1
+%{?_with_mandrake:%define mandrake 1}
 
 Summary: system monitoring dockapp based-on GNOME BubbleMon.
 Name: %name
@@ -12,6 +13,9 @@ Group: AfterStep/Applets
 URL: http://www.ne.jp/asahi/linux/timecop/
 Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+%if %{mandrake}
+Requires: libgtk+1.2-devel
+%endif
 
 %description
 This is a system monitoring dockapp, visually based on the GNOME
