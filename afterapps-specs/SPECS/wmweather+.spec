@@ -1,6 +1,6 @@
 %define prefix /usr/X11R6
 %define name wmweather+
-%define version 2.5
+%define version 2.9
 %define release 1
 
 Summary: A dock app for displaying weather information

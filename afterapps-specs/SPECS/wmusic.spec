@@ -13,6 +13,7 @@ URL: http://home.jtan.com/~john/wmusic/
 Source0: %{name}-%{version}.tar.gz
 Requires:   xmms >= 1.0.0
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRequires: xmms-devel
 
 %description
 wmusic is a dockapp that remote-controls xmms. Here is a list

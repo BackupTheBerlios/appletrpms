@@ -1,3 +1,4 @@
+# -*- makefile -*-
 # Window Maker applets
 # unfortunatelly not all at one place like AS ones
 
@@ -78,12 +79,12 @@ WMUSIC_URL=http://home.jtan.com/~john/wmusic/$(WMUSIC_TAR)
 
 APPLET_LIST += WMUSIC
 
-WMWEATHER+_NAME=wmweather+
-WMWEATHER+_VERSION=2.5
-WMWEATHER+_TAR=$(WMWEATHER+_NAME)-$(WMWEATHER+_VERSION).tar.gz
-WMWEATHER+_URL=http://easynews.dl.sourceforge.net/sourceforge/wmweatherplus//$(WMWEATHER+_TAR)
+WMWEATHERPLUS_NAME=wmweather+
+WMWEATHERPLUS_VERSION=2.9
+WMWEATHERPLUS_TAR=$(WMWEATHERPLUS_NAME)-$(WMWEATHERPLUS_VERSION).tar.gz
+WMWEATHERPLUS_URL=http://umn.dl.sourceforge.net/sourceforge/wmweatherplus/$(WMWEATHERPLUS_TAR)
 
-APPLET_LIST += WMWEATHER+
+APPLET_LIST += WMWEATHERPLUS
 
 WMXKB_NAME=wmxkb
 WMXKB_VERSION=1.2.2
