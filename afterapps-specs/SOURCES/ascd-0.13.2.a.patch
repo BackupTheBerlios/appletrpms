@@ -1,0 +1,10 @@
+--- ascd-0.13.2/libworkman/include.old/wm_cdda.h	1999-02-14 03:50:46.000000000 -0600
++++ ascd-0.13.2/libworkman/include/wm_cdda.h	2005-02-07 18:36:37.844949666 -0600
+@@ -91,7 +91,6 @@
+  * if there is no support.
+  */
+ #ifdef linux
+-# include <bytesex.h>
+ # include <endian.h>
+ /*
+  * XXX could this be a problem? The results are only 0 and 1 because

@@ -1,0 +1,23 @@
+--- Temperature.app.old/Temperature.cc	2002-04-05 17:44:09.000000000 -0600
++++ Temperature.app/Temperature.cc	2005-02-11 15:31:06.000000000 -0600
+@@ -192,13 +192,13 @@
+    XSetWMNormalHints(mDisplay, mAppWin, &sizeHints);
+ 
+    // Set wmhints
+-   wmHints.initial_state = WithdrawnState;
+-   wmHints.icon_window = mIconWin;
+-   wmHints.icon_x = 0;
+-   wmHints.icon_y = 0;
+-   wmHints.window_group = mAppWin;
+-   wmHints.flags = StateHint | IconWindowHint | IconPositionHint | WindowGroupHint;
+-   XSetWMHints(mDisplay, mAppWin, &wmHints);
++//   wmHints.initial_state = WithdrawnState;
++//   wmHints.icon_window = mIconWin;
++//   wmHints.icon_x = 0;
++//   wmHints.icon_y = 0;
++//   wmHints.window_group = mAppWin;
++//   wmHints.flags = StateHint | IconWindowHint | IconPositionHint | WindowGroupHint;
++//   XSetWMHints(mDisplay, mAppWin, &wmHints);
+ 
+    // Set command
+    XSetCommand(mDisplay, mAppWin, argv, argc);

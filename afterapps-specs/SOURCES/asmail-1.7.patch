@@ -1,0 +1,84 @@
+--- asmail-1.7.old/asmailrc.sample	2004-11-01 13:20:53.000000000 -0600
++++ asmail-1.7/asmailrc.sample	2005-02-08 14:26:55.970478459 -0600
+@@ -7,7 +7,7 @@
+ 	on_mouse_right echo "Right mouse button pressed" &
+ 	on_mouse_middle echo "Middle mouse button pressed" &
+ 	# what program executes when new mail arrives
+-	on_new_mail cat /usr/local/share/asmail/sounds/drip.au > /dev/audio &
++	on_new_mail cat /usr/share/asmail/sounds/drip.au > /dev/audio &
+ 	# use the shape extension
+ 	shape yes
+ 	# this section describes how the number of messages is presented
+@@ -39,39 +39,39 @@
+ 		refresh 10
+ 		# xpm picture files
+ 		#frame none
+-		frame /usr/local/share/afterstep/desktop/icons/16bpp/ASBBlockTransparent.xpm
+-		nomail /usr/local/share/asmail/pixmaps/e-no.xpm
+-		old /usr/local/share/asmail/pixmaps/e0.xpm
+-		new /usr/local/share/asmail/pixmaps/e1.xpm
+-		new /usr/local/share/asmail/pixmaps/e2.xpm
+-		new /usr/local/share/asmail/pixmaps/e3.xpm
+-		new /usr/local/share/asmail/pixmaps/e4.xpm
+-		new /usr/local/share/asmail/pixmaps/e5.xpm
+-		new /usr/local/share/asmail/pixmaps/e6.xpm
+-		new /usr/local/share/asmail/pixmaps/e7.xpm
+-		new /usr/local/share/asmail/pixmaps/e8.xpm
+-		new /usr/local/share/asmail/pixmaps/e9.xpm
+-		new /usr/local/share/asmail/pixmaps/e10.xpm
+-		new /usr/local/share/asmail/pixmaps/e11.xpm
+-		new /usr/local/share/asmail/pixmaps/e12.xpm
+-		new /usr/local/share/asmail/pixmaps/e13.xpm
+-		new /usr/local/share/asmail/pixmaps/e14.xpm
+-		new /usr/local/share/asmail/pixmaps/e15.xpm
+-		new /usr/local/share/asmail/pixmaps/e16.xpm
+-		new /usr/local/share/asmail/pixmaps/e17.xpm
+-		new /usr/local/share/asmail/pixmaps/e18.xpm
+-		new /usr/local/share/asmail/pixmaps/e19.xpm
+-		new /usr/local/share/asmail/pixmaps/e20.xpm
+-		new /usr/local/share/asmail/pixmaps/e21.xpm
+-		new /usr/local/share/asmail/pixmaps/e22.xpm
+-		new /usr/local/share/asmail/pixmaps/e23.xpm
+-		new /usr/local/share/asmail/pixmaps/e24.xpm
+-		new /usr/local/share/asmail/pixmaps/e25.xpm
+-		new /usr/local/share/asmail/pixmaps/e26.xpm
+-		new /usr/local/share/asmail/pixmaps/e27.xpm
+-		new /usr/local/share/asmail/pixmaps/e28.xpm
+-		new /usr/local/share/asmail/pixmaps/e29.xpm
+-		new /usr/local/share/asmail/pixmaps/e30.xpm
++		frame /usr/share/afterstep/desktop/icons/16bpp/ASBBlockTransparent.xpm
++		nomail /usr/share/asmail/pixmaps/e-no.xpm
++		old /usr/share/asmail/pixmaps/e0.xpm
++		new /usr/share/asmail/pixmaps/e1.xpm
++		new /usr/share/asmail/pixmaps/e2.xpm
++		new /usr/share/asmail/pixmaps/e3.xpm
++		new /usr/share/asmail/pixmaps/e4.xpm
++		new /usr/share/asmail/pixmaps/e5.xpm
++		new /usr/share/asmail/pixmaps/e6.xpm
++		new /usr/share/asmail/pixmaps/e7.xpm
++		new /usr/share/asmail/pixmaps/e8.xpm
++		new /usr/share/asmail/pixmaps/e9.xpm
++		new /usr/share/asmail/pixmaps/e10.xpm
++		new /usr/share/asmail/pixmaps/e11.xpm
++		new /usr/share/asmail/pixmaps/e12.xpm
++		new /usr/share/asmail/pixmaps/e13.xpm
++		new /usr/share/asmail/pixmaps/e14.xpm
++		new /usr/share/asmail/pixmaps/e15.xpm
++		new /usr/share/asmail/pixmaps/e16.xpm
++		new /usr/share/asmail/pixmaps/e17.xpm
++		new /usr/share/asmail/pixmaps/e18.xpm
++		new /usr/share/asmail/pixmaps/e19.xpm
++		new /usr/share/asmail/pixmaps/e20.xpm
++		new /usr/share/asmail/pixmaps/e21.xpm
++		new /usr/share/asmail/pixmaps/e22.xpm
++		new /usr/share/asmail/pixmaps/e23.xpm
++		new /usr/share/asmail/pixmaps/e24.xpm
++		new /usr/share/asmail/pixmaps/e25.xpm
++		new /usr/share/asmail/pixmaps/e26.xpm
++		new /usr/share/asmail/pixmaps/e27.xpm
++		new /usr/share/asmail/pixmaps/e28.xpm
++		new /usr/share/asmail/pixmaps/e29.xpm
++		new /usr/share/asmail/pixmaps/e30.xpm
+ 	}
+ }
+ 
