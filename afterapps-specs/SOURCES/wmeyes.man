@@ -1,0 +1,39 @@
+.TH "wmeyes" 1
+.SH NAME
+wmeyes is a dockapp with moving eyes that follow mouse movement
+.SH SYNOPSIS
+.B wmeyes
+[\-h] [\-ws] [\-p pupclr] [\-o outclr] [\-i inclr] [\-d disp]
+.SH DESCRIPTION
+wmeyes is a dockapp with moving eyes that follow mouse movement.
+This version also allows execition of a command by clicking the icon.
+.SH OPTIONS
+.TP
+.B \-h
+\-\-help	display this help screen
+.TP
+.B \-w
+\-\-withdrawn	withdrawn window (for WindowMaker)
+.TP
+.B \-s
+\-\-shape	use shaped window
+.TP
+.B \-p
+\-\-pupil	set the color of the eyes' pupils (default #009966)
+.TP
+.B \-o
+\-\-outside	set the outside color of the eyes (default black)
+.TP
+.B \-i
+\-\-inside	et the inside color of the eyes (default white)
+.TP
+.B \-t
+\-\-time	set the interation time in msec (default 125)
+.TP
+.B \-e
+\-\-exec	command to run
+.TP
+.B \-d
+\-\-display	set the X display to use (this may be set multiple times)
+.SH "SEE ALSO"
+.I /usr/share/doc/wmeyes/README

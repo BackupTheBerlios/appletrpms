@@ -1,0 +1,70 @@
+#
+# config file for the wmmsg dockapp
+# rename to ~/.wmmsgrc
+#
+
+# 0 = don't execute a global command on all incoming messages
+# 1 = execute a global command on all incoming messages
+use_global_command=1
+
+# execute this command on all incoming messages,
+# if use_global_command is turned on
+global_command=play -v .4 /usr/X11R6/share/wmmsg/sounds/apert.wav
+
+# max messages to keep in memory
+max_messages=300
+
+# 0 = separate icons for each message
+# 1 = use grouped icons
+grouped_icons=1
+
+# 0 = do not blink on message arrival
+# 1 = blink on message arrival
+blink_enabled=1
+
+# number of blinks, if applicable
+number_of_blinks=10
+
+# 0 = ignore desktop switches
+# 1 = clear all messages when switching to the originating desktop
+monitor_desktops=0
+
+# desktop that contains all your messaging clients (1, 2, ...)
+# only necessary if monitor_desktops is turned on
+msg_desktop_num=2
+
+# 0 = clicking on a message clears only that message
+# 1 = clicking on a message clears all messages
+click_clears_all=1
+
+# time format to display next to icon
+# %H:%M = 24 hour format, 2 digits
+# %k:%M = 24 hour format, 1 or 2 digits
+# %I:%M = 12 hour format, 2 digits
+# %l:%M = 12 hour format, 1 or 2 digits
+time_format=%H:%M
+
+# icon for unknown protocols
+unknown_icon=default
+
+# protocol definitions
+# name : name of protocol
+# icon : path to the icon to display, or "default"
+# action : command to execute upon an incoming msg of this type 
+#
+# Example:
+# protocol_name=fish
+# protocol_icon=/usr/share/pixmaps/gnome-fish.png
+# protocol_action=esdplay /home/me/sounds/fishy.wav
+
+protocol_name=aim
+protocol_icon=default
+protocol_action=esdplay /usr/X11R6/share/wmmsg/sounds/man-instantmessage.wav
+
+protocol_name=irc
+protocol_icon=default
+protocol_action=esdplay /usr/X11R6/share/wmmsg/sounds/haan.wav
+
+protocol_name=icq
+protocol_icon=default
+protocol_action=esdplay /usr/X11R6/share/wmmsg/sounds/ring.wav

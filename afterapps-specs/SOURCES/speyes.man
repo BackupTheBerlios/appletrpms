@@ -1,0 +1,32 @@
+.TH "speyes" 1
+.SH NAME
+speyes \- South Park\-themed wmeyes Dockapp
+.SH SYNOPSIS
+.B speyes
+[\-h] [\-ws] [\-p pupclr] [\-o outclr] [\-i inclr] [\-d disp]
+.SH DESCRIPTION
+South Park\-themed wmeyes Dockapp
+.SH OPTIONS
+.TP
+.B \-h
+\-\-help	display this help screen
+.TP
+.B \-w
+\-\-withdrawn	withdrawn window (for WindowMaker)
+.TP
+.B \-s
+\-\-shape	use shaped window
+.TP
+.B \-f
+\-\-face	set face: kenny, kyle, stan, cartman (default is random)
+.TP
+.B \-p
+\-\-pupil	set the color of the eyes' pupils (default #000000)
+.TP
+.B \-t
+\-\-time	set the interation time in msec (default 125)
+.TP
+.B \-d
+\-\-display	set the X display to use
+.SH "SEE ALSO"
+.I /usr/share/doc/speyes/README
