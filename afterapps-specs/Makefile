@@ -1,12 +1,7 @@
-RPMS=$(shell ls *.spec | grep -v base.spec | sed 's/spec/i586.rpm/')
-SRPMS=$(shell ls *.spec | grep -v base.spec | sed 's/spec/src.rpm/')
-RPMDIR=rpmdir
-SRPMDIR=srpmdir
-
 BUILD=BUILD
 SOURCES=SOURCES
 SPECS=SPECS
-TEST=asapm.rpm
+RPMS=RPMS
 
 include include/*inc
 
@@ -18,8 +13,14 @@ build: download
 download:
 	./buildme download
 
+meta_rpm:
+	./buildme meta_rpm
+
 $(APPLET_LIST):
 	./buildme $@
+
+mdk-i586: all
+	cd $(RPMS)/i586/ && genhdlist .
 
 clean:
 	./buildme clean

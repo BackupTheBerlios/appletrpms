@@ -28,18 +28,17 @@ runtarget($target);
 
 sub runtarget {
     unless(exists $map{uc $target} or
-       $target =~ /^(clean|all|download)/) {
+       $target =~ /^(clean|all|download|meta_rpm)/) {
         die "No such target $target";
     }
     
-    if($target =~ /^all$/) {
-        make_all();
-    } elsif (exists $map{uc $target}) {
+    if (exists $map{uc $target}) {
         make_target($target);
-    } elsif ($target =~ /^clean$/) {
-        system("rm -f $SOURCES/*tar.gz");
-        system("rm -f $SRPMS/*.src.rpm");
-        system("rm -f $RPMS/*/*rpm");
+    } else {
+        $target =~ /^clean$/ and make_clean();
+        $target =~ /^all$/ and make_all();
+        $target =~ /^download$/ and make_download();
+        $target =~ /^meta_rpm$/ and make_meta_rpm();
     }
 }
 
@@ -49,6 +48,12 @@ sub runtarget {
 #
 #########################################
 
+sub make_clean {
+    system("rm -f $SOURCES/*tar.gz");
+    system("rm -f $SRPMS/*.src.rpm");
+    system("rm -f $RPMS/*/*rpm");
+}
+    
 sub make_all {
     verbose("building all");
     for my $t (sort keys %map) {
@@ -114,15 +119,21 @@ sub make_rpm {
 
 sub make_download {
     my $target = shift;
-    my $tar = $map{uc $target}->{TAR};
-    my $url = $map{uc $target}->{URL};
-    verbose("  downloading $tar from $url",1);
-    if(!-e "$SOURCES/$tar" or
-       system("tar -tzf $SOURCES/$tar >/dev/null")) {
-        system("wget -O $SOURCES/$tar $url");
-        verbose("  done",1);
+    if(!$target) {
+        for my $t (sort keys %map) {
+            make_download($t);
+        }
     } else {
-        verbose("  $SOURCES/$tar already exists",2);
+        my $tar = $map{uc $target}->{TAR};
+        my $url = $map{uc $target}->{URL};
+        verbose("  downloading $tar from $url",1);
+        if(!-e "$SOURCES/$tar" or
+           system("tar -tzf $SOURCES/$tar >/dev/null")) {
+            system("wget -O $SOURCES/$tar $url");
+            verbose("  done",1);
+        } else {
+            verbose("  $SOURCES/$tar already exists",2);
+        }
     }
 }
 
@@ -210,6 +221,38 @@ sub check_deps {
     } else {
         return 0;
     }
+}
+
+
+sub make_meta_rpm {
+    my ($y, $m, $d) = (gmtime(time()))[5,4,3];
+    my $version = $y+1900 . $m + 1 . $d;
+    my $requires = "";
+
+    for my $key (sort keys %map) {
+        $requires .= $map{$key}->{NAME} . " ";
+    }
+    open(OUT,">$SPECS/afterstep-apps.spec");
+    print OUT <<END;
+Summary: Applet Bundle
+Name: afterstep-apps
+Version: $version
+Release: 1
+License: Mixed OSS
+Group: AfterStep/Applets
+URL: http://www.afterstep.org
+Requires: $requires
+BuildRoot: \%{_tmppath}/afterstep-apps-root
+
+%description
+This is a meta package that requires all available other
+applet rpms.
+
+%files
+
+END
+    close(OUT);
+    system("$RPM -bb $SPECS/afterstep-apps.spec");
 }
 
 sub bail {
