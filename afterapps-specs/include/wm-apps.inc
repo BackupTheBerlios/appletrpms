@@ -1,0 +1,114 @@
+# Window Maker applets
+# unfortunatelly not all at one place like AS ones
+
+WMCALC_NAME=wmcalc
+WMCALC_VERSION=0.4
+WMCALC_TAR=$(WMCALC_NAME)-$(WMCALC_VERSION).tar.gz
+WMCALC_URL=http://gentoo.ccccom.com/distfiles/$(WMCALC_NAME)/$(WMCALC_TAR)
+
+APPLET_LIST += WMCALC
+
+WMCLOCKMON_NAME=wmclockmon
+WMCLOCKMON_VERSION=0.8.0
+WMCLOCKMON_TAR=$(WMCLOCKMON_NAME)-$(WMCLOCKMON_VERSION).tar.gz
+WMCLOCKMON_URL=http://tnemeth.free.fr/projets/programmes/$(WMCLOCKMON_NAME)/$(WMCLOCKMON_TAR)
+
+APPLET_LIST += WMCLOCKMON
+
+WMCPULOAD_NAME=wmcpuload
+WMCPULOAD_VERSION=1.1.0pre4
+WMCPULOAD_TAR=$(WMCPULOAD_NAME)-$(WMCPULOAD_VERSION).tar.gz
+WMCPULOAD_URL=http://www.sh.rim.or.jp/~ssato/src/$(WMCPULOAD_NAME)/$(WMCPULOAD_TAR)
+
+APPLET_LIST += WMCPULOAD
+
+ASMEM_NAME=asmem
+ASMEM_VERSION=0.4
+ASMEM_TAR=$(ASMEM_NAME)-$(ASMEM_VERSION).tar.gz
+ASMEM_URL=http://tigr.net/afterstep/download/$(ASMEM_NAME)/$(ASMEM_TAR)
+
+APPLET_LIST += ASMEM
+
+ASMEM_NAME=asmem
+ASMEM_VERSION=0.4
+ASMEM_TAR=$(ASMEM_NAME)-$(ASMEM_VERSION).tar.gz
+ASMEM_URL=http://tigr.net/afterstep/download/$(ASMEM_NAME)/$(ASMEM_TAR)
+
+APPLET_LIST += ASMEM
+
+ASMEM_NAME=asmem
+ASMEM_VERSION=0.4
+ASMEM_TAR=$(ASMEM_NAME)-$(ASMEM_VERSION).tar.gz
+ASMEM_URL=http://tigr.net/afterstep/download/$(ASMEM_NAME)/$(ASMEM_TAR)
+
+APPLET_LIST += ASMEM
+
+ASMEM_NAME=asmem
+ASMEM_VERSION=0.4
+ASMEM_TAR=$(ASMEM_NAME)-$(ASMEM_VERSION).tar.gz
+ASMEM_URL=http://tigr.net/afterstep/download/$(ASMEM_NAME)/$(ASMEM_TAR)
+
+APPLET_LIST += ASMEM
+
+ASMEM_NAME=asmem
+ASMEM_VERSION=0.4
+ASMEM_TAR=$(ASMEM_NAME)-$(ASMEM_VERSION).tar.gz
+ASMEM_URL=http://tigr.net/afterstep/download/$(ASMEM_NAME)/$(ASMEM_TAR)
+
+APPLET_LIST += ASMEM
+
+ASMEM_NAME=asmem
+ASMEM_VERSION=0.4
+ASMEM_TAR=$(ASMEM_NAME)-$(ASMEM_VERSION).tar.gz
+ASMEM_URL=http://tigr.net/afterstep/download/$(ASMEM_NAME)/$(ASMEM_TAR)
+
+APPLET_LIST += ASMEM
+
+ASMEM_NAME=asmem
+ASMEM_VERSION=0.4
+ASMEM_TAR=$(ASMEM_NAME)-$(ASMEM_VERSION).tar.gz
+ASMEM_URL=http://tigr.net/afterstep/download/$(ASMEM_NAME)/$(ASMEM_TAR)
+
+APPLET_LIST += ASMEM
+
+ASMEM_NAME=asmem
+ASMEM_VERSION=0.4
+ASMEM_TAR=$(ASMEM_NAME)-$(ASMEM_VERSION).tar.gz
+ASMEM_URL=http://tigr.net/afterstep/download/$(ASMEM_NAME)/$(ASMEM_TAR)
+
+APPLET_LIST += ASMEM
+
+ASMEM_NAME=asmem
+ASMEM_VERSION=0.4
+ASMEM_TAR=$(ASMEM_NAME)-$(ASMEM_VERSION).tar.gz
+ASMEM_URL=http://tigr.net/afterstep/download/$(ASMEM_NAME)/$(ASMEM_TAR)
+
+APPLET_LIST += ASMEM
+
+ASMEM_NAME=asmem
+ASMEM_VERSION=0.4
+ASMEM_TAR=$(ASMEM_NAME)-$(ASMEM_VERSION).tar.gz
+ASMEM_URL=http://tigr.net/afterstep/download/$(ASMEM_NAME)/$(ASMEM_TAR)
+
+APPLET_LIST += ASMEM
+
+ASMEM_NAME=asmem
+ASMEM_VERSION=0.4
+ASMEM_TAR=$(ASMEM_NAME)-$(ASMEM_VERSION).tar.gz
+ASMEM_URL=http://tigr.net/afterstep/download/$(ASMEM_NAME)/$(ASMEM_TAR)
+
+APPLET_LIST += ASMEM
+
+ASMEM_NAME=asmem
+ASMEM_VERSION=0.4
+ASMEM_TAR=$(ASMEM_NAME)-$(ASMEM_VERSION).tar.gz
+ASMEM_URL=http://tigr.net/afterstep/download/$(ASMEM_NAME)/$(ASMEM_TAR)
+
+APPLET_LIST += ASMEM
+
+ASMEM_NAME=asmem
+ASMEM_VERSION=0.4
+ASMEM_TAR=$(ASMEM_NAME)-$(ASMEM_VERSION).tar.gz
+ASMEM_URL=http://tigr.net/afterstep/download/$(ASMEM_NAME)/$(ASMEM_TAR)
+
+APPLET_LIST += ASMEM
