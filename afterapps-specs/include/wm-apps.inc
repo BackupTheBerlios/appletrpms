@@ -86,6 +86,13 @@ WMFLAME_URL=http://web.novalis.org/programs/$(WMFLAME_TAR)
 
 APPLET_LIST += WMFLAME
 
+WMINET_NAME=wminet
+WMINET_VERSION=3.0.0
+WMINET_TAR=$(WMINET_NAME)-$(WMINET_VERSION).tar.gz
+WMINET_URL=http://www.swanson.ukfsn.org/wmdock/$(WMINET_TAR)
+
+APPLET_LIST += WMINET
+
 WMIX_NAME=wmix
 WMIX_VERSION=3.2
 WMIX_TAR=$(WMIX_NAME)-$(WMIX_VERSION).tar.gz
