@@ -1,7 +1,7 @@
 %define prefix /usr/X11R6
 %define name ascd
 %define version 0.13.2
-%define release 2
+%define release 3
 
 Summary: Audio CD player
 Name: %name
@@ -10,7 +10,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://worldserver.oleane.com/rsn/ascd-en.html
-Source0: %{name}-%{version}+lib-src.tgz
+Source0: %{name}-%{version}.tar.gz
 Patch0: ascd-0.13.2.a.patch
 Patch1: ascd-0.13.2.b.patch
 Patch2: ascd-0.13.2.c.patch
@@ -23,7 +23,7 @@ is an advanced CD player with a fully customizable interface and
 support for themes.
 
 %prep
-%setup -q -n ascd-%{version}+lib-src
+%setup -q -n ascd-%{version}
 
 %patch0 -p1 -b .a
 %patch1 -p1 -b .b
@@ -69,6 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Feb 27 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.13.2-3
+- Changed tarball to that provided by tigr.net/afterstep/.
+
 * Fri Feb 18 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.13.2-2
 - Changed themes from /usr/local/share to /usr/share.
 
