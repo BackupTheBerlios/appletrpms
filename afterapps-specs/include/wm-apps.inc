@@ -141,3 +141,10 @@ WMXKB_TAR=$(WMXKB_NAME)-$(WMXKB_VERSION).tar.gz
 WMXKB_URL=http://www.geocities.com/wmalms/$(WMXKB_TAR)
 
 APPLET_LIST += WMXKB
+
+WMBIFF_NAME=wmbiff
+WMBIFF_VERSION=0.4.26
+WMBIFF_TAR=$(WMBIFF_NAME)-$(WMBIFF_VERSION).tar.gz
+WMBIFF_URL=http://internap.dl.sourceforge.net/sourceforge/wmbiff/$(WMBIFF_TAR)
+
+APPLET_LIST += WMBIFF
