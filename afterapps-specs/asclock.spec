@@ -1,7 +1,12 @@
+%define prefix /usr/X11R6
+%define name asclock
+%define version 2.0.12
+%define release 1
+
 Summary: Clock Applet
-Name: asclock
-Version: 2.0.12
-Release: 1
+Name: %name
+Version: %version
+Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://afterstep.org
@@ -19,14 +24,15 @@ echo -e "shaped\n\n" | ./configure
 make
 
 %install
-make BINDIR=$RPM_BUILD_ROOT/usr/X11R6/bin install
+make BINDIR=$RPM_BUILD_ROOT%prefix/bin \
+    install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-/usr/X11R6/bin/asclock
+/usr/X11R6/bin/*
 %doc
 
 

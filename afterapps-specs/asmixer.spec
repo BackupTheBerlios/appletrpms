@@ -1,9 +1,9 @@
 %define prefix /usr/X11R6
-%define name ascpu
-%define version 1.9
+%define name asmixer
+%define version 0.5
 %define release 1
 
-Summary: CPU monitor
+Summary: AS Sound Mixer Applet
 Name: %name
 Version: %version
 Release: %release
@@ -14,8 +14,13 @@ Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
-This is an AfterStep look & feel CPU statistics monitor tool
-for computers running Linux, FreeBSD, HP-UX or AIX.
+This program is designed to rain fire and brimstone upon a thousand lands
+crushing an infinite number of souls with devestation never before experienced
+by man.  Either that, or it might just be a simple
+Mixer Utility for Linux systems.  Requires /dev/mixer to work.  The
+3 buttons are quite simply Volume, CD, and PCM.
+
+And of course, asmixer looks best under the Afterstep WM!
 
 %prep
 %setup -q
@@ -38,7 +43,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %prefix/bin/*
 %prefix/man/man1/*
-%doc CHANGES INSTALL LICENSE README TODO
+%doc INSTALL README
 
 
 %changelog

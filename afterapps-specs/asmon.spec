@@ -1,9 +1,9 @@
 %define prefix /usr/X11R6
-%define name ascpu
-%define version 1.9
+%define name asmon
+%define version 0.62
 %define release 1
 
-Summary: CPU monitor
+Summary: AS system monitor
 Name: %name
 Version: %version
 Release: %release
@@ -14,22 +14,20 @@ Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
-This is an AfterStep look & feel CPU statistics monitor tool
-for computers running Linux, FreeBSD, HP-UX or AIX.
+A system monitor applet for After Step.
 
 %prep
 %setup -q
 
 %build
-./configure --prefix=%prefix
+cd asmon
 make
 
 %install
 mkdir -p $RPM_BUILD_ROOT%prefix/bin
-mkdir -p $RPM_BUILD_ROOT%prefix/man/man1
-make AFTER_BIN_DIR=$RPM_BUILD_ROOT%prefix/bin \
-    AFTER_MAN_DIR=$RPM_BUILD_ROOT%prefix/man/man1 \
-    install install.man
+cd asmon
+make PR_NAME=$RPM_BUILD_ROOT%prefix/bin/%name \
+    install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -37,8 +35,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %prefix/bin/*
-%prefix/man/man1/*
-%doc CHANGES INSTALL LICENSE README TODO
+%doc AUTHOR Changelog CHANGES COPYING INSTALL 
 
 
 %changelog

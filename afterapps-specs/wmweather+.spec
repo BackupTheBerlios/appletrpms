@@ -1,9 +1,9 @@
 %define prefix /usr/X11R6
-%define name ascpu
-%define version 1.9
+%define name wmweather+
+%define version 2.4
 %define release 1
 
-Summary: CPU monitor
+Summary: WM Weather Applet
 Name: %name
 Version: %version
 Release: %release
@@ -12,6 +12,7 @@ Group: AfterStep/Applets
 URL: http://afterstep.org
 Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRequires: libpcre-devel libwraster-devel
 
 %description
 This is an AfterStep look & feel CPU statistics monitor tool
@@ -38,7 +39,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %prefix/bin/*
 %prefix/man/man1/*
-%doc CHANGES INSTALL LICENSE README TODO
+%doc CHANGES INSTALL LICENSE README TODO example.conf
 
 
 %changelog
