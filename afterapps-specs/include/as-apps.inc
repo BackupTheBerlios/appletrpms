@@ -1,0 +1,53 @@
+# -*- makefile -*-
+
+# AfterStep apm applet
+ASAPM_NAME=asapm
+ASAPM_VERSION=2.13
+ASAPM_TAR=$(ASAPM_NAME)-$(ASAPM_VERSION).tar.gz
+ASAPM_URL=http://tigr.net/afterstep/download/asapm/$(ASAPM_TAR)
+
+APPLET_LIST += ASAPM
+
+ASCLOCK_NAME=asclock
+ASCLOCK_VERSION=2.0.12
+ASCLOCK_TAR=$(ASCLOCK_NAME)-$(ASCLOCK_VERSION).tar.gz
+ASCLOCK_URL=http://tigr.net/afterstep/download/$(ASCLOCK_NAME)/$(ASCLOCK_TAR)
+
+APPLET_LIST += ASCLOCK
+
+ASCPU_NAME=ascpu
+ASCPU_VERSION=1.10
+ASCPU_TAR=$(ASCPU_NAME)-$(ASCPU_VERSION).tar.gz
+ASCPU_URL=http://tigr.net/afterstep/download/$(ASCPU_NAME)/$(ASCPU_TAR)
+
+APPLET_LIST += ASCPU
+
+ASFSMLITE_NAME=asfsm_lite
+ASFSMLITE_VERSION=1.0.0
+ASFSMLITE_TAR=$(ASFSMLITE_NAME)-$(ASFSMLITE_VERSION).tar.gz
+ASFSMLITE_URL=http://tigr.net/afterstep/download/$(ASFSMLITE_NAME)/$(ASFSMLITE_TAR)
+
+APPLET_LIST += ASFSMLITE
+
+ASLOAD_NAME=asload
+ASLOAD_VERSION=0.9.4
+ASLOAD_TAR=$(ASLOAD_NAME)-$(ASLOAD_VERSION).tar.gz
+ASLOAD_URL=http://tigr.net/afterstep/download/$(ASLOAD_NAME)/$(ASLOAD_TAR)
+
+APPLET_LIST += ASLOAD
+
+ASMAIL_NAME=asmail
+ASMAIL_VERSION=1.7
+ASMAIL_TAR=$(ASMAIL_NAME)-$(ASMAIL_VERSION).tar.gz
+ASMAIL_URL=http://tigr.net/afterstep/download/$(ASMAIL_NAME)/$(ASMAIL_TAR)
+
+APPLET_LIST += ASMAIL
+
+ASMEM_NAME=asmem
+ASMEM_VERSION=1.10
+ASMEM_TAR=$(ASMEM_NAME)-$(ASMEM_VERSION).tar.gz
+ASMEM_URL=http://tigr.net/afterstep/download/$(ASMEM_NAME)/$(ASMEM_TAR)
+
+APPLET_LIST += ASMEM
+
+
