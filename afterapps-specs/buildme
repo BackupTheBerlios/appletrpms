@@ -35,6 +35,13 @@ sub runtarget {
     }
 }
 
+sub make_all {
+    verbose("\building all");
+    for my $t (sort keys %map) {
+        make_target($t);
+    }
+}
+
 sub make_target {
     my $target = shift;
     verbose("\nbuilding $target");

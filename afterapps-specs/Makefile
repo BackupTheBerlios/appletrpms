@@ -10,21 +10,18 @@ TEST=asapm.rpm
 
 include include/*inc
 
-all: 
-	$(foreach app, $(APPLET_LIST), \
-		make $(app).rpm ) \
-		&& /bin/true
+all: download build
 
-%.done: %.rpm
+build: download
+	./buildme all
 
-%.rpm:
-	echo $(patsubst %.rpm,%,$@)
-	rm -f $(SOURCES)/$($(patsubst %.rpm,%,$@)_TAR)
-	wget -O $(SOURCES)/$($(patsubst %.rpm,%,$@)_TAR) $($(patsubst %.rpm,%,$@)_URL)
-	rpm --define='_topdir $(PWD)' -bs $(SPECS)/$($(patsubst %.rpm,%,$@)_NAME).spec
-	rpm --define='_topdir $(PWD)' -ba $(SPECS)/$($(patsubst %.rpm,%,$@)_NAME).spec
-	touch $(patsubst %.rpm,%.done,$@)
+download:
+	./buildme download
 
-.SUFFIXES: done rpm
+$(APPLET_LIST):
+	./buildme $@
 
-.PHONY: clean $(patsubst %,%.done,$(APPLET_LIST))
+clean:
+	./buildme clean
+
+
