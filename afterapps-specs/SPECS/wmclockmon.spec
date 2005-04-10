@@ -1,7 +1,7 @@
 %define prefix /usr/X11R6
 %define name wmclockmon
-%define version 0.8.0
-%define release 2
+%define version 0.8.1
+%define release 1
 
 Summary: digital clock with 7 different styles in either LCD or LED style
 Name: %name
@@ -51,6 +51,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sun Apr 10 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.8.1-1
+- Updated to 0.8.1.
+
 * Fri Mar 04 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.8.0-2
 - Changed styles dir to /usr/X11R6/share from /usr/share.
 
