@@ -1,17 +1,35 @@
 #!/usr/bin/perl
 
+
 use strict;
 
-if (-e "/etc/mandrake-release") {
-    # from mandrake push SRPMS and MDK RPMS
-    #
-    system("make mdk-i586");
-    system("rsync -avP -e ssh --delete-after --delete-excluded SRPMS/*.src.rpm afterstep\@spring.webconquest.com:~/www.afterstep.org/rpms/SRPMS/");
+my %distros = (
+    mdk => {
+	meta => "mdk-i586",
+	rpms => "RPMS/i586/",
+	srpms => "SRPMS/*.src.rpm",
+	target => "RPMS/mdk/10.1/i586/",
+    },
+    fc => {
+	meta => "fc3-i386",
+	rpms => "RPMS/i386/",
+	target => "RPMS/fc/3/i386/",
+    },
+);
 
-    system("rsync -avP -e ssh --delete-after --delete-excluded RPMS/i586/*.rpm RPMS/i586/*cz afterstep\@spring.webconquest.com:~/www.afterstep.org/rpms/RPMS/mdk/10.1/i586/");
-} elsif (-e "/etc/redhat-release") { 
-    system("make fc3-i386");
-    system("rsync -avP -e ssh --delete-after --delete-excluded RPMS/i386/*.rpm afterstep\@spring.webconquest.com:~/www.afterstep.org/rpms/RPMS/fc/3/i386/");
+my $rsyncopts = "-avP -e ssh --delete-after --delete-excluded";
+my $target = "afterstep\@spring.webconquest.com:~/www.afterstep.org/rpms";
+my $distro = shift;
+
+if($distros{$distro}) {
+    print "Processing distro $distro\n";
+    my $h = $distros{$distro};
+    system("make $h->{meta}");
+    system("rsync $rsyncopts $h->{rpms}/* $target/$h->{target}");
+    if($h->{srpms}) {
+	system("rsync $rsyncopts $h->{srpms} $target/SRPMS");
+    }
+} else {
+    print "Nothing to do for distro $distro\n";
 }
-
 
