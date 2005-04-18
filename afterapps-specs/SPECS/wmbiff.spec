@@ -12,6 +12,7 @@ Group: AfterStep/Applets
 URL: http://wmbiff.sf.net
 Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Requires: ruby
 
 %description 
 %{name} is an WindowMaker docking utility, that displays
