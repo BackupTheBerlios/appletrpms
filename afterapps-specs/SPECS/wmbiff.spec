@@ -1,7 +1,7 @@
 %define prefix /usr/X11R6
 %define name wmbiff
 %define version 0.4.26
-%define release 1
+%define release 2
 
 Summary: A dockable/swallowed mail notifier
 Name: %name
@@ -49,6 +49,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog COPYING FAQ INSTALL NEWS README* TODO
 
 %changelog
+* Mon Apr 18 2005 J. Krebs <rpm_speedy@yahoo.com> 0.4.26-2
+- added require for ruby.
 * Sun Mar  6 2005 Sean Dague <sean@dague.net> 0.4.26-1
 - first rpm version
 

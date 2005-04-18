@@ -1,7 +1,7 @@
 %define prefix /usr/X11R6
 %define name wmweather+
 %define version 2.9
-%define release 1
+%define release 2
 
 Summary: A dock app for displaying weather information
 Name: %name
@@ -46,6 +46,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Apr 18 2005 J. Krebs <rpm_speedy@yahoo.com> - 2.4-2
+- Added require for w3c-libwww.
+
 * Fri Aug 22 2003 Sean Dague <sean@dague.net> - 2.4-1
 - Initial build.
 
