@@ -1,7 +1,7 @@
 %define	name	AfterStep
-%define	fver	2.00.04
-%define	version	2.00.04
-%define release 2
+%define	fver	2.00.05
+%define	version	2.00.05
+%define release 1
 %define epoch   20
 %define	prefix	/usr/X11R6
 %define gdesk   /usr/share
@@ -83,13 +83,6 @@ CFLAGS=$RPM_OPT_FLAGS \
 	--datadir=%{prefix}/share                 \
 	--disable-staticlibs                      \
 	--enable-sharedlibs                       \
-	--with-xpm                                \
-	--with-jpeg                               \
-	--with-png                                \
-	--with-ttf                                \
-	--with-tiff                               \
-	--with-gif                                \
-	--with-jpeg                               \
 	--enable-ascp                             \
 	--enable-i18n                             \
 	--with-helpcommand="aterm -e man"         \
@@ -199,6 +192,9 @@ done
 %postun -p /sbin/ldconfig
 
 %changelog
+* Wed May 04 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.00.05-1
+- brought up to 2.00.05 release.
+
 * Mon Mar 28 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.00.04-2
 - Activated postcard-to-developer.
 
