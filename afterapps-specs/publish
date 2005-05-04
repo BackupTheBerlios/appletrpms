@@ -18,7 +18,7 @@ my %distros = (
 );
 
 my $rsyncopts = "-avP -e ssh --delete-after --delete-excluded";
-my $target = "afterstep\@spring.webconquest.com:~/www.afterstep.org/rpms";
+my $target = "davemann\@ftp.afterstep.org:~/fao/stable/rpms";
 my $distro = shift;
 
 if($distros{$distro}) {
