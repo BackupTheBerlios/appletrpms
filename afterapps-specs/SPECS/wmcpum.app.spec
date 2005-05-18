@@ -1,7 +1,7 @@
 %define prefix /usr/X11R6
 %define name wmcpum.app
 %define version 0.1.0
-%define release 1
+%define release 2
 
 Summary: WindowMaker CPU Monitor
 Name: %name
@@ -12,6 +12,7 @@ Group: AfterStep/Applets
 URL: http://www.unetz.com/schaepe/DOCKAPPS/dockapps.html
 Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Requires: lm_sensors
 
 %description
 WindowMaker CPU Monitor. Requires lm_sensors package.
@@ -47,6 +48,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed May 18 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.1.0-2
+- Added require for lm_sensors.
+
 * Mon Feb 21 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.1.0-1
 - Initial build.
 
