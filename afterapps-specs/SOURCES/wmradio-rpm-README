@@ -1,0 +1,25 @@
+After installing the wmradio package, use the following to
+get the program running:
+
+As user, run the configuration program:
+
+	wmradio-config.py
+	
+
+Using the GUI, add the device, up to six preset stations
+and their names, and the default skin.
+
+Launch wmradio using:
+
+	wmradio
+	
+	or
+	
+	wmradio -k skinfile.skin  (Ex: startrek.skin)
+
+Add wmradio to the Dock or Wharf.  For the AfterStep Wharf,
+add the following line:
+
+	*MonitorWharf wmradio - Swallow "WmRadio" wmradio &
+	
+the -k option can also be used within the Wharf.
