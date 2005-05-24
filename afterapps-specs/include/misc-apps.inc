@@ -28,6 +28,13 @@ LCD_URL=http://worldserver.oleane.com/rsn/Archives/$(LCD_TAR)
 
 #APPLET_LIST += LCD
 
+LIBICAL_NAME=libical
+LIBICAL_VERSION=0.24.RC4
+LIBICAL_TAR=$(LIBICAL_NAME)-$(LIBICAL_VERSION).tar.gz
+LIBICAL_URL=http://easynews.dl.sourceforge.net/sourceforge/freeassociation/$(LIBICAL_TAR)
+
+APPLET_LIST += LIBICAL
+
 MIXER.APP_NAME=Mixer.app
 MIXER.APP_VERSION=1.8.0
 MIXER.APP_TAR=$(MIXER.APP_NAME)-$(MIXER.APP_VERSION).tar.gz
