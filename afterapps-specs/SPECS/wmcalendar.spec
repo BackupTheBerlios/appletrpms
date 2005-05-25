@@ -13,6 +13,7 @@ URL: http://sourceforge.net/projects/wmcalendar/
 Source0: %{name}-%{version}.tar.gz
 Patch0: %{name}-%{version}.wharf.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Requires: libical
 
 %description
 Staying with v0.4.4 rather than v0.5.0; v0.5.0 has a right-click
