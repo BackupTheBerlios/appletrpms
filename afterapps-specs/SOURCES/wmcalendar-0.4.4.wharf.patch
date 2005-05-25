@@ -1,0 +1,11 @@
+--- Src/wmCalendar.c	2003-06-25 13:06:12.000000000 -0500
++++ Src/wmCalendar.c	2005-05-24 19:23:40.000000000 -0500
+@@ -22,7 +22,7 @@
+     if(debug)printf("using libical version %s\n", ICAL_VERSION);
+     if(debug)printf("settings:\nICON:%d\nLANG:%d\nAPP:%s\nRC:%s\nICS:%s\n\n", 
+ 		    appicon, language, application, rcfile, icsfile );
+-    dockapp_open_window("", "", 64, 64, argc, argv);
++    dockapp_open_window("", "wmCalendar", 64, 64, argc, argv);
+     initValues();
+     gtk_init(&argc, &argv);
+     
