@@ -3,7 +3,7 @@
 %define version 3.0
 %define release 1
 
-Summary: APM monitor
+Summary: Power Management (ACPI / APM) monitor
 Name: %name
 Version: %version
 Release: %release
@@ -15,9 +15,9 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: libjpeg-devel
 
 %description
-This is an AfterStep look & feel Advanced Power Management (APM) 
-monitor for laptops and notebook PCs running Linux or 
-FreeBSD/NetBSD/OpenBSD and X Windows.
+asapm is a swallowable applet that monitors the ACPI / APM status
+on laptops (battery/AC status, time left). It can execute commands
+on a variety of PM events..
 
 Basically, the tool shows you the following:
 - The bar-like indicator of the charge left in the battery
@@ -68,7 +68,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %changelog
 * Tue May 31 2005 J. Krebs <rpm_speedy@yahoo.com> - 3.0-1
-- added doc files
+- update to new version
 
 * Sat Aug 30 2003 Sean Dague <sean@dague.net> - 2.13-2
 - added doc files
