@@ -2,7 +2,7 @@
 
 # AfterStep apm applet
 ASAPM_NAME=asapm
-ASAPM_VERSION=2.13
+ASAPM_VERSION=3.0
 ASAPM_TAR=$(ASAPM_NAME)-$(ASAPM_VERSION).tar.gz
 ASAPM_URL=http://tigr.net/afterstep/download/asapm/$(ASAPM_TAR)
 
