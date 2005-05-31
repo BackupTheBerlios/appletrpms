@@ -1,7 +1,7 @@
 %define prefix /usr/X11R6
 %define name asapm
-%define version 2.13
-%define release 3
+%define version 3.0
+%define release 1
 
 Summary: APM monitor
 Name: %name
@@ -67,6 +67,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue May 31 2005 J. Krebs <rpm_speedy@yahoo.com> - 3.0-1
+- added doc files
+
 * Sat Aug 30 2003 Sean Dague <sean@dague.net> - 2.13-2
 - added doc files
 
