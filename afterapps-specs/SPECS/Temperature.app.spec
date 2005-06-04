@@ -1,7 +1,7 @@
 %define prefix /usr/X11R6
 %define name Temperature.app
 %define version 1.4
-%define release as3
+%define release as4
 
 Summary: WM applet gets temperature every 15 minutes
 Name: %name
@@ -16,11 +16,11 @@ Patch1: Temperature.app-1.4-frog-5.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
-This WM applet includes two binaries: "Temperature.app" for
-WindowMaker (and perhaps other window managers too) and
-"Temperature.app.as", a version modified to work with AfterStep.
-The AS version has been modified to work under AfterStep and will
-not work properly under WindowMaker.  It works fine in AfterStep :).
+This WM applet includes two binaries: "Temperature.app" for AfterStep
+>= 2.1.0 and WindowMaker (perhaps other window managers too) and
+"Temperature.app.as", a version modified to work with AfterStep < 2.1.0..
+The AS version has been modified to work under earlier versions of
+AfterStep and will not work properly under WindowMaker.
 
 Additionally, the patch from Frog at:
 
@@ -66,6 +66,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Jun 04 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.4-as4
+- Updated description to include news of AS 2.1.0 compatibility.
+
 * Mon Mar 21 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.4-as3
 - Added build for two binaries, one standard and one for
 - AfterStep.
