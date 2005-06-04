@@ -1,7 +1,7 @@
 %define prefix /usr/X11R6
 %define name wmcalendar
 %define version 0.4.4
-%define release 1
+%define release 2
 
 Summary: wmCalendar is a calendar dockapp.
 Name: %name
@@ -13,6 +13,7 @@ URL: http://sourceforge.net/projects/wmcalendar/
 Source0: %{name}-%{version}.tar.gz
 Patch0: %{name}-%{version}.wharf.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Buildrequires: libical
 Requires: libical
 
 %description
@@ -60,6 +61,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Jun 03 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.4.4-2
+- added buildrequire for libical.
+
 * Thu May 24 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.4.4-1
 - Initial build.
 
