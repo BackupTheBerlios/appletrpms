@@ -35,6 +35,14 @@ LIBICAL_URL=http://easynews.dl.sourceforge.net/sourceforge/freeassociation/$(LIB
 
 APPLET_LIST += LIBICAL
 
+#this is the the source file used to build libwraster
+LIBWRASTER_NAME=libwraster
+LIBWRASTER_VERSION=0.80.2
+LIBWRASTER_TAR=WindowMaker-$(LIBWRASTER_VERSION).tar.gz
+LIBWRASTER_URL=ftp://windowmaker.org/pub/source/release/$(LIBWRASTER_TAR)
+
+#APPLET_LIST += LIBWRASTER
+
 MIXER.APP_NAME=Mixer.app
 MIXER.APP_VERSION=1.8.0
 MIXER.APP_TAR=$(MIXER.APP_NAME)-$(MIXER.APP_VERSION).tar.gz
