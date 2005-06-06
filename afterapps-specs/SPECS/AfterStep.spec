@@ -1,6 +1,6 @@
 %define	name	AfterStep
-%define	fver	2.1.0
-%define	version	2.1.0 
+%define	fver	2.1.1
+%define	version	2.1.1 
 %define release 1
 %define epoch   20
 %define	prefix	/usr/X11R6
@@ -192,6 +192,9 @@ done
 %postun -p /sbin/ldconfig
 
 %changelog
+* Mon Jun 06 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.1.1-1
+- brought up to 2.1.1 release.
+
 * Tue May 17 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.1.0-1
 - brought up to 2.1.0 release.
 
