@@ -11,7 +11,7 @@ Source: 	WindowMaker-%{version}.tar.gz
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	XFree86-devel libpng-devel libjpeg-devel libungif-devel 
 BuildRequires:	libtiff-devel zlib-devel gettext
-Conflicts:	WindowMaker
+Conflicts:	WindowMaker WindowMaker-libs WindowMaker-devel
 Provides:	libwraster libwraster.so libwraster.so.2
 
 %description
