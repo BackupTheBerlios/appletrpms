@@ -1,13 +1,13 @@
 %define prefix  /usr/X11R6
 %define	name	aterm
 %define	version	1.00.beta4
-%define	release	1
+%define	release	2
 
 Summary:	aterm - terminal emulator in an X window
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-Copyright:	GPL
+License:	GPL
 Group:		X11/Utilities
 Vendor:		Sasha Vasko <sashav@sprintmail.com>
 URL:		http://aterm.sourceforge.net
@@ -57,6 +57,9 @@ make DESTDIR=$RPM_BUILD_ROOT install
 #%config(missingok) /etc/X11/wmconfig/aterm
 
 %changelog
+* Fri Jun 10 2005 J. Krebs <rpm_speedy@yahoo.com> 1.00beta4-2
+- replaced "copyright" with "license".
+
 * Thu Jun 09 2005 J. Krebs <rpm_speedy@yahoo.com> 1.00beta4-1
 - new version.
 

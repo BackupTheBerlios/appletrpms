@@ -1,13 +1,13 @@
 %define	name	libical
 %define	version	0.24.RC4
-%define release 2
+%define release 3
 %define	prefix	/usr
 
 Summary:	An implementation of basic iCAL protocols
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-Copyright:	MPL
+License:	MPL
 Group:		Development/Libraries/C and C++
 URL:		http://softwarestudio.org/libical/
 Source0:	%name-%version.tar.gz
@@ -65,6 +65,9 @@ rm -rf $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 
 %changelog
+* Fri Jun 10 2005 - J. Krebs <rpm_speedy@yahoo.com> 0.24.RC4-3
+- replaced "copyright" with "license".
+
 * Fri Jun 03 2005 - J. Krebs <rpm_speedy@yahoo.com> 0.24.RC4-2
 - .spec script cleanup.
 

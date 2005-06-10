@@ -1,6 +1,6 @@
 %define	name	AfterStep
 %define	version	2.1.1 
-%define release 2
+%define release 3
 %define	prefix	/usr/X11R6
 %define gdesk   /usr/share
 %define generic 1
@@ -19,7 +19,7 @@ Summary:	AfterStep Window Manager (NeXTalike)
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-Copyright:	GPL
+License:	GPL
 Group:		User Interface/Desktops
 URL:		http://www.afterstep.org
 Vendor:		The AfterStep Team (see TEAM in docdir)
@@ -53,7 +53,7 @@ Requires: xloadimage
 summary:	libraries required by afterstep 2.0
 version:	%{version}
 release:	%{release}
-copyright:	GPL
+License:	GPL
 group:		User Interface/Desktops
 Provides: %{name}-libs = %{version}
 
@@ -64,7 +64,7 @@ Provides: %{name}-libs = %{version}
 summary:	AftterStep libs include files
 version:	%{version}
 release:	%{release}
-copyright:	GPL
+License:	GPL
 group:		User Interface/Desktops
 Requires: %{name}-libs = %{version}
 
@@ -189,6 +189,9 @@ done
 %postun -p /sbin/ldconfig
 
 %changelog
+* Fri Jun 10 2005 J. Krebs <rpm_speedy@yahoo.com> 2.1.1-3
+- replaced "copyright" with "license" .spec file.
+
 * Thu Jun 09 2005 J. Krebs <rpm_speedy@yahoo.com> 2.1.1-2
 - eliminated epoch and fver from .spec file.
 
