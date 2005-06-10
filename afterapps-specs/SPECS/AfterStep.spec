@@ -1,8 +1,6 @@
 %define	name	AfterStep
-%define	fver	2.1.1
 %define	version	2.1.1 
-%define release 1
-%define epoch   20
+%define release 2
 %define	prefix	/usr/X11R6
 %define gdesk   /usr/share
 %define generic 1
@@ -21,12 +19,11 @@ Summary:	AfterStep Window Manager (NeXTalike)
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-Epoch:		%{epoch}
 Copyright:	GPL
 Group:		User Interface/Desktops
 URL:		http://www.afterstep.org
 Vendor:		The AfterStep Team (see TEAM in docdir)
-Source0:	ftp://ftp.afterstep.org/stable/%{name}-%{fver}.tar.gz
+Source0:	ftp://ftp.afterstep.org/stable/%{name}-%{version}.tar.gz
 Source1:	Xclients.afterstep
 Source2:	afterstep
 Source3: AfterStep.kdm
@@ -75,7 +72,7 @@ Requires: %{name}-libs = %{version}
   AftterStep libs include files
 
 %prep
-%setup -q -n %{name}-%{fver}
+%setup -q -n %{name}-%{version}
 
 CFLAGS=$RPM_OPT_FLAGS \
 ./configure \
@@ -192,22 +189,22 @@ done
 %postun -p /sbin/ldconfig
 
 %changelog
-* Mon Jun 06 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.1.1-1
+* Mon Jun 06 2005 J. Krebs <rpm_speedy@yahoo.com> 2.1.1-1
 - brought up to 2.1.1 release.
 
-* Tue May 17 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.1.0-1
+* Tue May 17 2005 J. Krebs <rpm_speedy@yahoo.com> 2.1.0-1
 - brought up to 2.1.0 release.
 
-* Wed May 04 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.00.05-1
+* Wed May 04 2005 J. Krebs <rpm_speedy@yahoo.com> 2.00.05-1
 - brought up to 2.00.05 release.
 
-* Mon Mar 28 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.00.04-2
+* Mon Mar 28 2005 J. Krebs <rpm_speedy@yahoo.com> 2.00.04-2
 - Activated postcard-to-developer.
 
-* Tue Mar 22 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.00.04-1
+* Tue Mar 22 2005 J. Krebs <rpm_speedy@yahoo.com> 2.00.04-1
 - brought up to 2.00.04 release
 
-* Mon Mar  7 2005 Sean Dague <sean@dague.net> 20:2.00.03-3
+* Mon Mar  7 2005 Sean Dague <sean@dague.net> 2.00.03-3
 - set provides manually on libs, move some docs to main and devel
 
 * Sun Mar  6 2005 Sean Dague <sean@dague.net> 2.00.03-2
