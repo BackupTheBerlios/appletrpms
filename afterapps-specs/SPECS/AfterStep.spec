@@ -189,6 +189,9 @@ done
 %postun -p /sbin/ldconfig
 
 %changelog
+* Thu Jun 09 2005 J. Krebs <rpm_speedy@yahoo.com> 2.1.1-2
+- brought up to 2.1.1 release.
+
 * Mon Jun 06 2005 J. Krebs <rpm_speedy@yahoo.com> 2.1.1-1
 - brought up to 2.1.1 release.
 
