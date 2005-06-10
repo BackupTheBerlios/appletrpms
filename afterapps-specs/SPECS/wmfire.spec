@@ -1,7 +1,19 @@
 %define prefix /usr/X11R6
 %define name wmfire
 %define version 1.2.2
-%define release 2
+%define release 3
+
+%define generic 1
+%define fedora 0
+%{?_with_fedora:%define fedora 1}
+%define mandrake 0
+%{?_with_mandrake:%define mandrake 1}
+%if %{fedora}
+   %define generic 0
+%endif
+%if %{mandrake}
+   %define generic 0
+%endif
 
 Summary: wmfire is a configurable cpu, mem, or network monitor.
 Name: %name
@@ -12,6 +24,16 @@ Group: AfterStep/Applets
 URL: http://www.swanson.ukfsn.org/wmfire/
 Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+
+%if %{fedora}
+Requires: libgtop2
+BuildRequires: libgtop2-devel
+%endif
+
+%if %{mandrake}
+Requires: libgtop2.0
+BuildRequires: libgtop2.0-devel
+%endif
 
 %description
 This is an update of the original wmfire dock applet. It uses
@@ -51,11 +73,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Jun 10 2005 J. Krebs <rpm_speedy@yahoo.com> 1.2.2-3
+- added "if" selection by distro
+
 * Sat Feb 26 2005 Sean Dague <sean@dague.net> 1.2.2-2
 - add build requires for gtop2-devel
 
 * Fri Feb 18 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-1
 - Initial build.
-
-
-
