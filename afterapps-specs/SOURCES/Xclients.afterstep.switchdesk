@@ -1,0 +1,10 @@
+#!/bin/bash
+
+WM="afterstep"
+WMPATH="/usr/bin /usr/X11R6/bin /usr/local/bin"
+
+for p in $WMPATH ; do
+   [ -x $p/$WM ] && exec $p/$WM
+done
+
+exit 1

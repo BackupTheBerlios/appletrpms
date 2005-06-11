@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=AfterStep
+Exec=etc/X11/gdm/Sessions/afterstep
+
+[Window Manager]
+SessionManaged=true

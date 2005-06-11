@@ -1,0 +1,61 @@
+This set of instructions is for Fedora users installing AfterStep (AS).  Switchdesk, provided by Fedora, is a closed-end solution to adding and changing desktops; i.e., if the window manager/desktop is not included in the switchdesk package, there is no simple way of adding new desktops.  AS is not included in the switchdesk package.  There are four methods of invoking AS:
+
+
+1.  As user, through gdm (Gnome Display Manager)
+
+First of all, as installed, AS works fine with gdm (Gnome Display Manager).  You can select AS via "Session" on gdm.  The only problem with using this method is that AS must be manually selected each time by the user at login.  It's a great way to experiment with a new window manager, but at some point the user will desire a more "permanent" setup.
+
+
+2.  As user, create a .Xclients-default file in the user home directory (~/)
+
+Edit the .Xclients-default file in the user home directory (~/.Xclients-default) to read as follows:
+
+	-----start text-----
+	#!/bin/bash
+
+	WM="afterstep"
+	WMPATH="/usr/bin /usr/X11R6/bin /usr/local/bin"
+
+	for p in $WMPATH ; do
+	   [ -x $p/$WM ] && exec $p/$WM
+	done
+
+	exit 1
+	------end text------
+
+If the file already exists, create a copy/backup.  Set the permissions with:
+
+	chmod 755 .Xclients-default
+
+This will allow AS to be default until the user changes the desktop (window manager) via switchdesk; once changed, the user will need to re-create the file to get AS as the default again.
+
+
+3.  As root, modify the switchdesk-helper file
+
+Add the following lines to /usr/bin/switchdesk-helper after the line
+DESKTOP='echo $1 |tr a-z A-Z':
+
+	-----start text-----
+	    AFTERSTEP)
+	        [ ! -x /usr/X11R6/bin/afterstep ] && NotFound AfterStep
+	        DNAME="AfterStep"
+	        NEW_XCLIENTS="$DATADIR/Xclients.afterstep"
+	        ;;
+	------end text------
+
+Just follow the existing pattern.  I put mine after WindowMaker.  This is a global fix.  Using the command:
+
+	switchdesk afterstep
+
+the user creates the file in option 3 abovein the home directory.  This option allows full functionality with gdm and switchdesk.
+
+
+4.  Creating .xinitrc and .xsession files in the user's home directory (~/)
+
+Login as user, open a terminal (aterm, xterm, etc.) and type the following:
+
+	echo "exec afterstep" > ~/.xinitrc
+	echo "exec afterstep" > ~/.xsession
+	chmod 700 ~/.xsession
+
+Every time you login, AS is your default.  Period.  This method is highly recommended for users who desire to keep AS as their sole desktop/window manager.

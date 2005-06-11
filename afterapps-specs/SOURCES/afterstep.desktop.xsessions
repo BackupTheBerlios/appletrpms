@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=AfterStep
+Comment=This session logs you into AfterStep
+Exec=/etc/X11/gdm/Sessions/afterstep
+TryExec=/etc/X11/gdm/Sessions/afterstep
+Icon=
+Type=Script
