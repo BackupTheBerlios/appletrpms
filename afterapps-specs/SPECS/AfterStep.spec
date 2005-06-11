@@ -1,6 +1,6 @@
 %define	name	AfterStep
 %define	version	2.1.1 
-%define release 3
+%define release 4
 %define	prefix	/usr/X11R6
 %define gdesk   /usr/share
 %define generic 1
@@ -24,11 +24,14 @@ Group:		User Interface/Desktops
 URL:		http://www.afterstep.org
 Vendor:		The AfterStep Team (see TEAM in docdir)
 Source0:	ftp://ftp.afterstep.org/stable/%{name}-%{version}.tar.gz
-Source1:	Xclients.afterstep
-Source2:	afterstep
-Source3: AfterStep.kdm
-Source4: AfterStep.menu
-Source5: AfterStep.menumethod
+Source1:	Xclients.afterstep.switchdesk
+Source2:	afterstep.gdm
+Source3: 	AfterStep.kdm
+Source4: 	AfterStep.menu
+Source5: 	AfterStep.menumethod
+Source6: 	afterstep.desktop.xsessions
+Source7: 	afterstep.desktop.wm-properties
+Source8:	afterstep.fedora.README
 Distribution:	The AfterStep TEAM
 Packager:	Sean Dague <sean at dague dot net>
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
@@ -104,14 +107,15 @@ done
 
 %if %{fedora}
 #fedora-config prep
+cp %{SOURCE8} .
 install -d $RPM_BUILD_ROOT%{gdesk}/switchdesk/
-install -m 0644 %{SOURCE1} $RPM_BUILD_ROOT%{gdesk}/switchdesk/
+install -m 0755 %{SOURCE1} $RPM_BUILD_ROOT%{gdesk}/switchdesk/Xclients.afterstep
 install -d $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/
-install -m 0644 %{SOURCE2} $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/
+install -m 0755 %{SOURCE2} $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/afterstep
 install -d %{buildroot}%{gdesk}/xsessions/
-install -m 0644 AfterStep.desktop.final %{buildroot}%{gdesk}/xsessions/afterstep.desktop
+install -m 0755 %{SOURCE6} %{buildroot}%{gdesk}/xsessions/afterstep.desktop
 install -d %{buildroot}%{gdesk}/gnome/wm-properties/
-install -m 0644 AfterStep.desktop.final %{buildroot}%{gdesk}/gnome/wm-properties/afterstep.desktop
+install -m 0644 %{SOURCE7} %{buildroot}%{gdesk}/gnome/wm-properties/afterstep.desktop
 rm -f %{buildroot}%{prefix}/share/xsessions/AfterStep.desktop
 rmdir %{buildroot}%{prefix}/share/xsessions/
 %endif
@@ -144,6 +148,7 @@ rm -rf %{buildroot}
 %{gdesk}/switchdesk/Xclients.afterstep
 %{gdesk}/xsessions/afterstep.desktop
 %{gdesk}/gnome/wm-properties/afterstep.desktop
+%doc afterstep.fedora.README
 %endif
 %if %{mandrake}
 /etc/X11/wmsession.d/42AfterStep
@@ -189,6 +194,9 @@ done
 %postun -p /sbin/ldconfig
 
 %changelog
+* Fri Jun 10 2005 J. Krebs <rpm_speedy@yahoo.com> 2.1.1-4
+- AfterStep now works correctly under Fedora gdm & switchdesk.
+
 * Fri Jun 10 2005 J. Krebs <rpm_speedy@yahoo.com> 2.1.1-3
 - replaced "copyright" with "license" .spec file.
 
