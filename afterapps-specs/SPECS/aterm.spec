@@ -1,7 +1,7 @@
 %define prefix  /usr/X11R6
 %define	name	aterm
 %define	version	1.00.beta4
-%define	release	2
+%define	release	3
 
 Summary:	aterm - terminal emulator in an X window
 Name:		%{name}
@@ -13,8 +13,8 @@ Vendor:		Sasha Vasko <sashav@sprintmail.com>
 URL:		http://aterm.sourceforge.net
 Source:		%{name}-%{version}.tar.gz
 Buildroot:	/var/tmp/%{name}-%{version}-root
-BuildRequires:	AfterStep-devel >= 2.00.00
-Requires:	AfterStep >= 2.00.00
+BuildRequires:	AfterStep-devel >= 20:2.00.00
+Requires:	AfterStep >= 20:2.00.00
 
 %description
 aterm, version %{version}, is a colour vt102 terminal emulator based on
@@ -57,6 +57,9 @@ make DESTDIR=$RPM_BUILD_ROOT install
 #%config(missingok) /etc/X11/wmconfig/aterm
 
 %changelog
+* Sun Jun 12 2005 J. Krebs <rpm_speedy@yahoo.com> 1.00beta4-3
+- added epoch info to AS requires.
+
 * Fri Jun 10 2005 J. Krebs <rpm_speedy@yahoo.com> 1.00beta4-2
 - replaced "copyright" with "license".
 

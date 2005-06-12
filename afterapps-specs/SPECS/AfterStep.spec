@@ -1,6 +1,7 @@
 %define	name	AfterStep
 %define	version	2.1.1 
-%define release 4
+%define release 5
+%define epoch 20
 %define	prefix	/usr/X11R6
 %define gdesk   /usr/share
 %define generic 1
@@ -19,6 +20,7 @@ Summary:	AfterStep Window Manager (NeXTalike)
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
+Epoch:		%{epoch}
 License:	GPL
 Group:		User Interface/Desktops
 URL:		http://www.afterstep.org
@@ -35,8 +37,8 @@ Source8:	afterstep.fedora.README
 Distribution:	The AfterStep TEAM
 Packager:	Sean Dague <sean at dague dot net>
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
-Requires:	%{name}-libs = %{version}
-Requires: xloadimage
+Requires:	%{name}-libs = %{epoch}:%{version}
+Requires: 	xloadimage
 
 %description
   AfterStep is a Window Manager for X which started by emulating the
@@ -56,20 +58,22 @@ Requires: xloadimage
 summary:	libraries required by afterstep 2.0
 version:	%{version}
 release:	%{release}
+Epoch:		%{epoch}
 License:	GPL
 group:		User Interface/Desktops
-Provides: %{name}-libs = %{version}
+Provides: 	%{name}-libs
 
 %description libs
   Libraries neeeded by AfterStep 2.0
 
 %package devel
-summary:	AftterStep libs include files
+summary:	AfterStep libs include files
 version:	%{version}
 release:	%{release}
+Epoch:		%{epoch}
 License:	GPL
 group:		User Interface/Desktops
-Requires: %{name}-libs = %{version}
+Requires: 	%{name}-libs = %{epoch}:%{version}
 
 %description devel
   AftterStep libs include files
@@ -194,41 +198,44 @@ done
 %postun -p /sbin/ldconfig
 
 %changelog
-* Fri Jun 10 2005 J. Krebs <rpm_speedy@yahoo.com> 2.1.1-4
+* Sun Jun 12 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.1.1-5
+- added epoch info back in and tweaked requires.
+
+* Fri Jun 10 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.1.1-4
 - AfterStep now works correctly under Fedora gdm & switchdesk.
 
-* Fri Jun 10 2005 J. Krebs <rpm_speedy@yahoo.com> 2.1.1-3
+* Fri Jun 10 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.1.1-3
 - replaced "copyright" with "license" .spec file.
 
-* Thu Jun 09 2005 J. Krebs <rpm_speedy@yahoo.com> 2.1.1-2
+* Thu Jun 09 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.1.1-2
 - eliminated epoch and fver from .spec file.
 
-* Mon Jun 06 2005 J. Krebs <rpm_speedy@yahoo.com> 2.1.1-1
+* Mon Jun 06 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.1.1-1
 - brought up to 2.1.1 release.
 
-* Tue May 17 2005 J. Krebs <rpm_speedy@yahoo.com> 2.1.0-1
+* Tue May 17 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.1.0-1
 - brought up to 2.1.0 release.
 
-* Wed May 04 2005 J. Krebs <rpm_speedy@yahoo.com> 2.00.05-1
+* Wed May 04 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.00.05-1
 - brought up to 2.00.05 release.
 
-* Mon Mar 28 2005 J. Krebs <rpm_speedy@yahoo.com> 2.00.04-2
+* Mon Mar 28 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.00.04-2
 - Activated postcard-to-developer.
 
-* Tue Mar 22 2005 J. Krebs <rpm_speedy@yahoo.com> 2.00.04-1
+* Tue Mar 22 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.00.04-1
 - brought up to 2.00.04 release
 
-* Mon Mar  7 2005 Sean Dague <sean@dague.net> 2.00.03-3
+* Mon Mar  7 2005 Sean Dague <sean@dague.net> 20:2.00.03-3
 - set provides manually on libs, move some docs to main and devel
 
-* Sun Mar  6 2005 Sean Dague <sean@dague.net> 2.00.03-2
+* Sun Mar  6 2005 Sean Dague <sean@dague.net> 20:2.00.03-2
 - add with tagging to fedora vs. mandrake issues
 
-* Thu Mar 03 2005 J.Krebs <rpm_speedy@yahoo.com> 2.00.03-1
+* Thu Mar 03 2005 J.Krebs <rpm_speedy@yahoo.com> 20:2.00.03-1
 - brought up to 2.00.03 release
 - separated Fedora desktop config files into a separate rpm
 
-* Sat Feb 26 2005 Sean Dague <sean@dague.net> 2.00.02-2
+* Sat Feb 26 2005 Sean Dague <sean@dague.net> 20:2.00.02-2
 - brought up to 2.00.02 release
 
 * Wed Sep 28 2004 Graydon Saunders <graydon@epiphyte.net> 2.00.00
