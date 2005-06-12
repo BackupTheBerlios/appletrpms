@@ -221,7 +221,7 @@ sub check_deps {
     # this finds the youngest dep
     for my $d (@deps) {
         my $m = (stat($d))[9];
-        if($m > $mtimed) {
+        if($m < $mtimed) {
             $mtimed = $m;
         }
     }
