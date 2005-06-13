@@ -207,7 +207,8 @@ sub check_deps {
         # we have no idea what is going on so we return fail
         return 1;
     }
-    my $mtimet = 2000000000; # pretty close to 2038
+#    my $mtimet = 2000000000; # pretty close to 2038
+    my $mtimet = 0;
     my $mtimed = 0;
     
     # this finds the oldest target
