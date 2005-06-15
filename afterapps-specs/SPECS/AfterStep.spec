@@ -38,7 +38,7 @@ Distribution:	The AfterStep TEAM
 Packager:	Sean Dague <sean at dague dot net>
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 Requires:	%{name}-libs = %{epoch}:%{version}
-Requires: 	qiv
+
 
 %description
   AfterStep is a Window Manager for X which started by emulating the
@@ -200,6 +200,7 @@ done
 %changelog
 * Tue Jun 14 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.1.1-6
 - removed xloadimage with qiv. FC4 no longer provides xloadimage.
+- qiv is an optional package and not a require for install.
 
 * Sun Jun 12 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.1.1-5
 - added epoch info back in and tweaked requires.
