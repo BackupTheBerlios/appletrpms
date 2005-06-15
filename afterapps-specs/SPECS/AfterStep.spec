@@ -91,7 +91,7 @@ CFLAGS=$RPM_OPT_FLAGS \
 	--enable-i18n                             \
 	--with-helpcommand="aterm -e man"         \
 	--with-desktops=1 --with-deskgeometry=2x3 \
-	--with-imageloader="xsetbg"
+	--with-imageloader="qiv --root"
 
 %build
 make
