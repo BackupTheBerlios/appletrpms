@@ -1,6 +1,6 @@
 %define	name	AfterStep
 %define	version	2.1.1 
-%define release 5
+%define release 6
 %define epoch 20
 %define	prefix	/usr/X11R6
 %define gdesk   /usr/share
@@ -38,7 +38,7 @@ Distribution:	The AfterStep TEAM
 Packager:	Sean Dague <sean at dague dot net>
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 Requires:	%{name}-libs = %{epoch}:%{version}
-Requires: 	xloadimage
+Requires: 	qiv
 
 %description
   AfterStep is a Window Manager for X which started by emulating the
@@ -198,6 +198,9 @@ done
 %postun -p /sbin/ldconfig
 
 %changelog
+* Tue Jun 14 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.1.1-6
+- removed xloadimage with qiv. FC4 no longer provides xloadimage.
+
 * Sun Jun 12 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.1.1-5
 - added epoch info back in and tweaked requires.
 

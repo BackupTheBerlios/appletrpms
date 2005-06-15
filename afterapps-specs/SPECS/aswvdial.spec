@@ -1,7 +1,7 @@
 %define prefix /usr/X11R6
 %define name aswvdial
 %define version 1.7
-%define release 2
+%define release 3
 
 Summary: ASwvdial is a dock/wharf/slit app for wvdial
 Name: %name
@@ -31,8 +31,8 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%prefix/bin
 
 install -s -m 755 aswvdial/aswvdial $RPM_BUILD_ROOT%prefix/bin
-install -s -m 755 aswvdial/netdown $RPM_BUILD_ROOT%prefix/bin
-install -s -m 755 aswvdial/netup $RPM_BUILD_ROOT%prefix/bin
+install -m 755 aswvdial/netdown $RPM_BUILD_ROOT%prefix/bin
+install -m 755 aswvdial/netup $RPM_BUILD_ROOT%prefix/bin
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -44,6 +44,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Jun 14 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.7-3
+- Maker script files install better.
+
 * Sun Jun 12 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.7-2
 - Added require for wvdial (duh).
 
