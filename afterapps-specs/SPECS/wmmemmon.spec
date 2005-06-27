@@ -1,6 +1,6 @@
 %define prefix /usr/X11R6
 %define name wmmemmon
-%define version 1.0.1
+%define version 1.0.2
 %define release 1
 
 Summary: WMMemMon - A dockapp to monitor memory/swap usages
@@ -10,8 +10,8 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://tnemeth.free.fr/projets/dockapps.html
-Source0: %{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Source0: %{name}-%{version}pre2.tar.gz
+BuildRoot: %{_tmppath}/%{name}-%{version}pre1-%{release}-buildroot
 
 %description
 WMMemMon is a program to monitor memory/swap usages. It is a dockapp that is
@@ -24,7 +24,7 @@ appliacation. If the usage hits a certain threshold, an alarm-mode will alert
 you by turning back-light on.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}pre2
 
 %build
 ./configure --prefix=%prefix
