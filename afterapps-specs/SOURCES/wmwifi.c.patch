@@ -1,0 +1,25 @@
+--- src/wmwifi.c	2004-09-24 14:58:36.000000000 -0500
++++ src/wmwifi.c	2005-06-26 17:56:22.000000000 -0500
+@@ -1,9 +1,11 @@
+ /*
+- *    wmupmon - A dockapp to monitor system uptime
+- *    Copyright (C) 2003  Justin Spadea <jzs@mail.rit.edu>
++ *    wmwifi - A dockapp to monitor wireless parameters
++ *    Copyright (C) 2004  Jess Mahan <jess@digitalssg.net>
+  *
+  *    Based on work by Seiichi SATO <ssato@sh.rim.or.jp>
+  *    Copyright (C) 2001,2002  Seiichi SATO <ssato@sh.rim.or.jp>
++ *    AND by Justin Spadea <jzs@mail.rit.edu>
++ *    Copyright (C) 2003  Justin Spadea <jzs@mail.rit.edu>
+  *    AND by Mark Staggs <me@markstaggs.net>
+  *    Copyright (C) 2002  Mark Staggs <me@markstaggs.net>
+ 
+@@ -535,7 +537,7 @@
+ static void print_help(char *prog)
+ {
+     printf("Usage : %s [OPTIONS]\n", prog);
+-    printf("wmupmon - uptime monitor dockapp\n");
++    printf("wmwifi - wireless monitor dockapp\n");
+     printf("  -d,  --display <string>        display to use\n");
+     printf("  -bl, --backlight               turn on back-light\n");
+     printf
