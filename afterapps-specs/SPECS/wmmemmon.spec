@@ -11,7 +11,7 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://tnemeth.free.fr/projets/dockapps.html
 Source0: %{name}-%{version}pre2.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}pre1-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}pre2-%{release}-buildroot
 
 %description
 WMMemMon is a program to monitor memory/swap usages. It is a dockapp that is
@@ -51,6 +51,8 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Jun 25 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.0.2pre2-1
+- new version
+
 * Sat Mar 05 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.0.1-1
 - Initial build
-
