@@ -10,7 +10,7 @@ AFTERSTEP_URL=ftp://ftp.afterstep.org/stable/$(AFTERSTEP_TAR)
 APPLET_LIST += AFTERSTEP
 
 ATERM_NAME=aterm
-ATERM_VERSION=1.00.beta4
+ATERM_VERSION=1.0.0
 ATERM_TAR=$(ATERM_NAME)-$(ATERM_VERSION).tar.gz
 ATERM_URL=ftp://ftp.afterstep.org/apps/aterm/$(ATERM_TAR)
 
