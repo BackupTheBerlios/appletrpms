@@ -1,6 +1,6 @@
 %define	name	AfterStep
 %define	version	2.1.1 
-%define release 6
+%define release 7
 %define epoch 20
 %define	prefix	/usr/X11R6
 %define gdesk   /usr/share
@@ -62,6 +62,9 @@ Epoch:		%{epoch}
 License:	GPL
 group:		User Interface/Desktops
 Provides: 	%{name}-libs
+%if %{mandrake}
+Obsoletes: libAfterStep1
+%endif
 
 %description libs
   Libraries neeeded by AfterStep 2.0

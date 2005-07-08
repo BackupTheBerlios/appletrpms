@@ -2,6 +2,7 @@
 %define	name	aterm
 %define	version	1.0.0
 %define	release	1
+%define epoch	2
 
 Summary:	aterm - terminal emulator in an X window
 Name:		%{name}
