@@ -173,11 +173,11 @@ rm -rf %{buildroot}
 %dir %{prefix}/share/afterstep
 %{prefix}/share/afterstep/*
 %{prefix}/man/man1/*
-%if %{mandrake}
-/etc/X11/wmsession.d/42AfterStep
-/usr/lib/menu/afterstep
+%if %{mdkversion}
+%config /etc/X11/wmsession.d/42AfterStep
 /etc/menu-methods/AfterStep
-%{prefix}/share/xsessions/
+/usr/X11R6/share/xsessions/AfterStep.desktop
+%config /usr/lib/menu/afterstep/AfterStep.menu
 %endif
 %if %{fedora}
 /etc/X11/gdm/Sessions/afterstep
