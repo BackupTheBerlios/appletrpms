@@ -28,7 +28,7 @@ Version:	%version
 Release:	%release
 License:	GPL
 Group:		X11/Libraries
-Source0:	%{name}-%{version}.tar.bz2
+Source0:	libdockapp-%{version}.tar.bz2
 URL:		http://solfertje.student.utwente.nl/~dalroi/libdockapp/
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
