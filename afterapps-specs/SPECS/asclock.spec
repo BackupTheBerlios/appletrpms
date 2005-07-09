@@ -25,8 +25,10 @@ perl -pi -e 's{/usr/local/share/asclock/}{%prefix/share/%name}' config.c
 make
 
 %install
+mkdir -p $RPM_BUILD_ROOT%prefix/share/%name/doc
 make BINDIR=$RPM_BUILD_ROOT%prefix/bin \
     MANDIR=$RPM_BUILD_ROOT%prefix/man/man1 \
+    DOCDIR=$RPM_BUILD_ROOT%prefix/share/%name/doc \
     install install.man
 install -d $RPM_BUILD_ROOT%prefix/share/%name
 cp -a themes/* $RPM_BUILD_ROOT%prefix/share/%name

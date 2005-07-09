@@ -1,14 +1,22 @@
 %define	name	AfterStep
 %define	version	2.1.1 
-%define release 7
+%define release 8
 %define epoch 20
 %define	prefix	/usr/X11R6
 %define gdesk   /usr/share
+%define         __prefix        %{prefix}
+%define         __bindir        %{__prefix}/bin
+%define         __mandir        %{__prefix}/man
+%define         __datadir       %{__prefix}/share
+%define         __libdir        %{__prefix}/%{_lib}
+%define         __includedir    %{__prefix}/include
 %define generic 1
 %define fedora 0
 %{?_with_fedora:%define fedora 1}
 %define mandrake 0
 %{?_with_mandrake:%define mandrake 1}
+%define ismultiarch 0
+%{?multiarch:%define ismultiarch 1}
 %if %{fedora}
    %define generic 0
 %endif
@@ -39,6 +47,13 @@ Packager:	Sean Dague <sean at dague dot net>
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 Requires:	%{name}-libs = %{epoch}:%{version}
 
+
+%define         __prefix        /usr/X11R6
+%define         __bindir        %{__prefix}/bin
+%define         __mandir        %{__prefix}/man
+%define         __datadir       %{__prefix}/share
+%define         __libdir        %{__prefix}/%{_lib}
+%define		__includedir	%{__prefix}/include
 
 %description
   AfterStep is a Window Manager for X which started by emulating the
@@ -84,20 +99,25 @@ Requires: 	%{name}-libs = %{epoch}:%{version}
 %prep
 %setup -q -n %{name}-%{version}
 
+%build
 CFLAGS=$RPM_OPT_FLAGS \
-./configure \
-	--prefix=%{prefix}                        \
-	--datadir=%{prefix}/share                 \
-	--disable-staticlibs                      \
+configure \
+	--prefix=%{__prefix}                      \
+	--datadir=%{__datadir}                    \
+	--libdir=%{__libdir} 			\
+	--mandir=%{__mandir} 			\
+	--bindir=%{__bindir} 			\
+	--sysconfdir=%{_sysconfdir}		\
+	--includedir=%{__includedir}		\
 	--enable-sharedlibs                       \
+	--disable-staticlibs			\
 	--enable-ascp                             \
 	--enable-i18n                             \
 	--with-helpcommand="aterm -e man"         \
 	--with-desktops=1 --with-deskgeometry=2x3 \
 	--with-imageloader="qiv --root"
 
-%build
-make
+%make
 
 if [[ -x /usr/bin/sgml2html ]]; then sgml2html doc/afterstep.sgml; fi
 cd src/ASDocGen && ./ASDocGen -l log.html -t html && cd ../..
@@ -108,9 +128,9 @@ mkdir -p $RPM_BUILD_ROOT
 
 make DESTDIR=$RPM_BUILD_ROOT LDCONFIG=/bin/true install
 rm -f $RPM_BUILD_ROOT%{prefix}/bin/{sessreg,xpmroot}
-for f in libAfter{Base,Conf,Image,Step}; do
-   cp -a $f/$f.so* %{buildroot}%{prefix}/lib
-done
+#for f in libAfter{Base,Conf,Image,Step}; do
+#   cp -a $f/$f.so* %{buildroot}%{prefix}/lib
+#done
 
 %if %{fedora}
 #fedora-config prep
@@ -134,8 +154,12 @@ install -d $RPM_BUILD_ROOT/usr/lib/menu/afterstep
 install -m 0644 %{SOURCE4} $RPM_BUILD_ROOT/usr/lib/menu/afterstep
 install -d $RPM_BUILD_ROOT/etc/menu-methods/
 install -m 0755 %{SOURCE5} $RPM_BUILD_ROOT/etc/menu-methods/AfterStep
-rm -f %{buildroot}%{prefix}/share/xsessions/AfterStep.desktop
-rmdir %{buildroot}%{prefix}/share/xsessions/
+%endif
+%if %{ismultiarch}
+#mkdir -p %{buildroot}%{multiarch_bindir}
+%multiarch_binaries %{buildroot}%{__bindir}/afterimage-config
+%multiarch_binaries %{buildroot}%{__bindir}/afterimage-libs
+%multiarch_binaries %{buildroot}%{__bindir}/afterstep-config
 %endif
 
 %clean
@@ -145,11 +169,16 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc ChangeLog NEW README* TEAM UPGRADE doc/languages doc/licences doc/code TODO doc/*.html
 %doc src/ASDocGen/html/*html
-
 %{prefix}/bin/*
 %dir %{prefix}/share/afterstep
 %{prefix}/share/afterstep/*
 %{prefix}/man/man1/*
+%if %{mandrake}
+/etc/X11/wmsession.d/42AfterStep
+/usr/lib/menu/afterstep
+/etc/menu-methods/AfterStep
+%{prefix}/share/xsessions/
+%endif
 %if %{fedora}
 /etc/X11/gdm/Sessions/afterstep
 %{gdesk}/switchdesk/Xclients.afterstep
@@ -157,19 +186,14 @@ rm -rf %{buildroot}
 %{gdesk}/gnome/wm-properties/afterstep.desktop
 %doc afterstep.fedora.README
 %endif
-%if %{mandrake}
-/etc/X11/wmsession.d/42AfterStep
-/usr/lib/menu/afterstep
-/etc/menu-methods/AfterStep
-%endif
 %if %{generic}
-%{prefix}/share/xsessions/AfterStep.desktop
+%{prefix}/xsessions/AfterStep.desktop
 %endif
 
 %files libs
 %defattr(-,root,root)
 %doc libAfterImage/README 
-%{prefix}/lib/*
+%{__libdir}/*
 
 %files devel
 %defattr(-,root,root)
