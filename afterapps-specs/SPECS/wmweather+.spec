@@ -29,8 +29,8 @@ BuildRequires: w3c-libwww-devel
 Requires: w3c-libwww
 
 %if %{mandrake}
-Requires: pcre
-BuildRequires: pcre
+Requires: libpcre0
+BuildRequires: libpcre0-devel
 %endif
 
 %if %{fedora}
