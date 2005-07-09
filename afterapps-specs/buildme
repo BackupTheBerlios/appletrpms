@@ -214,7 +214,8 @@ sub check_deps {
     # this finds the oldest target
     for my $t (@targets) {
         my $m = (stat($t))[9];
-        if($m < $mtimet) {
+	verbose("Target:$t - Mtime:$m",2);
+        if($m > $mtimet) {
             $mtimet = $m;
         }
     }
@@ -222,11 +223,13 @@ sub check_deps {
     # this finds the youngest dep
     for my $d (@deps) {
         my $m = (stat($d))[9];
-        if($m < $mtimed) {
+	verbose("Target:$d - Mtime:$m",2);
+        if($m > $mtimed) {
             $mtimed = $m;
         }
     }
- 
+
+    verbose("Dep: $mtimed, Target: $mtimet",2);
     if($mtimed >= $mtimet) {
         # a dep is younger than a target
         return 1;
