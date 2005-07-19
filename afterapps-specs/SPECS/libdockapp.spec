@@ -11,7 +11,7 @@
 %endif
 
 %define prefix	/usr/X11R6
-%define version 0.6.0
+%define version 0.6.1
 %define release 1
 
 %if %{mandrake}
@@ -58,7 +58,7 @@ Requires:	%{name} = %{version}
 Header files etc to develop DockApps.
 
 %prep
-%setup -q -n dockapp-0.6.0
+%setup -q -n dockapp-%{version}
 
 %build
 ./configure --prefix=%{prefix} \
@@ -91,5 +91,8 @@ rm -rf $RPM_BUILD_ROOT%{prefix}/lib/libdockapp.a
 %{prefix}/include/*
 
 %changelog
+* Mon Jul 18 2005 J. Krebs <rpm_speedy@yahoo.com> 0.6.1-1
+- new version.
+
 * Sat Jun 25 2005 J. Krebs <rpm_speedy@yahoo.com> 0.6.0-1
 - initial build.
