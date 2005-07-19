@@ -29,7 +29,7 @@ LCD_URL=http://worldserver.oleane.com/rsn/Archives/$(LCD_TAR)
 #APPLET_LIST += LCD
 
 LIBDOCKAPP_NAME=libdockapp
-LIBDOCKAPP_VERSION=0.6.0
+LIBDOCKAPP_VERSION=0.6.1
 LIBDOCKAPP_TAR=$(LIBDOCKAPP_NAME)-$(LIBDOCKAPP_VERSION).tar.bz2
 LIBDOCKAPP_URL=http://solfertje.student.utwente.nl/~dalroi/$(LIBDOCKAPP_NAME)/files/$(LIBDOCKAPP_TAR)
 
