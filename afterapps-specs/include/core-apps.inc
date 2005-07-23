@@ -3,7 +3,7 @@
 # This is for the core, like AfterStep itself
 
 AFTERSTEP_NAME=AfterStep
-AFTERSTEP_VERSION=2.1.1
+AFTERSTEP_VERSION=2.1.2
 AFTERSTEP_TAR=$(AFTERSTEP_NAME)-$(AFTERSTEP_VERSION).tar.gz
 AFTERSTEP_URL=ftp://ftp.afterstep.org/stable/$(AFTERSTEP_TAR)
 
