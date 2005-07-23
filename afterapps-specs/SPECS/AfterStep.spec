@@ -1,6 +1,6 @@
 %define	name	AfterStep
-%define	version	2.1.1 
-%define release 8
+%define	version	2.1.2 
+%define release 1
 %define epoch 20
 %define	prefix	/usr/X11R6
 %define gdesk   /usr/share
@@ -101,7 +101,7 @@ Requires: 	%{name}-libs = %{epoch}:%{version}
 
 %build
 CFLAGS=$RPM_OPT_FLAGS \
-configure \
+./configure \
 	--prefix=%{__prefix}                      \
 	--datadir=%{__datadir}                    \
 	--libdir=%{__libdir} 			\
@@ -117,7 +117,7 @@ configure \
 	--with-desktops=1 --with-deskgeometry=2x3 \
 	--with-imageloader="qiv --root"
 
-%make
+make
 
 if [[ -x /usr/bin/sgml2html ]]; then sgml2html doc/afterstep.sgml; fi
 cd src/ASDocGen && ./ASDocGen -l log.html -t html && cd ../..
@@ -173,7 +173,7 @@ rm -rf %{buildroot}
 %dir %{prefix}/share/afterstep
 %{prefix}/share/afterstep/*
 %{prefix}/man/man1/*
-%if %{mdkversion}
+%if %{mandrake}
 %config /etc/X11/wmsession.d/42AfterStep
 /etc/menu-methods/AfterStep
 /usr/X11R6/share/xsessions/AfterStep.desktop
@@ -201,10 +201,12 @@ rm -rf %{buildroot}
 %dir %{prefix}/include/libAfterConf
 %dir %{prefix}/include/libAfterImage
 %dir %{prefix}/include/libAfterStep
+%dir %{prefix}/include/libASGTK
 %{prefix}/include/libAfterBase/*
 %{prefix}/include/libAfterConf/*
 %{prefix}/include/libAfterImage/*
 %{prefix}/include/libAfterStep/*
+%{prefix}/include/libASGTK/*
 %{prefix}/man/man3/*
 %doc src/ASDocGen/html/API/*html
 
@@ -225,6 +227,9 @@ done
 %postun -p /sbin/ldconfig
 
 %changelog
+* Sat Jul 23 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.1.2-1
+- brought up to 2.1.2 release.
+
 * Tue Jun 14 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.1.1-6
 - removed xloadimage with qiv. FC4 no longer provides xloadimage.
 - qiv is an optional package and not a require for install.
@@ -320,4 +325,3 @@ done
   [AfterStep-1.6.6-2]
 - Configuring with no special settings and installing into
   default dirs as per David Mihm <davemann@ionet.net>
-
