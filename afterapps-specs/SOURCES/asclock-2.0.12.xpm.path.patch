@@ -1,0 +1,46 @@
+--- languages/english/month.xpm
++++ languages/english/month.xpm
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char *month_xpm[] = {
++char *month_xpm[] = {
+ /* width height num_colors chars_per_pixel */
+ "    22    72        4            1",
+ /* colors */
+--- languages/english/weekday.xpm
++++ languages/english/weekday.xpm
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char *weekday_xpm[] = {
++char *weekday_xpm[] = {
+ /* width height num_colors chars_per_pixel */
+ "    20    42        4            1",
+ /* colors */
+--- themes/classic/clock.xpm
++++ themes/classic/clock.xpm
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * clock_xpm[] = {
++char * clock_xpm[] = {
+ "64 64 44 1",
+ " 	c #CF3CCF3CCF3C",
+ ".	c #30C230C230C2",
+--- themes/classic/date.xpm
++++ themes/classic/date.xpm
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char *date_xpm[] = {
++char *date_xpm[] = {
+ /* width height num_colors chars_per_pixel */
+ "    90    13        4            1",
+ /* colors */
+--- config.c
++++ config.c
+@@ -30,6 +30,7 @@
+ char *themes_directories[] = {
+   "./themes/",
+   "/usr/local/share/asclock/",
++  "/usr/X11R6/share/asclock/",
+   "/usr/share/asclock/",
+   "",
+   NULL
