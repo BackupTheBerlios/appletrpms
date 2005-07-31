@@ -1,0 +1,36 @@
+--- Src/calendar.c	2003-07-15 17:23:50.000000000 +0200
++++ Src/calendar.c	2005-07-13 23:20:45.538801674 +0200
+@@ -144,7 +144,7 @@
+     static GtkWidget *event_box2;
+     char buf[28];
+     char buf2[28];
+-    struct tm *timptr = malloc(sizeof(struct tm));
++    struct tm *timptr = NULL;
+     time_t tt = icaltime_as_timet(dt);
+     timptr = gmtime(&tt);
+     event_box = gtk_event_box_new ();
+@@ -154,7 +154,6 @@
+ 
+     /* create titlebartext */
+     strftime(buf, 26, "%A, %x", timptr);
+-    free(timptr);
+     sprintf(buf2, "<b>%s</b>",buf);
+     /* Create a new window with no boarder and day as titlebar*/
+     dayView = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+@@ -216,7 +215,7 @@
+     char buftime1[30];
+     char buftime2[30];
+     char buf[1024];
+-    struct tm *timptr = malloc(sizeof(struct tm));
++    struct tm *timptr = NULL;
+     time_t tt;
+     
+     GtkWidget *separator;
+@@ -299,7 +298,6 @@
+ 	}
+ 	it = it->next;	  
+     }
+-    free(timptr);
+     label1 = gtk_label_new (NULL);
+     gtk_table_attach_defaults (GTK_TABLE(table), label1, 2, 3, j+1, j+2);
+     gtk_table_set_row_spacing (GTK_TABLE(table),j, 0);

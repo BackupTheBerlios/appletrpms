@@ -1,0 +1,49 @@
+#! /bin/sh
+
+# Copyright (C) 2005 Daniel Tschan
+# This script is free software; I give unlimited permission
+# to copy and/or distribute it, with or without modifications,
+# as long as this notice is preserved.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+# even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+
+# Usage:
+#     ogo2ical USER
+# 
+# Description:
+#     From an OpengroupWare.org database extract all appointments
+#     USER participates in, beginning with the current month, in
+#     iCalendar format suitable for wmCalendar.
+#
+# Example:
+#     ssh ogo.example.net ogo2ical dtschan >~/calendar.ics.tmp && mv ~/calendar.ics.tmp ~/calendar.ics     
+#
+# Notes:
+#     This script does not care about security and timezones.
+#     It has been developed because of: <http://bugzilla.opengroupware.org/bugzilla/show_bug.cgi?id=691>
+#
+# Author:
+#     Daniel Tschan <tschan at users.sourceforge.net>
+
+
+echo "BEGIN:VCALENDAR"
+echo "METHOD:REQUEST"
+echo "VERSION:2.0"
+
+psql -P tuples_only -P format=unaligned -c "select start_date,end_date,convert(title using iso_8859_1_to_utf_8) from date_x join date_company_assignment using (date_id) join staff using (company_id) where login = '$1' and start_date >= '`date +%G-%m-01`'" -U ogo ogo |
+while IFS='|' read start_date end_date title; do
+	echo "BEGIN:VEVENT"
+	echo "SUMMARY:$title"
+	IFS=' -+:'
+	set -- $end_date
+	echo "DTEND:$1$2$3T$4$5$6"
+	set -- $start_date
+	echo "DTSTART:$1$2$3T$4$5$6"
+	echo "END:VEVENT"
+done
+
+echo "END:VCALENDAR"
