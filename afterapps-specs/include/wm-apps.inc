@@ -38,9 +38,9 @@ WMBLUECPU_URL=http://sheepmakers.ath.cx/utils/wmbluecpu/$(WMBLUECPU_TAR)
 APPLET_LIST += WMBLUECPU
 
 WMCALENDAR_NAME=wmcalendar
-WMCALENDAR_VERSION=0.4.4
+WMCALENDAR_VERSION=0.5.0
 WMCALENDAR_TAR=$(WMCALENDAR_NAME)-$(WMCALENDAR_VERSION).tar.gz
-WMCALENDAR_URL=http://internap.dl.sourceforge.net/sourceforge/$(WMCALENDAR_NAME)/$(WMCALENDAR_TAR)
+WMCALENDAR_URL=http://easynews.dl.sourceforge.net/sourceforge/$(WMCALENDAR_NAME)/$(WMCALENDAR_TAR)
 
 APPLET_LIST += WMCALENDAR
 
