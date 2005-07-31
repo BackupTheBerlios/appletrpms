@@ -1,7 +1,7 @@
 %define prefix /usr/X11R6
 %define name wmcalendar
-%define version 0.4.4
-%define release 2
+%define version 0.5.0
+%define release 1
 
 Summary: wmCalendar is a calendar dockapp.
 Name: %name
@@ -11,15 +11,14 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://sourceforge.net/projects/wmcalendar/
 Source0: %{name}-%{version}.tar.gz
+Source1: %{name}.ogo2ical
 Patch0: %{name}-%{version}.wharf.patch
+Patch1: %{name}-%{version}-mallocfix.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Buildrequires: libical
 Requires: libical
 
 %description
-Staying with v0.4.4 rather than v0.5.0; v0.5.0 has a right-click
-crash bug!
-
 wmCalendar is a calendar dockapp that provides the following:
 - monthly view
 - gregorian, islamic, and persian calendar
@@ -35,13 +34,22 @@ wmCalendar is a calendar dockapp that provides the following:
 - popup detail information about calendar-entries
 - variable startday of week
 
+Includes the script "ogo2ical" that extracts appointments from
+OpenGroupware and converts them to iCalendar format for use in
+wmCalendar.  Many thanks to Daniel Tschan for his script!
+
 %prep
 %setup -q
 %patch0
+%patch1
+
+cp %{SOURCE1} ogo2ical
 
 %build
 cd Src
-make
+
+egrep 'Fedora Core release 4' /etc/fedora-release && make CC=gcc32
+egrep 'Fedora Core release 4' /etc/fedora-release || make
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -57,15 +65,15 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %prefix/bin/*
 %prefix/man/man1/*
-%doc BUGS CHANGES COPYING HINTS INSTALL README TODO
+%doc BUGS CHANGES COPYING HINTS INSTALL README TODO ogo2ical
 
 
 %changelog
+* Tue Jul 26 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.5.0-1
+- new version.
+
 * Fri Jun 03 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.4.4-2
 - added buildrequire for libical.
 
 * Thu May 24 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.4.4-1
 - Initial build.
-
-
-
