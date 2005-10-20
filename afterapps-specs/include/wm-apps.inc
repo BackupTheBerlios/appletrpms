@@ -54,7 +54,7 @@ APPLET_LIST += WMCALENDAR
 WMCALC_NAME=wmcalc
 WMCALC_VERSION=0.4
 WMCALC_TAR=$(WMCALC_NAME)-$(WMCALC_VERSION).tar.gz
-WMCALC_URL=http://gentoo.ccccom.com/distfiles/$(WMCALC_TAR)
+WMCALC_URL=ftp://ftp-mirror.internap.com/pub/gentoo/distfiles/$(WMCALC_TAR)
 
 APPLET_LIST += WMCALC
 
