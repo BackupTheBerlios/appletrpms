@@ -30,7 +30,7 @@ you by turning back-light on.
 
 %build
 ./configure --prefix=%prefix
-make CC=gcc32
+make
 
 %install
 mkdir -p $RPM_BUILD_ROOT%prefix/bin/
