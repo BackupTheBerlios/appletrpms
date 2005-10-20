@@ -11,6 +11,7 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://tnemeth.free.fr/projets/dockapps.html
 Source0: %{name}-%{version}pre2.tar.gz
+Patch0: wmmemmon-1.0.2-main.c.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}pre2-%{release}-buildroot
 
 %description
@@ -25,10 +26,11 @@ you by turning back-light on.
 
 %prep
 %setup -q -n %{name}-%{version}pre2
+%patch0
 
 %build
 ./configure --prefix=%prefix
-make
+make CC=gcc32
 
 %install
 mkdir -p $RPM_BUILD_ROOT%prefix/bin/

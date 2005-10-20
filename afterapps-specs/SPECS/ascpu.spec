@@ -1,7 +1,7 @@
 %define prefix /usr/X11R6
 %define name ascpu
-%define version 1.10
-%define release 2
+%define version 1.11
+%define release 1
 
 Summary: CPU monitor
 Name: %name
@@ -43,6 +43,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Oct 20 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.11-1
+- updated to 1.11
+
 * Fri Aug 29 2003 Sean Dague <sean@dague.net> - 1.9-2
 - added docs in
 
