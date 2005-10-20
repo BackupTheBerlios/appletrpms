@@ -24,7 +24,7 @@ ASCLOCK_URL=http://tigr.net/afterstep/download/$(ASCLOCK_NAME)/$(ASCLOCK_TAR)
 APPLET_LIST += ASCLOCK
 
 ASCPU_NAME=ascpu
-ASCPU_VERSION=1.10
+ASCPU_VERSION=1.11
 ASCPU_TAR=$(ASCPU_NAME)-$(ASCPU_VERSION).tar.gz
 ASCPU_URL=http://tigr.net/afterstep/download/$(ASCPU_NAME)/$(ASCPU_TAR)
 
@@ -45,7 +45,7 @@ ASLOAD_URL=http://tigr.net/afterstep/download/$(ASLOAD_NAME)/$(ASLOAD_TAR)
 APPLET_LIST += ASLOAD
 
 ASMAIL_NAME=asmail
-ASMAIL_VERSION=1.7
+ASMAIL_VERSION=1.8
 ASMAIL_TAR=$(ASMAIL_NAME)-$(ASMAIL_VERSION).tar.gz
 ASMAIL_URL=http://tigr.net/afterstep/download/$(ASMAIL_NAME)/$(ASMAIL_TAR)
 
