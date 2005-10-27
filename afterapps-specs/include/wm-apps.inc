@@ -152,7 +152,7 @@ APPLET_LIST += WMMEMMON
 WMMSG_NAME=wmmsg
 WMMSG_VERSION=1.0.1
 WMMSG_TAR=$(WMMSG_NAME)-$(WMMSG_VERSION).tar.gz
-WMMSG_URL=http://taxiway.swapspace.net:81/~matt/wmmsg/$(WMMSG_TAR)
+WMMSG_URL=http://dockapps.org/download.php/id/518/$(WMMSG_TAR)
 
 APPLET_LIST += WMMSG
 
