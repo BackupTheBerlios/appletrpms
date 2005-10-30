@@ -1,0 +1,14 @@
+--- Makefile	2003-11-01 09:50:52.000000000 -0600
++++ Makefile.new	2005-10-29 19:18:41.000000000 -0500
+@@ -4,10 +4,8 @@
+ OS=linux
+ #For linux
+ LIBS=-L/usr/X11R6/lib -lX11 -lXext -lXpm
+-#For FreeBSD
+-LIBS=-L/usr/X11R6/lib -lX11 -lXext -lXpm -lkvm
+ 
+-PREFIX=/usr/local
++PREFIX=/usr/X11R6
+ BINDIR=$(PREFIX)/bin
+ MANPREFIX=$(PREFIX)/share/man
+ MANDIR=$(MANPREFIX)/man1
