@@ -2,8 +2,9 @@
 %define name bubblemon-dockapp
 %define version 1.46
 %define release 1
-%define mandrake 0
-%{?_with_mandrake:%define mandrake 1}
+
+%define mdk  %(if [ -e /etc/mandrake-release ]; then echo 1; else echo 0; fi;)
+%{?_with_mdk:   %{expand: %%global mdk 1}}
 
 Summary: system monitoring dockapp based-on GNOME BubbleMon.
 Name: %name
@@ -14,7 +15,7 @@ Group: AfterStep/Applets
 URL: http://www.ne.jp/asahi/linux/timecop/
 Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-%if %{mandrake}
+%if %{mdk}
 Requires: libgtk+1.2-devel
 %endif
 
