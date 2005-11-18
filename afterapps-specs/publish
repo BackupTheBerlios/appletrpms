@@ -14,7 +14,7 @@ my %distros = (
         meta => "mdk-i586",
         rpms => "RPMS/i586/",
         target => "RPMS/mdk/2006.0/i586/",
-    }
+    },
     fc3 => {
 	meta => "fc3-i386",
 	rpms => "RPMS/i386/",
