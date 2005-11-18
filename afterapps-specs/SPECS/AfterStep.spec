@@ -154,7 +154,8 @@ rm -rf %{buildroot}
 %dir %{_datadir}/afterstep
 %{_datadir}/afterstep/*
 %{_mandir}/man1/*
-%if %{mandrake}
+# this is evil hack, but I can't get it to work otherwise on mdk
+%if !%{fedora}
 %config /etc/X11/wmsession.d/42AfterStep
 /etc/menu-methods/AfterStep
 %{_datadir}/xsessions/AfterStep.desktop
