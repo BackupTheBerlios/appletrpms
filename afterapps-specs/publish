@@ -4,17 +4,28 @@
 use strict;
 
 my %distros = (
-    mdk => {
+    mdk102 => {
 	meta => "mdk-i586",
 	rpms => "RPMS/i586/",
 	srpms => "SRPMS/*.src.rpm",
-	target => "RPMS/mdk/10.1/i586/",
+	target => "RPMS/mdk/10.2/i586/",
     },
-    fc => {
+    mdk2006 => {
+        meta => "mdk-i586",
+        rpms => "RPMS/i586/",
+        target => "RPMS/mdk/2006.0/i586/",
+    }
+    fc3 => {
 	meta => "fc3-i386",
 	rpms => "RPMS/i386/",
 	target => "RPMS/fc/3/i386/",
     },
+    fc4 => {
+        meta => "fc3-i386",
+        rpms => "RPMS/i386/",
+        target => "RPMS/fc/4/i386/",
+    },
+
 );
 
 my $rsyncopts = "-avP -e ssh --delete-after --delete-excluded";
