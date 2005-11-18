@@ -141,6 +141,7 @@ install -m 0755 %{SOURCE5} $RPM_BUILD_ROOT/etc/menu-methods/AfterStep
 %multiarch_binaries %{buildroot}%{_bindir}/afterimage-config
 %multiarch_binaries %{buildroot}%{_bindir}/afterimage-libs
 %multiarch_binaries %{buildroot}%{_bindir}/afterstep-config
+%multiarch_binaries %{buildroot}%{_bindir}/asgtk-config
 %endif
 
 %clean
