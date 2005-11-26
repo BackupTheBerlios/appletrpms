@@ -1,0 +1,13 @@
+--- wmsensormon/Makefile	2004-12-16 23:53:02.000000000 -0600
++++ wmsensormon/Makefile.patch	2005-11-25 23:43:11.000000000 -0600
+@@ -28,8 +28,8 @@
+ 	rm -rf ../wmgeneral/*.o
+ 
+ install:
+-	$(INSTALL) $(EXE) /usr/local/bin/
+-	$(INSTALL) $(MAN) /usr/share/man/man1/
++	$(INSTALL) $(EXE) /usr/X11R6/bin/
++	$(INSTALL) $(MAN) /usr/X11R6/man/man1/
+ uninstall:
+ 	rm -rf /usr/local/bin/$(EXE)
+ 	rm -rf /usr/share/man/man1/$(MAN)
