@@ -11,7 +11,6 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://wmsensormon.sourceforge.net/
 Source0: %{name}-%{version}.tar.gz
-Patch0: wmsensormon-1.2.1-Makefile.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: lm_sensors-devel >= 2.0
 Requires: lm_sensors >= 2.0
@@ -24,7 +23,6 @@ adjustable by the user with command line parameters.
 
 %prep
 %setup -q
-%patch0
 
 %build
 cd wmsensormon
