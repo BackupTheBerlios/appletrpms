@@ -1,7 +1,7 @@
 %define prefix /usr/X11R6
 %define name Temperature.app
 %define version 1.4
-%define release as4
+%define release as5
 
 Summary: WM applet gets temperature every 15 minutes
 Name: %name
@@ -14,6 +14,7 @@ Source0: %{name}-%{version}.tar.gz
 Patch0: Temperature.app-1.4.as.patch
 Patch1: Temperature.app-1.4-frog-5.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Requires: wget
 
 %description
 This WM applet includes two binaries: "Temperature.app" for AfterStep
@@ -66,6 +67,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Nov 26 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.4-as5
+- Added require for wget.
+
 * Sat Jun 04 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.4-as4
 - Updated description to include news of AS 2.1.0 compatibility.
 
