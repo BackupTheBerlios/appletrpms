@@ -1,0 +1,27 @@
+--- wmtz/wmtz.c	2001-04-16 14:26:34.000000000 -0500
++++ wmtz/wmtz.c	2005-12-03 15:38:59.000000000 -0600
+@@ -51,7 +51,7 @@
+ #define STRSIZE 10
+ #define LMST 1
+ #define GMST 0
+-#define ABOUT "xmessage -center -buttons \"Close\" \"WMTZ - Window Maker Time Zone dockapp v0.7
++#define ABOUT "xmessage -center -buttons \"Close\" \"WMTZ - Window Maker Time Zone dockapp v0.7\n\
+ http://www.geocities.com/jl1n/wmtz/wmtz.html\""
+ 
+ 
+@@ -479,6 +479,7 @@
+ 		   but_stat = -1;
+                    break;
+ 	    default:
++                ;
+ 	  }
+         }  
+ 
+@@ -529,6 +530,7 @@
+ 	    exit(0);
+ 	    break;
+ 	default:
++            ;
+       }
+     return;
+ }
