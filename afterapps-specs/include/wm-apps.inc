@@ -24,9 +24,9 @@ HVCLOCK_URL=http://www.hugovil.com/repository/$(HVCLOCK_TAR)
 APPLET_LIST += HVCLOCK
 
 PEKSYSTRAY_NAME=peksystray
-PEKSYSTRAY_VERSION=0.2.1
+PEKSYSTRAY_VERSION=0.3.0
 PEKSYSTRAY_TAR=$(PEKSYSTRAY_NAME)-$(PEKSYSTRAY_VERSION).tar.gz
-PEKSYSTRAY_URL=http://cogent.dl.sourceforge.net/sourceforge/peksystray/$(PEKSYSTRAY_TAR)
+PEKSYSTRAY_URL=http://voxel.dl.sourceforge.net/sourceforge/$(PEKSYSTRAY_NAME)/$(PEKSYSTRAY_TAR)
 
 APPLET_LIST += PEKSYSTRAY
 
@@ -225,6 +225,13 @@ WMTIMER_TAR=$(WMTIMER_NAME)-$(WMTIMER_VERSION).tar.gz
 WMTIMER_URL=http://www.darkops.net/wmtimer/$(WMTIMER_TAR)
 
 APPLET_LIST += WMTIMER
+
+WMTZ_NAME=wmtz
+WMTZ_VERSION=0.7
+WMTZ_TAR=$(WMTZ_NAME)-$(WMTZ_VERSION).tar.gz
+WMTZ_URL=http://www.geocities.com/jl1n/$(WMTZ_NAME)/$(WMTZ_TAR)
+
+APPLET_LIST += WMTZ
 
 WMUPMON_NAME=wmupmon
 WMUPMON_VERSION=0.1.3
