@@ -1,6 +1,6 @@
 %define prefix /usr/X11R6
 %define name peksystray
-%define version 0.2.1
+%define version 0.3.0
 %define release 1
 
 Summary: peksystray is a dockable systray.
@@ -40,6 +40,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Dec 03 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.3.0-1
+- New version.
+
 * Tue Mar 29 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.2.1-1
 - Initial build.
 
