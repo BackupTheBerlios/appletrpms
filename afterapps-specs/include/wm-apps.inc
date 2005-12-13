@@ -191,6 +191,13 @@ WMPOWER_URL=http://unc.dl.sourceforge.net/sourceforge/$(WMPOWER_NAME)/$(WMPOWER_
 
 APPLET_LIST += WMPOWER
 
+WMPPP_NAME=wmppp
+WMPPP_VERSION=1.3.0
+WMPPP_TAR=$(WMPPP_NAME)-$(WMPPP_VERSION).tar.gz
+WMPPP_URL=http://www.cs.mun.ca/~gstarkes/wmaker/dockapps/files/$(WMPPP_TAR)
+
+APPLET_LIST += WMPPP
+
 WMRADIO_NAME=wmradio
 WMRADIO_VERSION=0.9
 WMRADIO_TAR=$(WMRADIO_NAME)-$(WMRADIO_VERSION).tgz
