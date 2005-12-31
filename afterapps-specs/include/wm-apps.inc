@@ -75,7 +75,7 @@ APPLET_LIST += WMCALENDAR
 WMCALC_NAME=wmcalc
 WMCALC_VERSION=0.4
 WMCALC_TAR=$(WMCALC_NAME)-$(WMCALC_VERSION).tar.gz
-WMCALC_URL=ftp://ftp-mirror.internap.com/pub/gentoo/distfiles/$(WMCALC_TAR)
+WMCALC_URL=http://gentoo.mirrors.easynews.com/linux/gentoo/distfiles/$(WMCALC_TAR)
 
 APPLET_LIST += WMCALC
 
@@ -108,7 +108,7 @@ WMEYES_URL=http://www.bstern.org/wmeyes/$(WMEYES_TAR)
 APPLET_LIST += WMEYES
 
 WMFIRE_NAME=wmfire
-WMFIRE_VERSION=1.2.2
+WMFIRE_VERSION=1.2.3
 WMFIRE_TAR=$(WMFIRE_NAME)-$(WMFIRE_VERSION).tar.gz
 WMFIRE_URL=http://www.swanson.ukfsn.org/wmfire/$(WMFIRE_TAR)
 
@@ -187,7 +187,7 @@ APPLET_LIST += WMPOP3LB
 WMPOWER_NAME=wmpower
 WMPOWER_VERSION=0.4.2
 WMPOWER_TAR=$(WMPOWER_NAME)-$(WMPOWER_VERSION).tar.bz2
-WMPOWER_URL=http://unc.dl.sourceforge.net/sourceforge/$(WMPOWER_NAME)/$(WMPOWER_TAR)
+WMPOWER_URL=http://easynews.dl.sourceforge.net/sourceforge/$(WMPOWER_NAME)/$(WMPOWER_TAR)
 
 APPLET_LIST += WMPOWER
 
@@ -213,7 +213,7 @@ WMSENSORMON_URL=http://voxel.dl.sourceforge.net/sourceforge/$(WMSENSORMON_NAME)/
 APPLET_LIST += WMSENSORMON
 
 WMSM.APP_NAME=wmsm.app
-WMSM.APP_VERSION=0.2.0
+WMSM.APP_VERSION=0.2.1
 WMSM.APP_TAR=$(WMSM.APP_NAME)-$(WMSM.APP_VERSION).tar.gz
 WMSM.APP_URL=http://www.unetz.com/schaepe/DOCKAPPS/$(WMSM.APP_TAR)
 
@@ -257,7 +257,7 @@ APPLET_LIST += WMUSIC
 WMWEATHERPLUS_NAME=wmweather+
 WMWEATHERPLUS_VERSION=2.9
 WMWEATHERPLUS_TAR=$(WMWEATHERPLUS_NAME)-$(WMWEATHERPLUS_VERSION).tar.gz
-WMWEATHERPLUS_URL=http://unc.dl.sourceforge.net/sourceforge/wmweatherplus/$(WMWEATHERPLUS_TAR)
+WMWEATHERPLUS_URL=http://easynews.dl.sourceforge.net/sourceforge/wmweatherplus/$(WMWEATHERPLUS_TAR)
 
 APPLET_LIST += WMWEATHERPLUS
 
