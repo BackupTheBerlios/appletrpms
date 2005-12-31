@@ -1,7 +1,7 @@
 %define prefix /usr/X11R6
 %define name wmfire
-%define version 1.2.2
-%define release 3
+%define version 1.2.3
+%define release 1
 
 %define generic 1
 %define fedora 0
@@ -73,6 +73,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Dec 31 2005 J. Krebs <rpm_speedy@yahoo.com> 1.2.3-1
+- new version
+
 * Fri Jun 10 2005 J. Krebs <rpm_speedy@yahoo.com> 1.2.2-3
 - added "if" selection by distro
 

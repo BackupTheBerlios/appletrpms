@@ -1,6 +1,6 @@
 %define prefix /usr/X11R6
 %define name wmsm.app
-%define version 0.2.0
+%define version 0.2.1
 %define release 1
 
 Summary: WindowMaker System Monitor
@@ -47,6 +47,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Dec 31 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.2.1-1
+- New version.
+
 * Mon Feb 21 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.2.0-1
 - Initial build.
 
