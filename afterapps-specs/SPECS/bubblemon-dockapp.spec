@@ -6,6 +6,9 @@
 %define mdk  %(if [ -e /etc/mandrake-release ]; then echo 1; else echo 0; fi;)
 %{?_with_mdk:   %{expand: %%global mdk 1}}
 
+%define fedora  %(if [ -e /etc/fedora-release ]; then echo 1; else echo 0; fi;)
+%{?_with_fedora:   %{expand: %%global fedora 1}}
+
 Summary: system monitoring dockapp based-on GNOME BubbleMon.
 Name: %name
 Version: %version
