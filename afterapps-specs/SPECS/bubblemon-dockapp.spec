@@ -2,10 +2,9 @@
 %define name bubblemon-dockapp
 %define version 1.46
 %define release 2
-%define mandrake 0
-%{?_with_mandrake:%define mandrake 1}
-%define fedora 0
-%{?_with_fedora:%define fedora 1}
+
+%define mdk  %(if [ -e /etc/mandrake-release ]; then echo 1; else echo 0; fi;)
+%{?_with_mdk:   %{expand: %%global mdk 1}}
 
 Summary: system monitoring dockapp based-on GNOME BubbleMon.
 Name: %name
@@ -16,7 +15,7 @@ Group: AfterStep/Applets
 URL: http://www.ne.jp/asahi/linux/timecop/
 Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-%if %{mandrake}
+%if %{mdk}
 Requires: libgtk+1.2-devel
 %endif
 %if %{fedora}
@@ -60,13 +59,9 @@ rm -rf $RPM_BUILD_ROOT
 %prefix/bin/*
 %doc ChangeLog INSTALL README SUPPORTED_SYSTEMS doc/COPYING doc/Xdefaults.sample
 
-
 %changelog
 * Sat Dec 17 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.46-2
 - Added build require for fedora gdk-pixbuf-devel.
 
 * Sat Mar 05 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.46-1
 - Initial build.
-
-
-
