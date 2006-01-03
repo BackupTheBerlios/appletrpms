@@ -1,9 +1,9 @@
 %define prefix /usr/X11R6
 %define name wmsensormon
 %define version 1.2.1
-%define release 1
+%define release 2
 
-Summary: dockapp using lm_sensors to monitor CPU & sys temps, fan speed, and CPU voltage. It offers configurable warnings for overheating, and the sensors displayed are adjustable by the user with command line parameters.
+Summary: uses lm_sensors to monitor CPU & sys temps, fan speed, and CPU voltage.
 Name: %name
 Version: %version
 Release: %release
@@ -46,5 +46,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGELOG COPYING INSTALL README TODO
 
 %changelog
+* Tue Jan 03 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.2.1-2
+- Fixed summary statement.
+
 * Thu Oct 20 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.2.1-1
 - Initial build.
