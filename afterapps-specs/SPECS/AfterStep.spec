@@ -1,23 +1,50 @@
-%define	name	AfterStep
-%define	version	2.1.2 
+### BEGIN Distro Defines
+### mdk, fedora, suse & generic are distros
+### mandriva, fedoragcc4, and susegcc4 define gcc 4.0 compilers
+%define mdk  %(if [ -e /etc/mandrake-release -o -e /etc/mandriva-release ];\
+ then echo 1; else echo 0; fi;)
+%{?_with_mdk:   %{expand: %%global mdk 1}}
+
+%define mandriva  %(if [ -e /etc/mandriva-release ]; then echo 1; else echo 0; fi;)
+%{?_with_mandriva:   %{expand: %%global mandriva 1}}
+
+%define fedora  %(if [ -e /etc/fedora-release ]; then echo 1; else echo 0; fi;)
+%{?_with_fedora:   %{expand: %%global fedora 1}}
+
+%define suse %(if [ -e /etc/SuSE-release ]; then echo 1; else echo 0; fi;)
+%{?_with_suse:   %{expand: %%global suse 1}}
+
+%define generic 1
+
+%if %{fedora}
+  %define generic 0
+%endif
+
+%if %{fedora}
+  %define generic 0
+  %define fcgcctest $(grep release /etc/fedora-release | cut -d ' ' -f4)
+  %define fedoragcc4 %(if [ %fcgcctest -ge 4 ]; then echo 1; else echo 0; fi;)
+  %{?_with_fedoragcc4:   %{expand: %%global fedoragcc4 1}}
+%endif
+
+%if %{suse}
+  %define generic 0
+  %define susegcctest $(grep VERSION /etc/SuSE-release | cut -d ' ' -f3)
+  %define susegcc4 %(if [ %susegcctest -ge 10.0 ]; then echo 1; else echo 0; fi;)
+  %{?_with_susegcc4:   %{expand: %%global susegcc4 1}}
+%endif
+
+%define ismultiarch 0
+%{?multiarch:%define ismultiarch 1}
+### END Distro Definitions
+
+%define	name AfterStep
+%define	version	2.1.2
 %define release 2
 %define epoch 20
 %define gdesk /usr/share
 %define _prefix /usr/X11R6
 %define _mandir %{_prefix}/man
-%define generic 1
-%define fedora 0
-%{?_with_fedora:%define fedora 1}
-%define mandrake 0
-%{?_with_mandrake:%define mandrake 1}
-%define ismultiarch 0
-%{?multiarch:%define ismultiarch 1}
-%if %{fedora}
-   %define generic 0
-%endif
-%if %{mandrake}
-   %define generic 0
-%endif
 
 Summary:	AfterStep Window Manager (NeXTalike)
 Name:		%{name}
@@ -64,7 +91,7 @@ Epoch:		%{epoch}
 License:	GPL
 group:		User Interface/Desktops
 Provides: 	%{name}-libs
-%if %{mandrake}
+%if %{mdk}
 Obsoletes: libAfterStep1
 %endif
 
@@ -81,7 +108,7 @@ group:		User Interface/Desktops
 Requires: 	%{name}-libs = %{epoch}:%{version}
 
 %description devel
-  AftterStep libs include files
+  AfterStep libs include files
 
 %prep
 %setup -q -n %{name}-%{version}
@@ -127,7 +154,7 @@ install -m 0644 %{SOURCE7} %{buildroot}%{gdesk}/gnome/wm-properties/afterstep.de
 rm -f %{buildroot}%{_datadir}/xsessions/AfterStep.desktop
 rmdir %{buildroot}%{_datadir}/xsessions/
 %endif
-%if %{mandrake}
+%if %{mdk}
 # mandrake menu items
 install -d $RPM_BUILD_ROOT/etc/X11/wmsession.d/
 install -m 0644 %{SOURCE3} $RPM_BUILD_ROOT/etc/X11/wmsession.d/42AfterStep

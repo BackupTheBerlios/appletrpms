@@ -1,5 +1,8 @@
-### BEGIN Distro Definitions
-%define mdk  %(if [ -e /etc/mandrake-release ]; then echo 1; else echo 0; fi;)
+### BEGIN Distro Defines
+### mdk, fedora, suse & generic are distros
+### mandriva, fedoragcc4, and susegcc4 define gcc 4.0 compilers
+%define mdk  %(if [ -e /etc/mandrake-release -o -e /etc/mandriva-release]; then echo 1;\
+ else echo 0; fi;)
 %{?_with_mdk:   %{expand: %%global mdk 1}}
 
 %define mandriva  %(if [ -e /etc/mandriva-release ]; then echo 1; else echo 0; fi;)
@@ -11,18 +14,27 @@
 %define suse %(if [ -e /etc/SuSE-release ]; then echo 1; else echo 0; fi;)
 %{?_with_suse:   %{expand: %%global suse 1}}
 
+%define generic 1
+
 %if %{fedora}
+  %define generic 0
+%endif
+
+%if %{fedora}
+  %define generic 0
   %define fcgcctest $(grep release /etc/fedora-release | cut -d ' ' -f4)
   %define fedoragcc4 %(if [ %fcgcctest -ge 4 ]; then echo 1; else echo 0; fi;)
   %{?_with_fedoragcc4:   %{expand: %%global fedoragcc4 1}}
 %endif
 
 %if %{suse}
+  %define generic 0
   %define susegcctest $(grep VERSION /etc/SuSE-release | cut -d ' ' -f3)
   %define susegcc4 %(if [ %susegcctest -ge 10.0 ]; then echo 1; else echo 0; fi;)
   %{?_with_susegcc4:   %{expand: %%global susegcc4 1}}
 %endif
 ### END Distro Definitions
+
 
 %define prefix /usr/X11R6
 %define name wmcalendar
@@ -75,7 +87,6 @@ cp %{SOURCE1} ogo2ical
 cd Src
 
 if [ %{fedoragcc4} -eq 1 ]; then make CC=gcc32; \
-	elif [ %{mandriva} -eq 1 ]; then make CC=gcc296; \
 	elif [ %{susegcc4} -eq 1 ]; then make CC=gcc33; \
 	else make; \
 fi;
@@ -98,7 +109,7 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
-* Sun Jan 26 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.5.0-2
+* Sun Jan 01 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.5.0-2
 - updated distro definitions.
 
 * Tue Jul 26 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.5.0-1
