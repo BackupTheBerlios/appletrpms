@@ -16,7 +16,7 @@
 
 %define generic 1
 
-%if %{fedora}
+%if %{mdk}
   %define generic 0
 %endif
 
