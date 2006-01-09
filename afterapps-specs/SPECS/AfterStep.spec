@@ -41,10 +41,16 @@
 %define	name AfterStep
 %define	version	2.2.0
 %define release 1
+
 %define epoch 20
 %define gdesk /usr/share
-%define _prefix /usr/X11R6
-%define _mandir %{_prefix}/man
+
+%define __prefix /usr/X11R6
+%define _mandir %{__prefix}/man
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _includedir %{__prefix}/include
+%define _libdir %{__prefix}/lib
 
 Summary:	AfterStep Window Manager (NeXTalike)
 Name:		%{name}
@@ -116,7 +122,7 @@ Requires: 	%{name}-libs = %{epoch}:%{version}
 %build
 CFLAGS=$RPM_OPT_FLAGS \
 ./configure \
-	--prefix=%{_prefix}                       \
+	--prefix=%{__prefix}                      \
 	--enable-sharedlibs                       \
 	--disable-staticlibs			  \
 	--enable-ascp                             \
@@ -197,7 +203,7 @@ rm -rf %{buildroot}
 %doc afterstep.fedora.README
 %endif
 %if %{generic}
-%{_prefix}/xsessions/AfterStep.desktop
+%{__prefix}/xsessions/AfterStep.desktop
 %endif
 
 %files libs
