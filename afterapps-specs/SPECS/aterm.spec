@@ -1,7 +1,7 @@
 %define prefix  /usr/X11R6
 %define	name	aterm
 %define	version	1.0.0
-%define	release	2
+%define	release	3
 %define epoch	2
 
 Summary:	aterm - terminal emulator in an X window
@@ -58,6 +58,9 @@ make DESTDIR=$RPM_BUILD_ROOT install
 #%config(missingok) /etc/X11/wmconfig/aterm
 
 %changelog
+* Mon Jan 09 2006 J. Krebs <rpm_speedy@yahoo.com> 1.0.0-3
+- rebuild to recompile aterm against AS 2.2.0
+
 * Sat Jul 23 2005 J. Krebs <rpm_speedy@yahoo.com> 1.0.0-2
 - rebuild to recompile aterm against AS 2.1.2
 

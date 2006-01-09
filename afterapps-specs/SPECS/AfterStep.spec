@@ -39,8 +39,8 @@
 ### END Distro Definitions
 
 %define	name AfterStep
-%define	version	2.1.2
-%define release 2
+%define	version	2.2.0
+%define release 1
 %define epoch 20
 %define gdesk /usr/share
 %define _prefix /usr/X11R6
@@ -237,6 +237,10 @@ done
 %postun -p /sbin/ldconfig
 
 %changelog
+* Mon Jan 09 2006 J. Krebs <rpm_speedy@yahoo.com> 20:2.2.0-1
+- brought up to 2.1.2 release.
+- updated distro defines.
+
 * Mon Aug 08 2005 J. Krebs <rpm_speedy@yahoo.com> 20:2.1.2-2
 - updated configuration defines.
 
