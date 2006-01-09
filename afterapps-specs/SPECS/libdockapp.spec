@@ -1,7 +1,7 @@
 ### BEGIN Distro Defines
 ### mdk, fedora, suse & generic are distros
 ### mandriva, fedoragcc4, and susegcc4 define gcc 4.0 compilers
-%define mdk  %(if [ -e /etc/mandrake-release -o -e /etc/mandriva-release]; then echo 1; else echo 0; fi;)
+%define mdk  %(if [ -e /etc/mandrake-release -o -e /etc/mandriva-release ]; then echo 1; else echo 0; fi;)
 %{?_with_mdk:   %{expand: %%global mdk 1}}
 
 %define mandriva  %(if [ -e /etc/mandriva-release ]; then echo 1; else echo 0; fi;)
@@ -16,14 +16,16 @@
 %define generic 1
 
 %if %{mdk}
-  %define generic 0
+%define generic 0
+%define name	libdockapp0
 %endif
 
 %if %{fedora}
-  %define generic 0
-  %define fcgcctest $(grep release /etc/fedora-release | cut -d ' ' -f4)
-  %define fedoragcc4 %(if [ %fcgcctest -ge 4 ]; then echo 1; else echo 0; fi;)
-  %{?_with_fedoragcc4:   %{expand: %%global fedoragcc4 1}}
+%define generic 0
+%define fcgcctest $(grep release /etc/fedora-release | cut -d ' ' -f4)
+%define fedoragcc4 %(if [ %fcgcctest -ge 4 ]; then echo 1; else echo 0; fi;)
+%{?_with_fedoragcc4:   %{expand: %%global fedoragcc4 1}}
+%define name	libdockapp
 %endif
 
 %if %{suse}
@@ -31,20 +33,13 @@
   %define susegcctest $(grep VERSION /etc/SuSE-release | cut -d ' ' -f3)
   %define susegcc4 %(if [ %susegcctest -ge 10.0 ]; then echo 1; else echo 0; fi;)
   %{?_with_susegcc4:   %{expand: %%global susegcc4 1}}
+%define name	libdockapp
 %endif
 ### END Distro Definitions
 
 %define prefix	/usr/X11R6
 %define version 0.6.1
 %define release 2
-
-%if %{mdk}
-%define name	libdockapp0
-%endif
-
-%if %{fedora}
-%define name	libdockapp
-%endif
 
 Summary:	DockApp Making Standard Library
 Name:		%name
@@ -59,12 +54,10 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-
 %if %{mdk}
 Conflicts:	libdockapp
 Provides:	libdockapp0 libdockapp.so.2
 %endif
-
 %if %{fedora}
 Conflicts:	libdockapp0
 Provides:	libdockapp libdockapp.so.2
