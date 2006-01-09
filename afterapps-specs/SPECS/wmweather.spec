@@ -29,7 +29,7 @@ WindowMaker dock, but will work with other window managers as well.
 
 %build
 cd src
-./configure --prefix=%prefix --sysconfdir=/etc
+./configure --prefix=%prefix --sysconfdir=/etc --without-xmessage
 make
 
 %install
