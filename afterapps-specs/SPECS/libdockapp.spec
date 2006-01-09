@@ -1,8 +1,7 @@
 ### BEGIN Distro Defines
 ### mdk, fedora, suse & generic are distros
 ### mandriva, fedoragcc4, and susegcc4 define gcc 4.0 compilers
-%define mdk  %(if [ -e /etc/mandrake-release -o -e /etc/mandriva-release]; then echo 1;\
- else echo 0; fi;)
+%define mdk  %(if [ -e /etc/mandrake-release -o -e /etc/mandriva-release]; then echo 1; else echo 0; fi;)
 %{?_with_mdk:   %{expand: %%global mdk 1}}
 
 %define mandriva  %(if [ -e /etc/mandriva-release ]; then echo 1; else echo 0; fi;)
