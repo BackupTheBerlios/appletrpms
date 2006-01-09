@@ -1,11 +1,8 @@
 ### BEGIN Distro Defines
 ### mdk, fedora, suse & generic are distros
 ### mandriva, fedoragcc4, and susegcc4 define gcc 4.0 compilers
-%define mdk  %(if [ -e /etc/mandrake-release -o -e /etc/mandriva-release]; then echo 1; else echo 0; fi;)
+%define mdk  %(if [ -e /etc/mandrake-release ]; then echo 1; else echo 0; fi;)
 %{?_with_mdk:   %{expand: %%global mdk 1}}
-
-%define mandriva  %(if [ -e /etc/mandriva-release ]; then echo 1; else echo 0; fi;)
-%{?_with_mandriva:   %{expand: %%global mandriva 1}}
 
 %define fedora  %(if [ -e /etc/fedora-release ]; then echo 1; else echo 0; fi;)
 %{?_with_fedora:   %{expand: %%global fedora 1}}
@@ -14,23 +11,24 @@
 %{?_with_suse:   %{expand: %%global suse 1}}
 
 %define generic 1
+%define __gcc gcc
 
 %if %{mdk}
   %define generic 0
+  %define mdvgcctest $(grep release /etc/mandriva-release | cut -d ' ' -f4)
+  %define __gcc %(if [ ! -z %mdvgcctest ]; then echo "gcc-3.3.6"; else echo gcc; fi;)
 %endif
 
 %if %{fedora}
   %define generic 0
   %define fcgcctest $(grep release /etc/fedora-release | cut -d ' ' -f4)
-  %define fedoragcc4 %(if [ %fcgcctest -ge 4 ]; then echo 1; else echo 0; fi;)
-  %{?_with_fedoragcc4:   %{expand: %%global fedoragcc4 1}}
+  %define __gcc %(if [ %fcgcctest -ge 4 ]; then echo "gcc32"; else echo gcc; fi;)
 %endif
 
 %if %{suse}
   %define generic 0
   %define susegcctest $(grep VERSION /etc/SuSE-release | cut -d ' ' -f3)
-  %define susegcc4 %(if [ %susegcctest -ge 10.0 ]; then echo 1; else echo 0; fi;)
-  %{?_with_susegcc4:   %{expand: %%global susegcc4 1}}
+  %define __gcc %(if [ %susegcctest -ge 10.0 ]; then echo "gcc33"; else echo gcc; fi;)
 %endif
 ### END Distro Definitions
 
@@ -84,11 +82,7 @@ cp %{SOURCE1} ogo2ical
 
 %build
 cd Src
-
-if [ %{fedoragcc4} -eq 1 ]; then make CC=gcc32; \
-	elif [ %{susegcc4} -eq 1 ]; then make CC=gcc33; \
-	else make; \
-fi;
+make CC=%{__gcc}
 
 %install
 rm -rf $RPM_BUILD_ROOT
