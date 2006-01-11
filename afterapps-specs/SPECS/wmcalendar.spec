@@ -106,7 +106,7 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
-* Sun Jan 01 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.5.0-3
+* Tue Jan 10 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.5.0-3
 - added gcc4 patch (thank you gentoo team, Michele Noberasco).
 
 * Sun Jan 01 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.5.0-2
