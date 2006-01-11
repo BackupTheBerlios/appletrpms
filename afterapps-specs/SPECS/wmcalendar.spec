@@ -36,7 +36,7 @@
 %define prefix /usr/X11R6
 %define name wmcalendar
 %define version 0.5.0
-%define release 2
+%define release 3
 
 Summary: wmCalendar is a calendar dockapp.
 Name: %name
@@ -49,6 +49,7 @@ Source0: %{name}-%{version}.tar.gz
 Source1: %{name}.ogo2ical
 Patch0: %{name}-%{version}.wharf.patch
 Patch1: %{name}-%{version}-mallocfix.patch
+Patch2: %{name}-%{version}-gcc4.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Buildrequires: libical
 Requires: libical
@@ -77,12 +78,15 @@ wmCalendar.  Many thanks to Daniel Tschan for his script!
 %setup -q
 %patch0
 %patch1
+%patch2
 
 cp %{SOURCE1} ogo2ical
 
 %build
 cd Src
-make CC=%{__gcc}
+
+#make CC=%{__gcc}
+make
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -102,6 +106,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sun Jan 01 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.5.0-3
+- added gcc4 patch (thank you gentoo team, Michele Noberasco).
+
 * Sun Jan 01 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.5.0-2
 - updated distro definitions.
 
