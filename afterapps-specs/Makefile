@@ -5,7 +5,7 @@ RPMS=RPMS
 
 include include/*inc
 
-all: download build
+all: download build meta_rpm
 
 build: download
 	./buildme all
