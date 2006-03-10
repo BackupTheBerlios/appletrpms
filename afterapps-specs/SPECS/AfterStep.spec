@@ -39,7 +39,7 @@
 
 %define	name AfterStep
 %define	version	2.2.1
-%define release 1
+%define release 2
 
 %define epoch 20
 %define gdesk /usr/share
@@ -237,10 +237,14 @@ for i in /usr /usr/local /usr/X11R6 ; do
 	#fi
 done
 
-%post -p /sbin/ldconfig
+%post
+/sbin/ldconfig
+
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
-%postun -p /sbin/ldconfig
+%postun
+/sbin/ldconfig
+
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
