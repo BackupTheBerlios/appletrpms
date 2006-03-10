@@ -38,7 +38,7 @@
 ### END Distro Definitions
 
 %define	name AfterStep
-%define	version	2.2.0
+%define	version	2.2.1
 %define release 1
 
 %define epoch 20
@@ -238,10 +238,16 @@ for i in /usr /usr/local /usr/X11R6 ; do
 done
 
 %post -p /sbin/ldconfig
+if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %postun -p /sbin/ldconfig
+if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
+* Thu Mar  9 2006 Sean Dague <sean@dague.net> - 20:2.2.1-1
+- bring up to 2.2.1 release
+- make find session call on Mandrake, so it actually shows up in kdm
+
 * Mon Jan 09 2006 J. Krebs <rpm_speedy@yahoo.com> 20:2.2.0-1
 - brought up to 2.1.2 release.
 - updated distro defines.
