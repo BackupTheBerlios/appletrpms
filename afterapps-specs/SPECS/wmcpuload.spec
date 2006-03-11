@@ -1,6 +1,6 @@
 %define prefix /usr/X11R6
 %define name wmcpuload
-%define version 1.1.0
+%define version 1.1.0pre5
 %define release 1
 
 Summary: CPU monitor dockapp which has an LCD look user interface
@@ -10,8 +10,8 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://www.sh.rim.or.jp/~ssato/dockapp/index.shtml#wmcpuload
-Source0: %{name}-%{version}pre4.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}pre4-%{release}-buildroot
+Source0: %{name}-%{version}.tar.gz
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 WMCPULoad is a CPU monitor dockapp which has an LCD look-alike
@@ -22,7 +22,7 @@ hits a certain threshold, an alarm-mode will alert you by turning
 back-light on. 
 
 %prep
-%setup -q -n %{name}-%{version}pre4
+%setup -q -n %{name}-%{version}
 
 %build
 ./configure --prefix=%prefix
@@ -44,6 +44,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Mar 11 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.1.0pre5-1
+- Initial build.
+
 * Mon Feb 21 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.1.0pre4-1
 - Initial build.
 
