@@ -87,9 +87,9 @@ WMCLOCKMON_URL=http://tnemeth.free.fr/projets/programmes/$(WMCLOCKMON_TAR)
 APPLET_LIST += WMCLOCKMON
 
 WMCPULOAD_NAME=wmcpuload
-WMCPULOAD_VERSION=1.1.0pre4
+WMCPULOAD_VERSION=1.1.0pre5
 WMCPULOAD_TAR=$(WMCPULOAD_NAME)-$(WMCPULOAD_VERSION).tar.gz
-WMCPULOAD_URL=http://www.sh.rim.or.jp/~ssato/src/$(WMCPULOAD_TAR)
+WMCPULOAD_URL=http://seiichisato.jp/dockapps/src/$(WMCPULOAD_TAR)
 
 APPLET_LIST += WMCPULOAD
 
@@ -159,7 +159,7 @@ APPLET_LIST += WMMEMLOAD
 WMMEMMON_NAME=wmmemmon
 WMMEMMON_VERSION=1.0.2pre2
 WMMEMMON_TAR=$(WMMEMMON_NAME)-$(WMMEMMON_VERSION).tar.gz
-WMMEMMON_URL=http://www.sh.rim.or.jp/~ssato/src/$(WMMEMMON_TAR)
+WMMEMMON_URL=http://seiichisato.jp/dockapps/src/$(WMMEMMON_TAR)
 
 APPLET_LIST += WMMEMMON
 
