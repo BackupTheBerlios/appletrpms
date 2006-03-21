@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name salmon
 %define version 1.2.2
-%define release 1
+%define release 2
 
 Summary: Still Another Load MONitor
 Name: %name
@@ -45,10 +45,9 @@ rm -rf $RPM_BUILD_ROOT
 %prefix/man/man1/*
 %doc CHANGES INSTALL LICENSE README COPYING
 
-
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-2
+- changed prefix path to /usr.
+
 * Fri Feb 18 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-1
 - Initial build.
-
-
-

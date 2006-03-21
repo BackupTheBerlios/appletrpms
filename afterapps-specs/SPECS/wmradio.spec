@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmradio
 %define version 0.9
-%define release 1
+%define release 2
 
 Summary: wmradio is FM radio card applet for WindowMaker
 Name: %name
@@ -32,7 +32,7 @@ make install
 
 make install-skins
 
-mv $RPM_BUILD_ROOT/share/ $RPM_BUILD_ROOT/usr/share/
+mv $RPM_BUILD_ROOT/share/ $RPM_BUILD_ROOT%prefix/share/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -43,10 +43,13 @@ rm -rf $RPM_BUILD_ROOT
 %prefix/man/man1/*
 %prefix/lib/wmradio/*
 %doc README wmradio-rpm-README
-/usr/share/applications/*.desktop
-/usr/share/pixmaps/*.png
+%prefix/share/applications/*.desktop
+%prefix/share/pixmaps/*.png
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.9-2
+- changed prefix path to /usr.
+
 * Mon May 23 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.9-1
 - Initial build.
 

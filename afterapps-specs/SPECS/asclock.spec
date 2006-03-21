@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name asclock
 %define version 2.0.12
-%define release 3
+%define release 4
 
 Summary: Clock Applet
 Name: %name
@@ -50,6 +50,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 2.0.12-4
+- changed prefix path to /usr.
+
 * Tue Jul 26 2005 J. Krebs <rpm_speedy@yahoo.com> - 2.0.12-3
 - Added patches for gcc-4.0 and theme path.
 

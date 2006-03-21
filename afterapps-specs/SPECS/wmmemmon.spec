@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmmemmon
 %define version 1.0.2pre2
-%define release 3
+%define release 4
 
 Summary: WMMemMon - A dockapp to monitor memory/swap usages
 Name: %name
@@ -53,6 +53,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.0.2pre2-4
+- changed prefix path to /usr.
+
 * Sat Mar 11 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.0.2pre2-3
 - changed name on RPM to reflect "pre" status.
 

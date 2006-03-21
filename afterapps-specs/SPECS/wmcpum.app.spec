@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmcpum.app
 %define version 0.1.0
-%define release 2
+%define release 3
 
 Summary: WindowMaker CPU Monitor
 Name: %name
@@ -43,11 +43,13 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %doc CHANGELOG COPYING INSTALL
-
 %prefix/bin/wmcpum
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.1.0-3
+- changed prefix path to /usr.
+
 * Wed May 18 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.1.0-2
 - Added require for lm_sensors.
 

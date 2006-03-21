@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name asapm
 %define version 3.1
-%define release 1
+%define release 2
 
 Summary: Power Management (ACPI / APM) monitor
 Name: %name
@@ -67,6 +67,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 3.1-2
+- changed prefix path to /usr.
+
 * Wed Jul 27 2005 J. Krebs <rpm_speedy@yahoo.com> - 3.1-1
 - update to new version
 

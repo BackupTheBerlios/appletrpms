@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name speyes
 %define version 1.2.0
-%define release 1
+%define release 2
 
 Summary: South Park-themed wmeyes
 Name: %name
@@ -24,7 +24,6 @@ South Park-themed wmeyes.
 cp %{SOURCE1} .
 xmkmf
 make
-#make strip
 
 %install
 mkdir -p $RPM_BUILD_ROOT%prefix/bin
@@ -42,6 +41,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.2.0-2
+- changed prefix path to /usr.
+
 * Wed Mar 23 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.2.0-1
 - Initial build.
 

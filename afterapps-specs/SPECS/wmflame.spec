@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmflame
 %define version 0.60
-%define release 2
+%define release 3
 
 Summary: wmflame is a WindowMaker dock applet that draws flames
 Name: %name
@@ -37,6 +37,9 @@ install -s -m 755 %{name}/%{name} $RPM_BUILD_ROOT%{prefix}/bin
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.6-3
+- changed prefix path to /usr.
+
 * Fri Jun 10 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.6-2
 - replaced "copyright" with "license", updated .spec
 

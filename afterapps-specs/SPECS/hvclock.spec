@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name hvclock
 %define version 0.1.0
-%define release 1
+%define release 2
 
 Summary: hvclock is a "DockApp" analog clock and calendar application.
 Name: %name
@@ -40,6 +40,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README TODO
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.1.0-2
+- changed prefix path to /usr.
+
 * Thu Oct 20 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.1.0-1
 - Initial build.
 

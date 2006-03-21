@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name asmail
 %define version 1.8
-%define release 1
+%define release 2
 
 Summary: Afterstep Mail Applet
 Name: %name
@@ -63,6 +63,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> 1.8-2
+- changed prefix path to /usr.
+
 * Thu Oct 20 2005 J. Krebs <rpm_speedy@yahoo.com> 1.8-1
 - update to 1.8
 

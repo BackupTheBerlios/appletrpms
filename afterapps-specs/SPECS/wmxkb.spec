@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmxkb
 %define version 1.2.2
-%define release 3
+%define release 4
 
 Summary: A dockable/swallowed XKB groups indicator and switch
 Name: %name
@@ -46,6 +46,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Mar 20 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-4
+- changed prefix pat to /usr.
+
 * Fri Mar 04 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-3
 - changed pixmaps to /usr/X11R6/share/pixmaps/wmxkb.
 

@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmweather
 %define version 2.4.3
-%define release 1
+%define release 2
 
 Summary: wmweather is a dockapp that displays the current weather.
 Name: %name
@@ -51,5 +51,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGES COPYING README src/wmweather.conf
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 2.4.3-2
+- changed prefix path to /usr.
+
 * Sat Jan 06 2005 J. Krebs <rpm_speedy@yahoo.com> - 2.4.3-1
 - Initial build.

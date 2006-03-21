@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name Temperature.app
 %define version 1.4
-%define release as5
+%define release as6
 
 Summary: WM applet gets temperature every 15 minutes
 Name: %name
@@ -67,6 +67,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.4-as6
+- changed prefix path to /usr.
+
 * Sat Nov 26 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.4-as5
 - Added require for wget.
 

@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmpower
 %define version 0.4.2
-%define release 1
+%define release 2
 
 Summary: wmpower is a dockapp to see the power management of a laptop 
 Name: %name
@@ -39,8 +39,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.4.2-2
+- changed prefix path to /usr.
+
 * Sat Jul 23 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.4.2-1
-- INew version.
+- New version.
 
 * Sat Feb 26 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.4.1-1
 - Initial build.

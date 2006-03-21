@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wminet
 %define version 3.0.0
-%define release 1
+%define release 2
 
 Summary: dockapp for monitoring internet connections to/from your computer
 Name: %name
@@ -48,6 +48,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 3.0.0-2
+- changed prefix path to /usr.
+
 * Fri Mar 25 2005 J. Krebs <rpm_speedy@yahoo.com> - 3.0.0-1
 - Initial build.
 

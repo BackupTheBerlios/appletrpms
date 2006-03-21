@@ -1,13 +1,32 @@
-%define prefix /usr/X11R6
-%define name bubblemon-dockapp
-%define version 1.46
-%define release 2
-
+### BEGIN Distro Defines
 %define mdk  %(if [ -e /etc/mandrake-release ]; then echo 1; else echo 0; fi;)
 %{?_with_mdk:   %{expand: %%global mdk 1}}
 
 %define fedora  %(if [ -e /etc/fedora-release ]; then echo 1; else echo 0; fi;)
 %{?_with_fedora:   %{expand: %%global fedora 1}}
+
+%define suse %(if [ -e /etc/SuSE-release ]; then echo 1; else echo 0; fi;)
+%{?_with_suse:   %{expand: %%global suse 1}}
+
+%define generic 1
+
+%if %{mdk}
+  %define generic 0
+%endif
+
+%if %{fedora}
+  %define generic 0
+%endif
+
+%if %{suse}
+  %define generic 0
+%endif
+### END Distro Definitions
+
+%define prefix /usr
+%define name bubblemon-dockapp
+%define version 1.46
+%define release 3
 
 Summary: system monitoring dockapp based-on GNOME BubbleMon.
 Name: %name
@@ -63,6 +82,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc ChangeLog INSTALL README SUPPORTED_SYSTEMS doc/COPYING doc/Xdefaults.sample
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.46-3
+- changed prefix path to /usr.
+
 * Sat Dec 17 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.46-2
 - Added build require for fedora gdk-pixbuf-devel.
 

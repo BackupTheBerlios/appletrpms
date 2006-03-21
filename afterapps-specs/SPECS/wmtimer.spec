@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmtimer
 %define version 2.92
-%define release 1
+%define release 2
 
 Summary: wmtimer is a dockable alarm clock
 Name: %name
@@ -43,6 +43,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 2.92-2
+- changed prefix path to /usr.
+
 * Sat Mar 05 2005 J. Krebs <rpm_speedy@yahoo.com> - 2.92-1
 - Initial build.
 

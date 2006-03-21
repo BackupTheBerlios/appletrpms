@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmbiff
 %define version 0.4.27
-%define release 1
+%define release 2
 
 Summary: A dockable/swallowed mail notifier
 Name: %name
@@ -49,6 +49,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog COPYING FAQ INSTALL NEWS README* TODO
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> 0.4.27-2
+- changed prefix path to /usr.
 * Wed Nov 09 2005 J. Krebs <rpm_speedy@yahoo.com> 0.4.27-1
 - new version.
 * Mon Apr 18 2005 J. Krebs <rpm_speedy@yahoo.com> 0.4.26-2

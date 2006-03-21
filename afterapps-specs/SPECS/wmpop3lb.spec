@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmpop3lb
 %define version 2.4.2
-%define release 1
+%define release 2
 
 Summary: WMPop3LB is a multi POP3 mail box checker
 Name: %name
@@ -47,6 +47,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 2.4.2-2
+- changed prefix path to /usr.
+
 * Mon Mar 28 2005 J. Krebs <rpm_speedy@yahoo.com> - 2.4.2-1
 - Initial build.
 

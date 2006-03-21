@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmupmon
 %define version 0.1.3
-%define release 1
+%define release 2
 
 Summary: DockApp that displays your system uptime in realtime
 Name: %name
@@ -40,6 +40,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.1.3-2
+- changed prefix path to /usr.
+
 * Wed Mar 23 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.1.3-1
 - Initial build.
 

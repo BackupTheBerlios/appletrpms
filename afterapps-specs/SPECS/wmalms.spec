@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmalms
 %define version 1.1.1
-%define release 1
+%define release 2
 
 Summary: Applet to manage sensor data: temperature, fan speed, voltage.
 Name: %name
@@ -47,5 +47,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc COPYING README manual.html
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.1.1-2
+- changed prefix path to /usr.
+
 * Thu Oct 20 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.1.1-1
 - Initial build.

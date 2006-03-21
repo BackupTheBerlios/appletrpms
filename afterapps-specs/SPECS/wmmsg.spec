@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmmsg
 %define version 1.0.1
-%define release 1
+%define release 2
 
 Summary: dockapp that notifies of incoming messages and events
 Name: %name
@@ -67,6 +67,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.0.1-2
+- changed prefix path to /usr.
+
 * Sat Mar 12 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.0.1-1
 - Initial build.
 

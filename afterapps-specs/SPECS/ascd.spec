@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name ascd
 %define version 0.13.2
-%define release 4
+%define release 5
 
 Summary: Audio CD player
 Name: %name
@@ -69,6 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.13.2-5
+- changed prefix path to /usr.
+
 * Fri Mar 04 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.13.2-4
 - Changed Themes dir to /usr/X11R6/share/ascd/Themes.
 

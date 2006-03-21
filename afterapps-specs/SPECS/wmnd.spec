@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmnd
 %define version 0.4.11
-%define release 1
+%define release 2
 
 Summary: wmnd is a network monitoring dockapp.
 Name: %name
@@ -47,6 +47,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.4.11-2
+- changed prefix path to /usr.
+
 * Sat Mar 05 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.4.11-1
 - Initial build.
 

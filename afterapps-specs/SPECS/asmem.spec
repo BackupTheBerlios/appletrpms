@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name asmem
 %define version 1.10
-%define release 1
+%define release 2
 
 Summary: Memory utilization monitor
 Name: %name
@@ -42,6 +42,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.10-2
+- changed prefix path to /usr.
+
 * Fri Feb 18 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.10-1
 - Initial build.
 

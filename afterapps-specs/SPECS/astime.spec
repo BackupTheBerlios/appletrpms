@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name astime
 %define version 2.8
-%define release 2
+%define release 3
 
 Summary: An analog clock
 Name: %name
@@ -43,6 +43,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 2.8-3
+- changed prefix path to /usr.
+
 * Fri Feb 18 2005 J. Krebs <rpm_speedy@yahoo.com> - 2.8-2
 - Added example .astimerc to the docs area.
 

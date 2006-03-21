@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name asmodem
 %define version 0.6
-%define release 3
+%define release 4
 
 Summary: Modem monitor
 Name: %name
@@ -41,6 +41,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> 0.6-4
+- changed prefix path to /usr.
+
 * Sat Feb 26 2005 Sean Dague <sean@dague.net> 0.6-3
 - really ugly work around for odd tarball version
 

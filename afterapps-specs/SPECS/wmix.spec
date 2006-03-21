@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmix
 %define version 3.2
-%define release 1
+%define release 2
 
 Summary: dockapp mixer utilizing the OSS mixer API
 Name: %name
@@ -26,7 +26,6 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 %setup -q
 
 %build
-#./configure --prefix=%prefix
 make
 
 %install
@@ -48,6 +47,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 3.2-2
+- changed prefix path to /usr.
+
 * Fri Mar 04 2005 J. Krebs <rpm_speedy@yahoo.com> - 3.2-1
 - Initial build.
 

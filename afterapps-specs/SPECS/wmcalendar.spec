@@ -1,6 +1,4 @@
 ### BEGIN Distro Defines
-### mdk, fedora, suse & generic are distros
-### mandriva, fedoragcc4, and susegcc4 define gcc 4.0 compilers
 %define mdk  %(if [ -e /etc/mandrake-release ]; then echo 1; else echo 0; fi;)
 %{?_with_mdk:   %{expand: %%global mdk 1}}
 
@@ -11,32 +9,25 @@
 %{?_with_suse:   %{expand: %%global suse 1}}
 
 %define generic 1
-%define __gcc gcc
 
 %if %{mdk}
   %define generic 0
-  %define mdvgcctest $(grep release /etc/mandriva-release | cut -d ' ' -f4)
-  %define __gcc %(if [ ! -z %mdvgcctest ]; then echo "gcc-3.3.6"; else echo gcc; fi;)
 %endif
 
 %if %{fedora}
   %define generic 0
-  %define fcgcctest $(grep release /etc/fedora-release | cut -d ' ' -f4)
-  %define __gcc %(if [ %fcgcctest -ge 4 ]; then echo "gcc32"; else echo gcc; fi;)
 %endif
 
 %if %{suse}
   %define generic 0
-  %define susegcctest $(grep VERSION /etc/SuSE-release | cut -d ' ' -f3)
-  %define __gcc %(if [ %susegcctest -ge 10.0 ]; then echo "gcc33"; else echo gcc; fi;)
 %endif
 ### END Distro Definitions
 
 
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmcalendar
 %define version 0.5.0
-%define release 3
+%define release 4
 
 Summary: wmCalendar is a calendar dockapp.
 Name: %name
@@ -85,7 +76,6 @@ cp %{SOURCE1} ogo2ical
 %build
 cd Src
 
-#make CC=%{__gcc}
 make
 
 %install
@@ -106,6 +96,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.5.0-4
+- changed prefix path to /usr.
+
 * Tue Jan 10 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.5.0-3
 - added gcc4 patch (thank you gentoo team, Michele Noberasco).
 

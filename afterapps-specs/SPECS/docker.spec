@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name docker
 %define version 1.5
-%define release 1
+%define release 2
 
 Summary: Docking System Tray
 Name: %name
@@ -40,6 +40,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.5-2
+- changed prefix path to /usr.
+
 * Tue Aug 09 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.5-1
 - Initial build.
 

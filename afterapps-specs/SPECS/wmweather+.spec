@@ -1,19 +1,32 @@
-%define prefix /usr/X11R6
-%define name wmweather+
-%define version 2.9
-%define release 3
+### BEGIN Distro Defines
+%define mdk  %(if [ -e /etc/mandrake-release ]; then echo 1; else echo 0; fi;)
+%{?_with_mdk:   %{expand: %%global mdk 1}}
+
+%define fedora  %(if [ -e /etc/fedora-release ]; then echo 1; else echo 0; fi;)
+%{?_with_fedora:   %{expand: %%global fedora 1}}
+
+%define suse %(if [ -e /etc/SuSE-release ]; then echo 1; else echo 0; fi;)
+%{?_with_suse:   %{expand: %%global suse 1}}
 
 %define generic 1
-%define fedora 0
-%{?_with_fedora:%define fedora 1}
-%define mandrake 0
-%{?_with_mandrake:%define mandrake 1}
+
+%if %{mdk}
+  %define generic 0
+%endif
+
 %if %{fedora}
-   %define generic 0
+  %define generic 0
 %endif
-%if %{mandrake}
-   %define generic 0
+
+%if %{suse}
+  %define generic 0
 %endif
+### END Distro Definitions
+
+%define prefix /usr
+%define name wmweather+
+%define version 2.9
+%define release 4
 
 Summary: A dock app for displaying weather information
 Name: %name
@@ -28,7 +41,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: w3c-libwww-devel
 Requires: w3c-libwww
 
-%if %{mandrake}
+%if %{mdk}
 Requires: libpcre0
 BuildRequires: libpcre0-devel
 %endif
@@ -68,13 +81,16 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
-* Tue Jun 14 2005 J. Krebs <rpm_speedy@yahoo.com> - 2.4-3
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 2.9-4
+- changed prefix path to /usr.
+
+* Tue Jun 14 2005 J. Krebs <rpm_speedy@yahoo.com> - 2.9-3
 - Added if requires for pcre.
 
-* Mon Apr 18 2005 J. Krebs <rpm_speedy@yahoo.com> - 2.4-2
+* Mon Apr 18 2005 J. Krebs <rpm_speedy@yahoo.com> - 2.9-2
 - Added require for w3c-libwww.
 
-* Fri Aug 22 2003 Sean Dague <sean@dague.net> - 2.4-1
+* Fri Aug 22 2003 Sean Dague <sean@dague.net> - 2.9-1
 - Initial build.
 
 

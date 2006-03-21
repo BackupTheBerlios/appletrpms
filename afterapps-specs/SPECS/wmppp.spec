@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmppp
 %define version 1.3.0
-%define release 1
+%define release 2
 
 Summary: wmppp provides a PPP activator and network load monitor
 Name: %name
@@ -67,6 +67,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc wmppp/*.wmppprc wmppp/example-scripts/
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.3.0-2
+- changed prefix path to /usr.
+
 * Sat Dec 03 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.3.0-1
 - Initial build.
 

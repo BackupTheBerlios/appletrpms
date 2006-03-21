@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmsensormon
 %define version 1.2.1
-%define release 2
+%define release 3
 
 Summary: uses lm_sensors to monitor CPU & sys temps, fan speed, and CPU voltage.
 Name: %name
@@ -46,6 +46,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGELOG COPYING INSTALL README TODO
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.2.1-3
+- changed prefix path to /usr.
+
 * Tue Jan 03 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.2.1-2
 - Fixed summary statement.
 

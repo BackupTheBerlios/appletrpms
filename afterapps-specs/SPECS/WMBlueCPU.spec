@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name WMBlueCPU
 %define version 0.6
-%define release 1
+%define release 2
 
 Summary: WMBlueCPU is a cpu monitor.
 Name: %name
@@ -23,7 +23,6 @@ right corner, and a usage history chart at the bottom.
 %setup -q -n WMBlueCPU
 
 %build
-#./configure --prefix=%prefix
 make
 
 %install
@@ -45,6 +44,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.6-2
+- changed prefix path to /usr.
+
 * Fri Feb 18 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.6-1
 - Initial build.
 

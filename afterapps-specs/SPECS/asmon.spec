@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name asmon
 %define version 0.65
-%define release 1
+%define release 2
 
 Summary: AS system monitor
 Name: %name
@@ -39,6 +39,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.65-2
+- changed prefix path to /usr.
+
 * Fri Aug 22 2003 Sean Dague <sean@dague.net> - Aug 30, 2003
 - Initial build.
 

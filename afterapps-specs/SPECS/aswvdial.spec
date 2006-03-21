@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name aswvdial
 %define version 1.7
-%define release 3
+%define release 4
 
 Summary: ASwvdial is a dock/wharf/slit app for wvdial
 Name: %name
@@ -44,6 +44,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.7-4
+- changed prefix path to /usr.
+
 * Tue Jun 14 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.7-3
 - Maker script files install better.
 

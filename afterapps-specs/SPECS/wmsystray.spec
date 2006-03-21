@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmsystray
 %define version 0.1.1
-%define release 2
+%define release 3
 
 Summary: wmsystray is a dockable systray.
 Name: %name
@@ -50,6 +50,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.1.1-3
+- changed prefix path to /usr.
+
 * Tue Mar 29 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.1.1-2
 - Added .diff patch files (thanks, suse).
 

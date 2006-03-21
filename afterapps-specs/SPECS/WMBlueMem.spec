@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name WMBlueMem
 %define version 0.9
-%define release 1
+%define release 2
 
 Summary: WMBlueMem is a memory monitoring program.
 Name: %name
@@ -25,7 +25,6 @@ displayed.
 %patch0
 
 %build
-#./configure --prefix=%prefix
 make
 
 %install
@@ -47,6 +46,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.9-2
+- changed prefix path to /usr.
+
 * Sat Oct 29 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.9-1
 - Initial build.
 

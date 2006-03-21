@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmcalc
 %define version 0.4
-%define release 2
+%define release 3
 
 Summary: Wmcalc is an applet calculator.
 Name: %name
@@ -24,7 +24,6 @@ will clear the calculator.
 %setup -q -n wmcalc-%{version}
 
 %build
-#./configure --prefix=%prefix
 make
 
 %install
@@ -43,6 +42,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.4-3
+- changed prefix path to /usr.
+
 * Wed Jan 04 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.4-2
 - Included additional tarball config file.
 

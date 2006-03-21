@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmsm.app
 %define version 0.2.1
-%define release 1
+%define release 2
 
 Summary: WindowMaker System Monitor
 Name: %name
@@ -42,11 +42,13 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %doc CHANGELOG COPYING INSTALL
-
 %prefix/bin/wmsm
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.2.1-2
+- changed prefix path to /usr.
+
 * Sat Dec 31 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.2.1-1
 - New version.
 

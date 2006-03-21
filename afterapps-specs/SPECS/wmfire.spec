@@ -1,19 +1,33 @@
-%define prefix /usr/X11R6
-%define name wmfire
-%define version 1.2.3
-%define release 1
+### BEGIN Distro Defines
+%define mdk  %(if [ -e /etc/mandrake-release ]; then echo 1; else echo 0; fi;)
+%{?_with_mdk:   %{expand: %%global mdk 1}}
+
+%define fedora  %(if [ -e /etc/fedora-release ]; then echo 1; else echo 0; fi;)
+%{?_with_fedora:   %{expand: %%global fedora 1}}
+
+%define suse %(if [ -e /etc/SuSE-release ]; then echo 1; else echo 0; fi;)
+%{?_with_suse:   %{expand: %%global suse 1}}
 
 %define generic 1
-%define fedora 0
-%{?_with_fedora:%define fedora 1}
-%define mandrake 0
-%{?_with_mandrake:%define mandrake 1}
+
+%if %{mdk}
+  %define generic 0
+%endif
+
 %if %{fedora}
-   %define generic 0
+  %define generic 0
 %endif
-%if %{mandrake}
-   %define generic 0
+
+%if %{suse}
+  %define generic 0
 %endif
+### END Distro Definitions
+
+
+%define prefix /usr
+%define name wmfire
+%define version 1.2.3
+%define release 2
 
 Summary: wmfire is a configurable cpu, mem, or network monitor.
 Name: %name
@@ -30,7 +44,7 @@ Requires: libgtop2
 BuildRequires: libgtop2-devel
 %endif
 
-%if %{mandrake}
+%if %{mdk}
 Requires: libgtop2.0
 BuildRequires: libgtop2.0-devel
 %endif
@@ -73,6 +87,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> 1.2.3-2
+- changed prefix path to /usr.
+
 * Sat Dec 31 2005 J. Krebs <rpm_speedy@yahoo.com> 1.2.3-1
 - new version
 

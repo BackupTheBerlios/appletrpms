@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmfishtime
 %define version 1.24
-%define release 1
+%define release 2
 
 Summary: clock dockapp with fish.
 Name: %name
@@ -29,7 +29,6 @@ If $MAIL is not set, nothing happens.
 %setup -q
 
 %build
-#./configure --prefix=%prefix
 make
 
 %install
@@ -50,6 +49,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.24-2
+- changed prefix path to /usr.
+
 * Sat Mar 05 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.24-1
 - Initial build.
 

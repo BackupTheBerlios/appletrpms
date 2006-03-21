@@ -1,19 +1,32 @@
-%define prefix /usr/X11R6
-%define name wmwifi
-%define version 0.5
-%define release 1
+### BEGIN Distro Defines
+%define mdk  %(if [ -e /etc/mandrake-release ]; then echo 1; else echo 0; fi;)
+%{?_with_mdk:   %{expand: %%global mdk 1}}
+
+%define fedora  %(if [ -e /etc/fedora-release ]; then echo 1; else echo 0; fi;)
+%{?_with_fedora:   %{expand: %%global fedora 1}}
+
+%define suse %(if [ -e /etc/SuSE-release ]; then echo 1; else echo 0; fi;)
+%{?_with_suse:   %{expand: %%global suse 1}}
 
 %define generic 1
-%define fedora 0
-%{?_with_fedora:%define fedora 1}
-%define mandrake 0
-%{?_with_mandrake:%define mandrake 1}
+
+%if %{mdk}
+  %define generic 0
+%endif
+
 %if %{fedora}
-   %define generic 0
+  %define generic 0
 %endif
-%if %{mandrake}
-   %define generic 0
+
+%if %{suse}
+  %define generic 0
 %endif
+### END Distro Definitions
+
+%define prefix /usr
+%define name wmwifi
+%define version 0.5
+%define release 2
 
 Summary: WiFi dockapp displays signal, link, noise, & bitrate info in LCD format
 Name: %name
@@ -26,7 +39,7 @@ Source0: %{name}-%{version}.tar.gz
 Patch0: %{name}.c.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
-%if %{mandrake}
+%if %{mdk}
 Requires: libdockapp0
 %endif
 
@@ -63,6 +76,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.5-2
+- changed prefix path to /usr.
+
 * Sun Jun 26 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.5-1
 - Initial build.
 

@@ -39,12 +39,12 @@
 
 %define	name AfterStep
 %define	version	2.2.1
-%define release 2
+%define release 3
 
 %define epoch 20
 %define gdesk /usr/share
 
-%define __prefix /usr/X11R6
+%define __prefix /usr
 %define _mandir %{__prefix}/man
 %define _bindir %{__prefix}/bin
 %define _datadir %{__prefix}/share
@@ -157,7 +157,7 @@ install -m 0755 %{SOURCE6} %{buildroot}%{gdesk}/xsessions/afterstep.desktop
 install -d %{buildroot}%{gdesk}/gnome/wm-properties/
 install -m 0644 %{SOURCE7} %{buildroot}%{gdesk}/gnome/wm-properties/afterstep.desktop
 rm -f %{buildroot}%{_datadir}/xsessions/AfterStep.desktop
-rmdir %{buildroot}%{_datadir}/xsessions/
+#rmdir %{buildroot}%{_datadir}/xsessions/
 %endif
 %if %{mdk}
 # mandrake menu items
@@ -248,6 +248,9 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.1-3
+- changed prefix path to /usr.
+
 * Thu Mar  9 2006 Sean Dague <sean@dague.net> - 20:2.2.1-1
 - bring up to 2.2.1 release
 - make find session call on Mandrake, so it actually shows up in kdm

@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name Mixer.app
 %define version 1.8.0
-%define release as3
+%define release as4
 
 Summary: WM applet sound mixer based-on Rob Malda's asmixer
 Name: %name
@@ -58,6 +58,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.8.0-as4
+- changed prefix path to /usr.
+
 * Sat Jun 04 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.8.0-as3
 - Updated description to include news of AS 2.1.0 compatibility.
 

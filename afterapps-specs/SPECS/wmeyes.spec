@@ -1,7 +1,7 @@
-%define prefix /usr/X11R6
+%define prefix /usr
 %define name wmeyes
 %define version 1.2
-%define release 1
+%define release 2
 
 Summary: wmeyes is a dockapp with moving eyes that follow mouse movement
 Name: %name
@@ -25,7 +25,6 @@ This version also allows execition of a command by clicking the icon.
 cp %{SOURCE1} .
 xmkmf
 make
-#make strip
 
 %install
 mkdir -p $RPM_BUILD_ROOT%prefix/bin
@@ -43,6 +42,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.2-2
+- changed prefix path to /usr.
+
 * Thu Mar 24 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.2-1
 - Initial build.
 
