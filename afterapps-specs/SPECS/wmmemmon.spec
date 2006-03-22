@@ -44,6 +44,9 @@ install -m 644 icons/* $RPM_BUILD_ROOT%prefix/share/wmmemmon/icons/
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%postun
+%prefix/share/wmmemmon/icons/*
+
 %files
 %defattr(-,root,root,-)
 %prefix/bin/*

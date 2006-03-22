@@ -57,6 +57,10 @@ rm -f wmmsg-icons.tar.gz
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%postun
+%prefix/share/wmmsg/sounds/*
+%prefix/share/wmmsg/icons/*
+
 %files
 %defattr(-,root,root,-)
 %prefix/bin/*

@@ -42,6 +42,9 @@ install -m 644 styles/* $RPM_BUILD_ROOT%prefix/share/wmclockmon/styles/
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%postun
+%prefix/share/wmclockmon/styles/*
+
 %files
 %defattr(-,root,root,-)
 %prefix/bin/*
