@@ -38,7 +38,7 @@ mv $RPM_BUILD_ROOT/share/ $RPM_BUILD_ROOT%prefix/share/
 rm -rf $RPM_BUILD_ROOT
 
 %postun
-%prefix/lib/wmradio/*
+%prefix/lib/wmradio/
 
 %files
 %defattr(-,root,root,-)

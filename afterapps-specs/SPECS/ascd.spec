@@ -60,7 +60,7 @@ install -m 644 quick/* $RPM_BUILD_ROOT%prefix/share/ascd/Themes/default/quick/
 rm -rf $RPM_BUILD_ROOT
 
 %postun
-%prefix/share/ascd/Default/*
+%prefix/share/ascd/Default/
 
 %files
 %defattr(-,root,root,-)

@@ -46,7 +46,7 @@ rm -f lcd.tar.gz
 rm -rf $RPM_BUILD_ROOT
 
 %postun
-%prefix/share/ascd/Themes/*/*
+%prefix/share/ascd/Themes/*/
 
 %files
 %defattr(-,root,root,-)

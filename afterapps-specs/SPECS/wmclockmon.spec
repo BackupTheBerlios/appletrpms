@@ -43,7 +43,7 @@ install -m 644 styles/* $RPM_BUILD_ROOT%prefix/share/wmclockmon/styles/
 rm -rf $RPM_BUILD_ROOT
 
 %postun
-%prefix/share/wmclockmon/styles/*
+%prefix/share/wmclockmon/styles/
 
 %files
 %defattr(-,root,root,-)

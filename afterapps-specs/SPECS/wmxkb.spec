@@ -39,7 +39,7 @@ install -m 644 pixmaps/*.xpm $RPM_BUILD_ROOT%prefix/share/pixmaps/wmxkb/
 rm -rf $RPM_BUILD_ROOT
 
 %postun
-%prefix/share/pixmaps/wmxkb/*
+%prefix/share/pixmaps/wmxkb/
 
 %files
 %defattr(-,root,root,-)
