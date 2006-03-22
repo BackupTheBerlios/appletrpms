@@ -1,11 +1,6 @@
 ### BEGIN Distro Defines
-### mdk, fedora, suse & generic are distros
-### mandriva, fedoragcc4, and susegcc4 define gcc 4.0 compilers
-%define mdk  %(if [ -e /etc/mandrake-release -o -e /etc/mandriva-release ]; then echo 1; else echo 0; fi;)
+%define mdk  %(if [ -e /etc/mandrake-release ]; then echo 1; else echo 0; fi;)
 %{?_with_mdk:   %{expand: %%global mdk 1}}
-
-%define mandriva  %(if [ -e /etc/mandriva-release ]; then echo 1; else echo 0; fi;)
-%{?_with_mandriva:   %{expand: %%global mandriva 1}}
 
 %define fedora  %(if [ -e /etc/fedora-release ]; then echo 1; else echo 0; fi;)
 %{?_with_fedora:   %{expand: %%global fedora 1}}
@@ -16,30 +11,32 @@
 %define generic 1
 
 %if %{mdk}
-%define generic 0
-%define name	libdockapp0
+  %define generic 0
 %endif
-
 %if %{fedora}
-%define generic 0
-%define fcgcctest $(grep release /etc/fedora-release | cut -d ' ' -f4)
-%define fedoragcc4 %(if [ %fcgcctest -ge 4 ]; then echo 1; else echo 0; fi;)
-%{?_with_fedoragcc4:   %{expand: %%global fedoragcc4 1}}
-%define name	libdockapp
+  %define generic 0
 %endif
-
 %if %{suse}
   %define generic 0
-  %define susegcctest $(grep VERSION /etc/SuSE-release | cut -d ' ' -f3)
-  %define susegcc4 %(if [ %susegcctest -ge 10.0 ]; then echo 1; else echo 0; fi;)
-  %{?_with_susegcc4:   %{expand: %%global susegcc4 1}}
-%define name	libdockapp
 %endif
 ### END Distro Definitions
 
-%define prefix	/usr/X11R6
+%define prefix	/usr
 %define version 0.6.1
-%define release 2
+%define release 3
+
+%if %{mdk}
+%define name	libdockapp0
+%endif
+%if %{fedora}
+%define name	libdockapp
+%endif
+%if %{suse}
+%define name	libdockapp
+%endif
+%if %{generic}
+%define name	libdockapp
+%endif
 
 Summary:	DockApp Making Standard Library
 Name:		%name
@@ -80,7 +77,8 @@ Header files etc to develop DockApps.
 %build
 ./configure --prefix=%{prefix} \
 	--with-x \
-	--without-examples
+	--without-examples \
+	--without-fonts
 make
 
 %install
@@ -89,6 +87,7 @@ rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 
 rm -rf $RPM_BUILD_ROOT%{prefix}/lib/libdockapp.a
+rm -rf $RPM_BUILD_ROOT%{prefix}/X11R6/lib/X11/fonts/dockapp/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -100,7 +99,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README AUTHORS NEWS ChangeLog
 %attr(755,root,root) %{prefix}/lib/lib*.so.*
-%{prefix}/lib/X11/fonts/dockapp/*
+#%{prefix}/lib/X11/fonts/dockapp/*
 
 %files devel
 %defattr(644,root,root,755)
@@ -109,6 +108,9 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/include/*
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> 0.6.1-3
+- changed prefix path to /usr.
+
 * Mon Jan 02 2006 J. Krebs <rpm_speedy@yahoo.com> 0.6.1-2
 - added improved build clean-up.
 
