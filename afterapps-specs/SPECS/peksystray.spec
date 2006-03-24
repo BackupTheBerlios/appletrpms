@@ -22,6 +22,7 @@ docking.
 %setup -q
 
 %build
+CFLAGS="-lX11" \
 ./configure --prefix=%prefix
 make
 
