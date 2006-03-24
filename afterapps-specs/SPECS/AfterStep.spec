@@ -121,7 +121,7 @@ Requires: 	%{name}-libs = %{epoch}:%{version}
 %build
 CFLAGS=$RPM_OPT_FLAGS \
 ./configure \
-	--prefix=%{__prefix}                      \
+	--prefix=%{_prefix}                       \
 	--enable-sharedlibs                       \
 	--disable-staticlibs			  \
 	--enable-ascp                             \
@@ -153,9 +153,10 @@ install -m 0755 %{SOURCE1} $RPM_BUILD_ROOT%{gdesk}/switchdesk/Xclients.afterstep
 install -d $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/
 install -m 0755 %{SOURCE2} $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/afterstep
 install -d %{buildroot}%{gdesk}/xsessions/
-install -m 0755 %{SOURCE6} %{buildroot}%{gdesk}/xsessions/afterstep.desktop
+install -m 0644 %{SOURCE6} %{buildroot}%{gdesk}/xsessions/afterstep.desktop
 install -d %{buildroot}%{gdesk}/gnome/wm-properties/
 install -m 0644 %{SOURCE7} %{buildroot}%{gdesk}/gnome/wm-properties/afterstep.desktop
+rm -f %{buildroot}%{gdesk}/gnome/wm-properties/AfterStep.desktop
 rm -f %{buildroot}%{_datadir}/xsessions/AfterStep.desktop
 #rmdir %{buildroot}%{_datadir}/xsessions/
 %endif
