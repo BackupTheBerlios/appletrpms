@@ -32,7 +32,9 @@ make install
 
 make install-skins
 
-mv $RPM_BUILD_ROOT/share/ $RPM_BUILD_ROOT%prefix/share/
+mkdir -p $RPM_BUILD_ROOT%prefix/share/
+
+mv $RPM_BUILD_ROOT/share/* $RPM_BUILD_ROOT%prefix/share/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
