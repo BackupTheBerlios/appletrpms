@@ -39,7 +39,7 @@ Source0: %{name}-%{version}.tar.gz
 Patch0: wmweather+-fedorafix.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: w3c-libwww-devel
-Requires: w3c-libwww
+Requires: w3c-libwww libwraster
 
 %if %{mdk}
 Requires: libpcre0
