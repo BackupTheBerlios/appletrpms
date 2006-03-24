@@ -1,0 +1,8 @@
+--- Makefile	2002-05-25 08:05:51.000000000 -0500
++++ Makefile	2006-03-24 08:16:40.000000000 -0600
+@@ -1,4 +1,4 @@
+-INCLUDES =-I/usr/X11R6/include/X11 -I/usr/local/include
++INCLUDES =-I/usr/X11R6/include/X11 -I/usr/local/include -I/usr/include/X11
+ LIBINC =-L/usr/X11R6/lib
+ LIBS = -lX11 -lXpm -lXext -lm
+ 

@@ -11,6 +11,7 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://www.dockapps.com/
 Source0: %{name}-%{version}.tar.gz
+Patch0: %{name}-%{version}.Makefile.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -22,6 +23,7 @@ will clear the calculator.
 
 %prep
 %setup -q -n wmcalc-%{version}
+%patch0
 
 %build
 make
