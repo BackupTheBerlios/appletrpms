@@ -53,8 +53,10 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%prefix/bin
 mkdir -p $RPM_BUILD_ROOT/etc/ppp
 install -s -m 755 wmppp/wmppp $RPM_BUILD_ROOT%prefix/bin/
-install -s -m 755 wmppp/getmodemspeed $RPM_BUILD_ROOT/etc/ppp
+install -s -m 755 wmppp/getmodemspeed $RPM_BUILD_ROOT/etc/ppp/
 install -m 644 wmppp/user.wmppprc $RPM_BUILD_ROOT/etc/ppp/wmppprc
+
+rm -rf wmppp/example-scripts/getmodemspeed
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -64,7 +66,7 @@ rm -rf $RPM_BUILD_ROOT
 %prefix/bin/*
 /etc/ppp/*
 %doc BUGS CHANGES COPYING HINTS INSTALL README TODO
-%doc wmppp/*.wmppprc wmppp/example-scripts/
+%doc wmppp/*.wmppprc wmppp/example-scripts
 
 %changelog
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.3.0-2
