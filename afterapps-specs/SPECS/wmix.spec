@@ -1,4 +1,7 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name wmix
 %define version 3.2
 %define release 2
@@ -26,23 +29,23 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 %setup -q
 
 %build
-make
+make PREFIX=%{__prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-mkdir -p $RPM_BUILD_ROOT%prefix/man/man1
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
 
-install -s -m 755 wmix $RPM_BUILD_ROOT%prefix/bin
-install -m 644 wmix.1x.gz $RPM_BUILD_ROOT%prefix/man/man1/
+install -s -m 755 wmix $RPM_BUILD_ROOT%{_bindir}
+install -m 644 wmix.1x.gz $RPM_BUILD_ROOT%{_mandir}/man1/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man1/*
+%{_bindir}/*
+%{_mandir}/man1/*
 %doc AUTHORS BUGS COPYING INSTALL NEWS README sample.wmixrc
 
 

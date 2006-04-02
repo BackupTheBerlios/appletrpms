@@ -1,4 +1,9 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
+%define _libdir %{__prefix}/lib
+
 %define name wmradio
 %define version 0.9
 %define release 2
@@ -22,34 +27,32 @@ wmradio is FM radio card applet for WindowMaker
 
 %build
 cp %{SOURCE1} .
-./configure --prefix=%prefix --disable-libxosd --disable-gnome
+./configure --prefix=%{__prefix} --disable-libxosd --disable-gnome --mandir=%{_mandir}/man1
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-make install
+make MANDIR=%{_mandir}/man1 install DESTDIR=$RPM_BUILD_ROOT
 
-make install-skins
+make install-skins DESTDIR=$RPM_BUILD_ROOT
 
-mkdir -p $RPM_BUILD_ROOT%prefix/share/
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/
 
-mv $RPM_BUILD_ROOT/share/* $RPM_BUILD_ROOT%prefix/share/
+mv $RPM_BUILD_ROOT/share/* $RPM_BUILD_ROOT%{_datadir}/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%postun
-%prefix/lib/wmradio/
-
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man1/*
-%prefix/lib/wmradio/*
+%{_bindir}/*
+%{_mandir}/man1/*
+%dir %{_libdir}/wmradio
+%{_libdir}/wmradio/*
 %doc README wmradio-rpm-README
-%prefix/share/applications/*.desktop
-%prefix/share/pixmaps/*.png
+%{_datadir}/applications/*.desktop
+%{_datadir}/pixmaps/*.png
 
 %changelog
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.9-2

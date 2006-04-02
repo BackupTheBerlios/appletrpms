@@ -1,4 +1,7 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name wmnd
 %define version 0.4.11
 %define release 2
@@ -26,23 +29,24 @@ drivers. Enjoy!
 %setup -q
 
 %build
-./configure --prefix=%prefix
+./configure --prefix=%{__prefix} --mandir=%{_mandir}
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-mkdir -p $RPM_BUILD_ROOT%prefix/man/man1
-install -s -m 755 src/wmnd $RPM_BUILD_ROOT%prefix/bin/
-install -m 644 doc/wmnd.1 $RPM_BUILD_ROOT%prefix/man/man1/
+
+make install DESTDIR=$RPM_BUILD_ROOT
+
+rm -rf $RPM_BUILD_ROOT%{__prefix}/info/*
+rm -rf $RPM_BUILD_ROOT%{_datadir}/wmndrc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man1/*
+%{_bindir}/*
+%{_mandir}/man1/*
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README TODO examples/wmndrc
 
 

@@ -1,4 +1,7 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name wmsensormon
 %define version 1.2.1
 %define release 3
@@ -31,18 +34,18 @@ make
 %install
 rm -rf $RPM_BUILD_ROOT
 
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-install -s -m 755 wmsensormon/wmsensormon $RPM_BUILD_ROOT%prefix/bin/
-mkdir -p $RPM_BUILD_ROOT%prefix/man/man1
-install -m 644 wmsensormon/wmsensormon.1 $RPM_BUILD_ROOT%prefix/man/man1/
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+install -s -m 755 wmsensormon/wmsensormon $RPM_BUILD_ROOT%{_bindir}/
+mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
+install -m 644 wmsensormon/wmsensormon.1 $RPM_BUILD_ROOT%{_mandir}/man1/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man1/*
+%{_bindir}/*
+%{_mandir}/man1/*
 %doc CHANGELOG COPYING INSTALL README TODO
 
 %changelog
