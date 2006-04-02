@@ -1,4 +1,7 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name asmail
 %define version 1.8
 %define release 2
@@ -35,19 +38,21 @@ animation for the status update.
 %setup -q
 
 %build
-./configure --prefix=%prefix
+./configure --prefix=%{__prefix}
 make
 
 %install
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-mkdir -p $RPM_BUILD_ROOT%prefix/man/man1
-make AFTER_BIN_DIR=$RPM_BUILD_ROOT%prefix/bin \
-    AFTER_MAN_DIR=$RPM_BUILD_ROOT%prefix/man/man1 \
-    AFTER_RCMAN_DIR=$RPM_BUILD_ROOT%prefix/man/man5 \
-    AFTER_DOC_DIR=$RPM_BUILD_ROOT%prefix/share/afterstep/doc \
-    AFTER_SHAREDIR=$RPM_BUILD_ROOT%prefix/share/asmail \
-    AFTER_PIXDIR=$RPM_BUILD_ROOT%prefix/share/asmail/pixmaps \
-    AFTER_SOUNDDIR=$RPM_BUILD_ROOT%prefix/share/asmail/sounds \
+rm -rf $RPM_BUILD_ROOT
+
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
+make AFTER_BIN_DIR=$RPM_BUILD_ROOT%{_bindir} \
+    AFTER_MAN_DIR=$RPM_BUILD_ROOT%{_mandir}/man1 \
+    AFTER_RCMAN_DIR=$RPM_BUILD_ROOT%{_mandir}/man5 \
+    AFTER_DOC_DIR=$RPM_BUILD_ROOT%{_datadir}/afterstep/doc \
+    AFTER_SHAREDIR=$RPM_BUILD_ROOT%{_datadir}/asmail \
+    AFTER_PIXDIR=$RPM_BUILD_ROOT%{_datadir}/asmail/pixmaps \
+    AFTER_SOUNDDIR=$RPM_BUILD_ROOT%{_datadir}/asmail/sounds \
     install
 
 %clean
@@ -55,10 +60,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man1/*
-%prefix/man/man5/*
-%prefix/share/asmail
+%{_bindir}/*
+%{_mandir}/man1/*
+%{_mandir}/man5/*
+%dir %{_datadir}/asmail
+%{_datadir}/asmail
 %doc CHANGES INSTALL LICENSE README TODO
 
 

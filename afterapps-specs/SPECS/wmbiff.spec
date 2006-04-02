@@ -1,4 +1,8 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
+%define _libdir %{__prefix}/lib
 %define name wmbiff
 %define version 0.4.27
 %define release 2
@@ -28,10 +32,12 @@ wmbiff's with differrent configs).
 %setup -q
 
 %build
-./configure --prefix=%prefix
+./configure --prefix=%{__prefix} --mandir=%{_mandir}
 make
 
 %install
+rm -rf $RPM_BUILD_ROOT
+
 make DESTDIR=$RPM_BUILD_ROOT install
 
 %clean
@@ -39,12 +45,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man*/*
-%dir %prefix/share/%{name}
-%prefix/share/%{name}/*
-%dir %prefix/lib/%{name}
-%prefix/lib/%{name}/*
+%{_bindir}/*
+%{_mandir}/man*/*
+%dir %{_datadir}/%{name}
+%{_datadir}/%{name}/*
+%dir %{_libdir}/%{name}
+%{_libdir}/%{name}/*
 
 %doc AUTHORS ChangeLog COPYING FAQ INSTALL NEWS README* TODO
 
