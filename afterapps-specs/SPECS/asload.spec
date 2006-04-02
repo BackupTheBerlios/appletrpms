@@ -1,4 +1,7 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name asload
 %define version 0.9.4
 %define release 2
@@ -20,24 +23,25 @@ A swallowable applet monitors the CPU load.
 %setup -q
 
 %build
-./configure --prefix=%prefix
+./configure --prefix=%{__prefix}
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-mkdir -p $RPM_BUILD_ROOT%prefix/man/man1
 
-install -s -m 755 asload $RPM_BUILD_ROOT%prefix/bin
-install -m 644 asload.man $RPM_BUILD_ROOT%prefix/man/man1/asload.1
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
+
+install -s -m 755 asload $RPM_BUILD_ROOT%{_bindir}
+install -m 644 asload.man $RPM_BUILD_ROOT%{_mandir}/man1/asload.1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man1/*
+%{_bindir}/*
+%{_mandir}/man1/*
 %doc INSTALL LICENSE README
 
 

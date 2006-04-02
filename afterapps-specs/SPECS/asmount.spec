@@ -1,4 +1,7 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name asmount
 %define version 1.0.0
 %define release 2
@@ -21,23 +24,25 @@ like that by pressing a little icon on the Wharf.
 %setup -q
 
 %build
-./configure --prefix=%prefix
+./configure --prefix=%{__prefix}
 make
 
 %install
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-mkdir -p $RPM_BUILD_ROOT%prefix/man/man1
+rm -rf $RPM_BUILD_ROOT
 
-install -s -m 755 asmount $RPM_BUILD_ROOT%prefix/bin
-install -m 644 asmount.man $RPM_BUILD_ROOT%prefix/man/man1/asmount.1
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
+
+install -s -m 755 asmount $RPM_BUILD_ROOT%{_bindir}
+install -m 644 asmount.man $RPM_BUILD_ROOT%{_mandir}/man1/asmount.1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man1/*
+%{_bindir}/*
+%{_mandir}/man1/*
 %doc INSTALL README
 
 
