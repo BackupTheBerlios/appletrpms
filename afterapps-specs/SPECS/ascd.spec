@@ -67,10 +67,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %{_bindir}/*
 %{_mandir}/man1/*
-%dir %{_datadir}/ascd/Default
-%{_datadir}/ascd/Default/*
-%dir %{_datadir}/ascd/Themes/default
-%{_datadir}/ascd/Themes/default/*
+%dir %{_datadir}/ascd
+%{_datadir}/ascd
 %doc README ascd/doc/* ascd/themes/themes-manual.ps
 
 %changelog
@@ -88,6 +86,3 @@ rm -rf $RPM_BUILD_ROOT
 
 * Mon Feb 07 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.13.2-1
 - Initial build.
-
-
-
