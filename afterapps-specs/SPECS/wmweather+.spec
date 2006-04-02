@@ -23,7 +23,10 @@
 %endif
 ### END Distro Definitions
 
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name wmweather+
 %define version 2.9
 %define release 4
@@ -61,22 +64,20 @@ external command.
 %patch0 -p1
 
 %build
-./configure --prefix=%prefix
+./configure --prefix=%{__prefix} --mandir=%{_mandir}
 make
 
 %install
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-mkdir -p $RPM_BUILD_ROOT%prefix/man/man1
-make prefix=$RPM_BUILD_ROOT%prefix \
-    install
+
+make install DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man1/*
+%{_bindir}/*
+%{_mandir}/man1/*
 %doc ChangeLog README HINTS example.conf
 
 

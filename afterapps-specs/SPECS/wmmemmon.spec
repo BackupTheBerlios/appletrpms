@@ -1,4 +1,7 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name wmmemmon
 %define version 1.0.2pre2
 %define release 4
@@ -29,29 +32,24 @@ you by turning back-light on.
 %patch0
 
 %build
-./configure --prefix=%prefix
+./configure --prefix=%{__prefix} --mandir=%{_mandir}
 make
 
 %install
-mkdir -p $RPM_BUILD_ROOT%prefix/bin/
-mkdir -p $RPM_BUILD_ROOT%prefix/man/man1/
-mkdir -p $RPM_BUILD_ROOT%prefix/share/wmmemmon/icons/
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/wmmemmon/icons/
+install -m 644 icons/* $RPM_BUILD_ROOT%{_datadir}/wmmemmon/icons/
 
-install -s -m 755 src/wmmemmon $RPM_BUILD_ROOT%prefix/bin/
-install -m 644 doc/*.1 $RPM_BUILD_ROOT%prefix/man/man1/
-install -m 644 icons/* $RPM_BUILD_ROOT%prefix/share/wmmemmon/icons/
+make install DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%postun
-%prefix/share/wmmemmon/icons/
-
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man1/*
-%prefix/share/wmmemmon/icons/*
+%{_bindir}/*
+%{_mandir}/man1/*
+%dir %{_datadir}/wmmemmon/icons
+%{_datadir}/wmmemmon/icons/*
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README THANKS TODO
 
 

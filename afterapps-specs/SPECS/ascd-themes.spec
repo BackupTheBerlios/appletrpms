@@ -1,4 +1,7 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name ascd-themes
 %define version 1.0
 %define release 4
@@ -26,13 +29,13 @@ Denis Bourez and one from Michele Campeotto.  These install to
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%prefix/share/ascd/Themes/
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/ascd/Themes/
 
-cp themes.tar $RPM_BUILD_ROOT%prefix/share/ascd/Themes/
-cp %{SOURCE1} $RPM_BUILD_ROOT%prefix/share/ascd/Themes/
-cp %{SOURCE2} $RPM_BUILD_ROOT%prefix/share/ascd/Themes/
+cp themes.tar $RPM_BUILD_ROOT%{_datadir}/ascd/Themes/
+cp %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/ascd/Themes/
+cp %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/ascd/Themes/
 
-cd $RPM_BUILD_ROOT%prefix/share/ascd/Themes/
+cd $RPM_BUILD_ROOT%{_datadir}/ascd/Themes/
 
 tar xvf themes.tar
 tar xvzf dwing.tgz
@@ -45,13 +48,12 @@ rm -f lcd.tar.gz
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%postun
-%prefix/share/ascd/Themes/*/
-
 %files
 %defattr(-,root,root,-)
-%prefix/share/ascd/Themes/*/*
-
+%dir %{_datadir}/ascd
+%dir %{_datadir}/ascd/Themes
+%dir %{_datadir}/ascd/Themes/*
+%{_datadir}/ascd/Themes/*/*
 
 %changelog
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.0-4

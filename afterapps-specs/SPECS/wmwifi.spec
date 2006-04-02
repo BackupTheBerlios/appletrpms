@@ -23,7 +23,10 @@
 %endif
 ### END Distro Definitions
 
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name wmwifi
 %define version 0.5
 %define release 2
@@ -57,21 +60,21 @@ point's name.
 %patch0
 
 %build
-./configure --prefix=%prefix --with-x
+./configure --prefix=%{__prefix} --with-x --mandir=%{_mandir}
 make
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%prefix/man/man1/
-install -m 644 wmwifi.1 $RPM_BUILD_ROOT%prefix/man/man1/
+mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1/
+install -m 644 wmwifi.1 $RPM_BUILD_ROOT%{_mandir}/man1/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man1/*
+%{_bindir}/*
+%{_mandir}/man1/*
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README
 
 
@@ -81,4 +84,3 @@ rm -rf $RPM_BUILD_ROOT
 
 * Sun Jun 26 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.5-1
 - Initial build.
-

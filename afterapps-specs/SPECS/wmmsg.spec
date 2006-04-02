@@ -1,4 +1,7 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name wmmsg
 %define version 1.0.1
 %define release 2
@@ -29,46 +32,41 @@ or any other useful location. Works with Gaim, X-Chat, etc.
 %setup -q
 
 %build
-./configure --prefix=%prefix
+./configure --prefix=%{__prefix} --mandir=%{_mandir}
 make
 
 %install
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-mkdir -p $RPM_BUILD_ROOT%prefix/man/man1
-mkdir -p $RPM_BUILD_ROOT%prefix/share/wmmsg/sounds/
-mkdir -p $RPM_BUILD_ROOT%prefix/share/wmmsg/icons/
+rm -rf $RPM_BUILD_ROOT
 
-install -s -m 755 wmmsg $RPM_BUILD_ROOT%prefix/bin/
-install -s -m 755 wmmsg_notify $RPM_BUILD_ROOT%prefix/bin/
-install -m 644 man/*.1 $RPM_BUILD_ROOT%prefix/man/man1/
+make install DESTDIR=$RPM_BUILD_ROOT
+
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/wmmsg/sounds/
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/wmmsg/icons/
 
 cp %{SOURCE2} .
 
-cp %{SOURCE1} $RPM_BUILD_ROOT%prefix/share/wmmsg/sounds/
-cd $RPM_BUILD_ROOT%prefix/share/wmmsg/sounds/
+cp %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/wmmsg/sounds/
+cd $RPM_BUILD_ROOT%{_datadir}/wmmsg/sounds/
 tar xvzf wmmsg-sounds.tar.gz
 rm -f wmmsg-sounds.tar.gz
 
-cp %{SOURCE3} $RPM_BUILD_ROOT%prefix/share/wmmsg/icons/
-cd $RPM_BUILD_ROOT%prefix/share/wmmsg/icons/
+cp %{SOURCE3} $RPM_BUILD_ROOT%{_datadir}/wmmsg/icons/
+cd $RPM_BUILD_ROOT%{_datadir}/wmmsg/icons/
 tar xvzf wmmsg-icons.tar.gz
 rm -f wmmsg-icons.tar.gz
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%postun
-%prefix/share/wmmsg/sounds/
-%prefix/share/wmmsg/icons/
-
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man1/*
-%prefix/share/wmmsg/sounds/*.wav
-%prefix/share/wmmsg/icons/*.png
+%{_bindir}/*
+%{_mandir}/man1/*
+%dir %{_datadir}/wmmsg/sounds
+%{_datadir}/wmmsg/sounds/*.wav
+%dir %{_datadir}/wmmsg/icons
+%{_datadir}/wmmsg/icons/*.png
 %doc AUTHORS COPYING ChangeLog INSTALL README plugins/* wmmsgrc-example
-
 
 %changelog
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.0.1-2

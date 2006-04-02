@@ -42,14 +42,14 @@
 %define release 3
 
 %define epoch 20
-%define gdesk /usr/share
 
 %define __prefix /usr
-%define _mandir %{__prefix}/man
 %define _bindir %{__prefix}/bin
 %define _datadir %{__prefix}/share
 %define _includedir %{__prefix}/include
 %define _libdir %{__prefix}/lib
+%define _mandir %{_datadir}/man
+%define gdesk %{_datadir}
 
 Summary:	AfterStep Window Manager (NeXTalike)
 Name:		%{name}
@@ -122,6 +122,7 @@ Requires: 	%{name}-libs = %{epoch}:%{version}
 CFLAGS=$RPM_OPT_FLAGS \
 ./configure \
 	--prefix=%{_prefix}                       \
+	--mandir=%{_mandir}                       \
 	--enable-sharedlibs                       \
 	--disable-staticlibs			  \
 	--enable-ascp                             \

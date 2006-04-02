@@ -1,4 +1,7 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name wmtz
 %define version 0.7
 %define release 2
@@ -34,23 +37,23 @@ when they are asleep...
 %build
 cd wmtz
 
-make
+make DESTDIR=%{__prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-mkdir -p $RPM_BUILD_ROOT%prefix/man/man1
-install -s -m 755 wmtz/wmtz $RPM_BUILD_ROOT%prefix/bin/
-install -m 644 wmtz/wmtz.1 $RPM_BUILD_ROOT%prefix/man/man1/
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
+install -s -m 755 wmtz/wmtz $RPM_BUILD_ROOT%{_bindir}
+install -m 644 wmtz/wmtz.1 $RPM_BUILD_ROOT%{_mandir}/man1/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man1/*
+%{_bindir}/*
+%{_mandir}/man1/*
 %doc BUGS CHANGES COPYING INSTALL README wmtz/wmtzrc
 
 %changelog

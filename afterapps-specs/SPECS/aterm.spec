@@ -1,4 +1,7 @@
-%define prefix  /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define	name	aterm
 %define	version	1.0.0
 %define	release	4
@@ -32,18 +35,18 @@ tied to any libraries, and can be used anywhere.
 %setup -q
 
 LD_LIBRARY_PATH=../AfterStep-%{asversion}/libAfterBase \
-        CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%{prefix} \
+        CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%{__prefix} \
 	--enable-utmp --enable-background-image \
 	--enable-transparency --enable-menubar --enable-graphics \
 	--enable-next-scroll --disable-backspace-key \
-	--disable-delete-key --enable-xgetdefault
+	--disable-delete-key --enable-xgetdefault --mandir=%{_mandir}
 
 %build
 LD_LIBRARY_PATH=../AfterStep-%{asversion}/libAfterBase make
 
 %install
 [ -d $RPM_BUILD_ROOT ] && rm -rf $RPM_BUILD_ROOT;
-mkdir -p $RPM_BUILD_ROOT%{prefix}
+mkdir -p $RPM_BUILD_ROOT%{__prefix}
 
 make DESTDIR=$RPM_BUILD_ROOT install
 
@@ -53,8 +56,8 @@ make DESTDIR=$RPM_BUILD_ROOT install
 %files
 %defattr(-,root,root)
 %doc doc ChangeLog
-%{prefix}/bin/aterm
-%{prefix}/man/man1/aterm*
+%{_bindir}/aterm
+%{_mandir}/man1/aterm*
 #%config(missingok) /etc/X11/wmconfig/aterm
 
 %changelog

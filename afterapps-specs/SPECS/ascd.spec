@@ -1,4 +1,7 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name ascd
 %define version 0.13.2
 %define release 5
@@ -30,46 +33,45 @@ support for themes.
 %patch2 -p1 -b .c
 
 %build
-./configure --prefix=%prefix
+./configure --prefix=%prefix --bindir=%{_bindir} --mandir=%{_mandir}
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-mkdir -p $RPM_BUILD_ROOT%prefix/man/man1
-mkdir -p $RPM_BUILD_ROOT%prefix/share/ascd/Default/
-mkdir -p $RPM_BUILD_ROOT%prefix/share/ascd/Themes/default/quick/
 
-install -s -m 755 ascd/ascd $RPM_BUILD_ROOT%prefix/bin/
-install -m 644 ascd/ascd.man $RPM_BUILD_ROOT%prefix/man/man1/ascd.1
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
+install -s -m 755 ascd/ascd $RPM_BUILD_ROOT%{_bindir}/
+install -m 644 ascd/ascd.man $RPM_BUILD_ROOT%{_mandir}/man1/ascd.1
+
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/ascd/Default/
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/ascd/Themes/default/quick/
 
 cd ascd/themes
 tar xvf default.tar
 tar xvf themes.tar
 gunzip themes-manual.ps.gz
 
-install -m 644 Default/* $RPM_BUILD_ROOT%prefix/share/ascd/Default/
+install -m 644 Default/* $RPM_BUILD_ROOT%{_datadir}/ascd/Default/
 cd Themes
-install -m 644 default/*.xpm $RPM_BUILD_ROOT%prefix/share/ascd/Themes/default/
-install -m 644 default/Theme $RPM_BUILD_ROOT%prefix/share/ascd/Themes/default/
+install -m 644 default/*.xpm $RPM_BUILD_ROOT%{_datadir}/ascd/Themes/default/
+install -m 644 default/Theme $RPM_BUILD_ROOT%{_datadir}/ascd/Themes/default/
 
 cd default
-install -m 644 quick/* $RPM_BUILD_ROOT%prefix/share/ascd/Themes/default/quick/
+install -m 644 quick/* $RPM_BUILD_ROOT%{_datadir}/ascd/Themes/default/quick/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%postun
-%prefix/share/ascd/Default/
-
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man1/*
-%prefix/share/ascd/Default/*
-%prefix/share/ascd/Themes/default/*
+%{_bindir}/*
+%{_mandir}/man1/*
+%dir %{_datadir}/ascd/Default
+%{_datadir}/ascd/Default/*
+%dir %{_datadir}/ascd/Themes/default
+%{_datadir}/ascd/Themes/default/*
 %doc README ascd/doc/* ascd/themes/themes-manual.ps
-
 
 %changelog
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.13.2-5

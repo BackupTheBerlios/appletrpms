@@ -1,4 +1,7 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name wmweather
 %define version 2.4.3
 %define release 2
@@ -29,7 +32,7 @@ WindowMaker dock, but will work with other window managers as well.
 
 %build
 cd src
-./configure --prefix=%prefix --sysconfdir=/etc --without-xmessage
+./configure --prefix=%{__prefix} --sysconfdir=/etc --without-xmessage --mandir=%{_mandir}
 make
 
 %install
@@ -38,16 +41,14 @@ rm -rf $RPM_BUILD_ROOT
 cd src
 make install DESTDIR=$RPM_BUILD_ROOT
 
-#rm -rf $RPM_BUILD_ROOT/etc/wmweather.conf
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
+%{_bindir}*
 /etc/*
-%prefix/man/man1/*
+%{_mandir}/man1/*
 %doc CHANGES COPYING README src/wmweather.conf
 
 %changelog

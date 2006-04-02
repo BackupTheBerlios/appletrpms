@@ -1,4 +1,7 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name wmxkb
 %define version 1.2.2
 %define release 4
@@ -26,25 +29,25 @@ run whenever a particular group is activated.
 %setup -q
 
 %build
-./configure --with-rpm --prefix=%prefix
+./configure --with-rpm --prefix=%{__prefix}
 make
 
 %install
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-mkdir -p $RPM_BUILD_ROOT%prefix/share/pixmaps/wmxkb/
-install -s -m 755 wmxkb $RPM_BUILD_ROOT%prefix/bin/
-install -m 644 pixmaps/*.xpm $RPM_BUILD_ROOT%prefix/share/pixmaps/wmxkb/
+rm -rf $RPM_BUILD_ROOT
+
+make BINDIR=$RPM_BUILD_ROOT%{_bindir} install
+
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/pixmaps/wmxkb/
+install -m 644 pixmaps/*.xpm $RPM_BUILD_ROOT%{_datadir}/pixmaps/wmxkb/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%postun
-%prefix/share/pixmaps/wmxkb/
-
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/share/pixmaps/wmxkb/*.xpm
+%{_bindir}/*
+%doc %{_datadir}/pixmaps/wmxkb
+%{_datadir}/pixmaps/wmxkb/*.xpm
 %doc COPYING README manual.html WMxkb_flexy WMxkb_nonflexy
 
 

@@ -1,4 +1,7 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name wmclockmon
 %define version 0.8.1
 %define release 2
@@ -25,33 +28,30 @@ Sample .wmclockmonrc files are included in with the doc files.
 %setup -q
 
 %build
-./configure --prefix=%prefix
+./configure --prefix=%{__prefix} --mandir=%{_mandir}
 make
 
 %install
-mkdir -p $RPM_BUILD_ROOT%prefix/bin/
-mkdir -p $RPM_BUILD_ROOT%prefix/man/man1/
-mkdir -p $RPM_BUILD_ROOT%prefix/share/wmclockmon/styles/
+rm -rf $RPM_BUILD_ROOT
 
-install -s -m 755 src/wmclockmon $RPM_BUILD_ROOT%prefix/bin/
-install -s -m 755 wmclockmon-config/wmclockmon-config $RPM_BUILD_ROOT%prefix/bin/
-install -s -m 755 wmclockmon-cal/wmclockmon-cal $RPM_BUILD_ROOT%prefix/bin/
-install -m 644 doc/*.1 $RPM_BUILD_ROOT%prefix/man/man1/
-install -m 644 styles/* $RPM_BUILD_ROOT%prefix/share/wmclockmon/styles/
+make install DESTDIR=$RPM_BUILD_ROOT
+
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/wmclockmon/
+
+rm -rf styles/Makefile*
+
+install -m 644 styles/* $RPM_BUILD_ROOT%{_datadir}/wmclockmon/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%postun
-%prefix/share/wmclockmon/styles/
-
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man1/*
-%prefix/share/wmclockmon/styles/*
+%{_bindir}*
+%{_mandir}/man1/*
+%dir %{_datadir}/wmclockmon
+%{_datadir}/wmclockmon/*
 %doc doc/sample*.wmclockmonrc AUTHORS BUGS COPYING ChangeLog INSTALL NEWS README THANKS TODO
-
 
 %changelog
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.8.1-2
