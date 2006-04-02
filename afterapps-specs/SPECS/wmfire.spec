@@ -24,7 +24,10 @@
 ### END Distro Definitions
 
 
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name wmfire
 %define version 1.2.3
 %define release 2
@@ -65,24 +68,21 @@ onscreen. The flame color can also be changed.
 %setup -q -n %{name}-%{version}
 
 %build
-./configure --prefix=%prefix
+./configure --prefix=%{__prefix}
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-mkdir -p $RPM_BUILD_ROOT%prefix/man/man1
 
-install -s -m 755 src/wmfire $RPM_BUILD_ROOT%prefix/bin
-install -m 644 wmfire.1 $RPM_BUILD_ROOT%prefix/man/man1/
+make mandir=%{_mandir}/man1 install DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man1/*
+%{_bindir}/*
+%{_mandir}/man1/*
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README ALL_I_GET_IS_A_GREY_BOX
 
 

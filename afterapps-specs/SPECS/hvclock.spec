@@ -1,4 +1,7 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name hvclock
 %define version 0.1.0
 %define release 2
@@ -22,7 +25,7 @@ hvclock is a "DockApp" analog clock and calendar application.
 %setup -q
 
 %build
-./configure --prefix=%prefix
+./configure --prefix=%{__prefix} --mandir=%{_mandir}
 make
 
 %install
@@ -35,8 +38,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man1/*
+%{_bindir}/*
+%{_mandir}/man1/*
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README TODO
 
 %changelog

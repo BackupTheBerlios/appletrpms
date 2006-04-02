@@ -1,4 +1,7 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name wmfishtime
 %define version 1.24
 %define release 2
@@ -29,22 +32,22 @@ If $MAIL is not set, nothing happens.
 %setup -q
 
 %build
-make
+make PREFIX=%{__prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-mkdir -p $RPM_BUILD_ROOT%prefix/man/man1
-install -s -m 755 wmfishtime $RPM_BUILD_ROOT%prefix/bin/
-install -m 644 wmfishtime.1 $RPM_BUILD_ROOT%prefix/man/man1/
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
+install -s -m 755 wmfishtime $RPM_BUILD_ROOT%{_bindir}/
+install -m 644 wmfishtime.1 $RPM_BUILD_ROOT%{_mandir}/man1/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man1/*
+%{_bindir}/*
+%{_mandir}/man1/*
 %doc ALL_I_GET_IS_A_GRAY_BOX AUTHORS CODING COPYING ChangeLog INSTALL README
 
 

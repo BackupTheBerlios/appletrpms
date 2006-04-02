@@ -1,4 +1,7 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name speyes
 %define version 1.2.0
 %define release 2
@@ -26,17 +29,18 @@ xmkmf
 make
 
 %install
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-mkdir -p $RPM_BUILD_ROOT%prefix/man/man1
-install -s -m 755 speyes $RPM_BUILD_ROOT%prefix/bin/
-install -m 644 speyes.man $RPM_BUILD_ROOT%prefix/man/man1/speyes.1
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
+install -s -m 755 speyes $RPM_BUILD_ROOT%{_bindir}/
+install -m 644 speyes.man $RPM_BUILD_ROOT%{_mandir}/man1/speyes.1
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man1/*
+%{_bindir}/*
+%{_mandir}/man1/*
 %doc CHANGES README COPYING
 
 
