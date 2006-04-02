@@ -1,4 +1,7 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name wmsystray
 %define version 0.1.1
 %define release 3
@@ -31,21 +34,20 @@ later.
 %patch2 -p0 -b .orig
 
 %build
-make
+make prefix=%{__prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-mkdir -p $RPM_BUILD_ROOT%prefix/man/man1
-install -s -m 755 wmsystray/wmsystray $RPM_BUILD_ROOT%prefix/bin/
-install -m 644 doc/wmsystray.1 $RPM_BUILD_ROOT%prefix/man/man1/
+
+make prefix=$RPM_BUILD_ROOT%{__prefix} INSTALL=%{_bindir}/install install
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man1/*
+%{_bindir}/*
+%{_mandir}/man1/*
 %doc AUTHORS HACKING README
 
 
