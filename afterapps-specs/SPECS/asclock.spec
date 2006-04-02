@@ -1,4 +1,7 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name asclock
 %define version 2.0.12
 %define release 4
@@ -29,13 +32,14 @@ cp %{SOURCE1} configure
 make
 
 %install
-mkdir -p $RPM_BUILD_ROOT%prefix/share/%name/doc
-make BINDIR=$RPM_BUILD_ROOT%prefix/bin \
-    MANDIR=$RPM_BUILD_ROOT%prefix/man/man1 \
-    DOCDIR=$RPM_BUILD_ROOT%prefix/share/%name/doc \
+rm -rf $RPM_BUILD_ROOT
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/%name/doc
+make BINDIR=$RPM_BUILD_ROOT%{_bindir} \
+    MANDIR=$RPM_BUILD_ROOT%{_mandir}/man1 \
+    DOCDIR=$RPM_BUILD_ROOT%{_datadir}/%name/doc \
     install install.man
-install -d $RPM_BUILD_ROOT%prefix/share/%name
-cp -a themes/* $RPM_BUILD_ROOT%prefix/share/%name
+install -d $RPM_BUILD_ROOT%{_datadir}/%name
+cp -a themes/* $RPM_BUILD_ROOT%{_datadir}/%name
 
 
 %clean
@@ -43,9 +47,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man1/*
-%prefix/share/%name
+%{_bindir}/*
+%{_mandir}/man1/*
+%dir %{_datadir}/%name
+%{_datadir}/%name
 %doc COPYING INSTALL README README.THEMES TODO
 
 

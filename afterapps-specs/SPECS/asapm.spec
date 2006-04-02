@@ -1,4 +1,7 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name asapm
 %define version 3.1
 %define release 2
@@ -46,14 +49,16 @@ Basically, the tool shows you the following:
 %setup -q
 
 %build
-./configure --prefix=%prefix
+./configure --prefix=%{__prefix}
 make
 
 %install
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-mkdir -p $RPM_BUILD_ROOT%prefix/man/man1
-make AFTER_BIN_DIR=$RPM_BUILD_ROOT%prefix/bin \
-    AFTER_MAN_DIR=$RPM_BUILD_ROOT%prefix/man/man1 \
+rm -rf $RPM_BUILD_ROOT
+
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
+make AFTER_BIN_DIR=$RPM_BUILD_ROOT%{_bindir} \
+    AFTER_MAN_DIR=$RPM_BUILD_ROOT%{_mandir}/man1 \
     install
 
 %clean
@@ -61,8 +66,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man1/*
+%{_bindir}/*
+%{_mandir}/man1/*
 %doc CHANGES COPYING INSTALL LICENSE NOTES README TODO asapmrc
 
 
