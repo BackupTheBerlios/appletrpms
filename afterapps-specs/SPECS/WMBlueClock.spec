@@ -1,4 +1,7 @@
-%define prefix /usr
+%define __prefix /usr
+%define _bindir %{__prefix}/bin
+%define _datadir %{__prefix}/share
+%define _mandir %{_datadir}/man
 %define name WMBlueClock
 %define version 0.1
 %define release 2
@@ -23,23 +26,23 @@ and 24 hour mode.
 %setup -q -n WMBlueClock
 
 %build
-make
+make PREFIX=%{__prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-mkdir -p $RPM_BUILD_ROOT%prefix/man/man1
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
 
-install -s -m 755 wmblueclock $RPM_BUILD_ROOT%prefix/bin
-install -m 644 wmblueclock.1 $RPM_BUILD_ROOT%prefix/man/man1/
+install -s -m 755 wmblueclock $RPM_BUILD_ROOT%{_bindir}
+install -m 644 wmblueclock.1 $RPM_BUILD_ROOT%{_mandir}/man1/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
-%prefix/man/man1/*
+%{_bindir}/*
+%{_mandir}/man1/*
 %doc AUTHORS COPYING README THANKS TODO
 
 
