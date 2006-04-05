@@ -1,7 +1,7 @@
 %define prefix /usr
 %define name peksystray
 %define version 0.3.0
-%define release 2
+%define release 3
 
 Summary: peksystray is a dockable systray.
 Name: %name
@@ -22,7 +22,6 @@ docking.
 %setup -q
 
 %build
-CFLAGS="-lX11" \
 ./configure --prefix=%prefix
 make
 
@@ -41,6 +40,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Apr  5 2006 Sean Dague <sean@dague.net> - 0.3.0-3
+- remove -lX11 which was breaking things
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.3.0-2
 - changed prefix path to /usr.
 
