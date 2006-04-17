@@ -28,8 +28,8 @@
 %define _datadir %{__prefix}/share
 %define _mandir %{_datadir}/man
 %define name wmwifi
-%define version 0.5
-%define release 2
+%define version 0.6
+%define release 1
 
 Summary: WiFi dockapp displays signal, link, noise, & bitrate info in LCD format
 Name: %name
@@ -39,7 +39,6 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://wmwifi.digitalssg.net/
 Source0: %{name}-%{version}.tar.gz
-Patch0: %{name}.c.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %if %{mdk}
@@ -57,7 +56,6 @@ point's name.
  
 %prep
 %setup -q
-%patch0
 
 %build
 ./configure --prefix=%{__prefix} --with-x --mandir=%{_mandir}
@@ -79,6 +77,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Apr 17 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.6-1
+- new version.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.5-2
 - changed prefix path to /usr.
 
