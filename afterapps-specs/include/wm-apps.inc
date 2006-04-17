@@ -276,7 +276,7 @@ WMWEATHERPLUS_URL=http://easynews.dl.sourceforge.net/sourceforge/wmweatherplus/$
 APPLET_LIST += WMWEATHERPLUS
 
 WMWIFI_NAME=wmwifi
-WMWIFI_VERSION=0.5
+WMWIFI_VERSION=0.6
 WMWIFI_TAR=$(WMWIFI_NAME)-$(WMWIFI_VERSION).tar.gz
 WMWIFI_URL=http://digitalssg.net/debian/$(WMWIFI_TAR)
 
