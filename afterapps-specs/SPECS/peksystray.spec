@@ -1,7 +1,40 @@
+### BEGIN Distro Defines
+### mdk, fedora, suse & generic are distros
+### mandriva, fedoragcc4, and susegcc4 define gcc 4.0 compilers
+%define mdk  %(if [ -e /etc/mandrake-release -o -e /etc/mandriva-release ]; then echo 1; else echo 0; fi;)
+%{?_with_mdk:   %{expand: %%global mdk 1}}
+
+%define mandriva  %(if [ -e /etc/mandriva-release ]; then echo 1; else echo 0; fi;)
+%{?_with_mandriva:   %{expand: %%global mandriva 1}}
+
+%define fedora  %(if [ -e /etc/fedora-release ]; then echo 1; else echo 0; fi;)
+%{?_with_fedora:   %{expand: %%global fedora 1}}
+
+%define suse %(if [ -e /etc/SuSE-release ]; then echo 1; else echo 0; fi;)
+%{?_with_suse:   %{expand: %%global suse 1}}
+
+%define generic 1
+%define xseven 0
+ 
+%if %{mdk}
+  %define generic 0
+%endif
+
+%if %{fedora}
+  %define generic 0
+  %define xtest $(grep release /etc/fedora-release | cut -d ' ' -f4)
+  %define xseven %(if [ %xtest -ge 5 ]; then echo 1; else echo 0; fi;)
+  %{?_with_xseven:   %{expand: %%global xseven 1}}
+%endif
+
+%if %{suse}
+  %define generic 0
+%endif
+
 %define prefix /usr
 %define name peksystray
 %define version 0.3.0
-%define release 3
+%define release 4
 
 Summary: peksystray is a dockable systray.
 Name: %name
@@ -22,7 +55,14 @@ docking.
 %setup -q
 
 %build
-./configure --prefix=%prefix
+
+%if %{xseven}
+	CFLAGS="-lX11" \
+	./configure --prefix=%prefix
+%else
+	./configure --prefix=%prefix
+%endif
+
 make
 
 %install
@@ -40,6 +80,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed May 25 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.3.0-4
+- changed to build with FC5 (X11R7).
+
 * Wed Apr  5 2006 Sean Dague <sean@dague.net> - 0.3.0-3
 - remove -lX11 which was breaking things
 
