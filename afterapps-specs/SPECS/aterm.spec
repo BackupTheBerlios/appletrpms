@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define	name	aterm
 %define	version	1.0.0
-%define	release	4
+%define	release	5
 %define epoch	2
 
 Summary:	aterm - terminal emulator in an X window
@@ -61,6 +61,9 @@ make DESTDIR=$RPM_BUILD_ROOT install
 #%config(missingok) /etc/X11/wmconfig/aterm
 
 %changelog
+* Wed May 25 2006 J. Krebs <rpm_speedy@yahoo.com> 1.0.0-5
+- rebuild to coincide with AS 2.2.2 release.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> 1.0.0-4
 - changed prefix path to /usr.
 

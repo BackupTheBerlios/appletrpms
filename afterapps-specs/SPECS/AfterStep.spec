@@ -38,8 +38,8 @@
 ### END Distro Definitions
 
 %define	name AfterStep
-%define	version	2.2.1
-%define release 3
+%define	version	2.2.2
+%define release 1
 
 %define epoch 20
 
@@ -250,6 +250,9 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
+* Wed May 25 2006 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.2-1
+- new version.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.1-3
 - changed prefix path to /usr.
 
