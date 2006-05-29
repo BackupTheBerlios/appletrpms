@@ -3,8 +3,8 @@
 %define _datadir %{__prefix}/share
 %define _mandir %{_datadir}/man
 %define name wmnd
-%define version 0.4.11
-%define release 2
+%define version 0.4.12
+%define release 1
 
 Summary: wmnd is a network monitoring dockapp.
 Name: %name
@@ -51,6 +51,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sun May 28 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.4.12-1
+- changed prefix path to /usr.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.4.11-2
 - changed prefix path to /usr.
 

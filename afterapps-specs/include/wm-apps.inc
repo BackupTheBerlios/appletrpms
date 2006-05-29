@@ -171,7 +171,7 @@ WMMSG_URL=http://dockapps.org/download.php/id/518/$(WMMSG_TAR)
 APPLET_LIST += WMMSG
 
 WMND_NAME=wmnd
-WMND_VERSION=0.4.11
+WMND_VERSION=0.4.12
 WMND_TAR=$(WMND_NAME)-$(WMND_VERSION).tar.gz
 WMND_URL=ftp://ftp.yuv.info/pub/wmnd/releases/$(WMND_TAR)
 
