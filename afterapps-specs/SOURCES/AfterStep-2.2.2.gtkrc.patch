@@ -1,0 +1,57 @@
+--- afterstep/base.in	2006-03-08 03:02:49.000000000 +1100
++++ afterstep/base.in	2006-05-30 10:44:44.000000000 +1000
+@@ -47,7 +47,8 @@
+ # comment this to enable KDE apps having same color scheme as AfterStep :
+ DisableKDEGlobalsTheming
+ 
+-# comment these to enable GTK apps using same color scheme as afterstep : 
++# uncomment these to enable GTK apps using same color scheme as afterstep
++# (will overwrite any existing file by that name. if you have any
++# pre-existing settings there, please add them to the templates)
+ gtkrcPath	~/.gtkrc_afterstep
+ gtkrc20Path	~/.gtkrc-2.0_afterstep
+-  
+diff -aur AfterStep-2.2.2.old/configure.h.in AfterStep-2.2.2/configure.h.in
+--- configure.h.in	2006-05-03 09:38:49.000000000 +1000
++++ configure.h.in	2006-05-30 10:23:22.000000000 +1000
+@@ -87,8 +87,6 @@
+ #define MENU_FILE	AFTER_NONCF "/startmenu"
+ #define GTKRC_TEMPLATE_FILE     "gtkrc_template"         /* gtkrc prototype */
+ #define GTKRC20_TEMPLATE_FILE   "gtkrc-2.0_template"     /* gtkrc prototype */
+-#define GTKRC_FILE      "~/.gtkrc"		         /* compiled and ready to use gtkrc */
+-#define GTKRC20_FILE    "~/.gtkrc-2.0"		         /* compiled and ready to use gtkrc */
+ #define KSCRC_TEMPLATE_FILE   "kcsrc_template"           /* KDE colourscheme prototype */
+ #define AS_KCSRC_FILE	"AfterStep.kcsrc"
+ #define KCSRC_FILE      AFTER_NONCF "/AfterStep.kcsrc"    /* compiled and ready to use kcsrc */
+diff -aur AfterStep-2.2.2.old/libAfterConf/Base.c AfterStep-2.2.2/libAfterConf/Base.c
+--- libAfterConf/Base.c	2006-02-16 10:13:54.000000000 +1100
++++ libAfterConf/Base.c	2006-05-30 10:25:06.000000000 +1000
+@@ -170,6 +170,12 @@
+ 		 case BASE_MYNAME_PATH_ID:
+ 			 set_string( &(config->myname_path), item.data.string );
+ 			 break;
++		 case BASE_GTKRC_PATH_ID:
++			 set_string( &(config->gtkrc_path), item.data.string );
++			 break;
++		 case BASE_GTKRC20_PATH_ID:
++			 set_string( &(config->gtkrc20_path), item.data.string );
++			 break;
+ 		 case BASE_DESKTOP_SIZE_ID:
+ 		 	 set_flags( config->set_flags, BASE_DESKTOP_SIZE_SET );
+ 			 config->desktop_size = item.data.geometry;
+diff -aur AfterStep-2.2.2.old/libAfterStep/asapp.c AfterStep-2.2.2/libAfterStep/asapp.c
+--- libAfterStep/asapp.c	2006-05-06 09:22:23.000000000 +1000
++++ libAfterStep/asapp.c	2006-05-30 10:24:20.000000000 +1000
+@@ -814,8 +814,9 @@
+ 	for( i = 0 ; i < ASTool_Count ; ++i )
+ 		e->tool_command[i] = as_get_default_tool(i);	 
+ 
+-	e->gtkrc_path = make_session_rc_file(Session, GTKRC_FILE);
+-  	e->gtkrc20_path = make_session_rc_file(Session, GTKRC20_FILE) ;
++	/* Make the default safe and non-destructive */
++	e->gtkrc_path = NULL;
++  	e->gtkrc20_path = NULL;
+ 
+ 	return e;
+ }
+
