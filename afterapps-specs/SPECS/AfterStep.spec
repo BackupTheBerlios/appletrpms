@@ -69,6 +69,7 @@ Source5: 	AfterStep.menumethod
 Source6: 	afterstep.desktop.xsessions
 Source7: 	afterstep.desktop.wm-properties
 Source8:	afterstep.fedora.README
+Patch0:		%{name}-%{version}.gtkrc.patch
 Distribution:	The AfterStep TEAM
 Packager:	Sean Dague <sean at dague dot net>
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
@@ -117,6 +118,7 @@ Requires: 	%{name}-libs = %{epoch}:%{version}
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch0
 
 %build
 CFLAGS=$RPM_OPT_FLAGS \
