@@ -46,7 +46,7 @@ APPLET_LIST += LIBICAL
 LIBWRASTER_NAME=libwraster
 LIBWRASTER_VERSION=0.80.2
 LIBWRASTER_TAR=WindowMaker-$(LIBWRASTER_VERSION).tar.gz
-LIBWRASTER_URL=ftp://ftp.windowmaker.info/pub/source/release/archive/$(LIBWRASTER_TAR)
+LIBWRASTER_URL=http://open-systems.ufl.edu/mirrors/gentoo/distfiles/$(LIBWRASTER_TAR)
 
 #APPLET_LIST += LIBWRASTER
 
