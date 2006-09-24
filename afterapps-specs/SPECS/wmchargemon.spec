@@ -1,3 +1,28 @@
+### BEGIN Distro Defines
+%define mdk  %(if [ -e /etc/mandrake-release ]; then echo 1; else echo 0; fi;)
+%{?_with_mdk:   %{expand: %%global mdk 1}}
+
+%define fedora  %(if [ -e /etc/fedora-release ]; then echo 1; else echo 0; fi;)
+%{?_with_fedora:   %{expand: %%global fedora 1}}
+
+%define suse %(if [ -e /etc/SuSE-release ]; then echo 1; else echo 0; fi;)
+%{?_with_suse:   %{expand: %%global suse 1}}
+
+%define generic 1
+
+%if %{mdk}
+  %define generic 0
+%endif
+
+%if %{fedora}
+  %define generic 0
+%endif
+
+%if %{suse}
+  %define generic 0
+%endif
+### END Distro Definitions
+
 %define prefix	/usr
 %define version 0.2
 %define release 1
@@ -8,10 +33,18 @@ Name:		%name
 Version:	%version
 Release:	%release
 License:	GPL
-Group:		Amusements/Games
+Group:		AfterStep/Applets
 Source0:	http://dockapps.org/download.php/id/694/%{name}-%{version}.tar.gz
 URL:		http://dockapps.org/file.php/id/319
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+
+%if %{mdk}
+Requires: libdockapp0
+%endif
+
+%if %{fedora}
+Requires: libdockapp
+%endif
 
 %description
 WMChargemon is a simple dockapp showing, in a clear way, the
