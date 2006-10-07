@@ -1,7 +1,7 @@
 %define prefix /usr
 %define name aswvdial
 %define version 1.7
-%define release 4
+%define release 5
 
 Summary: ASwvdial is a dock/wharf/slit app for wvdial
 Name: %name
@@ -10,7 +10,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://www.ma-scha.de/
-Source0: %{name}-%{version}.tar.bz2
+Source0: http://www.ma-scha.de/download/%{name}-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: libxml-devel
 Requires: libxml wvdial
@@ -44,6 +44,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 07 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.7-5
+- updated URL and Source info.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.7-4
 - changed prefix path to /usr.
 
@@ -55,6 +58,3 @@ rm -rf $RPM_BUILD_ROOT
 
 * Fri Mar 04 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.7-1
 - Initial build.
-
-
-

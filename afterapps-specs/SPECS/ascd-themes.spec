@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name ascd-themes
 %define version 1.0
-%define release 4
+%define release 5
 
 Summary: Themes for ascd, the AfterStep CD player.
 Name: %name
@@ -13,9 +13,9 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://worldserver.oleane.com/rsn/ascd-en.html
-Source0: ascd-0.13pr6-themes.tgz
-Source1: dwing.tgz
-Source2: lcd.tar.gz
+Source0: http://worldserver.oleane.com/rsn/Archives/ascd-0.13pr6-themes.tgz
+Source1: http://worldserver.oleane.com/rsn/Archives/dwing.tgz
+Source2: http://worldserver.oleane.com/rsn/Archives/lcd.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires: ascd
 
@@ -56,6 +56,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/ascd/Themes/*/*
 
 %changelog
+* Sat Oct 07 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.0-5
+- updated URL and Source info.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.0-4
 - changed prefix path to /usr.
 

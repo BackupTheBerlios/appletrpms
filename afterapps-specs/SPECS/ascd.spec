@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name ascd
 %define version 0.13.2
-%define release 5
+%define release 6
 
 Summary: Audio CD player
 Name: %name
@@ -13,7 +13,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://worldserver.oleane.com/rsn/ascd-en.html
-Source0: %{name}-%{version}.tar.gz
+Source0: http://tigr.net/afterstep/download/%{name}/%{name}-%{version}.tar.gz
 Patch0: ascd-0.13.2.a.patch
 Patch1: ascd-0.13.2.b.patch
 Patch2: ascd-0.13.2.c.patch
@@ -72,6 +72,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc README ascd/doc/* ascd/themes/themes-manual.ps
 
 %changelog
+* Sat Oct 07 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.13.2-6
+- updated URL and Source info.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.13.2-5
 - changed prefix path to /usr.
 

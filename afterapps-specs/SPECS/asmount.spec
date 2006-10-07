@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name asmount
 %define version 1.0.0
-%define release 2
+%define release 3
 
 Summary: AfterStep mounter
 Name: %name
@@ -12,8 +12,8 @@ Version: %version
 Release: %release
 License: GPL
 Group: AfterStep/Applets
-URL: http://afterstep.org
-Source0: %{name}-%{version}.tar.gz
+URL: http://tigr.net/afterstep/view.php?applet=asmount/data
+Source0: http://tigr.net/afterstep/download/%{name}/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -47,11 +47,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 07 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.0.0-3
+- updated URL and Source info.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.0.0-2
 - changed prefix path to /usr.
 
 * Fri Feb 18 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.0.0-1
 - Initial build.
-
-
-

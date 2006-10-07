@@ -1,7 +1,7 @@
 %define prefix /usr
 %define name asmodem
 %define version 0.6
-%define release 4
+%define release 5
 
 Summary: Modem monitor
 Name: %name
@@ -9,8 +9,8 @@ Version: %version
 Release: %release
 License: GPL
 Group: AfterStep/Applets
-URL: http://afterstep.org
-Source0: %{name}-%{version}-1.tar.gz
+URL: http://tigr.net/afterstep/view.php?applet=asmodem/data
+Source0: http://tigr.net/afterstep/download/%{name}/%{name}-%{version}-1.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -43,6 +43,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 07 2006 J. Krebs <rpm_speedy@yahoo.com> 0.6-5
+- updated URL and Source info.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> 0.6-4
 - changed prefix path to /usr.
 

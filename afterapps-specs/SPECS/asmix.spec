@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name asmix
 %define version 1.5
-%define release 2
+%define release 3
 
 Summary: Sound volume knob
 Name: %name
@@ -12,8 +12,8 @@ Version: %version
 Release: %release
 License: GPL
 Group: AfterStep/Applets
-URL: http://afterstep.org
-Source0: %{name}-%{version}.tar.gz
+URL: http://tigr.net/afterstep/view.php?applet=asmix/data
+Source0: http://tigr.net/afterstep/download/%{name}/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -48,6 +48,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 07 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.5-3
+- updated URL and Source info.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.5-2
 - changed prefix path to /usr.
 

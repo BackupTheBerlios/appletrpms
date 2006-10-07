@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name asmail
 %define version 1.8
-%define release 2
+%define release 3
 
 Summary: Afterstep Mail Applet
 Name: %name
@@ -12,8 +12,8 @@ Version: %version
 Release: %release
 License: GPL
 Group: AfterStep/Applets
-URL: http://afterstep.org
-Source0: %{name}-%{version}.tar.gz
+URL: http://tigr.net/afterstep/view.php?applet=asmail/data
+Source0: http://tigr.net/afterstep/download/%{name}/%{name}-%{version}.tar.gz
 Packager: Sean Dague <sean@dague.net>
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
@@ -69,6 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 07 2006 J. Krebs <rpm_speedy@yahoo.com> 1.8-3
+- updated URL and Source info.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> 1.8-2
 - changed prefix path to /usr.
 
@@ -78,7 +81,5 @@ rm -rf $RPM_BUILD_ROOT
 * Sat Feb 26 2005 Sean Dague <sean@dague.net> 1.7-1
 - update to 1.7
 
-* Thu Nov 13 2003 Sean Dague <sean@dague.net> 1.6 -1
+* Thu Nov 13 2003 Sean Dague <sean@dague.net> 1.6-1
 - Intial build
-
-

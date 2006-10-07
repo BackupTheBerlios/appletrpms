@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name asclock
 %define version 2.0.12
-%define release 4
+%define release 5
 
 Summary: Clock Applet
 Name: %name
@@ -12,8 +12,8 @@ Version: %version
 Release: %release
 License: GPL
 Group: AfterStep/Applets
-URL: http://afterstep.org
-Source0: %{name}-%{version}.tar.gz
+URL: http://tigr.net/afterstep/view.php?applet=asclock/data
+Source0: http://tigr.net/afterstep/download/%{name}/%{name}-%{version}.tar.gz
 Source1: %{name}-%{version}.config
 Patch0: %{name}-%{version}.xpm.path.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -55,6 +55,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 07 2006 J. Krebs <rpm_speedy@yahoo.com> - 2.0.12-5
+- updated URL and Source info.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 2.0.12-4
 - changed prefix path to /usr.
 

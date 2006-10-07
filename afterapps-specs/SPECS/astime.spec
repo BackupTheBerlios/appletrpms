@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name astime
 %define version 2.8
-%define release 3
+%define release 4
 
 Summary: An analog clock
 Name: %name
@@ -12,8 +12,8 @@ Version: %version
 Release: %release
 License: GPL
 Group: AfterStep/Applets
-URL: http://afterstep.org
-Source0: %{name}-%{version}.tar.gz
+URL: http://tigr.net/afterstep/view.php?applet=astime/data
+Source0: http://tigr.net/afterstep/download/%{name}/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -48,6 +48,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 07 2006 J. Krebs <rpm_speedy@yahoo.com> - 2.8-4
+- updated URL and Source info.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 2.8-3
 - changed prefix path to /usr.
 
