@@ -34,7 +34,7 @@
 %define prefix /usr
 %define name peksystray
 %define version 0.3.0
-%define release 4
+%define release 5
 
 Summary: peksystray is a dockable systray.
 Name: %name
@@ -42,8 +42,8 @@ Version: %version
 Release: %release
 License: GPL
 Group: AfterStep/Applets
-URL: http://www.yuv.info/wmnd/
-Source0: %{name}-%{version}.tar.gz
+URL: http://sourceforge.net/projects/peksystray/
+Source0: http://easynews.dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -80,6 +80,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 07 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.3.0-5
+- updated URL and Source info.
+
 * Wed May 25 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.3.0-4
 - changed to build with FC5 (X11R7).
 
