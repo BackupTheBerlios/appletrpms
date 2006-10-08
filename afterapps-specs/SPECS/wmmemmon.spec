@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name wmmemmon
 %define version 1.0.2pre2
-%define release 4
+%define release 5
 
 Summary: WMMemMon - A dockapp to monitor memory/swap usages
 Name: %name
@@ -12,8 +12,8 @@ Version: %version
 Release: %release
 License: GPL
 Group: AfterStep/Applets
-URL: http://tnemeth.free.fr/projets/dockapps.html
-Source0: %{name}-%{version}.tar.gz
+URL: http://seiichisato.jp/dockapps/
+Source0: http://seiichisato.jp/dockapps/src/%{name}-%{version}.tar.gz
 Patch0: wmmemmon-1.0.2-main.c.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}pre2-%{release}-buildroot
 
@@ -54,6 +54,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Oct 07 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.0.2pre2-5
+- updated URL and Source info.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.0.2pre2-4
 - changed prefix path to /usr.
 
