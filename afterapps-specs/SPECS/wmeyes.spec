@@ -4,13 +4,13 @@
 %define _mandir %{_datadir}/man
 %define name wmeyes
 %define version 1.2
-%define release 2
+%define release 3
 
 Summary: wmeyes is a dockapp with moving eyes that follow mouse movement
 Name: %name
 Version: %version
 Release: %release
-License: GPL
+License: MIT
 Group: AfterStep/Applets
 URL: http://www.bstern.org/wmeyes/
 Source0: %{name}-%{version}.tar.gz
@@ -45,11 +45,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sun Sep 08 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.2-3
+- changed License line to reflect MIT.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.2-2
 - changed prefix path to /usr.
 
 * Thu Mar 24 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.2-1
 - Initial build.
-
-
-

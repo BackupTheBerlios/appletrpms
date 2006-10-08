@@ -42,7 +42,7 @@ Summary:	DockApp Making Standard Library
 Name:		%name
 Version:	%version
 Release:	%release
-License:	GPL
+License:	CustomOpenSource
 Group:		X11/Libraries
 Source0:	libdockapp-%{version}.tar.bz2
 URL:		http://solfertje.student.utwente.nl/~dalroi/libdockapp/
