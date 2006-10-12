@@ -23,7 +23,7 @@
 
 %define prefix	/usr
 %define version 0.6.1
-%define release 3
+%define release 4
 
 %if %{mdk}
 %define name	libdockapp0
@@ -42,9 +42,9 @@ Summary:	DockApp Making Standard Library
 Name:		%name
 Version:	%version
 Release:	%release
-License:	CustomOpenSource
+License:	Open Source
 Group:		X11/Libraries
-Source0:	libdockapp-%{version}.tar.bz2
+Source0:	http://solfertje.student.utwente.nl/~dalroi/libdockapp/files/libdockapp-%{version}.tar.bz2
 URL:		http://solfertje.student.utwente.nl/~dalroi/libdockapp/
 BuildRequires:	autoconf automake libtool
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -105,6 +105,9 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/include/*
 
 %changelog
+* Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> 0.6.1-4
+- updated license, Source line.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> 0.6.1-3
 - changed prefix path to /usr.
 

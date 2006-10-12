@@ -21,24 +21,25 @@
 
 %if %{fedora}
   %define generic 0
-  %define fcgcctest $(grep release /etc/fedora-release | cut -d ' ' -f4)
-  %define fedoragcc4 %(if [ %fcgcctest -ge 4 ]; then echo 1; else echo 0; fi;)
+  %define fcver $(grep release /etc/fedora-release | cut -d ' ' -f4)
+  %define fedora5 %(if [ %fcver -ge 5 ]; then echo 1; else echo 0; fi;)
+  %{?_with_fedora5:   %{expand: %%global fedora5 1}}
+  %define fedora4 %(if [ %fcver -le 4 ]; then echo 1; else echo 0; fi;)
+  %{?_with_fedora4:   %{expand: %%global fedora4 1}}  
+  %define fedoragcc4 %(if [ %fcver -ge 4 ]; then echo 1; else echo 0; fi;)
   %{?_with_fedoragcc4:   %{expand: %%global fedoragcc4 1}}
 %endif
 
-%if %{suse}
-  %define generic 0
-  %define susegcctest $(grep VERSION /etc/SuSE-release | cut -d ' ' -f3)
-  %define susegcc4 %(if [ %susegcctest -ge 10.0 ]; then echo 1; else echo 0; fi;)
-  %{?_with_susegcc4:   %{expand: %%global susegcc4 1}}
-%endif
+#%if %{suse}
+#  %define generic 0
+#%endif
 
 %define ismultiarch 0
 %{?multiarch:%define ismultiarch 1}
 ### END Distro Definitions
 
 %define	name AfterStep
-%define	version	2.2.2
+%define	version	2.2.3
 %define release 1
 
 %define epoch 20
@@ -69,11 +70,11 @@ Source5: 	AfterStep.menumethod
 Source6: 	afterstep.desktop.xsessions
 Source7: 	afterstep.desktop.wm-properties
 Source8:	afterstep.fedora.README
-Patch0:		%{name}-%{version}.gtkrc.patch
 Distribution:	The AfterStep TEAM
 Packager:	Sean Dague <sean at dague dot net>
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 Requires:	%{name}-libs = %{epoch}:%{version}
+Obsoletes:	libAfterImage
 
 %description
   AfterStep is a Window Manager for X which started by emulating the
@@ -118,7 +119,6 @@ Requires: 	%{name}-libs = %{epoch}:%{version}
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch0
 
 %build
 CFLAGS=$RPM_OPT_FLAGS \
@@ -126,6 +126,7 @@ CFLAGS=$RPM_OPT_FLAGS \
 	--prefix=%{_prefix}                       \
 	--mandir=%{_mandir}                       \
 	--enable-sharedlibs                       \
+	--enable-gdb                              \
 	--disable-staticlibs			  \
 	--enable-ascp                             \
 	--enable-i18n                             \
@@ -148,7 +149,7 @@ rm -f $RPM_BUILD_ROOT%{_bindir}/{sessreg,xpmroot}
 #   cp -a $f/$f.so* %{buildroot}%{_libdir}
 #done
 
-%if %{fedora}
+%if %{fedora4}
 #fedora-config prep
 cp %{SOURCE8} .
 install -d $RPM_BUILD_ROOT%{gdesk}/switchdesk/
@@ -163,6 +164,14 @@ rm -f %{buildroot}%{gdesk}/gnome/wm-properties/AfterStep.desktop
 rm -f %{buildroot}%{_datadir}/xsessions/AfterStep.desktop
 #rmdir %{buildroot}%{_datadir}/xsessions/
 %endif
+
+%if %{fedora5}
+install -d %{buildroot}%{gdesk}/xsessions/
+install -m 0644 %{SOURCE6} %{buildroot}%{gdesk}/xsessions/afterstep.desktop
+rm -f %{buildroot}%{gdesk}/gnome/wm-properties/AfterStep.desktop
+rm -f %{buildroot}%{_datadir}/xsessions/AfterStep.desktop
+%endif
+
 %if %{mdk}
 # mandrake menu items
 install -d $RPM_BUILD_ROOT/etc/X11/wmsession.d/
@@ -172,6 +181,7 @@ install -m 0644 %{SOURCE4} $RPM_BUILD_ROOT/usr/lib/menu/afterstep
 install -d $RPM_BUILD_ROOT/etc/menu-methods/
 install -m 0755 %{SOURCE5} $RPM_BUILD_ROOT/etc/menu-methods/AfterStep
 %endif
+
 %if %{ismultiarch}
 #mkdir -p %{buildroot}%{multiarch_bindir}
 %multiarch_binaries %{buildroot}%{_bindir}/afterimage-config
@@ -198,7 +208,10 @@ rm -rf %{buildroot}
 %{_datadir}/xsessions/AfterStep.desktop
 %config /usr/lib/menu/afterstep/AfterStep.menu
 %endif
-%if %{fedora}
+%if %{fedora5}
+%{gdesk}/xsessions/afterstep.desktop
+%endif
+%if %{fedora4}
 /etc/X11/gdm/Sessions/afterstep
 %{gdesk}/switchdesk/Xclients.afterstep
 %{gdesk}/xsessions/afterstep.desktop
@@ -252,6 +265,9 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
+* Tue Oct 11 2006 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.3-1
+- new version.
+
 * Wed May 25 2006 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.2-1
 - new version.
 
