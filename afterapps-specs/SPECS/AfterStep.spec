@@ -40,7 +40,7 @@
 
 %define	name AfterStep
 %define	version	2.2.3
-%define release 1
+%define release 2
 
 %define epoch 20
 
@@ -70,6 +70,13 @@ Source5: 	AfterStep.menumethod
 Source6: 	afterstep.desktop.xsessions
 Source7: 	afterstep.desktop.wm-properties
 Source8:	afterstep.fedora.README
+Source9:	AfterStep-2.2.3-look.Smooth-data.tar.gz
+Patch0:		AfterStep-2.2.3-look.Smooth-asview.c.patch
+Patch1:		AfterStep-2.2.3-look.Smooth-mystyle.c.patch
+Patch2:		AfterStep-2.2.3-look.Smooth-transform.c.patch
+Patch3:		AfterStep-2.2.3-look.Smooth-ximage.c.patch
+Patch4:		AfterStep-2.2.3-xinerama-screen.c.patch
+Patch5:		AfterStep-2.2.3-xinerama-WinTabs.c.patch
 Distribution:	The AfterStep TEAM
 Packager:	Sean Dague <sean at dague dot net>
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
@@ -119,6 +126,14 @@ Requires: 	%{name}-libs = %{epoch}:%{version}
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch0
+%patch1
+%patch2
+%patch3
+%patch4
+%patch5
+
+tar xvf %{SOURCE9}
 
 %build
 CFLAGS=$RPM_OPT_FLAGS \
@@ -126,7 +141,6 @@ CFLAGS=$RPM_OPT_FLAGS \
 	--prefix=%{_prefix}                       \
 	--mandir=%{_mandir}                       \
 	--enable-sharedlibs                       \
-	--enable-gdb                              \
 	--disable-staticlibs			  \
 	--enable-ascp                             \
 	--enable-i18n                             \
@@ -265,6 +279,9 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.3-2
+- added Smooth look ans support for xinerama, removed -gdb configure flag.
+
 * Tue Oct 11 2006 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.3-1
 - new version.
 

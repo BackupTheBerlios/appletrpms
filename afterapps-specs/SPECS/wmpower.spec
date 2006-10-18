@@ -1,7 +1,7 @@
 %define prefix /usr
 %define name wmpower
 %define version 0.4.2
-%define release 2
+%define release 3
 
 Summary: wmpower is a dockapp to see the power management of a laptop 
 Name: %name
@@ -10,7 +10,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://wmpower.sourceforge.net/
-Source0: %{name}-%{version}.tar.bz2
+Source0: http://easynews.dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -39,6 +39,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.4.2-3
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.4.2-2
 - changed prefix path to /usr.
 
@@ -47,6 +50,3 @@ rm -rf $RPM_BUILD_ROOT
 
 * Sat Feb 26 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.4.1-1
 - Initial build.
-
-
-

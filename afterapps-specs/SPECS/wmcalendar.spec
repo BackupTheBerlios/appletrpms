@@ -30,7 +30,7 @@
 %define _mandir %{_datadir}/man
 %define name wmcalendar
 %define version 0.5.0
-%define release 4
+%define release 5
 
 Summary: wmCalendar is a calendar dockapp.
 Name: %name
@@ -39,7 +39,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://sourceforge.net/projects/wmcalendar/
-Source0: %{name}-%{version}.tar.gz
+Source0: http://easynews.dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
 Source1: %{name}.ogo2ical
 Patch0: %{name}-%{version}.wharf.patch
 Patch1: %{name}-%{version}-mallocfix.patch
@@ -99,6 +99,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.5.0-5
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.5.0-4
 - changed prefix path to /usr.
 

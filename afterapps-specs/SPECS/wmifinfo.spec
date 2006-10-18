@@ -1,7 +1,7 @@
 %define prefix /usr
 %define name wmifinfo
 %define version 0.09
-%define release 2
+%define release 3
 
 Summary: wmifinfo shows basic network info for all available interfaces
 Name: %name
@@ -10,7 +10,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://www.zevv.nl/wmifinfo/
-Source0: %{name}-%{version}.tgz
+Source0: http://www.zevv.nl/wmifinfo/%{name}-%{version}.tgz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -42,11 +42,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.09-3
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.09-2
 - changed prefix path to /usr.
 
 * Mon Mar 28 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.09-1
 - Initial build.
-
-
-

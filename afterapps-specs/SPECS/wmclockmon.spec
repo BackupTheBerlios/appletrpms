@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name wmclockmon
 %define version 0.8.1
-%define release 2
+%define release 3
 
 Summary: digital clock with 7 different styles in either LCD or LED style
 Name: %name
@@ -13,7 +13,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://tnemeth.free.fr/projets/dockapps.html
-Source0: %{name}-%{version}.tar.gz
+Source0: http://tnemeth.free.fr/projets/programmes/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -54,6 +54,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc doc/sample*.wmclockmonrc AUTHORS BUGS COPYING ChangeLog INSTALL NEWS README THANKS TODO
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.8.1-3
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.8.1-2
 - changed prefix path to /usr.
 

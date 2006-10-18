@@ -1,7 +1,7 @@
 %define prefix /usr
 %define name wmmemload
 %define version 0.1.6
-%define release 2
+%define release 3
 
 Summary: memory monitor dockapp which displays free memory and swap space
 Name: %name
@@ -10,7 +10,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://www.markstaggs.net/cgi-bin/index.pl?&page=wmmemload
-Source0: %{name}-%{version}.tar.gz
+Source0: http://www.markstaggs.net/wmmemload/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -41,6 +41,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.1.6-3
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.1.6-2
 - changed prefix path to /usr.
 

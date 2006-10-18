@@ -1,7 +1,7 @@
 %define prefix /usr
 %define name wmppp
 %define version 1.3.0
-%define release 2
+%define release 3
 
 Summary: wmppp provides a PPP activator and network load monitor
 Name: %name
@@ -10,7 +10,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://www.cs.mun.ca/~gstarkes/wmaker/dockapps/net.html
-Source0: %{name}-%{version}.tar.gz
+Source0: http://www.cs.mun.ca/~gstarkes/wmaker/dockapps/files/%{name}-%{version}.tar.gz
 Patch0: wmppp-1.3.0-hispeed.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires: ppp
@@ -69,11 +69,11 @@ rm -rf $RPM_BUILD_ROOT
 %doc wmppp/*.wmppprc wmppp/example-scripts
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.3.0-3
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.3.0-2
 - changed prefix path to /usr.
 
 * Sat Dec 03 2005 J. Krebs <rpm_speedy@yahoo.com> - 1.3.0-1
 - Initial build.
-
-
-

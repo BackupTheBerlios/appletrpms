@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name wmix
 %define version 3.2
-%define release 2
+%define release 3
 
 Summary: dockapp mixer utilizing the OSS mixer API
 Name: %name
@@ -13,7 +13,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://www.dockapps.com/file.php/id/58
-Source0: %{name}-%{version}.tar.gz
+Source0: http://www.dockapps.com/download.php/id/528/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -50,11 +50,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 3.2-3
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 3.2-2
 - changed prefix path to /usr.
 
 * Fri Mar 04 2005 J. Krebs <rpm_speedy@yahoo.com> - 3.2-1
 - Initial build.
-
-
-

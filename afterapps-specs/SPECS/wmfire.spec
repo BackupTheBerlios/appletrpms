@@ -30,7 +30,7 @@
 %define _mandir %{_datadir}/man
 %define name wmfire
 %define version 1.2.3
-%define release 2
+%define release 3
 
 Summary: wmfire is a configurable cpu, mem, or network monitor.
 Name: %name
@@ -39,7 +39,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://www.swanson.ukfsn.org/wmfire/
-Source0: %{name}-%{version}.tar.gz
+Source0: http://www.swanson.ukfsn.org/wmfire/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %if %{fedora}
@@ -87,6 +87,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> 1.2.3-3
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> 1.2.3-2
 - changed prefix path to /usr.
 

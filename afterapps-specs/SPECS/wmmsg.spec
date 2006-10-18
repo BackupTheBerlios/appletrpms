@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name wmmsg
 %define version 1.0.1
-%define release 2
+%define release 3
 
 Summary: dockapp that notifies of incoming messages and events
 Name: %name
@@ -13,7 +13,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://www.dockapps.com/file.php/id/169
-Source0: %{name}-%{version}.tar.gz
+Source0: http://dockapps.org/download.php/id/518/%{name}-%{version}.tar.gz
 Source1: %{name}-sounds.tar.gz
 Source2: wmmsgrc-example
 Source3: %{name}-icons.tar.gz
@@ -69,6 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog INSTALL README plugins/* wmmsgrc-example
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.0.1-3
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.0.1-2
 - changed prefix path to /usr.
 
