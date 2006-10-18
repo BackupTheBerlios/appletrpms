@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name speyes
 %define version 1.2.0
-%define release 2
+%define release 3
 
 Summary: South Park-themed wmeyes
 Name: %name
@@ -13,7 +13,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://okb-1.org/speyes/speyes.html
-Source0: %{name}-%{version}.tar.gz
+Source0: http://okb-1.org/speyes/%{name}-%{version}.tar.gz
 Source1: %{name}.man
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
@@ -45,6 +45,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.2.0-3
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.2.0-2
 - changed prefix path to /usr.
 

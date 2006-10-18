@@ -1,7 +1,7 @@
 %define prefix /usr
 %define name Mixer.app
 %define version 1.8.0
-%define release as4
+%define release as5
 
 Summary: WM applet sound mixer based-on Rob Malda's asmixer
 Name: %name
@@ -10,7 +10,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://www.fukt.bth.se/~per/mixer
-Source0: %{name}-%{version}.tar.gz
+Source0: http://www.fukt.bth.se/~per/mixer/%{name}-%{version}.tar.gz
 Patch0: Mixer.app-1.8.0.as.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
@@ -58,6 +58,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.8.0-as5
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.8.0-as4
 - changed prefix path to /usr.
 

@@ -1,7 +1,7 @@
 %define prefix /usr
 %define name wmcalc
 %define version 0.4
-%define release 3
+%define release 4
 
 Summary: Wmcalc is an applet calculator.
 Name: %name
@@ -10,7 +10,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://www.dockapps.com/
-Source0: %{name}-%{version}.tar.gz
+Source0: http://gentoo.mirrors.easynews.com/linux/gentoo/distfiles/%{name}-%{version}.tar.gz
 Patch0: %{name}-%{version}.Makefile.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
@@ -44,6 +44,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.4-4
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.4-3
 - changed prefix path to /usr.
 

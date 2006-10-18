@@ -26,7 +26,7 @@
 %define prefix /usr
 %define name bubblemon-dockapp
 %define version 1.46
-%define release 3
+%define release 4
 
 Summary: system monitoring dockapp based-on GNOME BubbleMon.
 Name: %name
@@ -35,7 +35,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://www.ne.jp/asahi/linux/timecop/
-Source0: %{name}-%{version}.tar.gz
+Source0: http://www.ne.jp/asahi/linux/timecop/software/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 %if %{mdk}
 Requires: libgtk+1.2-devel
@@ -82,6 +82,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc ChangeLog INSTALL README SUPPORTED_SYSTEMS doc/COPYING doc/Xdefaults.sample
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.46-4
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.46-3
 - changed prefix path to /usr.
 

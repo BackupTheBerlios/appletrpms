@@ -1,7 +1,7 @@
 %define prefix /usr
 %define name docker
 %define version 1.5
-%define release 2
+%define release 3
 
 Summary: Docking System Tray
 Name: %name
@@ -10,7 +10,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://icculus.org/openbox/2/docker/
-Source0: %{name}-%{version}.tar.gz
+Source0: http://icculus.org/openbox/2/%{name}/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -40,6 +40,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.5-3
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.5-2
 - changed prefix path to /usr.
 

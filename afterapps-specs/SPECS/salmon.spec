@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name salmon
 %define version 1.2.2
-%define release 2
+%define release 3
 
 Summary: Still Another Load MONitor
 Name: %name
@@ -13,7 +13,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://www.mthoodcards.com/cgi-bin/index.py?grania
-Source0: %{name}-%{version}.tar.gz
+Source0: http://tigr.net/afterstep/download/salmon/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -51,6 +51,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGES INSTALL LICENSE README COPYING
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-3
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-2
 - changed prefix path to /usr.
 

@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name WMBlueCPU
 %define version 0.6
-%define release 2
+%define release 3
 
 Summary: WMBlueCPU is a cpu monitor.
 Name: %name
@@ -13,7 +13,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://sheepmakers.ath.cx/utils/wmbluecpu/
-Source0: %{name}.tar.gz
+Source0: http://sheepmakers.ath.cx/utils/wmbluecpu/%{name}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -47,6 +47,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.6-3
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.6-2
 - changed prefix path to /usr.
 

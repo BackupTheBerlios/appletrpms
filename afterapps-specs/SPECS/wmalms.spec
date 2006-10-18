@@ -1,7 +1,7 @@
 %define prefix /usr
 %define name wmalms
 %define version 1.1.1
-%define release 2
+%define release 3
 
 Summary: Applet to manage sensor data: temperature, fan speed, voltage.
 Name: %name
@@ -10,7 +10,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://www.geocities.com/wmalms/
-Source0: %{name}-%{version}.tar.gz
+Source0: http://www.geocities.com/%{name}/%{name}-%{version}.tar.gz
 Patch0: wmalms-1.1.1-prompt-bypass.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: lm_sensors-devel >= 2.0
@@ -47,6 +47,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc COPYING README manual.html
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.1.1-3
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.1.1-2
 - changed prefix path to /usr.
 

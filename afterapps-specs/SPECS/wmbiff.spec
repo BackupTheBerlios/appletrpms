@@ -5,7 +5,7 @@
 %define _libdir %{__prefix}/lib
 %define name wmbiff
 %define version 0.4.27
-%define release 2
+%define release 3
 
 Summary: A dockable/swallowed mail notifier
 Name: %name
@@ -14,7 +14,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://wmbiff.sf.net
-Source0: %{name}-%{version}.tar.gz
+Source0: http://internap.dl.sourceforge.net/sourceforge/wmbiff/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires: ruby
 
@@ -55,6 +55,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog COPYING FAQ INSTALL NEWS README* TODO
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> 0.4.27-3
+- Updated Source path.
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> 0.4.27-2
 - changed prefix path to /usr.
 * Wed Nov 09 2005 J. Krebs <rpm_speedy@yahoo.com> 0.4.27-1
