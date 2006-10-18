@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name wmupmon
 %define version 0.1.3
-%define release 2
+%define release 3
 
 Summary: DockApp that displays your system uptime in realtime
 Name: %name
@@ -13,7 +13,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://j-z-s.com/projects/index.php?project=wmupmon
-Source0: %{name}-%{version}.tar.gz
+Source0: http://j-z-s.com/projects/downloads/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -43,6 +43,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.1.3-3
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.1.3-2
 - changed prefix path to /usr.
 

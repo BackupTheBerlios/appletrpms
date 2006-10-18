@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name wmtemp
 %define version 0.0.5
-%define release 2
+%define release 3
 
 Summary: wmtemp displays CPU & SYS temps in "LCD look" via lm_sensors.
 Name: %name
@@ -13,7 +13,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://gnodde.org/wmtemp/
-Source0: %{name}-%{version}.tar.gz
+Source0: http://open-systems.ufl.edu/mirrors/gentoo/distfiles/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires: lm_sensors
 
@@ -46,11 +46,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.0.5-3
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.0.5-2
 - changed prefix path to /usr.
 
 * Sat Jan 14 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.0.5-1
 - Initial build.
-
-
-

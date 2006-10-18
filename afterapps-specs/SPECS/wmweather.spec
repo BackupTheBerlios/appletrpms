@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name wmweather
 %define version 2.4.3
-%define release 2
+%define release 3
 
 Summary: wmweather is a dockapp that displays the current weather.
 Name: %name
@@ -13,7 +13,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://www.godisch.de/debian/wmweather/
-Source0: %{name}-%{version}.tar.gz
+Source0: http://www.godisch.de/debian/%{name}/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: curl-devel
 Requires: curl
@@ -52,6 +52,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGES COPYING README src/wmweather.conf
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 2.4.3-3
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 2.4.3-2
 - changed prefix path to /usr.
 

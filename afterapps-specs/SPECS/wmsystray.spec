@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name wmsystray
 %define version 0.1.1
-%define release 3
+%define release 4
 
 Summary: wmsystray is a dockable systray.
 Name: %name
@@ -13,7 +13,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://kai.vm.bytemark.co.uk/~arashi/wmsystray/
-Source0: %{name}-%{version}.tar.bz2
+Source0: http://kai.vm.bytemark.co.uk/~arashi/wmsystray/release/%{name}-%{version}.tar.bz2
 Patch1: %{name}-fix-warnings.diff
 Patch2: %{name}-optflags.diff
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -52,6 +52,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.1.1-4
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.1.1-3
 - changed prefix path to /usr.
 

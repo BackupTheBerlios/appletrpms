@@ -38,7 +38,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://wmwifi.digitalssg.net/
-Source0: %{name}-%{version}.tar.gz
+Source0: http://digitalssg.net/debian/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %if %{mdk}

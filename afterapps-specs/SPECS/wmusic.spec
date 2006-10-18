@@ -1,7 +1,7 @@
 %define prefix /usr
 %define name wmusic
 %define version 1.5.0
-%define release 2
+%define release 3
 
 Summary: Windowmaker dockapp that remote controls xmms.
 Name: %name
@@ -10,7 +10,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://home.jtan.com/~john/wmusic/
-Source0: %{name}-%{version}.tar.gz
+Source0: http://home.jtan.com/~john/wmusic/%{name}-%{version}.tar.gz
 Requires:   xmms >= 1.0.0
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: xmms-devel
@@ -54,6 +54,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.5.0-3
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.5.0-2
 - changed prefix path to /usr.
 

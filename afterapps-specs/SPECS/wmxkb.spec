@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name wmxkb
 %define version 1.2.2
-%define release 4
+%define release 5
 
 Summary: A dockable/swallowed XKB groups indicator and switch
 Name: %name
@@ -13,7 +13,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://www.geocities.com/wmalms/#WMXKB
-Source0: %{name}-%{version}.tar.gz
+Source0: http://www.geocities.com/wmalms/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -52,6 +52,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-5
+- Updated Source path.
+
 * Mon Mar 20 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-4
 - changed prefix pat to /usr.
 

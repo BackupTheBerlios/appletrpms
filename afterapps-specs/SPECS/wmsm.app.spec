@@ -1,7 +1,7 @@
 %define prefix /usr
 %define name wmsm.app
 %define version 0.2.1
-%define release 2
+%define release 3
 
 Summary: WindowMaker System Monitor
 Name: %name
@@ -10,7 +10,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://www.unetz.com/schaepe/DOCKAPPS/dockapps.html
-Source0: %{name}-%{version}.tar.gz
+Source0: http://www.unetz.com/schaepe/DOCKAPPS/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -46,6 +46,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.2.1-3
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.2.1-2
 - changed prefix path to /usr.
 

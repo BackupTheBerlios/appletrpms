@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name wmtz
 %define version 0.7
-%define release 2
+%define release 3
 
 Summary: wmtz displays the local time from different time zones.
 Name: %name
@@ -13,7 +13,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://www.geocities.com/jl1n/wmtz/wmtz.html
-Source0: %{name}-%{version}.tar.gz
+Source0: http://www.geocities.com/jl1n/%{name}/%{name}-%{version}.tar.gz
 Patch0: %{name}-%{version}.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
@@ -57,11 +57,11 @@ rm -rf $RPM_BUILD_ROOT
 %doc BUGS CHANGES COPYING INSTALL README wmtz/wmtzrc
 
 %changelog
+* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.7-3
+- Updated Source path.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.7-2
 - changed prefix path to /usr.
 
 * Sat Dec 03 2005 J. Krebs <rpm_speedy@yahoo.com> - 0.7-1
 - Initial build.
-
-
-
