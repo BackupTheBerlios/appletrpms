@@ -77,6 +77,12 @@ Patch2:		AfterStep-2.2.3-look.Smooth-transform.c.patch
 Patch3:		AfterStep-2.2.3-look.Smooth-ximage.c.patch
 Patch4:		AfterStep-2.2.3-xinerama-screen.c.patch
 Patch5:		AfterStep-2.2.3-xinerama-WinTabs.c.patch
+Patch6:		AfterStep-2.2.3-System-Menu-asapp.c.patch
+Patch7:		AfterStep-2.2.3-System-Menu-asapp.h.patch
+Patch8:		AfterStep-2.2.3-System-Menu-configure.h.in.patch
+Patch9:		AfterStep-2.2.3-System-Menu-DesktopEntry.c.patch
+Patch10:	AfterStep-2.2.3-System-Menu-.include.patch
+
 Distribution:	The AfterStep TEAM
 Packager:	Sean Dague <sean at dague dot net>
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
@@ -132,6 +138,11 @@ Requires: 	%{name}-libs = %{epoch}:%{version}
 %patch3
 %patch4
 %patch5
+%patch6
+%patch7
+%patch8
+%patch9
+%patch10
 
 tar xvf %{SOURCE9}
 
