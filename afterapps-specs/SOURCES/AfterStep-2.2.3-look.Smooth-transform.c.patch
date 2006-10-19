@@ -1,0 +1,20 @@
+--- libAfterImage/transform.c	2006-05-15 13:38:44.000000000 -0500
++++ libAfterImage/transform.c	2006-10-12 18:08:20.000000000 -0500
+@@ -361,7 +361,7 @@
+ #endif
+ 
+ static inline void
+-start_component_interpolation( CARD32 *c1, CARD32 *c2, CARD32 *c3, CARD32 *c4, register CARD32 *T, register CARD32 *step, CARD16 S, int len)
++start_component_interpolation( CARD32 *c1, CARD32 *c2, CARD32 *c3, CARD32 *c4, register CARD32 *T, register CARD32 *step, int S, int len)
+ {
+ 	register int i;
+ 	for( i = 0 ; i < len ; i++ )
+@@ -772,7 +772,7 @@
+                     imout->output_image_scanline( imout, c1, 1);
+                 }else
+                 {
+-                    SCANLINE_COMBINE(start_component_interpolation,*c1,*c2,*c3,*c4,*c1,step,(CARD8)S,out_width);
++                    SCANLINE_COMBINE(start_component_interpolation,*c1,*c2,*c3,*c4,*c1,step,S,out_width);
+                     do
+                     {
+                         imout->output_image_scanline( imout, c1, 1);
