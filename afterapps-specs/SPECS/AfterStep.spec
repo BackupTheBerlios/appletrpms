@@ -83,6 +83,7 @@ Patch8:		AfterStep-2.2.3-System-Menu-asapp.h.patch
 Patch9:		AfterStep-2.2.3-System-Menu-configure.h.in.patch
 Patch10:	AfterStep-2.2.3-System-Menu-DesktopEntry.c.patch
 Patch11:	AfterStep-2.2.3-System-Menu-.include.patch
+Patch12:	AfterStep-2.2.3-System-Menu-dirtree.c.patch
 
 Distribution:	The AfterStep TEAM
 Packager:	Sean Dague <sean at dague dot net>
@@ -145,6 +146,7 @@ Requires: 	%{name}-libs = %{epoch}:%{version}
 %patch9
 %patch10
 %patch11
+%patch12
 
 tar xvf %{SOURCE9}
 
@@ -293,7 +295,8 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.3-2
-- added Smooth look ans support for xinerama, removed -gdb configure flag.
+- added Smooth look, support for xinerama, removed -gdb configure flag.
+- added Menu patches for various bug-fixes.
 
 * Tue Oct 11 2006 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.3-1
 - new version.
