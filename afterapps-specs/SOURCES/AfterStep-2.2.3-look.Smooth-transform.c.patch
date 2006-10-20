@@ -1,5 +1,5 @@
 --- libAfterImage/transform.c	2006-05-15 13:38:44.000000000 -0500
-+++ libAfterImage/transform.c	2006-10-12 18:08:20.000000000 -0500
++++ libAfterImage/transform.c	2006-10-19 17:54:29.000000000 -0500
 @@ -361,7 +361,7 @@
  #endif
  
@@ -18,3 +18,36 @@
                      do
                      {
                          imout->output_image_scanline( imout, c1, 1);
+@@ -1075,13 +1075,13 @@
+ 
+ LOCAL_DEBUG_CALLER_OUT( "dst_width = %d, dst_height = %d", dst_width, dst_height );
+ 	
+-	prepare_scanline( dst_width, QUANT_ERR_BITS, &dst_line, asv->BGR_mode );
+-	dst_line.flags = SCL_DO_ALL ;
+-
+ 	dst = create_destination_image( dst_width, dst_height, out_format, compression_out, ARGB32_DEFAULT_BACK_COLOR );
+ 	if( dst == NULL )
+ 		return NULL;
+ 
++	prepare_scanline( dst_width, QUANT_ERR_BITS, &dst_line, asv->BGR_mode );
++	dst_line.flags = SCL_DO_ALL ;
++
+ 	imdecs = safecalloc( count+20, sizeof(ASImageDecoder*));
+ 
+ /*  don't really know why the hell we need that ???
+@@ -1125,6 +1125,7 @@
+ 				stop_image_decoding( &(imdecs[i]) );
+ 
+         destroy_asimage( &dst );
++		free_scanline( &dst_line, True );
+     }else
+ 	{
+ 		int y, max_y = 0;
+@@ -2553,6 +2554,7 @@
+ 				imout->output_image_scanline( imout, out_buf, 1);
+ 			}
+ 		}
++		free_scanline( out_buf, False );
+ 		stop_image_output( &imout );
+ 	}
+ #ifdef HAVE_MMX
