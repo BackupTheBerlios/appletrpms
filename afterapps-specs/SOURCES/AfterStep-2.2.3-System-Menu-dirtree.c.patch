@@ -1,0 +1,11 @@
+--- src/afterstep/dirtree.c	2006-10-06 17:46:29.000000000 -0500
++++ src/afterstep/dirtree.c	2006-10-20 11:45:18.000000000 -0500
+@@ -287,6 +287,8 @@
+ 		LOCAL_DEBUG_OUT( "entry \"%s\", de = %p", entries[i], de );
+ 		if( de == NULL ) 
+ 			continue;
++		if( get_flags(de->flags, ASDE_Hidden|ASDE_NoDisplay) ) 
++			continue;
+ 		if( de->type == ASDE_TypeDirectory ) 
+ 		{	
+ 			if( !include_children ) 
