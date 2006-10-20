@@ -75,13 +75,14 @@ Patch0:		AfterStep-2.2.3-look.Smooth-asview.c.patch
 Patch1:		AfterStep-2.2.3-look.Smooth-mystyle.c.patch
 Patch2:		AfterStep-2.2.3-look.Smooth-transform.c.patch
 Patch3:		AfterStep-2.2.3-look.Smooth-ximage.c.patch
-Patch4:		AfterStep-2.2.3-xinerama-screen.c.patch
-Patch5:		AfterStep-2.2.3-xinerama-WinTabs.c.patch
-Patch6:		AfterStep-2.2.3-System-Menu-asapp.c.patch
-Patch7:		AfterStep-2.2.3-System-Menu-asapp.h.patch
-Patch8:		AfterStep-2.2.3-System-Menu-configure.h.in.patch
-Patch9:		AfterStep-2.2.3-System-Menu-DesktopEntry.c.patch
-Patch10:	AfterStep-2.2.3-System-Menu-.include.patch
+Patch4:		AfterStep-2.2.3-look.Smooth-functions.c.patch
+Patch5:		AfterStep-2.2.3-xinerama-screen.c.patch
+Patch6:		AfterStep-2.2.3-xinerama-WinTabs.c.patch
+Patch7:		AfterStep-2.2.3-System-Menu-asapp.c.patch
+Patch8:		AfterStep-2.2.3-System-Menu-asapp.h.patch
+Patch9:		AfterStep-2.2.3-System-Menu-configure.h.in.patch
+Patch10:	AfterStep-2.2.3-System-Menu-DesktopEntry.c.patch
+Patch11:	AfterStep-2.2.3-System-Menu-.include.patch
 
 Distribution:	The AfterStep TEAM
 Packager:	Sean Dague <sean at dague dot net>
@@ -143,6 +144,7 @@ Requires: 	%{name}-libs = %{epoch}:%{version}
 %patch8
 %patch9
 %patch10
+%patch11
 
 tar xvf %{SOURCE9}
 
