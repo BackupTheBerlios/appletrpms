@@ -41,7 +41,7 @@ URL: http://sourceforge.net/project/showfiles.php?group_id=60336
 Source0: http://easynews.dl.sourceforge.net/sourceforge/wmweatherplus/%{name}-%{version}.tar.gz
 Patch0: wmweather+-fedorafix.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: w3c-libwww-devel
+BuildRequires: w3c-libwww-devel libwraster
 Requires: w3c-libwww libwraster
 
 %if %{mdk}
@@ -82,6 +82,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Oct 25 2006 J. Krebs <rpm_speedy@yahoo.com> - 2.9-6
+- added build require for libwraster.
+
 * Sat Oct 07 2006 J. Krebs <rpm_speedy@yahoo.com> - 2.9-5
 - updated URL and Source info.
 

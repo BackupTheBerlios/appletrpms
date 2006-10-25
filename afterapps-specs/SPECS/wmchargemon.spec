@@ -25,7 +25,7 @@
 
 %define prefix	/usr
 %define version 0.2
-%define release 1
+%define release 2
 %define name	wmchargemon
 
 Summary:	displays ACPI battery level and power status.
@@ -40,10 +40,12 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %if %{mdk}
 Requires: libdockapp0
+BuildRequires: libdockapp0-devel
 %endif
 
 %if %{fedora}
 Requires: libdockapp
+BuildRequires: libdockapp-devel
 %endif
 
 %description
@@ -75,5 +77,8 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/bin/*
 
 %changelog
+* Wed Oct 25 2006 J. Krebs <rpm_speedy@yahoo.com> 0.2-2
+- added build requires for libdockapp.
+
 * Sat Sep 23 2006 J. Krebs <rpm_speedy@yahoo.com> 0.2-1
 - initial build.
