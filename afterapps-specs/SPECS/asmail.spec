@@ -3,8 +3,8 @@
 %define _datadir %{__prefix}/share
 %define _mandir %{_datadir}/man
 %define name asmail
-%define version 1.8
-%define release 3
+%define version 1.9
+%define release 1
 
 Summary: Afterstep Mail Applet
 Name: %name
@@ -69,6 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Nov 24 2006 J. Krebs <rpm_speedy@yahoo.com> 1.9-1
+- update to 1.9
+
 * Sat Oct 07 2006 J. Krebs <rpm_speedy@yahoo.com> 1.8-3
 - updated URL and Source info.
 

@@ -39,8 +39,8 @@
 ### END Distro Definitions
 
 %define	name AfterStep
-%define	version	2.2.3
-%define release 2
+%define	version	2.2.4
+%define release 1
 
 %define epoch 20
 
@@ -70,25 +70,14 @@ Source5: 	AfterStep.menumethod
 Source6: 	afterstep.desktop.xsessions
 Source7: 	afterstep.desktop.wm-properties
 Source8:	afterstep.fedora.README
-Source9:	AfterStep-2.2.3-look.Smooth-data.tar.gz
-Patch0:		AfterStep-2.2.3-look.Smooth-asview.c.patch
-Patch1:		AfterStep-2.2.3-look.Smooth-mystyle.c.patch
-Patch2:		AfterStep-2.2.3-look.Smooth-transform.c.patch
-Patch3:		AfterStep-2.2.3-look.Smooth-ximage.c.patch
-Patch4:		AfterStep-2.2.3-look.Smooth-functions.c.patch
-Patch5:		AfterStep-2.2.3-xinerama-screen.c.patch
-Patch6:		AfterStep-2.2.3-xinerama-WinTabs.c.patch
-Patch7:		AfterStep-2.2.3-System-Menu-asapp.c.patch
-Patch8:		AfterStep-2.2.3-System-Menu-asapp.h.patch
-Patch9:		AfterStep-2.2.3-System-Menu-configure.h.in.patch
-Patch10:	AfterStep-2.2.3-System-Menu-DesktopEntry.c.patch
-Patch11:	AfterStep-2.2.3-System-Menu-.include.patch
-Patch12:	AfterStep-2.2.3-System-Menu-dirtree.c.patch
-
+Source9:	AfterStep-2.2.4.Pulse.icon
+Source10:	AfterStep-2.2.4.Worker.icon
+Patch0:		AfterStep-2.2.4.update.patches
 Distribution:	The AfterStep TEAM
 Packager:	Sean Dague <sean at dague dot net>
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
-Requires:	%{name}-libs = %{epoch}:%{version}
+Requires:	%{name}-libs = %{epoch}:%{version} librsvg2
+BuildRequires:	librsvg2-devel
 Obsoletes:	libAfterImage
 
 %description
@@ -112,7 +101,7 @@ release:	%{release}
 Epoch:		%{epoch}
 License:	GPL
 group:		User Interface/Desktops
-Provides: 	%{name}-libs
+Provides: 	%{name}-libs libAfterImage
 %if %{mdk}
 Obsoletes: libAfterStep1
 %endif
@@ -135,20 +124,6 @@ Requires: 	%{name}-libs = %{epoch}:%{version}
 %prep
 %setup -q -n %{name}-%{version}
 %patch0
-%patch1
-%patch2
-%patch3
-%patch4
-%patch5
-%patch6
-%patch7
-%patch8
-%patch9
-%patch10
-%patch11
-%patch12
-
-tar xvf %{SOURCE9}
 
 %build
 CFLAGS=$RPM_OPT_FLAGS \
@@ -168,6 +143,12 @@ make
 if [[ -x /usr/bin/sgml2html ]]; then sgml2html doc/afterstep.sgml; fi
 cd src/ASDocGen && ./ASDocGen -l log.html -t html && cd ../..
 
+rm -rf afterstep/start/0_Applications/Office/Open_Office/
+rm -rf afterstep/start/1_Desktop/Animations/
+rm -rf afterstep/start/2_Modules/Forms/
+rm -rf afterstep/start/2_Modules/Scripts/
+rm -rf afterstep/start/2_Modules/Stop/
+
 %install
 if [[ -d $RPM_BUILD_ROOT ]]; then rm -rf $RPM_BUILD_ROOT; fi
 mkdir -p $RPM_BUILD_ROOT
@@ -177,6 +158,10 @@ rm -f $RPM_BUILD_ROOT%{_bindir}/{sessreg,xpmroot}
 #for f in libAfter{Base,Conf,Image,Step}; do
 #   cp -a $f/$f.so* %{buildroot}%{_libdir}
 #done
+
+#added icons for 2.2.4
+install -m 0644 %{SOURCE9} %{buildroot}%{_datadir}/afterstep/desktop/icons/normal/Pulse
+install -m 0644 %{SOURCE10} %{buildroot}%{_datadir}/afterstep/desktop/icons/logos/Worker
 
 %if %{fedora4}
 #fedora-config prep
@@ -294,9 +279,8 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
-* Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.3-2
-- added Smooth look, support for xinerama, removed -gdb configure flag.
-- added Menu patches for various bug-fixes.
+* Mon Nov 20 2006 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.4-1
+- new version.
 
 * Tue Oct 11 2006 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.3-1
 - new version.

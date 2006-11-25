@@ -39,7 +39,7 @@ Release:	%{release}.as%{asver}
 License:	GPL
 Group:		X11/Utilities
 URL:		http://www.afterstep.org/aterm.php
-Requires:	AfterStep >= 20:%{asver}
+Requires:	libAfterImage >= 1.11
 
 %description -n aterm
 aterm, version %{version}, is a colour vt102 terminal emulator based on
