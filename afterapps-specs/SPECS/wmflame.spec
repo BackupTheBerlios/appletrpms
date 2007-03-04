@@ -1,7 +1,7 @@
 %define prefix /usr
 %define name wmflame
 %define version 0.60
-%define release 4
+%define release 5
 
 Summary: wmflame is a WindowMaker dock applet that draws flames
 Name: %name
@@ -9,7 +9,7 @@ Version: %version
 Release: %release
 License: GPL
 Group: AfterStep/Applets
-Source: http://web.novalis.org/programs/%{name}-%{version}.tar.gz
+Source: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-buildroot
 
 %description
@@ -37,6 +37,9 @@ install -s -m 755 %{name}/%{name} $RPM_BUILD_ROOT%{prefix}/bin
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sun Mar 04 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.6-5
+- Updated Source path. Web site dead.
+
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.6-4
 - Updated Source path.
 
