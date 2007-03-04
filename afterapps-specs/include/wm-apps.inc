@@ -138,7 +138,7 @@ APPLET_LIST += WMFLAME
 WMIFINFO_NAME=wmifinfo
 WMIFINFO_VERSION=0.09
 WMIFINFO_TAR=$(WMIFINFO_NAME)-$(WMIFINFO_VERSION).tgz
-WMIFINFO_URL=http://www.zevv.nl/wmifinfo/$(WMIFINFO_TAR)
+WMIFINFO_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMIFINFO_TAR)
 
 APPLET_LIST += WMIFINFO
 
