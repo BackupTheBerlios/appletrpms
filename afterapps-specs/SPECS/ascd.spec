@@ -31,7 +31,7 @@ is an advanced CD player with a fully customizable interface and
 support for themes.
 
 %prep
-%setup -q -n ascd-%{version} -a 1 -a 2 -a 3
+%setup -q -n ascd-%{version} -a 1
 
 %patch0 -p1 -b .a
 %patch1 -p1 -b .b
@@ -56,9 +56,8 @@ tar xvf themes.tar
 
 cd $RPM_BUILD_DIR/ascd-%{version}/ascd-0.13pr6-themes/
 tar xvf themes.tar -C $RPM_BUILD_DIR/ascd-%{version}/ascd/themes/Themes/
-
-mv $RPM_BUILD_DIR/ascd-%{version}/dwing/ $RPM_BUILD_DIR/ascd-%{version}/ascd/themes/Themes/
-mv $RPM_BUILD_DIR/ascd-%{version}/lcd/ $RPM_BUILD_DIR/ascd-%{version}/ascd/themes/Themes/
+tar xvf %{SOURCE2} -C $RPM_BUILD_DIR/ascd-%{version}/ascd/themes/Themes/
+tar xvf %{SOURCE3} -C $RPM_BUILD_DIR/ascd-%{version}/ascd/themes/Themes/
 
 install -d $RPM_BUILD_ROOT%{_datadir}/ascd/Default/
 install -d $RPM_BUILD_ROOT%{_datadir}/ascd/Themes/
