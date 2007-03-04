@@ -4,22 +4,23 @@
 %define _bindir %{__prefix}/bin
 %define _datadir %{__prefix}/share
 %define _mandir %{_datadir}/man
-%define	srcname	aterm-src
+%define	name	aterm
 %define	version	1.0.0
-%define	release	6
+%define	release	7
 %define epoch	2
 
 Summary:	aterm - terminal emulator in an X window
-Name:		%{srcname}
+Name:		%{name}
 Version:	%{version}
 Release:	%{release}
+Epoch:		%{epoch}
 License:	GPL
 Group:		X11/Utilities
-URL:		http://www.afterstep.org/aterm.php
-Source:		http://easynews.dl.sourceforge.net/sourceforge/aterm/aterm-%{version}.tar.gz
-Buildroot:	/var/tmp/aterm-src-%{version}-root
+URL:		http://aterm.sourceforge.net
+Source:		ftp://ftp.afterstep.org/apps/aterm/%{name}-%{version}.tar.gz
+Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	AfterStep-devel >= 20:2.00.00
-Requires:	AfterStep >= 20:2.00.00
+Requires:	AfterStep >= 20:%{asver}
 
 %description
 aterm, version %{version}, is a colour vt102 terminal emulator based on
@@ -32,32 +33,12 @@ significant advantage on a machine serving many X sessions.
 It was created with AfterStep Window Manger users in mind, but is not
 tied to any libraries, and can be used anywhere.
 
-%package -n aterm
-Summary:	aterm - terminal emulator in an X window
-Version:	%{version}
-Release:	%{release}.as%{asver}
-License:	GPL
-Group:		X11/Utilities
-URL:		http://www.afterstep.org/aterm.php
-Requires:	libAfterImage >= 1.11
-
-%description -n aterm
-aterm, version %{version}, is a colour vt102 terminal emulator based on
-rxvt 2.4.8 with Alfredo Kojima's additions of fast transparency,
-intended as an xterm(1) replacement for users who do not require
-features such as Tektronix 4014 emulation and toolkit-style
-configurability. As a result, aterm uses much less swap space -- a
-significant advantage on a machine serving many X sessions.
-
-It was created with AfterStep Window Manger users in mind, but is not
-tied to any libraries, and can be used anywhere.
-
 %prep
-%setup -q -n aterm-%{version}
+%setup -q
 
 LD_LIBRARY_PATH=../AfterStep-%{asversion}/libAfterBase \
         CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%{__prefix} \
-	--enable-utmp --enable-background-image \
+	--enable-utmp --enable-background-image --with-term=rxvt \
 	--enable-transparency --enable-menubar --enable-graphics \
 	--enable-next-scroll --disable-backspace-key \
 	--disable-delete-key --enable-xgetdefault --mandir=%{_mandir}
@@ -74,7 +55,7 @@ make DESTDIR=$RPM_BUILD_ROOT install
 %clean
 [ -d $RPM_BUILD_ROOT ] && rm -rf $RPM_BUILD_ROOT;
 
-%files -n aterm
+%files
 %defattr(-,root,root)
 %doc doc ChangeLog
 %{_bindir}/aterm
@@ -82,6 +63,10 @@ make DESTDIR=$RPM_BUILD_ROOT install
 #%config(missingok) /etc/X11/wmconfig/aterm
 
 %changelog
+* Wed Feb 21 2007 J. Krebs <rpm_speedy@yahoo.com> 1.0.0-7
+- reverted back to old non-sub package setup. Will rely on
+- yum to pick out and match AfterStep to aterm.
+
 * Fri Oct 20 2006 J. Krebs <rpm_speedy@yahoo.com> 1.0.0-6
 - revamped the .spec structure and changed the .src.rpm
 - name to a different name (aterm-src). This should allow

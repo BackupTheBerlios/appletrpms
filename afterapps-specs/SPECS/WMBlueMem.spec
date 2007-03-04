@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name WMBlueMem
 %define version 0.9
-%define release 3
+%define release 4
 
 Summary: WMBlueMem is a memory monitoring program.
 Name: %name
@@ -13,9 +13,9 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://sheepmakers.ath.cx/utils/wmbluemem/
-Source0: http://sheepmakers.ath.cx/utils/wmbluemem/%{name}.tar.gz
+Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}.tar.gz
 Patch0: %{name}.Makefile.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 WMBlueMem is a memory monitoring program. It runs either as a
@@ -49,6 +49,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sun Mar 04 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.9-4
+- Updated Source path. Sheepmakers site is invalid.
+
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.9-3
 - Updated Source path.
 

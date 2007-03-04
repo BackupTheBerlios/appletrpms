@@ -1,17 +1,12 @@
 ### BEGIN Distro Defines
-### mdk, fedora, suse & generic are distros
-### mandriva, fedoragcc4, and susegcc4 define gcc 4.0 compilers
 %define mdk  %(if [ -e /etc/mandrake-release -o -e /etc/mandriva-release ]; then echo 1; else echo 0; fi;)
 %{?_with_mdk:   %{expand: %%global mdk 1}}
-
-%define mandriva  %(if [ -e /etc/mandriva-release ]; then echo 1; else echo 0; fi;)
-%{?_with_mandriva:   %{expand: %%global mandriva 1}}
 
 %define fedora  %(if [ -e /etc/fedora-release ]; then echo 1; else echo 0; fi;)
 %{?_with_fedora:   %{expand: %%global fedora 1}}
 
-%define suse %(if [ -e /etc/SuSE-release ]; then echo 1; else echo 0; fi;)
-%{?_with_suse:   %{expand: %%global suse 1}}
+#%define suse %(if [ -e /etc/SuSE-release ]; then echo 1; else echo 0; fi;)
+#%{?_with_suse:   %{expand: %%global suse 1}}
 
 %define generic 1
 
@@ -26,8 +21,6 @@
   %{?_with_fedora5:   %{expand: %%global fedora5 1}}
   %define fedora4 %(if [ %fcver -le 4 ]; then echo 1; else echo 0; fi;)
   %{?_with_fedora4:   %{expand: %%global fedora4 1}}  
-  %define fedoragcc4 %(if [ %fcver -ge 4 ]; then echo 1; else echo 0; fi;)
-  %{?_with_fedoragcc4:   %{expand: %%global fedoragcc4 1}}
 %endif
 
 #%if %{suse}
@@ -40,8 +33,7 @@
 
 %define	name AfterStep
 %define	version	2.2.4
-%define release 1
-
+%define release 2
 %define epoch 20
 
 %define __prefix /usr
@@ -50,7 +42,6 @@
 %define _includedir %{__prefix}/include
 %define _libdir %{__prefix}/lib
 %define _mandir %{_datadir}/man
-%define gdesk %{_datadir}
 
 Summary:	AfterStep Window Manager (NeXTalike)
 Name:		%{name}
@@ -73,12 +64,19 @@ Source8:	afterstep.fedora.README
 Source9:	AfterStep-2.2.4.Pulse.icon
 Source10:	AfterStep-2.2.4.Worker.icon
 Patch0:		AfterStep-2.2.4.update.patches
+Patch1:		AfterStep-2.2.4.disableKDEglobals.patch
+Patch2:		AfterStep-2.2.4.menu.pictures.patch
 Distribution:	The AfterStep TEAM
-Packager:	Sean Dague <sean at dague dot net>
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
-Requires:	%{name}-libs = %{epoch}:%{version} librsvg2
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	%{name}-libs = %{epoch}:%{version}
+Requires:	librsvg2
+Requires:	freetype
+Requires:	zlib
+Requires:	libX11
 BuildRequires:	librsvg2-devel
-Obsoletes:	libAfterImage
+BuildRequires:  freetype-devel
+BuildRequires:  zlib-devel
+BuildRequires:  libX11-devel
 
 %description
   AfterStep is a Window Manager for X which started by emulating the
@@ -95,28 +93,35 @@ Obsoletes:	libAfterImage
   at a premium.
 
 %package libs
-summary:	libraries required by afterstep 2.0
-version:	%{version}
-release:	%{release}
+Summary:	libraries required by afterstep 2.0
+Version:	%{version}
+Release:	%{release}
 Epoch:		%{epoch}
 License:	GPL
-group:		User Interface/Desktops
-Provides: 	%{name}-libs libAfterImage
+Group:		User Interface/Desktops
+Obsoletes:	libAfterImage
+Provides:	libAfterImage
 %if %{mdk}
-Obsoletes: libAfterStep1
+Obsoletes:	libAfterStep1
 %endif
 
 %description libs
-  Libraries neeeded by AfterStep 2.0
+  Libraries needed by AfterStep 2.0
 
 %package devel
-summary:	AfterStep libs include files
-version:	%{version}
-release:	%{release}
+Summary:	AfterStep libs include files
+Version:	%{version}
+Release:	%{release}
 Epoch:		%{epoch}
 License:	GPL
-group:		User Interface/Desktops
+Group:		User Interface/Desktops
 Requires: 	%{name}-libs = %{epoch}:%{version}
+Obsoletes:	libAfterImage-devel
+Provides:	libAfterImage-devel
+Requires:	librsvg2-devel
+Requires:	freetype-devel
+Requires:	zlib-devel
+Requires:	libX11-devel
 
 %description devel
   AfterStep libs include files
@@ -124,6 +129,8 @@ Requires: 	%{name}-libs = %{epoch}:%{version}
 %prep
 %setup -q -n %{name}-%{version}
 %patch0
+%patch1
+%patch2
 
 %build
 CFLAGS=$RPM_OPT_FLAGS \
@@ -131,8 +138,7 @@ CFLAGS=$RPM_OPT_FLAGS \
 	--prefix=%{_prefix}                       \
 	--mandir=%{_mandir}                       \
 	--enable-sharedlibs                       \
-	--disable-staticlibs			  \
-	--enable-ascp                             \
+	--disable-staticlibs                      \
 	--enable-i18n                             \
 	--with-helpcommand="aterm -e man"         \
 	--with-desktops=1 --with-deskgeometry=2x3 \
@@ -143,8 +149,13 @@ make
 if [[ -x /usr/bin/sgml2html ]]; then sgml2html doc/afterstep.sgml; fi
 cd src/ASDocGen && ./ASDocGen -l log.html -t html && cd ../..
 
+#for cvs builds - should be OK on release.
 rm -rf afterstep/start/0_Applications/Office/Open_Office/
 rm -rf afterstep/start/1_Desktop/Animations/
+rm -rf afterstep/start/1_Desktop/Pictures/GNOME_Branded/
+rm -rf afterstep/start/1_Desktop/Pictures/GNOME_Nature/
+rm -rf afterstep/start/1_Desktop/Pictures/GNOME_Tiles/
+rm -rf afterstep/start/1_Desktop/Pictures/GNOME_Translucent/
 rm -rf afterstep/start/2_Modules/Forms/
 rm -rf afterstep/start/2_Modules/Scripts/
 rm -rf afterstep/start/2_Modules/Stop/
@@ -155,39 +166,36 @@ mkdir -p $RPM_BUILD_ROOT
 
 make DESTDIR=$RPM_BUILD_ROOT LDCONFIG=/bin/true install
 rm -f $RPM_BUILD_ROOT%{_bindir}/{sessreg,xpmroot}
-#for f in libAfter{Base,Conf,Image,Step}; do
-#   cp -a $f/$f.so* %{buildroot}%{_libdir}
-#done
 
 #added icons for 2.2.4
 install -m 0644 %{SOURCE9} %{buildroot}%{_datadir}/afterstep/desktop/icons/normal/Pulse
 install -m 0644 %{SOURCE10} %{buildroot}%{_datadir}/afterstep/desktop/icons/logos/Worker
 
+#fedora core 4 and earlier gdm setup
 %if %{fedora4}
-#fedora-config prep
 cp %{SOURCE8} .
-install -d $RPM_BUILD_ROOT%{gdesk}/switchdesk/
-install -m 0755 %{SOURCE1} $RPM_BUILD_ROOT%{gdesk}/switchdesk/Xclients.afterstep
+install -d $RPM_BUILD_ROOT%{_datadir}/switchdesk/
+install -m 0755 %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/switchdesk/Xclients.afterstep
 install -d $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/
 install -m 0755 %{SOURCE2} $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/afterstep
-install -d %{buildroot}%{gdesk}/xsessions/
-install -m 0644 %{SOURCE6} %{buildroot}%{gdesk}/xsessions/afterstep.desktop
-install -d %{buildroot}%{gdesk}/gnome/wm-properties/
-install -m 0644 %{SOURCE7} %{buildroot}%{gdesk}/gnome/wm-properties/afterstep.desktop
-rm -f %{buildroot}%{gdesk}/gnome/wm-properties/AfterStep.desktop
+install -d %{buildroot}%{_datadir}/xsessions/
+install -m 0644 %{SOURCE6} %{buildroot}%{_datadir}/xsessions/afterstep.desktop
+install -d %{buildroot}%{_datadir}/gnome/wm-properties/
+install -m 0644 %{SOURCE7} %{buildroot}%{_datadir}/gnome/wm-properties/afterstep.desktop
+rm -f %{buildroot}%{_datadir}/gnome/wm-properties/AfterStep.desktop
 rm -f %{buildroot}%{_datadir}/xsessions/AfterStep.desktop
-#rmdir %{buildroot}%{_datadir}/xsessions/
 %endif
 
+#fedora core 5 and later gdm setup
 %if %{fedora5}
-install -d %{buildroot}%{gdesk}/xsessions/
-install -m 0644 %{SOURCE6} %{buildroot}%{gdesk}/xsessions/afterstep.desktop
-rm -f %{buildroot}%{gdesk}/gnome/wm-properties/AfterStep.desktop
+install -d %{buildroot}%{_datadir}/xsessions/
+install -m 0644 %{SOURCE6} %{buildroot}%{_datadir}/xsessions/afterstep.desktop
+rm -f %{buildroot}%{_datadir}/gnome/wm-properties/AfterStep.desktop
 rm -f %{buildroot}%{_datadir}/xsessions/AfterStep.desktop
 %endif
 
+# mandrake/mandriva menu items
 %if %{mdk}
-# mandrake menu items
 install -d $RPM_BUILD_ROOT/etc/X11/wmsession.d/
 install -m 0644 %{SOURCE3} $RPM_BUILD_ROOT/etc/X11/wmsession.d/42AfterStep
 install -d $RPM_BUILD_ROOT/usr/lib/menu/afterstep
@@ -218,18 +226,18 @@ rm -rf %{buildroot}
 # this is evil hack, but I can't get it to work otherwise on mdk
 %if !%{fedora}
 %config /etc/X11/wmsession.d/42AfterStep
-/etc/menu-methods/AfterStep
+%{_sysconfdir}/menu-methods/AfterStep
 %{_datadir}/xsessions/AfterStep.desktop
 %config /usr/lib/menu/afterstep/AfterStep.menu
 %endif
 %if %{fedora5}
-%{gdesk}/xsessions/afterstep.desktop
+%{_datadir}/xsessions/afterstep.desktop
 %endif
 %if %{fedora4}
-/etc/X11/gdm/Sessions/afterstep
-%{gdesk}/switchdesk/Xclients.afterstep
-%{gdesk}/xsessions/afterstep.desktop
-%{gdesk}/gnome/wm-properties/afterstep.desktop
+%{_sysconfdir}/X11/gdm/Sessions/afterstep
+%{_datadir}/switchdesk/Xclients.afterstep
+%{_datadir}/xsessions/afterstep.desktop
+%{_datadir}/gnome/wm-properties/afterstep.desktop
 %doc afterstep.fedora.README
 %endif
 %if %{generic}
@@ -239,7 +247,7 @@ rm -rf %{buildroot}
 %files libs
 %defattr(-,root,root)
 %doc libAfterImage/README 
-%{_libdir}/*
+%{_libdir}/libA*
 
 %files devel
 %defattr(-,root,root)
@@ -279,6 +287,9 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
+* Mon Feb 19 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.4-2
+- removed debug entries from /usr/lib, added provides for libAI.
+
 * Mon Nov 20 2006 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.4-1
 - new version.
 

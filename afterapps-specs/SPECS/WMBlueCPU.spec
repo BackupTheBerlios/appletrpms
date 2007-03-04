@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name WMBlueCPU
 %define version 0.6
-%define release 3
+%define release 4
 
 Summary: WMBlueCPU is a cpu monitor.
 Name: %name
@@ -13,8 +13,8 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://sheepmakers.ath.cx/utils/wmbluecpu/
-Source0: http://sheepmakers.ath.cx/utils/wmbluecpu/%{name}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}.tar.gz
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 WMBlueCPU is a cpu monitor. It runs either as a dockapp or
@@ -47,6 +47,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sun Mar 04 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.6-4
+- Updated Source path. Sheepmakers site is invalid.
+
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.6-3
 - Updated Source path.
 

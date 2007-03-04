@@ -29,10 +29,10 @@
 %define _datadir %{__prefix}/share
 %define _mandir %{_datadir}/man
 %define name wmcalendar
-%define version 0.5.0
-%define release 5
+%define version 0.5.2
+%define release 1
 
-Summary: wmCalendar is a calendar dockapp.
+Summary: wmCalendar is a calendar dockapp
 Name: %name
 Version: %version
 Release: %release
@@ -41,10 +41,7 @@ Group: AfterStep/Applets
 URL: http://sourceforge.net/projects/wmcalendar/
 Source0: http://easynews.dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
 Source1: %{name}.ogo2ical
-Patch0: %{name}-%{version}.wharf.patch
-Patch1: %{name}-%{version}-mallocfix.patch
-Patch2: %{name}-%{version}-gcc4.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Buildrequires: libical
 Requires: libical
 
@@ -70,9 +67,6 @@ wmCalendar.  Many thanks to Daniel Tschan for his script!
 
 %prep
 %setup -q
-%patch0
-%patch1
-%patch2
 
 cp %{SOURCE1} ogo2ical
 
@@ -99,6 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Feb 16 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.5.2-1
+- New version.
+
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.5.0-5
 - Updated Source path.
 

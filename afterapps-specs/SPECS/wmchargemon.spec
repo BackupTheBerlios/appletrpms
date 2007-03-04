@@ -24,19 +24,19 @@
 ### END Distro Definitions
 
 %define prefix	/usr
-%define version 0.2
-%define release 2
+%define version 0.3
+%define release 1
 %define name	wmchargemon
 
-Summary:	displays ACPI battery level and power status.
+Summary:	displays ACPI battery level and power status
 Name:		%name
 Version:	%version
 Release:	%release
 License:	GPL
 Group:		AfterStep/Applets
-Source0:	http://dockapps.org/download.php/id/694/%{name}-%{version}.tar.gz
+Source0:	http://dockapps.org/download.php/id/715/%{name}-%{version}.tar.gz
 URL:		http://dockapps.org/file.php/id/319
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %if %{mdk}
 Requires: libdockapp0
@@ -74,9 +74,12 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %doc AUTHORS BUGS ChangeLog INSTALL README
-%{prefix}/bin/*
+%{_bindir}/*
 
 %changelog
+* Fri Feb 16 2007 J. Krebs <rpm_speedy@yahoo.com> 0.3-1
+- new version.
+
 * Wed Oct 25 2006 J. Krebs <rpm_speedy@yahoo.com> 0.2-2
 - added build requires for libdockapp.
 

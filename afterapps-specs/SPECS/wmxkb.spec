@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name wmxkb
 %define version 1.2.2
-%define release 5
+%define release 6
 
 Summary: A dockable/swallowed XKB groups indicator and switch
 Name: %name
@@ -14,7 +14,7 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://www.geocities.com/wmalms/#WMXKB
 Source0: http://www.geocities.com/wmalms/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 %{name} showns and controls XKB groups (XFree86 key maps)
@@ -46,12 +46,14 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %{_bindir}/*
-%doc %{_datadir}/pixmaps/wmxkb
-%{_datadir}/pixmaps/wmxkb/*.xpm
+%{_datadir}/pixmaps/wmxkb
 %doc COPYING README manual.html WMxkb_flexy WMxkb_nonflexy
 
 
 %changelog
+* Fri Feb 16 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-6
+- spec file cleanup.
+
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-5
 - Updated Source path.
 

@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name ascpu
 %define version 1.11
-%define release 3
+%define release 4
 
 Summary: CPU monitor
 Name: %name
@@ -14,8 +14,7 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://tigr.net/afterstep/view.php?applet=ascpu/data
 Source0: http://tigr.net/afterstep/download/%{name}/%{name}-%{version}.tar.gz
-Packager: Sean Dague <sean@dague.net>
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 This is an AfterStep look & feel CPU statistics monitor tool
@@ -48,6 +47,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Feb 23 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.11-4
+- removed packager line.
+
 * Sat Oct 07 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.11-3
 - updated URL and Source info.
 

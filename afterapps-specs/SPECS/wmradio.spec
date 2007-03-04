@@ -6,7 +6,7 @@
 
 %define name wmradio
 %define version 0.9
-%define release 3
+%define release 4
 
 Summary: wmradio is FM radio card applet for WindowMaker
 Name: %name
@@ -15,9 +15,9 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://gogo.aquasoft.cz/~cermak/wmradio/
-Source0: ftp://ftp.afterstep.org/apps/%{name}/%{name}-%{version}.tgz
+Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tgz
 Source1: %{name}-rpm-README
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 wmradio is FM radio card applet for WindowMaker 
@@ -55,6 +55,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/pixmaps/*.png
 
 %changelog
+* Sun Mar 04 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.9-4
+- Updated Source path.
+
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.9-3
 - Updated Source path.
 

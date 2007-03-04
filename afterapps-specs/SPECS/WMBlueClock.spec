@@ -4,7 +4,7 @@
 %define _mandir %{_datadir}/man
 %define name WMBlueClock
 %define version 0.1
-%define release 3
+%define release 4
 
 Summary: WMBlueClock is a nice clock app.
 Name: %name
@@ -13,8 +13,8 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://sheepmakers.ath.cx/utils/wmblueclock/
-Source0: http://sheepmakers.ath.cx/utils/wmblueclock/%{name}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}.tar.gz
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 WMBlueClock is a nice clock app. It runs either as a dockapp
@@ -47,6 +47,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sun Mar 04 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.1-4
+- Updated Source path. Sheepmakers site is invalid.
+
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.1-3
 - Updated Source path.
 

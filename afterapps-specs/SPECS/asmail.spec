@@ -3,7 +3,7 @@
 %define _datadir %{__prefix}/share
 %define _mandir %{_datadir}/man
 %define name asmail
-%define version 1.9
+%define version 2.0
 %define release 1
 
 Summary: Afterstep Mail Applet
@@ -14,8 +14,7 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://tigr.net/afterstep/view.php?applet=asmail/data
 Source0: http://tigr.net/afterstep/download/%{name}/%{name}-%{version}.tar.gz
-Packager: Sean Dague <sean@dague.net>
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 The application is an AfterStep look & feel multiple e-mail
@@ -69,6 +68,12 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Feb 27 2007 J. Krebs <rpm_speedy@yahoo.com> 2.0-1
+- new version.
+
+* Fri Feb 23 2007 J. Krebs <rpm_speedy@yahoo.com> 1.9-2
+- removed packager line.
+
 * Fri Nov 24 2006 J. Krebs <rpm_speedy@yahoo.com> 1.9-1
 - update to 1.9
 
