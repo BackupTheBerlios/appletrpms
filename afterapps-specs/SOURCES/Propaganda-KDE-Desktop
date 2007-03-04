@@ -1,0 +1,11 @@
+# KDE Config File
+[URL properties]
+Toolbar=top
+LocationBar=hide
+Menubar=top
+HTMLView=yes
+Statusbar=show
+ViewMode=IconView
+ShowDotFiles=yes
+TreeView=Off
+VisualSchnauzer=Off
