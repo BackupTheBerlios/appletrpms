@@ -45,7 +45,7 @@ ASLOAD_URL=http://tigr.net/afterstep/download/$(ASLOAD_NAME)/$(ASLOAD_TAR)
 APPLET_LIST += ASLOAD
 
 ASMAIL_NAME=asmail
-ASMAIL_VERSION=1.9
+ASMAIL_VERSION=2.0
 ASMAIL_TAR=$(ASMAIL_NAME)-$(ASMAIL_VERSION).tar.gz
 ASMAIL_URL=http://tigr.net/afterstep/download/$(ASMAIL_NAME)/$(ASMAIL_TAR)
 

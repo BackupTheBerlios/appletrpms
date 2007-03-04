@@ -2,7 +2,34 @@
 #
 # misc applets that didn't seem to be specific to any wm
 
+#this is the first of three tarballs needed to build Propaganda
+PROPAGANDA_NAME=Propaganda
+PROPAGANDA_VERSION=1
+PROPAGANDA_TAR=$(PROPAGANDA_NAME)-EVERYTHING.tar.bz2
+PROPAGANDA_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(PROPAGANDA_TAR)
+
+APPLET_LIST += PROPAGANDA
+
+#this is the first of three tarballs needed to build Propaganda
+PROPAGANDA-VOL13_NOSPEC=YES
+PROPAGANDA-VOL13_NAME=Propaganda-Vol13
+PROPAGANDA-VOL13_VERSION=13
+PROPAGANDA-VOL13_TAR=$(PROPAGANDA-VOL13_NAME).tar.bz2
+PROPAGANDA-VOL13_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(PROPAGANDA-VOL13_TAR)
+
+APPLET_LIST += PROPAGANDA-VOL13
+
+#this is the first of three tarballs needed to build Propaganda
+PROPAGANDA-VOL14_NOSPEC=YES
+PROPAGANDA-VOL14_NAME=Propaganda-Vol14
+PROPAGANDA-VOL14_VERSION=14
+PROPAGANDA-VOL14_TAR=$(PROPAGANDA-VOL14_NAME).tar.bz2
+PROPAGANDA-VOL14_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(PROPAGANDA-VOL14_TAR)
+
+APPLET_LIST += PROPAGANDA-VOL14
+
 #this is the first of three tarballs needed to build ascd-themes
+ASCD-THEMES_NOSPEC=YES
 ASCD-THEMES_NAME=ascd-themes
 ASCD-THEMES_VERSION=1.13
 ASCD-THEMES_TAR=ascd-0.13pr6-themes.tgz
