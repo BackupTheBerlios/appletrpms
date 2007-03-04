@@ -131,14 +131,14 @@ APPLET_LIST += WMFISHTIME
 WMFLAME_NAME=wmflame
 WMFLAME_VERSION=0.60
 WMFLAME_TAR=$(WMFLAME_NAME)-$(WMFLAME_VERSION).tar.gz
-WMFLAME_URL=http://web.novalis.org/programs/$(WMFLAME_TAR)
+WMFLAME_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMFLAME_TAR)
 
 APPLET_LIST += WMFLAME
 
 WMIFINFO_NAME=wmifinfo
 WMIFINFO_VERSION=0.09
 WMIFINFO_TAR=$(WMIFINFO_NAME)-$(WMIFINFO_VERSION).tgz
-WMIFINFO_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMIFINFO_TAR)
+WMIFINFO_URL=http://www.zevv.nl/$(WMIFINFO_NAME)/$(WMIFINFO_TAR)
 
 APPLET_LIST += WMIFINFO
 
