@@ -180,7 +180,7 @@ APPLET_LIST += WMMSG
 WMND_NAME=wmnd
 WMND_VERSION=0.4.12
 WMND_TAR=$(WMND_NAME)-$(WMND_VERSION).tar.gz
-WMND_URL=http://www.yuv.info/wmnd/releases/$(WMND_TAR)
+WMND_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMND_TAR)
 
 APPLET_LIST += WMND
 
