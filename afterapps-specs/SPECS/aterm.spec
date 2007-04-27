@@ -2,7 +2,7 @@
 %define asver %astest 
 %define	name	aterm
 %define	version	1.0.0
-%define	release	8%{?dist}
+%define	release	9%{?dist}
 %define epoch	2
 
 Summary:	aterm - terminal emulator in an X window
@@ -59,6 +59,9 @@ make DESTDIR=$RPM_BUILD_ROOT install
 #%config(missingok) /etc/X11/wmconfig/aterm
 
 %changelog
+* Fri Apr 27 2007 J. Krebs <rpm_speedy@yahoo.com> 1.0.0-9
+- rebuild to coincide with AS 2.2.5 release.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> 1.0.0-8
 - added distro info to release.
 
