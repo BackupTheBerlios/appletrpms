@@ -1,10 +1,6 @@
-%define __prefix /usr
-%define _bindir %{__prefix}/bin
-%define _datadir %{__prefix}/share
-%define _mandir %{_datadir}/man
 %define name ascpu
 %define version 1.11
-%define release 4
+%define release 5%{?dist}
 
 Summary: CPU monitor
 Name: %name
@@ -24,7 +20,7 @@ for computers running Linux, FreeBSD, HP-UX or AIX.
 %setup -q
 
 %build
-./configure --prefix=%{__prefix}
+./configure --prefix=%{_prefix}
 make
 
 %install
@@ -47,6 +43,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.11-5
+- added distro info to release.
+
 * Fri Feb 23 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.11-4
 - removed packager line.
 

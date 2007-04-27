@@ -1,10 +1,6 @@
-%define __prefix /usr
-%define _bindir %{__prefix}/bin
-%define _datadir %{__prefix}/share
-%define _mandir %{_datadir}/man
 %define name asmail
-%define version 2.0
-%define release 1
+%define version 2.1
+%define release 1%{?dist}
 
 Summary: Afterstep Mail Applet
 Name: %name
@@ -37,7 +33,7 @@ animation for the status update.
 %setup -q
 
 %build
-./configure --prefix=%{__prefix}
+./configure --prefix=%{_prefix}
 make
 
 %install
@@ -68,6 +64,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> 2.1-1
+- new version, added distro info to release.
+
 * Tue Feb 27 2007 J. Krebs <rpm_speedy@yahoo.com> 2.0-1
 - new version.
 

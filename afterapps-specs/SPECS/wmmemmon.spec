@@ -1,10 +1,6 @@
-%define __prefix /usr
-%define _bindir %{__prefix}/bin
-%define _datadir %{__prefix}/share
-%define _mandir %{_datadir}/man
 %define name wmmemmon
 %define version 1.0.2pre2
-%define release 5
+%define release 6%{?dist}
 
 Summary: WMMemMon - A dockapp to monitor memory/swap usages
 Name: %name
@@ -15,7 +11,7 @@ Group: AfterStep/Applets
 URL: http://seiichisato.jp/dockapps/
 Source0: http://seiichisato.jp/dockapps/src/%{name}-%{version}.tar.gz
 Patch0: wmmemmon-1.0.2-main.c.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}pre2-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 WMMemMon is a program to monitor memory/swap usages. It is a dockapp that is
@@ -32,7 +28,7 @@ you by turning back-light on.
 %patch0
 
 %build
-./configure --prefix=%{__prefix} --mandir=%{_mandir}
+./configure --prefix=%{_prefix} --mandir=%{_mandir}
 make
 
 %install
@@ -54,6 +50,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.0.2pre2-6
+- added distro info to release.
+
 * Sat Oct 07 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.0.2pre2-5
 - updated URL and Source info.
 

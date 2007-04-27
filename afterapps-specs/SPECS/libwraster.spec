@@ -1,14 +1,16 @@
-%define prefix /usr
+%define name	libwraster
+%define version	0.80.2
+%define release	3%{?dist}
 
-Summary: 	wraster libraries used in WindowMaker.
-Name: 		libwraster
-Version:	0.80.2
-Release:	2
+Summary: 	wraster libraries used in WindowMaker
+Name:		%name
+Version:	%version
+Release:	%release
 License:	GPL
 Group: 		User Interface/Desktops
 URL: 		http://www.windowmaker.info/
 Source: 	http://open-systems.ufl.edu/mirrors/gentoo/distfiles/WindowMaker-%{version}.tar.gz
-BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	libpng-devel libjpeg-devel libungif-devel 
 BuildRequires:	libtiff-devel zlib-devel gettext
 Conflicts:	WindowMaker WindowMaker-libs WindowMaker-devel
@@ -26,35 +28,38 @@ these programs independent of WindowMaker.
 %setup -q -n WindowMaker-%{version}
 
 %build
-%configure --prefix=%{prefix}
+%configure --prefix=%{_prefix}
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{prefix}/lib
-mkdir -p $RPM_BUILD_ROOT%{prefix}/include
+mkdir -p $RPM_BUILD_ROOT%{_libdir}
+mkdir -p $RPM_BUILD_ROOT%{_includedir}
 
-ln -s ./libwraster.so.2.2.0 $RPM_BUILD_ROOT%{prefix}/lib/libwraster.so
-ln -s ./libwraster.so.2.2.0 $RPM_BUILD_ROOT%{prefix}/lib/libwraster.so.2
+ln -s ./libwraster.so.2.2.0 $RPM_BUILD_ROOT%{_libdir}/libwraster.so
+ln -s ./libwraster.so.2.2.0 $RPM_BUILD_ROOT%{_libdir}/libwraster.so.2
 
-install -m 644 wrlib/.libs/libwraster.a $RPM_BUILD_ROOT%{prefix}/lib/
-install -m 644 wrlib/libwraster.la $RPM_BUILD_ROOT%{prefix}/lib/
-install -m 755 wrlib/.libs/libwraster.so.2.2.0 $RPM_BUILD_ROOT%{prefix}/lib/
-install -m 644 wrlib/wraster.h $RPM_BUILD_ROOT%{prefix}/include/
+install -m 644 wrlib/.libs/libwraster.a $RPM_BUILD_ROOT%{_libdir}/
+install -m 644 wrlib/libwraster.la $RPM_BUILD_ROOT%{_libdir}/
+install -m 755 wrlib/.libs/libwraster.so.2.2.0 $RPM_BUILD_ROOT%{_libdir}/
+install -m 644 wrlib/wraster.h $RPM_BUILD_ROOT%{_includedir}/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/include/*.h
-%prefix/lib/libw*
+%{_includedir}/*.h
+%{_libdir}/libw*
 
 %post -p /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.80.2-3
+- added distro info to release.
+
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.80.2-2
 - Updated Source path and URL.
 

@@ -1,7 +1,6 @@
-%define prefix /usr
 %define name wmcpum.app
 %define version 0.1.0
-%define release 4
+%define release 5%{?dist}
 
 Summary: WindowMaker CPU Monitor
 Name: %name
@@ -11,7 +10,7 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://www.unetz.com/schaepe/DOCKAPPS/dockapps.html
 Source0: http://www.unetz.com/schaepe/DOCKAPPS/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: lm_sensors
 
 %description
@@ -33,9 +32,9 @@ make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
 cd wmcpum
-install -s -m 755 wmcpum $RPM_BUILD_ROOT%prefix/bin/
+install -s -m 755 wmcpum $RPM_BUILD_ROOT%{_bindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -43,10 +42,13 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %doc CHANGELOG COPYING INSTALL
-%prefix/bin/wmcpum
+%{_bindir}/wmcpum
 
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.1.0-5
+- added distro info to release.
+
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.1.0-4
 - Updated Source path.
 

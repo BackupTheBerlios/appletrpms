@@ -1,9 +1,8 @@
-%define prefix /usr
 %define name wmalms
 %define version 1.1.1
-%define release 3
+%define release 4%{?dist}
 
-Summary: Applet to manage sensor data: temperature, fan speed, voltage.
+Summary: Applet to manage sensor data: temperature, fan speed, voltage
 Name: %name
 Version: %version
 Release: %release
@@ -12,7 +11,7 @@ Group: AfterStep/Applets
 URL: http://www.geocities.com/wmalms/
 Source0: http://www.geocities.com/%{name}/%{name}-%{version}.tar.gz
 Patch0: wmalms-1.1.1-prompt-bypass.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: lm_sensors-devel >= 2.0
 Requires: lm_sensors >= 2.0
 
@@ -29,24 +28,27 @@ by lm_sensors.
 %patch0
 
 %build
-./configure --prefix=%prefix --with-rpm
+./configure --prefix=%{_prefix} --with-rpm
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-install -s -m 755 wmalms $RPM_BUILD_ROOT%prefix/bin/
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+install -s -m 755 wmalms $RPM_BUILD_ROOT%{_bindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
+%{_bindir}/*
 %doc COPYING README manual.html
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.1.1-4
+- added distro info to release.
+
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.1.1-3
 - Updated Source path.
 

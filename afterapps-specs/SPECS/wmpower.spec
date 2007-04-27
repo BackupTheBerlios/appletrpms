@@ -1,7 +1,6 @@
-%define prefix /usr
 %define name wmpower
 %define version 0.4.2
-%define release 3
+%define release 4%{?dist}
 
 Summary: wmpower is a dockapp to see the power management of a laptop 
 Name: %name
@@ -11,7 +10,7 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://wmpower.sourceforge.net/
 Source0: http://easynews.dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.bz2
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 wmpower is a Window Maker dock application allowing the user to
@@ -21,24 +20,27 @@ graphically see (and set) the power management status of his laptop.
 %setup -q
 
 %build
-./configure --exec-prefix=%prefix
+./configure --exec-prefix=%{_prefix}
 make
 
 %install
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-install -s -m 755 src/wmpower $RPM_BUILD_ROOT%prefix/bin
-strip $RPM_BUILD_ROOT%prefix/bin/wmpower
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+install -s -m 755 src/wmpower $RPM_BUILD_ROOT%{_bindir}
+strip $RPM_BUILD_ROOT%{_bindir}/wmpower
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
+%{_bindir}/*
 %doc AUTHORS BUGS COPYING ChangeLog INSTALL NEWS README README.compal THANKS TODO
 
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.4.2-4
+- added distro info to release.
+
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.4.2-3
 - Updated Source path.
 

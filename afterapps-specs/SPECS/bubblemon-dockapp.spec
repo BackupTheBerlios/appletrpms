@@ -23,12 +23,11 @@
 %endif
 ### END Distro Definitions
 
-%define prefix /usr
 %define name bubblemon-dockapp
 %define version 1.46
-%define release 4
+%define release 5%{?dist}
 
-Summary: system monitoring dockapp based-on GNOME BubbleMon.
+Summary: system monitoring dockapp based-on GNOME BubbleMon
 Name: %name
 Version: %version
 Release: %release
@@ -36,7 +35,7 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://www.ne.jp/asahi/linux/timecop/
 Source0: http://www.ne.jp/asahi/linux/timecop/software/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 %if %{mdk}
 Requires: libgtk+1.2-devel
 %endif
@@ -65,23 +64,26 @@ command-line, if you prefer original "BubbleMon" look.
 %setup -q
 
 %build
-#./configure --prefix=%prefix
+#./configure --prefix=%{_prefix}
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-install -s -m 755 bubblemon $RPM_BUILD_ROOT%prefix/bin/
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+install -s -m 755 bubblemon $RPM_BUILD_ROOT%{_bindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
+%{_bindir}/*
 %doc ChangeLog INSTALL README SUPPORTED_SYSTEMS doc/COPYING doc/Xdefaults.sample
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.46-5
+- added distro info to release.
+
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.46-4
 - Updated Source path.
 

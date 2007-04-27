@@ -1,10 +1,6 @@
-%define __prefix /usr
-%define _bindir %{__prefix}/bin
-%define _datadir %{__prefix}/share
-%define _mandir %{_datadir}/man
 %define name wmxkb
 %define version 1.2.2
-%define release 6
+%define release 7%{?dist}
 
 Summary: A dockable/swallowed XKB groups indicator and switch
 Name: %name
@@ -29,7 +25,7 @@ run whenever a particular group is activated.
 %setup -q
 
 %build
-./configure --with-rpm --prefix=%{__prefix}
+./configure --with-rpm --prefix=%{_prefix}
 make
 
 %install
@@ -51,6 +47,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-7
+- added distro info to release.
+
 * Fri Feb 16 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-6
 - spec file cleanup.
 

@@ -1,7 +1,6 @@
-%define prefix /usr
 %define name wmifinfo
 %define version 0.09
-%define release 3
+%define release 4%{?dist}
 
 Summary: wmifinfo shows basic network info for all available interfaces
 Name: %name
@@ -11,7 +10,7 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://www.zevv.nl/wmifinfo/
 Source0: http://www.zevv.nl/wmifinfo/%{name}-%{version}.tgz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 wmifinfo is a simple applet showing basic network info for
@@ -29,19 +28,21 @@ make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-install -s -m 755 wmifinfo $RPM_BUILD_ROOT%prefix/bin/
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+install -s -m 755 wmifinfo $RPM_BUILD_ROOT%{_bindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
+%{_bindir}/*
 %doc README
 
-
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.09-4
+- added distro info to release.
+
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.09-3
 - Updated Source path.
 

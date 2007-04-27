@@ -1,12 +1,8 @@
-%define __prefix /usr
-%define _bindir %{__prefix}/bin
-%define _datadir %{__prefix}/share
-%define _mandir %{_datadir}/man
 %define name wmtz
 %define version 0.7
-%define release 3
+%define release 4%{?dist}
 
-Summary: wmtz displays the local time from different time zones.
+Summary: wmtz displays the local time from different time zones
 Name: %name
 Version: %version
 Release: %release
@@ -15,7 +11,7 @@ Group: AfterStep/Applets
 URL: http://www.geocities.com/jl1n/wmtz/wmtz.html
 Source0: http://www.geocities.com/jl1n/%{name}/%{name}-%{version}.tar.gz
 Patch0: %{name}-%{version}.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 wmtz is a Window Maker dock app derived from the WMiNET
@@ -37,7 +33,7 @@ when they are asleep...
 %build
 cd wmtz
 
-make DESTDIR=%{__prefix}
+make DESTDIR=%{_prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -57,6 +53,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc BUGS CHANGES COPYING INSTALL README wmtz/wmtzrc
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.7-4
+- added distro info to release.
+
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.7-3
 - Updated Source path.
 

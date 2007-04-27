@@ -1,9 +1,9 @@
 %define prefix /usr
 %define name wmusic
 %define version 1.5.0
-%define release 3
+%define release 4%{?dist}
 
-Summary: Windowmaker dockapp that remote controls xmms.
+Summary: Windowmaker dockapp that remote controls xmms
 Name: %name
 Version: %version
 Release: %release
@@ -12,7 +12,7 @@ Group: AfterStep/Applets
 URL: http://home.jtan.com/~john/wmusic/
 Source0: http://home.jtan.com/~john/wmusic/%{name}-%{version}.tar.gz
 Requires:   xmms >= 1.0.0
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: xmms-devel
 
 %description
@@ -36,24 +36,27 @@ of the features:
 %setup -q -n %name-%version
 
 %build
-./configure --prefix=%prefix
+./configure --prefix=%{_prefix}
 make
 
 %install
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
 
-install -s -m 755 src/wmusic $RPM_BUILD_ROOT%prefix/bin/
+install -s -m 755 src/wmusic $RPM_BUILD_ROOT%{_bindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
+%{_bindir}/*
 %doc COPYING README
 
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.5.0-4
+- added distro info to release.
+
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.5.0-3
 - Updated Source path.
 

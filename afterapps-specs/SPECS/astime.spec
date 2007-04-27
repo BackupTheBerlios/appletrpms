@@ -1,10 +1,6 @@
-%define __prefix /usr
-%define _bindir %{__prefix}/bin
-%define _datadir %{__prefix}/share
-%define _mandir %{_datadir}/man
 %define name astime
 %define version 2.8
-%define release 4
+%define release 5%{?dist}
 
 Summary: An analog clock
 Name: %name
@@ -14,7 +10,7 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://tigr.net/afterstep/view.php?applet=astime/data
 Source0: http://tigr.net/afterstep/download/%{name}/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 An analog clock that shows the time, the date and the day of
@@ -25,7 +21,7 @@ user.
 %setup -q
 
 %build
-./configure --prefix=%{__prefix}
+./configure --prefix=%{_prefix}
 make
 
 %install
@@ -48,6 +44,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 2.8-5
+- added distro info to release.
+
 * Sat Oct 07 2006 J. Krebs <rpm_speedy@yahoo.com> - 2.8-4
 - updated URL and Source info.
 

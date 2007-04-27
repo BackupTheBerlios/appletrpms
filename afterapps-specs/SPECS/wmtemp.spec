@@ -1,12 +1,8 @@
-%define __prefix /usr
-%define _bindir %{__prefix}/bin
-%define _datadir %{__prefix}/share
-%define _mandir %{_datadir}/man
 %define name wmtemp
 %define version 0.0.5
-%define release 3
+%define release 4%{?dist}
 
-Summary: wmtemp displays CPU & SYS temps in "LCD look" via lm_sensors.
+Summary: wmtemp displays CPU & SYS temps in "LCD look" via lm_sensors
 Name: %name
 Version: %version
 Release: %release
@@ -14,8 +10,9 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://gnodde.org/wmtemp/
 Source0: http://open-systems.ufl.edu/mirrors/gentoo/distfiles/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: lm_sensors
+Buildrequires: lm_sensors-devel
 
 %description
 wmtemp dockapp displays CPU & SYS temps in LCD look via lm_sensors. 
@@ -46,6 +43,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.0.5-4
+- added distro info to release.
+
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.0.5-3
 - Updated Source path.
 

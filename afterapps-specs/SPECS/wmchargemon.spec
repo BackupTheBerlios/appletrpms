@@ -23,10 +23,9 @@
 %endif
 ### END Distro Definitions
 
-%define prefix	/usr
-%define version 0.3
-%define release 1
 %define name	wmchargemon
+%define version 0.3
+%define release 2%{?dist}
 
 Summary:	displays ACPI battery level and power status
 Name:		%name
@@ -59,14 +58,14 @@ its color) can be set.
 
 %build
 
-make PREFIX=%{prefix}
+make PREFIX=%{_prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-mkdir -p $RPM_BUILD_ROOT%{prefix}/bin
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
 
-install -s -m 755 wmchargemon $RPM_BUILD_ROOT%{prefix}/bin/
+install -s -m 755 wmchargemon $RPM_BUILD_ROOT%{_bindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -77,6 +76,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> 0.3-2
+- added distro info to release.
+
 * Fri Feb 16 2007 J. Krebs <rpm_speedy@yahoo.com> 0.3-1
 - new version.
 

@@ -1,10 +1,6 @@
-%define __prefix /usr
-%define _bindir %{__prefix}/bin
-%define _datadir %{__prefix}/share
-%define _mandir %{_datadir}/man
 %define name salmon
 %define version 1.2.2
-%define release 4
+%define release 5%{?dist}
 
 Summary: Still Another Load MONitor
 Name: %name
@@ -29,7 +25,7 @@ the moon.
 %setup -q
 
 %build
-./configure --prefix=%{__prefix}
+./configure --prefix=%{_prefix}
 make
 
 %install
@@ -51,6 +47,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGES INSTALL LICENSE README COPYING
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-5
+- added distro info to release.
+
 * Fri Feb 16 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-4
 - updated wen page info.
 

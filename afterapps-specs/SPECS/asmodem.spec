@@ -1,7 +1,6 @@
-%define prefix /usr
 %define name asmodem
 %define version 0.6
-%define release 5
+%define release 6%{?dist}
 
 Summary: Modem monitor
 Name: %name
@@ -11,7 +10,7 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://tigr.net/afterstep/view.php?applet=asmodem/data
 Source0: http://tigr.net/afterstep/download/%{name}/%{name}-%{version}-1.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 A swallowable applet monitors the modem.
@@ -20,7 +19,7 @@ A swallowable applet monitors the modem.
 %setup -q -n %{name}-%{version}-1
 
 %build
-./configure --prefix=%{__prefix}
+./configure --prefix=%{_prefix}
 make
 
 %install
@@ -43,6 +42,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> 0.6-6
+- added distro info to release.
+
 * Sat Oct 07 2006 J. Krebs <rpm_speedy@yahoo.com> 0.6-5
 - updated URL and Source info.
 

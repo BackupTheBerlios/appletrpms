@@ -1,12 +1,8 @@
-%define __prefix /usr
-%define _bindir %{__prefix}/bin
-%define _datadir %{__prefix}/share
-%define _mandir %{_datadir}/man
 %define name wmsensormon
 %define version 1.2.1
-%define release 4
+%define release 5%{?dist}
 
-Summary: uses lm_sensors to monitor CPU & sys temps, fan speed, and CPU voltage.
+Summary: uses lm_sensors to monitor CPU & sys temps, fan speed, and CPU voltage
 Name: %name
 Version: %version
 Release: %release
@@ -14,7 +10,7 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://wmsensormon.sourceforge.net/
 Source0: http://superb-west.dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: lm_sensors-devel >= 2.0
 Requires: lm_sensors >= 2.0
 
@@ -49,6 +45,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGELOG COPYING INSTALL README TODO
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.2.1-5
+- added distro info to release.
+
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.2.1-4
 - Updated Source path.
 

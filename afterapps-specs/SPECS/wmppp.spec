@@ -1,7 +1,6 @@
-%define prefix /usr
 %define name wmppp
 %define version 1.3.0
-%define release 3
+%define release 4%{?dist}
 
 Summary: wmppp provides a PPP activator and network load monitor
 Name: %name
@@ -12,7 +11,7 @@ Group: AfterStep/Applets
 URL: http://www.cs.mun.ca/~gstarkes/wmaker/dockapps/net.html
 Source0: http://www.cs.mun.ca/~gstarkes/wmaker/dockapps/files/%{name}-%{version}.tar.gz
 Patch0: wmppp-1.3.0-hispeed.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: ppp
 
 %description
@@ -50,9 +49,9 @@ make all
 %install
 rm -rf $RPM_BUILD_ROOT
 
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
 mkdir -p $RPM_BUILD_ROOT/etc/ppp
-install -s -m 755 wmppp/wmppp $RPM_BUILD_ROOT%prefix/bin/
+install -s -m 755 wmppp/wmppp $RPM_BUILD_ROOT%{_bindir}
 install -s -m 755 wmppp/getmodemspeed $RPM_BUILD_ROOT/etc/ppp/
 install -m 644 wmppp/user.wmppprc $RPM_BUILD_ROOT/etc/ppp/wmppprc
 
@@ -63,12 +62,15 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
+%{_bindir}/*
 /etc/ppp/*
 %doc BUGS CHANGES COPYING HINTS INSTALL README TODO
 %doc wmppp/*.wmppprc wmppp/example-scripts
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.3.0-4
+- added distro info to release.
+
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.3.0-3
 - Updated Source path.
 

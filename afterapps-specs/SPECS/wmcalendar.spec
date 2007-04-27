@@ -23,14 +23,9 @@
 %endif
 ### END Distro Definitions
 
-
-%define __prefix /usr
-%define _bindir %{__prefix}/bin
-%define _datadir %{__prefix}/share
-%define _mandir %{_datadir}/man
 %define name wmcalendar
 %define version 0.5.2
-%define release 1
+%define release 2%{?dist}
 
 Summary: wmCalendar is a calendar dockapp
 Name: %name
@@ -44,6 +39,7 @@ Source1: %{name}.ogo2ical
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Buildrequires: libical
 Requires: libical
+Buildrequires: libical-devel
 
 %description
 wmCalendar is a calendar dockapp that provides the following:
@@ -93,6 +89,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.5.2-2
+- added distro info to release.
+
 * Fri Feb 16 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.5.2-1
 - New version.
 

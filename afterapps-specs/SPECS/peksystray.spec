@@ -1,6 +1,4 @@
 ### BEGIN Distro Defines
-### mdk, fedora, suse & generic are distros
-### mandriva, fedoragcc4, and susegcc4 define gcc 4.0 compilers
 %define mdk  %(if [ -e /etc/mandrake-release -o -e /etc/mandriva-release ]; then echo 1; else echo 0; fi;)
 %{?_with_mdk:   %{expand: %%global mdk 1}}
 
@@ -31,10 +29,9 @@
   %define generic 0
 %endif
 
-%define prefix /usr
 %define name peksystray
 %define version 0.4.0
-%define release 1
+%define release 2%{?dist}
 
 Summary: peksystray is a dockable systray
 Name: %name
@@ -58,17 +55,17 @@ docking.
 
 %if %{xseven}
 	CFLAGS="-lX11" \
-	./configure --prefix=%prefix
+	./configure --prefix=%{_prefix}
 %else
-	./configure --prefix=%prefix
+	./configure --prefix=%{_prefix}
 %endif
 
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-install -s -m 755 src/peksystray $RPM_BUILD_ROOT%prefix/bin/
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+install -s -m 755 src/peksystray $RPM_BUILD_ROOT%{_bindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -80,6 +77,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.4.0-2
+- added distro info to release.
+
 * Fri Feb 16 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.4.0-1
 - New version.
 

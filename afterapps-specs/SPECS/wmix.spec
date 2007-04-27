@@ -1,10 +1,6 @@
-%define __prefix /usr
-%define _bindir %{__prefix}/bin
-%define _datadir %{__prefix}/share
-%define _mandir %{_datadir}/man
 %define name wmix
 %define version 3.2
-%define release 3
+%define release 4%{?dist}
 
 Summary: dockapp mixer utilizing the OSS mixer API
 Name: %name
@@ -14,7 +10,7 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://www.dockapps.com/file.php/id/58
 Source0: http://www.dockapps.com/download.php/id/528/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 - This is a complete dockapp mixer utilizing the OSS mixer API
@@ -29,7 +25,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 %setup -q
 
 %build
-make PREFIX=%{__prefix}
+make PREFIX=%{_prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -48,8 +44,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 %doc AUTHORS BUGS COPYING INSTALL NEWS README sample.wmixrc
 
-
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 3.2-4
+- added distro info to release.
+
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 3.2-3
 - Updated Source path.
 

@@ -1,7 +1,6 @@
-%define prefix /usr
 %define name wmflame
 %define version 0.60
-%define release 5
+%define release 6%{?dist}
 
 Summary: wmflame is a WindowMaker dock applet that draws flames
 Name: %name
@@ -10,7 +9,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 Source: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 wmflame makes an animated flame.  The flame algorithm is very standard.  
@@ -25,18 +24,21 @@ make CFLAGS="$RPM_OPT_FLAGS"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{prefix}/bin
-install -s -m 755 %{name}/%{name} $RPM_BUILD_ROOT%{prefix}/bin
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+install -s -m 755 %{name}/%{name} $RPM_BUILD_ROOT%{_bindir}
 
 %files
 %defattr(-,root,root)
-%{prefix}/bin/%{name}
+%{_bindir}/%{name}
 %doc BUGS COPYING INSTALL README
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.6-6
+- added distro info to release.
+
 * Sun Mar 04 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.6-5
 - Updated Source path. Web site dead.
 

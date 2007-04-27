@@ -1,12 +1,8 @@
-%define __prefix /usr
-%define _bindir %{__prefix}/bin
-%define _datadir %{__prefix}/share
-%define _mandir %{_datadir}/man
 %define name WMBlueClock
 %define version 0.1
-%define release 4
+%define release 5%{?dist}
 
-Summary: WMBlueClock is a nice clock app.
+Summary: WMBlueClock is a nice clock app
 Name: %name
 Version: %version
 Release: %release
@@ -26,7 +22,7 @@ and 24 hour mode.
 %setup -q -n WMBlueClock
 
 %build
-make PREFIX=%{__prefix}
+make PREFIX=%{_prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -47,6 +43,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.1-5
+- added distro info to release.
+
 * Sun Mar 04 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.1-4
 - Updated Source path. Sheepmakers site is invalid.
 

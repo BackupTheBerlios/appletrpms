@@ -1,12 +1,8 @@
-%define __prefix /usr
-%define _bindir %{__prefix}/bin
-%define _datadir %{__prefix}/share
-%define _mandir %{_datadir}/man
 %define name WMBlueMem
 %define version 0.9
-%define release 4
+%define release 5%{?dist}
 
-Summary: WMBlueMem is a memory monitoring program.
+Summary: WMBlueMem is a memory monitoring program
 Name: %name
 Version: %version
 Release: %release
@@ -28,7 +24,7 @@ displayed.
 %patch0
 
 %build
-make PREFIX=%{__prefix}
+make PREFIX=%{_prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -49,6 +45,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.9-5
+- added distro info to release.
+
 * Sun Mar 04 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.9-4
 - Updated Source path. Sheepmakers site is invalid.
 

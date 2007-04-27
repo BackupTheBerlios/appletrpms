@@ -1,7 +1,6 @@
-%define prefix /usr
 %define name wmtimer
 %define version 2.92
-%define release 3
+%define release 4%{?dist}
 
 Summary: wmtimer is a dockable alarm clock
 Name: %name
@@ -11,7 +10,7 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://dockapps.org/file.php/id/23
 Source0: http://open-systems.ufl.edu/mirrors/gentoo/distfiles/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 WMTimer is a dockable alarm clock for WindowMaker which can be
@@ -24,25 +23,27 @@ the command line or the GTK GUI.
 %setup -q
 
 %build
-#./configure --prefix=%prefix
 cd wmtimer
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
-install -s -m 755 wmtimer/wmtimer $RPM_BUILD_ROOT%prefix/bin/
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+install -s -m 755 wmtimer/wmtimer $RPM_BUILD_ROOT%{_bindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
+%{_bindir}/*
 %doc COPYING CREDITS Changelog INSTALL README
 
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 2.92-4
+- added distro info to release.
+
 * Sat Oct 07 2006 J. Krebs <rpm_speedy@yahoo.com> - 2.92-3
 - updated URL and Source info.
 

@@ -1,12 +1,8 @@
-%define __prefix /usr
-%define _bindir %{__prefix}/bin
-%define _datadir %{__prefix}/share
-%define _mandir %{_datadir}/man
 %define name hvclock
 %define version 0.2.0
-%define release 1
+%define release 2%{?dist}
 
-Summary: hvclock is a "DockApp" analog clock and calendar application.
+Summary: hvclock is a "DockApp" analog clock and calendar application
 Name: %name
 Version: %version
 Release: %release
@@ -14,9 +10,7 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://www2.hugovil.com:8080/en/hvclock/
 Source0: %{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-#BuildRequires: gdk-pixbuf-devel
-#Requires: gdk-pixbuf
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 hvclock is a "DockApp" analog clock and calendar application.
@@ -25,7 +19,7 @@ hvclock is a "DockApp" analog clock and calendar application.
 %setup -q
 
 %build
-./configure --prefix=%{__prefix} --mandir=%{_mandir}
+./configure --prefix=%{_prefix} --mandir=%{_mandir}
 make
 
 %install
@@ -43,6 +37,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README TODO
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.2.0-2
+- added distro info to release.
+
 * Sat Sep 09 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.2.0-1
 - new version.
 

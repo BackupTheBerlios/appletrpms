@@ -1,7 +1,6 @@
-%define prefix /usr
 %define name asmon
 %define version 0.65
-%define release 3
+%define release 4%{?dist}
 
 Summary: AS system monitor
 Name: %name
@@ -11,7 +10,7 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://tigr.net/afterstep/view.php?applet=asmon/data
 Source0: http://tigr.net/afterstep/download/%{name}/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 A system monitor applet for After Step.
@@ -24,9 +23,9 @@ cd asmon
 make
 
 %install
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
 cd asmon
-make PR_NAME=$RPM_BUILD_ROOT%prefix/bin/%name \
+make PR_NAME=$RPM_BUILD_ROOT%{_bindir}/%name \
     install
 
 %clean
@@ -34,11 +33,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
+%{_bindir}/*
 %doc AUTHOR CHANGES COPYING INSTALL 
 
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.65-4
+- added distro info to release.
+
 * Sat Oct 07 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.65-3
 - updated URL and Source info.
 

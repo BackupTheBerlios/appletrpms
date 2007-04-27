@@ -23,10 +23,9 @@
 %endif
 ### END Distro Definitions
 
-%define prefix	/usr
-%define version 0.1.1
-%define release 1
 %define name	wmnethru
+%define version 0.1.1
+%define release 2%{?dist}
 
 Summary:	Network Throughput and System Utilization Monitor
 Name:		%name
@@ -36,7 +35,7 @@ License:	GPL
 Group:		AfterStep/Applets
 Source0:	http://dockapps.org/download.php/id/693/%{name}-%{version}.tar.gz
 URL:		http://dockapps.org/file.php/id/315
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %if %{mdk}
 Requires: libdockapp0
@@ -68,16 +67,16 @@ mouse button.
 
 %build
 
-make DESTDIR=%{prefix}/bin                     \
-	LIBDIR=-L%{prefix}/lib                   \
-	INCDIR=-I%{prefix}/include/X11
+make DESTDIR=%{_bindir}                     \
+	LIBDIR=-L%{_libdir}                 \
+	INCDIR=-I%{_includedir}/X11
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-mkdir -p $RPM_BUILD_ROOT%{prefix}/bin
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
 
-install -s -m 755 wmnethru $RPM_BUILD_ROOT%{prefix}/bin/
+install -s -m 755 wmnethru $RPM_BUILD_ROOT%{_bindir}/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -85,8 +84,11 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %doc ChangeLog README
-%{prefix}/bin/*
+%{_bindir}/*
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> 0.1.1-2
+- added distro info to release.
+
 * Sat Sep 23 2006 J. Krebs <rpm_speedy@yahoo.com> 0.1.1-1
 - initial build.

@@ -32,16 +32,9 @@
 ### END Distro Definitions
 
 %define	name AfterStep
-%define	version	2.2.4
-%define release 2
+%define	version	2.2.5
+%define release 1%{?dist}
 %define epoch 20
-
-%define __prefix /usr
-%define _bindir %{__prefix}/bin
-%define _datadir %{__prefix}/share
-%define _includedir %{__prefix}/include
-%define _libdir %{__prefix}/lib
-%define _mandir %{_datadir}/man
 
 Summary:	AfterStep Window Manager (NeXTalike)
 Name:		%{name}
@@ -61,11 +54,6 @@ Source5: 	AfterStep.menumethod
 Source6: 	afterstep.desktop.xsessions
 Source7: 	afterstep.desktop.wm-properties
 Source8:	afterstep.fedora.README
-Source9:	AfterStep-2.2.4.Pulse.icon
-Source10:	AfterStep-2.2.4.Worker.icon
-Patch0:		AfterStep-2.2.4.update.patches
-Patch1:		AfterStep-2.2.4.disableKDEglobals.patch
-Patch2:		AfterStep-2.2.4.menu.pictures.patch
 Distribution:	The AfterStep TEAM
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	%{name}-libs = %{epoch}:%{version}
@@ -128,9 +116,6 @@ Requires:	libX11-devel
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch0
-%patch1
-%patch2
 
 %build
 CFLAGS=$RPM_OPT_FLAGS \
@@ -166,10 +151,6 @@ mkdir -p $RPM_BUILD_ROOT
 
 make DESTDIR=$RPM_BUILD_ROOT LDCONFIG=/bin/true install
 rm -f $RPM_BUILD_ROOT%{_bindir}/{sessreg,xpmroot}
-
-#added icons for 2.2.4
-install -m 0644 %{SOURCE9} %{buildroot}%{_datadir}/afterstep/desktop/icons/normal/Pulse
-install -m 0644 %{SOURCE10} %{buildroot}%{_datadir}/afterstep/desktop/icons/logos/Worker
 
 #fedora core 4 and earlier gdm setup
 %if %{fedora4}
@@ -241,7 +222,7 @@ rm -rf %{buildroot}
 %doc afterstep.fedora.README
 %endif
 %if %{generic}
-%{__prefix}/xsessions/AfterStep.desktop
+%{_prefix}/xsessions/AfterStep.desktop
 %endif
 
 %files libs
@@ -287,6 +268,9 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
+* Fri Apr 27 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.5-1
+- new version.
+
 * Mon Feb 19 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.4-2
 - removed debug entries from /usr/lib, added provides for libAI.
 

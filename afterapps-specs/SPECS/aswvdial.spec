@@ -1,7 +1,6 @@
-%define prefix /usr
 %define name aswvdial
 %define version 1.7
-%define release 5
+%define release 6%{?dist}
 
 Summary: ASwvdial is a dock/wharf/slit app for wvdial
 Name: %name
@@ -11,7 +10,7 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://www.ma-scha.de/
 Source0: http://www.ma-scha.de/download/%{name}-%{version}.tar.bz2
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: libxml-devel
 Requires: libxml wvdial
 
@@ -22,28 +21,31 @@ ASwvdial is a dock/wharf/slit app for wvdial.
 %setup -q -n aswvdial
 
 %build
-#./configure --prefix=%prefix
+#./configure --prefix=%{_prefix}
 cd aswvdial
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
 
-install -s -m 755 aswvdial/aswvdial $RPM_BUILD_ROOT%prefix/bin
-install -m 755 aswvdial/netdown $RPM_BUILD_ROOT%prefix/bin
-install -m 755 aswvdial/netup $RPM_BUILD_ROOT%prefix/bin
+install -s -m 755 aswvdial/aswvdial $RPM_BUILD_ROOT%{_bindir}
+install -m 755 aswvdial/netdown $RPM_BUILD_ROOT%{_bindir}
+install -m 755 aswvdial/netup $RPM_BUILD_ROOT%{_bindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
+%{_bindir}/*
 %doc COPYING ChangeLog INSTALL README XPM.readme
 
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.7-6
+- added distro info to release.
+
 * Sat Oct 07 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.7-5
 - updated URL and Source info.
 

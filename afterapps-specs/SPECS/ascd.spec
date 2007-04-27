@@ -1,10 +1,6 @@
-%define __prefix /usr
-%define _bindir %{__prefix}/bin
-%define _datadir %{__prefix}/share
-%define _mandir %{_datadir}/man
 %define name ascd
 %define version 0.13.2
-%define release 7
+%define release 8%{?dist}
 
 Summary: Audio CD player
 Name: %name
@@ -20,7 +16,7 @@ Source3: http://worldserver.oleane.com/rsn/Archives/lcd.tar.gz
 Patch0: ascd-0.13.2.a.patch
 Patch1: ascd-0.13.2.b.patch
 Patch2: ascd-0.13.2.c.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Obsoletes: ascd-themes
 Provides: ascd-themes
 
@@ -76,6 +72,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc README ascd/doc/* ascd/themes/themes-manual.ps
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.13.2-8
+- added distro info to release.
+
 * Sat Mar 03 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.13.2-7
 - merged ascd and ascd-themes; ascd-themes obsolete.
 

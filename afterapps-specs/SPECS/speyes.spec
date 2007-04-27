@@ -1,10 +1,6 @@
-%define __prefix /usr
-%define _bindir %{__prefix}/bin
-%define _datadir %{__prefix}/share
-%define _mandir %{_datadir}/man
 %define name speyes
 %define version 1.2.0
-%define release 3
+%define release 4%{?dist}
 
 Summary: South Park-themed wmeyes
 Name: %name
@@ -15,7 +11,7 @@ Group: AfterStep/Applets
 URL: http://okb-1.org/speyes/speyes.html
 Source0: http://okb-1.org/speyes/%{name}-%{version}.tar.gz
 Source1: %{name}.man
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 South Park-themed wmeyes.
@@ -45,6 +41,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.8.0-4
+- added distro info to release.
+
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.2.0-3
 - Updated Source path.
 

@@ -1,11 +1,6 @@
-%define __prefix /usr
-%define _bindir %{__prefix}/bin
-%define _datadir %{__prefix}/share
-%define _mandir %{_datadir}/man
-%define _libdir %{__prefix}/lib
 %define name wmbiff
 %define version 0.4.27
-%define release 3
+%define release 4%{?dist}
 
 Summary: A dockable/swallowed mail notifier
 Name: %name
@@ -15,7 +10,7 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://wmbiff.sf.net
 Source0: http://internap.dl.sourceforge.net/sourceforge/wmbiff/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: ruby
 
 %description 
@@ -32,7 +27,7 @@ wmbiff's with differrent configs).
 %setup -q
 
 %build
-./configure --prefix=%{__prefix} --mandir=%{_mandir}
+./configure --prefix=%{_prefix} --mandir=%{_mandir}
 make
 
 %install
@@ -55,6 +50,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog COPYING FAQ INSTALL NEWS README* TODO
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> 0.4.27-4
+- added distro info to release.
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> 0.4.27-3
 - Updated Source path.
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> 0.4.27-2

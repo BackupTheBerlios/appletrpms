@@ -1,10 +1,6 @@
-%define __prefix /usr
-%define _bindir %{__prefix}/bin
-%define _datadir %{__prefix}/share
-%define _mandir %{_datadir}/man
 %define name asclock
 %define version 2.0.12
-%define release 5
+%define release 6%{?dist}
 
 Summary: Clock Applet
 Name: %name
@@ -16,7 +12,7 @@ URL: http://tigr.net/afterstep/view.php?applet=asclock/data
 Source0: http://tigr.net/afterstep/download/%{name}/%{name}-%{version}.tar.gz
 Source1: %{name}-%{version}.config
 Patch0: %{name}-%{version}.xpm.path.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 AfterStep clock applet
@@ -55,6 +51,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 2.0.12-6
+- added distro info to release.
+
 * Sat Oct 07 2006 J. Krebs <rpm_speedy@yahoo.com> - 2.0.12-5
 - updated URL and Source info.
 

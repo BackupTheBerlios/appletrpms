@@ -1,7 +1,6 @@
-%define prefix /usr
 %define name Mixer.app
 %define version 1.8.0
-%define release as5
+%define release 6%{?dist}
 
 Summary: WM applet sound mixer based-on Rob Malda's asmixer
 Name: %name
@@ -12,7 +11,7 @@ Group: AfterStep/Applets
 URL: http://www.fukt.bth.se/~per/mixer
 Source0: http://www.fukt.bth.se/~per/mixer/%{name}-%{version}.tar.gz
 Patch0: Mixer.app-1.8.0.as.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 This WM applet includes two binaries: "Mixer.app" for AfterStep
@@ -43,21 +42,24 @@ make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%prefix/bin
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
 
-install -s -m 755 Mixer.app $RPM_BUILD_ROOT%prefix/bin/Mixer.app
-install -s -m 755 Mixer.app.as $RPM_BUILD_ROOT%prefix/bin/Mixer.app.as
+install -s -m 755 Mixer.app $RPM_BUILD_ROOT%{_bindir}/Mixer.app
+install -s -m 755 Mixer.app.as $RPM_BUILD_ROOT%{_bindir}/Mixer.app.as
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%prefix/bin/*
+%{_bindir}/*
 %doc ChangeLog INSTALL README COPYING
 
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.8.0-6
+- added distro info to release.
+
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> - 1.8.0-as5
 - Updated Source path.
 

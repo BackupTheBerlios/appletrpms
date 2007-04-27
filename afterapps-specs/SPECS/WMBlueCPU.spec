@@ -1,12 +1,8 @@
-%define __prefix /usr
-%define _bindir %{__prefix}/bin
-%define _datadir %{__prefix}/share
-%define _mandir %{_datadir}/man
 %define name WMBlueCPU
 %define version 0.6
-%define release 4
+%define release 5%{?dist}
 
-Summary: WMBlueCPU is a cpu monitor.
+Summary: WMBlueCPU is a cpu monitor
 Name: %name
 Version: %version
 Release: %release
@@ -26,7 +22,7 @@ right corner, and a usage history chart at the bottom.
 %setup -q -n WMBlueCPU
 
 %build
-make PREFIX=%{__prefix}
+make PREFIX=%{_prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -47,6 +43,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.6-5
+- added distro info to release.
+
 * Sun Mar 04 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.6-4
 - Updated Source path. Sheepmakers site is invalid.
 

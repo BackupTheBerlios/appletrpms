@@ -1,7 +1,7 @@
 %define imagepath /pixmaps/backgrounds
 %define	name Propaganda
 %define	version	1.0
-%define release 1
+%define release 2%{?dist}
 
 Summary:	Propaganda - Desktop backgrounds and tiles 
 Name:		%{name}
@@ -31,7 +31,7 @@ them ideal for use in 3D applications, or simply as desktop wallpaper.
 Summary:	Propaganda Volume 1 - Desktop backgrounds and tiles
 Group:		Graphical desktop/Other 
 %description Vol1
-This is Volume 1 of Propaganda Collection.
+This is Volume 1 of the Propaganda Collection.
 
 Propaganda, at its core, is basically a collection of "seamless tiles"..
 Graphics which are drawn in such a way that they do not appear to repeat
@@ -45,7 +45,7 @@ them ideal for use in 3D applications, or simply as desktop wallpaper.
 Summary:	Propaganda Volume 2 - Desktop backgrounds and tiles
 Group:		Graphical desktop/Other
 %description Vol2
-This is Volume 2 of Propaganda Collection.
+This is Volume 2 of the Propaganda Collection.
 
 Propaganda, at its core, is basically a collection of "seamless tiles"..
 Graphics which are drawn in such a way that they do not appear to repeat
@@ -59,7 +59,7 @@ them ideal for use in 3D applications, or simply as desktop wallpaper.
 Summary:	Propaganda Volume 3 - Desktop backgrounds and tiles
 Group:		Graphical desktop/Other
 %description Vol3
-This is Volume 3 of Propaganda Collection.
+This is Volume 3 of the Propaganda Collection.
 
 Propaganda, at its core, is basically a collection of "seamless tiles"..
 Graphics which are drawn in such a way that they do not appear to repeat
@@ -73,7 +73,7 @@ them ideal for use in 3D applications, or simply as desktop wallpaper.
 Summary:	Propaganda Volume 4 - Desktop backgrounds and tiles
 Group:		Graphical desktop/Other
 %description Vol4
-This is Volume 4 of Propaganda Collection.
+This is Volume 4 of the Propaganda Collection.
 
 Propaganda, at its core, is basically a collection of "seamless tiles"..
 Graphics which are drawn in such a way that they do not appear to repeat
@@ -87,7 +87,7 @@ them ideal for use in 3D applications, or simply as desktop wallpaper.
 Summary:	Propaganda Volume 5 - Desktop backgrounds and tiles
 Group:		Graphical desktop/Other
 %description Vol5
-This is Volume 5 of Propaganda Collection.
+This is Volume 5 of the Propaganda Collection.
 
 Propaganda, at its core, is basically a collection of "seamless tiles"..
 Graphics which are drawn in such a way that they do not appear to repeat
@@ -101,7 +101,7 @@ them ideal for use in 3D applications, or simply as desktop wallpaper.
 Summary:	Propaganda Volume 6 - Desktop backgrounds and tiles
 Group:		Graphical desktop/Other
 %description Vol6
-This is Volume 6 of Propaganda Collection.
+This is Volume 6 of the Propaganda Collection.
 
 Propaganda, at its core, is basically a collection of "seamless tiles"..
 Graphics which are drawn in such a way that they do not appear to repeat
@@ -115,7 +115,7 @@ them ideal for use in 3D applications, or simply as desktop wallpaper.
 Summary:	Propaganda Volume 7 - Desktop backgrounds and tiles
 Group:		Graphical desktop/Other
 %description Vol7
-This is Volume 7 of Propaganda Collection.
+This is Volume 7 of the Propaganda Collection.
 
 Propaganda, at its core, is basically a collection of "seamless tiles"..
 Graphics which are drawn in such a way that they do not appear to repeat
@@ -129,7 +129,7 @@ them ideal for use in 3D applications, or simply as desktop wallpaper.
 Summary:	Propaganda Volume 8 - Desktop backgrounds and tiles
 Group:		Graphical desktop/Other
 %description Vol8
-This is Volume 8 of Propaganda Collection.
+This is Volume 8 of the Propaganda Collection.
 
 Propaganda, at its core, is basically a collection of "seamless tiles"..
 Graphics which are drawn in such a way that they do not appear to repeat
@@ -143,7 +143,7 @@ them ideal for use in 3D applications, or simply as desktop wallpaper.
 Summary:	Propaganda Volume 9 - Desktop backgrounds and tiles
 Group:		Graphical desktop/Other
 %description Vol9
-This is Volume 9 of Propaganda Collection.
+This is Volume 9 of the Propaganda Collection.
 
 Propaganda, at its core, is basically a collection of "seamless tiles"..
 Graphics which are drawn in such a way that they do not appear to repeat
@@ -157,7 +157,7 @@ them ideal for use in 3D applications, or simply as desktop wallpaper.
 Summary:	Propaganda Volume 10 - Desktop backgrounds and tiles
 Group:		Graphical desktop/Other
 %description Vol10
-This is Volume 10 of Propaganda Collection.
+This is Volume 10 of the Propaganda Collection.
 
 Propaganda, at its core, is basically a collection of "seamless tiles"..
 Graphics which are drawn in such a way that they do not appear to repeat
@@ -171,7 +171,7 @@ them ideal for use in 3D applications, or simply as desktop wallpaper.
 Summary:	Propaganda Volume 11 - Desktop backgrounds and tiles
 Group:		Graphical desktop/Other
 %description Vol11
-This is Volume 11 of Propaganda Collection.
+This is Volume 11 of the Propaganda Collection.
 
 Propaganda, at its core, is basically a collection of "seamless tiles"..
 Graphics which are drawn in such a way that they do not appear to repeat
@@ -185,7 +185,7 @@ them ideal for use in 3D applications, or simply as desktop wallpaper.
 Summary:	Propaganda Volume 12 - Desktop backgrounds and tiles
 Group:		Graphical desktop/Other
 %description Vol12
-This is Volume 12 of Propaganda Collection.
+This is Volume 12 of the Propaganda Collection.
 
 Propaganda, at its core, is basically a collection of "seamless tiles"..
 Graphics which are drawn in such a way that they do not appear to repeat
@@ -199,7 +199,7 @@ them ideal for use in 3D applications, or simply as desktop wallpaper.
 Summary:    Propaganda Volume 13 - Desktop backgrounds and tiles
 Group:      Graphical desktop/Other
 %description Vol13
-This is Volume 13 of Propaganda Collection.
+This is Volume 13 of the Propaganda Collection.
 
 Propaganda, at its core, is basically a collection of "seamless tiles"..
 Graphics which are drawn in such a way that they do not appear to repeat
@@ -213,7 +213,7 @@ them ideal for use in 3D applications, or simply as desktop wallpaper.
 Summary:    Propaganda Volume 14 - Desktop backgrounds and tiles
 Group:      Graphical desktop/Other
 %description Vol14
-This is Volume 14 of Propaganda Collection.
+This is Volume 14 of the Propaganda Collection.
 
 Propaganda, at its core, is basically a collection of "seamless tiles"..
 Graphics which are drawn in such a way that they do not appear to repeat
@@ -227,8 +227,8 @@ them ideal for use in 3D applications, or simply as desktop wallpaper.
 Summary:	Propaganda For E - Desktop backgrounds and tiles
 Group:		Graphical desktop/Other
 %description For-E
-This is Volume "For-E" (Enlightenment) of Propaganda Collection. Althought
-is name is "For-E", you can use it for another Window Mangager (of course).
+This is Volume "For-E" (Enlightenment) of the Propaganda Collection. Although
+it's name is "For-E", you can use it for other Window Mangagers (of course!).
 
 Propaganda, at its core, is basically a collection of "seamless tiles"..
 Graphics which are drawn in such a way that they do not appear to repeat
@@ -348,5 +348,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}%{imagepath}/%{name}-For-E 
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.0-2
+- added distro info to release.
+
 * Sat Mar 03 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.0-1
 - Initial build

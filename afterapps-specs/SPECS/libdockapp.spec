@@ -21,10 +21,6 @@
 %endif
 ### END Distro Definitions
 
-%define prefix	/usr
-%define version 0.6.1
-%define release 4
-
 %if %{mdk}
 %define name	libdockapp0
 %endif
@@ -38,6 +34,9 @@
 %define name	libdockapp
 %endif
 
+%define version 0.6.1
+%define release 5%{?dist}
+
 Summary:	DockApp Making Standard Library
 Name:		%name
 Version:	%version
@@ -47,7 +46,7 @@ Group:		X11/Libraries
 Source0:	http://solfertje.student.utwente.nl/~dalroi/libdockapp/files/libdockapp-%{version}.tar.bz2
 URL:		http://solfertje.student.utwente.nl/~dalroi/libdockapp/
 BuildRequires:	autoconf automake libtool
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 %if %{mdk}
 Conflicts:	libdockapp
 Provides:	libdockapp0 libdockapp.so.2
@@ -72,7 +71,7 @@ Header files etc to develop DockApps.
 %setup -q -n dockapp-%{version}
 
 %build
-./configure --prefix=%{prefix} \
+./configure --prefix=%{_prefix} \
 	--with-x \
 	--without-examples \
 	--without-fonts
@@ -83,8 +82,8 @@ rm -rf $RPM_BUILD_ROOT
 
 make install DESTDIR=$RPM_BUILD_ROOT
 
-rm -rf $RPM_BUILD_ROOT%{prefix}/lib/libdockapp.a
-rm -rf $RPM_BUILD_ROOT%{prefix}/X11R6/lib/X11/fonts/dockapp/*
+rm -rf $RPM_BUILD_ROOT%{_libdir}/libdockapp.a
+rm -rf $RPM_BUILD_ROOT%{_prefix}/X11R6/lib/X11/fonts/dockapp/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -95,16 +94,19 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README AUTHORS NEWS ChangeLog
-%attr(755,root,root) %{prefix}/lib/lib*.so.*
-#%{prefix}/lib/X11/fonts/dockapp/*
+%attr(755,root,root) %{_libdir}/lib*.so.*
+#%{_libdir}/X11/fonts/dockapp/*
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{prefix}/lib/lib*.so
-%attr(755,root,root) %{prefix}/lib/lib*.la
-%{prefix}/include/*
+%attr(755,root,root) %{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/lib*.la
+%{_includedir}/*
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> 0.6.1-5
+- added distro info to release.
+
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> 0.6.1-4
 - updated license, Source line.
 
