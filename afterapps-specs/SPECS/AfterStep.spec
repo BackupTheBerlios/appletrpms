@@ -54,6 +54,7 @@ Source5: 	AfterStep.menumethod
 Source6: 	afterstep.desktop.xsessions
 Source7: 	afterstep.desktop.wm-properties
 Source8:	afterstep.fedora.README
+Source9: 	AfterStep-2.2.5-Propaganda-setup.tar.gz
 Patch0:		%{name}-%{version}-ImageMagick.patch
 Distribution:	The AfterStep TEAM
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -161,42 +162,46 @@ install -d $RPM_BUILD_ROOT%{_datadir}/switchdesk/
 install -m 0755 %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/switchdesk/Xclients.afterstep
 install -d $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/
 install -m 0755 %{SOURCE2} $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/afterstep
-install -d %{buildroot}%{_datadir}/xsessions/
-install -m 0644 %{SOURCE6} %{buildroot}%{_datadir}/xsessions/afterstep.desktop
-install -d %{buildroot}%{_datadir}/gnome/wm-properties/
-install -m 0644 %{SOURCE7} %{buildroot}%{_datadir}/gnome/wm-properties/afterstep.desktop
-rm -f %{buildroot}%{_datadir}/gnome/wm-properties/AfterStep.desktop
-rm -f %{buildroot}%{_datadir}/xsessions/AfterStep.desktop
+install -d $RPM_BUILD_ROOT%{_datadir}/xsessions/
+install -m 0644 %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/xsessions/afterstep.desktop
+install -d $RPM_BUILD_ROOT%{_datadir}/gnome/wm-properties/
+install -m 0644 %{SOURCE7} $RPM_BUILD_ROOT%{_datadir}/gnome/wm-properties/afterstep.desktop
+rm -f $RPM_BUILD_ROOT%{_datadir}/gnome/wm-properties/AfterStep.desktop
+rm -f $RPM_BUILD_ROOT%{_datadir}/xsessions/AfterStep.desktop
 %endif
 
 #fedora core 5 and later gdm setup
 %if %{fedora5}
-install -d %{buildroot}%{_datadir}/xsessions/
-install -m 0644 %{SOURCE6} %{buildroot}%{_datadir}/xsessions/afterstep.desktop
-rm -f %{buildroot}%{_datadir}/gnome/wm-properties/AfterStep.desktop
-rm -f %{buildroot}%{_datadir}/xsessions/AfterStep.desktop
+install -d $RPM_BUILD_ROOT%{_datadir}/xsessions/
+install -m 0644 %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/xsessions/afterstep.desktop
+rm -f $RPM_BUILD_ROOT%{_datadir}/gnome/wm-properties/AfterStep.desktop
+rm -f $RPM_BUILD_ROOT%{_datadir}/xsessions/AfterStep.desktop
 %endif
 
 # mandrake/mandriva menu items
 %if %{mdk}
 install -d $RPM_BUILD_ROOT/etc/X11/wmsession.d/
 install -m 0644 %{SOURCE3} $RPM_BUILD_ROOT/etc/X11/wmsession.d/42AfterStep
-install -d $RPM_BUILD_ROOT/usr/lib/menu/afterstep
-install -m 0644 %{SOURCE4} $RPM_BUILD_ROOT/usr/lib/menu/afterstep
+install -d $RPM_BUILD_ROOT%{_libdir}/menu/afterstep
+install -m 0644 %{SOURCE4} $RPM_BUILD_ROOT%{_libdir}/menu/afterstep
 install -d $RPM_BUILD_ROOT/etc/menu-methods/
 install -m 0755 %{SOURCE5} $RPM_BUILD_ROOT/etc/menu-methods/AfterStep
 %endif
 
 %if %{ismultiarch}
-#mkdir -p %{buildroot}%{multiarch_bindir}
-%multiarch_binaries %{buildroot}%{_bindir}/afterimage-config
-%multiarch_binaries %{buildroot}%{_bindir}/afterimage-libs
-%multiarch_binaries %{buildroot}%{_bindir}/afterstep-config
-%multiarch_binaries %{buildroot}%{_bindir}/asgtk-config
+#mkdir -p $RPM_BUILD_ROOT%{multiarch_bindir}
+%multiarch_binaries $RPM_BUILD_ROOT%{_bindir}/afterimage-config
+%multiarch_binaries $RPM_BUILD_ROOT%{_bindir}/afterimage-libs
+%multiarch_binaries $RPM_BUILD_ROOT%{_bindir}/afterstep-config
+%multiarch_binaries $RPM_BUILD_ROOT%{_bindir}/asgtk-config
 %endif
 
+#add Propaganda Menu files
+cd $RPM_BUILD_ROOT/%{_datadir}
+tar xvf %{SOURCE9}
+
 %clean
-rm -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
@@ -211,7 +216,7 @@ rm -rf %{buildroot}
 %config /etc/X11/wmsession.d/42AfterStep
 %{_sysconfdir}/menu-methods/AfterStep
 %{_datadir}/xsessions/AfterStep.desktop
-%config /usr/lib/menu/afterstep/AfterStep.menu
+%config %{_libdir}/menu/afterstep/AfterStep.menu
 %endif
 %if %{fedora5}
 %{_datadir}/xsessions/afterstep.desktop
