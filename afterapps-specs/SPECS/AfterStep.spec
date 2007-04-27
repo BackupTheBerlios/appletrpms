@@ -54,6 +54,7 @@ Source5: 	AfterStep.menumethod
 Source6: 	afterstep.desktop.xsessions
 Source7: 	afterstep.desktop.wm-properties
 Source8:	afterstep.fedora.README
+Patch0:		%{name}-%{version}-ImageMagick.patch
 Distribution:	The AfterStep TEAM
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	%{name}-libs = %{epoch}:%{version}
@@ -116,6 +117,7 @@ Requires:	libX11-devel
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch0
 
 %build
 CFLAGS=$RPM_OPT_FLAGS \

@@ -1,0 +1,11 @@
+--- afterstep/applications/graphics.desktop	2006-11-24 05:31:33.000000000 -0600
++++ afterstep/applications/graphics.desktop	2007-04-27 11:25:15.000000000 -0500
+@@ -204,7 +204,7 @@
+ Comment=X application for displaying and manipulating images
+ Exec=display
+ Icon=normal/View
+-Terminal=false
++Terminal=true
+ Type=Application
+ Encoding=UTF-8
+ Categories=Graphics
