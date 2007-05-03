@@ -9,7 +9,7 @@ Release:	%release
 License:	GPL
 Group: 		User Interface/Desktops
 URL: 		http://www.windowmaker.info/
-Source: 	http://open-systems.ufl.edu/mirrors/gentoo/distfiles/WindowMaker-%{version}.tar.gz
+Source: 	http://www.windowmaker.info/pub/source/release/archive/WindowMaker-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	libpng-devel libjpeg-devel libungif-devel 
 BuildRequires:	libtiff-devel zlib-devel gettext

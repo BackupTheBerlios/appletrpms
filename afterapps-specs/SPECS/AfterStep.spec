@@ -33,7 +33,7 @@
 
 %define	name AfterStep
 %define	version	2.2.5
-%define release 1%{?dist}
+%define release 2%{?dist}
 %define epoch 20
 
 Summary:	AfterStep Window Manager (NeXTalike)
@@ -56,6 +56,7 @@ Source7: 	afterstep.desktop.wm-properties
 Source8:	afterstep.fedora.README
 Source9: 	AfterStep-2.2.5-Propaganda-setup.tar.gz
 Patch0:		%{name}-%{version}-ImageMagick.patch
+Patch1:		%{name}-%{version}-MMX.patch
 Distribution:	The AfterStep TEAM
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	%{name}-libs = %{epoch}:%{version}
@@ -119,6 +120,7 @@ Requires:	libX11-devel
 %prep
 %setup -q -n %{name}-%{version}
 %patch0
+%patch1
 
 %build
 CFLAGS=$RPM_OPT_FLAGS \
@@ -275,6 +277,9 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
+* Wed May 02 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.5-2
+- added MMX patches for x86_64.
+
 * Fri Apr 27 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.5-1
 - new version.
 
