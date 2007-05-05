@@ -33,7 +33,7 @@
 
 %define	name AfterStep
 %define	version	2.2.5
-%define release 2%{?dist}
+%define release 3%{?dist}
 %define epoch 20
 
 Summary:	AfterStep Window Manager (NeXTalike)
@@ -126,6 +126,7 @@ Requires:	libX11-devel
 CFLAGS=$RPM_OPT_FLAGS \
 ./configure \
 	--prefix=%{_prefix}                       \
+	--libdir=%{_libdir}                       \
 	--mandir=%{_mandir}                       \
 	--enable-sharedlibs                       \
 	--disable-staticlibs                      \
@@ -277,6 +278,9 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
+* Fri May 04 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.5-3
+- added rpm macro libdir to configure.
+
 * Wed May 02 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.5-2
 - added MMX patches for x86_64.
 

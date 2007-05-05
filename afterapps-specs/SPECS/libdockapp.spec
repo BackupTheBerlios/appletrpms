@@ -35,7 +35,7 @@
 %endif
 
 %define version 0.6.1
-%define release 5%{?dist}
+%define release 6%{?dist}
 
 Summary:	DockApp Making Standard Library
 Name:		%name
@@ -72,6 +72,7 @@ Header files etc to develop DockApps.
 
 %build
 ./configure --prefix=%{_prefix} \
+	--libdir=%{_libdir} \
 	--with-x \
 	--without-examples \
 	--without-fonts
@@ -104,6 +105,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/*
 
 %changelog
+* Fri May 04 2007 J. Krebs <rpm_speedy@yahoo.com> 0.6.1-6
+- added rpm macro libdir to configure.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> 0.6.1-5
 - added distro info to release.
 

@@ -1,6 +1,6 @@
 %define name	libwraster
 %define version	0.80.2
-%define release	3%{?dist}
+%define release	4%{?dist}
 
 Summary: 	wraster libraries used in WindowMaker
 Name:		%name
@@ -28,7 +28,7 @@ these programs independent of WindowMaker.
 %setup -q -n WindowMaker-%{version}
 
 %build
-%configure --prefix=%{_prefix}
+%configure --prefix=%{_prefix} --libdir=%{_libdir}
 make
 
 %install
@@ -57,6 +57,9 @@ rm -rf $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 
 %changelog
+* Fri May 04 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.80.2-4
+- added rpm macro libdir to configure.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.80.2-3
 - added distro info to release.
 

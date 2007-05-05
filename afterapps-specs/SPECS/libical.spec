@@ -1,6 +1,6 @@
 %define	name	libical
 %define	version	0.24.RC4
-%define release 5%{?dist}
+%define release 6%{?dist}
 
 Summary:	An implementation of basic iCAL protocols
 Name:		%{name}
@@ -38,6 +38,7 @@ CXXFLAGS="$RPM_OPT_FLAGS" \
   ./configure \
      --prefix=%{_prefix} \
      --exec-prefix=%{_prefix} \
+     --libdir=%{_libdir} \
      --with-devel \
      --enable-python
 make
@@ -75,6 +76,9 @@ rm -rf $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 
 %changelog
+* Fri May 04 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.24.RC4-6
+- added rpm macro libdir to configure.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.24.RC4-5
 - added distro info to release, added devel package.
 
