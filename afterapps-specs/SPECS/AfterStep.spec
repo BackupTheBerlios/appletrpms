@@ -18,7 +18,7 @@
   %define generic 0
   %define fcver $(grep release /etc/fedora-release | cut -d ' ' -f4)
   %define fver $(grep release /etc/fedora-release | cut -d ' ' -f2)
-  %define fedora7 %(if [ %fver -eq release ]; then echo 1; else echo 0; fi;)
+  %define fedora7 %(if [ %fver = release ]; then echo 1; else echo 0; fi;)
   %{?_with_fedora7:   %{expand: %%global fedora7 1}}
   %define fedora5 %(if [ %fcver -ge 5 ]; then echo 1; else echo 0; fi;)
   %{?_with_fedora5:   %{expand: %%global fedora5 1}}
@@ -40,7 +40,7 @@
 
 %define	name AfterStep
 %define	version	2.2.6
-%define release 1%{?dist}
+%define release 2%{?dist}
 %define epoch 20
 
 Summary:	AfterStep Window Manager (NeXTalike)
@@ -280,7 +280,10 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
-* Wed May 030 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.6-1
+* Thu Jun 14 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.6-2
+- added test for F7.
+
+* Wed May 30 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.6-1
 - new version.
 
 * Fri May 04 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.5-3

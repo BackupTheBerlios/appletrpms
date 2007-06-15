@@ -25,7 +25,7 @@
 
 %define name wmwifi
 %define version 0.6
-%define release 2
+%define release 2%{?dist}
 
 Summary: WiFi dockapp displays signal, link, noise, & bitrate info in LCD format
 Name: %name
@@ -37,7 +37,7 @@ URL: http://wmwifi.digitalssg.net/
 Source0: http://digitalssg.net/debian/%{name}-%{version}.tar.gz
 Patch0: %{name}-%{version}-wireless.c.patch
 Patch1: %{name}-%{version}-%{name}.h.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %if %{mdk}
 Requires: libdockapp0
