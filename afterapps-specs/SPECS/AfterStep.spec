@@ -17,10 +17,17 @@
 %if %{fedora}
   %define generic 0
   %define fcver $(grep release /etc/fedora-release | cut -d ' ' -f4)
+  %define fver $(grep release /etc/fedora-release | cut -d ' ' -f2)
+  %define fedora7 %(if [ %fver -eq release ]; then echo 1; else echo 0; fi;)
+  %{?_with_fedora7:   %{expand: %%global fedora7 1}}
   %define fedora5 %(if [ %fcver -ge 5 ]; then echo 1; else echo 0; fi;)
   %{?_with_fedora5:   %{expand: %%global fedora5 1}}
   %define fedora4 %(if [ %fcver -le 4 ]; then echo 1; else echo 0; fi;)
   %{?_with_fedora4:   %{expand: %%global fedora4 1}}  
+  %if %{fedora7}
+    %define fedora5 1
+    %define fedora4 0
+  %endif
 %endif
 
 #%if %{suse}
@@ -32,8 +39,8 @@
 ### END Distro Definitions
 
 %define	name AfterStep
-%define	version	2.2.5
-%define release 3%{?dist}
+%define	version	2.2.6
+%define release 1%{?dist}
 %define epoch 20
 
 Summary:	AfterStep Window Manager (NeXTalike)
@@ -54,9 +61,8 @@ Source5: 	AfterStep.menumethod
 Source6: 	afterstep.desktop.xsessions
 Source7: 	afterstep.desktop.wm-properties
 Source8:	afterstep.fedora.README
-Source9: 	AfterStep-2.2.5-Propaganda-setup.tar.gz
-Patch0:		%{name}-%{version}-ImageMagick.patch
-Patch1:		%{name}-%{version}-MMX.patch
+Patch0:		%{name}-2.2.5-ImageMagick.patch
+Patch1:		%{name}-%{version}-ttf.patch
 Distribution:	The AfterStep TEAM
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	%{name}-libs = %{epoch}:%{version}
@@ -199,10 +205,6 @@ install -m 0755 %{SOURCE5} $RPM_BUILD_ROOT/etc/menu-methods/AfterStep
 %multiarch_binaries $RPM_BUILD_ROOT%{_bindir}/asgtk-config
 %endif
 
-#add Propaganda Menu files
-cd $RPM_BUILD_ROOT/%{_datadir}
-tar xvf %{SOURCE9}
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -278,6 +280,9 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
+* Wed May 030 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.6-1
+- new version.
+
 * Fri May 04 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.5-3
 - added rpm macro libdir to configure.
 

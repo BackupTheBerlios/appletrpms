@@ -23,13 +23,9 @@
 %endif
 ### END Distro Definitions
 
-%define __prefix /usr
-%define _bindir %{__prefix}/bin
-%define _datadir %{__prefix}/share
-%define _mandir %{_datadir}/man
 %define name wmwifi
 %define version 0.6
-%define release 1
+%define release 2
 
 Summary: WiFi dockapp displays signal, link, noise, & bitrate info in LCD format
 Name: %name
@@ -39,6 +35,8 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://wmwifi.digitalssg.net/
 Source0: http://digitalssg.net/debian/%{name}-%{version}.tar.gz
+Patch0: %{name}-%{version}-wireless.c.patch
+Patch1: %{name}-%{version}-%{name}.h.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %if %{mdk}
@@ -56,9 +54,11 @@ point's name.
  
 %prep
 %setup -q
+%patch0
+%patch1
 
 %build
-./configure --prefix=%{__prefix} --with-x --mandir=%{_mandir}
+./configure --prefix=%{_prefix} --with-x --mandir=%{_mandir}
 make
 
 %install
@@ -75,8 +75,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README
 
-
 %changelog
+* Thu Jun 14 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.6-2
+- fixed IFNAMSIZ build issues under FC6.
+
 * Mon Apr 17 2006 J. Krebs <rpm_speedy@yahoo.com> - 0.6-1
 - new version.
 
