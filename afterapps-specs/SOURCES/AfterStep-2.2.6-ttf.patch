@@ -1,0 +1,74 @@
+--- autoconf/configure.in	2007-05-15 15:42:02.000000000 -0500
++++ autoconf/configure.in	2007-05-30 19:50:22.000000000 -0500
+@@ -70,8 +70,8 @@
+ AC_ARG_WITH(tiff_includes,  	[  --with-tiff-includes=DIR use TIFF includes in DIR], tiff_includes="$withval", tiff_includes=NO)
+ AC_ARG_WITH(svg,		[  --with-svg               support SVG image format via librsvg 2.0 [[yes]]])
+ 
+-AC_ARG_WITH(tff,		[  --with-ttf               support True Type Fonts via FreeType library [[yes]]])
+-AC_ARG_WITH(tff_includes,   	[  --with-ttf-includes=DIR  use FreeType includes in DIR], ttf_includes="$withval", ttf_includes=NO)
++AC_ARG_WITH(ttf,		[  --with-ttf               support True Type Fonts via FreeType library [[yes]]])
++AC_ARG_WITH(ttf_includes,   	[  --with-ttf-includes=DIR  use FreeType includes in DIR], ttf_includes="$withval", ttf_includes=NO)
+ AC_ARG_WITH(gtk,	    	[  --with-gtk               use GTK 2.0 widget libraries where possible [[yes]]])
+ 
+ dnl# compile-time switches
+--- libAfterImage/configure.in	2007-05-15 15:42:02.000000000 -0500
++++ libAfterImage/configure.in	2007-05-30 19:50:23.000000000 -0500
+@@ -57,8 +57,8 @@
+ AC_ARG_WITH(tiff_includes,  [  --with-tiff-includes=DIR use TIFF includes in DIR], tiff_includes="$withval", tiff_includes=NO)
+ AC_ARG_WITH(svg,		    [  --with-svg               support SVG image format via librsvg [yes]])
+ 
+-AC_ARG_WITH(tff,		    [  --with-ttf               support True Type Fonts via FreeType library [yes]])
+-AC_ARG_WITH(tff_includes,   [  --with-ttf-includes=DIR  use FreeType includes in DIR], ttf_includes="$withval", ttf_includes=NO)
++AC_ARG_WITH(ttf,		    [  --with-ttf               support True Type Fonts via FreeType library [yes]])
++AC_ARG_WITH(ttf_includes,   [  --with-ttf-includes=DIR  use FreeType includes in DIR], ttf_includes="$withval", ttf_includes=NO)
+ 
+ AC_ARG_WITH(afterbase,		    [  --with-afterbase               use libAfterBase library of basic functionality [yes]])
+ AC_ARG_WITH(afterbase_includes, [  --with-afterbase-includes=DIR  use libAfterBase includes in DIR], afterbase_includes="$withval", afterbase_includes=NO)
+--- libAfterImage/configure	2007-05-15 15:42:02.000000000 -0500
++++ libAfterImage/configure	2007-05-30 19:50:23.000000000 -0500
+@@ -1574,15 +1574,15 @@
+ fi;
+ 
+ 
+-# Check whether --with-tff or --without-tff was given.
+-if test "${with_tff+set}" = set; then
+-  withval="$with_tff"
++# Check whether --with-ttf or --without-ttf was given.
++if test "${with_ttf+set}" = set; then
++  withval="$with_ttf"
+ 
+ fi;
+ 
+-# Check whether --with-tff_includes or --without-tff_includes was given.
+-if test "${with_tff_includes+set}" = set; then
+-  withval="$with_tff_includes"
++# Check whether --with-ttf_includes or --without-ttf_includes was given.
++if test "${with_ttf_includes+set}" = set; then
++  withval="$with_ttf_includes"
+   ttf_includes="$withval"
+ else
+   ttf_includes=NO
+--- configure	2007-05-15 15:42:02.000000000 -0500
++++ configure	2007-05-30 19:50:19.000000000 -0500
+@@ -1593,15 +1593,15 @@
+ fi;
+ 
+ 
+-# Check whether --with-tff or --without-tff was given.
+-if test "${with_tff+set}" = set; then
+-  withval="$with_tff"
++# Check whether --with-ttf or --without-ttf was given.
++if test "${with_ttf+set}" = set; then
++  withval="$with_ttf"
+ 
+ fi;
+ 
+-# Check whether --with-tff_includes or --without-tff_includes was given.
+-if test "${with_tff_includes+set}" = set; then
+-  withval="$with_tff_includes"
++# Check whether --with-ttf_includes or --without-ttf_includes was given.
++if test "${with_ttf_includes+set}" = set; then
++  withval="$with_ttf_includes"
+   ttf_includes="$withval"
+ else
+   ttf_includes=NO
