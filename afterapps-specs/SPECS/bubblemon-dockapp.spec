@@ -25,7 +25,7 @@
 
 %define name bubblemon-dockapp
 %define version 1.46
-%define release 5%{?dist}
+%define release 6%{?dist}
 
 Summary: system monitoring dockapp based-on GNOME BubbleMon
 Name: %name
@@ -37,9 +37,13 @@ URL: http://www.ne.jp/asahi/linux/timecop/
 Source0: http://www.ne.jp/asahi/linux/timecop/software/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 %if %{mdk}
-Requires: libgtk+1.2-devel
+Requires: libgtk+1.2
+Buildrequires: libgtk+1.2-devel
 %endif
 %if %{fedora}
+Requires: gtk+
+Requires: gdk-pixbuf
+BuildRequires: gtk+-devel
 BuildRequires: gdk-pixbuf-devel
 %endif
 
@@ -81,6 +85,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc ChangeLog INSTALL README SUPPORTED_SYSTEMS doc/COPYING doc/Xdefaults.sample
 
 %changelog
+* Fri Jun 15 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.46-6
+- added require for gtk+-devel, gtk+.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.46-5
 - added distro info to release.
 

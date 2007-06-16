@@ -1,6 +1,31 @@
+### BEGIN Distro Defines
+%define mdk  %(if [ -e /etc/mandrake-release ]; then echo 1; else echo 0; fi;)
+%{?_with_mdk:   %{expand: %%global mdk 1}}
+
+%define fedora  %(if [ -e /etc/fedora-release ]; then echo 1; else echo 0; fi;)
+%{?_with_fedora:   %{expand: %%global fedora 1}}
+
+%define suse %(if [ -e /etc/SuSE-release ]; then echo 1; else echo 0; fi;)
+%{?_with_suse:   %{expand: %%global suse 1}}
+
+%define generic 1
+
+%if %{mdk}
+  %define generic 0
+%endif
+
+%if %{fedora}
+  %define generic 0
+%endif
+
+%if %{suse}
+  %define generic 0
+%endif
+### END Distro Definitions
+
 %define name wmclockmon
 %define version 0.8.1
-%define release 4%{?dist}
+%define release 5%{?dist}
 
 Summary: digital clock with 7 different styles in either LCD or LED style
 Name: %name
@@ -11,6 +36,16 @@ Group: AfterStep/Applets
 URL: http://tnemeth.free.fr/projets/dockapps.html
 Source0: http://tnemeth.free.fr/projets/programmes/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+%if %{mdk}
+Requires: libgtk+1.2
+Buildrequires: libgtk+1.2-devel
+%endif
+%if %{fedora}
+Requires: gtk+
+Requires: gdk-pixbuf
+BuildRequires: gtk+-devel
+BuildRequires: gdk-pixbuf-devel
+%endif
 
 %description
 wmclockmon is a nice digital clock with 7 different styles in either
@@ -50,6 +85,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc doc/sample*.wmclockmonrc AUTHORS BUGS COPYING ChangeLog INSTALL NEWS README THANKS TODO
 
 %changelog
+* Fri Jun 15 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.8.1-5
+- added require for gtk+-devel, gtk+.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.8.1-4
 - added distro info to release.
 

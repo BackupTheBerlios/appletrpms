@@ -25,7 +25,7 @@
 
 %define name wmcalendar
 %define version 0.5.2
-%define release 2%{?dist}
+%define release 3%{?dist}
 
 Summary: wmCalendar is a calendar dockapp
 Name: %name
@@ -37,7 +37,6 @@ URL: http://sourceforge.net/projects/wmcalendar/
 Source0: http://easynews.dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
 Source1: %{name}.ogo2ical
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Buildrequires: libical
 Requires: libical
 Buildrequires: libical-devel
 
@@ -89,6 +88,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Jun  15 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.5.2-3
+- spec file cleanup.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.5.2-2
 - added distro info to release.
 

@@ -1,6 +1,31 @@
+### BEGIN Distro Defines
+%define mdk  %(if [ -e /etc/mandrake-release ]; then echo 1; else echo 0; fi;)
+%{?_with_mdk:   %{expand: %%global mdk 1}}
+
+%define fedora  %(if [ -e /etc/fedora-release ]; then echo 1; else echo 0; fi;)
+%{?_with_fedora:   %{expand: %%global fedora 1}}
+
+%define suse %(if [ -e /etc/SuSE-release ]; then echo 1; else echo 0; fi;)
+%{?_with_suse:   %{expand: %%global suse 1}}
+
+%define generic 1
+
+%if %{mdk}
+  %define generic 0
+%endif
+
+%if %{fedora}
+  %define generic 0
+%endif
+
+%if %{suse}
+  %define generic 0
+%endif
+### END Distro Definitions
+
 %define name wmfishtime
 %define version 1.24
-%define release 4%{?dist}
+%define release 5%{?dist}
 
 Summary: clock dockapp with fish
 Name: %name
@@ -11,6 +36,16 @@ Group: AfterStep/Applets
 URL: http://www.ne.jp/asahi/linux/timecop/
 Source0: http://www.ne.jp/asahi/linux/timecop/software/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+%if %{mdk}
+Requires: libgtk+1.2
+Buildrequires: libgtk+1.2-devel
+%endif
+%if %{fedora}
+Requires: gtk+
+Requires: gdk-pixbuf
+BuildRequires: gtk+-devel
+BuildRequires: gdk-pixbuf-devel
+%endif
 
 %description
 Well, this is just your standard time dockapp. Top part has the clock face,
@@ -48,6 +83,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Jun 15 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.24-5
+- added require for gtk+-devel, gtk+.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.24-4
 - added distro info to release.
 
