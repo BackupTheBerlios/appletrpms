@@ -1,8 +1,8 @@
-%define astest %(afterstep -v | cut -d ' ' -f3)
-%define asver %astest 
+%define aitest	%(rpm -q --queryformat='%{VERSION}' libAfterImage)
+%define aiver	%aitest 
 %define	name	aterm
-%define	version	1.0.0
-%define	release	9%{?dist}
+%define	version	1.0.1
+%define	release	1%{?dist}
 %define epoch	2
 
 Summary:	aterm - terminal emulator in an X window
@@ -13,10 +13,11 @@ Epoch:		%{epoch}
 License:	GPL
 Group:		Applications/X11
 URL:		http://aterm.sourceforge.net
+Patch0:		%{name}-%{version}-main.c.patch
 Source:		ftp://ftp.afterstep.org/apps/aterm/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires:	AfterStep-devel >= 20:2.00.00
-Requires:	AfterStep >= 20:%{asver}
+BuildRequires:	libAfterImage-devel
+Requires:	libAfterImage >= %{aiver}
 
 %description
 aterm, version %{version}, is a colour vt102 terminal emulator based on
@@ -31,12 +32,12 @@ tied to any libraries, and can be used anywhere.
 
 %prep
 %setup -q
+%patch0
 
 LD_LIBRARY_PATH=../AfterStep-%{asversion}/libAfterBase \
         CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%{_prefix} \
 	--enable-utmp --enable-background-image --with-term=rxvt \
-	--enable-transparency --enable-menubar --enable-graphics \
-	--enable-next-scroll --disable-backspace-key \
+	--enable-transparency --enable-graphics --disable-backspace-key \
 	--disable-delete-key --enable-xgetdefault --mandir=%{_mandir}
 
 %build
@@ -48,6 +49,24 @@ mkdir -p $RPM_BUILD_ROOT%{_prefix}
 
 make DESTDIR=$RPM_BUILD_ROOT install
 
+#Install application link for X-Windows
+echo -e "[Desktop Entry]
+Name=%{name}
+Comment=aterm - terminal emulator in an X window
+Exec=aterm
+Terminal=false
+Type=Application" > %{name}.desktop
+                                                                                
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
+desktop-file-install --vendor "" --delete-original \
+  --dir %{buildroot}%{_datadir}/applications                      \
+  --add-category X-Red-Hat-Extra                                  \
+  --add-category Application                                      \
+  --add-category System						  \
+  --add-category Utility					  \
+  --add-category TerminalEmulator                                 \
+  %{name}.desktop
+
 %clean
 [ -d $RPM_BUILD_ROOT ] && rm -rf $RPM_BUILD_ROOT;
 
@@ -56,10 +75,14 @@ make DESTDIR=$RPM_BUILD_ROOT install
 %doc doc ChangeLog
 %{_bindir}/aterm
 %{_mandir}/man1/aterm*
+%{_datadir}/applications/*.desktop
 #%config(missingok) /etc/X11/wmconfig/aterm
 
 %changelog
-* Fri Apr 27 2007 J. Krebs <rpm_speedy@yahoo.com> 1.0.0-9
+* Tue Aug 21 2007 J. Krebs <rpm_speedy@yahoo.com> 2:1.0.1-1
+- new version, linked to libAfterImage from AS 2.2.7.
+
+* Fri Apr 27 2007 J. Krebs <rpm_speedy@yahoo.com> 2:1.0.0-9
 - rebuild to coincide with AS 2.2.5 release.
 
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> 1.0.0-8

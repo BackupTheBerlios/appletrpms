@@ -39,8 +39,10 @@
 ### END Distro Definitions
 
 %define	name AfterStep
-%define	version	2.2.6
-%define release 2%{?dist}
+%define	version	2.2.7
+%define	libaiver	1.15
+%define	libabver	1.11
+%define release 1%{?dist}
 %define epoch 20
 
 Summary:	AfterStep Window Manager (NeXTalike)
@@ -62,71 +64,131 @@ Source6: 	afterstep.desktop.xsessions
 Source7: 	afterstep.desktop.wm-properties
 Source8:	afterstep.fedora.README
 Patch0:		%{name}-2.2.5-ImageMagick.patch
-Patch1:		%{name}-%{version}-ttf.patch
 Distribution:	The AfterStep TEAM
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires:	%{name}-libs = %{epoch}:%{version}
-Requires:	librsvg2
-Requires:	freetype
-Requires:	zlib
-Requires:	libX11
+%if %{mdk}
+Obsoletes:	libAfterStep1
+%endif
+Obsoletes:	AfterStep-libs
+Provides:	AfterStep-libs
+Requires: 	libAfterImage = %{epoch}:%{libaiver}
+Requires:	readline
+Requires:	gtk2
+Requires:	qiv
+BuildRequires:  readline-devel
+BuildRequires:  gtk2-devel
 BuildRequires:	librsvg2-devel
+BuildRequires:	libtiff-devel
 BuildRequires:  freetype-devel
 BuildRequires:  zlib-devel
 BuildRequires:  libX11-devel
 
 %description
-  AfterStep is a Window Manager for X which started by emulating the
-  NEXTSTEP look and feel, but which has been significantly altered
-  according to the requests of various users. Many adepts will tell you
-  that NEXTSTEP is not only the most visually pleasant interface, but
-  also one of the most functional and intuitive out there. AfterStep
-  aims to incorporate the advantages of the NEXTSTEP interface, and add
-  additional useful features.
+AfterStep is a Window Manager for X which started by emulating the
+NEXTSTEP look and feel, but which has been significantly altered
+according to the requests of various users. Many adepts will tell you
+that NEXTSTEP is not only the most visually pleasant interface, but
+also one of the most functional and intuitive out there. AfterStep
+aims to incorporate the advantages of the NEXTSTEP interface, and add
+additional useful features.
 
-  The developers of AfterStep have also worked very hard to ensure
-  stability and a small program footprint. Without giving up too many
-  features, AfterStep still works nicely in environments where memory is
-  at a premium.
-
-%package libs
-Summary:	libraries required by afterstep 2.0
-Version:	%{version}
-Release:	%{release}
-Epoch:		%{epoch}
-License:	GPL
-Group:		User Interface/Desktops
-Obsoletes:	libAfterImage
-Provides:	libAfterImage
-%if %{mdk}
-Obsoletes:	libAfterStep1
-%endif
-
-%description libs
-  Libraries needed by AfterStep 2.0
+The developers of AfterStep have also worked very hard to ensure
+stability and a small program footprint. Without giving up too many
+features, AfterStep still works nicely in environments where memory is
+at a premium.
 
 %package devel
-Summary:	AfterStep libs include files
+Summary:	Files needed for software development with AfterStep
 Version:	%{version}
 Release:	%{release}
 Epoch:		%{epoch}
 License:	GPL
-Group:		User Interface/Desktops
-Requires: 	%{name}-libs = %{epoch}:%{version}
-Obsoletes:	libAfterImage-devel
-Provides:	libAfterImage-devel
+Group:		Development/Libraries
+Requires: 	libAfterImage-devel = %{epoch}:%{libaiver}
+Requires:	%{name} = %{epoch}:%{version}
+
+%description devel
+Files needed for software development with AfterStep.
+
+%package -n libAfterImage
+Summary:	A generic image manipulation library
+Version:	%{libaiver}
+Release:	%{release}
+Epoch:		%{epoch}
+License:	GPL
+Group:		System Environment/Libraries
+Provides:	libAfterImage
+Requires:	librsvg2
+Requires:	libtiff
+Requires:	libpng
+Requires:	libjpeg
+Requires:	freetype
+Requires:	zlib
+Requires:	libX11
+Requires:	libAfterBase = %{epoch}:%{libabver}
+
+%description -n libAfterImage
+libAfterImage is a generic image manipulation library. It was initially
+implemented to address AfterStep Window Manager\'s needs for image handling,
+but it evolved into extremely powerful and flexible software, suitable for
+virtually any project that has needs for loading, manipulating, displaying
+images, as well as writing images in files. Most of the popular image formats
+are supported using standard libraries, with XCF, XPM, PPM/PNM, BMP, ICO,
+TGA and GIF being supported internally.
+
+PNG, JPEG and TIFF formats are supported via standard libraries.
+
+Powerful text rendering capabilities included, providing support for
+TrueType fonts using FreeType library, and antialiasing of standard fonts
+from X window system.
+
+%package -n libAfterImage-devel
+Summary:	Files needed for software development with libAfterImage
+Version:	%{libaiver}
+Release:	%{release}
+Epoch:		%{epoch}
+License:	GPL
+Group:		Development/Libraries
 Requires:	librsvg2-devel
+Requires:	libtiff-devel
+Requires:	libpng-devel
+Requires:	libjpeg-devel
 Requires:	freetype-devel
 Requires:	zlib-devel
 Requires:	libX11-devel
+Requires:	libAfterImage = %{epoch}:%{libaiver}
+Requires:	libAfterBase-devel = %{epoch}:%{libabver}
 
-%description devel
-  AfterStep libs include files
+%description -n libAfterImage-devel
+The libAfterImage-devel package contains the files needed for development with
+libAfterImage
+
+%package -n libAfterBase
+Summary:	A basic functions library providing support for libAfterImage
+Version:	%{libabver}
+Release:	%{release}
+Epoch:		%{epoch}
+License:	GPL
+Group:		System Environment/Libraries
+
+%description -n libAfterBase
+A basic functions library providing support for libAfterImage.
+
+%package -n libAfterBase-devel
+Summary:	Files needed for software development with libAfterBase
+Version:	%{libabver}
+Release:	%{release}
+Epoch:		%{epoch}
+License:	GPL
+Group:		Development/Libraries
+Requires:	libAfterBase = %{epoch}:%{libabver}
+
+%description -n libAfterBase-devel
+Files needed for software development with libAfterBase.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 %patch0
-%patch1
 
 %build
 CFLAGS=$RPM_OPT_FLAGS \
@@ -137,7 +199,7 @@ CFLAGS=$RPM_OPT_FLAGS \
 	--enable-sharedlibs                       \
 	--disable-staticlibs                      \
 	--enable-i18n                             \
-	--with-helpcommand="aterm -e man"         \
+	--with-helpcommand="xterm -e man"         \
 	--with-desktops=1 --with-deskgeometry=2x3 \
 	--with-imageloader="qiv --root"
 
@@ -210,11 +272,39 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%doc ChangeLog NEW README* TEAM UPGRADE doc/languages doc/licences doc/code TODO doc/*.html
+%doc ChangeLog NEW README* TEAM UPGRADE doc/languages doc/licences doc/code TODO doc/*.html doc/licences/COPYING*
 %doc src/ASDocGen/html/*html
-%{_bindir}/*
+%{_bindir}/ASFileBrowser
+%{_bindir}/ASRun
+%{_bindir}/ASWallpaper
+%{_bindir}/Animate
+%{_bindir}/Arrange
+%{_bindir}/Banner
+%{_bindir}/GWCommand
+%{_bindir}/Ident
+%{_bindir}/MonitorWharf
+%{_bindir}/Pager
+%{_bindir}/PrintDesktopEntries
+%{_bindir}/Wharf
+%{_bindir}/WinCommand
+%{_bindir}/WinList
+%{_bindir}/WinTabs
+%{_bindir}/Xpm2Jpg
+%{_bindir}/afterstep
+%{_bindir}/afterstep-config
+%{_bindir}/afterstepdoc
+%{_bindir}/ascolor
+%{_bindir}/ascommand.pl
+%{_bindir}/asgtk-config
+%{_bindir}/importasmenu
+%{_bindir}/installastheme.pl
+%{_bindir}/makeastheme.pl
+%{_bindir}/postcard.sh
 %dir %{_datadir}/afterstep
 %{_datadir}/afterstep/*
+%{_libdir}/libASGTK.so.1*
+%{_libdir}/libAfterConf.so.1*
+%{_libdir}/libAfterStep.so.1*
 %{_mandir}/man1/*
 # this is evil hack, but I can't get it to work otherwise on mdk
 %if !%{fedora}
@@ -237,25 +327,52 @@ rm -rf $RPM_BUILD_ROOT
 %{_prefix}/xsessions/AfterStep.desktop
 %endif
 
-%files libs
-%defattr(-,root,root)
-%doc libAfterImage/README 
-%{_libdir}/libA*
-
 %files devel
 %defattr(-,root,root)
-%dir %{_includedir}/libAfterBase
 %dir %{_includedir}/libAfterConf
-%dir %{_includedir}/libAfterImage
 %dir %{_includedir}/libAfterStep
 %dir %{_includedir}/libASGTK
-%{_includedir}/libAfterBase/*
+%{_libdir}/libASGTK.so
+%{_libdir}/libAfterConf.so
+%{_libdir}/libAfterStep.so
 %{_includedir}/libAfterConf/*
-%{_includedir}/libAfterImage/*
 %{_includedir}/libAfterStep/*
 %{_includedir}/libASGTK/*
 %{_mandir}/man3/*
 %doc src/ASDocGen/html/API/*html
+
+%files -n libAfterImage
+%defattr(-,root,root)
+%doc libAfterImage/ChangeLog libAfterImage/README doc/licences/COPYING*
+%{_bindir}/afterimage*
+%{_bindir}/ascompose
+%{_bindir}/asflip
+%{_bindir}/asgrad
+%{_bindir}/asi18n
+%{_bindir}/asmerge
+%{_bindir}/asscale
+%{_bindir}/astext
+%{_bindir}/astile
+%{_bindir}/asvector
+%{_bindir}/asview
+%{_libdir}/libAfterImage.so.0*
+
+%files -n libAfterImage-devel
+%defattr(-,root,root)
+%{_libdir}/libAfterImage.so
+%dir %{_includedir}/libAfterImage
+%{_includedir}/libAfterImage/*
+
+%files -n libAfterBase
+%defattr(-,root,root)
+%doc doc/licences/COPYING*
+%{_libdir}/libAfterBase.so.0*
+
+%files -n libAfterBase-devel
+%defattr(-,root,root)
+%{_libdir}/libAfterBase.so
+%dir %{_includedir}/libAfterBase
+%{_includedir}/libAfterBase/*
 
 %pre
 for i in /usr /usr/local /usr/X11R6 ; do
@@ -280,6 +397,17 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
+* Wed Aug 22 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.7-1
+- new version.
+
+* Thu Aug 02 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.6-3
+- broke-out libAI and libAB as separate packages for those
+  wanting to run rxvt-unicode and aterm without AfterStep.
+  Rxvt-unicode will need libAI >= 1.15, and a separate
+  package makes it easier to differentiate.
+- added qiv as a require for AfterStep - some apps still need
+  an image loader other than that provided by AfterStep.
+
 * Thu Jun 14 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.6-2
 - added test for F7.
 
