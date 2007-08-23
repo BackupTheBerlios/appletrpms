@@ -42,6 +42,8 @@
 %define	version	2.2.7
 %define	libaiver	1.15
 %define	libabver	1.11
+%define	libairel	1%{?dist}
+%define	libabrel	1%{?dist}
 %define release 1%{?dist}
 %define epoch 20
 
@@ -71,7 +73,7 @@ Obsoletes:	libAfterStep1
 %endif
 Obsoletes:	AfterStep-libs
 Provides:	AfterStep-libs
-Requires: 	libAfterImage = %{epoch}:%{libaiver}
+Requires: 	libAfterImage = %{epoch}:%{libaiver}-%libairel
 Requires:	readline
 Requires:	gtk2
 Requires:	qiv
@@ -104,8 +106,8 @@ Release:	%{release}
 Epoch:		%{epoch}
 License:	GPL
 Group:		Development/Libraries
-Requires: 	libAfterImage-devel = %{epoch}:%{libaiver}
-Requires:	%{name} = %{epoch}:%{version}
+Requires: 	libAfterImage-devel = %{epoch}:%{libaiver}-%libairel
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description devel
 Files needed for software development with AfterStep.
@@ -113,7 +115,7 @@ Files needed for software development with AfterStep.
 %package -n libAfterImage
 Summary:	A generic image manipulation library
 Version:	%{libaiver}
-Release:	%{release}
+Release:	%libairel
 Epoch:		%{epoch}
 License:	GPL
 Group:		System Environment/Libraries
@@ -125,7 +127,7 @@ Requires:	libjpeg
 Requires:	freetype
 Requires:	zlib
 Requires:	libX11
-Requires:	libAfterBase = %{epoch}:%{libabver}
+Requires:	libAfterBase = %{epoch}:%{libabver}-%libabrel
 
 %description -n libAfterImage
 libAfterImage is a generic image manipulation library. It was initially
@@ -145,7 +147,7 @@ from X window system.
 %package -n libAfterImage-devel
 Summary:	Files needed for software development with libAfterImage
 Version:	%{libaiver}
-Release:	%{release}
+Release:	%libairel
 Epoch:		%{epoch}
 License:	GPL
 Group:		Development/Libraries
@@ -156,8 +158,8 @@ Requires:	libjpeg-devel
 Requires:	freetype-devel
 Requires:	zlib-devel
 Requires:	libX11-devel
-Requires:	libAfterImage = %{epoch}:%{libaiver}
-Requires:	libAfterBase-devel = %{epoch}:%{libabver}
+Requires:	libAfterImage = %{epoch}:%{libaiver}-%libairel
+Requires:	libAfterBase-devel = %{epoch}:%{libabver}-%libabrel
 
 %description -n libAfterImage-devel
 The libAfterImage-devel package contains the files needed for development with
@@ -166,7 +168,7 @@ libAfterImage
 %package -n libAfterBase
 Summary:	A basic functions library providing support for libAfterImage
 Version:	%{libabver}
-Release:	%{release}
+Release:	%libabrel
 Epoch:		%{epoch}
 License:	GPL
 Group:		System Environment/Libraries
@@ -177,11 +179,11 @@ A basic functions library providing support for libAfterImage.
 %package -n libAfterBase-devel
 Summary:	Files needed for software development with libAfterBase
 Version:	%{libabver}
-Release:	%{release}
+Release:	%libabrel
 Epoch:		%{epoch}
 License:	GPL
 Group:		Development/Libraries
-Requires:	libAfterBase = %{epoch}:%{libabver}
+Requires:	libAfterBase = %{epoch}:%{libabver}-%libabrel
 
 %description -n libAfterBase-devel
 Files needed for software development with libAfterBase.

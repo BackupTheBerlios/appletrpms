@@ -11,8 +11,6 @@ License:	GPL
 Group:		Applications/File
 Source0:	http://www.boomerangsworld.de/worker/downloads/%{name}-%{version}.tar.gz
 Source1:	http://www.boomerangsworld.de/worker/downloads/%{name}-%{doc_version}-doc.tar.bz2
-Source2:	worker.desktop
-Source3:	worker.png
 URL:		http://www.boomerangsworld.de/worker/
 BuildRequires:	libX11-devel
 BuildRequires:	bzip2-devel
@@ -40,8 +38,7 @@ make DESTDIR=$RPM_BUILD_ROOT install
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications/
 
-cp %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/applications/
-cp %{SOURCE3} $RPM_BUILD_ROOT%{_datadir}/pixmaps/
+cp Icons/WorkerIcon48.xpm $RPM_BUILD_ROOT%{_datadir}/pixmaps/worker.xpm
 cd worker-%{doc_version}-doc
 
 ./configure --prefix=%{_prefix}
@@ -49,6 +46,24 @@ make
 
 
 make DESTDIR=$RPM_BUILD_ROOT install
+
+#Install application link for X-Windows
+echo -e "[Desktop Entry]
+Name=Worker File Manager
+Comment=View and manage files
+Exec=worker
+Icon=worker.xpm
+Terminal=false
+Encoding=UTF-8
+Type=Application" > %{name}.desktop
+                                                                                
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
+desktop-file-install --vendor "" --delete-original \
+  --dir $RPM_BUILD_ROOT%{_datadir}/applications                   \
+  --add-category X-Red-Hat-Extra                                  \
+  --add-category Application                                      \
+  --add-category System						  \
+  %{name}.desktop
 
 %clean
 rm -rf $RPM_BUILD_ROOT
