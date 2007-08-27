@@ -399,7 +399,7 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
-* Wed Aug 22 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.7-1
+* Mon Aug 27 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.7-1
 - new version.
 
 * Thu Aug 02 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.6-3
