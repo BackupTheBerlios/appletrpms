@@ -1,0 +1,29 @@
+--- src/main.c	2007-08-01 09:08:29.000000000 -0500
++++ src/main.c	2007-08-21 22:18:10.000000000 -0500
+@@ -32,7 +32,7 @@
+  *----------------------------------------------------------------------*/
+ 
+ #ifndef lint
+-static const char rcsid[] = "$Id: aterm-1.0.1-main.c.patch,v 1.1 2007/08/27 17:48:26 rpm_speedy Exp $";
++static const char rcsid[] = "$Id: aterm-1.0.1-main.c.patch,v 1.1 2007/08/27 17:48:26 rpm_speedy Exp $";
+ #endif
+ 
+ #define INTERN			/* assign all global vars to me */
+@@ -741,6 +741,7 @@
+ 
+ 
+     if (mwmhints.flags && _XA_MwmAtom) {
++	_XA_MwmAtom = XInternAtom(Xdisplay, "_MOTIF_WM_HINTS", False);
+     	XChangeProperty(Xdisplay, TermWin.parent, _XA_MwmAtom, _XA_MwmAtom, 32, PropModeReplace, (unsigned char *) &mwmhints, PROP_MWM_HINTS_ELEMENTS);
+     }
+    
+@@ -2105,8 +2106,7 @@
+ 		print_error("can't open display %s", display_name);
+ 		exit(EXIT_FAILURE);
+     }
+-  /* changed from _MOTIF_WM_INFO - Vaevictus - gentoo bug #139554 */
+-	_XA_MwmAtom = XInternAtom(Xdisplay, "_MOTIF_WM_HINTS", True);
++	_XA_MwmAtom = XInternAtom(Xdisplay, "_MOTIF_WM_INFO", True);
+ 	_XA_NET_WM_PID = XInternAtom(Xdisplay, "_NET_WM_PID", False);
+ 	_XROOTPMAP_ID = XInternAtom(Xdisplay, "_XROOTPMAP_ID", False);
+ 	_XA_NET_SUPPORTING_WM_CHECK = XInternAtom(Xdisplay, "_NET_SUPPORTING_WM_CHECK", False);
