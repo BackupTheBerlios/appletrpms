@@ -1,9 +1,0 @@
---- afterstep/start/1_Desktop/Pictures/.include.in	2006-10-02 20:48:15.000000000 -0500
-+++ afterstep/start/1_Desktop/Pictures/.include.in	2007-02-24 21:49:44.000000000 -0600
-@@ -9,5 +9,6 @@
- include "@datadir@/afterstep/backgrounds" Background
- include "@with_afterdir@/backgrounds" Background
- include "/usr/share/pixmaps/backgrounds" BackgroundForeign
-+include "/usr/share/backgrounds" BackgroundForeign
- include "/usr/local/share/pixmaps/backgrounds" BackgroundForeign
- command Background
