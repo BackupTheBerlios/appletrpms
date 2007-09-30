@@ -1,7 +1,7 @@
 %define prefix /usr
 %define name wmusic
 %define version 1.5.0
-%define release 4%{?dist}
+%define release 5%{?dist}
 
 Summary: Windowmaker dockapp that remote controls xmms
 Name: %name
@@ -10,7 +10,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://home.jtan.com/~john/wmusic/
-Source0: http://home.jtan.com/~john/wmusic/%{name}-%{version}.tar.gz
+Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
 Requires:   xmms >= 1.0.0
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: xmms-devel
@@ -54,6 +54,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Sep 28 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.5.0-5
+- homepage has disappeared pointed Source0 to ftp.afterstep.org.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.5.0-4
 - added distro info to release.
 

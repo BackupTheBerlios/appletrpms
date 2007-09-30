@@ -1,6 +1,6 @@
 %define name wmweather
-%define version 2.4.3
-%define release 4%{?dist}
+%define version 2.4.4
+%define release 1%{?dist}
 
 Summary: wmweather is a dockapp that displays the current weather
 Name: %name
@@ -48,6 +48,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGES COPYING README src/wmweather.conf
 
 %changelog
+* Fri Sep 28 2007 J. Krebs <rpm_speedy@yahoo.com> - 2.4.4-1
+- new version.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 2.4.3-4
 - added distro info to release.
 
