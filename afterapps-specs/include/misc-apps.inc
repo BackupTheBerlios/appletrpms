@@ -70,7 +70,7 @@ LIBDOCKAPP_URL=http://solfertje.student.utwente.nl/~dalroi/$(LIBDOCKAPP_NAME)/fi
 APPLET_LIST += LIBDOCKAPP
 
 LIBICAL_NAME=libical
-LIBICAL_VERSION=0.24.RC4
+LIBICAL_VERSION=0.27
 LIBICAL_TAR=$(LIBICAL_NAME)-$(LIBICAL_VERSION).tar.gz
 LIBICAL_URL=http://easynews.dl.sourceforge.net/sourceforge/freeassociation/$(LIBICAL_TAR)
 

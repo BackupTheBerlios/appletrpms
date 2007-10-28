@@ -6,7 +6,7 @@ Summary: wmweather is a dockapp that displays the current weather
 Name: %name
 Version: %version
 Release: %release
-License: GPL
+License: GPLv2+
 Group: AfterStep/Applets
 URL: http://www.godisch.de/debian/wmweather/
 Source0: http://www.godisch.de/debian/%{name}/%{name}-%{version}.tar.gz

@@ -7,7 +7,7 @@ Summary: Windowmaker dockapp that remote controls xmms
 Name: %name
 Version: %version
 Release: %release
-License: GPL
+License: GPLv2+
 Group: AfterStep/Applets
 URL: http://home.jtan.com/~john/wmusic/
 Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz

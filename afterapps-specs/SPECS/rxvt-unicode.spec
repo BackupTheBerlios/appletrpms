@@ -1,6 +1,6 @@
 %define aitest	%(rpm -q --queryformat='%{VERSION}' libAfterImage)
 %define aiver	%aitest 
-%define version 8.3
+%define version 8.4
 %define release 1%{?dist}
 %define name	rxvt-unicode
 %define epoch	2
@@ -10,7 +10,7 @@ Name:		%name
 Version:	%version
 Release:	%release
 Epoch:		%epoch
-License:	GPL
+License:	GPLv2+
 Group:		User Interface/X
 URL:		http://software.schmorp.de/pkg/rxvt-unicode.html
 Source0:	http://dist.schmorp.de/rxvt-unicode/%{name}-%{version}.tar.bz2
@@ -84,5 +84,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/urxvt
 
 %changelog
+* Sat Oct 27 2007 J. Krebs <rpm_speedy@yahoo.com> - 2:8.4
+- new version.
+
 * Tue Aug 21 2007 J. Krebs <rpm_speedy@yahoo.com> - 2:8.3
 - initial build.

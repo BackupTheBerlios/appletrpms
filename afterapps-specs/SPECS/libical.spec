@@ -1,16 +1,16 @@
 %define	name	libical
-%define	version	0.24.RC4
-%define release 6%{?dist}
+%define	version	0.27
+%define release 1%{?dist}
 
 Summary:	An implementation of basic iCAL protocols
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-License:	MPL
+License:	Dual LGPLv2+ and MPLv1.0
 Group:		Development/Libraries/C and C++
 URL:		http://softwarestudio.org/libical/
 Source0:	http://easynews.dl.sourceforge.net/sourceforge/freeassociation/%name-%version.tar.gz
-Patch0:		%name.diff
+#Patch0:		%name.diff
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -28,31 +28,30 @@ Requires:	%{name} = %{version}
 libical include files.
 
 %prep
-%setup -q -n %{name}-0.24
-%patch0
+%setup -q
+#%patch0
 
 %build
-autoreconf -f -i
-CFLAGS="$RPM_OPT_FLAGS" \
-CXXFLAGS="$RPM_OPT_FLAGS" \
-  ./configure \
+ 
+./configure \
      --prefix=%{_prefix} \
      --exec-prefix=%{_prefix} \
-     --libdir=%{_libdir} \
-     --with-devel \
-     --enable-python
+     --enable-shared \
+     --libdir=%{_libdir}
+
 make
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT
 rm -rf examples/.deps/
 rm -rf examples/.libs
-rm examples/*.o
+
+make install DESTDIR=$RPM_BUILD_ROOT
+
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/%{name}/scripts/
 install -m 644 scripts/*.pl $RPM_BUILD_ROOT%{_datadir}/%{name}/scripts/
-rm -rf doc/Makefil*
-rm -rf examples/Makefil*
-rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}/scripts/
+#rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}/scripts/
+rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}/doc/Makefil*
+rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}/examples/Makefil*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -76,6 +75,9 @@ rm -rf $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 
 %changelog
+* Thu Oct 11 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.27-1
+- new version.
+
 * Fri May 04 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.24.RC4-6
 - added rpm macro libdir to configure.
 

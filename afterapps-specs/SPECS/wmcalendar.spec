@@ -1,43 +1,20 @@
-### BEGIN Distro Defines
-%define mdk  %(if [ -e /etc/mandrake-release ]; then echo 1; else echo 0; fi;)
-%{?_with_mdk:   %{expand: %%global mdk 1}}
-
-%define fedora  %(if [ -e /etc/fedora-release ]; then echo 1; else echo 0; fi;)
-%{?_with_fedora:   %{expand: %%global fedora 1}}
-
-%define suse %(if [ -e /etc/SuSE-release ]; then echo 1; else echo 0; fi;)
-%{?_with_suse:   %{expand: %%global suse 1}}
-
-%define generic 1
-
-%if %{mdk}
-  %define generic 0
-%endif
-
-%if %{fedora}
-  %define generic 0
-%endif
-
-%if %{suse}
-  %define generic 0
-%endif
-### END Distro Definitions
-
+%define lictest	%(rpm -q --queryformat='%{VERSION}' libical)
+%define licver	%lictest 
 %define name wmcalendar
 %define version 0.5.2
-%define release 3%{?dist}
+%define release 4%{?dist}
 
 Summary: wmCalendar is a calendar dockapp
 Name: %name
 Version: %version
 Release: %release
-License: GPL
+License: GPLv2+
 Group: AfterStep/Applets
 URL: http://sourceforge.net/projects/wmcalendar/
 Source0: http://easynews.dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
 Source1: %{name}.ogo2ical
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: libical
+Requires: libical >= %{licver}
 Buildrequires: libical-devel
 
 %description
@@ -88,7 +65,10 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
-* Fri Jun  15 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.5.2-3
+* Fri Oct 12 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.5.2-4
+- added test for libical version, updated for libical 0.27.
+
+* Fri Jun 15 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.5.2-3
 - spec file cleanup.
 
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.5.2-2

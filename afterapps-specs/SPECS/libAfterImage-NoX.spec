@@ -1,6 +1,6 @@
 %define	name 	libAfterImage-NoX
 %define	version	1.15
-%define	release	1%{?dist}
+%define	release	2%{?dist}
 %define	epoch	20
 
 Summary:	A generic image manipulation library (Non-Xfree/Xorg version)
@@ -8,7 +8,7 @@ Name:		%name
 Version:	%version
 Release:	%release
 Epoch:		%epoch
-License:	GPL
+License:	GPLv2+
 Group:		System Environment/Libraries
 Source0:	ftp://ftp.afterstep.org/stable/libAfterImage/libAfterImage-%{version}.tar.gz
 Source1:	%{name}-COPYING
@@ -62,7 +62,7 @@ Requires:	libpng-devel
 Requires:	freetype-devel
 Requires:	zlib-devel
 Conflicts:	libX11 libX11-devel xorg-x11-filesystem AfterStep-devel libAfterImage-devel
-Requires:	libAfterImage-NoX = %{epoch}:%{libaiver}
+Requires:	libAfterImage-NoX = %{epoch}:%{version}
 Provides:	libAfterImage-devel
 
 %description devel
@@ -132,5 +132,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/libAfterImage/*
 
 %changelog
+* Sat Oct 20 2007 J. Krebs <rpm_speedy@yahoo.com> 1.15-2
+- fixed typo in requires for -devel (libaiver wasn't defined).
+
 * Mon Aug 19 2007 J. Krebs <rpm_speedy@yahoo.com> 1.15-1
 - initial build.
