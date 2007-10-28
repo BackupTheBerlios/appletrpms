@@ -9,7 +9,7 @@ Release: %release
 License: GPLv2+
 Group: AfterStep/Applets
 URL: http://www.godisch.de/debian/wmweather/
-Source0: http://www.godisch.de/debian/%{name}/%{name}-%{version}.tar.gz
+Source0: http://people.debian.org/~godisch/debian/%{name}/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: curl-devel
 Requires: curl
