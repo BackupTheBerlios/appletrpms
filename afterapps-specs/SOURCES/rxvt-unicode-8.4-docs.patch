@@ -1,0 +1,64 @@
+--- doc/rxvt.1.man.in	2007-10-27 07:07:31.000000000 -0500
++++ doc/rxvt.1.man.in	2007-10-29 09:39:06.000000000 -0500
+@@ -260,7 +260,8 @@
+ used to brighten or darken the image in addition to tinting it.
+ Please note that certain tint colours can be applied on the server\-side,
+ thus yielding performance gain of two orders of magnitude. These colours are:
+-blue, red, green, cyan, magenta, yellow, and those close to them; resource
++blue, red, green, cyan, magenta, yellow, and those close to them. Also
++pure black and pure white colors essentialy mean no tinting; resource
+ \&\fItintColor\fR. Example:
+ .Sp
+ .Vb 1
+@@ -268,7 +269,7 @@
+ .Ve
+ .IP "\fB\-sh\fR \fInumber\fR" 4
+ .IX Item "-sh number"
+-Darken (0 .. 100) or lighten (\-1 .. \-100) the transparent
++Darken (0 .. 100) or lighten (100 .. 200) the transparent
+ background image in addition to (or instead of) tinting it;
+ resource \fIshading\fR.
+ .IP "\fB\-blt\fR \fIstring\fR" 4
+--- doc/rxvt.1.pod	2007-10-27 07:01:23.000000000 -0500
++++ doc/rxvt.1.pod	2007-10-29 09:40:30.000000000 -0500
+@@ -148,13 +148,14 @@
+ Please note that certain tint colours can be applied on the server-side,
+ thus yielding performance gain of two orders of magnitude. These colours are:
+ blue, red, green, cyan, magenta, yellow, and those close to them; resource
++pure black and pure white colors essentialy mean no tinting; resource
+ I<tintColor>. Example:
+ 
+    @@RXVT_NAME@@ -tr -tint blue -sh 40
+ 
+ =item B<-sh> I<number>
+ 
+-Darken (0 .. 100) or lighten (-1 .. -100) the transparent
++Darken (0 .. 100) or lighten (100 .. 200) the transparent
+ background image in addition to (or instead of) tinting it;
+ resource I<shading>.
+ 
+--- doc/rxvt.7.pod	2007-10-24 05:40:28.000000000 -0500
++++ doc/rxvt.7.pod	2007-10-29 09:42:52.000000000 -0500
+@@ -218,10 +218,10 @@
+ Here are four ways to get transparency. B<Do> read the manpage and option
+ descriptions for the programs mentioned and rxvt-unicode. Really, do it!
+ 
+-1. Use inheritPixmap:
++1. Use transparent mode:
+ 
+    Esetroot wallpaper.jpg
+-   @@URXVT_NAME@@ -ip -tint red -sh 40
++   @@URXVT_NAME@@ -tr -tint red -sh 40
+ 
+ That works. If you think it doesn't, you lack transparency and tinting
+ support, or you are unable to read.
+@@ -2367,8 +2367,7 @@
+ 
+ =item --enable-transparency (default: on)
+ 
+-Add support for inheriting parent backgrounds thus giving a fake
+-transparency to the term.
++Add support for backgrounds, creating illusion of transparency in the term.
+ 
+ =item --enable-fading (default: on)
+ 
