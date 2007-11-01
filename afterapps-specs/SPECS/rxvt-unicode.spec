@@ -14,6 +14,7 @@ License:	GPLv2+
 Group:		User Interface/X
 URL:		http://software.schmorp.de/pkg/rxvt-unicode.html
 Source0:	http://dist.schmorp.de/rxvt-unicode/%{name}-%{version}.tar.bz2
+Patch0:		%{name}-%{version}-docs.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	perl-devel libXpm-devel libXft-devel freetype-devel
 BuildRequires:	libAfterImage-devel >= 1.15
