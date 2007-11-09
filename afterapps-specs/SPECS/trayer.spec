@@ -25,7 +25,7 @@
 
 %define name trayer
 %define version 1.0
-%define release 2%{?dist}
+%define release 3%{?dist}
 
 Summary: A lightweight GTK2-based systray for UNIX desktop
 Name: %name
@@ -35,6 +35,7 @@ License: GPL
 Group: User Interface/Desktops
 URL: http://fvwm-crystal.org/
 Source0: http://download.gna.org/fvwm-crystal/%{name}/%{version}/%{name}-%{version}.tar.gz
+Patch0: %{name}-%{version}-Makefile.common.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -42,6 +43,7 @@ A lightweight GTK2-based systray for UNIX desktop.
 
 %prep
 %setup -q
+%patch0
 
 %build
 make PREFIX=%{_prefix}
@@ -61,6 +63,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc CREDITS COPYING CHANGELOG README
 
 %changelog
+* Thu Nov 08 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.0-3
+- added patch for gtk issues (thanks Team Debian).
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.0-2
 - added distro info to release.
 

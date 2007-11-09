@@ -1,0 +1,11 @@
+--- src/screen.c	2006-03-29 16:32:07.000000000 -0600
++++ src/screen.c	2007-11-09 09:48:50.000000000 -0600
+@@ -2883,7 +2883,7 @@
+         selection.type = 1;
+ 		/* "fix" for the high-ascii pasting? : */
+ 		/* may need to try all three : aterm_XA_UTF8_STRING, _XA_COMPAUND_TEXT and XA_STRING in that order */
+-		XConvertSelection(Xdisplay, XA_PRIMARY, XA_STRING, aterm_XA_VT_SELECTION, TermWin.vt,tm);
++		XConvertSelection(Xdisplay, XA_PRIMARY, _XA_COMPAUND_TEXT, aterm_XA_VT_SELECTION, TermWin.vt,tm);
+ /*	XConvertSelection(Xdisplay, XA_PRIMARY, _XA_COMPAUND_TEXT, prop, TermWin.vt,tm); */
+     }
+ }

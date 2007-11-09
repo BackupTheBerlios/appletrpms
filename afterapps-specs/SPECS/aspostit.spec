@@ -1,6 +1,6 @@
 %define name aspostit
 %define version 1.3
-%define release 4%{?dist}
+%define release 5%{?dist}
 
 Summary: Post-It notes
 Name: %name
@@ -11,6 +11,8 @@ Group: AfterStep/Applets
 URL: http://tigr.net/afterstep/view.php?applet=aspostit/data
 Source0: http://tigr.net/afterstep/download/%{name}/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires: libXaw
+Buildrequires: libXaw-devel
 
 %description
 A swallowable applet allows you to ceate notes in post-it like
@@ -44,6 +46,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Nov 08 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.3-5
+- added requires for libXaw.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.3-4
 - added distro info to release.
 

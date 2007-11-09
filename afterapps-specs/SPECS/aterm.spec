@@ -2,7 +2,7 @@
 %define aiver	%aitest 
 %define	name	aterm
 %define	version	1.0.1
-%define	release	1%{?dist}
+%define	release	3%{?dist}
 %define epoch	2
 
 Summary:	aterm - terminal emulator in an X window
@@ -14,6 +14,7 @@ License:	GPL
 Group:		Applications/X11
 URL:		http://aterm.sourceforge.net
 Patch0:		%{name}-%{version}-main.c.patch
+Patch1:		%{name}-%{version}-screen.c.patch
 Source:		ftp://ftp.afterstep.org/apps/aterm/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	libAfterImage-devel
@@ -33,6 +34,7 @@ tied to any libraries, and can be used anywhere.
 %prep
 %setup -q
 %patch0
+%patch1
 
 LD_LIBRARY_PATH=../AfterStep-%{asversion}/libAfterBase \
         CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%{_prefix} \
@@ -79,6 +81,9 @@ desktop-file-install --vendor "" --delete-original \
 #%config(missingok) /etc/X11/wmconfig/aterm
 
 %changelog
+* Fri Nov 09 2007 J. Krebs <rpm_speedy@yahoo.com> 2:1.0.1-3
+- added patches for cut and paste, borderless.
+
 * Tue Aug 21 2007 J. Krebs <rpm_speedy@yahoo.com> 2:1.0.1-1
 - new version, linked to libAfterImage from AS 2.2.7.
 
