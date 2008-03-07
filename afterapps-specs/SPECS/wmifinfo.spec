@@ -1,6 +1,6 @@
 %define name wmifinfo
 %define version 0.09
-%define release 4%{?dist}
+%define release 5%{?dist}
 
 Summary: wmifinfo shows basic network info for all available interfaces
 Name: %name
@@ -8,8 +8,8 @@ Version: %version
 Release: %release
 License: GPL
 Group: AfterStep/Applets
-URL: http://www.zevv.nl/wmifinfo/
-Source0: http://www.zevv.nl/wmifinfo/%{name}-%{version}.tgz
+URL: http://www.zevv.nl/play/code/wmifinfo/
+Source0: http://www.zevv.nl/play/code/%{name}/%{name}-%{version}.tgz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -40,6 +40,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc README
 
 %changelog
+* Sat Nov 24 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.09-5
+- updated URL info.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.09-4
 - added distro info to release.
 

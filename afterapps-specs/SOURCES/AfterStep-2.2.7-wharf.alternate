@@ -1,0 +1,251 @@
+##########################################################################
+# Wharf - primary application launcher :
+#
+#------------------------------------------------------------------------
+
+*WharfAnimate
+*WharfAnimateMain
+*WharfAnimateDelay	2
+*WharfAnimateSteps	5
+*WharfAnimateStepsMain	5
+
+*WharfBalloons
+*WharfBalloonXOffset		10
+*WharfBalloonYOffset		-15
+*WharfBalloonDelay		120
+*WharfBalloonCloseDelay		1200
+*WharfBalloonStyle		"*WharfBalloon"
+*WharfBalloonBorderHilite	Right,Bottom
+*WharfShowHints                 Name
+
+#------------------------------------------------------------------------
+# Buttons
+#
+*WharfFullPush
+#*WharfNoPush
+
+# This will resize Wharf's buttons to fit the size of swallowed apps/icons
+#*WharfFitContents
+*WharfAlignContents HScaled, VScaled, HCenter, VCenter
+
+#------------------------------------------------------------------------
+# Geometry
+#
+*WharfForceSize		32x32
+*WharfRows		1
+#*WharfColumns		2
+*WharfGeometry		-0+0
+#*WharfBevel		Bottom,Right,NoOutline,Extra
+*WharfNoBorder
+
+#-----------------------------------------------------------------------
+# Applications :
+#
+
+# First available terminal. Rxvt-Unicode (urxvt) and aterm offer AfterStep support :
+*Wharf Term		logos/Unicode Exec "-" urxvt &
+*Wharf Term		logos/Unicode Exec "-" mlterm &
+*Wharf Term		logos/aterm2 Exec "-" aterm &
+*Wharf Term		logos/Eterm Exec "-" Eterm -P ~/.afterstep/non-configurable/0_background -f white &
+*Wharf Term		normal/Monitor3DBlue Exec "-" rxvt -bg black -fg grey70 -sl 500 -vb &
+*Wharf Term		logos/XWindow3 Exec "-" xterm -bg black -fg grey70 -sl 500 -vb &
+
+# First available Web Browser :
+*Wharf Browser		normal/WWW    Exec x-www-browser &
+*Wharf Browser		logos/Firefox Exec "firefox" firefox &
+*Wharf Browser		logos/Firefox Exec "Firefox2" mozilla-firefox &
+*Wharf Browser		iceweasel.png Exec "iceweasel" iceweasel &
+*Wharf Browser		logos/mozilla Exec "Mozilla" mozilla &
+*Wharf Browser		logos/Opera   Exec "Opera Web Browser" opera &
+*Wharf Browser		normal/WWW    Exec sensible-browser &
+
+# Restart the AfterStep session or close the session :
+*Wharf QuitFolder Folder-Stopsign Folder
+	*Wharf 	Restart_Session normal/Recycle Restart "" afterstep -r
+	*Wharf 	Quit normal/RedLight Quit "" afterstep
+*Wharf ~Folder
+
+# Subfolder of office applications. Look at how it pulls-in the same items that are in Menu/Applications/Office :
+*Wharf Office - CategoryTree "Office"
+
+# What's AfterStep without the MultiMedia bells and whistles? :
+*Wharf MultimediaFolder Folder-Headphones Folder
+	*Wharf gxmms2		xmms2.svg Exec "gxmms2" gxmms2 &
+	*Wharf AudioPlayer	normal/OldFashionedRadio Exec "xmms" xmms &
+	*Wharf Audacious	audacious.png Exec "audacious" audacious &
+	*Wharf Rhythmbox	rhythmbox.png Exec "rhythmbox" rhythmbox &
+	*Wharf Amarok		amarok.png Exec "amarok" amarok &
+	*Wharf MPlayer		normal/MovieProjector Exec "gmplayer" gmplayer -vo xv &
+	*Wharf Totem		totem.png Exec "totem" totem &
+	*Wharf VideoLANClient	vlc.png Exec "vlc" vlc &
+	*Wharf RealPlayer	realplay.png Exec "realplayer" realplay &
+*Wharf ~Folder
+
+# Odds-n-ends that fit in a folder nicely :
+*Wharf MiscFolder Folder-Screwdriver Folder
+	*Wharf Calculator	normal/Calculator Exec "Calcoo" calcoo &
+	*Wharf Calculator	normal/Calculator Exec "gcalctool" gcalctool &
+	*Wharf Calculator	kcalc.png Exec "kcalc" kcalc &
+	*Wharf Calculator	normal/Calculator2 Exec "xcalc" xcalc &
+
+	*Wharf ImageEditor	logos/gimp Exec "gimp" gimp &
+	*Wharf ImageEditor	normal/XV Exec "XV" xv &
+*Wharf ~Folder
+
+# First available e-mail client :
+*Wharf Mail		logos/Thunderbird Exec "Thunderbird" thunderbird &
+*Wharf Mail		logos/Thunderbird Exec "Thunderbird2" mozilla-thunderbird &
+*Wharf Mail		normal/MailBox2 Exec "mozilla-mail" mozilla --mail &
+*Wharf Mail		normal/MailBox2 Exec "kmail" kmail &
+*Wharf Mail		normal/MailBox2 Exec "balsa" balsa &
+*Wharf Mail		normal/MailBox2 ExecInTerm "Mutt" -title "Mutt e-mail reader" -e mutt -y &
+*Wharf Mail		normal/MailBox2 ExecInTerm "Pine" -title "Pine e-mail and news reader" -e pine &
+
+# First available text editor :
+*Wharf TextEditor	medit.png Exec "medit" medit &
+*Wharf TextEditor	normal/Pen1 Exec "nedit" nedit &
+*Wharf TextEditor 	normal/Pen1 Exec "cooledit" cooledit --look next &
+*Wharf TextEditor 	xemacs.png Exec "xemacs" xemacs &
+*Wharf TextEditor 	normal/Pen1 Exec "VIM" gvim &
+*Wharf TextEditor	normal/Pen1 ExecInTerm "nano" -title "Nano text editor" -e nano &
+
+# First available file manager :
+*Wharf FileManager	logos/Worker        Exec "Worker" worker &
+*Wharf FileManager	logos/konqueror     Exec "Konqueror" konqueror &
+*Wharf FileManager 	normal/Filecabinet2 Exec "Krusader" krusader &
+*Wharf FileManager 	normal/Filecabinet2 Exec "Gentoo File Manager" gentoo &
+*Wharf FileManager 	normal/Filecabinet2 Exec "Rox" rox &
+*Wharf FileManager 	normal/Filecabinet2 Exec "Nautilus" nautilus --no-desktop &
+*Wharf FileManager	normal/MCInMonitorShadow ExecInTerm "-" -g 130x35 if(aterm){-T mc-VerticalTitle -tr -tint blue -fg white -bg black} if(Eterm){-O --tint blue -f white -b black) if(rxvt){-tr -fg white -bg black} -e mc &
+
+# Alltray allows any application to be added to the systray :
+*Wharf alltray		/usr/share/pixmaps/alltray.png Exec "AllTray" alltray &
+
+# Not actually part of AfterStep; Trayer is the better option for systrays.
+*Wharf systray - MaxSwallow "trayer" trayer --SetDockType false --widthtype request --heighttype pixel --height 24 --edge bottom --align left --transparent true --alpha 128 &
+
+# Clock if not running MonitorWharf
+*Wharf clock - MaxSwallow "xclock" xclock -geometry 64x32 -digital -brief -bg gray10 -fg cyan -update 1 &
+
+#
+#  End of the Wharf configuration
+##########################################################################
+
+##########################################################################
+# MonitorWharf - monitorng applications, system configuration, clocks and docs:
+#
+#------------------------------------------------------------------------
+
+*MonitorWharfAnimate
+*MonitorWharfAnimateMain
+*MonitorWharfAnimateDelay	2
+*MonitorWharfAnimateSteps	5
+*MonitorWharfAnimateStepsMain	5
+
+*MonitorWharfBalloons
+*MonitorWharfBalloonXOffset		10
+*MonitorWharfBalloonYOffset		-15
+*MonitorWharfBalloonDelay		120
+*MonitorWharfBalloonCloseDelay		1200
+*MonitorWharfBalloonStyle		"*WharfBalloon"
+*MonitorWharfBalloonBorderHilite	Right,Bottom
+*MonitorWharfShowHints                 Name
+
+#------------------------------------------------------------------------
+# Buttons
+#
+*MonitorWharfFullPush
+#*MonitorWharfNoPush
+*MonitorWharfBevel		Right,NoOutline
+
+# This will resize Wharf's buttons to fit the size of swallowed apps/icons
+#*MonitorWharfFitContents
+#*MonitorWharfAlignContents HCenter, VCenter
+
+#------------------------------------------------------------------------
+# Geometry
+#
+#*MonitorWharfForceSize
+#*MonitorWharfRows		1
+*MonitorWharfColumns		1
+*MonitorWharfGeometry		-3-3
+
+#-----------------------------------------------------------------------
+# Monitoring Applications :
+#
+
+# To swallow Pager, you need to:
+#   - In autoexec, comment-out the line "Module  "I"     Pager 0 0"
+#   - In base, set the DeskTopScale value (default is 32, larger number
+#      means smaller Pager is displayed).  Helpful formula for vertical Wharf:
+#      (DesktopWidth) / (WharfWidth) * (#HorizontalViewports) = 1280/64*2 = 40
+#   - In Pager, comment-out the "*PagerGeometry       -3+35" line
+#   - In Pager, in the "*PagerDecoration  ..." line,
+#     change DeskBorderWidth from "1" to "0"
+#   - Edit the line below.  The 0,1, etc. refer to the desktops you want
+#     to display.  Default would be "0 1 2 3".
+#*MonitorWharf Pager - MaxSwallowModule "Pager" Pager 0 1
+
+# One of the annoying eyes Applets - first available :
+*MonitorWharf eyes - Swallow "speyes" speyes &
+*MonitorWharf eyes - Swallow "wmeyes" wmeyes &
+*MonitorWharf eyes - Swallow "xeyes" xeyes -geometry 64x64 &
+
+# One of the load monitors - first available :
+*MonitorWharf loadmonitor - Swallow "wmfire" wmfire -f 2 &
+*MonitorWharf loadmonitor - Swallow "wmcpuload" wmcpuload -wp &
+*MonitorWharf loadmonitor - Swallow "asmon" asmon &
+*MonitorWharf loadmonitor - Swallow "asload" asload -shape -exe "aterm -e top" &
+*MonitorWharf loadmonitor - Swallow "wmavgload" wmavgload -shape -led red &
+*MonitorWharf loadmonitor - Swallow "wmload" wmload -shape -led red &
+*MonitorWharf loadmonitor - Swallow "xload" xload -geometry 64x64 -bg gray70 -label LOAD -update 3 &
+
+# One of the audio players - first available :
+*MonitorWharf AudioPlayer - Swallow "wmusic" wmusic -w &
+*MonitorWharf AudioPlayer - Swallow "wmxmms" wmxmms --single &
+*MonitorWharf AudioPlayer logos/Xmms Exec "X Multi Media System" xmms &
+*MonitorWharf AudioPlayer - Swallow "ascd" ascd &
+
+# One of the memory monitors - first available :
+*MonitorWharf memory - Swallow "wmmemload" wmmemload -b -c -w &
+*MonitorWharf memory - Swallow "wmmemmon" wmmemmon -b -c -w &
+*MonitorWharf memory - Swallow "asmem" asmem &
+
+# One of the mixers - first available :
+*MonitorWharf mixer - Swallow "Mixer.app" Mixer.app &
+*MonitorWharf mixer - Swallow "wmix" wmix &
+*MonitorWharf mixer - Swallow "asmixer" asmixer -g -1-1 &
+*MonitorWharf mixer - Swallow "wmmixer" wmmixer &
+*MonitorWharf mixer - Swallow "asMix" asmix -shape &
+
+# One of the system temps - first available :
+# You'll need lm_sensors activated; folder-name is found in /sys/bus/i2c/devices/
+*MonitorWharf cputemp - Swallow "wmtemp" wmtemp -w &
+*MonitorWharf cputemp - Swallow "wmcpum" wmcpum -d 9191-0290 &
+*MonitorWharf cputemp - Swallow "wmsensormon" wmsensormon -dt 45 -ds 35 -wt 40 -ws 30 &
+
+# One of the weather monitors - first available :
+# Get the 4-letter code from http://weather.noaa.gov
+*MonitorWharf weather - Swallow "Temperature.app" Temperature.app -s KORD -f -c -p -w MPH &
+*MonitorWharf weather - Swallow "wmweather" wmweather -s KORD --compat &
+
+# One of the clocks - first available :
+*MonitorWharf clock - Swallow "wmclockmon" wmclockmon -w &
+*MonitorWharf clock - Swallow "asclock" asclock -24 -theme penguin &
+*MonitorWharf clock - Swallow "hvclock" hvclock &
+*MonitorWharf clock - Swallow "wmitime" wmitime &
+*MonitorWharf clock - Swallow "Time.app" Time.app -D -t 24 &
+*MonitorWharf clock - MaxSwallow "xclock" xclock -geometry 64x32 -digital -brief -bg gray10 -fg cyan -update 1 &
+*MonitorWharf clock - Exec "r" evolution &
+*MonitorWharf clock - Exec "r" korganizer &
+
+# One of the net monitors - first available :
+*MonitorWharf netmonitor - Swallow "wmnd" wmnd -w lines &
+*MonitorWharf netmonitor - Swallow "wminet" wminet -t &
+*MonitorWharf netmonitor - Swallow "wmnethru" wmnethru &
+*MonitorWharf netmonitor - Swallow "wmnet" wmnet --driver=devstats &
+*MonitorWharf netmonitor - Swallow "wmifinfo" wmifinfo -i eth0 &
+
+#
+#  End of the MonitorWharf configuration
+##########################################################################

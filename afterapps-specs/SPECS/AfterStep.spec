@@ -39,9 +39,9 @@
 ### END Distro Definitions
 
 %define	name AfterStep
-%define	version	2.2.7
-%define	libaiver	1.15
-%define	libabver	1.11
+%define	version	2.2.8
+%define	libaiver	1.17
+%define	libabver	1.12
 %define	libairel	1%{?dist}
 %define	libabrel	1%{?dist}
 %define release 1%{?dist}
@@ -65,7 +65,10 @@ Source5: 	AfterStep.menumethod
 Source6: 	afterstep.desktop.xsessions
 Source7: 	afterstep.desktop.wm-properties
 Source8:	afterstep.fedora.README
+Source9:	%{name}-2.2.7-wharf.alternate
 Patch0:		%{name}-2.2.5-ImageMagick.patch
+Patch1:		%{name}-2.2.7-winlist.patch
+Patch2:		%{name}-2.2.7-pager.patch
 Distribution:	The AfterStep TEAM
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 %if %{mdk}
@@ -75,8 +78,9 @@ Obsoletes:	AfterStep-libs
 Provides:	AfterStep-libs
 Requires: 	libAfterImage = %{epoch}:%{libaiver}-%libairel
 Requires:	readline
-Requires:	gtk2
+Requires:	gtk2, gtk2-devel
 Requires:	qiv
+Requires:	libXt
 BuildRequires:  readline-devel
 BuildRequires:  gtk2-devel
 BuildRequires:	librsvg2-devel
@@ -84,6 +88,7 @@ BuildRequires:	libtiff-devel
 BuildRequires:  freetype-devel
 BuildRequires:  zlib-devel
 BuildRequires:  libX11-devel
+BuildRequires:  libXt-devel
 
 %description
 AfterStep is a Window Manager for X which started by emulating the
@@ -191,6 +196,8 @@ Files needed for software development with libAfterBase.
 %prep
 %setup -q
 %patch0
+%patch1
+%patch2
 
 %build
 CFLAGS=$RPM_OPT_FLAGS \
@@ -202,7 +209,7 @@ CFLAGS=$RPM_OPT_FLAGS \
 	--disable-staticlibs                      \
 	--enable-i18n                             \
 	--with-helpcommand="xterm -e man"         \
-	--with-desktops=1 --with-deskgeometry=2x3 \
+	--with-desktops=2 --with-deskgeometry=2x2 \
 	--with-imageloader="qiv --root"
 
 make
@@ -221,6 +228,9 @@ rm -rf afterstep/start/2_Modules/Forms/
 rm -rf afterstep/start/2_Modules/Scripts/
 rm -rf afterstep/start/2_Modules/Stop/
 
+mv afterstep/wharf afterstep/wharf.orig
+cp %{SOURCE9} afterstep/wharf
+
 %install
 if [[ -d $RPM_BUILD_ROOT ]]; then rm -rf $RPM_BUILD_ROOT; fi
 mkdir -p $RPM_BUILD_ROOT
@@ -233,8 +243,8 @@ rm -f $RPM_BUILD_ROOT%{_bindir}/{sessreg,xpmroot}
 cp %{SOURCE8} .
 install -d $RPM_BUILD_ROOT%{_datadir}/switchdesk/
 install -m 0755 %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/switchdesk/Xclients.afterstep
-install -d $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/
-install -m 0755 %{SOURCE2} $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/afterstep
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/X11/gdm/Sessions/
+install -m 0755 %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/X11/gdm/Sessions/afterstep
 install -d $RPM_BUILD_ROOT%{_datadir}/xsessions/
 install -m 0644 %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/xsessions/afterstep.desktop
 install -d $RPM_BUILD_ROOT%{_datadir}/gnome/wm-properties/
@@ -253,12 +263,12 @@ rm -f $RPM_BUILD_ROOT%{_datadir}/xsessions/AfterStep.desktop
 
 # mandrake/mandriva menu items
 %if %{mdk}
-install -d $RPM_BUILD_ROOT/etc/X11/wmsession.d/
-install -m 0644 %{SOURCE3} $RPM_BUILD_ROOT/etc/X11/wmsession.d/42AfterStep
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/X11/wmsession.d/
+install -m 0644 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/X11/wmsession.d/42AfterStep
 install -d $RPM_BUILD_ROOT%{_libdir}/menu/afterstep
 install -m 0644 %{SOURCE4} $RPM_BUILD_ROOT%{_libdir}/menu/afterstep
-install -d $RPM_BUILD_ROOT/etc/menu-methods/
-install -m 0755 %{SOURCE5} $RPM_BUILD_ROOT/etc/menu-methods/AfterStep
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/menu-methods/
+install -m 0755 %{SOURCE5} $RPM_BUILD_ROOT%{_sysconfdir}/menu-methods/AfterStep
 %endif
 
 %if %{ismultiarch}
@@ -310,7 +320,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 # this is evil hack, but I can't get it to work otherwise on mdk
 %if !%{fedora}
-%config /etc/X11/wmsession.d/42AfterStep
+%config %{_sysconfdir}/X11/wmsession.d/42AfterStep
 %{_sysconfdir}/menu-methods/AfterStep
 %{_datadir}/xsessions/AfterStep.desktop
 %config %{_libdir}/menu/afterstep/AfterStep.menu
@@ -399,6 +409,18 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
+* Fri Mar 06 2008 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.8-1
+- new version.
+
+* Thu Dec 06 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.7-4
+- added patch to skip short duration windows under workspace_state.
+
+* Thu Dec 06 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.7-3
+- added patches to look for urxvt (then aterm, rxvt, xterm).
+
+* Fri Nov 09 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.7-2
+- cleaned-up desktop.
+
 * Mon Aug 27 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.7-1
 - new version.
 
@@ -409,6 +431,9 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
   package makes it easier to differentiate.
 - added qiv as a require for AfterStep - some apps still need
   an image loader other than that provided by AfterStep.
+
+* Thu Jun 14 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.6-2
+- added test for F7.
 
 * Thu Jun 14 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.6-2
 - added test for F7.

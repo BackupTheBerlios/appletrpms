@@ -1,6 +1,6 @@
 %define name Temperature.app
 %define version 1.4
-%define release 8%{?dist}
+%define release 9%{?dist}
 
 Summary: WM applet gets temperature every 15 minutes
 Name: %name
@@ -13,7 +13,7 @@ Source0: http://www.fukt.bth.se/~per/temperature/%{name}-%{version}.tar.gz
 Patch0: Temperature.app-1.4.as.patch
 Patch1: Temperature.app-1.4-frog-5.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: wget
+Requires: wget xorg-x11-fonts-ISO8859-1-75dpi xorg-x11-fonts-ISO8859-1-100dpi
 
 %description
 This WM applet includes two binaries: "Temperature.app" for AfterStep
@@ -66,6 +66,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Nov 10 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.4-9
+- added Require for xorg-x11-fonts-ISO8859-1-75dpi.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.4-8
 - added distro info to release.
 

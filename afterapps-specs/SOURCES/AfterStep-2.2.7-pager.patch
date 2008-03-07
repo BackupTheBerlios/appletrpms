@@ -1,0 +1,22 @@
+--- afterstep/pager.in	2005-05-10 16:51:28.000000000 -0500
++++ afterstep/pager.in	2007-11-11 11:12:58.000000000 -0600
+@@ -35,7 +35,7 @@
+ 
+ *PagerDecoration  DeskBorderWidth 1, DeskBorderColor BaseDark, GridColor Inactive2Dark, SelectionColor HighActiveLight
+ 
+-*PagerGeometry       -1+27
++*PagerGeometry       -3+35
+ 
+ # PagerStyle is used to define look of Pager's desk window.
+ # Relevant look must be defined in your look file or in this file
+@@ -53,8 +53,8 @@
+ *PagerLabel          1       WWW
+ *PagerLabel          2       Mail
+ *PagerLabel          3       Games
+-*PagerRows	     @with_desktops@
+-*PagerColumns        2
++*PagerRows	     2
++*PagerColumns        @with_desktops@
+ 
+ # use this options to override global look : 
+ #*PagerShadeButton	 	default-shade-dark 		 default-shade-dark-pressed

@@ -6,3 +6,6 @@ Exec=afterstep
 TryExec=afterstep
 Icon=
 Type=Application
+
+[Window Manager]
+SessionManaged=true

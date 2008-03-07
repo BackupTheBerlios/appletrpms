@@ -1,5 +1,5 @@
 %define	name 	yudit
-%define	version	2.8.1
+%define	version	2.9.0
 %define	release	1%{?dist}
 
 Summary:	Unicode Text Editor
@@ -9,7 +9,6 @@ Release:	%release
 License:	GPL
 Group:		Applications/Editors
 Source:		http://yudit.org/download/%{name}-%{version}.tar.gz
-Patch0:		%{name}-%{version}-patch1.txt
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -28,7 +27,6 @@ GNU (C) 1997-2005 Gaspar Sinai <gsinai@yudit.org>
 
 %prep
 %setup
-%patch0
 
 %build
 ./configure --prefix=%{_prefix} --mandir=%{_mandir}
@@ -72,8 +70,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/yudit
 %{_datadir}/yudit/data
 %{_datadir}/yudit/fonts
-%{_datadir}/yudit/src 
-%{_datadir}/yudit/doc 
+%{_datadir}/yudit/src
+%{_datadir}/yudit/doc
+%{_datadir}/yudit/syntax
+
 %dir %{_datadir}/yudit/locale
 %{_datadir}/yudit/locale/am
 %{_datadir}/yudit/locale/ar
@@ -106,6 +106,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/yudit/locale/vi
 %{_datadir}/yudit/locale/yi
 %{_datadir}/yudit/locale/zh
+%{_datadir}/yudit/locale/zh_CN
 
 %dir %{_datadir}/yudit/config
 %config %{_datadir}/yudit/config/*
@@ -115,9 +116,10 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGELOG.TXT COPYING.TXT FAQ.TXT README.TXT TODO.TXT doc/*.utf8 doc/notinstalled doc/problems doc/HOWTO-*.txt doc/otfsupport.txt
 
 %changelog
+* Mon Dec 24 2007 J. Krebs <rpm_speedy@yahoo.com> - 2.9.0-1
+  Updated to version 2.9.0
 * Thu Feb 15 2007 J. Krebs <rpm_speedy@yahoo.com> - 2.8.1-1
   Updated to version 2.8.1
-  
 * Mon Mar 21 2005 Gaspar Sinai <gsinai@yudit.org>
   - Merged Marathi and Gujarati menu.
   - Merged jodakshar.hwd marathi.hwd roman.hwd handwrinting recognition files

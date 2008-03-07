@@ -1,6 +1,6 @@
 %define aitest	%(rpm -q --queryformat='%{VERSION}' libAfterImage)
 %define aiver	%aitest 
-%define version 8.4
+%define version 9.02
 %define release 1%{?dist}
 %define name	rxvt-unicode
 %define epoch	2
@@ -14,7 +14,6 @@ License:	GPLv2+
 Group:		User Interface/X
 URL:		http://software.schmorp.de/pkg/rxvt-unicode.html
 Source0:	http://dist.schmorp.de/rxvt-unicode/%{name}-%{version}.tar.bz2
-Patch0:		%{name}-%{version}-docs.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	perl-devel libXpm-devel libXft-devel freetype-devel
 BuildRequires:	libAfterImage-devel >= 1.15
@@ -85,6 +84,21 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/urxvt
 
 %changelog
+* Fri Feb 02 2008 J. Krebs <rpm_speedy@yahoo.com> - 2:9.02
+- new version.
+
+* Fri Jan 25 2008 J. Krebs <rpm_speedy@yahoo.com> - 2:9.0
+- new version.
+
+* Mon Dec 24 2007 J. Krebs <rpm_speedy@yahoo.com> - 2:8.9
+- new version.
+
+* Sat Dec 15 2007 J. Krebs <rpm_speedy@yahoo.com> - 2:8.8
+- new version.
+
+* Sun Nov 25 2007 J. Krebs <rpm_speedy@yahoo.com> - 2:8.7
+- new version.
+
 * Sat Oct 27 2007 J. Krebs <rpm_speedy@yahoo.com> - 2:8.4
 - new version.
 

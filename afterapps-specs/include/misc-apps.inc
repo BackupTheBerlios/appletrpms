@@ -55,6 +55,13 @@ LCD_URL=http://worldserver.oleane.com/rsn/Archives/$(LCD_TAR)
 
 #APPLET_LIST += LCD
 
+AVFS_NAME=avfs
+AVFS_VERSION=0.9.8
+AVFS_TAR=$(AVFS_NAME)-$(AVFS_VERSION).tar.gz
+AVFS_URL=http://easynews.dl.sourceforge.net/sourceforge/avf/$(AVFS_TAR)
+
+APPLET_LIST += AVFS
+
 CALCOO_NAME=calcoo
 CALCOO_VERSION=1.3.18
 CALCOO_TAR=$(CALCOO_NAME)-$(CALCOO_VERSION).tar.gz
@@ -70,7 +77,7 @@ LIBDOCKAPP_URL=http://solfertje.student.utwente.nl/~dalroi/$(LIBDOCKAPP_NAME)/fi
 APPLET_LIST += LIBDOCKAPP
 
 LIBICAL_NAME=libical
-LIBICAL_VERSION=0.27
+LIBICAL_VERSION=0.30
 LIBICAL_TAR=$(LIBICAL_NAME)-$(LIBICAL_VERSION).tar.gz
 LIBICAL_URL=http://easynews.dl.sourceforge.net/sourceforge/freeassociation/$(LIBICAL_TAR)
 
@@ -83,6 +90,13 @@ LIBWRASTER_TAR=WindowMaker-$(LIBWRASTER_VERSION).tar.gz
 LIBWRASTER_URL=http://www.windowmaker.info/pub/source/release/archive/$(LIBWRASTER_TAR)
 
 #APPLET_LIST += LIBWRASTER
+
+MEDIT_NAME=medit
+MEDIT_VERSION=0.9.3
+MEDIT_TAR=$(MEDIT_NAME)-$(MEDIT_VERSION).tar.bz2
+MEDIT_URL=http://easynews.dl.sourceforge.net/sourceforge/mooedit/$(MEDIT_TAR)
+
+APPLET_LIST += MEDIT
 
 MINED_NAME=mined
 MINED_VERSION=2000.14
@@ -98,12 +112,26 @@ MIXER.APP_URL=http://www.fukt.bth.se/~per/mixer/$(MIXER.APP_TAR)
 
 APPLET_LIST += MIXER.APP
 
+PARCELLITE_NAME=parcellite
+PARCELLITE_VERSION=0.6.1
+PARCELLITE_TAR=$(PARCELLITE_NAME)-$(PARCELLITE_VERSION).tar.gz
+PARCELLITE_URL=http://xyhthyx.googlecode.com/files/$(PARCELLITE_TAR)
+
+APPLET_LIST += PARCELLITE
+
 SALMON_NAME=salmon
 SALMON_VERSION=1.2.2
 SALMON_TAR=$(SALMON_NAME)-$(SALMON_VERSION).tar.gz
 SALMON_URL=http://tigr.net/afterstep/download/salmon/$(SALMON_TAR)
 
 APPLET_LIST += SALMON
+
+STALONETRAY_NAME=stalonetray
+STALONETRAY_VERSION=0.7.6
+STALONETRAY_TAR=$(STALONETRAY_NAME)-$(STALONETRAY_VERSION).tar.gz
+STALONETRAY_URL=http://easynews.dl.sourceforge.net/sourceforge/$(STALONETRAY_NAME)/$(STALONETRAY_TAR)
+
+APPLET_LIST += STALONETRAY
 
 TEMPERATURE.APP_NAME=Temperature.app
 TEMPERATURE.APP_VERSION=1.4
@@ -120,7 +148,7 @@ TRAYER_URL=http://download.gna.org/fvwm-crystal/$(TRAYER_NAME)/$(TRAYER_VERSION)
 APPLET_LIST += TRAYER
 
 WORKER_NAME=worker
-WORKER_VERSION=2.15.0
+WORKER_VERSION=2.16.2
 WORKER_TAR=$(WORKER_NAME)-$(WORKER_VERSION).tar.gz
 WORKER_URL=http://www.boomerangsworld.de/worker/downloads/$(WORKER_TAR)
 
@@ -135,7 +163,7 @@ WORKER-DOC_URL=http://www.boomerangsworld.de/worker/downloads/$(WORKER-DOC_TAR)
 APPLET_LIST += WORKER-DOC
 
 YUDIT_NAME=yudit
-YUDIT_VERSION=2.8.1
+YUDIT_VERSION=2.9.0
 YUDIT_TAR=$(YUDIT_NAME)-$(YUDIT_VERSION).tar.gz
 YUDIT_URL=http://yudit.org/download/$(YUDIT_TAR)
 
