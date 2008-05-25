@@ -24,8 +24,8 @@
 ### END Distro Definitions
 
 %define name wmweather+
-%define version 2.9
-%define release 7%{?dist}
+%define version 2.11
+%define release 1%{?dist}
 
 Summary: A dock app for displaying weather information
 Name: %name
@@ -35,7 +35,6 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://sourceforge.net/project/showfiles.php?group_id=60336
 Source0: http://easynews.dl.sourceforge.net/sourceforge/wmweatherplus/%{name}-%{version}.tar.gz
-Patch0: wmweather+-fedorafix.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: w3c-libwww-devel libwraster
 Requires: w3c-libwww libwraster
@@ -57,7 +56,6 @@ external command.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 ./configure --prefix=%{_prefix} --mandir=%{_mandir}
@@ -78,6 +76,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Apr 12 2008 J. Krebs <rpm_speedy@yahoo.com> - 2.11-1
+- new version.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 2.9-7
 - added distro info to release.
 

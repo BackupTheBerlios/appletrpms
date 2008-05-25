@@ -69,6 +69,13 @@ CALCOO_URL=http://internap.dl.sourceforge.net/sourceforge/$(CALCOO_NAME)/$(CALCO
 
 APPLET_LIST += CALCOO
 
+FOTOX_NAME=fotox
+FOTOX_VERSION=0.43
+FOTOX_TAR=$(FOTOX_NAME).43.tar.gz
+FOTOX_URL=http://kornelix.squarespace.com/storage/fotox/$(FOTOX_TAR)
+
+APPLET_LIST += FOTOX
+
 LIBDOCKAPP_NAME=libdockapp
 LIBDOCKAPP_VERSION=0.6.1
 LIBDOCKAPP_TAR=$(LIBDOCKAPP_NAME)-$(LIBDOCKAPP_VERSION).tar.bz2
@@ -113,7 +120,7 @@ MIXER.APP_URL=http://www.fukt.bth.se/~per/mixer/$(MIXER.APP_TAR)
 APPLET_LIST += MIXER.APP
 
 PARCELLITE_NAME=parcellite
-PARCELLITE_VERSION=0.6.1
+PARCELLITE_VERSION=0.7
 PARCELLITE_TAR=$(PARCELLITE_NAME)-$(PARCELLITE_VERSION).tar.gz
 PARCELLITE_URL=http://xyhthyx.googlecode.com/files/$(PARCELLITE_TAR)
 
@@ -148,7 +155,7 @@ TRAYER_URL=http://download.gna.org/fvwm-crystal/$(TRAYER_NAME)/$(TRAYER_VERSION)
 APPLET_LIST += TRAYER
 
 WORKER_NAME=worker
-WORKER_VERSION=2.16.2
+WORKER_VERSION=2.16.3
 WORKER_TAR=$(WORKER_NAME)-$(WORKER_VERSION).tar.gz
 WORKER_URL=http://www.boomerangsworld.de/worker/downloads/$(WORKER_TAR)
 

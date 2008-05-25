@@ -1,6 +1,6 @@
 %define name wmupmon
 %define version 0.1.3
-%define release 4%{?dist}
+%define release 5%{?dist}
 
 Summary: DockApp that displays your system uptime in realtime
 Name: %name
@@ -8,8 +8,8 @@ Version: %version
 Release: %release
 License: GPL
 Group: AfterStep/Applets
-URL: http://j-z-s.com/projects/index.php?project=wmupmon
-Source0: http://j-z-s.com/projects/downloads/%{name}-%{version}.tar.gz
+URL: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
+Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -39,6 +39,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Apr 12 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.1.3-5
+- Website is no longer available. Moved links to ftp.afterstep.org.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.1.3-4
 - added distro info to release.
 

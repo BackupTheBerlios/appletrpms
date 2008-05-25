@@ -42,9 +42,9 @@
 %define	version	2.2.8
 %define	libaiver	1.17
 %define	libabver	1.12
-%define	libairel	1%{?dist}
-%define	libabrel	1%{?dist}
-%define release 1%{?dist}
+%define	libairel	2%{?dist}
+%define	libabrel	2%{?dist}
+%define release 2%{?dist}
 %define epoch 20
 
 Summary:	AfterStep Window Manager (NeXTalike)
@@ -69,6 +69,8 @@ Source9:	%{name}-2.2.7-wharf.alternate
 Patch0:		%{name}-2.2.5-ImageMagick.patch
 Patch1:		%{name}-2.2.7-winlist.patch
 Patch2:		%{name}-2.2.7-pager.patch
+Patch3:		%{name}-2.2.8-configure.h.in.patch
+Patch4:		%{name}-2.2.8-Pager.c.patch
 Distribution:	The AfterStep TEAM
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 %if %{mdk}
@@ -198,6 +200,8 @@ Files needed for software development with libAfterBase.
 %patch0
 %patch1
 %patch2
+%patch3
+%patch4
 
 %build
 CFLAGS=$RPM_OPT_FLAGS \
@@ -409,7 +413,10 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
-* Fri Mar 06 2008 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.8-1
+* Mon Mar 24 2008 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.8-2
+- Pager fix added to fix issues when swallowed by Wharf.
+
+* Wed Mar 17 2008 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.8-1
 - new version.
 
 * Thu Dec 06 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.7-4

@@ -241,7 +241,7 @@ WMSYSTRAY_URL=http://kai.vm.bytemark.co.uk/~arashi/wmsystray/release/$(WMSYSTRAY
 APPLET_LIST += WMSYSTRAY
 
 WMTEMP_NAME=wmtemp
-WMTEMP_VERSION=0.0.5
+WMTEMP_VERSION=0.0.6
 WMTEMP_TAR=$(WMTEMP_NAME)-$(WMTEMP_VERSION).tar.gz
 WMTEMP_URL=http://gnodde.org/$(WMTEMP_NAME)/$(WMTEMP_TAR)
 
@@ -264,7 +264,7 @@ APPLET_LIST += WMTZ
 WMUPMON_NAME=wmupmon
 WMUPMON_VERSION=0.1.3
 WMUPMON_TAR=$(WMUPMON_NAME)-$(WMUPMON_VERSION).tar.gz
-WMUPMON_URL=http://j-z-s.com/projects/downloads/$(WMUPMON_TAR)
+WMUPMON_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMUPMON_TAR)
 
 APPLET_LIST += WMUPMON
 
@@ -283,7 +283,7 @@ WMWEATHER_URL=http://people.debian.org/~godisch/debian/$(WMWEATHER_NAME)/$(WMWEA
 APPLET_LIST += WMWEATHER
 
 WMWEATHERPLUS_NAME=wmweather+
-WMWEATHERPLUS_VERSION=2.9
+WMWEATHERPLUS_VERSION=2.11
 WMWEATHERPLUS_TAR=$(WMWEATHERPLUS_NAME)-$(WMWEATHERPLUS_VERSION).tar.gz
 WMWEATHERPLUS_URL=http://easynews.dl.sourceforge.net/sourceforge/wmweatherplus/$(WMWEATHERPLUS_TAR)
 

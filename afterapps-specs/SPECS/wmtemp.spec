@@ -1,6 +1,6 @@
 %define name wmtemp
-%define version 0.0.5
-%define release 4%{?dist}
+%define version 0.0.6
+%define release 1%{?dist}
 
 Summary: wmtemp displays CPU & SYS temps in "LCD look" via lm_sensors
 Name: %name
@@ -43,6 +43,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon May 12 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.0.6-1
+- new version.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.0.5-4
 - added distro info to release.
 

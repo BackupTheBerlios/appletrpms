@@ -1,5 +1,5 @@
 %define name worker
-%define version 2.16.2
+%define version 2.16.3
 %define release 1%{?dist}
 %define doc_version 2.10.0.2
 
@@ -27,7 +27,11 @@ or buttons with the builtin configuration program.
 %setup -q -a 1
 
 %build
-./configure --prefix=%{_prefix} --mandir=%{_mandir} --docdir=%{_datadir}/doc/%{name}-%{version}
+./configure --prefix=%{_prefix} \
+	--mandir=%{_mandir} \
+	--docdir=%{_datadir}/doc/%{name}-%{version} \
+	--enable-xft
+
 make
 
 %install
@@ -114,6 +118,9 @@ fi
 %{_datadir}/applications/*
 
 %changelog
+* Thu Apr 17 2008 J. Krebs <rpm_speedy@yahoo.com> 2.16.3-1
+- new version
+
 * Mon Feb 11 2008 J. Krebs <rpm_speedy@yahoo.com> 2.16.2-1
 - new version
 

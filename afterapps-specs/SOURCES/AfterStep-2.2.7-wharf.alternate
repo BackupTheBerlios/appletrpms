@@ -96,17 +96,19 @@
 *Wharf Mail		logos/Thunderbird Exec "Thunderbird" thunderbird &
 *Wharf Mail		logos/Thunderbird Exec "Thunderbird2" mozilla-thunderbird &
 *Wharf Mail		normal/MailBox2 Exec "mozilla-mail" mozilla --mail &
-*Wharf Mail		normal/MailBox2 Exec "kmail" kmail &
-*Wharf Mail		normal/MailBox2 Exec "balsa" balsa &
+*Wharf Mail		kmail.png Exec "kmail" kmail &
+*Wharf Mail		gnome-balsa2.png Exec "balsa" balsa &
 *Wharf Mail		normal/MailBox2 ExecInTerm "Mutt" -title "Mutt e-mail reader" -e mutt -y &
 *Wharf Mail		normal/MailBox2 ExecInTerm "Pine" -title "Pine e-mail and news reader" -e pine &
 
 # First available text editor :
 *Wharf TextEditor	medit.png Exec "medit" medit &
-*Wharf TextEditor	normal/Pen1 Exec "nedit" nedit &
+*Wharf TextEditor	logos/NEdit Exec "nedit" nedit &
 *Wharf TextEditor 	normal/Pen1 Exec "cooledit" cooledit --look next &
+*Wharf TextEditor 	kedit.png Exec "kedit" kedit &
+*Wharf TextEditor 	normal/Pen1 Exec "gedit" gedit &
 *Wharf TextEditor 	xemacs.png Exec "xemacs" xemacs &
-*Wharf TextEditor 	normal/Pen1 Exec "VIM" gvim &
+*Wharf TextEditor 	logos/VIM Exec "VIM" gvim &
 *Wharf TextEditor	normal/Pen1 ExecInTerm "nano" -title "Nano text editor" -e nano &
 
 # First available file manager :
@@ -114,7 +116,8 @@
 *Wharf FileManager	logos/konqueror     Exec "Konqueror" konqueror &
 *Wharf FileManager 	normal/Filecabinet2 Exec "Krusader" krusader &
 *Wharf FileManager 	normal/Filecabinet2 Exec "Gentoo File Manager" gentoo &
-*Wharf FileManager 	normal/Filecabinet2 Exec "Rox" rox &
+*Wharf FileManager 	normal/Filecabinet2 Exec "ROX-Filer" rox &
+*Wharf FileManager 	normal/Filecabinet2 Exec "PCMan" pcmanfm &
 *Wharf FileManager 	normal/Filecabinet2 Exec "Nautilus" nautilus --no-desktop &
 *Wharf FileManager	normal/MCInMonitorShadow ExecInTerm "-" -g 130x35 if(aterm){-T mc-VerticalTitle -tr -tint blue -fg white -bg black} if(Eterm){-O --tint blue -f white -b black) if(rxvt){-tr -fg white -bg black} -e mc &
 

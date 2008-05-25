@@ -1,5 +1,5 @@
 %define name parcellite
-%define version 0.6.1
+%define version 0.7
 %define release 1%{?dist}
 
 Summary: Parcellite (Parcelle Lite) is a lightweight GTK+ clipboard manager
@@ -62,8 +62,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/applications/*.desktop
 %{_sysconfdir}/xdg/autostart/*.desktop
 %doc AUTHORS COPYING INSTALL ChangeLog NEWS README TODO
+%{_mandir}/man1/*
 
 %changelog
+* Fri Apr 19 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.7-1
+- New version.
+
 * Sun Feb 24 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.6.1-1
 - New version.
 
