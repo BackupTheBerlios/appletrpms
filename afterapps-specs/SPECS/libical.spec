@@ -1,5 +1,5 @@
 %define	name	libical
-%define	version	0.27
+%define	version	0.31
 %define release 1%{?dist}
 
 Summary:	An implementation of basic iCAL protocols
@@ -10,7 +10,6 @@ License:	Dual LGPLv2+ and MPLv1.0
 Group:		Development/Libraries/C and C++
 URL:		http://softwarestudio.org/libical/
 Source0:	http://easynews.dl.sourceforge.net/sourceforge/freeassociation/%name-%version.tar.gz
-#Patch0:		%name.diff
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -32,49 +31,45 @@ libical include files.
 #%patch0
 
 %build
- 
 ./configure \
-     --prefix=%{_prefix} \
-     --exec-prefix=%{_prefix} \
-     --enable-shared \
-     --libdir=%{_libdir}
+	--prefix=%{_prefix} \
+	--exec-prefix=%{_prefix} \
+	--enable-shared \
+	--libdir=%{_libdir}
 
 make
 
 %install
-rm -rf examples/.deps/
-rm -rf examples/.libs
+rm -rf $RPM_BUILD_ROOT
 
 make install DESTDIR=$RPM_BUILD_ROOT
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/%{name}/scripts/
 install -m 644 scripts/*.pl $RPM_BUILD_ROOT%{_datadir}/%{name}/scripts/
-#rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}/scripts/
-rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}/doc/Makefil*
-rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}/examples/Makefil*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%doc README AUTHORS ChangeLog NEWS TEST THANKS TODO doc examples
+%doc README AUTHORS ChangeLog NEWS TEST THANKS TODO doc/AddingOrModifyingComponents.txt doc/UsingLibical.txt
 %{_libdir}/*.so.*
-%dir %{_datadir}/libical
-%{_datadir}/libical/zoneinfo/*
-%{_datadir}/libical/scripts/*
 
 %files devel
 %defattr(-,root,root)
 %{_libdir}/*.*a
 %{_libdir}/*.so
 %{_includedir}/*.h
+%{_datadir}/libical/scripts/*
 
 %post -p /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
 
 %changelog
+* Sun May 25 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.31-1
+- new version.
+
 * Thu Oct 11 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.27-1
 - new version.
 
