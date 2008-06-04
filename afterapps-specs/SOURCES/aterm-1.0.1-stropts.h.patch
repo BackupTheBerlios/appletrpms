@@ -1,0 +1,28 @@
+--- src/command.c	2006-06-26 13:01:20.000000000 -0500
++++ src/command.c	2008-06-03 08:51:15.000000000 -0500
+@@ -91,7 +91,6 @@
+ 
+ #if defined (__svr4__) || defined (__lnx21__)
+ # include <sys/resource.h>	/* for struct rlimit */
+-# include <sys/stropts.h>	/* for I_PUSH */
+ # define _NEW_TTY_CTRL		/* to get proper defines in <termios.h> */
+ #endif
+ 
+@@ -673,16 +672,7 @@
+ 	exit(EXIT_FAILURE);
+     }
+ #if defined (__svr4__) || defined (__lnx21__)
+-/*
+- * Push STREAMS modules:
+- *    ptem: pseudo-terminal hardware emulation module.
+- *    ldterm: standard terminal line discipline.
+- *    ttcompat: V7, 4BSD and XENIX STREAMS compatibility module.
+- */
+-    ioctl(fd, I_PUSH, "ptem");
+-    ioctl(fd, I_PUSH, "ldterm");
+-    ioctl(fd, I_PUSH, "ttcompat");
+-#else				/* __svr4__ */
++				/* __svr4__ */
+     {
+     	/* change ownership of tty to real uid and real group */
+ #ifndef __CYGWIN32__		

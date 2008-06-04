@@ -2,7 +2,7 @@
 %define aiver	%aitest 
 %define	name	aterm
 %define	version	1.0.1
-%define	release	3%{?dist}
+%define	release	4%{?dist}
 %define epoch	2
 
 Summary:	aterm - terminal emulator in an X window
@@ -15,6 +15,7 @@ Group:		Applications/X11
 URL:		http://aterm.sourceforge.net
 Patch0:		%{name}-%{version}-main.c.patch
 Patch1:		%{name}-%{version}-screen.c.patch
+Patch2:		%{name}-%{version}-stropts.h.patch
 Source:		ftp://ftp.afterstep.org/apps/aterm/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	libAfterImage-devel
@@ -35,15 +36,15 @@ tied to any libraries, and can be used anywhere.
 %setup -q
 %patch0
 %patch1
+%patch2
 
-LD_LIBRARY_PATH=../AfterStep-%{asversion}/libAfterBase \
-        CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%{_prefix} \
+CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%{_prefix} \
 	--enable-utmp --enable-background-image --with-term=rxvt \
 	--enable-transparency --enable-graphics --disable-backspace-key \
 	--disable-delete-key --enable-xgetdefault --mandir=%{_mandir}
 
 %build
-LD_LIBRARY_PATH=../AfterStep-%{asversion}/libAfterBase make
+make
 
 %install
 [ -d $RPM_BUILD_ROOT ] && rm -rf $RPM_BUILD_ROOT;
@@ -81,6 +82,10 @@ desktop-file-install --vendor "" --delete-original \
 #%config(missingok) /etc/X11/wmconfig/aterm
 
 %changelog
+* Mon Jun 02 2008 J. Krebs <rpm_speedy@yahoo.com> 2:1.0.1-4
+- cleaned-up LD_LIBRARY_PATH info.
+- added patch for stropts.h - Fedora 9 and later don't ship it.
+
 * Fri Nov 09 2007 J. Krebs <rpm_speedy@yahoo.com> 2:1.0.1-3
 - added patches for cut and paste, borderless.
 

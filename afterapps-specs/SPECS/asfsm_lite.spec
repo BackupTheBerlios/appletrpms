@@ -1,6 +1,6 @@
 %define name asfsm_lite
 %define version 1.0.0
-%define release 4%{?dist}
+%define release 5%{?dist}
 
 Summary: File system monitor
 Name: %name
@@ -11,6 +11,8 @@ Group: AfterStep/Applets
 URL: http://tigr.net/afterstep/view.php?applet=asfsm_lite/data
 Source0: http://tigr.net/afterstep/download/%{name}/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires: libXaw
+BuildRequires: libXaw-devel
 
 %description
 A swallowable applet monitors the file system space.
@@ -42,6 +44,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon May 26 2008 J. Krebs <rpm_speedy@yahoo.com> - 1.0.0-5
+- added build require for libXaw-devel.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.0.0-4
 - added distro info to release.
 

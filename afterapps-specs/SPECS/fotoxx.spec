@@ -1,5 +1,5 @@
-%define name fotox
-%define version 0.43
+%define name fotoxx
+%define version 4.5
 %define release 1%{?dist}
 
 Summary: application for processing image files from a digital camera
@@ -8,15 +8,15 @@ Version: %version
 Release: %release
 License: GPLv2
 Group: Applications/Multimedia
-URL: http://kornelix.squarespace.com/fotox/
-Source0: http://kornelix.squarespace.com/storage/fotox/%{name}.43.tar.gz
-Patch0: %{name}-0.43-build.patch
+URL: http://kornelix.squarespace.com/%{name}/
+Source0: http://kornelix.squarespace.com/storage/programs/%{name}/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: gtk2 atk cairo pango libpng exiv2 libstdc++
 Buildrequires: gtk2-devel atk-devel cairo-devel pango-devel libpng-devel libstdc++-devel
+Obsoletes: fotox
 
 %description
-Fotox is a free open-source Linux program for improving image files
+Fotoxx is a free open-source Linux program for improving image files
 made with a digital camera.
 
  The following functions are provided:
@@ -44,23 +44,22 @@ made with a digital camera.
     * Red-eye removal.
 
 %prep
-%setup -n fotox
-%patch0
+%setup -n fotoxx
 
 %build
 rm -rf $RPM_BUILD_ROOT
 
-./build build
+make PREFIX=%{_prefix} DOCDIR=%{_datadir}/doc/%{name}-%{version}
 
 %install
-./build install
+make install DESTDIR=$RPM_BUILD_ROOT PREFIX=%{_prefix} DOCDIR=%{_datadir}/doc/%{name}-%{version}
 
 #Install application link for X-Windows
 echo -e "[Desktop Entry]
-Name=Fotox Digital Image Editor
+Name=Fotoxx Digital Image Editor
 Comment=Edit and improve digital camera image files
-Exec=fotox
-Icon=fotox.png
+Exec=fotoxx
+Icon=fotoxx.png
 Terminal=false
 Encoding=UTF-8
 Type=Application" > %{name}.desktop
@@ -75,21 +74,27 @@ desktop-file-install --vendor "" --delete-original \
   %{name}.desktop
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/pixmaps/
-install -m 644 icons/fotox.png $RPM_BUILD_ROOT%{_datadir}/pixmaps/
+install -m 644 data/icons/fotoxx.png $RPM_BUILD_ROOT%{_datadir}/pixmaps/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc README changelog *.pdf
-%{_bindir}/fotox
+%doc doc/*
+%{_bindir}/%{name}
 %{_datadir}/applications/*.desktop
-%{_datadir}/fotox/*.xtext
-%{_datadir}/fotox/icons/*
+%{_datadir}/%{name}/*.xtext
+%{_datadir}/%{name}/icons/*
 %{_datadir}/pixmaps/*.png
 
 %changelog
+* Tue Jun 03 2008 J. Krebs <rpm_speedy@yahoo.com> - 4.5-1
+- new version, application name changed from fotox to fotoxx.
+
+* Sun May 25 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.44-1
+- new version.
+
 * Thu May 22 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.43-1
 - new version.
 

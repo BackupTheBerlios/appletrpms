@@ -69,12 +69,12 @@ CALCOO_URL=http://internap.dl.sourceforge.net/sourceforge/$(CALCOO_NAME)/$(CALCO
 
 APPLET_LIST += CALCOO
 
-FOTOX_NAME=fotox
-FOTOX_VERSION=0.43
-FOTOX_TAR=$(FOTOX_NAME).43.tar.gz
-FOTOX_URL=http://kornelix.squarespace.com/storage/fotox/$(FOTOX_TAR)
+FOTOXX_NAME=fotoxx
+FOTOXX_VERSION=4.5
+FOTOXX_TAR=$(FOTOXX_NAME)-$(FOTOXX_VERSION).tar.gz
+FOTOXX_URL=http://kornelix.squarespace.com/storage/programs/$(FOTOXX_NAME)/$(FOTOXX_TAR)
 
-APPLET_LIST += FOTOX
+APPLET_LIST += FOTOXX
 
 LIBDOCKAPP_NAME=libdockapp
 LIBDOCKAPP_VERSION=0.6.1

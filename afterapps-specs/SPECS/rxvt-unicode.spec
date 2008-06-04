@@ -1,7 +1,7 @@
 %define aitest	%(rpm -q --queryformat='%{VERSION}' libAfterImage)
 %define aiver	%aitest 
 %define version 9.02
-%define release 1%{?dist}
+%define release 2%{?dist}
 %define name	rxvt-unicode
 %define epoch	2
 
@@ -14,6 +14,7 @@ License:	GPLv2+
 Group:		User Interface/X
 URL:		http://software.schmorp.de/pkg/rxvt-unicode.html
 Source0:	http://dist.schmorp.de/rxvt-unicode/%{name}-%{version}.tar.bz2
+Patch0:		%{name}-%{version}-stropts.h.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	perl-devel libXpm-devel libXft-devel freetype-devel
 BuildRequires:	libAfterImage-devel >= 1.15
@@ -39,6 +40,7 @@ Xft fonts.
 
 %prep
 %setup -q
+%patch0
 
 %build
 
@@ -84,23 +86,26 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/urxvt
 
 %changelog
-* Fri Feb 02 2008 J. Krebs <rpm_speedy@yahoo.com> - 2:9.02
+* Mon Jun 02 2008 J. Krebs <rpm_speedy@yahoo.com> - 2:9.02-2
+- added patch for stropts.h - Fedora 9 and later don't ship it.
+
+* Fri Feb 02 2008 J. Krebs <rpm_speedy@yahoo.com> - 2:9.02-1
 - new version.
 
-* Fri Jan 25 2008 J. Krebs <rpm_speedy@yahoo.com> - 2:9.0
+* Fri Jan 25 2008 J. Krebs <rpm_speedy@yahoo.com> - 2:9.0-1
 - new version.
 
-* Mon Dec 24 2007 J. Krebs <rpm_speedy@yahoo.com> - 2:8.9
+* Mon Dec 24 2007 J. Krebs <rpm_speedy@yahoo.com> - 2:8.9-1
 - new version.
 
-* Sat Dec 15 2007 J. Krebs <rpm_speedy@yahoo.com> - 2:8.8
+* Sat Dec 15 2007 J. Krebs <rpm_speedy@yahoo.com> - 2:8.8-1
 - new version.
 
-* Sun Nov 25 2007 J. Krebs <rpm_speedy@yahoo.com> - 2:8.7
+* Sun Nov 25 2007 J. Krebs <rpm_speedy@yahoo.com> - 2:8.7-1
 - new version.
 
-* Sat Oct 27 2007 J. Krebs <rpm_speedy@yahoo.com> - 2:8.4
+* Sat Oct 27 2007 J. Krebs <rpm_speedy@yahoo.com> - 2:8.4-1
 - new version.
 
-* Tue Aug 21 2007 J. Krebs <rpm_speedy@yahoo.com> - 2:8.3
+* Tue Aug 21 2007 J. Krebs <rpm_speedy@yahoo.com> - 2:8.3-1
 - initial build.

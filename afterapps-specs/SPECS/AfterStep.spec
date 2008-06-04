@@ -42,9 +42,9 @@
 %define	version	2.2.8
 %define	libaiver	1.17
 %define	libabver	1.12
-%define	libairel	2%{?dist}
-%define	libabrel	2%{?dist}
-%define release 2%{?dist}
+%define	libairel	3%{?dist}
+%define	libabrel	3%{?dist}
+%define release 3%{?dist}
 %define epoch 20
 
 Summary:	AfterStep Window Manager (NeXTalike)
@@ -81,7 +81,7 @@ Provides:	AfterStep-libs
 Requires: 	libAfterImage = %{epoch}:%{libaiver}-%libairel
 Requires:	readline
 Requires:	gtk2, gtk2-devel
-Requires:	qiv
+Requires:	feh
 Requires:	libXt
 BuildRequires:  readline-devel
 BuildRequires:  gtk2-devel
@@ -214,7 +214,7 @@ CFLAGS=$RPM_OPT_FLAGS \
 	--enable-i18n                             \
 	--with-helpcommand="xterm -e man"         \
 	--with-desktops=2 --with-deskgeometry=2x2 \
-	--with-imageloader="qiv --root"
+	--with-imageloader="feh --bg-center"
 
 make
 
@@ -413,6 +413,9 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
+* Sat May 31 2008 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.8-3
+- Changed image loader from qiv to feh.
+
 * Mon Mar 24 2008 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.8-2
 - Pager fix added to fix issues when swallowed by Wharf.
 

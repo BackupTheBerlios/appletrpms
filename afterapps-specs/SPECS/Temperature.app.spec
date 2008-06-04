@@ -12,6 +12,7 @@ URL: http://www.fukt.hk-r.se/~per/temperature
 Source0: http://www.fukt.bth.se/~per/temperature/%{name}-%{version}.tar.gz
 Patch0: Temperature.app-1.4.as.patch
 Patch1: Temperature.app-1.4-frog-5.patch
+Patch2: Temperature.app-1.4-xpm.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: wget xorg-x11-fonts-ISO8859-1-75dpi xorg-x11-fonts-ISO8859-1-100dpi
 
@@ -40,6 +41,7 @@ and displays it (in Celsius or Fahrenheit).
 
 %patch1 -p1 -b .frog
 %patch0 -p1 -b .as
+%patch2
 
 %build
 make
