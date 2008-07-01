@@ -1,6 +1,6 @@
 %define name wmtemp
 %define version 0.0.6
-%define release 1%{?dist}
+%define release 2%{?dist}
 
 Summary: wmtemp displays CPU & SYS temps in "LCD look" via lm_sensors
 Name: %name
@@ -11,8 +11,8 @@ Group: AfterStep/Applets
 URL: http://gnodde.org/wmtemp/
 Source0: http://open-systems.ufl.edu/mirrors/gentoo/distfiles/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: lm_sensors
-Buildrequires: lm_sensors-devel
+BuildRequires: lm_sensors-devel >= 2.0, lm_sensors-devel < 3.0
+Requires: lm_sensors >= 2.0, lm_sensors < 3.0
 
 %description
 wmtemp dockapp displays CPU & SYS temps in LCD look via lm_sensors. 
@@ -43,6 +43,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Jun 30 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.0.6-2
+- updated requires for lm_sensors < 3.0.
+
 * Mon May 12 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.0.6-1
 - new version.
 

@@ -11,6 +11,7 @@ Group:		Development/Libraries/C and C++
 URL:		http://softwarestudio.org/libical/
 Source0:	http://easynews.dl.sourceforge.net/sourceforge/freeassociation/%name-%version.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRequires:	byacc flex bison
 
 %description
 Libical is an Open Source implementation of the IETF's iCalendar
@@ -28,7 +29,6 @@ libical include files.
 
 %prep
 %setup -q
-#%patch0
 
 %build
 ./configure \

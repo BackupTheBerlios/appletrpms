@@ -1,6 +1,6 @@
 %define name Temperature.app
 %define version 1.4
-%define release 9%{?dist}
+%define release 10%{?dist}
 
 Summary: WM applet gets temperature every 15 minutes
 Name: %name
@@ -10,25 +10,13 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://www.fukt.hk-r.se/~per/temperature
 Source0: http://www.fukt.bth.se/~per/temperature/%{name}-%{version}.tar.gz
-Patch0: Temperature.app-1.4.as.patch
 Patch1: Temperature.app-1.4-frog-5.patch
-Patch2: Temperature.app-1.4-xpm.patch
+Patch2: Temperature.app-1.4-gcc43.patch
+Patch3: Temperature.app-1.4-Makefile.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: wget xorg-x11-fonts-ISO8859-1-75dpi xorg-x11-fonts-ISO8859-1-100dpi
 
 %description
-This WM applet includes two binaries: "Temperature.app" for AfterStep
->= 2.1.0 and WindowMaker (perhaps other window managers too) and
-"Temperature.app.as", a version modified to work with AfterStep < 2.1.0..
-The AS version has been modified to work under earlier versions of
-AfterStep and will not work properly under WindowMaker.
-
-Additionally, the patch from Frog at:
-
-    http://www.unetz.com/schaepe/DOCKAPPS/dockapps.html
-    
-has been added to allow for pressure, wind, and windchill.
-
 Temperature.app is a Window Maker applet which fetches local
 temperature information every 15 minutes from
 
@@ -36,27 +24,27 @@ temperature information every 15 minutes from
 
 and displays it (in Celsius or Fahrenheit).
 
-%prep
-%setup -q -n Temperature.app-%{version}
+The patch from Frog at:
 
-%patch1 -p1 -b .frog
-%patch0 -p1 -b .as
+    http://www.unetz.com/schaepe/DOCKAPPS/dockapps.html
+
+has been added to allow for pressure, wind, and windchill.
+
+
+%prep
+%setup -q
+
+%patch1
 %patch2
+%patch3
 
 %build
 make
 
-mv -f Temperature.app Temperature.app.as
-cp -f Temperature.cc.as Temperature.cc
-
-make
-
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
 
-install -s -m 755 Temperature.app $RPM_BUILD_ROOT%{_bindir}/Temperature.app
-install -s -m 755 Temperature.app.as $RPM_BUILD_ROOT%{_bindir}/Temperature.app.as
+make install-x11 DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -68,6 +56,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Jun 30 2008 J. Krebs <rpm_speedy@yahoo.com> - 1.4-10
+- added patch for gcc43.
+
 * Sat Nov 10 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.4-9
 - added Require for xorg-x11-fonts-ISO8859-1-75dpi.
 

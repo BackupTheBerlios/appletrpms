@@ -1,5 +1,5 @@
---- Temperature.app.old/Temperature.cc	2002-04-06 01:44:09.000000000 +0200
-+++ Temperature.app/Temperature.cc	2004-12-10 16:23:25.202032048 +0100
+--- Temperature.cc	2002-04-06 01:44:09.000000000 +0200
++++ Temperature.cc	2004-12-10 16:23:25.202032048 +0100
 @@ -2,6 +2,7 @@
  //  Temperature.app
  // 
@@ -459,8 +459,8 @@
                    if (updateTemperture(file)) {
                       showLed(false);
 diff -Nur Temperature.app-1.4/Temperature.h Temperature.app-1.4-frog/Temperature.h
---- Temperature.app-1.4/Temperature.h	2002-04-06 01:44:17.000000000 +0200
-+++ Temperature.app-1.4-frog/Temperature.h	2004-12-10 16:26:07.284391784 +0100
+--- Temperature.h	2002-04-06 01:44:17.000000000 +0200
++++ Temperature.h	2004-12-10 16:26:07.284391784 +0100
 @@ -2,6 +2,7 @@
  //  Temperature.app
  // 
@@ -527,8 +527,8 @@ diff -Nur Temperature.app-1.4/Temperature.h Temperature.app-1.4-frog/Temperature
     bool      mVerbose;
  };
 diff -Nur Temperature.app-1.4/Xpm.cc Temperature.app-1.4-frog/Xpm.cc
---- Temperature.app-1.4/Xpm.cc	2002-04-06 01:44:36.000000000 +0200
-+++ Temperature.app-1.4-frog/Xpm.cc	2004-12-10 16:03:05.955385712 +0100
+--- Xpm.cc	2002-04-06 01:44:36.000000000 +0200
++++ Xpm.cc	2004-12-10 16:03:05.955385712 +0100
 @@ -22,9 +22,9 @@
  #include <X11/Xlib.h>
  #include <X11/xpm.h>

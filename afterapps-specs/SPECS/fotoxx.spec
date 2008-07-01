@@ -1,5 +1,5 @@
 %define name fotoxx
-%define version 4.5
+%define version 4.7
 %define release 1%{?dist}
 
 Summary: application for processing image files from a digital camera
@@ -14,6 +14,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: gtk2 atk cairo pango libpng exiv2 libstdc++
 Buildrequires: gtk2-devel atk-devel cairo-devel pango-devel libpng-devel libstdc++-devel
 Obsoletes: fotox
+Provides: fotox
 
 %description
 Fotoxx is a free open-source Linux program for improving image files
@@ -89,6 +90,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/pixmaps/*.png
 
 %changelog
+* Sat Jun 21 2008 J. Krebs <rpm_speedy@yahoo.com> - 4.7-1
+- new version.
+
+* Wed Jun 04 2008 J. Krebs <rpm_speedy@yahoo.com> - 4.5-2
+- added fotox provide, to help yum users searching for fotox.
+
 * Tue Jun 03 2008 J. Krebs <rpm_speedy@yahoo.com> - 4.5-1
 - new version, application name changed from fotox to fotoxx.
 

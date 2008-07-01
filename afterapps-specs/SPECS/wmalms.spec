@@ -1,6 +1,6 @@
 %define name wmalms
 %define version 1.1.1
-%define release 4%{?dist}
+%define release 5%{?dist}
 
 Summary: Applet to manage sensor data: temperature, fan speed, voltage
 Name: %name
@@ -12,8 +12,8 @@ URL: http://www.geocities.com/wmalms/
 Source0: http://www.geocities.com/%{name}/%{name}-%{version}.tar.gz
 Patch0: wmalms-1.1.1-prompt-bypass.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires: lm_sensors-devel >= 2.0
-Requires: lm_sensors >= 2.0
+BuildRequires: lm_sensors-devel >= 2.0, lm_sensors-devel < 3.0
+Requires: lm_sensors >= 2.0, lm_sensors < 3.0
 
 %description
 wmalms monitors data obtained from a sensor chip: temperature, fan speed,
@@ -46,6 +46,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc COPYING README manual.html
 
 %changelog
+* Mon Jun 30 2008 J. Krebs <rpm_speedy@yahoo.com> - 1.1.1-5
+- added require for lm_sensors < 3.0.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.1.1-4
 - added distro info to release.
 

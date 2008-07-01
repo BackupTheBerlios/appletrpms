@@ -1,6 +1,6 @@
 %define name wmsensormon
 %define version 1.2.1
-%define release 5%{?dist}
+%define release 6%{?dist}
 
 Summary: uses lm_sensors to monitor CPU & sys temps, fan speed, and CPU voltage
 Name: %name
@@ -11,8 +11,8 @@ Group: AfterStep/Applets
 URL: http://wmsensormon.sourceforge.net/
 Source0: http://superb-west.dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires: lm_sensors-devel >= 2.0
-Requires: lm_sensors >= 2.0
+BuildRequires: lm_sensors-devel >= 2.0, lm_sensors-devel < 3.0
+Requires: lm_sensors >= 2.0, lm_sensors < 3.0
 
 %description
 Wmsensormon is a doc app for WindowMaker that utilizes lm_sensors to
@@ -45,6 +45,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGELOG COPYING INSTALL README TODO
 
 %changelog
+* Mon Jun 30 2008 J. Krebs <rpm_speedy@yahoo.com> - 1.2.1-6
+- updated requires for lm_sensors < 3.0.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.2.1-5
 - added distro info to release.
 
