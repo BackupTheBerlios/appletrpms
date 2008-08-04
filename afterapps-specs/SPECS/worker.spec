@@ -1,5 +1,5 @@
 %define name worker
-%define version 2.16.3
+%define version 2.16.5
 %define release 1%{?dist}
 %define doc_version 2.10.0.2
 
@@ -12,8 +12,8 @@ Group:		Applications/File
 Source0:	http://www.boomerangsworld.de/worker/downloads/%{name}-%{version}.tar.gz
 Source1:	http://www.boomerangsworld.de/worker/downloads/%{name}-%{doc_version}-doc.tar.bz2
 URL:		http://www.boomerangsworld.de/worker/
-Requires:	libXpm avfs fuse
-BuildRequires:	libX11-devel bzip2-devel zlib-devel libXpm-devel avfs-devel
+Requires:	libXpm avfs fuse file
+BuildRequires:	libX11-devel bzip2-devel zlib-devel libXpm-devel avfs-devel file-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -30,7 +30,9 @@ or buttons with the builtin configuration program.
 ./configure --prefix=%{_prefix} \
 	--mandir=%{_mandir} \
 	--docdir=%{_datadir}/doc/%{name}-%{version} \
-	--enable-xft
+	--enable-xft \
+	--with-avfs \
+	--with-libmagic
 
 make
 
@@ -118,6 +120,12 @@ fi
 %{_datadir}/applications/*
 
 %changelog
+* Fri Jul 04 2008 J. Krebs <rpm_speedy@yahoo.com> 2.16.5-1
+- new version
+
+* Wed Jul 02 2008 J. Krebs <rpm_speedy@yahoo.com> 2.16.4-1
+- new version
+
 * Thu Apr 17 2008 J. Krebs <rpm_speedy@yahoo.com> 2.16.3-1
 - new version
 

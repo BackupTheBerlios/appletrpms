@@ -1,5 +1,5 @@
 %define name fotoxx
-%define version 4.7
+%define version 4.9
 %define release 1%{?dist}
 
 Summary: application for processing image files from a digital camera
@@ -9,7 +9,7 @@ Release: %release
 License: GPLv2
 Group: Applications/Multimedia
 URL: http://kornelix.squarespace.com/%{name}/
-Source0: http://kornelix.squarespace.com/storage/programs/%{name}/%{name}-%{version}.tar.gz
+Source0: http://kornelix.squarespace.com/storage/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: gtk2 atk cairo pango libpng exiv2 libstdc++
 Buildrequires: gtk2-devel atk-devel cairo-devel pango-devel libpng-devel libstdc++-devel
@@ -90,6 +90,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/pixmaps/*.png
 
 %changelog
+* Sun Jul 12 2008 J. Krebs <rpm_speedy@yahoo.com> - 4.9-1
+- new version.
+
 * Sat Jun 21 2008 J. Krebs <rpm_speedy@yahoo.com> - 4.7-1
 - new version.
 

@@ -70,9 +70,9 @@ CALCOO_URL=http://internap.dl.sourceforge.net/sourceforge/$(CALCOO_NAME)/$(CALCO
 APPLET_LIST += CALCOO
 
 FOTOXX_NAME=fotoxx
-FOTOXX_VERSION=4.7
+FOTOXX_VERSION=4.9
 FOTOXX_TAR=$(FOTOXX_NAME)-$(FOTOXX_VERSION).tar.gz
-FOTOXX_URL=http://kornelix.squarespace.com/storage/programs/$(FOTOXX_NAME)/$(FOTOXX_TAR)
+FOTOXX_URL=http://kornelix.squarespace.com/storage/$(FOTOXX_TAR)
 
 APPLET_LIST += FOTOXX
 
@@ -155,7 +155,7 @@ TRAYER_URL=http://download.gna.org/fvwm-crystal/$(TRAYER_NAME)/$(TRAYER_VERSION)
 APPLET_LIST += TRAYER
 
 WORKER_NAME=worker
-WORKER_VERSION=2.16.3
+WORKER_VERSION=2.16.5
 WORKER_TAR=$(WORKER_NAME)-$(WORKER_VERSION).tar.gz
 WORKER_URL=http://www.boomerangsworld.de/worker/downloads/$(WORKER_TAR)
 

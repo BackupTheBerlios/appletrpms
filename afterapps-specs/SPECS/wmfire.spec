@@ -25,7 +25,7 @@
 
 %define name wmfire
 %define version 1.2.3
-%define release 4%{?dist}
+%define release 5%{?dist}
 
 Summary: wmfire is a configurable cpu, mem, or network monitor
 Name: %name
@@ -69,7 +69,7 @@ make
 %install
 rm -rf $RPM_BUILD_ROOT
 
-make mandir=%{_mandir}/man1 install DESTDIR=$RPM_BUILD_ROOT
+make mandir=%{_mandir} install DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -77,11 +77,14 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %{_bindir}/*
-%{_mandir}/man1/*
+%{_mandir}/man1/wmfire*
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README ALL_I_GET_IS_A_GREY_BOX
 
 
 %changelog
+* Sat Jul 02 2008 J. Krebs <rpm_speedy@yahoo.com> 1.2.3-5
+- fixed man page path.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> 1.2.3-4
 - added distro info to release.
 
