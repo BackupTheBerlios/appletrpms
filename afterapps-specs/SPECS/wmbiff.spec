@@ -1,6 +1,6 @@
 %define name wmbiff
 %define version 0.4.27
-%define release 4%{?dist}
+%define release 5%{?dist}
 
 Summary: A dockable/swallowed mail notifier
 Name: %name
@@ -27,7 +27,7 @@ wmbiff's with differrent configs).
 %setup -q
 
 %build
-./configure --prefix=%{_prefix} --mandir=%{_mandir}
+./configure --prefix=%{_prefix} --mandir=%{_mandir} --libdir=%{_libdir} 
 make
 
 %install
@@ -50,6 +50,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog COPYING FAQ INSTALL NEWS README* TODO
 
 %changelog
+* Wed Aug 06 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.4.27-5
+- added libdir to configure for build under x86_64.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> 0.4.27-4
 - added distro info to release.
 * Wed Oct 18 2006 J. Krebs <rpm_speedy@yahoo.com> 0.4.27-3

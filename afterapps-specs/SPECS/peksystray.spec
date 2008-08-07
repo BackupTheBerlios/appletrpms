@@ -31,7 +31,7 @@
 
 %define name peksystray
 %define version 0.4.0
-%define release 2%{?dist}
+%define release 3%{?dist}
 
 Summary: peksystray is a dockable systray
 Name: %name
@@ -41,6 +41,7 @@ License: GPL
 Group: AfterStep/Applets
 URL: http://sourceforge.net/projects/peksystray/
 Source0: http://easynews.dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.bz2
+Patch0: %{name}-%{version}-ldadd.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -50,14 +51,15 @@ docking.
 
 %prep
 %setup -q
+%patch0
 
 %build
 
 %if %{xseven}
 	CFLAGS="-lX11" \
-	./configure --prefix=%{_prefix}
+	./configure --prefix=%{_prefix} --libdir=%{_libdir}
 %else
-	./configure --prefix=%{_prefix}
+	./configure --prefix=%{_prefix} --libdir=%{_libdir}
 %endif
 
 make
@@ -77,6 +79,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Aug 06 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.4.0-3
+- added patch from Gentoo for build under x86_64.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.4.0-2
 - added distro info to release.
 

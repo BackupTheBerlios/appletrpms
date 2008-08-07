@@ -25,7 +25,7 @@
 
 %define name trayer
 %define version 1.0
-%define release 3%{?dist}
+%define release 4%{?dist}
 
 Summary: A lightweight GTK2-based systray for UNIX desktop
 Name: %name
@@ -37,6 +37,7 @@ URL: http://fvwm-crystal.org/
 Source0: http://download.gna.org/fvwm-crystal/%{name}/%{version}/%{name}-%{version}.tar.gz
 Patch0: %{name}-%{version}-Makefile.common.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRequires: libXmu-devel
 
 %description
 A lightweight GTK2-based systray for UNIX desktop.
@@ -63,6 +64,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc CREDITS COPYING CHANGELOG README
 
 %changelog
+* Wed Aug 06 2008 J. Krebs <rpm_speedy@yahoo.com> - 1.0-4
+- added build requirement for libXmu-devel.
+
 * Thu Nov 08 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.0-3
 - added patch for gtk issues (thanks Team Debian).
 

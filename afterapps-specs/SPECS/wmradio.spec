@@ -1,6 +1,6 @@
 %define name wmradio
 %define version 0.9
-%define release 5%{?dist}
+%define release 6%{?dist}
 
 Summary: wmradio is FM radio card applet for WindowMaker
 Name: %name
@@ -21,7 +21,7 @@ wmradio is FM radio card applet for WindowMaker
 
 %build
 cp %{SOURCE1} .
-./configure --prefix=%{_prefix} --disable-libxosd --disable-gnome --mandir=%{_mandir}/man1
+./configure --prefix=%{_prefix} --libdir=%{_libdir} --disable-libxosd --disable-gnome --mandir=%{_mandir}/man1
 make
 
 %install
@@ -29,7 +29,7 @@ rm -rf $RPM_BUILD_ROOT
 
 make MANDIR=%{_mandir}/man1 install DESTDIR=$RPM_BUILD_ROOT
 
-make install-skins DESTDIR=$RPM_BUILD_ROOT
+make install-skins LIBDIR=%{_libdir}/wmradio/ DESTDIR=$RPM_BUILD_ROOT
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/
 
@@ -49,6 +49,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/pixmaps/*.png
 
 %changelog
+* Wed Aug 06 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.9-6
+- added libdir to configure for build under x86_64.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.9-5
 - added distro info to release.
 

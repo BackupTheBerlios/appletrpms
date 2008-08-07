@@ -1,6 +1,6 @@
 %define	name 	avfs
 %define	version	0.9.8
-%define	release	1%{?dist}
+%define	release	2%{?dist}
 
 Summary:	Enables programs to look inside archived/compressed files, access remote files
 Name:		%name
@@ -42,7 +42,7 @@ Development libraries and header files for %{name}
 %setup -q
 
 %build
-./configure --prefix=%{_prefix} --enable-fuse
+./configure --prefix=%{_prefix} --libdir=%{_libdir} --enable-fuse
 make
 
 %install
@@ -73,5 +73,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.*a
 
 %changelog
+* Wed Aug 06 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.9.8-2
+- Added libdir to configure for build under x86_64.
+
 * Sat Nov 10 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.9.8-1
 - Initial build.

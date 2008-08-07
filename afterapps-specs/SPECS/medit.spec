@@ -1,6 +1,6 @@
 %define	name 	medit
 %define	version	0.9.3
-%define	release	1%{?dist}
+%define	release	2%{?dist}
 
 Summary:	medit is a GTK-based text editor
 Name:		%name
@@ -22,7 +22,7 @@ medit is a GTK-based text editor.
 %setup -q
 
 %build
-./configure --prefix=%{_prefix} --with-python --docdir=%{_datadir}/doc/%{name}-%{version}
+./configure --prefix=%{_prefix} --libdir=%{_libdir} --with-python --docdir=%{_datadir}/doc/%{name}-%{version}
 make
 
 %install
@@ -68,6 +68,9 @@ fi
 %{_mandir}/man1/medit*
 
 %changelog
+* Wed Aug 06 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.9.3-2
+- Added libdir to configure for build under x86_64.
+
 * Sun Feb 10 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.9.3-1
 - New version.
 
