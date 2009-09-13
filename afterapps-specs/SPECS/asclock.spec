@@ -13,6 +13,7 @@ Source0: http://tigr.net/afterstep/download/%{name}/%{name}-%{version}.tar.gz
 Source1: %{name}-%{version}.config
 Patch0: %{name}-%{version}.xpm.path.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRequires: imake
 
 %description
 AfterStep clock applet

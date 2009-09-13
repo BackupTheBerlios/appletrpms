@@ -1,0 +1,33 @@
+--- stoolkit/SBHashtable.cpp	2006-05-21 10:57:44.000000000 +0200
++++ stoolkit/SBHashtable.cpp	2008-11-18 12:30:37.000000000 +0100
+@@ -324,7 +324,9 @@
+         }
+         if (j==1)
+         {
+-           delete bv; GET_BUCKET (buffer->array, mod) = 0;
++           delete [] bv;
++	   bv = NULL;
++	   GET_BUCKET (buffer->array, mod) = 0;
+            break;
+         }
+         break;
+@@ -365,7 +367,8 @@
+              bi = bv[j];
+              delete bi;
+           }
+-          delete bv;
++          delete [] bv;
++	  bv = NULL;
+        }
+     }
+     delete buffer;
+@@ -532,7 +535,8 @@
+    }
+    if (bv != 0)
+    {
+-     delete bv;
++     delete [] bv;
++     bv = NULL;
+    }
+    nv[count] = bi;
+    nv[count+1] = 0;

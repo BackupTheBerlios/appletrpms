@@ -1,0 +1,48 @@
+--- configure.in	2008-10-04 19:43:12.000000000 +0200
++++ configure.in	2008-10-04 19:44:34.000000000 +0200
+@@ -689,9 +689,9 @@
+     	AFTERIMAGE_TEST_LIBS="-L./ -L../libAfterBase -lAfterImage $AFTERIMAGE_LIBS"
+     	AFTERIMAGE_LIB_LIBS="-L./ -L../libAfterBase $AFTERIMAGE_LIBS"
+     else
+-    	AFTERIMAGE_APPS_LIBS="-L../ -L$libdir -lAfterImage $AFTERIMAGE_LIBS"
+-    	AFTERIMAGE_TEST_LIBS="-L./ -L$libdir -lAfterImage $AFTERIMAGE_LIBS"
+-    	AFTERIMAGE_LIB_LIBS="-L./ -L$libdir $AFTERIMAGE_LIBS"
++    	AFTERIMAGE_APPS_LIBS="-L../ -lAfterImage $AFTERIMAGE_LIBS"
++    	AFTERIMAGE_TEST_LIBS="-L./ -lAfterImage $AFTERIMAGE_LIBS"
++    	AFTERIMAGE_LIB_LIBS="-L./ $AFTERIMAGE_LIBS"
+     fi
+     AC_DEFINE(HAVE_AFTERBASE,1,[Define if libAfterBase is available])
+ else
+@@ -722,7 +722,7 @@
+ 	  CLEAN_AFTERIMAGE_LIBS="$CLEAN_AFTERIMAGE_LIBS $L"
+   fi
+ done
+-AFTERIMAGE_LIBS="-L$libdir -lAfterImage $CLEAN_AFTERIMAGE_LIBS"
++AFTERIMAGE_LIBS="-lAfterImage $CLEAN_AFTERIMAGE_LIBS"
+ AC_SUBST(AFTERIMAGE_LIBS)
+ 
+ if test "x$enable_staticlibs" = "xyes"; then
+--- configure.orig	2008-10-04 19:44:46.000000000 +0200
++++ configure	2008-10-04 19:45:28.000000000 +0200
+@@ -8805,9 +8805,9 @@
+     	AFTERIMAGE_TEST_LIBS="-L./ -L../libAfterBase -lAfterImage $AFTERIMAGE_LIBS"
+     	AFTERIMAGE_LIB_LIBS="-L./ -L../libAfterBase $AFTERIMAGE_LIBS"
+     else
+-    	AFTERIMAGE_APPS_LIBS="-L../ -L$libdir -lAfterImage $AFTERIMAGE_LIBS"
+-    	AFTERIMAGE_TEST_LIBS="-L./ -L$libdir -lAfterImage $AFTERIMAGE_LIBS"
+-    	AFTERIMAGE_LIB_LIBS="-L./ -L$libdir $AFTERIMAGE_LIBS"
++    	AFTERIMAGE_APPS_LIBS="-L../ -lAfterImage $AFTERIMAGE_LIBS"
++    	AFTERIMAGE_TEST_LIBS="-L./ -lAfterImage $AFTERIMAGE_LIBS"
++    	AFTERIMAGE_LIB_LIBS="-L./ $AFTERIMAGE_LIBS"
+     fi
+ 
+ cat >>confdefs.h <<\_ACEOF
+@@ -9314,7 +9314,7 @@
+ 	  CLEAN_AFTERIMAGE_LIBS="$CLEAN_AFTERIMAGE_LIBS $L"
+   fi
+ done
+-AFTERIMAGE_LIBS="-L$libdir -lAfterImage $CLEAN_AFTERIMAGE_LIBS"
++AFTERIMAGE_LIBS="-lAfterImage $CLEAN_AFTERIMAGE_LIBS"
+ 
+ 
+ if test "x$enable_staticlibs" = "xyes"; then

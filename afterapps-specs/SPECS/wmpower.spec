@@ -1,6 +1,6 @@
 %define name wmpower
-%define version 0.4.2
-%define release 4%{?dist}
+%define version 0.4.3
+%define release 1%{?dist}
 
 Summary: wmpower is a dockapp to see the power management of a laptop 
 Name: %name
@@ -20,7 +20,7 @@ graphically see (and set) the power management status of his laptop.
 %setup -q
 
 %build
-./configure --exec-prefix=%{_prefix}
+./configure --exec-prefix=%{_prefix} --prefix=%{_prefix} --includedir=%{_includedir}
 make
 
 %install
@@ -36,8 +36,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 %doc AUTHORS BUGS COPYING ChangeLog INSTALL NEWS README README.compal THANKS TODO
 
-
 %changelog
+* Sat Aug 01 2009 J. Krebs <rpm_speedy@yahoo.com> - 0.4.3-1
+- new version.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.4.2-4
 - added distro info to release.
 

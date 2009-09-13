@@ -25,7 +25,7 @@
 
 %define name	wmnethru
 %define version 0.1.1
-%define release 2%{?dist}
+%define release 3%{?dist}
 
 Summary:	Network Throughput and System Utilization Monitor
 Name:		%name
@@ -33,8 +33,8 @@ Version:	%version
 Release:	%release
 License:	GPL
 Group:		AfterStep/Applets
-Source0:	http://dockapps.org/download.php/id/693/%{name}-%{version}.tar.gz
-URL:		http://dockapps.org/file.php/id/315
+Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
+URL:		ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %if %{mdk}
@@ -87,6 +87,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 
 %changelog
+* Thu Aug 06 2009 J. Krebs <rpm_speedy@yahoo.com> 0.1.1-3
+- updated URL info.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> 0.1.1-2
 - added distro info to release.
 

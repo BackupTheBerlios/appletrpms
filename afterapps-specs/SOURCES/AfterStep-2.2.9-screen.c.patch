@@ -1,0 +1,19 @@
+--- libAfterStep/screen.c	2009-02-11 17:32:03.000000000 -0600
++++ libAfterStep/screen.c	2009-08-25 14:31:29.000000000 -0500
+@@ -291,6 +291,7 @@
+ 		return -1;
+ 
+ 	dpy = display ;
++	set_current_X_display (display); /* for libAfterBase X Wrappers */
+ 	
+ 	if( scr == NULL ) 
+ 	{
+@@ -401,8 +402,6 @@
+ 		exit (1);
+ 	}
+ 	
+-	set_current_X_display (dpy); /* for libAfterBase X Wrappers */
+-
+ 	ConnectXDisplay (dpy, scr, (event_mask&SubstructureRedirectMask));
+     XSelectInput (dpy, scr->Root, event_mask);
+ 	return x_fd;

@@ -1,5 +1,5 @@
 %define name worker
-%define version 2.16.5
+%define version 2.17.4
 %define release 1%{?dist}
 %define doc_version 2.10.0.2
 
@@ -120,6 +120,9 @@ fi
 %{_datadir}/applications/*
 
 %changelog
+* Thu Jul 30 2009 J. Krebs <rpm_speedy@yahoo.com> 2.17.4-1
+- new version
+
 * Fri Jul 04 2008 J. Krebs <rpm_speedy@yahoo.com> 2.16.5-1
 - new version
 

@@ -1,5 +1,5 @@
 %define name parcellite
-%define version 0.7
+%define version 0.9.1
 %define release 1%{?dist}
 
 Summary: Parcellite (Parcelle Lite) is a lightweight GTK+ clipboard manager
@@ -9,7 +9,7 @@ Release: %release
 License: GPLv3+
 Group: Applications/X11
 URL: http://code.google.com/p/xyhthyx/
-Source0: http://xyhthyx.googlecode.com/files/%{name}-%{version}.tar.gz
+Source0: http://downloads.sourceforge.net/project/%{name}/%{name}/%{name}-%{version}/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: gtk2 >= 2.10
 Buildrequires: gtk2-devel >= 2.10
@@ -25,7 +25,7 @@ footprint for those who like simplicity.
 %build
 ./autogen.sh
 
-./configure prefix=%{_prefix} exec_prefix=%{_prefix}
+./configure --prefix=%{_prefix} --exec_prefix=%{_prefix} --sysconfdir=%{_sysconfdir}
 
 make
 
@@ -58,13 +58,22 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
+%doc AUTHORS COPYING INSTALL ChangeLog NEWS README TODO
 %{_bindir}/*
 %{_datadir}/applications/*.desktop
-%{_sysconfdir}/xdg/autostart/*.desktop
-%doc AUTHORS COPYING INSTALL ChangeLog NEWS README TODO
+%{_datadir}/locale/de/LC_MESSAGES/parcellite.mo
+%{_datadir}/locale/es/LC_MESSAGES/parcellite.mo
+%{_datadir}/locale/hu/LC_MESSAGES/parcellite.mo
+%{_datadir}/locale/ja/LC_MESSAGES/parcellite.mo
+%{_datadir}/locale/pt_BR/LC_MESSAGES/parcellite.mo
+%{_datadir}/locale/sv/LC_MESSAGES/parcellite.mo
+%{_sysconfdir}/xdg/autostart/parcellite-startup.desktop
 %{_mandir}/man1/*
 
 %changelog
+* Thu Aug 06 2009 J. Krebs <rpm_speedy@yahoo.com> - 0.9.1-1
+- New version.
+
 * Fri Apr 19 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.7-1
 - New version.
 

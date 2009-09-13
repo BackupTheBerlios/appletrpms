@@ -1,6 +1,6 @@
 %define name speyes
 %define version 1.2.0
-%define release 5%{?dist}
+%define release 6%{?dist}
 
 Summary: South Park-themed wmeyes
 Name: %name
@@ -13,7 +13,7 @@ Source0: http://okb-1.org/speyes/%{name}-%{version}.tar.gz
 Source1: %{name}.man
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: libXmu
-Buildrequires: libXmu-devel
+Buildrequires: libXmu-devel imake
 
 %description
 South Park-themed wmeyes.
@@ -43,6 +43,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Jul 31 2009 J. Krebs <rpm_speedy@yahoo.com> - 1.8.0-6
+- added build require for imake.
+
 * Thu Nov 08 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.8.0-5
 - added requires for libXmu and libXmu-devel.
 

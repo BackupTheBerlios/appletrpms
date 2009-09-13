@@ -1,6 +1,6 @@
 %define name wmxkb
 %define version 1.2.2
-%define release 7%{?dist}
+%define release 8%{?dist}
 
 Summary: A dockable/swallowed XKB groups indicator and switch
 Name: %name
@@ -8,8 +8,8 @@ Version: %version
 Release: %release
 License: GPL
 Group: AfterStep/Applets
-URL: http://www.geocities.com/wmalms/#WMXKB
-Source0: http://www.geocities.com/wmalms/%{name}-%{version}.tar.gz
+URL: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
+Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -47,6 +47,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Aug 06 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-8
+- updated URL info.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-7
 - added distro info to release.
 

@@ -1,18 +1,19 @@
 %define name fotoxx
-%define version 4.9
+%define version 8.4
 %define release 1%{?dist}
 
 Summary: application for processing image files from a digital camera
-Name: %name
-Version: %version
-Release: %release
+Name: %{name}
+Version: %{version}
+Release: %{release}
 License: GPLv2
 Group: Applications/Multimedia
 URL: http://kornelix.squarespace.com/%{name}/
-Source0: http://kornelix.squarespace.com/storage/%{name}-%{version}.tar.gz
+Source0: http://kornelix.squarespace.com/storage/downloads/%{name}-%{version}.tar.gz
+Patch0: %{name}-8.1-Makefile.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: gtk2 atk cairo pango libpng exiv2 libstdc++
-Buildrequires: gtk2-devel atk-devel cairo-devel pango-devel libpng-devel libstdc++-devel
+Requires: gtk2 atk cairo pango libpng exiv2 libstdc++ ufraw perl-Image-ExifTool
+Buildrequires: gtk2-devel atk-devel cairo-devel pango-devel libpng-devel libstdc++-devel gcc-c++ freeimage-devel ufraw perl-Image-ExifTool
 Obsoletes: fotox
 Provides: fotox
 
@@ -45,14 +46,15 @@ made with a digital camera.
     * Red-eye removal.
 
 %prep
-%setup -n fotoxx
+%setup -q
+%patch0
 
 %build
-rm -rf $RPM_BUILD_ROOT
-
-make PREFIX=%{_prefix} DOCDIR=%{_datadir}/doc/%{name}-%{version}
+make PREFIX=%{_prefix} DOCDIR=%{_datadir}/doc/%{name}-%{version} DESKTOP=""
 
 %install
+rm -rf $RPM_BUILD_ROOT
+
 make install DESTDIR=$RPM_BUILD_ROOT PREFIX=%{_prefix} DOCDIR=%{_datadir}/doc/%{name}-%{version}
 
 #Install application link for X-Windows
@@ -85,11 +87,24 @@ rm -rf $RPM_BUILD_ROOT
 %doc doc/*
 %{_bindir}/%{name}
 %{_datadir}/applications/*.desktop
-%{_datadir}/%{name}/*.xtext
 %{_datadir}/%{name}/icons/*
+%{_datadir}/%{name}/locales/*
 %{_datadir}/pixmaps/*.png
+%{_mandir}/man1/*.gz
 
 %changelog
+* Mon Sep 13 2009 J. Krebs <rpm_speedy@yahoo.com> - 8.4-1
+- new version.
+
+* Mon Sep 08 2008 J. Krebs <rpm_speedy@yahoo.com> - 5.2.4-1
+- new version.
+
+* Sun Aug 24 2008 J. Krebs <rpm_speedy@yahoo.com> - 5.1-1
+- new version.
+
+* Sat Aug 16 2008 J. Krebs <rpm_speedy@yahoo.com> - 5.0.3-1
+- new version.
+
 * Sun Jul 12 2008 J. Krebs <rpm_speedy@yahoo.com> - 4.9-1
 - new version.
 

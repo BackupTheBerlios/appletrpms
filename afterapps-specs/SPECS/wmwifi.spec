@@ -25,7 +25,7 @@
 
 %define name wmwifi
 %define version 0.6
-%define release 2%{?dist}
+%define release 3%{?dist}
 
 Summary: WiFi dockapp displays signal, link, noise, & bitrate info in LCD format
 Name: %name
@@ -33,8 +33,8 @@ Version: %version
 Release: %release
 License: GPL
 Group: AfterStep/Applets
-URL: http://wmwifi.digitalssg.net/
-Source0: http://digitalssg.net/debian/%{name}-%{version}.tar.gz
+URL: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
+Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
 Patch0: %{name}-%{version}-wireless.c.patch
 Patch1: %{name}-%{version}-%{name}.h.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -76,6 +76,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README
 
 %changelog
+* Thu Jun 14 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.6-3
+- updated URL info.
+
 * Thu Jun 14 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.6-2
 - fixed IFNAMSIZ build issues under FC6.
 

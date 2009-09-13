@@ -1,0 +1,23 @@
+--- afterimage-config.in	2008-10-04 19:36:52.000000000 +0200
++++ afterimage-config.in	2008-10-04 19:42:48.000000000 +0200
+@@ -115,11 +115,7 @@
+         	libs="-lAfterBase $libs"
+  	fi
+  	libs="-lAfterImage $libs" 
+-	if test "@libdir@" != "/usr/lib" ; then
+-  		echo -L@libdir@ $libs
+- 	else
+-  		echo $libs
+- 	fi
++ 	echo $libs
+  else
+         echo $libs
+  fi
+@@ -127,7 +123,6 @@
+ 
+ if test "$echo_libtool" = "yes" ; then
+  convlib="libAfterImage.la"
+- echo @libdir@/$convlib
+ fi
+ 
+ if test "$echo_have_afterbase" = "yes" ; then

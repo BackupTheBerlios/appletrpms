@@ -1,6 +1,6 @@
 %define name wmmsg
 %define version 1.0.1
-%define release 4%{?dist}
+%define release 5%{?dist}
 
 Summary: dockapp that notifies of incoming messages and events
 Name: %name
@@ -8,14 +8,14 @@ Version: %version
 Release: %release
 License: GPL
 Group: AfterStep/Applets
-URL: http://www.dockapps.com/file.php/id/169
-Source0: http://dockapps.org/download.php/id/518/%{name}-%{version}.tar.gz
+URL: http://swapspace.net/~matt/wmmsg/
+Source0: http://swapspace.net/~matt/wmmsg/%{name}-%{version}.tar.gz
 Source1: %{name}-sounds.tar.gz
 Source2: wmmsgrc-example
 Source3: %{name}-icons.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: imlib2
-BuildRequires: imlib2-devel
+BuildRequires: imlib2-devel gcc-c++
 
 %description
 wmmsg is a dockapp that informs you of new events, such as
@@ -65,6 +65,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog INSTALL README plugins/* wmmsgrc-example
 
 %changelog
+* Fri Jul 31 2009 J. Krebs <rpm_speedy@yahoo.com> - 1.0.1-5
+- added build require for c++ (gcc-c++).
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.0.1-4
 - added distro info to release.
 

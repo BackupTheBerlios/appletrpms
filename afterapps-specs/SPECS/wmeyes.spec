@@ -1,6 +1,6 @@
 %define name wmeyes
 %define version 1.2
-%define release 5%{?dist}
+%define release 6%{?dist}
 
 Summary: wmeyes is a dockapp with moving eyes that follow mouse movement
 Name: %name
@@ -13,7 +13,7 @@ Source0: %{name}-%{version}.tar.gz
 Source1: %{name}.man
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: libXmu
-Buildrequires: libXmu-devel
+Buildrequires: libXmu-devel imake
 
 %description
 wmeyes is a dockapp with moving eyes that follow mouse movement.
@@ -43,6 +43,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Jul 31 2009 J. Krebs <rpm_speedy@yahoo.com> - 1.2-6
+- added build requires for imake.
+
 * Thu Nov 08 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.2-5
 - added requires for libXmu and libXmu-devel.
 

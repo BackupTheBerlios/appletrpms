@@ -1,6 +1,6 @@
 %define name	libwraster
 %define version	0.80.2
-%define release	4%{?dist}
+%define release	5%{?dist}
 
 Summary: 	wraster libraries used in WindowMaker
 Name:		%name
@@ -9,7 +9,7 @@ Release:	%release
 License:	GPL
 Group: 		User Interface/Desktops
 URL: 		http://www.windowmaker.info/
-Source: 	http://www.windowmaker.info/pub/source/release/archive/WindowMaker-%{version}.tar.gz
+Source: 	http://windowmaker.info/pub/source/archive/WindowMaker-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	libpng-devel libjpeg-devel libungif-devel 
 BuildRequires:	libtiff-devel zlib-devel gettext
@@ -57,6 +57,9 @@ rm -rf $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 
 %changelog
+* Thu Aug 13 2009 J. Krebs <rpm_speedy@yahoo.com> - 0.80.2-5
+- updated URLs.
+
 * Fri May 04 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.80.2-4
 - added rpm macro libdir to configure.
 

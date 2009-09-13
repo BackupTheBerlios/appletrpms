@@ -1,5 +1,8 @@
+%define pythtst	%(rpm -q --queryformat='%{VERSION}' python)
+%define pythver	%pythtst 
+
 %define	name 	medit
-%define	version	0.9.3
+%define	version	0.9.4
 %define	release	2%{?dist}
 
 Summary:	medit is a GTK-based text editor
@@ -10,16 +13,19 @@ License:	GPLv2 and LGPLv2
 Group:		Applications/Editors
 URL:		http://mooedit.sourceforge.net/
 Source0:	http://easynews.dl.sourceforge.net/sourceforge/mooedit/%{name}-%{version}.tar.bz2
+Patch0:		medit-0.9.4-stdio.h-conflict.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires:	python, pcre >= 7.0, libxml2, pygtk2, pango, gtk2, cairo, atk, libICE, libX11, libSM
+Requires:	python = %{pythver}, pcre >= 7.0, libxml2, pygtk2, pango, gtk2, cairo, atk, libICE, libX11, libSM
 Buildrequires:	python-devel, pcre-devel >= 7.0, libxml2-devel, perl-XML-Parser, pygtk2-devel, pango-devel 
-Buildrequires:	gtk2-devel, cairo-devel, atk-devel, libICE-devel, libX11-devel, libSM-devel
+Buildrequires:	gtk2-devel, cairo-devel, atk-devel, libICE-devel, libX11-devel, libSM-devel, intltool
+Provides:	mooedit
 
 %description
 medit is a GTK-based text editor.
 
 %prep
 %setup -q
+%patch0
 
 %build
 ./configure --prefix=%{_prefix} --libdir=%{_libdir} --with-python --docdir=%{_datadir}/doc/%{name}-%{version}
@@ -58,16 +64,21 @@ fi
 %doc AUTHORS COPYING COPYING.GPL INSTALL LICENSE NEWS README THANKS doc/help/
 %{_bindir}/medit
 %{_libdir}/moo/
-%{_libdir}/python2.5/
+%{_libdir}/python%{pythver}/
 %{_datadir}/applications/medit.desktop
 %{_datadir}/icons/hicolor/48x48/apps/medit.png
 %{_datadir}/locale/
-%{_datadir}/mime/
 %{_datadir}/moo/
 %{_datadir}/pixmaps/medit.png
 %{_mandir}/man1/medit*
 
 %changelog
+* Sat Aug 01 2009 J. Krebs <rpm_speedy@yahoo.com> - 0.9.4-2
+- build patches for FC11.
+
+* Fri Aug 29 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.9.4-1
+- New version.
+
 * Wed Aug 06 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.9.3-2
 - Added libdir to configure for build under x86_64.
 

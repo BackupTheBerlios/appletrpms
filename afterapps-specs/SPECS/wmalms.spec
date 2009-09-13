@@ -1,6 +1,6 @@
 %define name wmalms
 %define version 1.1.1
-%define release 5%{?dist}
+%define release 6%{?dist}
 
 Summary: Applet to manage sensor data: temperature, fan speed, voltage
 Name: %name
@@ -8,8 +8,8 @@ Version: %version
 Release: %release
 License: GPL
 Group: AfterStep/Applets
-URL: http://www.geocities.com/wmalms/
-Source0: http://www.geocities.com/%{name}/%{name}-%{version}.tar.gz
+URL: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
+Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
 Patch0: wmalms-1.1.1-prompt-bypass.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: lm_sensors-devel >= 2.0, lm_sensors-devel < 3.0
@@ -46,6 +46,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc COPYING README manual.html
 
 %changelog
+* Thu Aug 06 2009 J. Krebs <rpm_speedy@yahoo.com> - 1.1.1-6
+- updated URL info.
+
 * Mon Jun 30 2008 J. Krebs <rpm_speedy@yahoo.com> - 1.1.1-5
 - added require for lm_sensors < 3.0.
 

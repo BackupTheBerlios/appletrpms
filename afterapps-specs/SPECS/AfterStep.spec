@@ -39,12 +39,12 @@
 ### END Distro Definitions
 
 %define	name AfterStep
-%define	version	2.2.8
-%define	libaiver	1.17
-%define	libabver	1.12
-%define	libairel	3%{?dist}
-%define	libabrel	3%{?dist}
-%define release 3%{?dist}
+%define	version	2.2.9
+%define	libaiver	1.19
+%define	libabver	1.13
+%define	libairel	2%{?dist}
+%define	libabrel	2%{?dist}
+%define release 2%{?dist}
 %define epoch 20
 
 Summary:	AfterStep Window Manager (NeXTalike)
@@ -69,8 +69,15 @@ Source9:	%{name}-2.2.7-wharf.alternate
 Patch0:		%{name}-2.2.5-ImageMagick.patch
 Patch1:		%{name}-2.2.7-winlist.patch
 Patch2:		%{name}-2.2.7-pager.patch
-Patch3:		%{name}-2.2.8-configure.h.in.patch
-Patch4:		%{name}-2.2.8-Pager.c.patch
+Patch3:		%{name}-2.2.9-asgtklookedit.c.patch
+Patch4:		AfterStep-2.2.9-ascompose.c.patch
+Patch5:		AfterStep-2.2.9-screen.c.patch
+Patch6:		AfterStep-2.2.9-SkipPager-afterconf.h.patch
+Patch7:		AfterStep-2.2.9-SkipPager-asdatabase.h.patch
+Patch8:		AfterStep-2.2.9-SkipPager-Database.c.patch
+Patch9:		AfterStep-2.2.9-SkipPager-hints.c.patch
+Patch10:	AfterStep-2.2.9-SkipPager-hints.h.patch
+Patch11:	AfterStep-2.2.9-SkipPager-Pager.c.patch
 Distribution:	The AfterStep TEAM
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 %if %{mdk}
@@ -202,6 +209,13 @@ Files needed for software development with libAfterBase.
 %patch2
 %patch3
 %patch4
+%patch5
+%patch6
+%patch7
+%patch8
+%patch9
+%patch10
+%patch11
 
 %build
 CFLAGS=$RPM_OPT_FLAGS \
@@ -312,6 +326,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/ascolor
 %{_bindir}/ascommand.pl
 %{_bindir}/asgtk-config
+%{_bindir}/ascheckttf
 %{_bindir}/importasmenu
 %{_bindir}/installastheme.pl
 %{_bindir}/makeastheme.pl
@@ -413,6 +428,9 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
+* Thu Jul 30 2009 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.9-1
+- new version.
+
 * Sat May 31 2008 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.8-3
 - Changed image loader from qiv to feh.
 

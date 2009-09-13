@@ -1,0 +1,19 @@
+--- libAfterStep/hints.c	2007-07-06 17:35:15.000000000 -0500
++++ libAfterStep/hints.c	2009-08-25 14:29:51.000000000 -0500
+@@ -40,7 +40,7 @@
+ {
+ 	if (hints)
+ 	{										   /* some defaults to start with : */
+-		hints->flags = AS_Gravity | AS_AcceptsFocus | AS_Titlebar | AS_IconTitle | AS_Handles | AS_Border;
++		hints->flags = AS_HitPager | AS_Gravity | AS_AcceptsFocus | AS_Titlebar | AS_IconTitle | AS_Handles | AS_Border;
+         /* can't gracefully close the window if it does not support WM_DELETE_WINDOW */
+         hints->function_mask = ~(AS_FuncClose|AS_FuncPinMenu);
+         hints->gravity = NorthWestGravity;
+@@ -1341,6 +1341,7 @@
+ 		{STYLE_IGNORE_CONFIG, AS_IgnoreConfigRequest, 0, 0, AS_IgnoreConfigRequest},
+ 		{STYLE_IGNORE_RESTACK, AS_IgnoreRestackRequest, 0, 0, AS_IgnoreRestackRequest},
+ 		{STYLE_CURRENT_VIEWPORT, AS_UseCurrentViewport, 0, 0, AS_UseCurrentViewport},
++		{STYLE_PAGER, AS_HitPager, 0, 0, AS_HitPager},
+ 		{0, 0, 0, 0, 0}
+ 	};
+ 

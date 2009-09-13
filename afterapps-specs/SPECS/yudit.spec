@@ -1,6 +1,6 @@
 %define	name 	yudit
 %define	version	2.9.0
-%define	release	1%{?dist}
+%define	release	2%{?dist}
 
 Summary:	Unicode Text Editor
 Name:		%name
@@ -9,7 +9,11 @@ Release:	%release
 License:	GPL
 Group:		Applications/Editors
 Source:		http://yudit.org/download/%{name}-%{version}.tar.gz
+Patch0:		%{name}-%{version}-patch1.txt
+Patch1:		%{name}-%{version}-patch2.txt
+Patch2:		%{name}-%{version}-patch3.txt
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRequires:	gcc-c++
 
 %description
 Yudit is a unicode text editor for  the X Window
@@ -27,6 +31,10 @@ GNU (C) 1997-2005 Gaspar Sinai <gsinai@yudit.org>
 
 %prep
 %setup
+
+%patch0
+%patch1
+%patch2
 
 %build
 ./configure --prefix=%{_prefix} --mandir=%{_mandir}
@@ -116,6 +124,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGELOG.TXT COPYING.TXT FAQ.TXT README.TXT TODO.TXT doc/*.utf8 doc/notinstalled doc/problems doc/HOWTO-*.txt doc/otfsupport.txt
 
 %changelog
+* Fri Jul 31 2009 J. Krebs <rpm_speedy@yahoo.com> - 2.9.0-2
+  Added require for c++ (gcc-c++), patches.
 * Mon Dec 24 2007 J. Krebs <rpm_speedy@yahoo.com> - 2.9.0-1
   Updated to version 2.9.0
 * Thu Feb 15 2007 J. Krebs <rpm_speedy@yahoo.com> - 2.8.1-1

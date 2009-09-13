@@ -1,7 +1,7 @@
 %define aitest	%(rpm -q --queryformat='%{VERSION}' libAfterImage)
 %define aiver	%aitest 
-%define version 9.05
-%define release 2%{?dist}
+%define version 9.06
+%define release 1%{?dist}
 %define name	rxvt-unicode
 %define epoch	2
 
@@ -14,6 +14,7 @@ License:	GPLv2+
 Group:		User Interface/X
 URL:		http://software.schmorp.de/pkg/rxvt-unicode.html
 Source0:	http://dist.schmorp.de/rxvt-unicode/%{name}-%{version}.tar.bz2
+Patch0:		rxvt-unicode-gcc44.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	perl-devel libXpm-devel libXft-devel freetype-devel perl-ExtUtils-Embed
 BuildRequires:	libAfterImage-devel >= 1.15
@@ -39,6 +40,7 @@ Xft fonts.
 
 %prep
 %setup -q
+%patch0
 
 %build
 
@@ -84,6 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/urxvt
 
 %changelog
+* Thu Jul 30 2009 J. Krebs <rpm_speedy@yahoo.com> - 2:9.06-1
+- new version.
+
 * Wed Aug 06 2008 J. Krebs <rpm_speedy@yahoo.com> - 2:9.05-2
 - added required for perl-ExtUtils-Embed.
 

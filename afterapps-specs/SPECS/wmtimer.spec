@@ -1,6 +1,6 @@
 %define name wmtimer
 %define version 2.92
-%define release 4%{?dist}
+%define release 5%{?dist}
 
 Summary: wmtimer is a dockable alarm clock
 Name: %name
@@ -8,8 +8,8 @@ Version: %version
 Release: %release
 License: GPL
 Group: AfterStep/Applets
-URL: http://dockapps.org/file.php/id/23
-Source0: http://open-systems.ufl.edu/mirrors/gentoo/distfiles/%{name}-%{version}.tar.gz
+URL: http://www.darkops.net/wmtimer/
+Source0: http://www.darkops.net/%{name}/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -41,6 +41,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Aug 06 2009 J. Krebs <rpm_speedy@yahoo.com> - 2.92-5
+- updated URL info.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 2.92-4
 - added distro info to release.
 

@@ -1,6 +1,6 @@
 %define name wmmemload
 %define version 0.1.6
-%define release 4%{?dist}
+%define release 5%{?dist}
 
 Summary: memory monitor dockapp which displays free memory and swap space
 Name: %name
@@ -8,8 +8,8 @@ Version: %version
 Release: %release
 License: GPL
 Group: AfterStep/Applets
-URL: http://markstaggs.net/
-Source0: http://www.markstaggs.net/wmmemload/%{name}-%{version}.tar.gz
+URL: https://sourceforge.net/projects/freshmeat_wmmemload/
+Source0: http://gentoo.mirrors.easynews.com/linux/gentoo/distfiles/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -40,6 +40,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Aug 07 2009 J. Krebs <rpm_speedy@yahoo.com> - 0.1.6-5
+- Updated URLs.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.1.6-4
 - added distro info to release.
 

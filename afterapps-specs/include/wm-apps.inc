@@ -2,6 +2,13 @@
 # Window Maker applets
 # unfortunatelly not all at one place like AS ones
 
+ALSAMIXER.APP_NAME=AlsaMixer.app
+ALSAMIXER.APP_VERSION=0.1
+ALSAMIXER.APP_TAR=$(ALSAMIXER.APP_NAME)-$(ALSAMIXER.APP_VERSION).tar.gz
+ALSAMIXER.APP_URL=http://gentoo.mirrors.easynews.com/linux/gentoo/distfiles/$(ALSAMIXER.APP_TAR)
+
+APPLET_LIST += ALSAMIXER.APP-
+
 BUBBLEMON-DOCKAPP_NAME=bubblemon-dockapp
 BUBBLEMON-DOCKAPP_VERSION=1.46
 BUBBLEMON-DOCKAPP_TAR=$(BUBBLEMON-DOCKAPP_NAME)-$(BUBBLEMON-DOCKAPP_VERSION).tar.gz
@@ -40,7 +47,7 @@ APPLET_LIST += SPEYES
 WMALMS_NAME=wmalms
 WMALMS_VERSION=1.1.1
 WMALMS_TAR=$(WMALMS_NAME)-$(WMALMS_VERSION).tar.gz
-WMALMS_URL=http://www.geocities.com/$(WMALMS_NAME)/$(WMALMS_TAR)
+WMALMS_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMALMS_NAME)/$(WMALMS_TAR)
 
 APPLET_LIST += WMALMS
 
@@ -173,7 +180,7 @@ APPLET_LIST += WMMEMMON
 WMMSG_NAME=wmmsg
 WMMSG_VERSION=1.0.1
 WMMSG_TAR=$(WMMSG_NAME)-$(WMMSG_VERSION).tar.gz
-WMMSG_URL=http://dockapps.org/download.php/id/518/$(WMMSG_TAR)
+WMMSG_URL=http://swapspace.net/~matt/wmmsg/$(WMMSG_TAR)
 
 APPLET_LIST += WMMSG
 
@@ -187,7 +194,7 @@ APPLET_LIST += WMND
 WMNETHRU_NAME=wmnethru
 WMNETHRU_VERSION=0.1.1
 WMNETHRU_TAR=$(WMNETHRU_NAME)-$(WMNETHRU_VERSION).tar.gz
-WMNETHRU_URL=http://dockapps.org/download.php/id/693/$(WMNETHRU_TAR)
+WMNETHRU_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMNETHRU_TAR)
 
 APPLET_LIST += WMNETHRU
 
@@ -199,7 +206,7 @@ WMPOP3LB_URL=http://lbj.free.fr/wmpop3/$(WMPOP3LB_TAR)
 APPLET_LIST += WMPOP3LB
 
 WMPOWER_NAME=wmpower
-WMPOWER_VERSION=0.4.2
+WMPOWER_VERSION=0.4.3
 WMPOWER_TAR=$(WMPOWER_NAME)-$(WMPOWER_VERSION).tar.bz2
 WMPOWER_URL=http://easynews.dl.sourceforge.net/sourceforge/$(WMPOWER_NAME)/$(WMPOWER_TAR)
 
@@ -222,7 +229,7 @@ APPLET_LIST += WMRADIO
 WMSENSORMON_NAME=wmsensormon
 WMSENSORMON_VERSION=1.2.1
 WMSENSORMON_TAR=$(WMSENSORMON_NAME)-$(WMSENSORMON_VERSION).tar.gz
-WMSENSORMON_URL=http://superb-west.dl.sourceforge.net/sourceforge/$(WMSENSORMON_NAME)/$(WMSENSORMON_TAR)
+WMSENSORMON_URL=http://prdownloads.sourceforge.net/sourceforge/$(WMSENSORMON_NAME)/$(WMSENSORMON_TAR)
 
 APPLET_LIST += WMSENSORMON
 
@@ -250,7 +257,7 @@ APPLET_LIST += WMTEMP
 WMTIMER_NAME=wmtimer
 WMTIMER_VERSION=2.92
 WMTIMER_TAR=$(WMTIMER_NAME)-$(WMTIMER_VERSION).tar.gz
-WMTIMER_URL=http://open-systems.ufl.edu/mirrors/gentoo/distfiles/$(WMTIMER_TAR)
+WMTIMER_URL=http://gentoo.mirrors.easynews.com/linux/gentoo/distfiles/$(WMTIMER_TAR)
 
 APPLET_LIST += WMTIMER
 
@@ -276,9 +283,9 @@ WMUSIC_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMUSIC_TAR)
 APPLET_LIST += WMUSIC
 
 WMWEATHER_NAME=wmweather
-WMWEATHER_VERSION=2.4.4
-WMWEATHER_TAR=$(WMWEATHER_NAME)-$(WMWEATHER_VERSION).tar.gz
-WMWEATHER_URL=http://people.debian.org/~godisch/debian/$(WMWEATHER_NAME)/$(WMWEATHER_TAR)
+WMWEATHER_VERSION=2.4.5
+WMWEATHER_TAR=$(WMWEATHER_NAME)_$(WMWEATHER_VERSION).orig.tar.gz
+WMWEATHER_URL=http://ftp.de.debian.org/debian/pool/main/w/wmweather/$(WMWEATHER_TAR)
 
 APPLET_LIST += WMWEATHER
 
@@ -292,14 +299,14 @@ APPLET_LIST += WMWEATHERPLUS
 WMWIFI_NAME=wmwifi
 WMWIFI_VERSION=0.6
 WMWIFI_TAR=$(WMWIFI_NAME)-$(WMWIFI_VERSION).tar.gz
-WMWIFI_URL=http://digitalssg.net/debian/$(WMWIFI_TAR)
+WMWIFI_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMWIFI_TAR)
 
 APPLET_LIST += WMWIFI
 
 WMXKB_NAME=wmxkb
 WMXKB_VERSION=1.2.2
 WMXKB_TAR=$(WMXKB_NAME)-$(WMXKB_VERSION).tar.gz
-WMXKB_URL=http://www.geocities.com/wmalms/$(WMXKB_TAR)
+WMXKB_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMXKB_TAR)
 
 APPLET_LIST += WMXKB
 

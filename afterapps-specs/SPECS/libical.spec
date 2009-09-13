@@ -1,5 +1,5 @@
 %define	name	libical
-%define	version	0.31
+%define	version	0.43
 %define release 1%{?dist}
 
 Summary:	An implementation of basic iCAL protocols
@@ -11,7 +11,7 @@ Group:		Development/Libraries/C and C++
 URL:		http://softwarestudio.org/libical/
 Source0:	http://easynews.dl.sourceforge.net/sourceforge/freeassociation/%name-%version.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires:	byacc flex bison
+BuildRequires:	byacc flex bison gcc-c++
 
 %description
 Libical is an Open Source implementation of the IETF's iCalendar
@@ -59,7 +59,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %{_libdir}/*.*a
 %{_libdir}/*.so
+%{_libdir}/pkgconfig/*.pc
 %{_includedir}/*.h
+%{_includedir}/%{name}/*.h
 %{_datadir}/libical/scripts/*
 
 %post -p /sbin/ldconfig
@@ -67,6 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 
 %changelog
+* Fri Jul 31 2009 J. Krebs <rpm_speedy@yahoo.com> - 0.43-1
+- new version.
+
 * Sun May 25 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.31-1
 - new version.
 

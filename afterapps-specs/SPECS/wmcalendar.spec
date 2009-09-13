@@ -2,7 +2,7 @@
 %define licver	%lictest 
 %define name wmcalendar
 %define version 0.5.2
-%define release 4%{?dist}
+%define release 5%{?dist}
 
 Summary: wmCalendar is a calendar dockapp
 Name: %name
@@ -13,6 +13,8 @@ Group: AfterStep/Applets
 URL: http://sourceforge.net/projects/wmcalendar/
 Source0: http://easynews.dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
 Source1: %{name}.ogo2ical
+Patch0: wmcalendar-0.5.2-exit-sin-and-cos.patch
+Patch1: wmcalendar-0.5.2-rename_kill_func.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: libical >= %{licver}
 Buildrequires: libical-devel
@@ -39,6 +41,8 @@ wmCalendar.  Many thanks to Daniel Tschan for his script!
 
 %prep
 %setup -q
+%patch0
+%patch1
 
 cp %{SOURCE1} ogo2ical
 
@@ -65,6 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Aug 04 2009 J. Krebs <rpm_speedy@yahoo.com> - 0.5.2-5
+- added build patches for Fedora 11.
+
 * Fri Oct 12 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.5.2-4
 - added test for libical version, updated for libical 0.27.
 

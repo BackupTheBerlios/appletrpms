@@ -1,6 +1,6 @@
 %define name wmsensormon
 %define version 1.2.1
-%define release 6%{?dist}
+%define release 7%{?dist}
 
 Summary: uses lm_sensors to monitor CPU & sys temps, fan speed, and CPU voltage
 Name: %name
@@ -9,7 +9,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: http://wmsensormon.sourceforge.net/
-Source0: http://superb-west.dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
+Source0: http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: lm_sensors-devel >= 2.0, lm_sensors-devel < 3.0
 Requires: lm_sensors >= 2.0, lm_sensors < 3.0
@@ -45,6 +45,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGELOG COPYING INSTALL README TODO
 
 %changelog
+* Thu Aug 06 2009 J. Krebs <rpm_speedy@yahoo.com> - 1.2.1-7
+- updated URL info.
+
 * Mon Jun 30 2008 J. Krebs <rpm_speedy@yahoo.com> - 1.2.1-6
 - updated requires for lm_sensors < 3.0.
 

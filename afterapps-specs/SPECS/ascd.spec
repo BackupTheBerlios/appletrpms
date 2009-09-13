@@ -19,6 +19,7 @@ Patch2: ascd-0.13.2.c.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Obsoletes: ascd-themes
 Provides: ascd-themes
+BuildRequires: imake
 
 %description
 A swallowable applet allows to control the CD-ROM and provides

@@ -1,6 +1,6 @@
 %define name Temperature.app
 %define version 1.4
-%define release 10%{?dist}
+%define release 12%{?dist}
 
 Summary: WM applet gets temperature every 15 minutes
 Name: %name
@@ -8,13 +8,12 @@ Version: %version
 Release: %release
 License: GPL
 Group: AfterStep/Applets
-URL: http://www.fukt.hk-r.se/~per/temperature
-Source0: http://www.fukt.bth.se/~per/temperature/%{name}-%{version}.tar.gz
-Patch1: Temperature.app-1.4-frog-5.patch
-Patch2: Temperature.app-1.4-gcc43.patch
-Patch3: Temperature.app-1.4-Makefile.patch
+URL: http://www.fukt.bsnet.se/~per/temperature/
+Source0: http://www.fukt.bsnet.se/~per/temperature/%{name}-%{version}.tar.gz
+Patch0: Temperature.app-1.4-frog-6.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: wget xorg-x11-fonts-ISO8859-1-75dpi xorg-x11-fonts-ISO8859-1-100dpi
+Requires: wget xorg-x11-fonts-ISO8859-1-75dpi xorg-x11-fonts-ISO8859-1-100dpi freetype
+BuildRequires: gcc-c++
 
 %description
 Temperature.app is a Window Maker applet which fetches local
@@ -24,7 +23,7 @@ temperature information every 15 minutes from
 
 and displays it (in Celsius or Fahrenheit).
 
-The patch from Frog at:
+The v6 patch from Frog at:
 
     http://www.unetz.com/schaepe/DOCKAPPS/dockapps.html
 
@@ -34,17 +33,17 @@ has been added to allow for pressure, wind, and windchill.
 %prep
 %setup -q
 
-%patch1
-%patch2
-%patch3
+%patch0
 
 %build
-make
+make X11_BINDIR=%{_bindir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-make install-x11 DESTDIR=$RPM_BUILD_ROOT
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+
+make install DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -54,8 +53,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 %doc ChangeLog INSTALL README COPYING
 
-
 %changelog
+* Fri Jul 31 2009 J. Krebs <rpm_speedy@yahoo.com> - 1.4-12
+- updated URLs.
+
+* Sat Aug 09 2008 J. Krebs <rpm_speedy@yahoo.com> - 1.4-11
+- updated to Frog Patch v6.
+
 * Mon Jun 30 2008 J. Krebs <rpm_speedy@yahoo.com> - 1.4-10
 - added patch for gcc43.
 

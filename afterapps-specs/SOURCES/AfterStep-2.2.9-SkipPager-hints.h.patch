@@ -1,0 +1,10 @@
+--- libAfterStep/hints.h	2007-05-03 14:41:58.000000000 -0500
++++ libAfterStep/hints.h	2009-08-25 14:30:13.000000000 -0500
+@@ -97,6 +97,7 @@
+ 										  * window should be animated */ 
+ #define AS_UseCurrentViewport  	(1<<27)
+ #define AS_WindowOpacity	   	(1<<28)
++#define AS_HitPager	   	(1<<29)
+ 
+ #define NOLOOK_HINT_FLAGS	(AS_IgnoreConfigRequest|AS_Module|AS_ShortLived| \
+ 							 AS_AvoidCover|AS_AcceptsFocus|AS_ClickToFocus| \
