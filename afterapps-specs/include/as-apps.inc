@@ -113,7 +113,7 @@ APPLET_LIST += ASTIME
 ASWVDIAL_NAME=aswvdial
 ASWVDIAL_VERSION=1.7
 ASWVDIAL_TAR=$(ASWVDIAL_NAME)-$(ASWVDIAL_VERSION).tar.bz2
-ASWVDIAL_URL=http://www.ma-scha.de/download/$(ASWVDIAL_TAR)
+ASWVDIAL_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(ASWVDIAL_TAR)
 
 APPLET_LIST += ASWVDIAL
 

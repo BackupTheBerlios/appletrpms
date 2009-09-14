@@ -1,6 +1,6 @@
 %define name wmcpuload
 %define version 1.1.0pre5
-%define release 4%{?dist}
+%define release 5%{?dist}
 
 Summary: CPU monitor dockapp which has an LCD look user interface
 Name: %name
@@ -8,8 +8,8 @@ Version: %version
 Release: %release
 License: GPL
 Group: AfterStep/Applets
-URL: http://www.sh.rim.or.jp/~ssato/dockapp/index.shtml#wmcpuload
-Source0: http://seiichisato.jp/dockapps/src/%{name}-%{version}.tar.gz
+URL: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
+Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -43,6 +43,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sun Sep 13 2009 J. Krebs <rpm_speedy@yahoo.com> - 1.1.0pre5-5
+- updated URL info.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.1.0pre5-4
 - added distro info to release.
 

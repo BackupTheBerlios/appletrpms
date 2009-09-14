@@ -8,8 +8,8 @@ Version: %version
 Release: %release
 License: GPL
 Group: AfterStep/Applets
-URL: http://www.ma-scha.de/
-Source0: http://www.ma-scha.de/download/%{name}-%{version}.tar.bz2
+URL: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
+Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: libxml-devel
 Requires: libxml wvdial

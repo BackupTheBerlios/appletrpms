@@ -9,7 +9,7 @@ Release: %release
 License: GPL
 Group: AfterStep/Applets
 URL: https://sourceforge.net/projects/freshmeat_wmmemload/
-Source0: http://gentoo.mirrors.easynews.com/linux/gentoo/distfiles/%{name}-%{version}.tar.gz
+Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description

@@ -1,6 +1,6 @@
 %define name wmix
 %define version 3.2
-%define release 4%{?dist}
+%define release 5%{?dist}
 
 Summary: dockapp mixer utilizing the OSS mixer API
 Name: %name
@@ -8,8 +8,8 @@ Version: %version
 Release: %release
 License: GPL
 Group: AfterStep/Applets
-URL: http://www.dockapps.com/file.php/id/58
-Source0: http://www.dockapps.com/download.php/id/528/%{name}-%{version}.tar.gz
+URL: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
+Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -45,6 +45,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS BUGS COPYING INSTALL NEWS README sample.wmixrc
 
 %changelog
+* Sun Sep 13 2009 J. Krebs <rpm_speedy@yahoo.com> - 3.2-5
+- updated URL info.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 3.2-4
 - added distro info to release.
 

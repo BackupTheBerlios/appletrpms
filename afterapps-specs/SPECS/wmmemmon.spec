@@ -1,6 +1,6 @@
 %define name wmmemmon
 %define version 1.0.2pre2
-%define release 6%{?dist}
+%define release 7%{?dist}
 
 Summary: WMMemMon - A dockapp to monitor memory/swap usages
 Name: %name
@@ -8,8 +8,8 @@ Version: %version
 Release: %release
 License: GPL
 Group: AfterStep/Applets
-URL: http://seiichisato.jp/dockapps/
-Source0: http://seiichisato.jp/dockapps/src/%{name}-%{version}.tar.gz
+URL: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
+Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
 Patch0: wmmemmon-1.0.2-main.c.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -50,6 +50,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sun Sep 13 2009 J. Krebs <rpm_speedy@yahoo.com> - 1.0.2pre2-7
+- updated URL info.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.0.2pre2-6
 - added distro info to release.
 

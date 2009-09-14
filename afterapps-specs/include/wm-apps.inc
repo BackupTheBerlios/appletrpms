@@ -89,7 +89,7 @@ APPLET_LIST += WMCALC
 WMCHARGEMON_NAME=wmchargemon
 WMCHARGEMON_VERSION=0.3
 WMCHARGEMON_TAR=$(WMCHARGEMON_NAME)-$(WMCHARGEMON_VERSION).tar.gz
-WMCHARGEMON_URL=http://dockapps.org/download.php/id/715/$(WMCHARGEMON_TAR)
+WMCHARGEMON_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMCHARGEMON_TAR)
 
 APPLET_LIST += WMCHARGEMON
 
@@ -103,7 +103,7 @@ APPLET_LIST += WMCLOCKMON
 WMCPULOAD_NAME=wmcpuload
 WMCPULOAD_VERSION=1.1.0pre5
 WMCPULOAD_TAR=$(WMCPULOAD_NAME)-$(WMCPULOAD_VERSION).tar.gz
-WMCPULOAD_URL=http://seiichisato.jp/dockapps/src/$(WMCPULOAD_TAR)
+WMCPULOAD_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMCPULOAD_TAR)
 
 APPLET_LIST += WMCPULOAD
 
@@ -159,21 +159,21 @@ APPLET_LIST += WMINET
 WMIX_NAME=wmix
 WMIX_VERSION=3.2
 WMIX_TAR=$(WMIX_NAME)-$(WMIX_VERSION).tar.gz
-WMIX_URL=http://www.dockapps.com/download.php/id/528/$(WMIX_TAR)
+WMIX_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMIX_TAR)
 
 APPLET_LIST += WMIX
 
 WMMEMLOAD_NAME=wmmemload
 WMMEMLOAD_VERSION=0.1.6
 WMMEMLOAD_TAR=$(WMMEMLOAD_NAME)-$(WMMEMLOAD_VERSION).tar.gz
-WMMEMLOAD_URL=http://markstaggs.net/wmmemload-download/$(WMMEMLOAD_TAR)
+WMMEMLOAD_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMMEMLOAD_TAR)
 
 APPLET_LIST += WMMEMLOAD
 
 WMMEMMON_NAME=wmmemmon
 WMMEMMON_VERSION=1.0.2pre2
 WMMEMMON_TAR=$(WMMEMMON_NAME)-$(WMMEMMON_VERSION).tar.gz
-WMMEMMON_URL=http://seiichisato.jp/dockapps/src/$(WMMEMMON_TAR)
+WMMEMMON_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMMEMMON_TAR)
 
 APPLET_LIST += WMMEMMON
 
