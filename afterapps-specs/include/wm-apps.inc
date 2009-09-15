@@ -7,7 +7,7 @@ ALSAMIXER.APP_VERSION=0.1
 ALSAMIXER.APP_TAR=$(ALSAMIXER.APP_NAME)-$(ALSAMIXER.APP_VERSION).tar.gz
 ALSAMIXER.APP_URL=http://gentoo.mirrors.easynews.com/linux/gentoo/distfiles/$(ALSAMIXER.APP_TAR)
 
-APPLET_LIST += ALSAMIXER.APP-
+APPLET_LIST += ALSAMIXER.APP
 
 BUBBLEMON-DOCKAPP_NAME=bubblemon-dockapp
 BUBBLEMON-DOCKAPP_VERSION=1.46
@@ -44,12 +44,13 @@ SPEYES_URL=http://okb-1.org/speyes/$(SPEYES_TAR)
 
 APPLET_LIST += SPEYES
 
-WMALMS_NAME=wmalms
-WMALMS_VERSION=1.1.1
-WMALMS_TAR=$(WMALMS_NAME)-$(WMALMS_VERSION).tar.gz
-WMALMS_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMALMS_NAME)/$(WMALMS_TAR)
+# Will not work with current lm_sensors - will disable for now
+#WMALMS_NAME=wmalms
+#WMALMS_VERSION=1.1.1
+#WMALMS_TAR=$(WMALMS_NAME)-$(WMALMS_VERSION).tar.gz
+#WMALMS_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMALMS_NAME)/$(WMALMS_TAR)
 
-APPLET_LIST += WMALMS
+#APPLET_LIST += WMALMS
 
 WMBLUECLOCK_NAME=WMBlueClock
 WMBLUECLOCK_VERSION=0.1
@@ -226,12 +227,13 @@ WMRADIO_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMRADIO_TAR)
 
 APPLET_LIST += WMRADIO
 
-WMSENSORMON_NAME=wmsensormon
-WMSENSORMON_VERSION=1.2.1
-WMSENSORMON_TAR=$(WMSENSORMON_NAME)-$(WMSENSORMON_VERSION).tar.gz
-WMSENSORMON_URL=http://prdownloads.sourceforge.net/sourceforge/$(WMSENSORMON_NAME)/$(WMSENSORMON_TAR)
+# Will not work with current lm_sensors - will disable for now
+#WMSENSORMON_NAME=wmsensormon
+#WMSENSORMON_VERSION=1.2.1
+#WMSENSORMON_TAR=$(WMSENSORMON_NAME)-$(WMSENSORMON_VERSION).tar.gz
+#WMSENSORMON_URL=http://prdownloads.sourceforge.net/sourceforge/$(WMSENSORMON_NAME)/$(WMSENSORMON_TAR)
 
-APPLET_LIST += WMSENSORMON
+#APPLET_LIST += WMSENSORMON
 
 WMSM.APP_NAME=wmsm.app
 WMSM.APP_VERSION=0.2.1
@@ -247,12 +249,13 @@ WMSYSTRAY_URL=http://kai.vm.bytemark.co.uk/~arashi/wmsystray/release/$(WMSYSTRAY
 
 APPLET_LIST += WMSYSTRAY
 
-WMTEMP_NAME=wmtemp
-WMTEMP_VERSION=0.0.6
-WMTEMP_TAR=$(WMTEMP_NAME)-$(WMTEMP_VERSION).tar.gz
-WMTEMP_URL=http://gnodde.org/$(WMTEMP_NAME)/$(WMTEMP_TAR)
+# Will not work with current lm_sensors - will disable for now
+#WMTEMP_NAME=wmtemp
+#WMTEMP_VERSION=0.0.6
+#WMTEMP_TAR=$(WMTEMP_NAME)-$(WMTEMP_VERSION).tar.gz
+#WMTEMP_URL=http://gnodde.org/$(WMTEMP_NAME)/$(WMTEMP_TAR)
 
-APPLET_LIST += WMTEMP
+#APPLET_LIST += WMTEMP
 
 WMTIMER_NAME=wmtimer
 WMTIMER_VERSION=2.92
