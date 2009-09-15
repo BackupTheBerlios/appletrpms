@@ -1,5 +1,5 @@
 %define name fotoxx
-%define version 8.4
+%define version 8.4.1
 %define release 1%{?dist}
 
 Summary: application for processing image files from a digital camera
@@ -93,7 +93,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*.gz
 
 %changelog
-* Mon Sep 13 2009 J. Krebs <rpm_speedy@yahoo.com> - 8.4-1
+* Mon Sep 14 2009 J. Krebs <rpm_speedy@yahoo.com> - 8.4.1-1
+- new version.
+
+* Sun Sep 13 2009 J. Krebs <rpm_speedy@yahoo.com> - 8.4-1
 - new version.
 
 * Mon Sep 08 2008 J. Krebs <rpm_speedy@yahoo.com> - 5.2.4-1

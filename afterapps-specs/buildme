@@ -15,7 +15,7 @@ our $SOURCES = "SOURCES";
 our $SPECS = "SPECS";
 our $RPMS = "RPMS";
 our $SRPMS = "SRPMS";
-our $RPM = "rpmbuild --target=x86_64 --define='_topdir $ENV{PWD}'";
+our $RPM = "rpmbuild --define='_topdir $ENV{PWD}'";
 
 my $target = shift;
 
