@@ -1,5 +1,5 @@
---- Makefile	2009-08-20 00:42:45.000000000 -0500
-+++ Makefile	2009-08-20 12:56:11.000000000 -0500
+--- Makefile	2009-09-18 02:11:08.000000000 -0500
++++ Makefile	2009-09-18 09:49:43.000000000 -0500
 @@ -41,17 +41,6 @@
  	cp -R data/* $(DESTDIR)$(DATADIR)
  	cp $(PROGRAM) $(DESTDIR)$(BINDIR)
@@ -17,4 +17,4 @@
 -	xdg-desktop-menu install $(DESKTOP)
  #  install man page
  	cp -f doc/$(PROGRAM).man $(PROGRAM).1
- 	gzip -f $(PROGRAM).1
+ 	gzip -f -9 $(PROGRAM).1

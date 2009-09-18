@@ -1,5 +1,5 @@
 %define name fotoxx
-%define version 8.4.1
+%define version 8.4.2
 %define release 1%{?dist}
 
 Summary: application for processing image files from a digital camera
@@ -10,7 +10,7 @@ License: GPLv2
 Group: Applications/Multimedia
 URL: http://kornelix.squarespace.com/%{name}/
 Source0: http://kornelix.squarespace.com/storage/downloads/%{name}-%{version}.tar.gz
-Patch0: %{name}-8.1-Makefile.patch
+Patch0: %{name}-8.4.2-Makefile.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: gtk2 atk cairo pango libpng exiv2 libstdc++ ufraw perl-Image-ExifTool
 Buildrequires: gtk2-devel atk-devel cairo-devel pango-devel libpng-devel libstdc++-devel gcc-c++ freeimage-devel ufraw perl-Image-ExifTool
@@ -93,6 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*.gz
 
 %changelog
+* Fri Sep 18 2009 J. Krebs <rpm_speedy@yahoo.com> - 8.4.2-1
+- new version.
+
 * Mon Sep 14 2009 J. Krebs <rpm_speedy@yahoo.com> - 8.4.1-1
 - new version.
 
