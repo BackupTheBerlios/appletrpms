@@ -70,7 +70,7 @@ CALCOO_URL=http://internap.dl.sourceforge.net/sourceforge/$(CALCOO_NAME)/$(CALCO
 APPLET_LIST += CALCOO
 
 FOTOXX_NAME=fotoxx
-FOTOXX_VERSION=8.4.2
+FOTOXX_VERSION=8.6
 FOTOXX_TAR=$(FOTOXX_NAME)-$(FOTOXX_VERSION).tar.gz
 FOTOXX_URL=http://kornelix.squarespace.com/storage/downloads/$(FOTOXX_TAR)
 
@@ -83,12 +83,13 @@ LIBDOCKAPP_URL=http://solfertje.student.utwente.nl/~dalroi/$(LIBDOCKAPP_NAME)/fi
 
 APPLET_LIST += LIBDOCKAPP
 
-LIBICAL_NAME=libical
-LIBICAL_VERSION=0.43
-LIBICAL_TAR=$(LIBICAL_NAME)-$(LIBICAL_VERSION).tar.gz
-LIBICAL_URL=http://easynews.dl.sourceforge.net/sourceforge/freeassociation/$(LIBICAL_TAR)
-
-APPLET_LIST += LIBICAL
+# Included in Fedora 11 Repository
+#LIBICAL_NAME=libical
+#LIBICAL_VERSION=0.43
+#LIBICAL_TAR=$(LIBICAL_NAME)-$(LIBICAL_VERSION).tar.gz
+#LIBICAL_URL=http://easynews.dl.sourceforge.net/sourceforge/freeassociation/$(LIBICAL_TAR)
+#
+#APPLET_LIST += LIBICAL
 
 #this is the the source file used to build libwraster
 LIBWRASTER_NAME=libwraster
@@ -119,12 +120,13 @@ MIXER.APP_URL=http://www.fukt.bsnet.se/~per/mixer/$(MIXER.APP_TAR)
 
 APPLET_LIST += MIXER.APP
 
-PARCELLITE_NAME=parcellite
-PARCELLITE_VERSION=0.9.1
-PARCELLITE_TAR=$(PARCELLITE_NAME)-$(PARCELLITE_VERSION).tar.gz
-PARCELLITE_URL=http://downloads.sourceforge.net/project/$(PARCELLITE_NAME)/$(PARCELLITE_NAME)/$(PARCELLITE_NAME)-$(PARCELLITE_VERSION)/$(PARCELLITE_TAR)
-
-APPLET_LIST += PARCELLITE
+# Included in Fedora's Repository
+#PARCELLITE_NAME=parcellite
+#PARCELLITE_VERSION=0.9.1
+#PARCELLITE_TAR=$(PARCELLITE_NAME)-$(PARCELLITE_VERSION).tar.gz
+#PARCELLITE_URL=http://downloads.sourceforge.net/project/$(PARCELLITE_NAME)/$(PARCELLITE_NAME)/$(PARCELLITE_NAME)-$(PARCELLITE_VERSION)/$(PARCELLITE_TAR)
+#
+#APPLET_LIST += PARCELLITE
 
 SALMON_NAME=salmon
 SALMON_VERSION=1.2.2
