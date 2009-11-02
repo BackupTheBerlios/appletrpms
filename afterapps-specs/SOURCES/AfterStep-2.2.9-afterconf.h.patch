@@ -1,0 +1,28 @@
+--- libAfterConf/afterconf.h	2009-04-02 15:17:42.000000000 -0500
++++ libAfterConf/afterconf.h	2009-11-01 21:44:52.000000000 -0600
+@@ -1407,9 +1407,11 @@
+ #define DATABASE_WindowOpacity_ID		   (DATABASE_ID_START+69)
+ #define DATABASE_IgnoreRestack_ID          (DATABASE_ID_START+70)
+ #define DATABASE_HonorRestack_ID            (DATABASE_ID_START+71)
++#define DATABASE_PagerHit_ID            (DATABASE_ID_START+72)
++#define DATABASE_PagerSkip_ID            (DATABASE_ID_START+73)
+ 
+ 
+-#define DATABASE_ID_END             (DATABASE_ID_START+72)
++#define DATABASE_ID_END             (DATABASE_ID_START+74)
+ 
+ /* we use name_list structure 1 to 1 in here, as it does not requre any
+    preprocessing from us
+@@ -1989,9 +1991,10 @@
+ #define FEEL_Tile_ID				  	(FEEL_PLACEMENT_START_ID+2)	
+ #define FEEL_Cascade_ID				  	(FEEL_PLACEMENT_START_ID+3)	
+ #define FEEL_UnderPointer_ID	  	(FEEL_PLACEMENT_START_ID+4)	
+-#define FEEL_Manual_ID				  	(FEEL_PLACEMENT_START_ID+5)
++#define FEEL_WarpPointer_ID	  	(FEEL_PLACEMENT_START_ID+5)	
++#define FEEL_Manual_ID				  	(FEEL_PLACEMENT_START_ID+6)
+ 
+-#define FEEL_ID_END                   	(FEEL_PLACEMENT_START_ID+10)
++#define FEEL_ID_END                   	(FEEL_PLACEMENT_START_ID+11)
+ 
+ /************************************
+  * WindowBox configuration may look something like this :

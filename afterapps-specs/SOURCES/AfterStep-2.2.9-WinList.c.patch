@@ -1,0 +1,11 @@
+--- src/WinList2/WinList.c	2007-07-20 13:16:18.000000000 -0500
++++ src/WinList2/WinList.c	2009-11-01 21:38:01.000000000 -0600
+@@ -171,7 +171,7 @@
+ 	
+     /* Save our program name - for error messages */
+ 	set_DeadPipe_handler(DeadPipe);
+-    InitMyApp (CLASS_WINLIST, argc, argv, WinList_usage, NULL, 0 );
++    InitMyApp (CLASS_WINLIST, argc, argv, NULL, WinList_usage, 0 );
+ 	LinkAfterStepConfig();
+ 
+     for( i = 1 ; i< argc ; ++i)

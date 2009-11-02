@@ -42,9 +42,9 @@
 %define	version	2.2.9
 %define	libaiver	1.19
 %define	libabver	1.13
-%define	libairel	2%{?dist}
-%define	libabrel	2%{?dist}
-%define release 2%{?dist}
+%define	libairel	3%{?dist}
+%define	libabrel	3%{?dist}
+%define release 3%{?dist}
 %define epoch 20
 
 Summary:	AfterStep Window Manager (NeXTalike)
@@ -70,20 +70,34 @@ Patch0:		%{name}-2.2.5-ImageMagick.patch
 Patch1:		%{name}-2.2.7-winlist.patch
 Patch2:		%{name}-2.2.7-pager.patch
 Patch3:		%{name}-2.2.9-asgtklookedit.c.patch
-Patch4:		AfterStep-2.2.9-ascompose.c.patch
-Patch5:		AfterStep-2.2.9-screen.c.patch
-Patch6:		AfterStep-2.2.9-SkipPager-afterconf.h.patch
-Patch7:		AfterStep-2.2.9-SkipPager-asdatabase.h.patch
-Patch8:		AfterStep-2.2.9-SkipPager-Database.c.patch
-Patch9:		AfterStep-2.2.9-SkipPager-hints.c.patch
-Patch10:	AfterStep-2.2.9-SkipPager-hints.h.patch
-Patch11:	AfterStep-2.2.9-SkipPager-Pager.c.patch
+Patch4:		%{name}-2.2.9-ascompose.c.patch
+Patch5:		%{name}-2.2.9-screen.c.patch
+Patch6:		%{name}-2.2.9-asdatabase.h.patch
+Patch7:		%{name}-2.2.9-Database.c.patch
+Patch8:		%{name}-2.2.9-hints.c.patch
+Patch9:		%{name}-2.2.9-hints.h.patch
+Patch10:	%{name}-2.2.9-afterbase.c.patch
+Patch11:	%{name}-2.2.9-afterconf.h.patch
+Patch12:	%{name}-2.2.9-afterstep.c.patch
+Patch13:	%{name}-2.2.9-AfterStep.c.patch
+Patch14:	%{name}-2.2.9-asapp.c.patch
+Patch15:	%{name}-2.2.9-ascolor.c.patch
+Patch16:	%{name}-2.2.9-ASDocGen.c.patch
+Patch17:	%{name}-2.2.9-asfeel.h.patch
+Patch18:	%{name}-2.2.9-asim_afterbase.h.patch
+Patch19:	%{name}-2.2.9-asimbrowser.c.patch
+Patch20:	%{name}-2.2.9-configure.c.patch
+Patch21:	%{name}-2.2.9-Feel.c.patch
+Patch22:	%{name}-2.2.9-NEW.patch
+Patch23:	%{name}-2.2.9-pager.c.patch
+Patch24:	%{name}-2.2.9-Pager.c.patch
+Patch25:	%{name}-2.2.9-WinList.c.patch
+Patch26:	%{name}-2.2.9-WinTabs.c.patch
 Distribution:	The AfterStep TEAM
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 %if %{mdk}
 Obsoletes:	libAfterStep1
 %endif
-Obsoletes:	AfterStep-libs
 Provides:	AfterStep-libs
 Requires: 	libAfterImage = %{epoch}:%{libaiver}-%libairel
 Requires:	readline
@@ -216,6 +230,21 @@ Files needed for software development with libAfterBase.
 %patch9
 %patch10
 %patch11
+%patch12
+%patch13
+%patch14
+%patch15
+%patch16
+%patch17
+%patch18
+%patch19
+%patch20
+%patch21
+%patch22
+%patch23
+%patch24
+%patch25
+%patch26
 
 %build
 CFLAGS=$RPM_OPT_FLAGS \
@@ -428,6 +457,12 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
+* Sun Nov 01 2009 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.9-3
+- added more fixes and patches for -v, brought in-line with cvs.
+
+* Thu Oct 29 2009 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.9-2
+- added patches for glibc segfaults.
+
 * Thu Jul 30 2009 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.9-1
 - new version.
 

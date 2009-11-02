@@ -1,0 +1,12 @@
+--- libAfterStep/asfeel.h	2008-06-13 11:32:51.000000000 -0500
++++ libAfterStep/asfeel.h	2009-11-01 21:43:55.000000000 -0600
+@@ -81,7 +81,8 @@
+ 	DontAnimateBackground   = (1 << 26),
+ 	WinListHideIcons	    = (1 << 27),
+ 	AnimateDeskChange		= (1 << 28),
+-	DontCoverDesktop		= (1 << 29)	
++	DontCoverDesktop		= (1 << 29),
++	WarpPointer		= (1 << 30)	
+ }FeelFlags;
+ 
+ /* since we have too many feel flags  - we want another enum for
