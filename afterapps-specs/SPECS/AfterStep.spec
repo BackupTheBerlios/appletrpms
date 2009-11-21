@@ -42,9 +42,9 @@
 %define	version	2.2.9
 %define	libaiver	1.19
 %define	libabver	1.13
-%define	libairel	3%{?dist}
-%define	libabrel	3%{?dist}
-%define release 3%{?dist}
+%define	libairel	4%{?dist}
+%define	libabrel	4%{?dist}
+%define release 4%{?dist}
 %define epoch 20
 
 Summary:	AfterStep Window Manager (NeXTalike)
@@ -93,6 +93,7 @@ Patch23:	%{name}-2.2.9-pager.c.patch
 Patch24:	%{name}-2.2.9-Pager.c.patch
 Patch25:	%{name}-2.2.9-WinList.c.patch
 Patch26:	%{name}-2.2.9-WinTabs.c.patch
+Patch27:	%{name}-2.2.9-export.c.patch
 Distribution:	The AfterStep TEAM
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 %if %{mdk}
@@ -245,6 +246,7 @@ Files needed for software development with libAfterBase.
 %patch24
 %patch25
 %patch26
+%patch27
 
 %build
 CFLAGS=$RPM_OPT_FLAGS \
@@ -457,6 +459,9 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
+* Thu Nov 12 2009 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.9-4
+- added export.c patch to default export values using union members.
+
 * Sun Nov 01 2009 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.9-3
 - added more fixes and patches for -v, brought in-line with cvs.
 
