@@ -70,18 +70,18 @@ CALCOO_URL=http://internap.dl.sourceforge.net/sourceforge/$(CALCOO_NAME)/$(CALCO
 APPLET_LIST += CALCOO
 
 FOTOXX_NAME=fotoxx
-FOTOXX_VERSION=8.6.2
+FOTOXX_VERSION=8.8
 FOTOXX_TAR=$(FOTOXX_NAME)-$(FOTOXX_VERSION).tar.gz
 FOTOXX_URL=http://kornelix.squarespace.com/storage/downloads/$(FOTOXX_TAR)
 
 APPLET_LIST += FOTOXX
 
-LIBDOCKAPP_NAME=libdockapp
-LIBDOCKAPP_VERSION=0.6.2
-LIBDOCKAPP_TAR=$(LIBDOCKAPP_NAME)-$(LIBDOCKAPP_VERSION).tar.bz2
-LIBDOCKAPP_URL=http://solfertje.student.utwente.nl/~dalroi/$(LIBDOCKAPP_NAME)/files/$(LIBDOCKAPP_TAR)
+#LIBDOCKAPP_NAME=libdockapp
+#LIBDOCKAPP_VERSION=0.6.2
+#LIBDOCKAPP_TAR=$(LIBDOCKAPP_NAME)-$(LIBDOCKAPP_VERSION).tar.bz2
+#LIBDOCKAPP_URL=http://solfertje.student.utwente.nl/~dalroi/$(LIBDOCKAPP_NAME)/files/$(LIBDOCKAPP_TAR)
 
-APPLET_LIST += LIBDOCKAPP
+#APPLET_LIST += LIBDOCKAPP
 
 # Included in Fedora 11 Repository
 #LIBICAL_NAME=libical
