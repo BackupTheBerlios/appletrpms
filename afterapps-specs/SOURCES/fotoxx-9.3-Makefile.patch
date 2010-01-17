@@ -1,0 +1,52 @@
+--- Makefile	2010-01-12 14:29:31.000000000 -0600
++++ Makefile	2010-01-16 18:22:33.000000000 -0600
+@@ -10,14 +10,13 @@
+ 
+ # use $PREFIX if defined, else assume /usr/local
+ ifeq "$(PREFIX)" ""
+-	PREFIX = /usr/local
++	PREFIX = /usr
+ endif
+ 
+ BINDIR = $(PREFIX)/bin
+ DATADIR = $(PREFIX)/share/$(PROGRAM)
+ ICONDIR = $(DATADIR)/icons
+-DESKTOP = $(DATADIR)/kornelix-$(PROGRAM).desktop
+-DOCDIR = $(PREFIX)/share/doc/$(PROGRAM)
++DOCDIR = $(PREFIX)/share/doc/$(PROGRAM)-$(VERSION)
+ MANDIR = $(PREFIX)/share/man/man1
+ 
+ $(PROGRAM): $(PROGRAM).o zfuncs.o
+@@ -33,31 +32,21 @@
+ 	  -D "DATADIR=\"$(DATADIR)\"" -D "DOCDIR=\"$(DOCDIR)\"" -D "BINDIR=\"$(BINDIR)\""
+ 
+ install: $(PROGRAM)
+-	mkdir -p $(DESTDIR)$(DOCDIR) 
+ 	mkdir -p $(DESTDIR)$(BINDIR)
+ 	mkdir -p $(DESTDIR)$(DATADIR)
+ 	mkdir -p $(DESTDIR)$(ICONDIR) 
+ 	mkdir -p $(DESTDIR)$(DATADIR)/locales
+ 	mkdir -p $(DESTDIR)$(MANDIR) 
+-	cp -R doc/* $(DESTDIR)$(DOCDIR)
+ 	cp icons/* $(DESTDIR)$(ICONDIR)
+ 	cp -R locales/* $(DESTDIR)$(DATADIR)/locales
+ 	cp $(PROGRAM) $(DESTDIR)$(BINDIR)
+-	@ echo use make menu to install desktop menu
+-	@ echo use make manpage to install man page
+-
+-menu:
+-	cp -f desktop $(DESKTOP)
+-	xdg-desktop-menu install $(DESKTOP)
+-
+-manpage:
+ 	cp -f doc/$(PROGRAM).man $(PROGRAM).1
+ 	gzip -f -9 $(PROGRAM).1
+ 	cp $(PROGRAM).1.gz $(DESTDIR)$(MANDIR)
+ 	rm -f $(PROGRAM).1.gz
++	rm -f doc/$(PROGRAM).man
+ 
+ uninstall:
+-	xdg-desktop-menu uninstall $(DESKTOP)
+ 	rm -f $(DESTDIR)$(BINDIR)/$(PROGRAM)
+ 	rm -R -f $(DESTDIR)$(DOCDIR)
+ 	rm -R -f $(DESTDIR)$(DATADIR)

@@ -70,7 +70,7 @@ CALCOO_URL=http://internap.dl.sourceforge.net/sourceforge/$(CALCOO_NAME)/$(CALCO
 APPLET_LIST += CALCOO
 
 FOTOXX_NAME=fotoxx
-FOTOXX_VERSION=8.8
+FOTOXX_VERSION=9.3
 FOTOXX_TAR=$(FOTOXX_NAME)-$(FOTOXX_VERSION).tar.gz
 FOTOXX_URL=http://kornelix.squarespace.com/storage/downloads/$(FOTOXX_TAR)
 
@@ -136,7 +136,7 @@ SALMON_URL=http://tigr.net/afterstep/download/salmon/$(SALMON_TAR)
 APPLET_LIST += SALMON
 
 STALONETRAY_NAME=stalonetray
-STALONETRAY_VERSION=0.7.6
+STALONETRAY_VERSION=0.8.0
 STALONETRAY_TAR=$(STALONETRAY_NAME)-$(STALONETRAY_VERSION).tar.gz
 STALONETRAY_URL=http://easynews.dl.sourceforge.net/sourceforge/$(STALONETRAY_NAME)/$(STALONETRAY_TAR)
 

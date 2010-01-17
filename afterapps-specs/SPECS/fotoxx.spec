@@ -1,21 +1,20 @@
 %define name fotoxx
-%define version 8.8
+%define version 9.3
 %define release 1%{?dist}
 
 Summary: application for processing image files from a digital camera
 Name: %{name}
 Version: %{version}
 Release: %{release}
-License: GPLv2
+License: GPLv3
 Group: Applications/Multimedia
 URL: http://kornelix.squarespace.com/%{name}/
 Source0: http://kornelix.squarespace.com/storage/downloads/%{name}-%{version}.tar.gz
-Patch0: %{name}-8.6.1-Makefile.patch
+Patch0: %{name}-9.3-Makefile.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: gtk2 atk cairo pango libpng exiv2 libstdc++ ufraw perl-Image-ExifTool
 Buildrequires: gtk2-devel atk-devel cairo-devel pango-devel libpng-devel libstdc++-devel gcc-c++ freeimage-devel ufraw perl-Image-ExifTool
 Obsoletes: fotox
-Provides: fotox
 
 %description
 Fotoxx is a free open-source Linux program for improving image files
@@ -50,19 +49,21 @@ made with a digital camera.
 %patch0
 
 %build
-make PREFIX=%{_prefix} DOCDIR=%{_datadir}/doc/%{name}-%{version} DESKTOP=""
+make PREFIX=%{_prefix} \
+	DOCDIR=%{_datadir}/doc/%{name}-%{version}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-make install DESTDIR=$RPM_BUILD_ROOT PREFIX=%{_prefix} DOCDIR=%{_datadir}/doc/%{name}-%{version}
+make install DESTDIR=$RPM_BUILD_ROOT PREFIX=%{_prefix} \
+	DOCDIR=%{_datadir}/doc/%{name}-%{version}
 
 #Install application link for X-Windows
 echo -e "[Desktop Entry]
 Name=Fotoxx Digital Image Editor
 Comment=Edit and improve digital camera image files
 Exec=fotoxx
-Icon=fotoxx.png
+Icon=fotoxx
 Terminal=false
 Encoding=UTF-8
 Type=Application" > %{name}.desktop
@@ -77,7 +78,7 @@ desktop-file-install --vendor "" --delete-original \
   %{name}.desktop
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/pixmaps/
-install -m 644 data/icons/fotoxx.png $RPM_BUILD_ROOT%{_datadir}/pixmaps/
+install -m 644 icons/fotoxx.png $RPM_BUILD_ROOT%{_datadir}/pixmaps/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -93,6 +94,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*.gz
 
 %changelog
+* Fri Jan 15 2010 J. Krebs <rpm_speedy@yahoo.com> - 9.3-1
+- new version.
+
+* Thu Jan 07 2010 J. Krebs <rpm_speedy@yahoo.com> - 9.2-1
+- new version.
+
+* Sun Dec 13 2009 J. Krebs <rpm_speedy@yahoo.com> - 9.0-1
+- new version.
+
 * Sun Nov 29 2009 J. Krebs <rpm_speedy@yahoo.com> - 8.8-1
 - new version.
 

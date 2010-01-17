@@ -1,12 +1,12 @@
 %define name	stalonetray
-%define version	0.7.6
+%define version	0.8.0
 %define release	1%{?dist}
 
 Summary:	STand Alone TRAY (notification area) implementation
 Name:		%name
 Version:	%version
 Release:	%release
-License:	GPLv2+
+License:	GPLv2
 Group:		User Interface/Desktops
 URL:		http://sourceforge.net/projects/stalonetray
 Source0:	http://easynews.dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
@@ -43,5 +43,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man*/*
 
 %changelog
+* Thu Jan 07 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.8.0-1
+- new version.
+
 * Wed Jan 09 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.7.6-1
 - Initial build.
