@@ -1,5 +1,5 @@
 %define name fotoxx
-%define version 9.3
+%define version 9.5
 %define release 1%{?dist}
 
 Summary: application for processing image files from a digital camera
@@ -55,8 +55,7 @@ make PREFIX=%{_prefix} \
 %install
 rm -rf $RPM_BUILD_ROOT
 
-make install DESTDIR=$RPM_BUILD_ROOT PREFIX=%{_prefix} \
-	DOCDIR=%{_datadir}/doc/%{name}-%{version}
+make install DESTDIR=$RPM_BUILD_ROOT PREFIX=%{_prefix}
 
 #Install application link for X-Windows
 echo -e "[Desktop Entry]
@@ -94,6 +93,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*.gz
 
 %changelog
+* Mon Feb 01 2010 J. Krebs <rpm_speedy@yahoo.com> - 9.5-1
+- new version.
+
+* Mon Jan 18 2010 J. Krebs <rpm_speedy@yahoo.com> - 9.4-1
+- new version.
+
 * Fri Jan 15 2010 J. Krebs <rpm_speedy@yahoo.com> - 9.3-1
 - new version.
 
