@@ -1,0 +1,15 @@
+This patch fixes segmentation fault when hunspell is used on an expaning line.
+
+Gaspar Sinai <gsinai@yudit.org>
+Tokyo 2010-02-15
+
+*** stoolkit/syntax/SSyntax.cpp	2007-12-09 16:43:25.000000000 +0900
+--- stoolkit/syntax/SSyntax.cpp	2010-02-15 19:40:10.984291072 +0900
+***************
+*** 228,231 ****
+--- 228,232 ----
+    }
+    if (i==max) return SD_ERROR;
++   if (syntaxLines[index.line]->size()<=i) return SD_ERROR;
+    return (SS_Tag) (syntaxLines[index.line]->peek (i) & 0xff);
+  }

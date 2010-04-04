@@ -123,7 +123,7 @@ WMEYES_URL=http://www.bstern.org/wmeyes/$(WMEYES_TAR)
 APPLET_LIST += WMEYES
 
 WMFIRE_NAME=wmfire
-WMFIRE_VERSION=1.2.3
+WMFIRE_VERSION=1.2.4
 WMFIRE_TAR=$(WMFIRE_NAME)-$(WMFIRE_VERSION).tar.gz
 WMFIRE_URL=http://www.swanson.ukfsn.org/wmfire/$(WMFIRE_TAR)
 
@@ -274,7 +274,7 @@ APPLET_LIST += WMTIMER
 WMTZ_NAME=wmtz
 WMTZ_VERSION=0.7
 WMTZ_TAR=$(WMTZ_NAME)-$(WMTZ_VERSION).tar.gz
-WMTZ_URL=http://www.geocities.com/jl1n/$(WMTZ_NAME)/$(WMTZ_TAR)
+WMTZ_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMTZ_NAME)/$(WMTZ_TAR)
 
 APPLET_LIST += WMTZ
 

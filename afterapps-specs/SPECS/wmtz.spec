@@ -1,17 +1,17 @@
-%define name wmtz
-%define version 0.7
-%define release 4%{?dist}
+%define name		wmtz
+%define version		0.7
+%define release		5%{?dist}
 
-Summary: wmtz displays the local time from different time zones
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: http://www.geocities.com/jl1n/wmtz/wmtz.html
-Source0: http://www.geocities.com/jl1n/%{name}/%{name}-%{version}.tar.gz
-Patch0: %{name}-%{version}.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:	wmtz displays the local time from different time zones
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPL
+Group:		AfterStep/Applets
+URL:		ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
+Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}/%{name}-%{version}.tar.gz
+Patch0:		%{name}-%{version}.patch
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 wmtz is a Window Maker dock app derived from the WMiNET
@@ -53,6 +53,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc BUGS CHANGES COPYING INSTALL README wmtz/wmtzrc
 
 %changelog
+* Wed Feb 03 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.7-5
+- update source link.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.7-4
 - added distro info to release.
 

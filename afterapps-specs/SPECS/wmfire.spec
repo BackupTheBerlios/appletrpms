@@ -24,8 +24,8 @@
 ### END Distro Definitions
 
 %define name wmfire
-%define version 1.2.3
-%define release 5%{?dist}
+%define version 1.2.4
+%define release 1%{?dist}
 
 Summary: wmfire is a configurable cpu, mem, or network monitor
 Name: %name
@@ -60,7 +60,7 @@ seconds symbols to represent the current monitor are "burnt"
 onscreen. The flame color can also be changed. 
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 
 %build
 ./configure --prefix=%{_prefix}
@@ -82,6 +82,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sun Mar 21 2010 J. Krebs <rpm_speedy@yahoo.com> 1.2.4-1
+- new version.
+
 * Sat Jul 02 2008 J. Krebs <rpm_speedy@yahoo.com> 1.2.3-5
 - fixed man page path.
 

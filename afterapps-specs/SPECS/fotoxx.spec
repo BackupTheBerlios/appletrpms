@@ -1,5 +1,5 @@
 %define name fotoxx
-%define version 9.5
+%define version 9.9
 %define release 1%{?dist}
 
 Summary: application for processing image files from a digital camera
@@ -10,7 +10,6 @@ License: GPLv3
 Group: Applications/Multimedia
 URL: http://kornelix.squarespace.com/%{name}/
 Source0: http://kornelix.squarespace.com/storage/downloads/%{name}-%{version}.tar.gz
-Patch0: %{name}-9.3-Makefile.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: gtk2 atk cairo pango libpng exiv2 libstdc++ ufraw perl-Image-ExifTool
 Buildrequires: gtk2-devel atk-devel cairo-devel pango-devel libpng-devel libstdc++-devel gcc-c++ freeimage-devel ufraw perl-Image-ExifTool
@@ -46,7 +45,6 @@ made with a digital camera.
 
 %prep
 %setup -q
-%patch0
 
 %build
 make PREFIX=%{_prefix} \
@@ -56,6 +54,8 @@ make PREFIX=%{_prefix} \
 rm -rf $RPM_BUILD_ROOT
 
 make install DESTDIR=$RPM_BUILD_ROOT PREFIX=%{_prefix}
+
+make manpage DESTDIR=$RPM_BUILD_ROOT PREFIX=%{_prefix}
 
 #Install application link for X-Windows
 echo -e "[Desktop Entry]
@@ -79,6 +79,10 @@ desktop-file-install --vendor "" --delete-original \
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/pixmaps/
 install -m 644 icons/fotoxx.png $RPM_BUILD_ROOT%{_datadir}/pixmaps/
 
+rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/fotoxx/*
+
+desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -86,13 +90,20 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %doc doc/*
 %{_bindir}/%{name}
-%{_datadir}/applications/*.desktop
+%{_datadir}/applications/%{name}.desktop
 %{_datadir}/%{name}/icons/*
-%{_datadir}/%{name}/locales/*
+%{_datadir}/%{name}/locales/*/%{name}.po
+%{_datadir}/%{name}/locales/*/zfuncs.po
 %{_datadir}/pixmaps/*.png
-%{_mandir}/man1/*.gz
+%{_mandir}/man1/%{name}.1.gz
 
 %changelog
+* Fri Mar 26 2010 J. Krebs <rpm_speedy@yahoo.com> - 9.9-1
+- new version.
+
+* Mon Feb 22 2010 J. Krebs <rpm_speedy@yahoo.com> - 9.6-1
+- new version.
+
 * Mon Feb 01 2010 J. Krebs <rpm_speedy@yahoo.com> - 9.5-1
 - new version.
 

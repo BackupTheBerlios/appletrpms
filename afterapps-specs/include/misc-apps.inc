@@ -33,7 +33,7 @@ ASCD-THEMES_NOSPEC=YES
 ASCD-THEMES_NAME=ascd-themes
 ASCD-THEMES_VERSION=1.13
 ASCD-THEMES_TAR=ascd-0.13pr6-themes.tgz
-ASCD-THEMES_URL=http://worldserver.oleane.com/rsn/Archives/$(ASCD-THEMES_TAR)
+ASCD-THEMES_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(ASCD-THEMES_TAR)
 
 APPLET_LIST += ASCD-THEMES
 
@@ -42,7 +42,7 @@ DWING_NOSPEC=YES
 DWING_NAME=dwing
 DWING_VERSION=1.10
 DWING_TAR=$(DWING_NAME).tgz
-DWING_URL=http://worldserver.oleane.com/rsn/Archives/$(DWING_TAR)
+DWING_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(DWING_TAR)
 
 #APPLET_LIST += DWING
 
@@ -51,7 +51,7 @@ LCD_NOSPEC=YES
 LCD_NAME=lcd
 LCD_VERSION=1.10
 LCD_TAR=$(LCD_NAME).tar.gz
-LCD_URL=http://worldserver.oleane.com/rsn/Archives/$(LCD_TAR)
+LCD_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(LCD_TAR)
 
 #APPLET_LIST += LCD
 
@@ -70,7 +70,7 @@ CALCOO_URL=http://internap.dl.sourceforge.net/sourceforge/$(CALCOO_NAME)/$(CALCO
 APPLET_LIST += CALCOO
 
 FOTOXX_NAME=fotoxx
-FOTOXX_VERSION=9.5
+FOTOXX_VERSION=9.9
 FOTOXX_TAR=$(FOTOXX_NAME)-$(FOTOXX_VERSION).tar.gz
 FOTOXX_URL=http://kornelix.squarespace.com/storage/downloads/$(FOTOXX_TAR)
 
@@ -100,14 +100,14 @@ LIBWRASTER_URL=http://windowmaker.info/pub/source/archive/$(LIBWRASTER_TAR)
 #APPLET_LIST += LIBWRASTER
 
 MEDIT_NAME=medit
-MEDIT_VERSION=0.9.4
+MEDIT_VERSION=0.10.1
 MEDIT_TAR=$(MEDIT_NAME)-$(MEDIT_VERSION).tar.bz2
-MEDIT_URL=http://easynews.dl.sourceforge.net/sourceforge/mooedit/$(MEDIT_TAR)
+MEDIT_URL=http://easynews.dl.sourceforge.net/sourceforge/mooedit/medit/$(MEDIT_VERSION)/$(MEDIT_TAR)
 
 APPLET_LIST += MEDIT
 
 MINED_NAME=mined
-MINED_VERSION=2000.15.4
+MINED_VERSION=2000.16
 MINED_TAR=$(MINED_NAME)-$(MINED_VERSION).tar.gz
 MINED_URL=http://towo.net/$(MINED_NAME)/$(MINED_TAR)
 
@@ -157,7 +157,7 @@ TRAYER_URL=http://download.gna.org/fvwm-crystal/$(TRAYER_NAME)/$(TRAYER_VERSION)
 APPLET_LIST += TRAYER
 
 WORKER_NAME=worker
-WORKER_VERSION=2.17.5
+WORKER_VERSION=2.17.6
 WORKER_TAR=$(WORKER_NAME)-$(WORKER_VERSION).tar.gz
 WORKER_URL=http://www.boomerangsworld.de/worker/downloads/$(WORKER_TAR)
 
@@ -172,7 +172,7 @@ WORKER-DOC_URL=http://www.boomerangsworld.de/worker/downloads/$(WORKER-DOC_TAR)
 APPLET_LIST += WORKER-DOC
 
 YUDIT_NAME=yudit
-YUDIT_VERSION=2.9.0
+YUDIT_VERSION=2.9.2
 YUDIT_TAR=$(YUDIT_NAME)-$(YUDIT_VERSION).tar.gz
 YUDIT_URL=http://yudit.org/download/$(YUDIT_TAR)
 

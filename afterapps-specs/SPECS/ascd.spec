@@ -1,25 +1,25 @@
-%define name ascd
-%define version 0.13.2
-%define release 8%{?dist}
+%define name		ascd
+%define version		0.13.2
+%define release		9%{?dist}
 
-Summary: Audio CD player
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: http://worldserver.oleane.com/rsn/ascd-en.html
-Source0: http://tigr.net/afterstep/download/%{name}/%{name}-%{version}.tar.gz
-Source1: http://worldserver.oleane.com/rsn/Archives/ascd-0.13pr6-themes.tgz
-Source2: http://worldserver.oleane.com/rsn/Archives/dwing.tgz
-Source3: http://worldserver.oleane.com/rsn/Archives/lcd.tar.gz
-Patch0: ascd-0.13.2.a.patch
-Patch1: ascd-0.13.2.b.patch
-Patch2: ascd-0.13.2.c.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Obsoletes: ascd-themes
-Provides: ascd-themes
-BuildRequires: imake
+Summary:	Audio CD player
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPL
+Group:		AfterStep/Applets
+URL:		http://tigr.net/afterstep/applets/
+Source0:	http://tigr.net/afterstep/download/%{name}/%{name}-%{version}.tar.gz
+Source1:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/ascd-0.13pr6-themes.tgz
+Source2:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/dwing.tgz
+Source3:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/lcd.tar.gz
+Patch0:		ascd-0.13.2.a.patch
+Patch1:		ascd-0.13.2.b.patch
+Patch2:		ascd-0.13.2.c.patch
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Obsoletes:	ascd-themes
+Provides:	ascd-themes
+BuildRequires:	imake
 
 %description
 A swallowable applet allows to control the CD-ROM and provides
@@ -73,6 +73,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc README ascd/doc/* ascd/themes/themes-manual.ps
 
 %changelog
+* Wed Feb 03 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.13.2-9
+- updated links for source files.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.13.2-8
 - added distro info to release.
 

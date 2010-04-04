@@ -2,22 +2,23 @@
 %define pythver	%pythtst
 
 %define	name 	medit
-%define	version	0.9.4
-%define	release	3%{?dist}
+%define	version	0.10.1
+%define	release	1%{?dist}
 
 Summary:	medit is a GTK-based text editor
 Name:		%name
 Version:	%version
 Release:	%release
-License:	GPLv2 and LGPLv2
+License:	GPLv2 and LGPLv2.1
 Group:		Applications/Editors
 URL:		http://mooedit.sourceforge.net/
-Source0:	http://easynews.dl.sourceforge.net/sourceforge/mooedit/%{name}-%{version}.tar.bz2
-Patch0:		medit-0.9.4-stdio.h-conflict.patch
+Source0:	http://easynews.dl.sourceforge.net/sourceforge/mooedit/medit/%{version}/%{name}-%{version}.tar.bz2
+Patch0:		%{name}-%{version}-static+man.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	python >= %{pythver}, pcre >= 7.0, libxml2, pygtk2, pango, gtk2, cairo, atk, libICE, libX11, libSM
 Buildrequires:	python-devel, pcre-devel >= 7.0, libxml2-devel, perl-XML-Parser, pygtk2-devel, pango-devel 
-Buildrequires:	gtk2-devel, cairo-devel, atk-devel, libICE-devel, libX11-devel, libSM-devel, intltool
+Buildrequires:	gtk2-devel, cairo-devel, atk-devel, libICE-devel, libX11-devel, libSM-devel, intltool, cmake
+BuildRequires:	gettext
 Provides:	mooedit
 
 %description
@@ -28,17 +29,20 @@ medit is a GTK-based text editor.
 %patch0
 
 %build
-./configure --prefix=%{_prefix} --libdir=%{_libdir} --with-python --docdir=%{_datadir}/doc/%{name}-%{version}
-make
+%cmake \
+	-DMOO_DOC_DIR:PATH=share/doc/%{name}-%{version} \
+	-DCMAKE_INSTALL_PREFIX=/usr .
+make VERBOSE=1 %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 make install DESTDIR=$RPM_BUILD_ROOT
 
-rm -rf $RPM_BUILD_ROOT%{_datadir}/mime/mime.cache
+%find_lang moo
 
-rm -rf $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/icon-theme.cache
+%find_lang moo-gsv
+
+desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -59,20 +63,21 @@ if [ -x %{_bindir}/gtk-update-icon-cache ]; then
   %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
 fi
 
-%files
+%files -f moo.lang
+%files -f moo-gsv.lang
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING COPYING.GPL INSTALL LICENSE NEWS README THANKS doc/help/
-%{_bindir}/medit
-%{_libdir}/moo/
-%{_libdir}/python%{pythver}/
-%{_datadir}/applications/medit.desktop
+%{_bindir}/%{name}
+%{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/48x48/apps/medit.png
-%{_datadir}/locale/
 %{_datadir}/moo/
 %{_datadir}/pixmaps/medit.png
-%{_mandir}/man1/medit*
+%{_mandir}/man1/medit.*
 
 %changelog
+* Sat Mar 20 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.10.1-1
+- new version.
+
 * Fri Nov 20 2009 J. Krebs <rpm_speedy@yahoo.com> - 0.9.4-3
 - added test for python major version.
 

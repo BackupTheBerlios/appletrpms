@@ -1,6 +1,6 @@
 %define name	mined
-%define version	2000.15.4
-%define release	2%{?dist}
+%define version	2000.16
+%define release	1%{?dist}
 
 Summary:	mined is a powerful text editor with extensive Unicode and CJK support
 Name:		%name
@@ -18,7 +18,7 @@ Buildrequires:	ncurses-devel
 mined is a powerful text editor with extensive Unicode and CJK support.
 
 %prep
-%setup -q
+%setup -q -n %{name}-2000.15
 
 %build
 make -C src -f makefile.linux PREFIX=%{_prefix} LIBDIR=%{_libdir}
@@ -39,6 +39,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc doc COMPILE.DOC DESCR INSTALL.DOC PACKAGE.DOC README VERSION
 
 %changelog
+* Mon Mar 01 2010 J. Krebs <rpm_speedy@yahoo.com> - 2000.16-1
+- New version.
+
 * Fri Jul 31 2009 J. Krebs <rpm_speedy@yahoo.com> - 2000.15.4-1
 - New version.
 
