@@ -1,15 +1,15 @@
 %define name wmcpum.app
 %define version 0.1.0
-%define release 5%{?dist}
+%define release 6%{?dist}
 
 Summary: WindowMaker CPU Monitor
 Name: %name
 Version: %version
 Release: %release
-License: GPL
+License: GPLv2+
 Group: AfterStep/Applets
-URL: http://www.unetz.com/schaepe/DOCKAPPS/dockapps.html
-Source0: http://www.unetz.com/schaepe/DOCKAPPS/%{name}-%{version}.tar.gz
+URL: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
+Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: lm_sensors
 
@@ -46,6 +46,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sun Apr 04 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.1.0-6
+- dead link, pointed to ftp.afterstep.org.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.1.0-5
 - added distro info to release.
 

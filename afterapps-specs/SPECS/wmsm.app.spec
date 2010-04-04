@@ -1,12 +1,12 @@
 %define name wmsm.app
 %define version 0.2.1
-%define release 4%{?dist}
+%define release 5%{?dist}
 
 Summary: WindowMaker System Monitor
 Name: %name
 Version: %version
 Release: %release
-License: GPL
+License: GPLv2+
 Group: AfterStep/Applets
 URL: http://www.unetz.com/schaepe/DOCKAPPS/dockapps.html
 Source0: http://www.unetz.com/schaepe/DOCKAPPS/%{name}-%{version}.tar.gz
@@ -45,6 +45,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sun Apr 04 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.2.1-5
+- dead link, pointed to ftp.afterstep.org.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.2.1-4
 - added distro info to release.
 
