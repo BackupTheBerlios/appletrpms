@@ -1,5 +1,5 @@
 %define name fotoxx
-%define version 9.9
+%define version 10.2.1
 %define release 1%{?dist}
 
 Summary: application for processing image files from a digital camera
@@ -81,6 +81,8 @@ install -m 644 icons/fotoxx.png $RPM_BUILD_ROOT%{_datadir}/pixmaps/
 
 rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/fotoxx/*
 
+rm -rf $RPM_BUILD_ROOT%{_datadir}/%{name}/locales/de/%{name}.po.old
+
 desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
 %clean
@@ -98,6 +100,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/%{name}.1.gz
 
 %changelog
+* Sun May 02 2010 J. Krebs <rpm_speedy@yahoo.com> - 10.2.1-1
+- new version.
+
+* Mon Apr 05 2010 J. Krebs <rpm_speedy@yahoo.com> - 10.0-1
+- new version.
+
 * Fri Mar 26 2010 J. Krebs <rpm_speedy@yahoo.com> - 9.9-1
 - new version.
 

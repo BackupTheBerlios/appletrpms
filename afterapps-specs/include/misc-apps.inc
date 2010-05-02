@@ -70,7 +70,7 @@ CALCOO_URL=http://internap.dl.sourceforge.net/sourceforge/$(CALCOO_NAME)/$(CALCO
 APPLET_LIST += CALCOO
 
 FOTOXX_NAME=fotoxx
-FOTOXX_VERSION=9.9
+FOTOXX_VERSION=10.2.1
 FOTOXX_TAR=$(FOTOXX_NAME)-$(FOTOXX_VERSION).tar.gz
 FOTOXX_URL=http://kornelix.squarespace.com/storage/downloads/$(FOTOXX_TAR)
 
@@ -100,7 +100,7 @@ LIBWRASTER_URL=http://windowmaker.info/pub/source/archive/$(LIBWRASTER_TAR)
 #APPLET_LIST += LIBWRASTER
 
 MEDIT_NAME=medit
-MEDIT_VERSION=0.10.1
+MEDIT_VERSION=0.10.4
 MEDIT_TAR=$(MEDIT_NAME)-$(MEDIT_VERSION).tar.bz2
 MEDIT_URL=http://easynews.dl.sourceforge.net/sourceforge/mooedit/medit/$(MEDIT_VERSION)/$(MEDIT_TAR)
 
