@@ -1,5 +1,5 @@
 %define name fotoxx
-%define version 10.2.1
+%define version 10.4
 %define release 1%{?dist}
 
 Summary: application for processing image files from a digital camera
@@ -100,7 +100,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/%{name}.1.gz
 
 %changelog
-* Sun May 02 2010 J. Krebs <rpm_speedy@yahoo.com> - 10.2.1-1
+* Tue May 25 2010 J. Krebs <rpm_speedy@yahoo.com> - 10.4-1
 - new version.
 
 * Mon Apr 05 2010 J. Krebs <rpm_speedy@yahoo.com> - 10.0-1

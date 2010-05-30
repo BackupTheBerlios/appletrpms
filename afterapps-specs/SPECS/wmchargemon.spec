@@ -25,7 +25,7 @@
 
 %define name	wmchargemon
 %define version 0.3
-%define release 3%{?dist}
+%define release 4%{?dist}
 
 Summary:	displays ACPI battery level and power status
 Name:		%name
@@ -58,7 +58,7 @@ its color) can be set.
 
 %build
 
-make PREFIX=%{_prefix}
+make PREFIX=%{_prefix} CFLAGS=" -O2 -ldockapp -lm -lX11"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -76,6 +76,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 
 %changelog
+* Thu May 27 2010 J. Krebs <rpm_speedy@yahoo.com> 0.3-4
+- added cflags to make.
+
 * Sun Sep 13 2009 J. Krebs <rpm_speedy@yahoo.com> 0.3-3
 - updated URL info.
 

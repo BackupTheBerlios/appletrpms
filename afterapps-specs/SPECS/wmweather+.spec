@@ -25,7 +25,7 @@
 
 %define name wmweather+
 %define version 2.11
-%define release 1%{?dist}
+%define release 2%{?dist}
 
 Summary: A dock app for displaying weather information
 Name: %name
@@ -59,7 +59,7 @@ external command.
 
 %build
 ./configure --prefix=%{_prefix} --mandir=%{_mandir}
-make
+make X_EXTRA_LIBS=" -lm"
 
 %install
 
@@ -76,6 +76,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu May 27 2010 J. Krebs <rpm_speedy@yahoo.com> - 2.11-2
+- added compiler link to make for libm.
+
 * Fri Apr 12 2008 J. Krebs <rpm_speedy@yahoo.com> - 2.11-1
 - new version.
 

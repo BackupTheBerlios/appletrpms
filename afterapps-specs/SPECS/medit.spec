@@ -1,9 +1,9 @@
-%define pythtst	%(rpm -q --queryformat='%{VERSION}' python | cut -b1-3)
-%define pythver	%pythtst
+%define pythtst %(rpm -q --queryformat='%{VERSION}' python | cut -b1-3)
+%define pythver %pythtst
 
 %define	name 	medit
 %define	version	0.10.4
-%define	release	1%{?dist}
+%define	release	2%{?dist}
 
 Summary:	medit is a GTK-based text editor
 Name:		%name
@@ -14,8 +14,8 @@ Group:		Applications/Editors
 URL:		http://mooedit.sourceforge.net/
 Source0:	http://easynews.dl.sourceforge.net/sourceforge/mooedit/medit/%{version}/%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires:	python >= %{pythver}, pcre >= 7.0, libxml2, pygtk2, pango, gtk2, cairo, atk, libICE, libX11, libSM
-Buildrequires:	python-devel, pcre-devel >= 7.0, libxml2-devel, perl-XML-Parser, pygtk2-devel, pango-devel 
+Requires:	python >= %{pythver}, python < 3.0, libxml2, pygtk2, pango, gtk2, cairo, atk, libICE, libX11, libSM
+Buildrequires:	python-devel, libxml2-devel, perl-XML-Parser, pygtk2-devel, pango-devel 
 Buildrequires:	gtk2-devel, cairo-devel, atk-devel, libICE-devel, libX11-devel, libSM-devel, intltool, cmake
 BuildRequires:	gettext
 Provides:	mooedit
@@ -29,12 +29,30 @@ medit is a GTK-based text editor.
 %build
 %cmake \
 	-DMOO_DOC_DIR:PATH=share/doc/%{name}-%{version} \
-	-DCMAKE_INSTALL_PREFIX=/usr .
+	-DMOO_PLUGINS_DIR:PATH=%{_libdir}/moo/plugins \
+	-DMOO_LIB_DIR:PATH=%{_libdir}/moo \
+	-DCMAKE_C_FLAGS:STRING='-O2 -g -lm -ldl' \
+	-DCMAKE_INSTALL_PREFIX:PATH=%{_prefix} .
+
+# Run cmake twice or plugins won't build
+%cmake \
+	-DMOO_DOC_DIR:PATH=share/doc/%{name}-%{version} \
+	-DMOO_PLUGINS_DIR:PATH=%{_libdir}/moo/plugins \
+	-DMOO_LIB_DIR:PATH=%{_libdir}/moo \
+	-DCMAKE_C_FLAGS:STRING='-O2 -g -lm -ldl' \
+	-DCMAKE_INSTALL_PREFIX:PATH=%{_prefix} .
 make VERBOSE=1 %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
+
+rm -rf $RPM_BUILD_ROOT%{_libdir}/moo/plugins/*.pyc
+rm -rf $RPM_BUILD_ROOT%{_libdir}/moo/plugins/*.pyo
+rm -rf $RPM_BUILD_ROOT%{_libdir}/moo/plugins/lib/*.pyc
+rm -rf $RPM_BUILD_ROOT%{_libdir}/moo/plugins/lib/*.pyo
+rm -rf $RPM_BUILD_ROOT%{_libdir}/moo/plugins/lib/medit/*.pyc
+rm -rf $RPM_BUILD_ROOT%{_libdir}/moo/plugins/lib/medit/*.pyo
 
 %find_lang moo
 
@@ -70,9 +88,16 @@ fi
 %{_datadir}/icons/hicolor/48x48/apps/medit.png
 %{_datadir}/moo/
 %{_datadir}/pixmaps/medit.png
+%{_libdir}/moo/plugins/*.ini
+%{_libdir}/moo/plugins/*.py
+%{_libdir}/moo/plugins/lib/*.py
+%{_libdir}/moo/plugins/lib/medit/*.py
 %{_mandir}/man1/medit.*
 
 %changelog
+* Fri May 28 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.10.4-2
+- added links for libm and libdl.
+
 * Thu Apr 29 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.10.4-1
 - new version.
 

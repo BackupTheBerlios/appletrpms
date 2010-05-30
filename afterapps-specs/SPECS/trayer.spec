@@ -25,7 +25,7 @@
 
 %define name trayer
 %define version 1.0
-%define release 4%{?dist}
+%define release 5%{?dist}
 
 Summary: A lightweight GTK2-based systray for UNIX desktop
 Name: %name
@@ -64,6 +64,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc CREDITS COPYING CHANGELOG README
 
 %changelog
+* Thu May 27 2010 J. Krebs <rpm_speedy@yahoo.com> - 1.0-5
+- improved links in Makefile.common patch file.
+
 * Wed Aug 06 2008 J. Krebs <rpm_speedy@yahoo.com> - 1.0-4
 - added build requirement for libXmu-devel.
 

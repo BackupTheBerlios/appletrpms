@@ -2,7 +2,7 @@
 %define licver	%lictest 
 %define name wmcalendar
 %define version 0.5.2
-%define release 5%{?dist}
+%define release 6%{?dist}
 
 Summary: wmCalendar is a calendar dockapp
 Name: %name
@@ -69,6 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu May 27 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.5.2-6
+- updated patch0 (exit-sin-cos) to improve library links.
+
 * Tue Aug 04 2009 J. Krebs <rpm_speedy@yahoo.com> - 0.5.2-5
 - added build patches for Fedora 11.
 

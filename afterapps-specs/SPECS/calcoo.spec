@@ -1,6 +1,6 @@
 %define name calcoo
 %define version 1.3.18
-%define release 1%{?dist}
+%define release 2%{?dist}
 
 Summary: calcoo is a RPN and algebraic scientific calculator
 Name: %name
@@ -44,7 +44,7 @@ other calculator programs are:
 
 %build
 ./configure --prefix=%{_prefix} --mandir=%{_mandir}
-make
+make LIBS=" -lm"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -61,6 +61,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README
 
 %changelog
+* Thu May 27 2010 J. Krebs <rpm_speedy@yahoo.com> - 1.3.18-2
+- added library links to make.
+
 * Mon Aug 20 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.3.18-1
 - New version.
 
