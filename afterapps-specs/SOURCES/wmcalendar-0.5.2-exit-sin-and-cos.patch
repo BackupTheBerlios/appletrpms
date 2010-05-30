@@ -41,7 +41,7 @@
  
  # for Linux
 -LIBS   = $(LIBDIR) -lXpm -lical -lpthread
-+LIBS   = -lXpm -lical -lpthread `pkg-config --libs gtk+-2.0`
++LIBS   = -lXext -lXpm -lm -lX11 -lical -lpthread `pkg-config --libs gtk+-2.0`
  # for Solaris (untested!!!)
  # LIBS   = -lXpm -lX11 -lXext -lsocket -lnsl -lical
  

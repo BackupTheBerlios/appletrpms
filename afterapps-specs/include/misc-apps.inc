@@ -69,8 +69,15 @@ CALCOO_URL=http://internap.dl.sourceforge.net/sourceforge/$(CALCOO_NAME)/$(CALCO
 
 APPLET_LIST += CALCOO
 
+EINA_NAME=eina
+EINA_VERSION=0.9.3
+EINA_TAR=$(EINA_NAME)-$(EINA_VERSION).tar.gz
+EINA_URL=http://launchpad.net/eina/trunk/0.9.3/+download/$(EINA_TAR)
+
+APPLET_LIST += EINA
+
 FOTOXX_NAME=fotoxx
-FOTOXX_VERSION=10.2.1
+FOTOXX_VERSION=10.4
 FOTOXX_TAR=$(FOTOXX_NAME)-$(FOTOXX_VERSION).tar.gz
 FOTOXX_URL=http://kornelix.squarespace.com/storage/downloads/$(FOTOXX_TAR)
 

@@ -1,0 +1,73 @@
+--- Makefile.in	2005-05-06 10:02:31.000000000 -0500
++++ Makefile.in	2010-05-29 08:53:48.000000000 -0500
+@@ -1,9 +1,11 @@
+ PREFIX=@prefix@
+-BINDIR=$(PREFIX)/bin/
+-LIBDIR=$(PREFIX)/lib/wmradio/
+-MANDIR=$(PREFIX)/man/man1/
++BINDIR=$(PREFIX)/bin
++LIBDIR=@libdir@
++SKNDIR=$(LIBDIR)/wmradio
++DATADIR=$(PREFIX)/share
++MANDIR=$(DATADIR)/man/man1
+ 
+-TARGETS=@TARGETS@
++TARGETS=wmradio xwmradio
+ 
+ CC=@CC@
+ 
+@@ -16,7 +18,7 @@
+ PANEL_CFLAGS=-DGNOME_RADIO @PANEL_CFLAGS@
+ PANEL_LIBS=@PANEL_LIBS@
+ 
+-EXTRA_CFLAGS=-Wall -D SKIN_DIR=\"$(LIBDIR)\"
++EXTRA_CFLAGS=-Wall -D SKIN_DIR=\"$(SKNDIR)\"
+ 
+ BASESOURCE=skin.c \
+            radio.c \
+@@ -60,26 +62,26 @@
+ 	/bin/rm -f xor $(TARGETS) *~ *.o
+ 
+ install: wmradio
+-	install -m 755 -d $(RPM_BUILD_ROOT)$(BINDIR)
+-	install -m 755 -d $(RPM_BUILD_ROOT)$(MANDIR)
+-	install -m 755 wmradio $(RPM_BUILD_ROOT)$(BINDIR)
+-	install -m 755 xwmradio $(RPM_BUILD_ROOT)$(BINDIR)
+-	install -m 755 wmradio-remote $(RPM_BUILD_ROOT)$(BINDIR)
+-	install -m 755 config/wmradio-config.py $(RPM_BUILD_ROOT)$(BINDIR)
+-	install -m 644 doc/wmradio.1 $(RPM_BUILD_ROOT)$(MANDIR)
+-	install -m 755 -d $(RPM_BUILD_ROOT)`pkg-config gnome-desktop-2.0 --variable=prefix`/share/applications
+-	install -m 755 -d $(RPM_BUILD_ROOT)`pkg-config gnome-desktop-2.0 --variable=prefix`/share/pixmaps
+-	install -m 644 misc/wmradio.png $(RPM_BUILD_ROOT)`pkg-config gnome-desktop-2.0 --variable=prefix`/share/pixmaps/
+-	install -m 644 misc/wmradio.desktop $(RPM_BUILD_ROOT)`pkg-config gnome-desktop-2.0 --variable=prefix`/share/applications/
+-	install -m 644 misc/wmradio-config.desktop $(RPM_BUILD_ROOT)`pkg-config gnome-desktop-2.0 --variable=prefix`/share/applications/
++	install -m 755 -d $(DESTDIR)$(BINDIR)
++	install -m 755 -d $(DESTDIR)$(MANDIR)
++	install -m 755 wmradio $(DESTDIR)$(BINDIR)
++	install -m 755 xwmradio $(DESTDIR)$(BINDIR)
++	install -m 755 wmradio-remote $(DESTDIR)$(BINDIR)
++	install -m 755 config/wmradio-config.py $(DESTDIR)$(BINDIR)
++	install -m 644 doc/wmradio.1 $(DESTDIR)$(MANDIR)
++	install -m 755 -d $(DESTDIR)$(DATADIR)/applications
++	install -m 755 -d $(DESTDIR)$(DATADIR)/pixmaps
++	install -m 644 misc/wmradio.png $(DESTDIR)$(DATADIR)/pixmaps/
++	install -m 644 misc/wmradio.desktop $(DESTDIR)$(DATADIR)/applications/
++	install -m 644 misc/wmradio-config.desktop $(DESTDIR)$(DATADIR)/applications/
+ 
+ ginstall: gwmradio
+-	install -d $(RPM_BUILD_ROOT)`gnome-config --prefix`/share/applets/Multimedia
+-	install -d $(RPM_BUILD_ROOT)`gnome-config --sysconfdir`/CORBA/servers
+-	install -m 755 gwmradio $(RPM_BUILD_ROOT)$(BINDIR)
+-	install -m 644 gwmradio.desktop $(RPM_BUILD_ROOT)`gnome-config --prefix`/share/applets/Multimedia/
+-	install -m 644 gwmradio.gnorba $(RPM_BUILD_ROOT)`gnome-config --sysconfdir`/CORBA/servers/
++	install -d $(DESTDIR)$(DATADIR)/applets/Multimedia
++	install -d $(DESTDIR)`gnome-config --sysconfdir`/CORBA/servers
++	install -m 755 gwmradio $(DESTDIR)$(BINDIR)
++	install -m 644 gwmradio.desktop $(DESTDIR)$(DATADIR)/applets/Multimedia/
++	install -m 644 gwmradio.gnorba $(DESTDIR)`gnome-config --sysconfdir`/CORBA/servers/
+ 
+ install-skins:
+-	install -m 755 -d $(RPM_BUILD_ROOT)$(LIBDIR)
+-	install -m 644 $(SKINFILES) $(RPM_BUILD_ROOT)$(LIBDIR)
++	install -m 755 -d $(DESTDIR)$(SKNDIR)
++	install -m 644 $(SKINFILES) $(DESTDIR)$(SKNDIR)
