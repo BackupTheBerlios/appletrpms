@@ -1,19 +1,17 @@
-%define name worker
-%define version 2.17.6
-%define release 1%{?dist}
-%define doc_version 2.10.0.2
+%define		name worker
+%define		version 2.17.8
+%define		release 2%{?dist}
 
 Summary:	A file manager for X in AMIGA style
 Name:		%name
 Version:	%version
 Release:	%release
-License:	GPL
+License:	GPLv2+
 Group:		Applications/File
-Source0:	http://www.boomerangsworld.de/worker/downloads/%{name}-%{version}.tar.gz
-Source1:	http://www.boomerangsworld.de/worker/downloads/%{name}-%{doc_version}-doc.tar.bz2
-URL:		http://www.boomerangsworld.de/worker/
-Requires:	libXpm avfs fuse file
-BuildRequires:	libX11-devel bzip2-devel zlib-devel libXpm-devel avfs-devel file-devel
+Source0:	http://www.boomerangsworld.de/%{name}/downloads/%{name}-%{version}.tar.gz
+URL:		http://www.boomerangsworld.de/%{name}/
+Requires:	libXpm avfs fuse file libXft
+BuildRequires:	libX11-devel bzip2-devel zlib-devel libXpm-devel avfs-devel file-devel libXft-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -24,7 +22,7 @@ operate on the selected items. You can easily add actions to filetypes
 or buttons with the builtin configuration program.
 
 %prep
-%setup -q -a 1
+%setup -q
 
 %build
 ./configure --prefix=%{_prefix} \
@@ -53,11 +51,6 @@ install -m 644 Icons/WorkerIcon.xpm $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/64x
 
 rm -rf $RPM_BUILD_ROOT%{_datadir}/pixmaps/*.xpm
 
-cd worker-%{doc_version}-doc
-./configure --prefix=%{_prefix}
-make
-make DESTDIR=$RPM_BUILD_ROOT install
-
 #Install application link for X-Windows
 echo -e "[Desktop Entry]
 Name=Worker File Manager
@@ -76,20 +69,6 @@ desktop-file-install --vendor "" --delete-original \
   --add-category System						  \
   %{name}.desktop
 
-cd ..
-
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}/
-install -m 644 AUTHORS $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}/
-install -m 644 COPYING $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}/
-install -m 644 INSTALL $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}/
-install -m 644 ChangeLog $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}/
-install -m 644 NEWS $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}/
-install -m 644 READM* $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}/
-install -m 644 THANKS $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}/
-
-mv $RPM_BUILD_ROOT%{_datadir}/doc/%{name}/* $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}/
-rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/%{name}/
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -105,21 +84,31 @@ if [ -x %{_bindir}/gtk-update-icon-cache ]; then
   %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
 fi
 
-
 %files
 %defattr(-,root,root,-)
-%docdir %{_datadir}/doc/%{name}-%{version}
-%{_datadir}/doc/%{name}-%{version}/
-%{_bindir}/*
-%dir %{_datadir}/worker
-%{_datadir}/worker/scripts/*
-%{_datadir}/worker/catalogs/*
+%doc AUTHORS COPYING ChangeLog NEWS README README_LARGEFILES THANKS
+%{_bindir}/worker
+%{_datadir}/icons/hicolor/*/apps/worker.xpm
+%{_datadir}/worker/catalogs/*.catalog
+%{_datadir}/worker/catalogs/*.catalog.coms
+%{_datadir}/worker/catalogs/*.catalog.coms.utf8
+%{_datadir}/worker/catalogs/*.catalog.flags
+%{_datadir}/worker/catalogs/*.catalog.flags.utf8
+%{_datadir}/worker/catalogs/*.catalog.utf8
+%{_datadir}/worker/scripts/*.sh
+%{_datadir}/worker/scripts/displaywrapper_worker
+%{_datadir}/worker/scripts/xeditor
+%{_datadir}/worker/scripts/xliwrapper_worker
 %{_datadir}/worker/config-*
-%{_mandir}/
-%{_datadir}/icons/hicolor/
-%{_datadir}/applications/*
+%{_mandir}/fr/man1/worker.*
+%{_mandir}/it/man1/worker.*
+%{_mandir}/man1/worker.*
+%{_datadir}/applications/worker.desktop
 
 %changelog
+* Fri Jun 25 2010 J. Krebs <rpm_speedy@yahoo.com> 2.17.8-2
+- new version, eliminated older documentation.
+
 * Mon Mar 01 2010 J. Krebs <rpm_speedy@yahoo.com> 2.17.6-1
 - new version
 

@@ -1,5 +1,5 @@
 %define name	wmsorsen
-%define version	0.10.0
+%define version	0.10.1
 %define release	1%{?dist}
 
 Summary:	dockapp for window maker for displaying hardware sensor values.
@@ -43,5 +43,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGELOG COPYING INSTALL README wmsorsen/wmsorsenrc
 
 %changelog
+* Tue Jun 22 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.10.1-1
+- new version.
+
 * Wed Nov 18 2009 J. Krebs <rpm_speedy@yahoo.com> - 0.10.0-1
 - Initial build.

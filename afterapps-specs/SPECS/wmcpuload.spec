@@ -1,16 +1,22 @@
-%define name wmcpuload
-%define version 1.1.0pre5
-%define release 5%{?dist}
+%define		name wmcpuload
+%define		version 1.1.0pre5
+%define		release 6%{?dist}
 
-Summary: CPU monitor dockapp which has an LCD look user interface
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
-Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:	CPU monitor dockapp which has an LCD look user interface
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		AfterStep/Applets
+URL:		http://www.dockapps.org/file.php/id/36
+Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	libX11
+Requires:	libXext
+Requires:	libXpm
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXpm-devel
 
 %description
 WMCPULoad is a CPU monitor dockapp which has an LCD look-alike
@@ -39,10 +45,13 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %{_bindir}/*
-%doc AUTHORS COPYING ChangeLog INSTALL NEWS README THANKS TODO
+%doc AUTHORS COPYING ChangeLog NEWS README THANKS TODO
 
 
 %changelog
+* Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 1.1.0pre5-6
+- changed URL info to dockapps.org.
+
 * Sun Sep 13 2009 J. Krebs <rpm_speedy@yahoo.com> - 1.1.0pre5-5
 - updated URL info.
 

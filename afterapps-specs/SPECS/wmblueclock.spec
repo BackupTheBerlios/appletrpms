@@ -1,16 +1,26 @@
-%define name WMBlueClock
-%define version 0.1
-%define release 5%{?dist}
+%define		name wmblueclock
+%define		version 0.4
+%define		release 1%{?dist}
 
-Summary: WMBlueClock is a nice clock app
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: http://sheepmakers.ath.cx/utils/wmblueclock/
-Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:	WMBlueClock is a nice clock app
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		AfterStep/Applets
+URL:		http://www.dockapps.org/file.php/id/344
+Source0:	http://www.dockapps.org/download.php/id/772/%{name}-%{version}.tar.bz2
+Patch0:		%{name}-%{version}-Makefile.patch
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	libX11
+Requires:	libXext
+Requires:	libXft
+Requires:	libXpm
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+Requires:	libXft-devel
+BuildRequires:	libXpm-devel
+Obsoletes:	WMBlueClock
 
 %description
 WMBlueClock is a nice clock app. It runs either as a dockapp
@@ -19,7 +29,8 @@ week, day of month, month, number of month. It can run in 12
 and 24 hour mode.
 
 %prep
-%setup -q -n WMBlueClock
+%setup -q -n wmblueclock
+%patch0
 
 %build
 make PREFIX=%{_prefix}
@@ -43,6 +54,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.4-1
+- new version. changed URL info to dockapps.org.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.1-5
 - added distro info to release.
 

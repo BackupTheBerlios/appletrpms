@@ -23,28 +23,34 @@
 %endif
 ### END Distro Definitions
 
-%define name	wmnethru
-%define version 0.1.1
-%define release 3%{?dist}
+%define		name wmnethru
+%define		version 0.1.1
+%define		release 4%{?dist}
 
 Summary:	Network Throughput and System Utilization Monitor
 Name:		%name
 Version:	%version
 Release:	%release
-License:	GPL
+License:	GPLv2+
 Group:		AfterStep/Applets
-Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
-URL:		ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
+Source0:	http://www.dockapps.org/download.php/id/693/%{name}-%{version}.tar.gz
+URL:		http://www.dockapps.org/file.php/id/315
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	libX11
+Requires:	libXext
+Requires:	libXpm
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXpm-devel
 
 %if %{mdk}
-Requires: libdockapp0
-BuildRequires: libdockapp0-devel
+Requires:	libdockapp0
+BuildRequires:	libdockapp0-devel
 %endif
 
 %if %{fedora}
-Requires: libdockapp
-BuildRequires: libdockapp-devel
+Requires:	libdockapp
+BuildRequires:	libdockapp-devel
 %endif
 
 %description
@@ -87,6 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 
 %changelog
+* Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> 0.1.1-4
+- changed URL info to dockapps.org.
+
 * Thu Aug 06 2009 J. Krebs <rpm_speedy@yahoo.com> 0.1.1-3
 - updated URL info.
 

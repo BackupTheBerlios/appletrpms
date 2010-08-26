@@ -23,28 +23,36 @@
 %endif
 ### END Distro Definitions
 
-%define name wmwifi
-%define version 0.6
-%define release 3%{?dist}
+%define		name wmwifi
+%define		version 0.6
+%define		release 4%{?dist}
 
-Summary: WiFi dockapp displays signal, link, noise, & bitrate info in LCD format
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
-Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
-Patch0: %{name}-%{version}-wireless.c.patch
-Patch1: %{name}-%{version}-%{name}.h.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:	WiFi dockapp displays signal, link, noise, & bitrate info in LCD format
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		AfterStep/Applets
+URL:		http://www.dockapps.org/file.php/id/222
+Source0:	http://www.dockapps.org/download.php/id/669/%{name}-%{version}.tar.gz
+Patch0:		%{name}-%{version}-wireless.c.patch
+Patch1:		%{name}-%{version}-%{name}.h.patch
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	libX11
+Requires:	libXext
+Requires:	libXpm
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXpm-devel
 
 %if %{mdk}
-Requires: libdockapp0
+Requires:	libdockapp0
+BuildRequires:	libdockapp0-devel
 %endif
 
 %if %{fedora}
-Requires: libdockapp
+Requires:	libdockapp
+BuildRequires:	libdockapp-devel
 %endif
 
 %description
@@ -76,6 +84,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README
 
 %changelog
+* Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.6-4
+- changed URL info to dockapps.org.
+
 * Thu Jun 14 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.6-3
 - updated URL info.
 

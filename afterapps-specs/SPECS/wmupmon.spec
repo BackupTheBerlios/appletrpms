@@ -1,16 +1,22 @@
-%define name wmupmon
-%define version 0.1.3
-%define release 5%{?dist}
+%define		name wmupmon
+%define		version 0.1.3
+%define		release 6%{?dist}
 
-Summary: DockApp that displays your system uptime in realtime
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
-Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:	DockApp that displays your system uptime in realtime
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2
+Group:		AfterStep/Applets
+URL:		http://www.dockapps.org/file.php/id/188
+Source0:	http://www.dockapps.org/download.php/id/547/%{name}-%{version}.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	libX11
+Requires:	libXext
+Requires:	libXpm
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXpm-devel
 
 %description
 DockApp that displays your system uptime in realtime.
@@ -35,10 +41,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %{_bindir}/*
 %{_mandir}/man1/*
-%doc AUTHORS ChangeLog INSTALL THANKS README COPYING
+%doc AUTHORS ChangeLog THANKS README COPYING
 
 
 %changelog
+* Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.1.3-6
+- changed URL info to dockapps.org.
+
 * Sat Apr 12 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.1.3-5
 - Website is no longer available. Moved links to ftp.afterstep.org.
 

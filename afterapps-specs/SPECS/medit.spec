@@ -82,7 +82,7 @@ fi
 %files -f moo.lang
 %files -f moo-gsv.lang
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING COPYING.GPL INSTALL LICENSE NEWS README THANKS doc/help/
+%doc AUTHORS COPYING COPYING.GPL LICENSE NEWS README THANKS doc/help/
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/48x48/apps/medit.png

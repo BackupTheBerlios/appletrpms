@@ -1,16 +1,19 @@
-%define name asmail
-%define version 2.1
-%define release 1%{?dist}
+%define		name asmail
+%define		version 2.1
+%define		release 2%{?dist}
 
-Summary: Afterstep Mail Applet
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: http://tigr.net/afterstep/view.php?applet=asmail/data
-Source0: http://tigr.net/afterstep/download/%{name}/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:	Afterstep Mail Applet
+Name:		%{name}
+Version:	%{version}
+Release:	%{release}
+License:	GPLv2
+Group:		AfterStep/Applets
+URL:		http://tigr.net/afterstep/view.php?applet=asmail/data
+Source0:	http://tigr.net/afterstep/download/%{name}/%{name}-%{version}.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	libICE libSM libX11 libXext libXpm openssl
+BuildRequires:	libICE-devel libSM-devel libX11-devel
+BuildRequires:	libXext-devel libXpm-devel openssl-devel
 
 %description
 The application is an AfterStep look & feel multiple e-mail
@@ -34,7 +37,8 @@ animation for the status update.
 
 %build
 ./configure --prefix=%{_prefix}
-make
+
+make LIBS_X="-L%{_libdir} -lX11 -lSM -lICE -lXpm -lXext -lcrypto"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -55,15 +59,80 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
-%{_mandir}/man1/*
-%{_mandir}/man5/*
-%dir %{_datadir}/asmail
-%{_datadir}/asmail
 %doc CHANGES INSTALL LICENSE README TODO
-
+%{_bindir}/asmail
+%{_datadir}/%{name}/pixmaps/e-no.xpm
+%{_datadir}/%{name}/pixmaps/e0.xpm
+%{_datadir}/%{name}/pixmaps/e1.xpm
+%{_datadir}/%{name}/pixmaps/e10.xpm
+%{_datadir}/%{name}/pixmaps/e11.xpm
+%{_datadir}/%{name}/pixmaps/e12.xpm
+%{_datadir}/%{name}/pixmaps/e13.xpm
+%{_datadir}/%{name}/pixmaps/e14.xpm
+%{_datadir}/%{name}/pixmaps/e15.xpm
+%{_datadir}/%{name}/pixmaps/e16.xpm
+%{_datadir}/%{name}/pixmaps/e17.xpm
+%{_datadir}/%{name}/pixmaps/e18.xpm
+%{_datadir}/%{name}/pixmaps/e19.xpm
+%{_datadir}/%{name}/pixmaps/e2.xpm
+%{_datadir}/%{name}/pixmaps/e20.xpm
+%{_datadir}/%{name}/pixmaps/e21.xpm
+%{_datadir}/%{name}/pixmaps/e22.xpm
+%{_datadir}/%{name}/pixmaps/e23.xpm
+%{_datadir}/%{name}/pixmaps/e24.xpm
+%{_datadir}/%{name}/pixmaps/e25.xpm
+%{_datadir}/%{name}/pixmaps/e26.xpm
+%{_datadir}/%{name}/pixmaps/e27.xpm
+%{_datadir}/%{name}/pixmaps/e28.xpm
+%{_datadir}/%{name}/pixmaps/e29.xpm
+%{_datadir}/%{name}/pixmaps/e3.xpm
+%{_datadir}/%{name}/pixmaps/e30.xpm
+%{_datadir}/%{name}/pixmaps/e4.xpm
+%{_datadir}/%{name}/pixmaps/e5.xpm
+%{_datadir}/%{name}/pixmaps/e6.xpm
+%{_datadir}/%{name}/pixmaps/e7.xpm
+%{_datadir}/%{name}/pixmaps/e8.xpm
+%{_datadir}/%{name}/pixmaps/e9.xpm
+%{_datadir}/%{name}/pixmaps/m-e0.xpm
+%{_datadir}/%{name}/pixmaps/m-e1.xpm
+%{_datadir}/%{name}/pixmaps/m-e10.xpm
+%{_datadir}/%{name}/pixmaps/m-e11.xpm
+%{_datadir}/%{name}/pixmaps/m-e12.xpm
+%{_datadir}/%{name}/pixmaps/m-e13.xpm
+%{_datadir}/%{name}/pixmaps/m-e14.xpm
+%{_datadir}/%{name}/pixmaps/m-e15.xpm
+%{_datadir}/%{name}/pixmaps/m-e16.xpm
+%{_datadir}/%{name}/pixmaps/m-e17.xpm
+%{_datadir}/%{name}/pixmaps/m-e18.xpm
+%{_datadir}/%{name}/pixmaps/m-e19.xpm
+%{_datadir}/%{name}/pixmaps/m-e2.xpm
+%{_datadir}/%{name}/pixmaps/m-e20.xpm
+%{_datadir}/%{name}/pixmaps/m-e21.xpm
+%{_datadir}/%{name}/pixmaps/m-e22.xpm
+%{_datadir}/%{name}/pixmaps/m-e23.xpm
+%{_datadir}/%{name}/pixmaps/m-e24.xpm
+%{_datadir}/%{name}/pixmaps/m-e25.xpm
+%{_datadir}/%{name}/pixmaps/m-e26.xpm
+%{_datadir}/%{name}/pixmaps/m-e27.xpm
+%{_datadir}/%{name}/pixmaps/m-e28.xpm
+%{_datadir}/%{name}/pixmaps/m-e29.xpm
+%{_datadir}/%{name}/pixmaps/m-e3.xpm
+%{_datadir}/%{name}/pixmaps/m-e30.xpm
+%{_datadir}/%{name}/pixmaps/m-e4.xpm
+%{_datadir}/%{name}/pixmaps/m-e5.xpm
+%{_datadir}/%{name}/pixmaps/m-e6.xpm
+%{_datadir}/%{name}/pixmaps/m-e7.xpm
+%{_datadir}/%{name}/pixmaps/m-e8.xpm
+%{_datadir}/%{name}/pixmaps/m-e9.xpm
+%{_datadir}/%{name}/sounds/clink.au
+%{_datadir}/%{name}/sounds/drip.au
+%{_mandir}/man1/asmail.*
+%{_mandir}/man5/asmailrc.*
 
 %changelog
+* Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> 2.1-2
+- cleaned up spec file.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> 2.1-1
 - new version, added distro info to release.
 

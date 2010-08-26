@@ -1,16 +1,22 @@
-%define name wmxkb
-%define version 1.2.2
-%define release 8%{?dist}
+%define		name wmxkb
+%define		version 1.2.2
+%define		release 9%{?dist}
 
-Summary: A dockable/swallowed XKB groups indicator and switch
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
-Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:	A dockable/swallowed XKB groups indicator and switch
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		AfterStep/Applets
+URL:		http://www.dockapps.org/file.php/id/221
+Source0:	http://www.dockapps.org/download.php/id/487/%{name}-%{version}.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	libX11
+Requires:	libXext
+Requires:	libXpm
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXpm-devel
 
 %description
 %{name} showns and controls XKB groups (XFree86 key maps)
@@ -45,8 +51,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/pixmaps/wmxkb
 %doc COPYING README manual.html WMxkb_flexy WMxkb_nonflexy
 
-
 %changelog
+* Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-9
+- updated URL info to dockapps.org.
+
 * Thu Aug 06 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-8
 - updated URL info.
 

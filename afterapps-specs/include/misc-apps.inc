@@ -77,7 +77,7 @@ EINA_URL=http://launchpad.net/eina/trunk/0.9.3/+download/$(EINA_TAR)
 APPLET_LIST += EINA
 
 FOTOXX_NAME=fotoxx
-FOTOXX_VERSION=10.4
+FOTOXX_VERSION=10.8.4
 FOTOXX_TAR=$(FOTOXX_NAME)-$(FOTOXX_VERSION).tar.gz
 FOTOXX_URL=http://kornelix.squarespace.com/storage/downloads/$(FOTOXX_TAR)
 
@@ -98,11 +98,12 @@ APPLET_LIST += FOTOXX
 #
 #APPLET_LIST += LIBICAL
 
+# Substitute WindowMaker
 #this is the the source file used to build libwraster
-LIBWRASTER_NAME=libwraster
-LIBWRASTER_VERSION=0.80.2
-LIBWRASTER_TAR=WindowMaker-$(LIBWRASTER_VERSION).tar.gz
-LIBWRASTER_URL=http://windowmaker.info/pub/source/archive/$(LIBWRASTER_TAR)
+#LIBWRASTER_NAME=libwraster
+#LIBWRASTER_VERSION=0.80.2
+#LIBWRASTER_TAR=WindowMaker-$(LIBWRASTER_VERSION).tar.gz
+#LIBWRASTER_URL=http://windowmaker.info/pub/source/archive/$(LIBWRASTER_TAR)
 
 #APPLET_LIST += LIBWRASTER
 
@@ -164,19 +165,19 @@ TRAYER_URL=http://download.gna.org/fvwm-crystal/$(TRAYER_NAME)/$(TRAYER_VERSION)
 APPLET_LIST += TRAYER
 
 WORKER_NAME=worker
-WORKER_VERSION=2.17.6
+WORKER_VERSION=2.17.8
 WORKER_TAR=$(WORKER_NAME)-$(WORKER_VERSION).tar.gz
 WORKER_URL=http://www.boomerangsworld.de/worker/downloads/$(WORKER_TAR)
 
 APPLET_LIST += WORKER
 
-WORKER-DOC_NOSPEC=YES
-WORKER-DOC_NAME=worker
-WORKER-DOC_VERSION=2.10.0.2
-WORKER-DOC_TAR=$(WORKER-DOC_NAME)-$(WORKER-DOC_VERSION)-doc.tar.bz2
-WORKER-DOC_URL=http://www.boomerangsworld.de/worker/downloads/$(WORKER-DOC_TAR)
+#WORKER-DOC_NOSPEC=YES
+#WORKER-DOC_NAME=worker
+#WORKER-DOC_VERSION=2.10.0.2
+#WORKER-DOC_TAR=$(WORKER-DOC_NAME)-$(WORKER-DOC_VERSION)-doc.tar.bz2
+#WORKER-DOC_URL=http://www.boomerangsworld.de/worker/downloads/$(WORKER-DOC_TAR)
 
-APPLET_LIST += WORKER-DOC
+#APPLET_LIST += WORKER-DOC
 
 YUDIT_NAME=yudit
 YUDIT_VERSION=2.9.2

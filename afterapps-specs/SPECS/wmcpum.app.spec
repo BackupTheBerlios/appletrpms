@@ -1,17 +1,26 @@
-%define name wmcpum.app
-%define version 0.1.0
-%define release 6%{?dist}
+%define		name wmcpum.app
+%define		version 0.1.0
+%define		release 7%{?dist}
 
-Summary: WindowMaker CPU Monitor
-Name: %name
-Version: %version
-Release: %release
-License: GPLv2+
-Group: AfterStep/Applets
-URL: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
-Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: lm_sensors
+Summary:	WindowMaker CPU Monitor
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		AfterStep/Applets
+URL:		http://www.dockapps.org/file.php/id/263
+Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	libX11
+Requires:	libXext
+Requires:	libXpm
+Requires:	lm_sensors
+Requires:	glibc
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXpm-devel
+BuildRequires:	lm_sensors-devel
+BuildRequires:	glibc-devel
 
 %description
 WindowMaker CPU Monitor. Requires lm_sensors package.
@@ -41,11 +50,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc CHANGELOG COPYING INSTALL
+%doc CHANGELOG COPYING
 %{_bindir}/wmcpum
 
 
 %changelog
+* Wed Aug 25 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.1.0-7
+- changed URL info to dockapps.org.
+
 * Sun Apr 04 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.1.0-6
 - dead link, pointed to ftp.afterstep.org.
 

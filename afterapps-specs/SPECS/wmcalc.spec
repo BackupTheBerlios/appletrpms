@@ -1,17 +1,25 @@
-%define name wmcalc
-%define version 0.4
-%define release 5%{?dist}
+%define		name wmcalc
+%define		version 0.4
+%define		release 6%{?dist}
 
-Summary: Wmcalc is an applet calculator
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: http://dockapps.org/file.php/id/130
-Source0: http://gentoo.mirrors.easynews.com/linux/gentoo/distfiles/%{name}-%{version}.tar.gz
-Patch0: %{name}-%{version}.Makefile.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:	Wmcalc is an applet calculator
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2
+Group:		AfterStep/Applets
+URL:		http://dockapps.org/file.php/id/130
+Source0:	http://gentoo.mirrors.easynews.com/linux/gentoo/distfiles/%{name}-%{version}.tar.gz
+Patch0:		%{name}-%{version}.Makefile.patch
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	libX11
+Requires:	libXext
+Requires:	libXpm
+Requires:	glibc
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXpm-devel
+BuildRequires:	glibc-devel
 
 %description
 Wmcalc is a 64x64 pixel application that performs all the
@@ -42,6 +50,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc COPYING README wmcalc.conf .wmcalc
 
 %changelog
+* Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.4-6
+- updated spec file.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.4-5
 - added distro info to release.
 

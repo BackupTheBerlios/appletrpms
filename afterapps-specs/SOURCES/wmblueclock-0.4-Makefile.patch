@@ -1,0 +1,34 @@
+--- Makefile	2008-09-14 17:47:28.000000000 -0500
++++ Makefile	2010-08-23 23:24:08.000000000 -0500
+@@ -1,10 +1,7 @@
+ # Makefile
+ 
+ # Installation directory
+-PREFIX=/usr/local
+-
+-# USE Xft for the menu
+-USE_XFT=yes
++PREFIX=/usr
+ 
+ VERSION=0.4
+ 
+@@ -14,18 +11,13 @@
+ PROG=wmblueclock
+ MANUAL=$(PROG).1
+ OBJS=main.o menu.o
+-LIBS=-L/usr/X11R6/lib -lX11 -lXext -lXpm
++LIBS=-L/usr/X11R6/lib -L/usr/lib -L/usr/lib64 -lX11 -lXext -lXpm -lXft
+ CFLAGS=-O2 -Wall -DVERSION=\"$(VERSION)\"
+ 
+ CC=gcc
+ RM=rm -rf
+ INST=install
+ 
+-ifeq ($(USE_XFT),yes)
+-CFLAGS += -DUSE_XFT $(shell xft-config --cflags)
+-LIBS += $(shell xft-config --libs)
+-endif
+-
+ all: $(PROG)
+ 
+ $(PROG): $(OBJS)

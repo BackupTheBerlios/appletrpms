@@ -1,17 +1,26 @@
-%define name WMBlueMem
-%define version 0.9
-%define release 5%{?dist}
+%define		name wmbluemem
+%define		version 0.12
+%define		release 1%{?dist}
 
-Summary: WMBlueMem is a memory monitoring program
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: http://sheepmakers.ath.cx/utils/wmbluemem/
-Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}.tar.gz
-Patch0: %{name}.Makefile.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:	WMBlueMem is a memory monitoring program
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		AfterStep/Applets
+URL:		http://www.dockapps.org/file.php/id/165
+Source0:	http://www.dockapps.org/download.php/id/771/%{name}-%{version}.tar.bz2
+Patch0:		%{name}-%{version}-Makefile.patch
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	libX11
+Requires:	libXext
+Requires:	libXft
+Requires:	libXpm
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+Requires:	libXft-devel
+BuildRequires:	libXpm-devel
+Obsoletes:	WMBlueMem
 
 %description
 WMBlueMem is a memory monitoring program. It runs either as a
@@ -20,7 +29,7 @@ usage is displayed and on the bottom the swap space usage is
 displayed.
 
 %prep
-%setup -q -n WMBlueMem
+%setup -q -n wmbluemem
 %patch0
 
 %build
@@ -41,10 +50,12 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %{_bindir}/*
 %{_mandir}/man1/*
-%doc AUTHORS COPYING INSTALL README THANKS
-
+%doc AUTHORS COPYING README THANKS
 
 %changelog
+* Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.12-1
+- new version. changed URL info to dockapps.org.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.9-5
 - added distro info to release.
 

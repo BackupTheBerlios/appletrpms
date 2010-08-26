@@ -1,0 +1,36 @@
+--- Makefile	2008-09-14 17:41:01.000000000 -0500
++++ Makefile	2010-08-24 07:37:21.000000000 -0500
+@@ -1,10 +1,7 @@
+ # Makefile
+ 
+ # Installation directory
+-PREFIX=/usr/local
+-
+-# Use Xft for the menu
+-USE_XFT=yes
++PREFIX=/usr
+ 
+ VERSION=0.12
+ 
+@@ -18,20 +15,10 @@
+ 
+ OS=$(shell uname -s)
+ ifeq ($(OS),Linux)
+-LIBS=-L/usr/X11R6/lib -lX11 -lXext -lXpm
++LIBS=-L/usr/X11R6/lib -L/usr/lib -L/usr/lib64 -lX11 -lXext -lXpm -lXft
+ OBJS+=mem_linux.o
+ endif
+ 
+-ifeq ($(OS),FreeBSD)
+-LIBS=-L/usr/X11R6/lib -lX11 -lXext -lXpm -lkvm
+-OBJS+=mem_freebsd.o
+-endif
+-
+-ifeq ($(USE_XFT),yes)
+-CFLAGS += -DUSE_XFT $(shell xft-config --cflags)
+-LIBS += $(shell xft-config --libs)
+-endif
+-
+ CC=gcc
+ RM=rm -rf
+ INST=install

@@ -23,19 +23,21 @@
 %endif
 ### END Distro Definitions
 
-%define name	wmchargemon
-%define version 0.3
-%define release 4%{?dist}
+%define		name	wmchargemon
+%define		version 0.3
+%define		release 5%{?dist}
 
 Summary:	displays ACPI battery level and power status
 Name:		%name
 Version:	%version
 Release:	%release
-License:	GPL
+License:	GPLv2+
 Group:		AfterStep/Applets
-Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
-URL:		ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
+Source0:	http://www.dockapps.org/download.php/id/715/%{name}-%{version}.tar.gz
+URL:		http://www.dockapps.org/file.php/id/319
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	libX11
+BuildRequires:	libX11-devel
 
 %if %{mdk}
 Requires: libdockapp0
@@ -72,10 +74,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS BUGS ChangeLog INSTALL README
+%doc AUTHORS BUGS ChangeLog README
 %{_bindir}/*
 
 %changelog
+* Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> 0.3-5
+- changed URL info to dockapps.org.
+
 * Thu May 27 2010 J. Krebs <rpm_speedy@yahoo.com> 0.3-4
 - added cflags to make.
 

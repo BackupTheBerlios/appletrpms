@@ -1,19 +1,44 @@
-%define name fotoxx
-%define version 10.4
-%define release 1%{?dist}
+%define		name fotoxx
+%define		version 10.8.4
+%define		release 1%{?dist}
 
-Summary: application for processing image files from a digital camera
-Name: %{name}
-Version: %{version}
-Release: %{release}
-License: GPLv3
-Group: Applications/Multimedia
-URL: http://kornelix.squarespace.com/%{name}/
-Source0: http://kornelix.squarespace.com/storage/downloads/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: gtk2 atk cairo pango libpng exiv2 libstdc++ ufraw perl-Image-ExifTool
-Buildrequires: gtk2-devel atk-devel cairo-devel pango-devel libpng-devel libstdc++-devel gcc-c++ freeimage-devel ufraw perl-Image-ExifTool
-Obsoletes: fotox
+Summary:	application for processing image files from a digital camera
+Name:		%{name}
+Version:	%{version}
+Release:	%{release}
+License:	GPLv3+
+Group:		Applications/Multimedia
+URL:		http://kornelix.squarespace.com/%{name}/
+Source0:	http://kornelix.squarespace.com/storage/downloads/%{name}-%{version}.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	atk
+Requires:	cairo
+Requires:	exiv2
+Requires:	fontconfig
+Requires:	freetype
+Requires:	glib2
+Requires:	glibc
+Requires:	gtk2
+Requires:	libpng
+Requires:	libstdc++
+Requires:	libtiff
+Requires:	pango
+Requires:	perl-Image-ExifTool
+Requires:	ufraw
+Buildrequires:	atk-devel
+Buildrequires:	cairo-devel
+Buildrequires:	freeimage-devel
+Buildrequires:	gcc-c++
+Buildrequires:	glib2-devel
+Buildrequires:	glibc-devel
+Buildrequires:	gtk2-devel
+Buildrequires:	libpng-devel
+Buildrequires:	libstdc++-devel
+Buildrequires:	libtiff-devel
+Buildrequires:	pango-devel
+Buildrequires:	perl-Image-ExifTool
+Buildrequires:	ufraw
+Obsoletes:	fotox
 
 %description
 Fotoxx is a free open-source Linux program for improving image files
@@ -47,8 +72,7 @@ made with a digital camera.
 %setup -q
 
 %build
-make PREFIX=%{_prefix} \
-	DOCDIR=%{_datadir}/doc/%{name}-%{version}
+make PREFIX=%{_prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -79,9 +103,7 @@ desktop-file-install --vendor "" --delete-original \
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/pixmaps/
 install -m 644 icons/fotoxx.png $RPM_BUILD_ROOT%{_datadir}/pixmaps/
 
-rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/fotoxx/*
-
-rm -rf $RPM_BUILD_ROOT%{_datadir}/%{name}/locales/de/%{name}.po.old
+rm -rf $RPM_BUILD_ROOT%{_datadir}/%{name}/locales/*/%{name}.po.old
 
 desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
@@ -90,16 +112,33 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc doc/*
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/%{name}/icons/*
 %{_datadir}/%{name}/locales/*/%{name}.po
 %{_datadir}/%{name}/locales/*/zfuncs.po
+%{_datadir}/doc/%{name}/images/*.jpeg
+%{_datadir}/doc/%{name}/images/*.png
+%{_datadir}/doc/%{name}/images/.thumbnails/*.png
+%{_datadir}/doc/%{name}/images/zappcrash
+%{_datadir}/doc/%{name}/CHANGES
+%{_datadir}/doc/%{name}/COPYING
+%{_datadir}/doc/%{name}/README
+%{_datadir}/doc/%{name}/TRANSLATIONS
+%{_datadir}/doc/%{name}/fotoxx.man
+%{_datadir}/doc/%{name}/userguide-changes
+%{_datadir}/doc/%{name}/userguide-de.html
+%{_datadir}/doc/%{name}/userguide-en.html
 %{_datadir}/pixmaps/*.png
 %{_mandir}/man1/%{name}.1.gz
 
 %changelog
+* Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 10.8.4-1
+- new version.
+
+* Wed Jun 02 2010 J. Krebs <rpm_speedy@yahoo.com> - 10.5-1
+- new version.
+
 * Tue May 25 2010 J. Krebs <rpm_speedy@yahoo.com> - 10.4-1
 - new version.
 

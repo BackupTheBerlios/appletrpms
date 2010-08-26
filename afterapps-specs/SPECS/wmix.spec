@@ -1,16 +1,24 @@
-%define name wmix
-%define version 3.2
-%define release 5%{?dist}
+%define		name wmix
+%define		version 3.2
+%define		release 6%{?dist}
 
-Summary: dockapp mixer utilizing the OSS mixer API
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
-Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:	dockapp mixer utilizing the OSS mixer API
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		AfterStep/Applets
+URL:		http://www.dockapps.org/file.php/id/58
+Source0:	http://www.dockapps.org/download.php/id/528/%{name}-%{version}.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	libX11
+Requires:	libXext
+Requires:	libXpm
+Requires:	glibc
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXpm-devel
+BuildRequires:	glibc-devel
 
 %description
 - This is a complete dockapp mixer utilizing the OSS mixer API
@@ -42,9 +50,12 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %{_bindir}/*
 %{_mandir}/man1/*
-%doc AUTHORS BUGS COPYING INSTALL NEWS README sample.wmixrc
+%doc AUTHORS BUGS COPYING NEWS README sample.wmixrc
 
 %changelog
+* Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 3.2-6
+- changed URL info to dockapps.org.
+
 * Sun Sep 13 2009 J. Krebs <rpm_speedy@yahoo.com> - 3.2-5
 - updated URL info.
 

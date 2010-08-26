@@ -23,30 +23,46 @@
 %endif
 ### END Distro Definitions
 
-%define name wmweather+
-%define version 2.11
-%define release 2%{?dist}
+%define		name wmweather+
+%define		version 2.12
+%define		release 1%{?dist}
 
-Summary: A dock app for displaying weather information
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: http://sourceforge.net/project/showfiles.php?group_id=60336
-Source0: http://easynews.dl.sourceforge.net/sourceforge/wmweatherplus/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires: w3c-libwww-devel libwraster
-Requires: w3c-libwww libwraster
+Summary:	A dock app for displaying weather information
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		AfterStep/Applets
+URL:		http://sourceforge.net/project/showfiles.php?group_id=60336
+Source0:	http://easynews.dl.sourceforge.net/sourceforge/wmweatherplus/%{name}-%{version}.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	glibc
+Requires:	libcurl
+Requires:	libICE
+Requires:	libSM
+Requires:	libX11
+Requires:	libXext
+Requires:	libXpm
+Requires:	w3c-libwww
+Requires:	WindowMaker
+BuildRequires:	glibc-devel
+BuildRequires:	libcurl-devel
+BuildRequires:	libICE-devel
+BuildRequires:	libSM-devel
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXpm-devel
+BuildRequires:	w3c-libwww-devel
+BuildRequires:	WindowMaker-devel
 
 %if %{mdk}
-Requires: libpcre0
-BuildRequires: libpcre0-devel
+Requires:	libpcre0
+BuildRequires:	libpcre0-devel
 %endif
 
 %if %{fedora}
-Requires: pcre
-BuildRequires: pcre-devel
+Requires:	pcre
+BuildRequires:	pcre-devel
 %endif
 
 %description
@@ -76,6 +92,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Aug 25 2010 J. Krebs <rpm_speedy@yahoo.com> - 2.12-1
+- new version.
+
 * Thu May 27 2010 J. Krebs <rpm_speedy@yahoo.com> - 2.11-2
 - added compiler link to make for libm.
 

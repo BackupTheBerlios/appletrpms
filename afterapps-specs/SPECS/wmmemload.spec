@@ -1,16 +1,22 @@
-%define name wmmemload
-%define version 0.1.6
-%define release 5%{?dist}
+%define		name wmmemload
+%define		version 0.1.6
+%define		release 6%{?dist}
 
-Summary: memory monitor dockapp which displays free memory and swap space
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: https://sourceforge.net/projects/freshmeat_wmmemload/
-Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:	memory monitor dockapp which displays free memory and swap space
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		AfterStep/Applets
+URL:		https://sourceforge.net/projects/freshmeat_wmmemload/
+Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	libX11
+Requires:	libXext
+Requires:	libXpm
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXpm-devel
 
 %description
 wmmemload is a simple dockapp for WindowMaker on X Windows that
@@ -36,10 +42,13 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %{_bindir}/*
-%doc AUTHORS COPYING ChangeLog INSTALL NEWS README THANKS
+%doc AUTHORS COPYING ChangeLog THANKS
 
 
 %changelog
+* Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.1.6-6
+- changed URL info to dockapps.org.
+
 * Fri Aug 07 2009 J. Krebs <rpm_speedy@yahoo.com> - 0.1.6-5
 - Updated URLs.
 

@@ -1,19 +1,33 @@
-%define prefix /usr
-%define name wmusic
-%define version 1.5.0
-%define release 5%{?dist}
+%define		name wmusic
+%define		version	 1.5.0
+%define		release	 6%{?dist}
 
-Summary: Windowmaker dockapp that remote controls xmms
-Name: %name
-Version: %version
-Release: %release
-License: GPLv2+
-Group: AfterStep/Applets
-URL: http://home.jtan.com/~john/wmusic/
-Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
-Requires:   xmms >= 1.0.0
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires: xmms-devel
+Summary:	Windowmaker dockapp that remote controls xmms
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		AfterStep/Applets
+URL:		http://home.jtan.com/~john/wmusic/
+Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
+Requires:	xmms >= 1.0.0
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	glib
+Requires:	glibc
+Requires:	gtk+
+Requires:	libX11
+Requires:	libXext
+Requires:	libXi
+Requires:	libXpm
+Requires:	xmms
+BuildRequires:	glib-devel
+BuildRequires:	glibc-devel
+BuildRequires:	gtk+-devel
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXi-devel
+BuildRequires:	libXpm-devel
+BuildRequires:	xmms-devel >= 1.0.0
 
 %description
 wmusic is a dockapp that remote-controls xmms. Here is a list
@@ -54,6 +68,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 1.5.0-6
+- added requires and buildrequires.
+
 * Fri Sep 28 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.5.0-5
 - homepage has disappeared pointed Source0 to ftp.afterstep.org.
 
