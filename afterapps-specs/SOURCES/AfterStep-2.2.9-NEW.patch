@@ -1,9 +1,0 @@
---- NEW	2009-04-02 15:17:42.000000000 -0500
-+++ NEW	2009-11-01 21:48:48.000000000 -0600
-@@ -1,3 +1,6 @@
-+	* new WarpPointer feel option to make pointer warping on viewport change
-+	  switcheable. Contributed by Chris Nix.
-+	
- version 2.2.9 release
- 	* Menu  Mini Pixmaps will no longer be loaded if MenuMiniPixmaps is set 0
- 	  in look.
