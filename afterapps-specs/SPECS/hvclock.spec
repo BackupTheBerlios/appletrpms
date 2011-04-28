@@ -1,5 +1,5 @@
 %define name	hvclock
-%define version	1.0.0
+%define version	1.0.2
 %define release	1%{?dist}
 
 Summary:	hvclock is a "DockApp" analog clock and calendar application
@@ -38,6 +38,12 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README TODO
 
 %changelog
+* Wed Mar 23 2011 J. Krebs <rpm_speedy@yahoo.com> - 1.0.2-1
+- new version.
+
+* Thu Dec 09 2010 J. Krebs <rpm_speedy@yahoo.com> - 1.0.1-1
+- new version.
+
 * Thu Jan 07 2010 J. Krebs <rpm_speedy@yahoo.com> - 1.0.0-1
 - new version.
 

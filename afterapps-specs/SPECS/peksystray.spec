@@ -1,37 +1,6 @@
-### BEGIN Distro Defines
-%define mdk  %(if [ -e /etc/mandrake-release -o -e /etc/mandriva-release ]; then echo 1; else echo 0; fi;)
-%{?_with_mdk:   %{expand: %%global mdk 1}}
-
-%define mandriva  %(if [ -e /etc/mandriva-release ]; then echo 1; else echo 0; fi;)
-%{?_with_mandriva:   %{expand: %%global mandriva 1}}
-
-%define fedora  %(if [ -e /etc/fedora-release ]; then echo 1; else echo 0; fi;)
-%{?_with_fedora:   %{expand: %%global fedora 1}}
-
-%define suse %(if [ -e /etc/SuSE-release ]; then echo 1; else echo 0; fi;)
-%{?_with_suse:   %{expand: %%global suse 1}}
-
-%define generic 1
-%define xseven 0
- 
-%if %{mdk}
-  %define generic 0
-%endif
-
-%if %{fedora}
-  %define generic 0
-  %define xtest $(grep release /etc/fedora-release | cut -d ' ' -f4)
-  %define xseven %(if [ %xtest -ge 5 ]; then echo 1; else echo 0; fi;)
-  %{?_with_xseven:   %{expand: %%global xseven 1}}
-%endif
-
-%if %{suse}
-  %define generic 0
-%endif
-
 %define name peksystray
 %define version 0.4.0
-%define release 3%{?dist}
+%define release 4%{?dist}
 
 Summary: peksystray is a dockable systray
 Name: %name
@@ -55,12 +24,8 @@ docking.
 
 %build
 
-%if %{xseven}
-	CFLAGS="-lX11" \
-	./configure --prefix=%{_prefix} --libdir=%{_libdir}
-%else
-	./configure --prefix=%{_prefix} --libdir=%{_libdir}
-%endif
+CFLAGS="-lX11" \
+./configure --prefix=%{_prefix} --libdir=%{_libdir}
 
 make
 
@@ -77,8 +42,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README THANKS TODO
 
-
 %changelog
+* Mon Dec 27 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.4.0-4
+- cleanup of spec file.
+
 * Wed Aug 06 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.4.0-3
 - added patch from Gentoo for build under x86_64.
 

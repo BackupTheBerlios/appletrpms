@@ -1,5 +1,5 @@
 %define		name fotoxx
-%define		version 10.8.4
+%define		version 11.04
 %define		release 1%{?dist}
 
 Summary:	application for processing image files from a digital camera
@@ -104,6 +104,8 @@ mkdir -p $RPM_BUILD_ROOT%{_datadir}/pixmaps/
 install -m 644 icons/fotoxx.png $RPM_BUILD_ROOT%{_datadir}/pixmaps/
 
 rm -rf $RPM_BUILD_ROOT%{_datadir}/%{name}/locales/*/%{name}.po.old
+rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/%{name}/fotoxx.man
+rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/%{name}/freshmeat
 
 desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
@@ -118,22 +120,18 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/locales/*/%{name}.po
 %{_datadir}/%{name}/locales/*/zfuncs.po
 %{_datadir}/doc/%{name}/images/*.jpeg
+%{_datadir}/doc/%{name}/images/*.jpg
 %{_datadir}/doc/%{name}/images/*.png
-%{_datadir}/doc/%{name}/images/.thumbnails/*.png
-%{_datadir}/doc/%{name}/images/zappcrash
 %{_datadir}/doc/%{name}/CHANGES
 %{_datadir}/doc/%{name}/COPYING
 %{_datadir}/doc/%{name}/README
 %{_datadir}/doc/%{name}/TRANSLATIONS
-%{_datadir}/doc/%{name}/fotoxx.man
-%{_datadir}/doc/%{name}/userguide-changes
-%{_datadir}/doc/%{name}/userguide-de.html
 %{_datadir}/doc/%{name}/userguide-en.html
 %{_datadir}/pixmaps/*.png
 %{_mandir}/man1/%{name}.1.gz
 
 %changelog
-* Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 10.8.4-1
+* Fri Apr 01 2011 J. Krebs <rpm_speedy@yahoo.com> - 11.04-1
 - new version.
 
 * Wed Jun 02 2010 J. Krebs <rpm_speedy@yahoo.com> - 10.5-1

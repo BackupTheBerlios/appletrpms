@@ -1,6 +1,6 @@
 %define name	mined
 %define version	2000.16
-%define release	1%{?dist}
+%define release	2%{?dist}
 
 Summary:	mined is a powerful text editor with extensive Unicode and CJK support
 Name:		%name
@@ -21,7 +21,7 @@ mined is a powerful text editor with extensive Unicode and CJK support.
 %setup -q -n %{name}-2000.15
 
 %build
-make -C src -f makefile.linux PREFIX=%{_prefix} LIBDIR=%{_libdir}
+make -C src -f makefile.linux PREFIX=%{_prefix} LIBDIR=%{_libdir} GLDOPTS=" -ltinfo "
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -39,6 +39,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc doc COMPILE.DOC DESCR INSTALL.DOC PACKAGE.DOC README VERSION
 
 %changelog
+* Mon Feb 01 2011 J. Krebs <rpm_speedy@yahoo.com> - 2000.16-2
+- Added link for libtinfo.
+
 * Mon Mar 01 2010 J. Krebs <rpm_speedy@yahoo.com> - 2000.16-1
 - New version.
 

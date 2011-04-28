@@ -20,7 +20,7 @@ BuildRequires:	libX11-devel
 BuildRequires:	libXext-devel
 Requires:	libXft-devel
 BuildRequires:	libXpm-devel
-Obsoletes:	WMBlueMem
+Obsoletes:	WMBlueMem wmmemfree
 
 %description
 WMBlueMem is a memory monitoring program. It runs either as a

@@ -29,6 +29,8 @@ DockApp that displays your system uptime in realtime.
 make
 
 %install
+rm -rf $RPM_BUILD_ROOT
+
 mkdir -p $RPM_BUILD_ROOT%{_bindir}
 mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
 install -s -m 755 src/wmupmon $RPM_BUILD_ROOT%{_bindir}/

@@ -2,22 +2,51 @@
 %define pythver %pythtst
 
 %define	name 	medit
-%define	version	0.10.4
-%define	release	2%{?dist}
+%define	version	1.0.3
+%define	release	1%{?dist}
 
 Summary:	medit is a GTK-based text editor
 Name:		%name
 Version:	%version
 Release:	%release
-License:	GPLv2 and LGPLv2.1
+License:	GPLv2, LGPLv2.1+, BSD and MIT License
 Group:		Applications/Editors
 URL:		http://mooedit.sourceforge.net/
-Source0:	http://easynews.dl.sourceforge.net/sourceforge/mooedit/medit/%{version}/%{name}-%{version}.tar.bz2
+Source0:	http://sourceforge.net/projects/mooedit/files/medit/1.0.2/%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires:	python >= %{pythver}, python < 3.0, libxml2, pygtk2, pango, gtk2, cairo, atk, libICE, libX11, libSM
-Buildrequires:	python-devel, libxml2-devel, perl-XML-Parser, pygtk2-devel, pango-devel 
-Buildrequires:	gtk2-devel, cairo-devel, atk-devel, libICE-devel, libX11-devel, libSM-devel, intltool, cmake
-BuildRequires:	gettext
+Requires:	atk
+Requires:	cairo
+Requires:	fontconfig
+Requires:	freetype
+Requires:	glib2
+Requires:	glibc
+Requires:	gtk2
+Requires:	libICE
+Requires:	libSM
+Requires:	libX11
+Requires:	libXext
+Requires:	libxml2
+Requires:	pango
+Requires:	pygtk2
+Requires:	python < 3.0
+Requires:	python >= %{pythver}
+Buildrequires:	atk-devel
+Buildrequires:	cairo-devel
+Buildrequires:	gettext
+Buildrequires:	glib2-devel
+Buildrequires:	glibc-devel
+Buildrequires:	gtk2-devel
+Buildrequires:	intltool
+BuildRequires:	libICE-devel
+BuildRequires:	libSM-devel
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libxml2-devel
+Buildrequires:	pango-devel
+Buildrequires:	pygtk2-devel
+Buildrequires:	python-devel < 3.0
+Buildrequires:	python-devel >= %{pythver}
+Buildrequires:	redhat-rpm-config
 Provides:	mooedit
 
 %description
@@ -27,38 +56,25 @@ medit is a GTK-based text editor.
 %setup -q
 
 %build
-%cmake \
-	-DMOO_DOC_DIR:PATH=share/doc/%{name}-%{version} \
-	-DMOO_PLUGINS_DIR:PATH=%{_libdir}/moo/plugins \
-	-DMOO_LIB_DIR:PATH=%{_libdir}/moo \
-	-DCMAKE_C_FLAGS:STRING='-O2 -g -lm -ldl' \
-	-DCMAKE_INSTALL_PREFIX:PATH=%{_prefix} .
+./configure --prefix=%{_prefix} --libdir=%{_libdir} --with-python
 
-# Run cmake twice or plugins won't build
-%cmake \
-	-DMOO_DOC_DIR:PATH=share/doc/%{name}-%{version} \
-	-DMOO_PLUGINS_DIR:PATH=%{_libdir}/moo/plugins \
-	-DMOO_LIB_DIR:PATH=%{_libdir}/moo \
-	-DCMAKE_C_FLAGS:STRING='-O2 -g -lm -ldl' \
-	-DCMAKE_INSTALL_PREFIX:PATH=%{_prefix} .
-make VERBOSE=1 %{?_smp_mflags}
+make VERBOSE=1 %{?_smp_mflags} \
+	MOO_PYTHON_LIB_DIR=%{python_sitelib}/medit-1/python \
+	MOO_PYTHON_PLUGIN_DIR=%{python_sitelib}/medit-1/plugins
 
 %install
 rm -rf $RPM_BUILD_ROOT
-make install DESTDIR=$RPM_BUILD_ROOT
 
-rm -rf $RPM_BUILD_ROOT%{_libdir}/moo/plugins/*.pyc
-rm -rf $RPM_BUILD_ROOT%{_libdir}/moo/plugins/*.pyo
-rm -rf $RPM_BUILD_ROOT%{_libdir}/moo/plugins/lib/*.pyc
-rm -rf $RPM_BUILD_ROOT%{_libdir}/moo/plugins/lib/*.pyo
-rm -rf $RPM_BUILD_ROOT%{_libdir}/moo/plugins/lib/medit/*.pyc
-rm -rf $RPM_BUILD_ROOT%{_libdir}/moo/plugins/lib/medit/*.pyo
+make install MOO_PYTHON_LIB_DIR=%{python_sitelib}/medit-1/python \
+	MOO_PYTHON_PLUGIN_DIR=%{python_sitelib}/medit-1/plugins \
+	DESTDIR=$RPM_BUILD_ROOT
 
-%find_lang moo
-
-%find_lang moo-gsv
+%find_lang medit-1
+%find_lang medit-1-gsv
 
 desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
+
+rm -rf $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/icon-theme.cache
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -79,22 +95,61 @@ if [ -x %{_bindir}/gtk-update-icon-cache ]; then
   %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
 fi
 
-%files -f moo.lang
-%files -f moo-gsv.lang
+%files -f medit-1.lang
+%files -f medit-1-gsv.lang
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING COPYING.GPL LICENSE NEWS README THANKS doc/help/
+%doc AUTHORS COPYING NEWS README THANKS
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/icons/hicolor/48x48/apps/medit.png
-%{_datadir}/moo/
-%{_datadir}/pixmaps/medit.png
-%{_libdir}/moo/plugins/*.ini
-%{_libdir}/moo/plugins/*.py
-%{_libdir}/moo/plugins/lib/*.py
-%{_libdir}/moo/plugins/lib/medit/*.py
-%{_mandir}/man1/medit.*
+%{_datadir}/doc/%{name}-1/help/*.html
+%{_datadir}/doc/%{name}-1/help/img/prefs-file-filters.png
+%{_datadir}/doc/%{name}-1/help/img/prefs-file-selector.png
+%{_datadir}/doc/%{name}-1/help/medit.css
+%{_datadir}/doc/%{name}-1/help/script/*.html
+%{_datadir}/icons/hicolor/48x48/apps/%{name}.png
+%{_datadir}/medit-1/context.xml
+%{_datadir}/medit-1/filters.xml
+%{_datadir}/medit-1/lua/_moo/*.lua
+%{_datadir}/medit-1/menu.xml
+%{_datadir}/medit-1/language-specs/*.lang
+%{_datadir}/medit-1/language-specs/*.xml
+%{_datadir}/medit-1/language-specs/check.sh
+%{_datadir}/medit-1/language-specs/language2.rng
+%{_datadir}/medit-1/scripts/moo-open-html-help
+%{_datadir}/medit-1/scripts/xdg-email
+%{_datadir}/medit-1/scripts/xdg-open
+%dir %{python_sitelib}/medit-1/plugins/
+%{python_sitelib}/medit-1/plugins/python.ini
+%{python_sitelib}/medit-1/plugins/python.py
+%{python_sitelib}/medit-1/plugins/python.pyc
+%{python_sitelib}/medit-1/plugins/python.pyo
+%{python_sitelib}/medit-1/plugins/terminal.ini
+%{python_sitelib}/medit-1/plugins/terminal.py
+%{python_sitelib}/medit-1/plugins/terminal.pyc
+%{python_sitelib}/medit-1/plugins/terminal.pyo
+%dir %{python_sitelib}/medit-1/python/
+%{python_sitelib}/medit-1/python/insert_date_and_time.py
+%{python_sitelib}/medit-1/python/insert_date_and_time.pyc
+%{python_sitelib}/medit-1/python/insert_date_and_time.pyo
+%{python_sitelib}/medit-1/python/pyconsole.py
+%{python_sitelib}/medit-1/python/pyconsole.pyc
+%{python_sitelib}/medit-1/python/pyconsole.pyo
+%dir %{python_sitelib}/medit-1/python/medit/
+%{python_sitelib}/medit-1/python/medit/__init__.py
+%{python_sitelib}/medit-1/python/medit/__init__.pyc
+%{python_sitelib}/medit-1/python/medit/__init__.pyo
+%{python_sitelib}/medit-1/python/medit/runpython.py
+%{python_sitelib}/medit-1/python/medit/runpython.pyc
+%{python_sitelib}/medit-1/python/medit/runpython.pyo
+%{_mandir}/man1/%{name}.*
 
 %changelog
+* Thu Apr 14 2011 J. Krebs <rpm_speedy@yahoo.com> - 1.0.3-1
+- new version.
+
+* Thu Aug 26 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.10.4-3
+- changed help file path to comply with Fedora packaging guidelines.
+
 * Fri May 28 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.10.4-2
 - added links for libm and libdl.
 

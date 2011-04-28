@@ -70,6 +70,8 @@ point's name.
 make
 
 %install
+rm -rf $RPM_BUILD_ROOT
+
 make install DESTDIR=$RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1/
 install -m 644 wmwifi.1 $RPM_BUILD_ROOT%{_mandir}/man1/

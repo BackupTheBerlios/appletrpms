@@ -24,7 +24,7 @@
 ### END Distro Definitions
 
 %define		name wmweather+
-%define		version 2.12
+%define		version 2.13
 %define		release 1%{?dist}
 
 Summary:	A dock app for displaying weather information
@@ -78,6 +78,7 @@ external command.
 make X_EXTRA_LIBS=" -lm"
 
 %install
+rm -rf $RPM_BUILD_ROOT
 
 make install DESTDIR=$RPM_BUILD_ROOT
 
@@ -92,6 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Dec 11 2010 J. Krebs <rpm_speedy@yahoo.com> - 2.13-1
+- new version.
+
 * Wed Aug 25 2010 J. Krebs <rpm_speedy@yahoo.com> - 2.12-1
 - new version.
 

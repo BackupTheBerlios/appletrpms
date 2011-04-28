@@ -1,6 +1,6 @@
 %define		name worker
-%define		version 2.17.8
-%define		release 2%{?dist}
+%define		version 2.17.11
+%define		release 1%{?dist}
 
 Summary:	A file manager for X in AMIGA style
 Name:		%name
@@ -30,7 +30,8 @@ or buttons with the builtin configuration program.
 	--docdir=%{_datadir}/doc/%{name}-%{version} \
 	--enable-xft \
 	--with-avfs \
-	--with-libmagic
+	--with-libmagic \
+	--with-hal
 
 make
 
@@ -106,6 +107,12 @@ fi
 %{_datadir}/applications/worker.desktop
 
 %changelog
+* Wed Mar 23 2011 J. Krebs <rpm_speedy@yahoo.com> 2.17.11-1
+- new version.
+
+* Tue Aug 31 2010 J. Krebs <rpm_speedy@yahoo.com> 2.17.9-1
+- new version.
+
 * Fri Jun 25 2010 J. Krebs <rpm_speedy@yahoo.com> 2.17.8-2
 - new version, eliminated older documentation.
 

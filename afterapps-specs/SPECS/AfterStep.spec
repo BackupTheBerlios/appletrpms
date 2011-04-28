@@ -39,24 +39,24 @@
 ### END Distro Definitions
 
 %define	name AfterStep
-%define	version	2.2.9
-%define	libaiver	1.19
-%define	libabver	1.13
-%define	libairel	4%{?dist}
-%define	libabrel	4%{?dist}
-%define release 4%{?dist}
+%define	asver		2.2.11
+%define	libaiver	1.20
+%define	libabver	1.14
+%define	libairel	1%{?dist}
+%define	libabrel	1%{?dist}
+%define release 1%{?dist}
 %define epoch 20
 
 Summary:	AfterStep Window Manager (NeXTalike)
 Name:		%{name}
-Version:	%{version}
+Version:	%{asver}
 Release:	%{release}
 Epoch:		%{epoch}
-License:	GPL
+License:	GPLv2+
 Group:		User Interface/Desktops
 URL:		http://www.afterstep.org
 Vendor:		The AfterStep Team (see TEAM in docdir)
-Source0:	ftp://ftp.afterstep.org/stable/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.afterstep.org/stable/%{name}-%{asver}.tar.gz
 Source1:	Xclients.afterstep.switchdesk
 Source2:	afterstep.gdm
 Source3: 	AfterStep.kdm
@@ -69,50 +69,46 @@ Source9:	%{name}-2.2.7-wharf.alternate
 Patch0:		%{name}-2.2.5-ImageMagick.patch
 Patch1:		%{name}-2.2.7-winlist.patch
 Patch2:		%{name}-2.2.7-pager.patch
-Patch3:		%{name}-2.2.9-asgtklookedit.c.patch
-Patch4:		%{name}-2.2.9-ascompose.c.patch
-Patch5:		%{name}-2.2.9-screen.c.patch
-Patch6:		%{name}-2.2.9-asdatabase.h.patch
-Patch7:		%{name}-2.2.9-Database.c.patch
-Patch8:		%{name}-2.2.9-hints.c.patch
-Patch9:		%{name}-2.2.9-hints.h.patch
-Patch10:	%{name}-2.2.9-afterbase.c.patch
-Patch11:	%{name}-2.2.9-afterconf.h.patch
-Patch12:	%{name}-2.2.9-afterstep.c.patch
-Patch13:	%{name}-2.2.9-AfterStep.c.patch
-Patch14:	%{name}-2.2.9-asapp.c.patch
-Patch15:	%{name}-2.2.9-ascolor.c.patch
-Patch16:	%{name}-2.2.9-ASDocGen.c.patch
-Patch17:	%{name}-2.2.9-asfeel.h.patch
-Patch18:	%{name}-2.2.9-asim_afterbase.h.patch
-Patch19:	%{name}-2.2.9-asimbrowser.c.patch
-Patch20:	%{name}-2.2.9-configure.c.patch
-Patch21:	%{name}-2.2.9-Feel.c.patch
-Patch22:	%{name}-2.2.9-NEW.patch
-Patch23:	%{name}-2.2.9-pager.c.patch
-Patch24:	%{name}-2.2.9-Pager.c.patch
-Patch25:	%{name}-2.2.9-WinList.c.patch
-Patch26:	%{name}-2.2.9-WinTabs.c.patch
-Patch27:	%{name}-2.2.9-export.c.patch
 Distribution:	The AfterStep TEAM
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRoot:	%{_tmppath}/%{name}-%{asver}-%{release}-root-%(%{__id_u} -n)
 %if %{mdk}
 Obsoletes:	libAfterStep1
 %endif
 Provides:	AfterStep-libs
-Requires: 	libAfterImage = %{epoch}:%{libaiver}-%libairel
-Requires:	readline
-Requires:	gtk2, gtk2-devel
+Requires:	atk
+Requires:	cairo
+Requires:	dbus
 Requires:	feh
-Requires:	libXt
-BuildRequires:  readline-devel
+Requires:	fontconfig
+Requires:	freetype
+Requires:	gdk-pixbuf2
+Requires:	glib2
+Requires:	glibc
+Requires:	gtk2
+Requires: 	libAfterBase = %{epoch}:%{libabver}-%{libabrel}
+Requires: 	libAfterImage = %{epoch}:%{libaiver}-%{libairel}
+Requires:	libICE
+Requires:	libjpeg-turbo
+Requires:	libpng
+Requires:	librsvg2
+Requires:	libSM
+Requires:	libtiff
+Requires:	libX11
+Requires:	libXext
+Requires:	libXinerama
+Requires:	ncurses
+Requires:	pango
+Requires:	perl
+Requires:	readline
+Requires:	zlib
+BuildRequires:  freetype-devel
 BuildRequires:  gtk2-devel
 BuildRequires:	librsvg2-devel
 BuildRequires:	libtiff-devel
-BuildRequires:  freetype-devel
-BuildRequires:  zlib-devel
 BuildRequires:  libX11-devel
 BuildRequires:  libXt-devel
+BuildRequires:  readline-devel
+BuildRequires:  zlib-devel
 
 %description
 AfterStep is a Window Manager for X which started by emulating the
@@ -130,13 +126,13 @@ at a premium.
 
 %package devel
 Summary:	Files needed for software development with AfterStep
-Version:	%{version}
+Version:	%{asver}
 Release:	%{release}
 Epoch:		%{epoch}
 License:	GPL
 Group:		Development/Libraries
-Requires: 	libAfterImage-devel = %{epoch}:%{libaiver}-%libairel
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires: 	libAfterImage-devel = %{epoch}:%{libaiver}-%{libairel}
+Requires:	%{name} = %{epoch}:%{asver}-%{release}
 
 %description devel
 Files needed for software development with AfterStep.
@@ -144,19 +140,25 @@ Files needed for software development with AfterStep.
 %package -n libAfterImage
 Summary:	A generic image manipulation library
 Version:	%{libaiver}
-Release:	%libairel
+Release:	%{libairel}
 Epoch:		%{epoch}
 License:	GPL
 Group:		System Environment/Libraries
-Provides:	libAfterImage
-Requires:	librsvg2
-Requires:	libtiff
-Requires:	libpng
-Requires:	libjpeg
+Requires:	cairo
 Requires:	freetype
-Requires:	zlib
+Requires:	gdk-pixbuf2
+Requires:	glib2
+Requires:	glibc
+Requires:	libAfterBase = %{epoch}:%{libabver}-%{libabrel}
+Requires:	libICE
+Requires:	libjpeg-turbo
+Requires:	libpng
+Requires:	librsvg2
+Requires:	libSM
+Requires:	libtiff
 Requires:	libX11
-Requires:	libAfterBase = %{epoch}:%{libabver}-%libabrel
+Requires:	libXext
+Requires:	zlib
 
 %description -n libAfterImage
 libAfterImage is a generic image manipulation library. It was initially
@@ -176,7 +178,7 @@ from X window system.
 %package -n libAfterImage-devel
 Summary:	Files needed for software development with libAfterImage
 Version:	%{libaiver}
-Release:	%libairel
+Release:	%{libairel}
 Epoch:		%{epoch}
 License:	GPL
 Group:		Development/Libraries
@@ -187,8 +189,8 @@ Requires:	libjpeg-devel
 Requires:	freetype-devel
 Requires:	zlib-devel
 Requires:	libX11-devel
-Requires:	libAfterImage = %{epoch}:%{libaiver}-%libairel
-Requires:	libAfterBase-devel = %{epoch}:%{libabver}-%libabrel
+Requires:	libAfterImage = %{epoch}:%{libaiver}-%{libairel}
+Requires:	libAfterBase-devel = %{epoch}:%{libabver}-%{libabrel}
 
 %description -n libAfterImage-devel
 The libAfterImage-devel package contains the files needed for development with
@@ -197,7 +199,7 @@ libAfterImage
 %package -n libAfterBase
 Summary:	A basic functions library providing support for libAfterImage
 Version:	%{libabver}
-Release:	%libabrel
+Release:	%{libabrel}
 Epoch:		%{epoch}
 License:	GPL
 Group:		System Environment/Libraries
@@ -208,11 +210,11 @@ A basic functions library providing support for libAfterImage.
 %package -n libAfterBase-devel
 Summary:	Files needed for software development with libAfterBase
 Version:	%{libabver}
-Release:	%libabrel
+Release:	%{libabrel}
 Epoch:		%{epoch}
 License:	GPL
 Group:		Development/Libraries
-Requires:	libAfterBase = %{epoch}:%{libabver}-%libabrel
+Requires:	libAfterBase = %{epoch}:%{libabver}-%{libabrel}
 
 %description -n libAfterBase-devel
 Files needed for software development with libAfterBase.
@@ -222,31 +224,6 @@ Files needed for software development with libAfterBase.
 %patch0
 %patch1
 %patch2
-%patch3
-%patch4
-%patch5
-%patch6
-%patch7
-%patch8
-%patch9
-%patch10
-%patch11
-%patch12
-%patch13
-%patch14
-%patch15
-%patch16
-%patch17
-%patch18
-%patch19
-%patch20
-%patch21
-%patch22
-%patch23
-%patch24
-%patch25
-%patch26
-%patch27
 
 %build
 CFLAGS=$RPM_OPT_FLAGS \
@@ -257,8 +234,7 @@ CFLAGS=$RPM_OPT_FLAGS \
 	--enable-sharedlibs                       \
 	--disable-staticlibs                      \
 	--enable-i18n                             \
-	--with-helpcommand="xterm -e man"         \
-	--with-desktops=2 --with-deskgeometry=2x2 \
+	--with-helpcommand="urxvt -e man"         \
 	--with-imageloader="feh --bg-center"
 
 make
@@ -459,6 +435,9 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
+* Fri Jan 14 2011 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.11-1
+- new version.
+
 * Thu Nov 12 2009 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.9-4
 - added export.c patch to default export values using union members.
 

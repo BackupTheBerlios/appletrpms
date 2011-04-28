@@ -1,50 +1,48 @@
-### BEGIN Distro Defines
-%define mdk  %(if [ -e /etc/mandrake-release ]; then echo 1; else echo 0; fi;)
-%{?_with_mdk:   %{expand: %%global mdk 1}}
-
-%define fedora  %(if [ -e /etc/fedora-release ]; then echo 1; else echo 0; fi;)
-%{?_with_fedora:   %{expand: %%global fedora 1}}
-
-%define suse %(if [ -e /etc/SuSE-release ]; then echo 1; else echo 0; fi;)
-%{?_with_suse:   %{expand: %%global suse 1}}
-
-%define generic 1
-
-%if %{mdk}
-  %define generic 0
-%endif
-
-%if %{fedora}
-  %define generic 0
-%endif
-
-%if %{suse}
-  %define generic 0
-%endif
-### END Distro Definitions
-
 %define name trayer
-%define version 1.0
-%define release 5%{?dist}
+%define version 1.1
+%define release 1%{?dist}
 
-Summary: A lightweight GTK2-based systray for UNIX desktop
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: User Interface/Desktops
-URL: http://fvwm-crystal.org/
-Source0: http://download.gna.org/fvwm-crystal/%{name}/%{version}/%{name}-%{version}.tar.gz
-Patch0: %{name}-%{version}-Makefile.common.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires: libXmu-devel
+Summary:	A lightweight GTK2-based systray for UNIX desktop
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		User Interface/Desktops
+URL:		http://hg.debian.org/hg/collab-maint/trayer
+Source0:	http://ftp.de.debian.org/debian/pool/main/t/%{name}/%{name}_%{version}.orig.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	atk
+Requires:	cairo
+Requires:	fontconfig
+Requires:	freetype
+Requires:	gdk-pixbuf2
+Requires:	glib2
+Requires:	glibc
+Requires:	glibc
+Requires:	gtk2
+Requires:	libpng
+Requires:	libX11
+Requires:	libXmu
+Requires:	pango
+BuildRequires:	atk-devel
+BuildRequires:	cairo-devel
+BuildRequires:	fontconfig-devel
+BuildRequires:	freetype-devel
+BuildRequires:	gdk-pixbuf2-devel
+BuildRequires:	glib2-devel
+BuildRequires:	glibc-devel
+BuildRequires:	glibc-devel
+BuildRequires:	gtk2-devel
+BuildRequires:	libpng-devel
+BuildRequires:	libX11-devel
+BuildRequires:	libXmu-devel
+BuildRequires:	pango-devel
 
 %description
 A lightweight GTK2-based systray for UNIX desktop.
 
 %prep
-%setup -q
-%patch0
+%setup -q -n sargon-trayer-srg-75f4d7e
 
 %build
 make PREFIX=%{_prefix}
@@ -60,10 +58,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
-%doc CREDITS COPYING CHANGELOG README
+%{_bindir}/trayer
+%doc CREDITS COPYING CHANGELOG README TODO
 
 %changelog
+* Thu Apr 28 2011 J. Krebs <rpm_speedy@yahoo.com> - 1.1-1
+- new version (thanks Team Debian).
+
 * Thu May 27 2010 J. Krebs <rpm_speedy@yahoo.com> - 1.0-5
 - improved links in Makefile.common patch file.
 

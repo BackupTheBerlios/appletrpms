@@ -1,5 +1,5 @@
 %define	name 	libAfterImage-NoX
-%define	version	1.18
+%define	version	1.20
 %define	release	1%{?dist}
 %define	epoch	20
 
@@ -14,11 +14,6 @@ Source0:	ftp://ftp.afterstep.org/stable/libAfterImage/libAfterImage-%{version}.t
 Source1:	%{name}-COPYING
 Source2:	%{name}-COPYING.LDP
 Source3:	%{name}-COPYING.LIB
-Patch0:		libAfterImage-afterimage-config.patch
-Patch1:		libAfterImage-glx.patch
-Patch2:		libAfterImage-Makefile-ldconfig.patch
-Patch3:		libAfterImage-multiarch.patch
-Patch4:		libAfterImage-%{version}-ascompose.c.patch
 URL:		http://www.afterstep.org
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	librsvg2
@@ -78,11 +73,6 @@ libAfterImage.
 
 %prep
 %setup -q -n libAfterImage-%{version}
-%patch0
-%patch1
-%patch2
-%patch3
-%patch4
 
 %build
 
@@ -94,7 +84,7 @@ libAfterImage.
 	--enable-i18n \
 	--enable-sharedlibs
 
-make
+make LIBS_XEXTS=-lX11
 
 %install
 
@@ -142,6 +132,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/libAfterImage/*
 
 %changelog
+* Sat Jan 15 2011 J. Krebs <rpm_speedy@yahoo.com> 1.20-1
+- new version.
+
 * Fri Jul 31 2009 J. Krebs <rpm_speedy@yahoo.com> 1.18-1
 - new version.
 

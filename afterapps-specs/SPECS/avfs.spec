@@ -1,21 +1,25 @@
 %define	name 	avfs
-%define	version	0.9.8
-%define	release	2%{?dist}
+%define	version	0.9.9
+%define	release	1%{?dist}
 
 Summary:	Enables programs to look inside archived/compressed files, access remote files
-Name:		%name
-Version:	%version
-Release:	%release
+Name:		%{name}
+Version:	%{version}
+Release:	%{release}
 License:	GPLv2 and LGPLv2
 Group:		Applications/Archiving
 URL:		http://sourceforge.net/projects/avf
 Source0:	http://easynews.dl.sourceforge.net/sourceforge/avf/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	fuse
+Requires:	glibc
+Requires:	perl
 Buildrequires:	fuse-devel
+Buildrequires:	glibc-devel
+Buildrequires:	perl-devel
 
 %description
-AVFS is a system which enables all programs to look inside archived
+AVFS is a system, which enables all programs to look inside archived
 or compressed files, or access remote files without recompiling the
 programs or changing the kernel.
 
@@ -23,12 +27,6 @@ At the moment it supports floppies, tar and gzip files, zip, bzip2, ar
 and rar files, ftp sessions, http, webdav, rsh/rcp, ssh/scp. Quite a
 few other handlers are implemented with the Midnight Commander's
 external FS.
-
-AVFS is (C) under the GNU GPL (see the file COPYING). The shared
-library supporting AVFS with LD_PRELOAD is (C) under the GNU LGPL (see
-the file COPYING.LIB).
-
-AVFS comes with ABSOLUTELY NO WARRANTY, for details see the file COPYING. 
 
 %package devel
 Summary:   Development libraries and header files for %{name}
@@ -65,7 +63,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/%{name}/
 %{_libdir}/*.so.*
 %{_includedir}/*
-%doc AUTHORS COPYING COPYING.LIB ChangeLog INSTALL NEWS README TODO doc/
+%doc AUTHORS COPYING COPYING.LIB ChangeLog NEWS README TODO doc/
 
 %files devel
 %{_includedir}/
@@ -73,6 +71,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.*a
 
 %changelog
+* Fri Oct 08 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.9.9-1
+- New version.
+
 * Wed Aug 06 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.9.8-2
 - Added libdir to configure for build under x86_64.
 

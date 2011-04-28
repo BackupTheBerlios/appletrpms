@@ -1,4 +1,4 @@
-%define version 0.9.3
+%define version 0.10cvs20110119101636
 %define release 1%{?dist}
 %define name	eina
 
@@ -6,33 +6,55 @@ Summary:	A classic player for a modern era
 Name:		%name
 Version:	%version
 Release:	%release
-License:	GPLv2+
+License:	GPLv3
 Group:		Applications/Multimedia
-Source0:	http://launchpad.net/eina/trunk/0.9.3/+download/%{name}-%{version}.tar.gz
+Source0:	http://launchpad.net/eina/trunk/0.9.4/+download/%{name}-%{version}.tar.gz
+#Patch0:		%{name}-%{version}-main.c.patch
+#Patch1:		%{name}-%{version}-data-Makefile.am.patch
+#Patch2:		%{name}-%{version}-data-Makefile.in.patch
+#Patch3:		%{name}-%{version}-gel-Makefile.am.patch
+#Patch4:		%{name}-%{version}-gel-Makefile.in.patch
+#Patch5:		%{name}-%{version}-lomo-Makefile.am.patch
+#Patch6:		%{name}-%{version}-lomo-Makefile.in.patch
+#Patch7:		%{name}-%{version}-data-eina.pc.in.patch
 URL:		http://eina.sourceforge.net/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires:	gstreamer curl gtk2 unique sqlite libuuid libnotify clutter-gtk atk
-Requires:	freetype gdk-pixbuf dbus-glib pango cairo libnotify glibc libxml2
-BuildRequires:	freetype-devel
-BuildRequires:	gstreamer-devel 
-BuildRequires:	intltool 
-BuildRequires:	gtk2-devel
-BuildRequires:	dbus-glib-devel
-BuildRequires:	unique-devel
-BuildRequires:	sqlite-devel
-BuildRequires:	desktop-file-utils
+#Requires:	atk
+#Requires:	clutter-gtk
+#Requires:	curl
+#Requires:	dbus-glib
+#Requires:	freetype
+#Requires:	gdk-pixbuf
+#Requires:	glib2 >= 2.26.0
+#Requires:	glibc
+#Requires:	gstreamer
+#Requires:	gtk3 >= 2.91.1
+#Requires:	libnotify
+#Requires:	libuuid
+#Requires:	libxml2
+#Requires:	pango cairo
+#Requires:	sqlite
+#Requires:	unique
+BuildRequires:	atk-devel
+BuildRequires:	cairo-devel
+BuildRequires:	clutter-gtk-devel
 BuildRequires:	curl-devel
+BuildRequires:	dbus-glib-devel
+BuildRequires:	desktop-file-utils
+BuildRequires:	freetype-devel
+BuildRequires:	gdk-pixbuf-devel
+BuildRequires:	glib2-devel >= 2.26.0
+BuildRequires:	glibc-devel
+BuildRequires:	gstreamer-devel 
+BuildRequires:	gtk3-devel >= 2.91.1
+BuildRequires:	intltool 
 BuildRequires:	libnotify-devel
 BuildRequires:	libuuid-devel
-BuildRequires:	clutter-gtk-devel
-BuildRequires:	dbus-glib-devel
-BuildRequires:	atk-devel
-BuildRequires:	gdk-pixbuf-devel
-BuildRequires:	pango-devel
-BuildRequires:	cairo-devel
-BuildRequires:	libnotify-devel
-BuildRequires:	glibc-devel
 BuildRequires:	libxml2-devel
+BuildRequires:	pango-devel
+BuildRequires:	redhat-rpm-config
+BuildRequires:	sqlite-devel
+BuildRequires:	unique-devel
 
 %description
 Eina works like a common portable music player. It just plays what you
@@ -66,13 +88,23 @@ This package contains documentation for eina.
 
 %prep
 %setup -q
+#%patch0
+#%patch1
+#%patch2
+#%patch3
+#%patch4
+#%patch5
+#%patch6
+#%patch7
 
 %build
+./autogen.sh
+
 ./configure --prefix=%{_prefix} --libdir=%{_libdir} --disable-static
 
 # Remove Rpath
-sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
-sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
+#sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
+#sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 
 make
 
@@ -89,6 +121,7 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 find $RPM_BUILD_ROOT -name '*.a' -exec rm -f {} ';'
 
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -102,9 +135,8 @@ update-desktop-database &> /dev/null || :
 
 %files -f eina.lang
 %defattr(-,root,root,-)
-%doc AUTHORS BUGS COPYING ChangeLog INSTALL NEWS README
+%doc AUTHORS BUGS COPYING ChangeLog NEWS README
 %{_bindir}/eina
-%{_bindir}/vogon
 %{_datadir}/applications/eina.desktop
 %{_datadir}/eina/icons/hicolor/*/actions/bug.png
 %{_datadir}/eina/icons/hicolor/*/actions/cover-default.png
@@ -140,7 +172,6 @@ update-desktop-database &> /dev/null || :
 %{_libdir}/liblomo-1.0.so.1.0.0
 %{_libdir}/eina/adb/adb.png
 %{_libdir}/eina/adb/libadb.so
-%{_libdir}/eina/callhome/libcallhome.so
 %{_libdir}/eina/coverplus/libcoverplus.so
 %{_libdir}/eina/lastfm/lastfm.png
 %{_libdir}/eina/lastfm/lastfm.ui
@@ -149,31 +180,46 @@ update-desktop-database &> /dev/null || :
 %{_libdir}/eina/lastfm/lastfmsubmitd/COPYRIGHT
 %{_libdir}/eina/lastfm/lastfmsubmitd/info.txt
 %attr(755, root, root) %{_libdir}/eina/lastfm/lastfmsubmitd/lastfmsubmitd
+%dir %{_libdir}/eina/lastfm/lastfmsubmitd/lastfm/
 %{_libdir}/eina/lastfm/lastfmsubmitd/lastfm/__init__.py
+%{_libdir}/eina/lastfm/lastfmsubmitd/lastfm/__init__.pyc
+%{_libdir}/eina/lastfm/lastfmsubmitd/lastfm/__init__.pyo
 %{_libdir}/eina/lastfm/lastfmsubmitd/lastfm/client.py
+%{_libdir}/eina/lastfm/lastfmsubmitd/lastfm/client.pyc
+%{_libdir}/eina/lastfm/lastfmsubmitd/lastfm/client.pyo
 %{_libdir}/eina/lastfm/lastfmsubmitd/lastfm/config.py
+%{_libdir}/eina/lastfm/lastfmsubmitd/lastfm/config.pyc
+%{_libdir}/eina/lastfm/lastfmsubmitd/lastfm/config.pyo
 %{_libdir}/eina/lastfm/lastfmsubmitd/lastfm/marshaller.py
+%{_libdir}/eina/lastfm/lastfmsubmitd/lastfm/marshaller.pyc
+%{_libdir}/eina/lastfm/lastfmsubmitd/lastfm/marshaller.pyo
 %{_libdir}/eina/muine/libmuine.so
 %{_libdir}/eina/muine/muine.ui
 %{_libdir}/eina/ntfy/libntfy.so
 %{_libdir}/eina/ntfy/ntfy.png
 %{_libdir}/eina/recently/dock.ui
 %{_libdir}/eina/recently/go-back.png
+%{_libdir}/eina/recently/librecently.so
 
 %files devel
 %defattr(-,root,root,-)
+%{_includedir}/eina-0.9/eina/about.h
 %{_includedir}/eina-0.9/eina/art.h
+%{_includedir}/eina-0.9/eina/dbus.h
+%{_includedir}/eina-0.9/eina/dock.h
 %{_includedir}/eina-0.9/eina/eina-obj.h
 %{_includedir}/eina-0.9/eina/eina-plugin.h
 %{_includedir}/eina-0.9/eina/fs.h
 %{_includedir}/eina-0.9/eina/lomo.h
+%{_includedir}/eina-0.9/eina/player.h
+%{_includedir}/eina-0.9/eina/playlist.h
 %{_includedir}/eina-0.9/eina/preferences.h
 %{_includedir}/eina-0.9/eina/settings.h
+%{_includedir}/eina-0.9/eina/vogon.h
 %{_includedir}/eina-0.9/eina/window.h
 %{_includedir}/eina-0.9/eina/ext/curl-engine.h
 %{_includedir}/eina-0.9/eina/ext/eina-conf.h
 %{_includedir}/eina-0.9/eina/ext/eina-cover.h
-%{_includedir}/eina-0.9/eina/ext/eina-cover-clutter.h
 %{_includedir}/eina-0.9/eina/ext/eina-cover-image.h
 %{_includedir}/eina-0.9/eina/ext/eina-file-chooser-dialog.h
 %{_includedir}/eina-0.9/eina/ext/eina-file-utils.h
@@ -229,6 +275,9 @@ update-desktop-database &> /dev/null || :
 %{_datadir}/gtk-doc/html/lomo/up.png
 
 %changelog
+* Sat Jan 08 2011 J. Krebs <rpm_speedy@yahoo.com> 0.9.4.2-1
+- new version.
+
 * Sat May 29 2010 J. Krebs <rpm_speedy@yahoo.com> 0.9.3-1
 - initial build.
 

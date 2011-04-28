@@ -56,7 +56,7 @@ LCD_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(LCD_TAR)
 #APPLET_LIST += LCD
 
 AVFS_NAME=avfs
-AVFS_VERSION=0.9.8
+AVFS_VERSION=0.9.9
 AVFS_TAR=$(AVFS_NAME)-$(AVFS_VERSION).tar.gz
 AVFS_URL=http://easynews.dl.sourceforge.net/sourceforge/avf/$(AVFS_TAR)
 
@@ -65,19 +65,19 @@ APPLET_LIST += AVFS
 CALCOO_NAME=calcoo
 CALCOO_VERSION=1.3.18
 CALCOO_TAR=$(CALCOO_NAME)-$(CALCOO_VERSION).tar.gz
-CALCOO_URL=http://internap.dl.sourceforge.net/sourceforge/$(CALCOO_NAME)/$(CALCOO_TAR)
+CALCOO_URL=http://easynews.dl.sourceforge.net/sourceforge/$(CALCOO_NAME)/$(CALCOO_TAR)
 
 APPLET_LIST += CALCOO
 
 EINA_NAME=eina
-EINA_VERSION=0.9.3
+EINA_VERSION=0.9.4.2
 EINA_TAR=$(EINA_NAME)-$(EINA_VERSION).tar.gz
-EINA_URL=http://launchpad.net/eina/trunk/0.9.3/+download/$(EINA_TAR)
+EINA_URL=http://launchpad.net/eina/trunk/0.9.4/+download/$(EINA_TAR)
 
 APPLET_LIST += EINA
 
 FOTOXX_NAME=fotoxx
-FOTOXX_VERSION=10.8.4
+FOTOXX_VERSION=11.04
 FOTOXX_TAR=$(FOTOXX_NAME)-$(FOTOXX_VERSION).tar.gz
 FOTOXX_URL=http://kornelix.squarespace.com/storage/downloads/$(FOTOXX_TAR)
 
@@ -108,9 +108,9 @@ APPLET_LIST += FOTOXX
 #APPLET_LIST += LIBWRASTER
 
 MEDIT_NAME=medit
-MEDIT_VERSION=0.10.4
+MEDIT_VERSION=1.0.3
 MEDIT_TAR=$(MEDIT_NAME)-$(MEDIT_VERSION).tar.bz2
-MEDIT_URL=http://easynews.dl.sourceforge.net/sourceforge/mooedit/medit/$(MEDIT_VERSION)/$(MEDIT_TAR)
+MEDIT_URL=http://sourceforge.net/projects/mooedit/files/$(MEDIT_NAME)/$(MEDIT_VERSION)/$(MEDIT_TAR)
 
 APPLET_LIST += MEDIT
 
@@ -144,7 +144,7 @@ SALMON_URL=http://tigr.net/afterstep/download/salmon/$(SALMON_TAR)
 APPLET_LIST += SALMON
 
 STALONETRAY_NAME=stalonetray
-STALONETRAY_VERSION=0.8.0
+STALONETRAY_VERSION=0.8.1
 STALONETRAY_TAR=$(STALONETRAY_NAME)-$(STALONETRAY_VERSION).tar.gz
 STALONETRAY_URL=http://easynews.dl.sourceforge.net/sourceforge/$(STALONETRAY_NAME)/$(STALONETRAY_TAR)
 
@@ -158,14 +158,13 @@ TEMPERATURE.APP_URL=http://www.fukt.bsnet.se/~per/temperature/$(TEMPERATURE.APP_
 APPLET_LIST += TEMPERATURE.APP
 
 TRAYER_NAME=trayer
-TRAYER_VERSION=1.0
-TRAYER_TAR=$(TRAYER_NAME)-$(TRAYER_VERSION).tar.gz
-TRAYER_URL=http://download.gna.org/fvwm-crystal/$(TRAYER_NAME)/$(TRAYER_VERSION)/$(TRAYER_TAR)
-
+TRAYER_VERSION=1.1
+TRAYER_TAR=$(TRAYER_NAME)_$(TRAYER_VERSION).orig.tar.gz
+TRAYER_URL=http://ftp.de.debian.org/debian/pool/main/t/trayer/trayer_1.1.orig.tar.gz
 APPLET_LIST += TRAYER
 
 WORKER_NAME=worker
-WORKER_VERSION=2.17.8
+WORKER_VERSION=2.17.11
 WORKER_TAR=$(WORKER_NAME)-$(WORKER_VERSION).tar.gz
 WORKER_URL=http://www.boomerangsworld.de/worker/downloads/$(WORKER_TAR)
 

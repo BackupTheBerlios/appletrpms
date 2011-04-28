@@ -24,9 +24,9 @@ DOCKER_URL=http://icculus.org/openbox/2/$(DOCKER_NAME)/$(DOCKER_TAR)
 APPLET_LIST += DOCKER
 
 HVCLOCK_NAME=hvclock
-HVCLOCK_VERSION=1.0.0
+HVCLOCK_VERSION=1.0.2
 HVCLOCK_TAR=$(HVCLOCK_NAME)-$(HVCLOCK_VERSION).tar.gz
-HVCLOCK_URL=http://www.hugovil.com/repository/$(HVCLOCK_TAR)
+HVCLOCK_URL=http://www.hugovil.com/repository/hvclock/$(HVCLOCK_TAR)
 
 APPLET_LIST += HVCLOCK
 
@@ -73,6 +73,13 @@ WMBLUEMEM_URL=http://www.dockapps.org/download.php/id/771/$(WMBLUEMEM_TAR)
 
 APPLET_LIST += WMBLUEMEM
 
+WMC2D_NAME=wmc2d
+WMC2D_VERSION=2.04
+WMC2D_TAR=$(WMC2D_NAME)-2010-08-16-13.tar.bz2
+WMC2D_URL=http://www.goron.de/~johns/wmc2d/$(WMC2D_TAR)
+
+APPLET_LIST += WMC2D
+
 WMCALENDAR_NAME=wmcalendar
 WMCALENDAR_VERSION=0.5.2
 WMCALENDAR_TAR=$(WMCALENDAR_NAME)-$(WMCALENDAR_VERSION).tar.gz
@@ -111,7 +118,7 @@ APPLET_LIST += WMCPULOAD
 WMCPUM.APP_NAME=wmcpum.app
 WMCPUM.APP_VERSION=0.1.0
 WMCPUM.APP_TAR=$(WMCPUM.APP_NAME)-$(WMCPUM.APP_VERSION).tar.gz
-WMCPUM.APP_URL=http://www.unetz.com/schaepe/DOCKAPPS/$(WMCPUM.APP_TAR)
+WMCPUM.APP_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMCPUM.APP_TAR)
 
 APPLET_LIST += WMCPUM.APP
 
@@ -249,6 +256,13 @@ WMSORSEN_URL=http://www.boomerangsworld.de/cms/dockapps/$(WMSORSEN_NAME)/downloa
 
 APPLET_LIST += WMSORSEN
 
+WMSYSTEMTRAY_NAME=wmsystemtray
+WMSYSTEMTRAY_VERSION=1.2
+WMSYSTEMTRAY_TAR=$(WMSYSTEMTRAY_NAME)-$(WMSYSTEMTRAY_VERSION).tar.gz
+WMSYSTEMTRAY_URL=http://easynews.dl.sourceforge.net/sourceforge/wmsystemtray/$(WMSYSTEMTRAY_TAR)
+
+APPLET_LIST += WMSYSTEMTRAY
+
 WMSYSTRAY_NAME=wmsystray
 WMSYSTRAY_VERSION=0.1.1
 WMSYSTRAY_TAR=$(WMSYSTRAY_NAME)-$(WMSYSTRAY_VERSION).tar.bz2
@@ -274,9 +288,16 @@ APPLET_LIST += WMTIMER
 WMTZ_NAME=wmtz
 WMTZ_VERSION=0.7
 WMTZ_TAR=$(WMTZ_NAME)-$(WMTZ_VERSION).tar.gz
-WMTZ_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMTZ_NAME)/$(WMTZ_TAR)
+WMTZ_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMTZ_TAR)
 
 APPLET_LIST += WMTZ
+
+WMUDMOUNT_NAME=wmudmount
+WMUDMOUNT_VERSION=1.6
+WMUDMOUNT_TAR=$(WMUDMOUNT_NAME)-$(WMUDMOUNT_VERSION).tar.gz
+WMUDMOUNT_URL=http://www.dockapps.org/download.php/id/836/$(WMUDMOUNT_TAR)
+
+APPLET_LIST += WMUDMOUNT
 
 WMUPMON_NAME=wmupmon
 WMUPMON_VERSION=0.1.3
@@ -300,7 +321,7 @@ WMWEATHER_URL=http://ftp.de.debian.org/debian/pool/main/w/wmweather/$(WMWEATHER_
 APPLET_LIST += WMWEATHER
 
 WMWEATHERPLUS_NAME=wmweather+
-WMWEATHERPLUS_VERSION=2.12
+WMWEATHERPLUS_VERSION=2.13
 WMWEATHERPLUS_TAR=$(WMWEATHERPLUS_NAME)-$(WMWEATHERPLUS_VERSION).tar.gz
 WMWEATHERPLUS_URL=http://easynews.dl.sourceforge.net/sourceforge/wmweatherplus/$(WMWEATHERPLUS_TAR)
 
@@ -323,6 +344,6 @@ APPLET_LIST += WMXKB
 WMBIFF_NAME=wmbiff
 WMBIFF_VERSION=0.4.27
 WMBIFF_TAR=$(WMBIFF_NAME)-$(WMBIFF_VERSION).tar.gz
-WMBIFF_URL=http://internap.dl.sourceforge.net/sourceforge/wmbiff/$(WMBIFF_TAR)
+WMBIFF_URL=http://easynews.dl.sourceforge.net/sourceforge/wmbiff/$(WMBIFF_TAR)
 
 APPLET_LIST += WMBIFF
