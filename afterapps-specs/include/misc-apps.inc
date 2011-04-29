@@ -69,12 +69,13 @@ CALCOO_URL=http://easynews.dl.sourceforge.net/sourceforge/$(CALCOO_NAME)/$(CALCO
 
 APPLET_LIST += CALCOO
 
-EINA_NAME=eina
-EINA_VERSION=0.9.4.2
-EINA_TAR=$(EINA_NAME)-$(EINA_VERSION).tar.gz
-EINA_URL=http://launchpad.net/eina/trunk/0.9.4/+download/$(EINA_TAR)
+#cvs eina needs gtk3-3.0.0+, not available under Fedora 14
+#EINA_NAME=eina
+#EINA_VERSION=0.9.4.2
+#EINA_TAR=$(EINA_NAME)-$(EINA_VERSION).tar.gz
+#EINA_URL=http://launchpad.net/eina/trunk/0.9.4/+download/$(EINA_TAR)
 
-APPLET_LIST += EINA
+#APPLET_LIST += EINA
 
 FOTOXX_NAME=fotoxx
 FOTOXX_VERSION=11.04

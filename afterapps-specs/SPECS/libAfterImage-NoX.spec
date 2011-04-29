@@ -84,7 +84,7 @@ libAfterImage.
 	--enable-i18n \
 	--enable-sharedlibs
 
-make LIBS_XEXTS=-lX11
+make LIBS_X=" -lXext -lX11"
 
 %install
 
