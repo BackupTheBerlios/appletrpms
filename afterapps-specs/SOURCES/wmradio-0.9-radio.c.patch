@@ -1,0 +1,11 @@
+--- radio.c	2004-09-26 13:09:37.000000000 -0500
++++ radio.c	2011-05-24 23:27:08.644452402 -0500
+@@ -27,7 +27,7 @@
+ #include <sys/time.h>
+ #include <sys/ioctl.h>
+ 
+-#include <linux/videodev.h>
++#include <libv4l1-videodev.h>
+ 
+ char *device = "/dev/radio";
+ 

@@ -1,0 +1,15 @@
+--- configure.ac	2010-09-28 09:16:06.000000000 -0500
++++ configure.ac	2011-05-25 10:34:12.000000000 -0500
+@@ -75,6 +75,12 @@
+ AC_C_INLINE
+ AC_TYPE_SIZE_T
+ 
++# Check for libnotify >= 0.7
++PKG_CHECK_MODULES(LIBNOTIFY_07, [libnotify >= 0.7], [have_libnotify_07=yes],[have_libnotify_07=no])
++if test x"$have_libnotify_07" = "xyes"; then
++ AC_DEFINE(HAVE_LIBNOTIFY_07, 1, [Define if you have libnotify 0.7 or later])
++fi
++
+ # Checks for library functions.
+ AC_FUNC_MALLOC
+ if test "$ac_cv_func_malloc_0_nonnull" != "yes"; then AC_MSG_WARN([malloc() doesn't seem to work]); fi #'

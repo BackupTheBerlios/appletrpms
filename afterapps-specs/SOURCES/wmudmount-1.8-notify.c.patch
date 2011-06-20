@@ -1,0 +1,16 @@
+--- notify.c	2010-09-15 09:35:38.000000000 -0500
++++ notify.c	2011-05-25 08:50:02.000000000 -0500
+@@ -58,7 +58,12 @@
+     } else if(G_IS_FILE_ICON(icon)){
+         icon_name = g_icon_to_string(icon);
+     }
+-    NotifyNotification *n = notify_notification_new(summary, body, icon_name, NULL);
++    NotifyNotification *n = notify_notification_new(summary, body, icon_name
++#ifdef HAVE_LIBNOTIFY_07
++    );
++#else
++    , NULL);
++#endif
+     GError *err = NULL;
+     if(!notify_notification_show(n, &err)){
+         warn(DEBUG_ERROR, "Failed to show notification \"%s\" \"%s\": %s", summary, body, err?err->message:"<unknown error>");

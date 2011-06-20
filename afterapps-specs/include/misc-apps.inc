@@ -70,15 +70,15 @@ CALCOO_URL=http://easynews.dl.sourceforge.net/sourceforge/$(CALCOO_NAME)/$(CALCO
 APPLET_LIST += CALCOO
 
 #cvs eina needs gtk3-3.0.0+, not available under Fedora 14
-#EINA_NAME=eina
-#EINA_VERSION=0.9.4.2
-#EINA_TAR=$(EINA_NAME)-$(EINA_VERSION).tar.gz
-#EINA_URL=http://launchpad.net/eina/trunk/0.9.4/+download/$(EINA_TAR)
+EINA_NAME=eina
+EINA_VERSION=0.10.0
+EINA_TAR=$(EINA_NAME)-$(EINA_VERSION).tar.gz
+EINA_URL=http://launchpad.net/eina/trunk/$(EINA_VERSION)/+download/$(EINA_TAR)
 
-#APPLET_LIST += EINA
+APPLET_LIST += EINA
 
 FOTOXX_NAME=fotoxx
-FOTOXX_VERSION=11.04
+FOTOXX_VERSION=11.06.2
 FOTOXX_TAR=$(FOTOXX_NAME)-$(FOTOXX_VERSION).tar.gz
 FOTOXX_URL=http://kornelix.squarespace.com/storage/downloads/$(FOTOXX_TAR)
 
@@ -159,13 +159,13 @@ TEMPERATURE.APP_URL=http://www.fukt.bsnet.se/~per/temperature/$(TEMPERATURE.APP_
 APPLET_LIST += TEMPERATURE.APP
 
 TRAYER_NAME=trayer
-TRAYER_VERSION=1.1
+TRAYER_VERSION=1.1.1
 TRAYER_TAR=$(TRAYER_NAME)_$(TRAYER_VERSION).orig.tar.gz
-TRAYER_URL=http://ftp.de.debian.org/debian/pool/main/t/trayer/trayer_1.1.orig.tar.gz
+TRAYER_URL=http://ftp.de.debian.org/debian/pool/main/t/trayer/trayer_1.1.1.orig.tar.gz
 APPLET_LIST += TRAYER
 
 WORKER_NAME=worker
-WORKER_VERSION=2.17.11
+WORKER_VERSION=2.17.13
 WORKER_TAR=$(WORKER_NAME)-$(WORKER_VERSION).tar.gz
 WORKER_URL=http://www.boomerangsworld.de/worker/downloads/$(WORKER_TAR)
 

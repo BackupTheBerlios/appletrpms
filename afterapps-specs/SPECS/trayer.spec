@@ -1,5 +1,5 @@
 %define name trayer
-%define version 1.1
+%define version 1.1.1
 %define release 1%{?dist}
 
 Summary:	A lightweight GTK2-based systray for UNIX desktop
@@ -8,7 +8,7 @@ Version:	%version
 Release:	%release
 License:	GPLv2+
 Group:		User Interface/Desktops
-URL:		http://hg.debian.org/hg/collab-maint/trayer
+URL:		https://github.com/sargon/trayer-srg
 Source0:	http://ftp.de.debian.org/debian/pool/main/t/%{name}/%{name}_%{version}.orig.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	atk
@@ -42,7 +42,7 @@ BuildRequires:	pango-devel
 A lightweight GTK2-based systray for UNIX desktop.
 
 %prep
-%setup -q -n sargon-trayer-srg-75f4d7e
+%setup -q -n sargon-trayer-srg-82d5d05
 
 %build
 make PREFIX=%{_prefix}
@@ -62,6 +62,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc CREDITS COPYING CHANGELOG README TODO
 
 %changelog
+* Sat May 21 2011 J. Krebs <rpm_speedy@yahoo.com> - 1.1.1-1
+- new version.
+
 * Thu Apr 28 2011 J. Krebs <rpm_speedy@yahoo.com> - 1.1-1
 - new version (thanks Team Debian).
 

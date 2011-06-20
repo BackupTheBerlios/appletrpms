@@ -1,5 +1,5 @@
 %define		name worker
-%define		version 2.17.11
+%define		version 2.17.13
 %define		release 1%{?dist}
 
 Summary:	A file manager for X in AMIGA style
@@ -107,6 +107,9 @@ fi
 %{_datadir}/applications/worker.desktop
 
 %changelog
+* Thu Jun 02 2011 J. Krebs <rpm_speedy@yahoo.com> 2.17.13-1
+- new version.
+
 * Wed Mar 23 2011 J. Krebs <rpm_speedy@yahoo.com> 2.17.11-1
 - new version.
 

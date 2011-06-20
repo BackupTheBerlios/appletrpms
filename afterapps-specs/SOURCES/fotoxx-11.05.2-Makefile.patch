@@ -1,0 +1,14 @@
+--- Makefile	2011-05-15 12:10:18.000000000 -0500
++++ Makefile	2011-05-21 12:13:29.000000000 -0500
+@@ -60,11 +60,6 @@
+ 	gzip -f -9 fotoxx.1
+ 	cp fotoxx.1.gz $(DESTDIR)$(MANDIR)
+ 	rm -f fotoxx.1.gz
+-	# menu (desktop) file
+-	echo Exec=/usr/bin/$(PROGRAM) >> $(DESTDIR)$(MENUFILE1)
+-	echo Icon=/usr/share/$(PROGRAM)/icons/$(PROGRAM).png >> $(DESTDIR)$(MENUFILE1)
+-	cp $(DESTDIR)$(MENUFILE1) $(DESTDIR)$(MENUFILE2)
+-	@ echo "*** use make menu to install the desktop menu"
+ 
+ menu:
+ 	xdg-desktop-menu install $(PREFIX)/share/applications/kornelix-fotoxx.desktop

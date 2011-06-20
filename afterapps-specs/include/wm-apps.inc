@@ -293,9 +293,9 @@ WMTZ_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMTZ_TAR)
 APPLET_LIST += WMTZ
 
 WMUDMOUNT_NAME=wmudmount
-WMUDMOUNT_VERSION=1.6
+WMUDMOUNT_VERSION=1.8
 WMUDMOUNT_TAR=$(WMUDMOUNT_NAME)-$(WMUDMOUNT_VERSION).tar.gz
-WMUDMOUNT_URL=http://www.dockapps.org/download.php/id/836/$(WMUDMOUNT_TAR)
+WMUDMOUNT_URL=http://downloads.sourceforge.net/project/$(WMUDMOUNT_NAME)/$(WMUDMOUNT_NAME)/$(WMUDMOUNT_TAR)
 
 APPLET_LIST += WMUDMOUNT
 

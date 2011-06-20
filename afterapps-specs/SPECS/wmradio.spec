@@ -1,18 +1,29 @@
 %define		name wmradio
 %define		version 0.9
-%define		release 8%{?dist}
+%define		release 9%{?dist}
 
-Summary:	mradio is FM radio card applet for WindowMaker
+Summary:	FM radio card applet for WindowMaker
 Name:		%name
 Version:	%version
 Release:	%release
 License:	GPLv2+
 Group:		AfterStep/Applets
-URL:		http://gogo.aquasoft.cz/~cermak/wmradio/
+URL:		ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
 Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tgz
 Source1:	%{name}-setup-README
 Patch0:		%{name}-%{version}-Makefile.in.patch
+Patch1:		%{name}-%{version}-radio.c.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Buildrequires:	glibc-devel
+Buildrequires:	libv4l-devel >= 0.8.3
+Buildrequires:	libX11-devel
+Buildrequires:	libXext-devel
+Buildrequires:	libXpm-devel
+Requires:	glibc
+Requires:	libv4l
+Requires:	libX11
+Requires:	libXext
+Requires:	libXpm
 Requires:	python < 3.0
 
 %description
@@ -21,6 +32,7 @@ wmradio is FM radio card applet for WindowMaker
 %prep
 %setup -q
 %patch0
+%patch1
 
 %build
 cp %{SOURCE1} .
@@ -52,6 +64,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Tue May 24 2011 J. Krebs <rpm_speedy@yahoo.com> - 0.9-9
+- shifted from kernel-headers to libv4l-devel for videodev.h.
+
 * Thu May 27 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.9-8
 - cleaned up Makefile.in.
 

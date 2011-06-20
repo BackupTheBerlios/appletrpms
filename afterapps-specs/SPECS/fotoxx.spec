@@ -1,5 +1,5 @@
 %define		name fotoxx
-%define		version 11.04
+%define		version 11.06.2
 %define		release 1%{?dist}
 
 Summary:	application for processing image files from a digital camera
@@ -10,6 +10,7 @@ License:	GPLv3+
 Group:		Applications/Multimedia
 URL:		http://kornelix.squarespace.com/%{name}/
 Source0:	http://kornelix.squarespace.com/storage/downloads/%{name}-%{version}.tar.gz
+Patch0:		%{name}-11.05.2-Makefile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	atk
 Requires:	cairo
@@ -70,6 +71,7 @@ made with a digital camera.
 
 %prep
 %setup -q
+%patch0
 
 %build
 make PREFIX=%{_prefix}
@@ -78,8 +80,6 @@ make PREFIX=%{_prefix}
 rm -rf $RPM_BUILD_ROOT
 
 make install DESTDIR=$RPM_BUILD_ROOT PREFIX=%{_prefix}
-
-make manpage DESTDIR=$RPM_BUILD_ROOT PREFIX=%{_prefix}
 
 #Install application link for X-Windows
 echo -e "[Desktop Entry]
@@ -91,7 +91,7 @@ Terminal=false
 Encoding=UTF-8
 Type=Application" > %{name}.desktop
                                                                                 
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
+#mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 desktop-file-install --vendor "" --delete-original \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications                   \
   --add-category X-Red-Hat-Extra                                  \
@@ -106,6 +106,7 @@ install -m 644 icons/fotoxx.png $RPM_BUILD_ROOT%{_datadir}/pixmaps/
 rm -rf $RPM_BUILD_ROOT%{_datadir}/%{name}/locales/*/%{name}.po.old
 rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/%{name}/fotoxx.man
 rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/%{name}/freshmeat
+rm -rf $RPM_BUILD_ROOT%{_datadir}/%{name}/data/desktop
 
 desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
@@ -131,6 +132,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/%{name}.1.gz
 
 %changelog
+* Mon Jun 13 2011 J. Krebs <rpm_speedy@yahoo.com> - 10.06.2-1
+- new version.
+
+* Fri May 20 2011 J. Krebs <rpm_speedy@yahoo.com> - 11.05.2-1
+- new version.
+
+* Sun May 01 2011 J. Krebs <rpm_speedy@yahoo.com> - 11.05.1-1
+- new version.
+
 * Fri Apr 01 2011 J. Krebs <rpm_speedy@yahoo.com> - 11.04-1
 - new version.
 
