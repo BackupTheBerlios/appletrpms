@@ -1,8 +1,10 @@
+%define avftest	%(rpm -q --queryformat='%{VERSION}' avfs)
+%define avfver	%avftest 
 %define		name worker
-%define		version 2.17.13
-%define		release 1%{?dist}
+%define		version 2.18.0
+%define		release 2%{?dist}
 
-Summary:	A file manager for X in AMIGA style
+Summary:	A file manager for the X Window System
 Name:		%name
 Version:	%version
 Release:	%release
@@ -10,16 +12,30 @@ License:	GPLv2+
 Group:		Applications/File
 Source0:	http://www.boomerangsworld.de/%{name}/downloads/%{name}-%{version}.tar.gz
 URL:		http://www.boomerangsworld.de/%{name}/
-Requires:	libXpm avfs fuse file libXft
-BuildRequires:	libX11-devel bzip2-devel zlib-devel libXpm-devel avfs-devel file-devel libXft-devel
+Requires:	avfs >= %{avftest}
+Requires:	file-libs
+Requires:	fuse
+Requires:	glib2
+Requires:	glibc
+Requires:	libgcc
+Requires:	libICE
+Requires:	libSM
+Requires:	libstdc++
+Requires:	libX11
+Requires:	libXft
+Requires:	libXpm
+BuildRequires:	avfs-devel
+BuildRequires:	bzip2-devel
+BuildRequires:	file-devel
+BuildRequires:	libX11-devel
+BuildRequires:	libXft-devel
+BuildRequires:	libXpm-devel
+BuildRequires:	zlib-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
-Worker is a graphical filemanager for the X Window System. It uses the
-classical two-panel-view of the files and directories. It has many
-intern operations while any extern program can also be used for
-operate on the selected items. You can easily add actions to filetypes
-or buttons with the builtin configuration program.
+Worker is a file manager for the X Window System on UN*X.
+The directories and files are shown in two independent panels
 
 %prep
 %setup -q
@@ -27,11 +43,10 @@ or buttons with the builtin configuration program.
 %build
 ./configure --prefix=%{_prefix} \
 	--mandir=%{_mandir} \
-	--docdir=%{_datadir}/doc/%{name}-%{version} \
 	--enable-xft \
 	--with-avfs \
 	--with-libmagic \
-	--with-hal
+	--without-hal
 
 make
 
@@ -107,6 +122,12 @@ fi
 %{_datadir}/applications/worker.desktop
 
 %changelog
+* Sat Jul 30 2011 J. Krebs <rpm_speedy@yahoo.com> 2.18.0-2
+- Fedora is eliminating HAL. Let's remove it from worker. 
+
+* Tue Jul 19 2011 J. Krebs <rpm_speedy@yahoo.com> 2.18.0-1
+- new version.
+
 * Thu Jun 02 2011 J. Krebs <rpm_speedy@yahoo.com> 2.17.13-1
 - new version.
 

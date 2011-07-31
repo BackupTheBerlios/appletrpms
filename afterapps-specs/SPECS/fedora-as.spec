@@ -22,21 +22,22 @@ configuration to use the AfterStep Fedora-provided rpm packages.
 
 %setup -q
 
-cp fedora-as.repo.txt %{name}.repo
-
 %install
 rm -rf $RPM_BUILD_ROOT
 
 mkdir -p $RPM_BUILD_ROOT/etc/yum.repos.d/
 install -m 644 fedora-as.repo $RPM_BUILD_ROOT/etc/yum.repos.d/
 
+mkdir -p $RPM_BUILD_ROOT/etc/pki/rpm-gpg/
+install -m 644 RPM-GPG-KEY-AppletRPMs $RPM_BUILD_ROOT/etc/pki/rpm-gpg/
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc COPYING
 /etc/yum.repos.d/fedora-as.repo
+/etc/pki/rpm-gpg/RPM-GPG-KEY-AppletRPMs
 
 %changelog
 * Fri Apr 29 2011 J. Krebs <rpm_speedy@yahoo.com> - 1.1-1

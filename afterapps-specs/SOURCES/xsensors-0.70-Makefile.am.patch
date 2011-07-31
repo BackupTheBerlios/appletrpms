@@ -1,0 +1,14 @@
+--- src/Makefile.am	2003-07-21 18:13:04.000000000 -0500
++++ src/Makefile.am	2011-06-25 19:51:33.000000000 -0500
+@@ -4,10 +4,7 @@
+ 	-DG_LOG_DOMAIN=\"GnomeCPUInfoApplet\"				\
+ 	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"		\
+ 	-DDATADIR=\""$(datadir)/pixmaps/xsensors"\"					\
+-	-DG_DISABLE_DEPRECATED		-DGTK_DISABLE_DEPRECATED	\
+-	-DGDK_DISABLE_DEPRECATED	-DGNOME_DISABLE_DEPRECATED	\
+-	-ansi	-Wall	-Wmissing-prototypes	-Wmissing-declarations \
+-    -Werror
++	-ansi	-Wmissing-prototypes	-Wmissing-declarations
+ 	
+ bin_PROGRAMS = xsensors
+ 

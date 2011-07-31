@@ -33,7 +33,7 @@ APPLET_LIST += HVCLOCK
 PEKSYSTRAY_NAME=peksystray
 PEKSYSTRAY_VERSION=0.4.0
 PEKSYSTRAY_TAR=$(PEKSYSTRAY_NAME)-$(PEKSYSTRAY_VERSION).tar.bz2
-PEKSYSTRAY_URL=http://easynews.dl.sourceforge.net/sourceforge/$(PEKSYSTRAY_NAME)/$(PEKSYSTRAY_TAR)
+PEKSYSTRAY_URL=http://downloads.sourceforge.net/project/$(PEKSYSTRAY_NAME)/$(PEKSYSTRAY_NAME)/$(PEKSYSTRAY_TAR)
 
 APPLET_LIST += PEKSYSTRAY
 
@@ -83,7 +83,7 @@ APPLET_LIST += WMC2D
 WMCALENDAR_NAME=wmcalendar
 WMCALENDAR_VERSION=0.5.2
 WMCALENDAR_TAR=$(WMCALENDAR_NAME)-$(WMCALENDAR_VERSION).tar.gz
-WMCALENDAR_URL=http://easynews.dl.sourceforge.net/sourceforge/$(WMCALENDAR_NAME)/$(WMCALENDAR_TAR)
+WMCALENDAR_URL=http://downloads.sourceforge.net/project/$(WMCALENDAR_NAME)/$(WMCALENDAR_NAME)/$(WMCALENDAR_TAR)
 
 APPLET_LIST += WMCALENDAR
 
@@ -121,6 +121,13 @@ WMCPUM.APP_TAR=$(WMCPUM.APP_NAME)-$(WMCPUM.APP_VERSION).tar.gz
 WMCPUM.APP_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMCPUM.APP_TAR)
 
 APPLET_LIST += WMCPUM.APP
+
+WMDISKMON_NAME=wmdiskmon
+WMDISKMON_VERSION=0.0.2
+WMDISKMON_TAR=$(WMDISKMON_NAME)-$(WMDISKMON_VERSION).tar.gz
+WMDISKMON_URL=http://www.dockapps.org/download.php/id/584/$(WMDISKMON_TAR)
+
+APPLET_LIST += WMDISKMON
 
 WMEYES_NAME=wmeyes
 WMEYES_VERSION=1.2
@@ -193,9 +200,9 @@ WMMSG_URL=http://swapspace.net/~matt/wmmsg/$(WMMSG_TAR)
 APPLET_LIST += WMMSG
 
 WMND_NAME=wmnd
-WMND_VERSION=0.4.12
+WMND_VERSION=0.4.16
 WMND_TAR=$(WMND_NAME)-$(WMND_VERSION).tar.gz
-WMND_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMND_TAR)
+WMND_URL=http://www.thregr.org/~wavexx/software/wmnd/releases/$(WMND_TAR)
 
 APPLET_LIST += WMND
 
@@ -216,7 +223,7 @@ APPLET_LIST += WMPOP3LB
 #WMPOWER_NAME=wmpower
 #WMPOWER_VERSION=0.4.3
 #WMPOWER_TAR=$(WMPOWER_NAME)-$(WMPOWER_VERSION).tar.bz2
-#WMPOWER_URL=http://easynews.dl.sourceforge.net/sourceforge/$(WMPOWER_NAME)/$(WMPOWER_TAR)
+#WMPOWER_URL=http://downloads.sourceforge.net/project/$(WMPOWER_NAME)/$(WMPOWER_NAME)/$(WMPOWER_TAR)
 
 #APPLET_LIST += WMPOWER
 
@@ -259,7 +266,7 @@ APPLET_LIST += WMSORSEN
 WMSYSTEMTRAY_NAME=wmsystemtray
 WMSYSTEMTRAY_VERSION=1.2
 WMSYSTEMTRAY_TAR=$(WMSYSTEMTRAY_NAME)-$(WMSYSTEMTRAY_VERSION).tar.gz
-WMSYSTEMTRAY_URL=http://easynews.dl.sourceforge.net/sourceforge/wmsystemtray/$(WMSYSTEMTRAY_TAR)
+WMSYSTEMTRAY_URL=http://downloads.sourceforge.net/project/$(WMSYSTEMTRAY_NAME)/$(WMSYSTEMTRAY_NAME)/$(WMSYSTEMTRAY_TAR)
 
 APPLET_LIST += WMSYSTEMTRAY
 
@@ -323,7 +330,7 @@ APPLET_LIST += WMWEATHER
 WMWEATHERPLUS_NAME=wmweather+
 WMWEATHERPLUS_VERSION=2.13
 WMWEATHERPLUS_TAR=$(WMWEATHERPLUS_NAME)-$(WMWEATHERPLUS_VERSION).tar.gz
-WMWEATHERPLUS_URL=http://easynews.dl.sourceforge.net/sourceforge/wmweatherplus/$(WMWEATHERPLUS_TAR)
+WMWEATHERPLUS_URL=http://downloads.sourceforge.net/project/wmweatherplus/wmweatherplus/$(WMWEATHERPLUS_TAR)
 
 APPLET_LIST += WMWEATHERPLUS
 
@@ -344,6 +351,6 @@ APPLET_LIST += WMXKB
 WMBIFF_NAME=wmbiff
 WMBIFF_VERSION=0.4.27
 WMBIFF_TAR=$(WMBIFF_NAME)-$(WMBIFF_VERSION).tar.gz
-WMBIFF_URL=http://easynews.dl.sourceforge.net/sourceforge/wmbiff/$(WMBIFF_TAR)
+WMBIFF_URL=http://downloads.sourceforge.net/project/$(WMBIFF_NAME)/$(WMBIFF_NAME)/$(WMBIFF_TAR)
 
 APPLET_LIST += WMBIFF

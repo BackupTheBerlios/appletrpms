@@ -1,5 +1,5 @@
 %define	name 	avfs
-%define	version	0.9.9
+%define	version	1.0.0
 %define	release	1%{?dist}
 
 Summary:	Enables programs to look inside archived/compressed files, access remote files
@@ -9,7 +9,7 @@ Release:	%{release}
 License:	GPLv2 and LGPLv2
 Group:		Applications/Archiving
 URL:		http://sourceforge.net/projects/avf
-Source0:	http://easynews.dl.sourceforge.net/sourceforge/avf/%{name}-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/project/avf/%{name}/%{version}/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	fuse
 Requires:	glibc
@@ -71,6 +71,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.*a
 
 %changelog
+* Tue Jul 19 2011 J. Krebs <rpm_speedy@yahoo.com> - 1.0.0-1
+- New version.
+
 * Fri Oct 08 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.9.9-1
 - New version.
 

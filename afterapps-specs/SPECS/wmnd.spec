@@ -1,16 +1,16 @@
-%define name wmnd
-%define version 0.4.12
-%define release 2%{?dist}
+%define name	wmnd
+%define version	0.4.16
+%define release	1%{?dist}
 
-Summary: wmnd is a network monitoring dockapp
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: http://www.yuv.info/wmnd/
-Source0: %{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:	wmnd is a network monitoring dockapp
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		AfterStep/Applets
+URL:		http://www.thregr.org/~wavexx/software/wmnd/
+Source0:	http://www.thregr.org/~wavexx/software/wmnd/releases/%{name}-%{version}.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 WMND (WindowMaker Network Devices) is a network monitoring
@@ -33,7 +33,6 @@ rm -rf $RPM_BUILD_ROOT
 
 make install DESTDIR=$RPM_BUILD_ROOT
 
-rm -rf $RPM_BUILD_ROOT%{_prefix}/info/*
 rm -rf $RPM_BUILD_ROOT%{_datadir}/wmndrc
 
 %clean
@@ -41,12 +40,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
-%{_mandir}/man1/*
-%doc AUTHORS COPYING ChangeLog INSTALL NEWS README TODO examples/wmndrc
-
+%doc AUTHORS COPYING ChangeLog NEWS README TODO examples/wmndrc
+%{_bindir}/wmnd
+%{_mandir}/man1/wmnd.*
 
 %changelog
+* Tue Jun 21 2011 J. Krebs <rpm_speedy@yahoo.com> - 0.4.16-1
+- new version.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.4.12-2
 - added distro info to release.
 

@@ -1,0 +1,11 @@
+--- configure.in	2010-01-28 13:59:04.000000000 -0600
++++ configure.in	2011-06-25 20:05:51.000000000 -0500
+@@ -28,7 +28,7 @@
+ *** development headers installed. The latest version of GTK+ is
+ *** always available at http://www.gtk.org/.]))
+ 
+-XSENSORS_CFLAGS="`pkg-config --cflags gtk+-2.0` -Werror"
++XSENSORS_CFLAGS="`pkg-config --cflags gtk+-2.0`"
+ XSENSORS_LIBS="`pkg-config --libs gtk+-2.0`"
+ AC_SUBST(XSENSORS_CFLAGS)
+ AC_SUBST(XSENSORS_LIBS)

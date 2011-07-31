@@ -1,6 +1,6 @@
 %define aitest	%(rpm -q --queryformat='%{VERSION}' libAfterImage)
 %define aiver	%aitest 
-%define version 9.11
+%define version 9.12
 %define release 1%{?dist}
 %define name	rxvt-unicode
 %define epoch	2
@@ -77,13 +77,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%doc COPYING Changes INSTALL README.FAQ README.configure doc/README.xvt doc/etc doc/changes.txt
+%doc COPYING Changes README.FAQ README.configure doc/README.xvt doc/etc doc/changes.txt
 %{_bindir}/*
 %{_mandir}/man*/*
 %{_datadir}/applications/*
 %{_libdir}/urxvt
 
 %changelog
+* Tue Jul 19 2011 J. Krebs <rpm_speedy@yahoo.com> - 2:9.12-1
+- new version.
+
 * Mon May 02 2011 J. Krebs <rpm_speedy@yahoo.com> - 2:9.11-1
 - new version.
 

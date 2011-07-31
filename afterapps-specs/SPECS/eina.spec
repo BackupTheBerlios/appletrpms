@@ -1,5 +1,5 @@
 %define version 0.10.0
-%define release 1%{?dist}
+%define release 1.git20110708%{?dist}
 %define name	eina
 
 Summary:	A classic player for a modern era
@@ -8,7 +8,7 @@ Version:	%version
 Release:	%release
 License:	GPLv3
 Group:		Applications/Multimedia
-Source0:	http://launchpad.net/eina/trunk/%{version}/+download/%{name}-%{version}.tar.gz
+Source0:	%{name}-%{version}git20110708.tar.gz
 URL:		http://eina.sourceforge.net/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -17,7 +17,6 @@ Requires:	cairo
 Requires:	cairo-gobject
 Requires:	clutter
 Requires:	clutter-gtk
-Requires:	curl
 Requires:	fontconfig
 Requires:	freetype
 Requires:	gdk-pixbuf2
@@ -28,6 +27,7 @@ Requires:	gtk3 >= 3.0.0
 Requires:	json-glib
 Requires:	libdrm
 Requires:	libnotify
+Requires:	libpeas
 Requires:	libpng
 Requires:	libuuid
 Requires:	libX11
@@ -46,7 +46,6 @@ BuildRequires:	cairo-devel
 BuildRequires:	cairo-gobject-devel
 BuildRequires:	clutter-devel
 BuildRequires:	clutter-gtk-devel
-BuildRequires:	curl-devel
 BuildRequires:	freetype-devel
 BuildRequires:	gdk-pixbuf2-devel
 BuildRequires:	glib2-devel >= 2.28.0
@@ -57,6 +56,7 @@ BuildRequires:	intltool
 BuildRequires:	json-glib-devel
 BuildRequires:	libdrm-devel
 BuildRequires:	libnotify-devel
+BuildRequires:	libpeas-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libuuid-devel
 BuildRequires:	libX11-devel
@@ -69,7 +69,6 @@ BuildRequires:	pango-devel
 BuildRequires:	redhat-rpm-config
 BuildRequires:	sqlite-devel
 BuildRequires:	unique-devel
-BuildRequires:	vala
 BuildRequires:	desktop-file-utils
 
 
@@ -104,9 +103,11 @@ Requires: %{name} = %{version}-%{release}
 This package contains documentation for eina.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}git20110708
 
 %build
+./autogen.sh
+
 ./configure --prefix=%{_prefix} --libdir=%{_libdir} --disable-static
 
 # Remove Rpath

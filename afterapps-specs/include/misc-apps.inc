@@ -56,20 +56,20 @@ LCD_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(LCD_TAR)
 #APPLET_LIST += LCD
 
 AVFS_NAME=avfs
-AVFS_VERSION=0.9.9
+AVFS_VERSION=1.0.0
 AVFS_TAR=$(AVFS_NAME)-$(AVFS_VERSION).tar.gz
-AVFS_URL=http://easynews.dl.sourceforge.net/sourceforge/avf/$(AVFS_TAR)
+AVFS_URL=http://downloads.sourceforge.net/project/avf/$(AVFS_NAME)/$(AVFS_VERSION)/$(AVFS_TAR)
 
 APPLET_LIST += AVFS
 
 CALCOO_NAME=calcoo
 CALCOO_VERSION=1.3.18
 CALCOO_TAR=$(CALCOO_NAME)-$(CALCOO_VERSION).tar.gz
-CALCOO_URL=http://easynews.dl.sourceforge.net/sourceforge/$(CALCOO_NAME)/$(CALCOO_TAR)
+CALCOO_URL=http://downloads.sourceforge.net/project/$(CALCOO_NAME)/$(CALCOO_NAME)/$(CALCOO_TAR)
 
 APPLET_LIST += CALCOO
 
-#cvs eina needs gtk3-3.0.0+, not available under Fedora 14
+#eina 0.10.0+ needs gtk3-3.0.0+, only available under Fedora 15+
 EINA_NAME=eina
 EINA_VERSION=0.10.0
 EINA_TAR=$(EINA_NAME)-$(EINA_VERSION).tar.gz
@@ -78,12 +78,13 @@ EINA_URL=http://launchpad.net/eina/trunk/$(EINA_VERSION)/+download/$(EINA_TAR)
 APPLET_LIST += EINA
 
 FOTOXX_NAME=fotoxx
-FOTOXX_VERSION=11.06.2
+FOTOXX_VERSION=11.08
 FOTOXX_TAR=$(FOTOXX_NAME)-$(FOTOXX_VERSION).tar.gz
 FOTOXX_URL=http://kornelix.squarespace.com/storage/downloads/$(FOTOXX_TAR)
 
 APPLET_LIST += FOTOXX
 
+# Included in Fedora 15 Repository
 #LIBDOCKAPP_NAME=libdockapp
 #LIBDOCKAPP_VERSION=0.6.2
 #LIBDOCKAPP_TAR=$(LIBDOCKAPP_NAME)-$(LIBDOCKAPP_VERSION).tar.bz2
@@ -91,7 +92,7 @@ APPLET_LIST += FOTOXX
 
 #APPLET_LIST += LIBDOCKAPP
 
-# Included in Fedora 11 Repository
+# Included in Fedora 15 Repository
 #LIBICAL_NAME=libical
 #LIBICAL_VERSION=0.43
 #LIBICAL_TAR=$(LIBICAL_NAME)-$(LIBICAL_VERSION).tar.gz
@@ -116,9 +117,9 @@ MEDIT_URL=http://sourceforge.net/projects/mooedit/files/$(MEDIT_NAME)/$(MEDIT_VE
 APPLET_LIST += MEDIT
 
 MINED_NAME=mined
-MINED_VERSION=2000.16
+MINED_VERSION=2011.17
 MINED_TAR=$(MINED_NAME)-$(MINED_VERSION).tar.gz
-MINED_URL=http://towo.net/$(MINED_NAME)/$(MINED_TAR)
+MINED_URL=http://towo.net/mined/download/$(MINED_TAR)
 
 APPLET_LIST += MINED
 
@@ -147,7 +148,7 @@ APPLET_LIST += SALMON
 STALONETRAY_NAME=stalonetray
 STALONETRAY_VERSION=0.8.1
 STALONETRAY_TAR=$(STALONETRAY_NAME)-$(STALONETRAY_VERSION).tar.gz
-STALONETRAY_URL=http://easynews.dl.sourceforge.net/sourceforge/$(STALONETRAY_NAME)/$(STALONETRAY_TAR)
+STALONETRAY_URL=http://downloads.sourceforge.net/project/$(STALONETRAY_NAME)/$(STALONETRAY_NAME)/$(STALONETRAY_TAR)
 
 APPLET_LIST += STALONETRAY
 
@@ -159,18 +160,19 @@ TEMPERATURE.APP_URL=http://www.fukt.bsnet.se/~per/temperature/$(TEMPERATURE.APP_
 APPLET_LIST += TEMPERATURE.APP
 
 TRAYER_NAME=trayer
-TRAYER_VERSION=1.1.1
-TRAYER_TAR=$(TRAYER_NAME)_$(TRAYER_VERSION).orig.tar.gz
-TRAYER_URL=http://ftp.de.debian.org/debian/pool/main/t/trayer/trayer_1.1.1.orig.tar.gz
+TRAYER_VERSION=1.1.2
+TRAYER_TAR=sargon-trayer-srg-$(TRAYER_NAME)_$(TRAYER_VERSION)-1-g77e2eb2.tar.gz
+TRAYER_URL=https://github.com/sargon/trayer-srg/tarball/master/$(TRAYER_TAR)
 APPLET_LIST += TRAYER
 
 WORKER_NAME=worker
-WORKER_VERSION=2.17.13
+WORKER_VERSION=2.18.0
 WORKER_TAR=$(WORKER_NAME)-$(WORKER_VERSION).tar.gz
 WORKER_URL=http://www.boomerangsworld.de/worker/downloads/$(WORKER_TAR)
 
 APPLET_LIST += WORKER
 
+# Let's kill this outdated documentation.  Rely for online info
 #WORKER-DOC_NOSPEC=YES
 #WORKER-DOC_NAME=worker
 #WORKER-DOC_VERSION=2.10.0.2
@@ -178,6 +180,13 @@ APPLET_LIST += WORKER
 #WORKER-DOC_URL=http://www.boomerangsworld.de/worker/downloads/$(WORKER-DOC_TAR)
 
 #APPLET_LIST += WORKER-DOC
+
+XSENSORS_NAME=xsensors
+XSENSORS_VERSION=0.70
+XSENSORS_TAR=$(XSENSORS_NAME)-$(XSENSORS_VERSION).tar.gz
+XSENSORS_URL=http://www.linuxhardware.org/$(XSENSORS_NAME)/$(XSENSORS_TAR)
+
+APPLET_LIST += XSENSORS
 
 YUDIT_NAME=yudit
 YUDIT_VERSION=2.9.2
