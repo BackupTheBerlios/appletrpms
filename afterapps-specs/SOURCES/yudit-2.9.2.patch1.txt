@@ -1,0 +1,69 @@
+*** mytool/Makefile	2010-02-06 11:48:06.000000000 +0900
+--- mytool/Makefile	2011-05-17 14:01:50.232711920 +0900
+***************
+*** 33,37 ****
+  	$(CXX) -c $(CPPFLAGS) $(subst .obj,.cpp,$@)
+  
+! $(SUBDIRS_all):
+  	$(MAKE) -C $(patsubst %_all,%,$@) all
+  
+--- 33,37 ----
+  	$(CXX) -c $(CPPFLAGS) $(subst .obj,.cpp,$@)
+  
+! $(SUBDIRS_all): mytool
+  	$(MAKE) -C $(patsubst %_all,%,$@) all
+  
+*** Makefile.in	2007-12-06 21:40:47.000000000 +0900
+--- Makefile.in	2011-05-17 14:16:00.833959261 +0900
+***************
+*** 6,10 ****
+  SUBDIRS_clean:=$(foreach dir, $(SUBDIRS), $(dir)_clean)
+  
+! .PHONY: $(SUBDIRS_all) $(SUBDIRS_clean)
+  
+  all: $(SUBDIRS_all)
+--- 6,10 ----
+  SUBDIRS_clean:=$(foreach dir, $(SUBDIRS), $(dir)_clean)
+  
+! .PHONY: all $(SUBDIRS_all) $(SUBDIRS_clean)
+  
+  all: $(SUBDIRS_all)
+***************
+*** 13,16 ****
+--- 13,24 ----
+  	@echo "M----------------------------------------------------"
+  
++ gui_all: swidget_all swindow_all stoolkit_all
++ 
++ uniprint_all: swidget_all swindow_all stoolkit_all
++ 
++ uniconv_all: stoolkit_all
++ 
++ mytool_all: swindow_all stoolkit_all
++ 
+  $(SUBDIRS_all):
+  	$(MAKE) -C $(patsubst %_all,%,$@) all
+*** uniconv/Makefile   2002-08-27 02:07:08.000000000 +0900
+--- uniconv/Makefile    2011-05-17 14:32:35.255417764 +0900
+***************
+*** 6,16 ****
+  OBJS=$(subst .o,.obj,$(MODULES))
+  SLIBS=/libpath:../stoolkit stoolkit.lib
+! SWINLIBS=/libpath:../swindow 
+! MYLIBS=/link /subsystem:CONSOLE $(SWINLIBS) $(SLIBS) $(ALL_LIBS)
+  else
+  OBJS=$(MODULES)
+  SLIBS=-L../stoolkit -lstoolkit
+! SWINLIBS=-L../swindow -lswindow 
+! MYLIBS=$(SWINLIBS) $(SLIBS) $(ALL_LIBS)
+  endif
+  
+--- 6,14 ----
+  OBJS=$(subst .o,.obj,$(MODULES))
+  SLIBS=/libpath:../stoolkit stoolkit.lib
+! MYLIBS=/link /subsystem:CONSOLE $(SLIBS) $(ALL_LIBS)
+  else
+  OBJS=$(MODULES)
+  SLIBS=-L../stoolkit -lstoolkit
+! MYLIBS=$(SLIBS) $(ALL_LIBS)
+  endif

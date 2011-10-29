@@ -23,28 +23,42 @@
 %endif
 ### END Distro Definitions
 
-%define name wmclockmon
-%define version 0.8.1
-%define release 5%{?dist}
+%define		name wmclockmon
+%define		version 0.8.1
+%define		release 6%{?dist}
 
-Summary: digital clock with 7 different styles in either LCD or LED style
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: http://tnemeth.free.fr/projets/dockapps.html
-Source0: http://tnemeth.free.fr/projets/programmes/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:	digital clock with 7 different styles in either LCD or LED style
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPL
+Group:		AfterStep/Applets
+URL:		http://tnemeth.free.fr/projets/dockapps.html
+Source0:	http://tnemeth.free.fr/projets/programmes/%{name}-%{version}.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	glib
+Requires:	glibc
+Requires:	libX11
+Requires:	libXext
+Requires:	libXi
+Requires:	libXpm
+BuildRequires:	glib-devel
+BuildRequires:	glibc-devel
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXi-devel
+BuildRequires:	libXpm-devel
+
 %if %{mdk}
-Requires: libgtk+1.2
-Buildrequires: libgtk+1.2-devel
+Requires:	libgtk+1.2
+Buildrequires:	libgtk+1.2-devel
 %endif
+
 %if %{fedora}
-Requires: gtk+
-Requires: gdk-pixbuf
-BuildRequires: gtk+-devel
-BuildRequires: gdk-pixbuf-devel
+Requires:	gtk+
+Requires:	gdk-pixbuf
+BuildRequires:	gtk+-devel
+BuildRequires:	gdk-pixbuf-devel
 %endif
 
 %description
@@ -53,7 +67,6 @@ LCD or LED style; uses locales to display weekday and month names.
 It also features the internet time.
 Includes wmclockmon-cal, a calendar display and wmclockmon-config,
 a configuration tool for the package.
-Sample .wmclockmonrc files are included in with the doc files. 
 
 %prep
 %setup -q
@@ -82,9 +95,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 %dir %{_datadir}/wmclockmon
 %{_datadir}/wmclockmon/*
-%doc doc/sample*.wmclockmonrc AUTHORS BUGS COPYING ChangeLog INSTALL NEWS README THANKS TODO
+%doc doc/sample*.wmclockmonrc AUTHORS BUGS COPYING ChangeLog NEWS README THANKS TODO
 
 %changelog
+* Wed Oct 19 2011 J. Krebs <rpm_speedy@yahoo.com> - 0.8.1-6
+- cleanup.
+
 * Fri Jun 15 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.8.1-5
 - added require for gtk+-devel, gtk+.
 

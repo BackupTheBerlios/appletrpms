@@ -1,6 +1,6 @@
 %define	name 	yudit
 %define	version	2.9.2
-%define	release	1%{?dist}
+%define	release	2%{?dist}
 
 Summary:	Unicode Text Editor
 Name:		%name
@@ -10,6 +10,8 @@ License:	GPL
 Group:		Applications/Editors
 Source:		http://yudit.org/download/%{name}-%{version}.tar.gz
 Patch0:		%{name}-%{version}.patch0.txt
+Patch1:		%{name}-%{version}.patch1.txt
+Patch2:		%{name}-%{version}.patch2.txt
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	gcc-c++
 
@@ -30,6 +32,8 @@ GNU (C) 1997-2005 Gaspar Sinai <gsinai@yudit.org>
 %prep
 %setup
 %patch0
+%patch1
+%patch2
 
 %build
 ./configure --prefix=%{_prefix} --mandir=%{_mandir}
@@ -119,6 +123,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGELOG.TXT COPYING.TXT FAQ.TXT README.TXT TODO.TXT doc/*.utf8 doc/notinstalled doc/problems doc/HOWTO-*.txt doc/otfsupport.txt
 
 %changelog
+* Mon Mar 01 2010 J. Krebs <rpm_speedy@yahoo.com> - 2.9.2-2
+  Added patches #1 and #2 from homepage.
 * Mon Mar 01 2010 J. Krebs <rpm_speedy@yahoo.com> - 2.9.2-1
   New version.
 * Fri Jul 31 2009 J. Krebs <rpm_speedy@yahoo.com> - 2.9.0-2

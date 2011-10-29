@@ -1,8 +1,8 @@
 %define avftest	%(rpm -q --queryformat='%{VERSION}' avfs)
 %define avfver	%avftest 
 %define		name worker
-%define		version 2.18.0
-%define		release 2%{?dist}
+%define		version 2.18.1
+%define		release 1%{?dist}
 
 Summary:	A file manager for the X Window System
 Name:		%name
@@ -122,6 +122,9 @@ fi
 %{_datadir}/applications/worker.desktop
 
 %changelog
+* Sat Oct 01 2011 J. Krebs <rpm_speedy@yahoo.com> 2.18.1-1
+- new version.
+
 * Sat Jul 30 2011 J. Krebs <rpm_speedy@yahoo.com> 2.18.0-2
 - Fedora is eliminating HAL. Let's remove it from worker. 
 

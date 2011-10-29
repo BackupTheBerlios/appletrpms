@@ -2,7 +2,7 @@
 %define pythver %pythtst
 
 %define	name 	medit
-%define	version	1.0.3
+%define	version	1.0.5
 %define	release	1%{?dist}
 
 Summary:	medit is a GTK-based text editor
@@ -12,7 +12,7 @@ Release:	%release
 License:	GPLv2, LGPLv2.1+, BSD and MIT License
 Group:		Applications/Editors
 URL:		http://mooedit.sourceforge.net/
-Source0:	http://sourceforge.net/projects/mooedit/files/medit/1.0.2/%{name}-%{version}.tar.bz2
+Source0:	http://sourceforge.net/projects/mooedit/files/medit/%{version}/%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	atk
 Requires:	cairo
@@ -32,6 +32,7 @@ Requires:	python < 3.0
 Requires:	python >= %{pythver}
 Buildrequires:	atk-devel
 Buildrequires:	cairo-devel
+Buildrequires:	gcc-c++
 Buildrequires:	gettext
 Buildrequires:	glib2-devel
 Buildrequires:	glibc-devel
@@ -144,6 +145,9 @@ fi
 %{_mandir}/man1/%{name}.*
 
 %changelog
+* Sun Oct 23 2011 J. Krebs <rpm_speedy@yahoo.com> - 1.0.5-1
+- new version.
+
 * Thu Apr 14 2011 J. Krebs <rpm_speedy@yahoo.com> - 1.0.3-1
 - new version.
 

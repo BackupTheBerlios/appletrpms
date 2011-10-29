@@ -1,0 +1,11 @@
+--- cpu_linux.c	2008-07-03 00:34:57.000000000 -0500
++++ cpu_linux.c	2011-10-28 12:07:53.000000000 -0500
+@@ -38,7 +38,7 @@
+  FILE *file;
+  long cpu, nice, system, idle, used, total;
+  char buf[128];
+- int c;
++ int c=-1;
+ 
+  file = fopen("/proc/stat", "r");
+  if(!file)

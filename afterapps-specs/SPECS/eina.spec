@@ -1,5 +1,5 @@
-%define version 0.10.0
-%define release 1.git20110708%{?dist}
+%define version 0.12.0git20111019
+%define release 1%{?dist}
 %define name	eina
 
 Summary:	A classic player for a modern era
@@ -8,7 +8,7 @@ Version:	%version
 Release:	%release
 License:	GPLv3
 Group:		Applications/Multimedia
-Source0:	%{name}-%{version}git20110708.tar.gz
+Source0:	http://launchpad.net/eina/trunk/%{version}/+download/%{name}-%{version}.tar.gz
 URL:		http://eina.sourceforge.net/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -71,7 +71,6 @@ BuildRequires:	sqlite-devel
 BuildRequires:	unique-devel
 BuildRequires:	desktop-file-utils
 
-
 %description
 Eina works like a common portable music player. It just plays what you
 want to listen to.
@@ -94,16 +93,16 @@ Requires:   pkgconfig
 %description devel
 Header files and libraries for building an extension library for Eina.
 
-%package doc
-Summary: Documentation for %{name}
-Group: Documentation
-Requires: %{name} = %{version}-%{release}
+#%package doc
+#Summary: Documentation for %{name}
+#Group: Documentation
+#Requires: %{name} = %{version}-%{release}
 
-%description doc
-This package contains documentation for eina.
+#%description doc
+#This package contains documentation for eina.
 
 %prep
-%setup -q -n %{name}-%{version}git20110708
+%setup -q
 
 %build
 ./autogen.sh
@@ -111,8 +110,8 @@ This package contains documentation for eina.
 ./configure --prefix=%{_prefix} --libdir=%{_libdir} --disable-static
 
 # Remove Rpath
-sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
-sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
+#sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
+#sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 
 make
 
@@ -151,8 +150,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 
 %files -f eina.lang
 %defattr(-,root,root,-)
-%doc AUTHORS BUGS COPYING ChangeLog NEWS README
-%attr(755, root, root) %{_libdir}/eina/lastfm/lastfmsubmitd/lastfmsubmitd
+%doc AUTHORS BUGS COPYING ChangeLog HACKING NEWS README
 %{_bindir}/eina
 %{_datadir}/applications/eina.desktop
 %{_datadir}/eina/icons/hicolor/*/actions/bug.png
@@ -177,24 +175,26 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_datadir}/eina/pixmaps/eina.svg
 %{_datadir}/eina/pixmaps/loading-spin-16x16.gif
 %{_datadir}/eina/pixmaps/plugin.png
+%{_datadir}/gir-1.0/Eina-0.12.gir
+%{_datadir}/gir-1.0/Gel-2.0.gir
+%{_datadir}/gir-1.0/GelUI-2.0.gir
+%{_datadir}/gir-1.0/Lomo-2.0.gir
 %{_datadir}/glib-2.0/schemas/net.sourceforge.eina.gschema.xml
-%{_libdir}/eina/adb/adb.ini
+%{_libdir}/eina/adb/adb.plugin
 %{_libdir}/eina/adb/libadb.so
-%{_libdir}/eina/art/art.ini
-%{_libdir}/eina/art/libart.so
-%{_libdir}/eina/clutty/clutty.ini
+%{_libdir}/eina/clutty/clutty.plugin
 %{_libdir}/eina/clutty/libclutty.so
-%{_libdir}/eina/dbus/dbus.ini
+%{_libdir}/eina/dbus/dbus.plugin
 %{_libdir}/eina/dbus/libdbus.so
-%{_libdir}/eina/dock/dock.ini
+%{_libdir}/eina/dock/dock.plugin
 %{_libdir}/eina/dock/libdock.so
-%{_libdir}/eina/fieshta/fieshta.ini
+%{_libdir}/eina/fieshta/fieshta.plugin
 %{_libdir}/eina/fieshta/libfieshta.so
-%{_libdir}/eina/lastfm/lastfm.ini
+%{_libdir}/eina/lastfm/lastfm.plugin
 %{_libdir}/eina/lastfm/lastfm.png
-%dir %{_libdir}/eina/lastfm/lastfmsubmitd/lastfm/
 %{_libdir}/eina/lastfm/lastfmsubmitd/COPYRIGHT
 %{_libdir}/eina/lastfm/lastfmsubmitd/info.txt
+%dir %{_libdir}/eina/lastfm/lastfmsubmitd/lastfm/
 %{_libdir}/eina/lastfm/lastfmsubmitd/lastfm/client.py
 %{_libdir}/eina/lastfm/lastfmsubmitd/lastfm/client.pyc
 %{_libdir}/eina/lastfm/lastfmsubmitd/lastfm/client.pyo
@@ -207,160 +207,173 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_libdir}/eina/lastfm/lastfmsubmitd/lastfm/marshaller.py
 %{_libdir}/eina/lastfm/lastfmsubmitd/lastfm/marshaller.pyc
 %{_libdir}/eina/lastfm/lastfmsubmitd/lastfm/marshaller.pyo
+%{_libdir}/eina/lastfm/lastfmsubmitd/lastfmsubmitd
 %{_libdir}/eina/lastfm/liblastfm.so
 %{_libdir}/eina/lastfm/preferences.ui
 %{_libdir}/eina/lomo/liblomo.so
-%{_libdir}/eina/lomo/lomo.ini
+%{_libdir}/eina/lomo/lomo.plugin
 %{_libdir}/eina/mpris/libmpris.so
-%{_libdir}/eina/mpris/mpris.ini
+%{_libdir}/eina/mpris/mpris.plugin
 %{_libdir}/eina/muine/libmuine.so
-%{_libdir}/eina/muine/muine.ini
+%{_libdir}/eina/muine/muine.plugin
 %{_libdir}/eina/ntfy/libntfy.so
-%{_libdir}/eina/ntfy/ntfy.ini
+%{_libdir}/eina/ntfy/ntfy.plugin
 %{_libdir}/eina/ntfy/ntfy.png
 %{_libdir}/eina/player/libplayer.so
-%{_libdir}/eina/player/player.ini
+%{_libdir}/eina/player/player.plugin
 %{_libdir}/eina/player/preferences.ui
 %{_libdir}/eina/playlist/libplaylist.so
-%{_libdir}/eina/playlist/playlist.ini
+%{_libdir}/eina/playlist/playlist.plugin
 %{_libdir}/eina/preferences/libpreferences.so
-%{_libdir}/eina/preferences/preferences.ini
-%{_libdir}/eina/statusicon/libstatusicon.so
-%{_libdir}/eina/statusicon/statusicon.ini
-%{_libdir}/libgel-1.1.so
-%{_libdir}/libgel-1.1.so.0
-%{_libdir}/libgel-1.1.so.0.1.1
-%{_libdir}/libgel-ui-1.1.so
-%{_libdir}/libgel-ui-1.1.so.0
-%{_libdir}/libgel-ui-1.1.so.0.1.1
-%{_libdir}/liblomo-1.1.so
-%{_libdir}/liblomo-1.1.so.0
-%{_libdir}/liblomo-1.1.so.0.1.1
+%{_libdir}/eina/preferences/preferences.plugin
+%{_libdir}/eina/pythonconsole/console.py
+%{_libdir}/eina/pythonconsole/console.pyc
+%{_libdir}/eina/pythonconsole/console.pyo
+%{_libdir}/eina/pythonconsole/pythonconsole.plugin
+%{_libdir}/eina/pythonconsole/pythonconsole.py
+%{_libdir}/eina/pythonconsole/pythonconsole.pyc
+%{_libdir}/eina/pythonconsole/pythonconsole.pyo
+%{_libdir}/eina/pythonhello/pythonhello.plugin
+%{_libdir}/eina/pythonhello/pythonhello.py
+%{_libdir}/eina/pythonhello/pythonhello.pyc
+%{_libdir}/eina/pythonhello/pythonhello.pyo
+%{_libdir}/eina/status-icon/libstatus-icon.so
+%{_libdir}/eina/status-icon/status-icon.plugin
+%{_libdir}/girepository-1.0/Eina-0.12.typelib
+%{_libdir}/girepository-1.0/Gel-2.0.typelib
+%{_libdir}/girepository-1.0/GelUI-2.0.typelib
+%{_libdir}/girepository-1.0/Lomo-2.0.typelib
+%{_libdir}/libgel-2.0.so
+%{_libdir}/libgel-2.0.so.2
+%{_libdir}/libgel-2.0.so.2.0.0
+%{_libdir}/libgel-ui-2.0.so
+%{_libdir}/libgel-ui-2.0.so.2
+%{_libdir}/libgel-ui-2.0.so.2.0.0
+%{_libdir}/liblomo-2.0.so
+%{_libdir}/liblomo-2.0.so.2
+%{_libdir}/liblomo-2.0.so.2.0.0
+%{_libdir}/pkgconfig/eina-0.12.pc
+%{_libdir}/pkgconfig/gel-2.0.pc
+%{_libdir}/pkgconfig/gel-ui-2.0.pc
+%{_libdir}/pkgconfig/lomo-2.0.pc
 
 %files devel
 %defattr(-,root,root,-)
-%{_includedir}/eina-0.10/eina/art/art.h
-%{_includedir}/eina-0.10/eina/art/eina-art-backend.h
-%{_includedir}/eina-0.10/eina/art/eina-art-search.h
-%{_includedir}/eina-0.10/eina/art/eina-art.h
-%{_includedir}/eina-0.10/eina/clutty/eina-cover-clutter.h
-%{_includedir}/eina-0.10/eina/dock/dock.h
-%{_includedir}/eina-0.10/eina/dock/eina-dock-tab.h
-%{_includedir}/eina-0.10/eina/dock/eina-dock.h
-%{_includedir}/eina-0.10/eina/eina-plugin.h
-%{_includedir}/eina-0.10/eina/ext/curl-engine.h
-%{_includedir}/eina-0.10/eina/ext/eina-application.h
-%{_includedir}/eina-0.10/eina/ext/eina-file-chooser-dialog.h
-%{_includedir}/eina-0.10/eina/ext/eina-file-utils.h
-%{_includedir}/eina-0.10/eina/ext/eina-fs.h
-%{_includedir}/eina-0.10/eina/ext/eina-stock.h
-%{_includedir}/eina-0.10/eina/ext/eina-window.h
-%{_includedir}/eina-0.10/eina/fieshta/eina-fiestha-behaviour.h
-%{_includedir}/eina-0.10/eina/fieshta/fieshta.h
-%{_includedir}/eina-0.10/eina/lomo/lomo.h
-%{_includedir}/eina-0.10/eina/player/eina-cover-image.h
-%{_includedir}/eina-0.10/eina/player/eina-cover.h
-%{_includedir}/eina-0.10/eina/player/eina-player.h
-%{_includedir}/eina-0.10/eina/player/eina-preferences-dialog.h
-%{_includedir}/eina-0.10/eina/player/eina-preferences-tab.h
-%{_includedir}/eina-0.10/eina/player/eina-seek.h
-%{_includedir}/eina-0.10/eina/player/player.h
-%{_includedir}/eina-0.10/eina/playlist/eina-playlist.h
-%{_includedir}/eina-0.10/eina/playlist/playlist.h
-%{_includedir}/gel-1.1/gel/gel-io-scanner.h
-%{_includedir}/gel-1.1/gel/gel-io.h
-%{_includedir}/gel-1.1/gel/gel-job-queue.h
-%{_includedir}/gel-1.1/gel/gel-misc.h
-%{_includedir}/gel-1.1/gel/gel-plugin-engine.h
-%{_includedir}/gel-1.1/gel/gel-plugin-info.h
-%{_includedir}/gel-1.1/gel/gel-plugin.h
-%{_includedir}/gel-1.1/gel/gel-str-parser.h
-%{_includedir}/gel-1.1/gel/gel-string.h
-%{_includedir}/gel-1.1/gel/gel-ui-dialogs.h
-%{_includedir}/gel-1.1/gel/gel-ui-generic.h
-%{_includedir}/gel-1.1/gel/gel-ui-plugin-manager.h
-%{_includedir}/gel-1.1/gel/gel-ui-scale.h
-%{_includedir}/gel-1.1/gel/gel-ui-utils.h
-%{_includedir}/gel-1.1/gel/gel-ui.h
-%{_includedir}/gel-1.1/gel/gel.h
-%{_includedir}/lomo-1.1/lomo/lomo-metadata-parser.h
-%{_includedir}/lomo-1.1/lomo/lomo-player.h
-%{_includedir}/lomo-1.1/lomo/lomo-stream.h
-%{_includedir}/lomo-1.1/lomo/lomo-util.h
-%{_includedir}/lomo-1.1/lomo/lomo.h
-%{_libdir}/pkgconfig/eina-0.10.pc
-%{_libdir}/pkgconfig/gel-1.1.pc
-%{_libdir}/pkgconfig/gel-ui-1.1.pc
-%{_libdir}/pkgconfig/lomo-1.1.pc
+%{_includedir}/eina-0.12/eina/clutty/eina-cover-clutter.h
+%{_includedir}/eina-0.12/eina/dock/eina-dock-plugin.h
+%{_includedir}/eina-0.12/eina/dock/eina-dock-tab.h
+%{_includedir}/eina-0.12/eina/dock/eina-dock.h
+%{_includedir}/eina-0.12/eina/ext/eina-activatable.h
+%{_includedir}/eina-0.12/eina/ext/eina-application.h
+%{_includedir}/eina-0.12/eina/ext/eina-file-chooser-dialog.h
+%{_includedir}/eina-0.12/eina/ext/eina-file-utils.h
+%{_includedir}/eina-0.12/eina/ext/eina-fs.h
+%{_includedir}/eina-0.12/eina/ext/eina-stock.h
+%{_includedir}/eina-0.12/eina/ext/eina-window.h
+%{_includedir}/eina-0.12/eina/fieshta/eina-fieshta-behaviour.h
+%{_includedir}/eina-0.12/eina/fieshta/eina-fieshta-plugin.h
+%{_includedir}/eina-0.12/eina/lomo/eina-lomo-plugin.h
+%{_includedir}/eina-0.12/eina/player/eina-cover-image.h
+%{_includedir}/eina-0.12/eina/player/eina-cover.h
+%{_includedir}/eina-0.12/eina/player/eina-player-plugin.h
+%{_includedir}/eina-0.12/eina/player/eina-player.h
+%{_includedir}/eina-0.12/eina/player/eina-preferences-dialog.h
+%{_includedir}/eina-0.12/eina/player/eina-preferences-tab.h
+%{_includedir}/eina-0.12/eina/player/eina-seek.h
+%{_includedir}/eina-0.12/eina/playlist/eina-playlist-plugin.h
+%{_includedir}/eina-0.12/eina/playlist/eina-playlist.h
+%{_includedir}/gel-2.0/gel/gel-io-scanner.h
+%{_includedir}/gel-2.0/gel/gel-io.h
+%{_includedir}/gel-2.0/gel/gel-job-queue.h
+%{_includedir}/gel-2.0/gel/gel-misc.h
+%{_includedir}/gel-2.0/gel/gel-str-parser.h
+%{_includedir}/gel-2.0/gel/gel-string.h
+%{_includedir}/gel-2.0/gel/gel-ui-dialogs.h
+%{_includedir}/gel-2.0/gel/gel-ui-generic.h
+%{_includedir}/gel-2.0/gel/gel-ui-scale.h
+%{_includedir}/gel-2.0/gel/gel-ui-utils.h
+%{_includedir}/gel-2.0/gel/gel-ui.h
+%{_includedir}/gel-2.0/gel/gel.h
+%{_includedir}/lomo-2.0/lomo/lomo-em-art-backend.h
+%{_includedir}/lomo-2.0/lomo/lomo-em-art-backends.h
+%{_includedir}/lomo-2.0/lomo/lomo-em-art-provider.h
+%{_includedir}/lomo-2.0/lomo/lomo-em-art-search.h
+%{_includedir}/lomo-2.0/lomo/lomo-em-art.h
+%{_includedir}/lomo-2.0/lomo/lomo-logger.h
+%{_includedir}/lomo-2.0/lomo/lomo-metadata-parser.h
+%{_includedir}/lomo-2.0/lomo/lomo-player.h
+%{_includedir}/lomo-2.0/lomo/lomo-stream.h
+%{_includedir}/lomo-2.0/lomo/lomo-util.h
+%{_includedir}/lomo-2.0/lomo/lomo.h
 
-%files doc
-%defattr(-,root,root,-)
-%{_datadir}/gtk-doc/html/eina/api-index-full.html
-%{_datadir}/gtk-doc/html/eina/ch01.html
-%{_datadir}/gtk-doc/html/eina/deprecated-api-index.html
-%{_datadir}/gtk-doc/html/eina/EinaApplication.html
-%{_datadir}/gtk-doc/html/eina/eina-curl-engine.html
-%{_datadir}/gtk-doc/html/eina/eina.devhelp
-%{_datadir}/gtk-doc/html/eina/eina.devhelp2
-%{_datadir}/gtk-doc/html/eina/eina-eina-file-utils.html
-%{_datadir}/gtk-doc/html/eina/eina-eina-fs.html
-%{_datadir}/gtk-doc/html/eina/eina-eina-stock.html
-%{_datadir}/gtk-doc/html/eina/EinaFileChooserDialog.html
-%{_datadir}/gtk-doc/html/eina/EinaWindow.html
-%{_datadir}/gtk-doc/html/eina/home.png
-%{_datadir}/gtk-doc/html/eina/index.html
-%{_datadir}/gtk-doc/html/eina/index.sgml
-%{_datadir}/gtk-doc/html/eina/left.png
-%{_datadir}/gtk-doc/html/eina/object-tree.html
-%{_datadir}/gtk-doc/html/eina/right.png
-%{_datadir}/gtk-doc/html/eina/style.css
-%{_datadir}/gtk-doc/html/eina/up.png
-%{_datadir}/gtk-doc/html/gel/annotation-glossary.html
-%{_datadir}/gtk-doc/html/gel/api-index-full.html
-%{_datadir}/gtk-doc/html/gel/ch01.html
-%{_datadir}/gtk-doc/html/gel/deprecated-api-index.html
-%{_datadir}/gtk-doc/html/gel/gel.devhelp
-%{_datadir}/gtk-doc/html/gel/gel.devhelp2
-%{_datadir}/gtk-doc/html/gel/gel-gel-misc.html
-%{_datadir}/gtk-doc/html/gel/gel-gel-plugin.html
-%{_datadir}/gtk-doc/html/gel/gel-gel-plugin-info.html
-%{_datadir}/gtk-doc/html/gel/gel-gel-string.html
-%{_datadir}/gtk-doc/html/gel/gel-gel-str-parser.html
-%{_datadir}/gtk-doc/html/gel/gel-gel-ui-dialogs.html
-%{_datadir}/gtk-doc/html/gel/gel-gel-ui-utils.html
-%{_datadir}/gtk-doc/html/gel/GelIOScanner.html
-%{_datadir}/gtk-doc/html/gel/GelJobQueue.html
-%{_datadir}/gtk-doc/html/gel/GelPluginEngine.html
-%{_datadir}/gtk-doc/html/gel/GelUIGeneric.html
-%{_datadir}/gtk-doc/html/gel/GelUIPluginManager.html
-%{_datadir}/gtk-doc/html/gel/home.png
-%{_datadir}/gtk-doc/html/gel/index.html
-%{_datadir}/gtk-doc/html/gel/index.sgml
-%{_datadir}/gtk-doc/html/gel/left.png
-%{_datadir}/gtk-doc/html/gel/object-tree.html
-%{_datadir}/gtk-doc/html/gel/right.png
-%{_datadir}/gtk-doc/html/gel/style.css
-%{_datadir}/gtk-doc/html/gel/up.png
-%dir %{_datadir}/gtk-doc/html/lomo
-%{_datadir}/gtk-doc/html/lomo/annotation-glossary.html
-%{_datadir}/gtk-doc/html/lomo/api-index-full.html
-%{_datadir}/gtk-doc/html/lomo/ch01.html
-%{_datadir}/gtk-doc/html/lomo/deprecated-api-index.html
-%{_datadir}/gtk-doc/html/lomo/home.png
-%{_datadir}/gtk-doc/html/lomo/index.html
-%{_datadir}/gtk-doc/html/lomo/index.sgml
-%{_datadir}/gtk-doc/html/lomo/left.png
-%{_datadir}/gtk-doc/html/lomo/lomo.devhelp
-%{_datadir}/gtk-doc/html/lomo/lomo.devhelp2
-%{_datadir}/gtk-doc/html/lomo/lomo-lomo-stats.html
-%{_datadir}/gtk-doc/html/lomo/lomo-lomo-util.html
-%{_datadir}/gtk-doc/html/lomo/LomoMetadataParser.html
-%{_datadir}/gtk-doc/html/lomo/LomoPlayer.html
-%{_datadir}/gtk-doc/html/lomo/LomoStream.html
-%{_datadir}/gtk-doc/html/lomo/object-tree.html
-%{_datadir}/gtk-doc/html/lomo/right.png
-%{_datadir}/gtk-doc/html/lomo/style.css
-%{_datadir}/gtk-doc/html/lomo/up.png
+#%files doc
+#%defattr(-,root,root,-)
+#%{_datadir}/gtk-doc/html/eina/api-index-full.html
+#%{_datadir}/gtk-doc/html/eina/ch01.html
+#%{_datadir}/gtk-doc/html/eina/deprecated-api-index.html
+#%{_datadir}/gtk-doc/html/eina/EinaApplication.html
+#%{_datadir}/gtk-doc/html/eina/eina-curl-engine.html
+#%{_datadir}/gtk-doc/html/eina/eina.devhelp
+#%{_datadir}/gtk-doc/html/eina/eina.devhelp2
+#%{_datadir}/gtk-doc/html/eina/eina-eina-file-utils.html
+#%{_datadir}/gtk-doc/html/eina/eina-eina-fs.html
+#%{_datadir}/gtk-doc/html/eina/eina-eina-stock.html
+#%{_datadir}/gtk-doc/html/eina/EinaFileChooserDialog.html
+#%{_datadir}/gtk-doc/html/eina/EinaWindow.html
+#%{_datadir}/gtk-doc/html/eina/home.png
+#%{_datadir}/gtk-doc/html/eina/index.html
+#%{_datadir}/gtk-doc/html/eina/index.sgml
+#%{_datadir}/gtk-doc/html/eina/left.png
+#%{_datadir}/gtk-doc/html/eina/object-tree.html
+#%{_datadir}/gtk-doc/html/eina/right.png
+#%{_datadir}/gtk-doc/html/eina/style.css
+#%{_datadir}/gtk-doc/html/eina/up.png
+#%{_datadir}/gtk-doc/html/gel/annotation-glossary.html
+#%{_datadir}/gtk-doc/html/gel/api-index-full.html
+#%{_datadir}/gtk-doc/html/gel/ch01.html
+#%{_datadir}/gtk-doc/html/gel/deprecated-api-index.html
+#%{_datadir}/gtk-doc/html/gel/gel.devhelp
+#%{_datadir}/gtk-doc/html/gel/gel.devhelp2
+#%{_datadir}/gtk-doc/html/gel/gel-gel-misc.html
+#%{_datadir}/gtk-doc/html/gel/gel-gel-plugin.html
+#%{_datadir}/gtk-doc/html/gel/gel-gel-plugin-info.html
+#%{_datadir}/gtk-doc/html/gel/gel-gel-string.html
+#%{_datadir}/gtk-doc/html/gel/gel-gel-str-parser.html
+#%{_datadir}/gtk-doc/html/gel/gel-gel-ui-dialogs.html
+#%{_datadir}/gtk-doc/html/gel/gel-gel-ui-utils.html
+#%{_datadir}/gtk-doc/html/gel/GelIOScanner.html
+#%{_datadir}/gtk-doc/html/gel/GelJobQueue.html
+#%{_datadir}/gtk-doc/html/gel/GelPluginEngine.html
+#%{_datadir}/gtk-doc/html/gel/GelUIGeneric.html
+#%{_datadir}/gtk-doc/html/gel/GelUIPluginManager.html
+#%{_datadir}/gtk-doc/html/gel/home.png
+#%{_datadir}/gtk-doc/html/gel/index.html
+#%{_datadir}/gtk-doc/html/gel/index.sgml
+#%{_datadir}/gtk-doc/html/gel/left.png
+#%{_datadir}/gtk-doc/html/gel/object-tree.html
+#%{_datadir}/gtk-doc/html/gel/right.png
+#%{_datadir}/gtk-doc/html/gel/style.css
+#%{_datadir}/gtk-doc/html/gel/up.png
+#%dir %{_datadir}/gtk-doc/html/lomo
+#%{_datadir}/gtk-doc/html/lomo/annotation-glossary.html
+#%{_datadir}/gtk-doc/html/lomo/api-index-full.html
+#%{_datadir}/gtk-doc/html/lomo/ch01.html
+#%{_datadir}/gtk-doc/html/lomo/deprecated-api-index.html
+#%{_datadir}/gtk-doc/html/lomo/home.png
+#%{_datadir}/gtk-doc/html/lomo/index.html
+#%{_datadir}/gtk-doc/html/lomo/index.sgml
+#%{_datadir}/gtk-doc/html/lomo/left.png
+#%{_datadir}/gtk-doc/html/lomo/lomo.devhelp
+#%{_datadir}/gtk-doc/html/lomo/lomo.devhelp2
+#%{_datadir}/gtk-doc/html/lomo/lomo-lomo-stats.html
+#%{_datadir}/gtk-doc/html/lomo/lomo-lomo-util.html
+#%{_datadir}/gtk-doc/html/lomo/LomoMetadataParser.html
+#%{_datadir}/gtk-doc/html/lomo/LomoPlayer.html
+#%{_datadir}/gtk-doc/html/lomo/LomoStream.html
+#%{_datadir}/gtk-doc/html/lomo/object-tree.html
+#%{_datadir}/gtk-doc/html/lomo/right.png
+#%{_datadir}/gtk-doc/html/lomo/style.css
+#%{_datadir}/gtk-doc/html/lomo/up.png
 
 %changelog
 * Sun Jun 12 2011 J. Krebs <rpm_speedy@yahoo.com> 0.10.0-1

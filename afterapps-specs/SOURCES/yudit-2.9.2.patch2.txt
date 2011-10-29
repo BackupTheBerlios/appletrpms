@@ -1,0 +1,25 @@
+*** swindow/SPostscript.cpp	2009-03-28 00:52:20.000000000 +0900
+--- swindow/SPostscript.cpp	2011-08-04 13:58:51.850294348 +0900
+***************
+*** 501,504 ****
+--- 501,505 ----
+        sprintf (arr, "gsave %s%d.%03d %s%d.%03d translate newpath\n", 
+          SG(ix), ix/1000, SM(ix), SG(iy), iy/1000, SM(iy));
++       // BUG-2011-08-04 Don't write. This happens between U+0000...U+001F
+        //writeString (arr);
+        return true;
+***************
+*** 547,551 ****
+    else 
+    {
+!     if (cache.get (cacheID) == 0) writeString ("fill grestore\n");
+    }
+  }
+--- 548,554 ----
+    else 
+    {
+!     // BUG-2011-08-04 Don't write. This happens between U+0000...U+001F
+!     // Originally only newpath was commented out.
+!     // if (cache.get (cacheID) == 0) writeString ("fill grestore\n");
+    }
+  }

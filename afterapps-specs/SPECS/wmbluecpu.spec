@@ -1,6 +1,6 @@
 %define		name wmbluecpu
 %define		version 0.9
-%define		release 1%{?dist}
+%define		release 2%{?dist}
 
 Summary:	WMBlueCPU is a cpu monitor
 Name:		%name
@@ -11,6 +11,7 @@ Group:		AfterStep/Applets
 URL:		http://www.dockapps.org/file.php/id/167
 Source0:	http://www.dockapps.org/download.php/id/770/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-%{version}-Makefile.patch
+Patch1:		%{name}-%{version}-cpu_linux.c.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	libX11
 Requires:	libXext
@@ -31,6 +32,7 @@ right corner, and a usage history chart at the bottom.
 %prep
 %setup -q -n wmbluecpu
 %patch0
+%patch1
 
 %build
 make PREFIX=%{_prefix}
@@ -52,8 +54,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 %doc AUTHORS COPYING ChangeLog README THANKS
 
-
 %changelog
+* Fri Oct 28 2011 J. Krebs <rpm_speedy@yahoo.com> - 0.9-2
+- added patch for SMP processors to default to CPU0.
+
 * Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.9-1
 - new version. changed URL info to dockapps.org.
 

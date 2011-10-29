@@ -42,9 +42,9 @@
 %define	asver		2.2.11
 %define	libaiver	1.20
 %define	libabver	1.14
-%define	libairel	2%{?dist}
-%define	libabrel	2%{?dist}
-%define release 2%{?dist}
+%define	libairel	3%{?dist}
+%define	libabrel	3%{?dist}
+%define release 3%{?dist}
 %define epoch 20
 
 Summary:	AfterStep Window Manager (NeXTalike)
@@ -103,6 +103,7 @@ Requires:	readline
 Requires:	zlib
 BuildRequires:  freetype-devel
 BuildRequires:  gtk2-devel
+BuildRequires:  libjpeg-turbo-devel
 BuildRequires:	librsvg2-devel
 BuildRequires:	libtiff-devel
 BuildRequires:  libX11-devel
@@ -435,6 +436,9 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
+* Thu Oct 27 2011 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.11-3
+- added build require for libjpeg-turbo-devel.
+
 * Fri Jul 20 2011 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.11-2
 - updated wharf to reflect applications usable with lm_sensors 3.0+, PulseAudio.
 

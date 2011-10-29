@@ -52,6 +52,20 @@ APPLET_LIST += SPEYES
 
 #APPLET_LIST += WMALMS
 
+WMAB_NAME=wmab
+WMAB_VERSION=0.3
+WMAB_TAR=$(WMAB_NAME)-$(WMAB_VERSION).tar.gz
+WMAB_URL=http://web.tiscali.it/kalem/wmab/$(WMAB_TAR)
+
+APPLET_LIST += WMAB
+
+WMACPILOAD_NAME=wmacpiload
+WMACPILOAD_VERSION=0.2.0
+WMACPILOAD_TAR=$(WMACPILOAD_NAME)-$(WMACPILOAD_VERSION).tar.bz2
+WMACPILOAD_URL=http://wmacpiload.tuxfamily.org/download/$(WMACPILOAD_TAR)
+
+APPLET_LIST += WMACPILOAD
+
 WMBLUECLOCK_NAME=wmblueclock
 WMBLUECLOCK_VERSION=0.4
 WMBLUECLOCK_TAR=$(WMBLUECLOCK_NAME)-$(WMBLUECLOCK_VERSION).tar.bz2
@@ -74,9 +88,9 @@ WMBLUEMEM_URL=http://www.dockapps.org/download.php/id/771/$(WMBLUEMEM_TAR)
 APPLET_LIST += WMBLUEMEM
 
 WMC2D_NAME=wmc2d
-WMC2D_VERSION=2.04
-WMC2D_TAR=$(WMC2D_NAME)-2010-08-16-13.tar.bz2
-WMC2D_URL=http://www.goron.de/~johns/wmc2d/$(WMC2D_TAR)
+WMC2D_VERSION=2.05
+WMC2D_TAR=$(WMC2D_NAME)-2011-04-29-17.tar.bz2
+WMC2D_URL=http://downloads.sourceforge.net/project/$(WMC2D_NAME)/Source/$(WMC2D_TAR)
 
 APPLET_LIST += WMC2D
 
@@ -220,12 +234,12 @@ WMPOP3LB_URL=http://lbj.free.fr/wmpop3/$(WMPOP3LB_TAR)
 
 APPLET_LIST += WMPOP3LB
 
-#WMPOWER_NAME=wmpower
-#WMPOWER_VERSION=0.4.3
-#WMPOWER_TAR=$(WMPOWER_NAME)-$(WMPOWER_VERSION).tar.bz2
-#WMPOWER_URL=http://downloads.sourceforge.net/project/$(WMPOWER_NAME)/$(WMPOWER_NAME)/$(WMPOWER_TAR)
+WMPOWER_NAME=wmpower
+WMPOWER_VERSION=0.5.0
+WMPOWER_TAR=$(WMPOWER_NAME)-$(WMPOWER_VERSION).tar.bz2
+WMPOWER_URL=http://linux-bsd-unix.strefa.pl/$(WMPOWER_TAR)
 
-#APPLET_LIST += WMPOWER
+APPLET_LIST += WMPOWER
 
 WMPPP_NAME=wmppp
 WMPPP_VERSION=1.3.0
@@ -293,9 +307,9 @@ WMTIMER_URL=http://gentoo.mirrors.easynews.com/linux/gentoo/distfiles/$(WMTIMER_
 APPLET_LIST += WMTIMER
 
 WMTZ_NAME=wmtz
-WMTZ_VERSION=0.7
+WMTZ_VERSION=0.7.1
 WMTZ_TAR=$(WMTZ_NAME)-$(WMTZ_VERSION).tar.gz
-WMTZ_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMTZ_TAR)
+WMTZ_URL=http://www.dockapps.org/download.php/id/885/$(WMTZ_TAR)
 
 APPLET_LIST += WMTZ
 

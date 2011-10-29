@@ -71,14 +71,14 @@ APPLET_LIST += CALCOO
 
 #eina 0.10.0+ needs gtk3-3.0.0+, only available under Fedora 15+
 EINA_NAME=eina
-EINA_VERSION=0.10.0
+EINA_VERSION=0.12.0
 EINA_TAR=$(EINA_NAME)-$(EINA_VERSION).tar.gz
 EINA_URL=http://launchpad.net/eina/trunk/$(EINA_VERSION)/+download/$(EINA_TAR)
 
 APPLET_LIST += EINA
 
 FOTOXX_NAME=fotoxx
-FOTOXX_VERSION=11.08
+FOTOXX_VERSION=11.10
 FOTOXX_TAR=$(FOTOXX_NAME)-$(FOTOXX_VERSION).tar.gz
 FOTOXX_URL=http://kornelix.squarespace.com/storage/downloads/$(FOTOXX_TAR)
 
@@ -110,7 +110,7 @@ APPLET_LIST += FOTOXX
 #APPLET_LIST += LIBWRASTER
 
 MEDIT_NAME=medit
-MEDIT_VERSION=1.0.3
+MEDIT_VERSION=1.0.5
 MEDIT_TAR=$(MEDIT_NAME)-$(MEDIT_VERSION).tar.bz2
 MEDIT_URL=http://sourceforge.net/projects/mooedit/files/$(MEDIT_NAME)/$(MEDIT_VERSION)/$(MEDIT_TAR)
 
@@ -160,13 +160,13 @@ TEMPERATURE.APP_URL=http://www.fukt.bsnet.se/~per/temperature/$(TEMPERATURE.APP_
 APPLET_LIST += TEMPERATURE.APP
 
 TRAYER_NAME=trayer
-TRAYER_VERSION=1.1.2
-TRAYER_TAR=sargon-trayer-srg-$(TRAYER_NAME)_$(TRAYER_VERSION)-1-g77e2eb2.tar.gz
+TRAYER_VERSION=1.1.3
+TRAYER_TAR=sargon-trayer-srg-$(TRAYER_NAME)_$(TRAYER_VERSION)-1-gb619e34.tar.gz
 TRAYER_URL=https://github.com/sargon/trayer-srg/tarball/master/$(TRAYER_TAR)
 APPLET_LIST += TRAYER
 
 WORKER_NAME=worker
-WORKER_VERSION=2.18.0
+WORKER_VERSION=2.18.1
 WORKER_TAR=$(WORKER_NAME)-$(WORKER_VERSION).tar.gz
 WORKER_URL=http://www.boomerangsworld.de/worker/downloads/$(WORKER_TAR)
 

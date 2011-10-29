@@ -1,0 +1,14 @@
+--- Makefile	2011-09-01 03:46:22.000000000 -0500
++++ Makefile	2011-09-01 07:19:20.000000000 -0500
+@@ -69,11 +69,6 @@
+ 	gzip -f -9 fotoxx.1
+ 	cp fotoxx.1.gz $(DESTDIR)$(MANDIR)
+ 	rm -f fotoxx.1.gz
+-	# menu (desktop) file (absolute paths to get around rpmbuild problem)
+-	cp -f data/desktop $(DESTDIR)$(MENUFILE)
+-	echo Exec=/usr/bin/fotoxx >> $(DESTDIR)$(MENUFILE)
+-	echo Icon=/usr/share/fotoxx/icons/fotoxx.png >> $(DESTDIR)$(MENUFILE)
+-	xdg-desktop-menu install $(DESTDIR)$(MENUFILE)
+ 
+ uninstall:
+ 	rm -f  $(DESTDIR)$(BINDIR)/fotoxx

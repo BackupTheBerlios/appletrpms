@@ -1,6 +1,6 @@
 %define name trayer
-%define version 1.1.2
-%define gitver	77e2eb2
+%define version 1.1.3
+%define gitver	b619e34
 %define release 1%{?dist}
 
 Summary:	A lightweight GTK2-based systray for UNIX desktop
@@ -63,6 +63,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc CREDITS COPYING CHANGELOG README TODO
 
 %changelog
+* Mon Aug 22 2011 J. Krebs <rpm_speedy@yahoo.com> - 1.1.3-1
+- new version.
+
 * Fri Jul 15 2011 J. Krebs <rpm_speedy@yahoo.com> - 1.1.2-1
 - new version.
 

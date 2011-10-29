@@ -1,6 +1,6 @@
 %define name	wmnd
 %define version	0.4.16
-%define release	1%{?dist}
+%define release	2%{?dist}
 
 Summary:	wmnd is a network monitoring dockapp
 Name:		%name
@@ -10,7 +10,21 @@ License:	GPLv2+
 Group:		AfterStep/Applets
 URL:		http://www.thregr.org/~wavexx/software/wmnd/
 Source0:	http://www.thregr.org/~wavexx/software/wmnd/releases/%{name}-%{version}.tar.gz
+Patch0:		%{name}-%{version}-make-byte-packet-counters-64-bit.patch
+Patch1:		%{name}-%{version}-ld.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	glibc
+Requires:	libICE
+Requires:	libSM
+Requires:	libX11
+Requires:	libXext
+Requires:	libXpm
+BuildRequires:	glibc-devel
+BuildRequires:	libICE-devel
+BuildRequires:	libSM-devel
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXpm-devel
 
 %description
 WMND (WindowMaker Network Devices) is a network monitoring
@@ -23,6 +37,8 @@ drivers. Enjoy!
 
 %prep
 %setup -q
+%patch0
+%patch1
 
 %build
 ./configure --prefix=%{_prefix} --mandir=%{_mandir}
@@ -45,6 +61,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/wmnd.*
 
 %changelog
+* Wed Oct 19 2011 J. Krebs <rpm_speedy@yahoo.com> - 0.4.16-2
+- added requires and buildrequires, added packet counter & ld patches.
+
 * Tue Jun 21 2011 J. Krebs <rpm_speedy@yahoo.com> - 0.4.16-1
 - new version.
 

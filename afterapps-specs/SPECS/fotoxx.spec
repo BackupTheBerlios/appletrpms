@@ -1,5 +1,5 @@
 %define		name fotoxx
-%define		version 11.08
+%define		version 11.10
 %define		release 1%{?dist}
 
 Summary:	application for processing image files from a digital camera
@@ -10,7 +10,7 @@ License:	GPLv3+
 Group:		Applications/Multimedia
 URL:		http://kornelix.squarespace.com/%{name}/
 Source0:	http://kornelix.squarespace.com/storage/downloads/%{name}-%{version}.tar.gz
-Patch0:		%{name}-11.08-Makefile.patch
+Patch0:		%{name}-11.09-Makefile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	atk
 Requires:	cairo
@@ -127,6 +127,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/doc/%{name}/COPYING
 %{_datadir}/doc/%{name}/README
 %{_datadir}/doc/%{name}/TRANSLATIONS
+%{_datadir}/doc/%{name}/edit*
 %{_datadir}/doc/%{name}/userguide-changes.txt
 %{_datadir}/doc/%{name}/userguide-en.html
 %{_datadir}/doc/%{name}/userguide-it.html
@@ -134,7 +135,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/%{name}.1.gz
 
 %changelog
-* Sun Jul 31 2011 J. Krebs <rpm_speedy@yahoo.com> - 10.08-1
+* Sat Oct 01 2011 J. Krebs <rpm_speedy@yahoo.com> - 10.10-1
+- new version.
+
+* Thu Sep 01 2011 J. Krebs <rpm_speedy@yahoo.com> - 10.09-1
+- new version.
+
+* Wed Aug 03 2011 J. Krebs <rpm_speedy@yahoo.com> - 10.08.1-1
 - new version.
 
 * Sat Jul 02 2011 J. Krebs <rpm_speedy@yahoo.com> - 10.07-1

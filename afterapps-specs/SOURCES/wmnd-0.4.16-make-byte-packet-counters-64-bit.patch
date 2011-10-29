@@ -1,0 +1,502 @@
+--- configure.ac
++++ configure.ac
+@@ -29,7 +29,7 @@ AC_SEARCH_LIBS(sin, m,, [AC_MSG_ERROR(math library is required)])
+ 
+ # X libraries
+ AC_PATH_XTRA
+-CFLAGS="$CFLAGS $X_CFLAGS"
++CFLAGS="-W -Wall $CFLAGS $X_CFLAGS"
+ LDFLAGS="$LDFLAGS $X_PRE_LIBS $X_LIBS $X_EXTRA_LIBS"
+ 
+ # check for XPM headers, libraries
+--- src/display.c
++++ src/display.c
+@@ -72,7 +72,7 @@ trunc_normal(unsigned size, unsigned* rx, unsigned* tx)
+ #ifdef USE_DRW_TRADITIONAL
+ /* Traditional mode */
+ void
+-drwTraditional(unsigned long* hist, unsigned mIn, unsigned mOut,
++drwTraditional(unsigned long long* hist, unsigned mIn, unsigned mOut,
+     unsigned size, unsigned long long rx_max, unsigned long long tx_max)
+ {
+   unsigned int k, txlev, rxlev, nolev;
+@@ -98,7 +98,7 @@ drwTraditional(unsigned long* hist, unsigned mIn, unsigned mOut,
+ #ifdef USE_DRW_MGRAPH
+ /* MGraph mode */
+ void
+-drwMGraph(unsigned long* hist, unsigned mIn, unsigned mOut,
++drwMGraph(unsigned long long* hist, unsigned mIn, unsigned mOut,
+     unsigned size, unsigned long long rx_max, unsigned long long tx_max)
+ {
+   /* max scale */
+@@ -140,7 +140,7 @@ drwMGraph(unsigned long* hist, unsigned mIn, unsigned mOut,
+ #ifdef USE_DRW_WAVEFORM
+ /* Waveform mode */
+ void
+-drwWaveform(unsigned long* hist, unsigned mIn, unsigned mOut,
++drwWaveform(unsigned long long* hist, unsigned mIn, unsigned mOut,
+     unsigned size, unsigned long long rx_max, unsigned long long tx_max)
+ {
+   unsigned int k, txlev, rxlev, center;
+@@ -169,7 +169,7 @@ drwWaveform(unsigned long* hist, unsigned mIn, unsigned mOut,
+ #ifdef USE_DRW_WMWAVE
+ /* Reverse wmnet mode */
+ void
+-drwWmwave(unsigned long* hist, unsigned mIn, unsigned mOut,
++drwWmwave(unsigned long long* hist, unsigned mIn, unsigned mOut,
+     unsigned size, unsigned long long rx_max, unsigned long long tx_max)
+ {
+   unsigned int k, msize, bpp, txlev, rxlev, center;
+@@ -198,7 +198,7 @@ drwWmwave(unsigned long* hist, unsigned mIn, unsigned mOut,
+ #ifdef USE_DRW_WMNET
+ /* Wmnet like modeness */
+ void
+-drwWmnet(unsigned long* hist, unsigned mIn, unsigned mOut, unsigned size,
++drwWmnet(unsigned long long* hist, unsigned mIn, unsigned mOut, unsigned size,
+     unsigned long long rx_max, unsigned long long tx_max)
+ {
+   unsigned int k, txlev, rxlev, nolev;
+@@ -233,7 +233,7 @@ drwWmnet(unsigned long* hist, unsigned mIn, unsigned mOut, unsigned size,
+ #ifdef USE_DRW_SEPGRAPHS
+ /* Separated graphs mode */
+ void
+-drwSepgraphs(unsigned long* hist, unsigned mIn, unsigned mOut,
++drwSepgraphs(unsigned long long* hist, unsigned mIn, unsigned mOut,
+     unsigned size, unsigned long long rx_max, unsigned long long tx_max)
+ {
+   unsigned int k, msize, txlev, rxlev, center, rxBpp, txBpp;
+@@ -263,7 +263,7 @@ drwSepgraphs(unsigned long* hist, unsigned mIn, unsigned mOut,
+ #ifdef USE_DRW_TWISTED
+ /* Twisted mode */
+ void
+-drwTwisted(unsigned long* hist, unsigned mIn, unsigned mOut,
++drwTwisted(unsigned long long* hist, unsigned mIn, unsigned mOut,
+     unsigned size, unsigned long long rx_max, unsigned long long tx_max)
+ {
+   unsigned int k, stpos, itn, txlev, rxlev;
+@@ -303,7 +303,7 @@ drwTwisted(unsigned long* hist, unsigned mIn, unsigned mOut,
+ #if defined(USE_DRW_CHARTS) || defined(USE_DRW_NEEDLE)
+ /* func utils */
+ void
+-drwGetMeds(const unsigned long* hist, const unsigned mIn,
++drwGetMeds(const unsigned long long* hist, const unsigned mIn,
+     const unsigned mOut, unsigned long* tx_med,
+     unsigned long* rx_med)
+ {
+@@ -323,7 +323,7 @@ drwGetMeds(const unsigned long* hist, const unsigned mIn,
+ 
+ #ifdef USE_DRW_CHARTS
+ /* Charts mode */
+-void drwCharts(unsigned long* hist, unsigned mIn, unsigned mOut, unsigned size,
++void drwCharts(unsigned long long* hist, unsigned mIn, unsigned mOut, unsigned size,
+     unsigned long long rx_max, unsigned long long tx_max)
+ {
+   unsigned int k, j, stpos, spc;
+@@ -378,7 +378,7 @@ drwRotPoint(const unsigned len, const double rad,
+ }
+ 
+ /* needle mode */
+-void drwNeedle(unsigned long* hist, unsigned mIn, unsigned mOut, unsigned size,
++void drwNeedle(unsigned long long* hist, unsigned mIn, unsigned mOut, unsigned size,
+     unsigned long long rx_max, unsigned long long tx_max)
+ {
+   unsigned int k, stpos, offset, nX, nY;
+@@ -454,7 +454,7 @@ void drwNeedle(unsigned long* hist, unsigned mIn, unsigned mOut, unsigned size,
+ 
+ #ifdef USE_DRW_LINES
+ /* lines mode */
+-void drwLines(unsigned long* hist, unsigned mIn, unsigned mOut, unsigned size,
++void drwLines(unsigned long long* hist, unsigned mIn, unsigned mOut, unsigned size,
+     unsigned long long rx_max, unsigned long long tx_max)
+ {
+   unsigned int k, oTxlev, oRxlev, txlev, rxlev;
+--- src/display.h
++++ src/display.h
+@@ -28,7 +28,7 @@
+ struct drwStruct
+ {
+   char* funcName;
+-  void (*funcPtr)(unsigned long* hist, unsigned mIn, unsigned mOut,
++  void (*funcPtr)(unsigned long long* hist, unsigned mIn, unsigned mOut,
+       unsigned size, unsigned long long rx_max, unsigned long long tx_max);
+ };
+ 
+--- src/drivers.c
++++ src/drivers.c
+@@ -215,8 +215,8 @@ solaris_fpppd_list(const char* devname, struct Devices* list)
+ }
+ 
+ int
+-solaris_fpppd_get(struct Devices* dev, unsigned long* ip,
+-    unsigned long* op, unsigned long* ib, unsigned long* ob)
++solaris_fpppd_get(struct Devices* dev, unsigned long long* ip,
++    unsigned long long* op, unsigned long long* ib, unsigned long long* ob)
+ {
+   static struct ppp_stats curp;
+   struct solaris_fpppd_drvdata* drvdata = dev->drvdata;
+@@ -340,8 +340,8 @@ solaris_kstat_init(struct Devices* dev)
+ }
+ 
+ int
+-solaris_kstat_get(struct Devices* dev, unsigned long* ip, unsigned long* op,
+-    unsigned long* ib, unsigned long* ob)
++solaris_kstat_get(struct Devices* dev, unsigned long long* ip, unsigned long long* op,
++    unsigned long long* ib, unsigned long long* ob)
+ {
+   struct solaris_kstat_drvdata* drvdata =
+     (struct solaris_kstat_drvdata*)dev->drvdata;
+@@ -411,13 +411,13 @@ testing_dummy_init(struct Devices* dev)
+ }
+ 
+ int
+-testing_dummy_get(struct Devices* dev, unsigned long* ip, unsigned long* op,
+-    unsigned long* ib, unsigned long* ob)
++testing_dummy_get(struct Devices* dev, unsigned long long* ip, unsigned long long* op,
++    unsigned long long* ib, unsigned long long* ob)
+ {
+   /* some more fun when debugging! */
+   static float v = 0.;
+-  static unsigned long is = 0;
+-  static unsigned long os = 0;
++  static unsigned long long is = 0;
++  static unsigned long long os = 0;
+ 
+   *ip = *ib = (is += (16384. * cos(v)) + 16384);
+   *op = *ob = (os += (16384. * sin(v)) + 16384);
+@@ -502,8 +502,8 @@ linux_proc_list(const char* devname, struct Devices* list)
+ }
+ 
+ int
+-linux_proc_get(struct Devices* dev, unsigned long* ip, unsigned long* op,
+-    unsigned long* ib, unsigned long* ob)
++linux_proc_get(struct Devices* dev, unsigned long long* ip, unsigned long long* op,
++    unsigned long long* ib, unsigned long long* ob)
+ {
+   FILE* fp;
+   char temp[MAXBUF];
+@@ -524,13 +524,15 @@ linux_proc_get(struct Devices* dev, unsigned long* ip, unsigned long* op,
+     if(!strcmp(strtok(temp, linux_proc_tokens), dev->name))
+     {
+       p = strchr(temp, 0) + 1;
+-      sscanf(p, "%lu %lu %*s %*s %*s %*s %*s %*s %lu %lu", ib, ip, ob, op);
++      sscanf(p, "%llu %llu %*s %*s %*s %*s %*s %*s %llu %llu", ib, ip, ob, op);
+       active = 0;
+       break;
+     }
+   }
+   fclose(fp);
+ 
++  printf("linux_proc_get('%s') = %llub, %llup in, %llub, %llup out\n", dev->name, *ib, *ip, *ob, *op);
++
+   return active;
+ }
+ 
+@@ -629,8 +631,8 @@ freebsd_sysctl_list(const char* devname, struct Devices* list)
+ 
+ /* gather stats */
+ int
+-freebsd_sysctl_get(struct Devices*dev, unsigned long* ip,
+-    unsigned long* op, unsigned long* ib, unsigned long* ob)
++freebsd_sysctl_get(struct Devices*dev, unsigned long long* ip,
++    unsigned long long* op, unsigned long long* ib, unsigned long long* ob)
+ {
+   struct freebsd_sysctl_drvdata* drdata = dev->drvdata;
+   int datamib[6];
+@@ -803,8 +805,8 @@ irix_pcp_init(struct Devices* dev)
+ }
+ 
+ int
+-irix_pcp_get(struct Devices* dev, unsigned long* ip, unsigned long* op,
+-    unsigned long* ib, unsigned long* ob)
++irix_pcp_get(struct Devices* dev, unsigned long long* ip, unsigned long long* op,
++    unsigned long long* ib, unsigned long long* ob)
+ {
+   /* switch to the right context */
+   struct irix_pcp_drvdata* drdata =
+@@ -1131,8 +1133,8 @@ generic_snmp_init(struct Devices* dev)
+ }
+ 
+ int
+-generic_snmp_get(struct Devices* dev, unsigned long* ip, unsigned long* op,
+-    unsigned long* ib, unsigned long* ob)
++generic_snmp_get(struct Devices* dev, unsigned long long* ip, unsigned long long* op,
++    unsigned long long* ib, unsigned long long* ob)
+ {
+   /* switch to the right context */
+   struct generic_snmp_drvdata* drdata =
+@@ -1282,35 +1284,35 @@ struct drivers_struct drivers_table[] =
+ {
+ #ifdef USE_FREEBSD_SYSCTL
+   {USE_FREEBSD_SYSCTL, freebsd_sysctl_list, NULL,
+-    freebsd_sysctl_get, freebsd_sysctl_term, NULL},
++    freebsd_sysctl_get, freebsd_sysctl_term, NULL, 0},
+ #endif
+ #ifdef USE_NETBSD_IOCTL
+   {USE_NETBSD_IOCTL, netbsd_ioctl_list, NULL,
+-    netbsd_ioctl_get, NULL, netbsd_ioctl_unlist},
++    netbsd_ioctl_get, NULL, netbsd_ioctl_unlist, 0},
+ #endif
+ #ifdef USE_LINUX_PROC
+   {USE_LINUX_PROC, linux_proc_list, NULL,
+-    linux_proc_get, NULL, NULL},
++    linux_proc_get, NULL, NULL, 0},
+ #endif
+ #ifdef USE_SOLARIS_FPPPD
+   {USE_SOLARIS_FPPPD, solaris_fpppd_list, solaris_fpppd_init,
+-    solaris_fpppd_get, solaris_fpppd_term, NULL},
++    solaris_fpppd_get, solaris_fpppd_term, NULL, 0},
+ #endif
+ #ifdef USE_SOLARIS_KSTAT
+   {USE_SOLARIS_KSTAT, solaris_kstat_list, solaris_kstat_init,
+-    solaris_kstat_get, solaris_kstat_term, NULL},
++    solaris_kstat_get, solaris_kstat_term, NULL, 0},
+ #endif
+ #ifdef USE_IRIX_PCP
+   {USE_IRIX_PCP, irix_pcp_list, irix_pcp_init,
+-    irix_pcp_get, irix_pcp_term, NULL},
++    irix_pcp_get, irix_pcp_term, NULL, 0},
+ #endif
+ #ifdef USE_GENERIC_SNMP
+   {USE_GENERIC_SNMP, generic_snmp_list, generic_snmp_init,
+-    generic_snmp_get, generic_snmp_term, NULL},
++    generic_snmp_get, generic_snmp_term, NULL, 0},
+ #endif
+ #ifdef USE_TESTING_DUMMY
+   {USE_TESTING_DUMMY, testing_dummy_list, testing_dummy_init,
+-    testing_dummy_get, NULL, NULL},
++    testing_dummy_get, NULL, NULL, 0},
+ #endif
+-  {NULL, NULL, NULL, NULL, NULL, NULL}
++  {NULL, NULL, NULL, NULL, NULL, NULL, 0}
+ };
+--- src/drivers.h
++++ src/drivers.h
+@@ -32,8 +32,8 @@
+ 
+ typedef int (*p_list_devs) (const char* devname, struct Devices* list);
+ typedef int (*p_init_dev) (struct Devices* dev);
+-typedef int (*p_updt_stats) (struct Devices* dev, unsigned long* ip,
+-    unsigned long* op, unsigned long* ib, unsigned long* ob);
++typedef int (*p_updt_stats) (struct Devices* dev, unsigned long long* ip,
++    unsigned long long* op, unsigned long long* ib, unsigned long long* ob);
+ typedef void (*p_term_dev) (struct Devices* dev);
+ typedef void (*p_term_drv) ();
+ 
+--- src/wmnd.c
++++ src/wmnd.c
+@@ -49,25 +49,25 @@ int check_mr(int x, int y);
+ void beat_event(void);
+ void click_event(unsigned int region, unsigned int button);
+ static void led_control(const unsigned char led, const unsigned char mode);
+-void scale(char* rx_buf, char* tx_buf, unsigned long rx,
+-    unsigned long tx, const int gap);
+-void metric_scale(unsigned char sign, unsigned long value, char* buf);
+-void binary_scale(unsigned char sign, unsigned long value, char* buf);
++void scale(char* rx_buf, char* tx_buf, unsigned long long rx,
++    unsigned long long tx, const int gap);
++void metric_scale(unsigned char sign, unsigned long long value, char* buf);
++void binary_scale(unsigned char sign, unsigned long long value, char* buf);
+ void draw_string(const char* buf, unsigned int x, unsigned int y);
+-void smooth(unsigned long* stat, const unsigned long last, const float smooth);
++void smooth(unsigned long long* stat, const unsigned long long last, const float smooth);
+ 
+ /* device statistics */
+ void draw_interface(void);
+-void draw_rate(unsigned long rx, unsigned long tx, const int gap);
+-void draw_max(unsigned long rx, unsigned long tx);
++void draw_rate(unsigned long long rx, unsigned long long tx, const int gap);
++void draw_max(unsigned long long rx, unsigned long long tx);
+ void draw_stats(struct Devices *ptr, const int gap);
+ 
+ /* driver functions */
+ int devices_init(const char* driver, const char* interface);
+ void devices_select(const char* interface);
+ void devices_prev(void);
+-void devices_getstat(struct Devices *device, unsigned long* ip,
+-    unsigned long* op, unsigned long* ib, unsigned long* ob);
++void devices_getstat(struct Devices *device, unsigned long long* ip,
++    unsigned long long* op, unsigned long long* ib, unsigned long long* ob);
+ void devices_destroy(void);
+ 
+ /* useless shit */
+@@ -594,7 +594,7 @@ exec_trend(struct Devices* dev, int bp)
+     int x, idx;
+     idx = (bp? 0: 2);
+     for(x = 0; x != 58; ++x)
+-      fprintf(trendFd[i], "%lu %lu\n",
++      fprintf(trendFd[i], "%llu %llu\n",
+ 	  dev->his[x][idx + 0], dev->his[x][idx + 1]);
+     fflush(trendFd[i]);
+   }
+@@ -700,7 +700,7 @@ click_event(unsigned int region, unsigned int button)
+ 
+ 
+ void
+-smooth(unsigned long* stat, const unsigned long last, const float smooth)
++smooth(unsigned long long* stat, const unsigned long long last, const float smooth)
+ {
+   *stat = ((unsigned long)(last + (smooth * (*stat - last))));
+ }
+@@ -728,7 +728,7 @@ int main(int argc, char* *argv)
+   int parse_conf = 1;
+   char* conf_file = NULL;
+   struct Devices* ptr;
+-  unsigned long ib, ob, ip, op;
++  unsigned long long ib, ob, ip, op;
+   int ch;
+   unsigned btn = 0;
+   int rgn = -1;
+@@ -1096,7 +1096,7 @@ int main(int argc, char* *argv)
+ 		close_trend(i);
+ 	      else
+ 	      {
+-		fprintf(trendFd[i], "%lu %lu\n",
++		fprintf(trendFd[i], "%llu %llu\n",
+ 		    ptr->his[57][idx + 0], ptr->his[57][idx + 1]);
+ 		fflush(trendFd[i]);
+ 	      }
+@@ -1164,7 +1164,7 @@ int main(int argc, char* *argv)
+ 
+ 
+ void
+-binary_scale(unsigned char sign, unsigned long value, char* buf)
++binary_scale(unsigned char sign, unsigned long long value, char* buf)
+ {
+   unsigned char scale;
+   unsigned int i;
+@@ -1193,7 +1193,7 @@ binary_scale(unsigned char sign, unsigned long value, char* buf)
+   else
+     scale = ' ';
+ 
+-  snprintf(buf, 7, "%c%lu", sign, value);
++  snprintf(buf, 7, "%c%llu", sign, value);
+   r = buf;
+   r++;
+ 
+@@ -1209,7 +1209,7 @@ binary_scale(unsigned char sign, unsigned long value, char* buf)
+ 
+ 
+ void
+-metric_scale(unsigned char sign, unsigned long value, char* buf)
++metric_scale(unsigned char sign, unsigned long long value, char* buf)
+ {
+   float f;
+   unsigned char scale;
+@@ -1256,8 +1256,8 @@ metric_scale(unsigned char sign, unsigned long value, char* buf)
+ 
+ 
+ void
+-scale(char* rx_buf, char* tx_buf, unsigned long rx,
+-    unsigned long tx, const int gap)
++scale(char* rx_buf, char* tx_buf, unsigned long long rx,
++    unsigned long long tx, const int gap)
+ {
+   char rx_sign, tx_sign;
+ 
+@@ -1393,7 +1393,7 @@ draw_string(const char* buf, unsigned int x, unsigned int y)
+ 
+ 
+ void
+-draw_rate(unsigned long rx, unsigned long tx, const int gap)
++draw_rate(unsigned long long rx, unsigned long long tx, const int gap)
+ {
+   char rx_buf[8];
+   char tx_buf[8];
+@@ -1411,7 +1411,7 @@ draw_rate(unsigned long rx, unsigned long tx, const int gap)
+ 
+ 
+ void
+-draw_max(unsigned long rx, unsigned long tx)
++draw_max(unsigned long long rx, unsigned long long tx)
+ {
+   char rx_buf[16];
+   char tx_buf[16];
+@@ -1434,7 +1434,7 @@ void
+ draw_stats(struct Devices *ptr, const int gap)
+ {
+   unsigned int k;
+-  unsigned long* p;
++  unsigned long long* p;
+   unsigned int in, out;
+   unsigned long rx_max_his, tx_max_his;
+   unsigned long long rx_max, tx_max;
+@@ -1464,7 +1464,7 @@ draw_stats(struct Devices *ptr, const int gap)
+ 
+   /* find maximum value in screen history */
+   rx_max = tx_max = 0;
+-  p = (unsigned long*)ptr->his;
++  p = (unsigned long long*)ptr->his;
+   for(k = 0; k < 58; k++)
+   {
+     rx_max = MAX(rx_max, p[in]);
+@@ -1481,7 +1481,7 @@ draw_stats(struct Devices *ptr, const int gap)
+   else
+     draw_max(rx_max_his, tx_max_his);
+ 
+-  p = (unsigned long*)ptr->his;
++  p = (unsigned long long*)ptr->his;
+   (*drwFuncs[wmnd.wavemode].funcPtr)(p, in, out, size, rx_max, tx_max);
+ 
+   /* copy connection time over the graph */
+@@ -1774,7 +1774,7 @@ devices_init(const char* driver, const char* interface)
+       {
+ 	/* initialize statistics for this device */
+ 	int cnt;
+-	unsigned long int ib, ob, ip, op;
++	unsigned long long ib, ob, ip, op;
+ 
+ 	/* sample some stats to inizialize cleanly the graph */
+ 	(*drivers_table[prt->drvnum].get_stats)(prt, &ip, &op, &ib, &ob);
+@@ -1865,8 +1865,8 @@ devices_select(const char* interface)
+ 
+ 
+ void
+-devices_getstat(struct Devices *device, unsigned long* ip, unsigned long* op,
+-    unsigned long* ib, unsigned long* ob)
++devices_getstat(struct Devices *device, unsigned long long* ip, unsigned long long* op,
++    unsigned long long* ib, unsigned long long* ob)
+ {
+   /*
+    * devices_getstat: run appropriate get_stats for device
+--- src/wmnd.h
++++ src/wmnd.h
+@@ -59,18 +59,18 @@ struct Devices
+   int online;               /* 0 for online, 1 for offline */
+   time_t devstart;          /* device activity start, 0 for unavaible */
+ 
+-  unsigned long avg[4];     /* average sampling - last samples */
+-  unsigned long avgBuf[4];  /* average sampling - buffers */
+-
+-  unsigned long his[59][4];
+-  unsigned long ib_stat_last;
+-  unsigned long ob_stat_last;
+-  unsigned long ip_stat_last;
+-  unsigned long op_stat_last;
+-  unsigned long ib_max_his; /* maximum input bytes in history */
+-  unsigned long ob_max_his; /* maximum output bytes in history */
+-  unsigned long ip_max_his; /* maximum input packets in history */
+-  unsigned long op_max_his; /* maximum output packets in history */
++  unsigned long long avg[4];     /* average sampling - last samples */
++  unsigned long long avgBuf[4];  /* average sampling - buffers */
++
++  unsigned long long his[59][4];
++  unsigned long long ib_stat_last;
++  unsigned long long ob_stat_last;
++  unsigned long long ip_stat_last;
++  unsigned long long op_stat_last;
++  unsigned long long ib_max_his; /* maximum input bytes in history */
++  unsigned long long ob_max_his; /* maximum output bytes in history */
++  unsigned long long ip_max_his; /* maximum input packets in history */
++  unsigned long long op_max_his; /* maximum output packets in history */
+ };
+ 
+ struct var
+@@ -87,7 +87,7 @@ typedef struct {
+   unsigned int nWavemodes;              /* numbers of wave graph */
+   struct Devices* curdev;               /* current device */
+   void                                  /* scale function */
+-  (*scale)(unsigned char sign, unsigned long value, char* buf);
++  (*scale)(unsigned char sign, unsigned long long value, char* buf);
+   unsigned int refresh;	                /* speed of the refresh */
+   unsigned int avgSteps;                /* number of steps to average */
+   unsigned int avgRSteps;               /* number of remaining steps */

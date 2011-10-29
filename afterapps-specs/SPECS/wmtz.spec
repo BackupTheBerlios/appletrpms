@@ -1,6 +1,6 @@
 %define		name wmtz
-%define		version 0.7
-%define		release 6%{?dist}
+%define		version 0.7.1
+%define		release 1%{?dist}
 
 Summary:	wmtz displays the local time from different time zones
 Name:		%name
@@ -9,8 +9,7 @@ Release:	%release
 License:	GPLv2
 Group:		AfterStep/Applets
 URL:		http://www.dockapps.org/file.php/id/24
-Source0:	http://www.dockapps.org/download.php/id/38/%{name}/%{name}-%{version}.tar.gz
-Patch0:		%{name}-%{version}.patch
+Source0:	http://www.dockapps.org/download.php/id/885/%{name}/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	libX11
 Requires:	libXext
@@ -35,32 +34,37 @@ you to avoid making a fool of yourself by calling someone
 when they are asleep...
 
 %prep
-%setup -q
-%patch0
+%setup -q -n %{name}-0.7
 
 %build
 cd wmtz
 
-make DESTDIR=%{_prefix}
+make LIBDIR=%{_libdir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 mkdir -p $RPM_BUILD_ROOT%{_bindir}
 mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
+mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}
 install -s -m 755 wmtz/wmtz $RPM_BUILD_ROOT%{_bindir}
 install -m 644 wmtz/wmtz.1 $RPM_BUILD_ROOT%{_mandir}/man1/
+install -m 644 wmtz/wmtzrc $RPM_BUILD_ROOT%{_sysconfdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
-%{_mandir}/man1/*
+%{_bindir}/wmtz
+%{_mandir}/man1/wmtz.1*
+%{_sysconfdir}/wmtzrc
 %doc BUGS CHANGES COPYING README wmtz/wmtzrc
 
 %changelog
+* Sun Oct 10 2011 J. Krebs <rpm_speedy@yahoo.com> - 0.7.1-1
+- new version.
+
 * Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.7-6
 - changed URL info to dockapps.org.
 
