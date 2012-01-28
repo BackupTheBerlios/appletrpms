@@ -1,0 +1,11 @@
+--- names.h	2010-10-30 07:51:28.000000000 -0500
++++ names.h	2011-11-27 17:14:51.000000000 -0600
+@@ -9,7 +9,7 @@
+ #if defined(__WIN32__) || defined(WIN32)
+ #define LIBPATH "data"
+ #else
+-#define LIBPATH "data:/usr/local/games/scavenger"
++#define LIBPATH "data:/usr/share/sdlscavenger"
+ #endif
+ #endif
+ 

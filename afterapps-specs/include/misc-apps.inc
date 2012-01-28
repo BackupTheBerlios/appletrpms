@@ -69,20 +69,26 @@ CALCOO_URL=http://downloads.sourceforge.net/project/$(CALCOO_NAME)/$(CALCOO_NAME
 
 APPLET_LIST += CALCOO
 
-#eina 0.10.0+ needs gtk3-3.0.0+, only available under Fedora 15+
 EINA_NAME=eina
-EINA_VERSION=0.12.0
+EINA_VERSION=0.14.0
 EINA_TAR=$(EINA_NAME)-$(EINA_VERSION).tar.gz
 EINA_URL=http://launchpad.net/eina/trunk/$(EINA_VERSION)/+download/$(EINA_TAR)
 
 APPLET_LIST += EINA
 
 FOTOXX_NAME=fotoxx
-FOTOXX_VERSION=11.10
+FOTOXX_VERSION=12.01.2
 FOTOXX_TAR=$(FOTOXX_NAME)-$(FOTOXX_VERSION).tar.gz
 FOTOXX_URL=http://kornelix.squarespace.com/storage/downloads/$(FOTOXX_TAR)
 
 APPLET_LIST += FOTOXX
+
+JPEGINFO_NAME=jpeginfo
+JPEGINFO_VERSION=1.6.1
+JPEGINFO_TAR=$(JPEGINFO_NAME)-$(JPEGINFO_VERSION).tar.gz
+JPEGINFO_URL=http://www.kokkonen.net/tjko/src/$(JPEGINFO_TAR)
+
+APPLET_LIST += JPEGINFO
 
 # Included in Fedora 15 Repository
 #LIBDOCKAPP_NAME=libdockapp
@@ -117,7 +123,7 @@ MEDIT_URL=http://sourceforge.net/projects/mooedit/files/$(MEDIT_NAME)/$(MEDIT_VE
 APPLET_LIST += MEDIT
 
 MINED_NAME=mined
-MINED_VERSION=2011.17
+MINED_VERSION=2011.19
 MINED_TAR=$(MINED_NAME)-$(MINED_VERSION).tar.gz
 MINED_URL=http://towo.net/mined/download/$(MINED_TAR)
 
@@ -129,6 +135,13 @@ MIXER.APP_TAR=$(MIXER.APP_NAME)-$(MIXER.APP_VERSION).tar.gz
 MIXER.APP_URL=http://www.fukt.bsnet.se/~per/mixer/$(MIXER.APP_TAR)
 
 APPLET_LIST += MIXER.APP
+
+MPCK_NAME=mpck
+MPCK_VERSION=0.19
+MPCK_TAR=checkmate-$(MPCK_VERSION).tar.gz
+MPCK_URL=http://www.checkmate.gissen.nl/$(MPCK_TAR)
+
+APPLET_LIST += MPCK
 
 # Included in Fedora's Repository
 #PARCELLITE_NAME=parcellite
@@ -145,6 +158,13 @@ SALMON_URL=http://tigr.net/afterstep/download/salmon/$(SALMON_TAR)
 
 APPLET_LIST += SALMON
 
+SDLSCAVENGER_NAME=sdlscavenger
+SDLSCAVENGER_VERSION=1.4.5.1_2010_11_5
+SDLSCAVENGER_TAR=sdlscav-145.1_2010_11_5.tgz
+SDLSCAVENGER_URL=http://downloads.sourceforge.net/project/$(SDLSCAVENGER_NAME)/$(SDLSCAVENGER_TAR)
+
+APPLET_LIST += SDLSCAVENGER
+
 STALONETRAY_NAME=stalonetray
 STALONETRAY_VERSION=0.8.1
 STALONETRAY_TAR=$(STALONETRAY_NAME)-$(STALONETRAY_VERSION).tar.gz
@@ -159,9 +179,16 @@ TEMPERATURE.APP_URL=http://www.fukt.bsnet.se/~per/temperature/$(TEMPERATURE.APP_
 
 APPLET_LIST += TEMPERATURE.APP
 
+TKIRC_NAME=tkirc
+TKIRC_VERSION=2.46
+TKIRC_TAR=$(TKIRC_NAME)$(TKIRC_VERSION).tar.gz
+TKIRC_URL=http://netsplit.de/$(TKIRC_NAME)2/$(TKIRC_TAR)
+
+APPLET_LIST += TKIRC
+
 TRAYER_NAME=trayer
-TRAYER_VERSION=1.1.3
-TRAYER_TAR=sargon-trayer-srg-$(TRAYER_NAME)_$(TRAYER_VERSION)-1-gb619e34.tar.gz
+TRAYER_VERSION=1.1.4
+TRAYER_TAR=sargon-trayer-srg-$(TRAYER_NAME)-$(TRAYER_VERSION)-0-g412ad31.tar.gz
 TRAYER_URL=https://github.com/sargon/trayer-srg/tarball/master/$(TRAYER_TAR)
 APPLET_LIST += TRAYER
 
@@ -181,10 +208,17 @@ APPLET_LIST += WORKER
 
 #APPLET_LIST += WORKER-DOC
 
+XBILL_NAME=xbill
+XBILL_VERSION=2.1
+XBILL_TAR=$(XBILL_NAME)-$(XBILL_VERSION).tar.gz
+XBILL_URL=http://www.xbill.org/download/$(XBILL_TAR)
+
+APPLET_LIST += XBILL
+
 XSENSORS_NAME=xsensors
 XSENSORS_VERSION=0.70
 XSENSORS_TAR=$(XSENSORS_NAME)-$(XSENSORS_VERSION).tar.gz
-XSENSORS_URL=http://www.linuxhardware.org/$(XSENSORS_NAME)/$(XSENSORS_TAR)
+XSENSORS_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(XSENSORS_TAR)
 
 APPLET_LIST += XSENSORS
 

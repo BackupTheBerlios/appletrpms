@@ -23,9 +23,9 @@
 %endif
 ### END Distro Definitions
 
-%define		name	wmchargemon
+%define		name wmchargemon
 %define		version 0.3
-%define		release 5%{?dist}
+%define		release 6%{?dist}
 
 Summary:	displays ACPI battery level and power status
 Name:		%name
@@ -33,8 +33,8 @@ Version:	%version
 Release:	%release
 License:	GPLv2+
 Group:		AfterStep/Applets
-Source0:	http://www.dockapps.org/download.php/id/715/%{name}-%{version}.tar.gz
-URL:		http://www.dockapps.org/file.php/id/319
+Source0:	http://dockapps.windowmaker.org/download.php/id/715/%{name}-%{version}.tar.gz
+URL:		http://dockapps.windowmaker.org/file.php/id/319
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	libX11
 BuildRequires:	libX11-devel
@@ -78,6 +78,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 
 %changelog
+* Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> 0.3-6
+- shifted URLs to http://dockapps.windowmaker.org.
+
 * Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> 0.3-5
 - changed URL info to dockapps.org.
 

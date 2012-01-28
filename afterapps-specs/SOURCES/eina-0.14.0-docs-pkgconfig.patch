@@ -1,0 +1,43 @@
+--- data/gel-2.0.pc.in	2011-12-03 12:53:59.000000000 -0600
++++ data/gel-2.0.pc.in	2011-12-30 20:16:47.000000000 -0600
+@@ -1,7 +1,7 @@
+ prefix=@prefix@
+ exec_prefix=@exec_prefix@
+ libdir=@libdir@
+-includedir=@includedir@/gel-@GEL_API_VERSION@
++includedir=@includedir@
+ 
+ Name: Gel
+ Description: GLib-@GLIB_API_VERSION@ Extensions Library
+--- data/gel-ui-2.0.pc.in	2011-12-03 12:53:59.000000000 -0600
++++ data/gel-ui-2.0.pc.in	2011-12-30 20:17:21.000000000 -0600
+@@ -1,7 +1,7 @@
+ prefix=@prefix@
+ exec_prefix=@exec_prefix@
+ libdir=@libdir@
+-includedir=@includedir@/gel-@GEL_API_VERSION@
++includedir=@includedir@
+ 
+ Name: GelUI
+ Description: Gtk+-@GTK_API_VERSION@ Extensions Library
+--- data/lomo-2.0.pc.in	2011-12-03 12:53:59.000000000 -0600
++++ data/lomo-2.0.pc.in	2011-12-30 20:17:46.000000000 -0600
+@@ -1,7 +1,7 @@
+ prefix=@prefix@
+ exec_prefix=@exec_prefix@
+ libdir=@libdir@
+-includedir=@includedir@/lomo-@LOMO_API_VERSION@
++includedir=@includedir@
+ 
+ Name: Lomo
+ Description: GStreamer based playback library
+--- docs/eina/Makefile.am	2011-12-09 11:18:40.000000000 -0600
++++ docs/eina/Makefile.am	2011-12-30 20:19:18.000000000 -0600
+@@ -82,6 +82,7 @@
+ # e.g. GTKDOC_CFLAGS=-I$(top_srcdir) -I$(top_builddir) $(GTK_DEBUG_FLAGS)
+ # e.g. GTKDOC_LIBS=$(top_builddir)/gtk/$(gtktargetlib)
+ GTKDOC_CFLAGS= \
++  -Wl,--no-as-needed \
+ 	@EINA_CFLAGS@
+ 
+ #if BUILD_ADB

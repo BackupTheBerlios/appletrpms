@@ -1,0 +1,11 @@
+--- include/lib_acpi.h	2005-07-21 20:33:19.000000000 -0500
++++ include/lib_acpi.h	2011-10-29 19:03:57.000000000 -0500
+@@ -32,7 +32,7 @@
+  * Macros
+  ************************************************************************/
+ 
+-#  define ACPIDEV "/proc/acpi/info"
++#  define ACPIDEV "/sys/module/acpi/parameters/acpica_version"
+ 
+   /* use ? */
+ #  ifndef ACPI_32_BIT_SUPPORT

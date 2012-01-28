@@ -1,5 +1,5 @@
 %define		name fotoxx
-%define		version 11.10
+%define		version 12.0.2
 %define		release 1%{?dist}
 
 Summary:	application for processing image files from a digital camera
@@ -10,7 +10,7 @@ License:	GPLv3+
 Group:		Applications/Multimedia
 URL:		http://kornelix.squarespace.com/%{name}/
 Source0:	http://kornelix.squarespace.com/storage/downloads/%{name}-%{version}.tar.gz
-Patch0:		%{name}-11.09-Makefile.patch
+Patch0:		%{name}-11.11-Makefile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	atk
 Requires:	cairo
@@ -118,23 +118,24 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/%{name}/icons/*
-%{_datadir}/%{name}/locales/*/%{name}.po
-%{_datadir}/%{name}/locales/*/zfuncs.po
+%{_datadir}/%{name}/locales/%{name}-*.po
 %{_datadir}/doc/%{name}/images/*.jpeg
 %{_datadir}/doc/%{name}/images/*.jpg
 %{_datadir}/doc/%{name}/images/*.png
-%{_datadir}/doc/%{name}/CHANGES
-%{_datadir}/doc/%{name}/COPYING
+%{_datadir}/doc/%{name}/changelog
+%{_datadir}/doc/%{name}/copyright
 %{_datadir}/doc/%{name}/README
-%{_datadir}/doc/%{name}/TRANSLATIONS
+%{_datadir}/doc/%{name}/translations
 %{_datadir}/doc/%{name}/edit*
-%{_datadir}/doc/%{name}/userguide-changes.txt
 %{_datadir}/doc/%{name}/userguide-en.html
 %{_datadir}/doc/%{name}/userguide-it.html
 %{_datadir}/pixmaps/*.png
-%{_mandir}/man1/%{name}.1.gz
+%{_mandir}/man1/%{name}.*
 
 %changelog
+* Tue Jan 03 2012 J. Krebs <rpm_speedy@yahoo.com> - 12.01.2-1
+- new version.
+
 * Sat Oct 01 2011 J. Krebs <rpm_speedy@yahoo.com> - 10.10-1
 - new version.
 

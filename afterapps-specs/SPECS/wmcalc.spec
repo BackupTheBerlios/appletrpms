@@ -1,15 +1,15 @@
 %define		name wmcalc
 %define		version 0.4
-%define		release 6%{?dist}
+%define		release 7%{?dist}
 
-Summary:	Wmcalc is an applet calculator
+Summary:	a dockapp calculator
 Name:		%name
 Version:	%version
 Release:	%release
 License:	GPLv2
 Group:		AfterStep/Applets
-URL:		http://dockapps.org/file.php/id/130
-Source0:	http://gentoo.mirrors.easynews.com/linux/gentoo/distfiles/%{name}-%{version}.tar.gz
+URL:		http://dockapps.windowmaker.org/file.php/id/130
+Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
 Patch0:		%{name}-%{version}.Makefile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	libX11
@@ -50,6 +50,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc COPYING README wmcalc.conf .wmcalc
 
 %changelog
+* Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.4-7
+- shifted URL link to http://dockapps.windowmaker.org.
+
 * Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.4-6
 - updated spec file.
 

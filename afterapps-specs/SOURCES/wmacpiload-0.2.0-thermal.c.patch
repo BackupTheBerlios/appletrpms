@@ -1,0 +1,22 @@
+--- src/thermal.c	2005-09-29 18:32:46.000000000 -0500
++++ src/thermal.c	2011-10-29 21:49:40.000000000 -0500
+@@ -48,8 +48,8 @@
+  * Global constants definitions
+  ************************************************************************/
+ 
+-const char *const thermal_zone_dir = "/thermal_zone/";
+-const char *const thermal_zone_status_file = "/temperature";
++const char *const thermal_zone_dir = "/thermal/";
++const char *const thermal_zone_status_file = "/temp";
+ 
+ /************************************************************************
+  * Function definitions
+@@ -87,7 +87,7 @@
+     strcpy(tz->name, fd->d_name);
+ 
+     tz->tempfile =
+-        strcat4("/proc/acpi", thermal_zone_dir, tz->name,
++        strcat4("/sys/class", thermal_zone_dir, tz->name,
+                 thermal_zone_status_file);
+     if (!tz->tempfile) {
+         fprintf(stderr, "%s : could not allocate memory "

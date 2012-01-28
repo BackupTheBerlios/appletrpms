@@ -51,13 +51,13 @@
 *Wharf Term		normal/Monitor3DBlue Exec "-" gnome-terminal &
 
 # First available Web Browser :
+*Wharf Browser		normal/WWW    Exec sensible-browser &
 *Wharf Browser		normal/WWW    Exec x-www-browser &
 *Wharf Browser		logos/Opera   Exec "Opera Web Browser" opera &
+*Wharf Browser		iceweasel.png Exec "iceweasel" iceweasel &
 *Wharf Browser		logos/Firefox Exec "firefox" firefox &
 *Wharf Browser		logos/Firefox Exec "Firefox2" mozilla-firefox &
-*Wharf Browser		iceweasel.png Exec "iceweasel" iceweasel &
 *Wharf Browser		logos/mozilla Exec "Mozilla" mozilla &
-*Wharf Browser		normal/WWW    Exec sensible-browser &
 
 # Restart the AfterStep session or close the session :
 *Wharf QuitFolder Folder-Stopsign Folder
@@ -196,6 +196,7 @@
 *MonitorWharf eyes - Swallow "xeyes" xeyes -geometry 64x64 &
 
 # One of the cpu load monitors - first available :
+# wmcpuload, wmfire, and ascpu support SMP processors.
 *MonitorWharf CPU_1 - Swallow "wmcpuload-1" wmcpuload -wp -c 0 -t wmcpuload-1 &
 *MonitorWharf CPU_1 - Swallow "wmfire" wmfire -b -f 2 -c 0 &
 *MonitorWharf CPU_1 - Swallow "ascpu-1" ascpu -cpu 0 -title ascpu-1 &
@@ -226,18 +227,18 @@
 *MonitorWharf memory - Exec "r" gnome-system-monitor &
 
 # One of the few mixers that works with Alsa and Pulse :
-*Wharf mixer - Swallow "AlsaMixer.app" AlsaMixer.app -1 Master -2 Master -3 Master &
-*Wharf mixer - Exec "r" alsamixergui &
-*Wharf mixer - ExecInTerm "r" -title "Alsa Mixer" -e alsamixer &
+*MonitorWharf mixer - Swallow "AlsaMixer.app" AlsaMixer.app -1 Master -2 Master -3 Master &
+*MonitorWharf mixer - Exec "r" alsamixergui &
+*MonitorWharf mixer - ExecInTerm "r" -title "Alsa Mixer" -e alsamixer &
 
 # One of the system temp apps - first available :
 # wmsorsen and wmcpum are a couple of apps that actually work with lm_sensors 3.0+
 # You'll need lm_sensors activated. As root/su run "sensors-detect". 
 # try wmcpum -h for details... /sys/bus/platform/devices/ is another path to check
 # try wmsorsen -p for parameters to input into the ~/.wmsorsenrc file
-*Wharf cputemp - Swallow "wmsorsen" wmsorsen &
-*Wharf cputemp - Swallow "wmcpum" wmcpum -p /sys/devices/platform/f71882fg.2560 &
-*Wharf cputemp - Exec "r" xsensors &
+*MonitorWharf cputemp - Swallow "wmsorsen" wmsorsen &
+*MonitorWharf cputemp - Swallow "wmcpum" wmcpum -p /sys/devices/platform/f71882fg.2560 &
+*MonitorWharf cputemp - Exec "r" xsensors &
 
 # One of the weather monitors - first available :
 # Get the 4-letter code from http://weather.noaa.gov

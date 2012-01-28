@@ -1,17 +1,17 @@
-%define name wmmemmon
-%define version 1.0.2pre2
-%define release 7%{?dist}
+%define		name wmmemmon
+%define		version 1.0.2pre2
+%define		release 8%{?dist}
 
-Summary: WMMemMon - A dockapp to monitor memory/swap usages
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
-Source0: ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
-Patch0: wmmemmon-1.0.2-main.c.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:	dockapp to monitor memory/swap usages
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		AfterStep/Applets
+URL:		http://dockapps.windowmaker.org/file.php/id/37
+Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
+Patch0:		wmmemmon-1.0.2-main.c.patch
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 WMMemMon is a program to monitor memory/swap usages. It is a dockapp that is
@@ -50,6 +50,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.0.2pre2-8
+- shifted URL link to http://dockapps.windowmaker.org.
+
 * Sun Sep 13 2009 J. Krebs <rpm_speedy@yahoo.com> - 1.0.2pre2-7
 - updated URL info.
 

@@ -1,0 +1,11 @@
+--- src/lib_acpi.c	2005-07-21 20:41:31.000000000 -0500
++++ src/lib_acpi.c	2011-10-30 00:43:13.000000000 -0500
+@@ -83,7 +83,7 @@
+         if (!k->ac)
+             fprintf(stderr, "%s : no AC adapter detected\n", PACKAGE);
+ 
+-        n = snprintf(dir, FILENAME_MAX + 1, "%s%s", "/proc/acpi",
++        n = snprintf(dir, FILENAME_MAX + 1, "%s%s", "/sys/class",
+                      thermal_zone_dir);
+         if (n > FILENAME_MAX) {
+             fprintf(stderr, "%s : file name too long, "

@@ -1,6 +1,6 @@
 %define		name wmsm.app
 %define		version 0.2.1
-%define		release 6%{?dist}
+%define		release 7%{?dist}
 
 Summary:	WindowMaker System Monitor
 Name:		%name
@@ -8,8 +8,8 @@ Version:	%version
 Release:	%release
 License:	GPLv2+
 Group:		AfterStep/Applets
-URL:		http://www.dockapps.org/file.php/id/208
-Source0:	http://www.dockapps.org/download.php/id/632/%{name}-%{version}.tar.bz2
+URL:		http://dockapps.windowmaker.org/file.php/id/208
+Source0:	http://dockapps.windowmaker.org/download.php/id/632/%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	libX11
 Requires:	libXext
@@ -49,8 +49,10 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGELOG COPYING
 %{_bindir}/wmsm
 
-
 %changelog
+* Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.2.1-7
+- shifted URLs to http://dockapps.windowmaker.org.
+
 * Wed Aug 25 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.2.1-6
 - changed URL info to dockapps.org.
 

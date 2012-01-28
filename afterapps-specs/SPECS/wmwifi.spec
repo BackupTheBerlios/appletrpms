@@ -25,7 +25,7 @@
 
 %define		name wmwifi
 %define		version 0.6
-%define		release 4%{?dist}
+%define		release 5%{?dist}
 
 Summary:	WiFi dockapp displays signal, link, noise, & bitrate info in LCD format
 Name:		%name
@@ -33,8 +33,8 @@ Version:	%version
 Release:	%release
 License:	GPLv2+
 Group:		AfterStep/Applets
-URL:		http://www.dockapps.org/file.php/id/222
-Source0:	http://www.dockapps.org/download.php/id/669/%{name}-%{version}.tar.gz
+URL:		http://dockapps.windowmaker.org/file.php/id/222
+Source0:	http://dockapps.windowmaker.org/download.php/id/669/%{name}-%{version}.tar.gz
 Patch0:		%{name}-%{version}-wireless.c.patch
 Patch1:		%{name}-%{version}-%{name}.h.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -86,6 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README
 
 %changelog
+* Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.6-5
+- shifted URLs to http://dockapps.windowmaker.org.
+
 * Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.6-4
 - changed URL info to dockapps.org.
 

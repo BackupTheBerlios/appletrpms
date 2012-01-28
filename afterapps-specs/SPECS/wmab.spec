@@ -10,7 +10,16 @@ License:	GPLv2+
 Group:		AfterStep/Applets
 URL:		http://web.tiscali.it/kalem/dockapps.html
 Source0:	http://web.tiscali.it/kalem/wmab/%{name}-%{version}.tar.gz
+Patch0:		%{name}-%{version}-libacpi.c.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	glibc
+Requires:	libX11
+Requires:	libXext
+Requires:	libXpm
+BuildRequires:	glibc-devel
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXpm-devel
 
 %description
 WMab is a WindowMaker dockapp that allows ACPI laptop users 
@@ -20,6 +29,10 @@ take to drain or charge the batteries.
 
 %prep
 %setup -q
+
+# /proc/acpi/info was deprecated in kernel 2.6.36, let's try 
+# /sys/module/acpi/parameters/acpica_version instead.
+%patch0
 
 %build
 cd wmab

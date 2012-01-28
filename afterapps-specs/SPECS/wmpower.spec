@@ -2,7 +2,7 @@
 %define		version 0.5.0
 %define		release 1%{?dist}
 
-Summary:	wmpower is a dockapp to see the power management of a laptop 
+Summary:	dockapp to see the power management of a laptop 
 Name:		%name
 Version:	%version
 Release:	%release
@@ -12,6 +12,14 @@ URL:		http://linux-bsd-unix.strefa.pl/index.en.html
 Source0:	http://linux-bsd-unix.strefa.pl/%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 ExclusiveArch:	i386 i486 i586 i686
+Requires:	glibc
+Requires:	libX11
+Requires:	libXext
+Requires:	libXpm
+BuildRequires:	glibc-devel
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXpm-devel
 
 %description
 wmpower is a Window Maker dock application allowing the user to
@@ -25,6 +33,8 @@ graphically see (and set) the power management status of his laptop.
 make
 
 %install
+rm -rf $RPM_BUILD_ROOT
+
 mkdir -p $RPM_BUILD_ROOT%{_bindir}
 install -s -m 755 src/wmpower $RPM_BUILD_ROOT%{_bindir}
 strip $RPM_BUILD_ROOT%{_bindir}/wmpower

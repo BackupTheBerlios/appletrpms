@@ -1,0 +1,25 @@
+--- doc/wmmemload.1	2002-04-03 12:22:34.000000000 -0600
++++ doc/wmmemload.1	2011-12-10 17:10:18.000000000 -0600
+@@ -61,7 +61,7 @@
+ .B \-c,  \-\-ignore\-cached
+ ignore cached pages. (GNU/Linux / FreeBSD)
+ .TP
+-.B \-c,  \-\-ignore\-wired
++.B \-wr,  \-\-ignore\-wired
+ ignore wired pages. (FreeBSD)
+ .TP
+ .B \-h,  \-\-help
+@@ -76,11 +76,11 @@
+ .B \-bw, \-\-broken\-wm
+ activate broken window manager fix
+ .TP
+-.B \-a,  \-\-alarm\-mem <percentage>
++.B \-am,  \-\-alarm\-mem <percentage>
+ activate alarm mode of memory. <percentage> is threshold of percentage from 0
+ to 100.(90 is default)
+ .TP
+-.B \-a,  \-\-alarm\-swap <percentage>
++.B \-as,  \-\-alarm\-swap <percentage>
+ activate alarm mode of swap. <percentage> is threshold of percentage from 0 to
+ 100.(50 is default)
+ 

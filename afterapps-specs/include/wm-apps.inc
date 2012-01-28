@@ -5,7 +5,7 @@
 ALSAMIXER.APP_NAME=AlsaMixer.app
 ALSAMIXER.APP_VERSION=0.1
 ALSAMIXER.APP_TAR=$(ALSAMIXER.APP_NAME)-$(ALSAMIXER.APP_VERSION).tar.gz
-ALSAMIXER.APP_URL=http://gentoo.mirrors.easynews.com/linux/gentoo/distfiles/$(ALSAMIXER.APP_TAR)
+ALSAMIXER.APP_URL=http://dockapps.windowmaker.org/download.php/id/517/$(ALSAMIXER.APP_TAR)
 
 APPLET_LIST += ALSAMIXER.APP
 
@@ -69,21 +69,21 @@ APPLET_LIST += WMACPILOAD
 WMBLUECLOCK_NAME=wmblueclock
 WMBLUECLOCK_VERSION=0.4
 WMBLUECLOCK_TAR=$(WMBLUECLOCK_NAME)-$(WMBLUECLOCK_VERSION).tar.bz2
-WMBLUECLOCK_URL=http://www.dockapps.org/download.php/id/772/$(WMBLUECLOCK_TAR)
+WMBLUECLOCK_URL=http://dockapps.windowmaker.org/download.php/id/772/$(WMBLUECLOCK_TAR)
 
 APPLET_LIST += WMBLUECLOCK
 
 WMBLUECPU_NAME=wmbluecpu
 WMBLUECPU_VERSION=0.9
 WMBLUECPU_TAR=$(WMBLUECPU_NAME)-$(WMBLUECPU_VERSION).tar.bz2
-WMBLUECPU_URL=http://www.dockapps.org/download.php/id/770/$(WMBLUECPU_TAR)
+WMBLUECPU_URL=http://dockapps.windowmaker.org/download.php/id/770/$(WMBLUECPU_TAR)
 
 APPLET_LIST += WMBLUECPU
 
 WMBLUEMEM_NAME=wmbluemem
 WMBLUEMEM_VERSION=0.12
 WMBLUEMEM_TAR=$(WMBLUEMEM_NAME)-$(WMBLUEMEM_VERSION).tar.bz2
-WMBLUEMEM_URL=http://www.dockapps.org/download.php/id/771/$(WMBLUEMEM_TAR)
+WMBLUEMEM_URL=http://dockapps.windowmaker.org/download.php/id/771/$(WMBLUEMEM_TAR)
 
 APPLET_LIST += WMBLUEMEM
 
@@ -104,14 +104,15 @@ APPLET_LIST += WMCALENDAR
 WMCALC_NAME=wmcalc
 WMCALC_VERSION=0.4
 WMCALC_TAR=$(WMCALC_NAME)-$(WMCALC_VERSION).tar.gz
-WMCALC_URL=http://gentoo.mirrors.easynews.com/linux/gentoo/distfiles/$(WMCALC_TAR)
+#WMCALC_URL=http://gentoo.mirrors.easynews.com/linux/gentoo/distfiles/$(WMCALC_TAR)
+WMCALC_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMCALC_TAR)
 
 APPLET_LIST += WMCALC
 
 WMCHARGEMON_NAME=wmchargemon
 WMCHARGEMON_VERSION=0.3
 WMCHARGEMON_TAR=$(WMCHARGEMON_NAME)-$(WMCHARGEMON_VERSION).tar.gz
-WMCHARGEMON_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMCHARGEMON_TAR)
+WMCHARGEMON_URL=http://dockapps.windowmaker.org/download.php/id/715/$(WMCHARGEMON_TAR)
 
 APPLET_LIST += WMCHARGEMON
 
@@ -139,7 +140,7 @@ APPLET_LIST += WMCPUM.APP
 WMDISKMON_NAME=wmdiskmon
 WMDISKMON_VERSION=0.0.2
 WMDISKMON_TAR=$(WMDISKMON_NAME)-$(WMDISKMON_VERSION).tar.gz
-WMDISKMON_URL=http://www.dockapps.org/download.php/id/584/$(WMDISKMON_TAR)
+WMDISKMON_URL=http://tnemeth.free.fr/projets/programmes/$(WMDISKMON_TAR)
 
 APPLET_LIST += WMDISKMON
 
@@ -185,10 +186,17 @@ WMINET_URL=http://www.swanson.ukfsn.org/wmdock/$(WMINET_TAR)
 
 APPLET_LIST += WMINET
 
+WMINFO_NAME=wminfo
+WMINFO_VERSION=2.5.2
+WMINFO_TAR=$(WMINFO_NAME)-$(WMINFO_VERSION).tar.gz
+WMINFO_URL=http://linux-bsd-unix.strefa.pl/$(WMINFO_TAR)
+
+APPLET_LIST += WMINFO
+
 WMIX_NAME=wmix
 WMIX_VERSION=3.2
 WMIX_TAR=$(WMIX_NAME)-$(WMIX_VERSION).tar.gz
-WMIX_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMIX_TAR)
+WMIX_URL=http://dockapps.windowmaker.org/download.php/id/528/$(WMIX_TAR)
 
 APPLET_LIST += WMIX
 
@@ -223,7 +231,7 @@ APPLET_LIST += WMND
 WMNETHRU_NAME=wmnethru
 WMNETHRU_VERSION=0.1.1
 WMNETHRU_TAR=$(WMNETHRU_NAME)-$(WMNETHRU_VERSION).tar.gz
-WMNETHRU_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMNETHRU_TAR)
+WMNETHRU_URL=http://dockapps.windowmaker.org/download.php/id/693/$(WMNETHRU_TAR)
 
 APPLET_LIST += WMNETHRU
 
@@ -266,7 +274,7 @@ APPLET_LIST += WMRADIO
 WMSM.APP_NAME=wmsm.app
 WMSM.APP_VERSION=0.2.1
 WMSM.APP_TAR=$(WMSM.APP_NAME)-$(WMSM.APP_VERSION).tar.bz2
-WMSM.APP_URL=http://www.dockapps.org/download.php/id/632/$(WMSM.APP_TAR)
+WMSM.APP_URL=http://dockapps.windowmaker.org/download.php/id/632/$(WMSM.APP_TAR)
 
 APPLET_LIST += WMSM.APP
 
@@ -309,7 +317,7 @@ APPLET_LIST += WMTIMER
 WMTZ_NAME=wmtz
 WMTZ_VERSION=0.7.1
 WMTZ_TAR=$(WMTZ_NAME)-$(WMTZ_VERSION).tar.gz
-WMTZ_URL=http://www.dockapps.org/download.php/id/885/$(WMTZ_TAR)
+WMTZ_URL=http://dockapps.windowmaker.org/download.php/id/885/$(WMTZ_TAR)
 
 APPLET_LIST += WMTZ
 
@@ -323,7 +331,7 @@ APPLET_LIST += WMUDMOUNT
 WMUPMON_NAME=wmupmon
 WMUPMON_VERSION=0.1.3
 WMUPMON_TAR=$(WMUPMON_NAME)-$(WMUPMON_VERSION).tar.gz
-WMUPMON_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMUPMON_TAR)
+WMUPMON_URL=http://dockapps.windowmaker.org/download.php/id/547/$(WMUPMON_TAR)
 
 APPLET_LIST += WMUPMON
 
@@ -351,14 +359,14 @@ APPLET_LIST += WMWEATHERPLUS
 WMWIFI_NAME=wmwifi
 WMWIFI_VERSION=0.6
 WMWIFI_TAR=$(WMWIFI_NAME)-$(WMWIFI_VERSION).tar.gz
-WMWIFI_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMWIFI_TAR)
+WMWIFI_URL=http://dockapps.windowmaker.org/download.php/id/669/$(WMWIFI_TAR)
 
 APPLET_LIST += WMWIFI
 
 WMXKB_NAME=wmxkb
 WMXKB_VERSION=1.2.2
 WMXKB_TAR=$(WMXKB_NAME)-$(WMXKB_VERSION).tar.gz
-WMXKB_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMXKB_TAR)
+WMXKB_URL=http://dockapps.windowmaker.org/download.php/id/487/$(WMXKB_TAR)
 
 APPLET_LIST += WMXKB
 

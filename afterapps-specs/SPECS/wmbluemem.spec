@@ -1,15 +1,15 @@
 %define		name wmbluemem
 %define		version 0.12
-%define		release 1%{?dist}
+%define		release 2%{?dist}
 
-Summary:	WMBlueMem is a memory monitoring program
+Summary:	dockapp memory monitoring program
 Name:		%name
 Version:	%version
 Release:	%release
 License:	GPLv2+
 Group:		AfterStep/Applets
-URL:		http://www.dockapps.org/file.php/id/165
-Source0:	http://www.dockapps.org/download.php/id/771/%{name}-%{version}.tar.bz2
+URL:		http://dockapps.windowmaker.org/file.php/id/165
+Source0:	http://dockapps.windowmaker.org/download.php/id/771/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-%{version}-Makefile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	libX11
@@ -53,6 +53,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING README THANKS
 
 %changelog
+* Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.12-2
+- shifted URLs to http://dockapps.windowmaker.org.
+
 * Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.12-1
 - new version. changed URL info to dockapps.org.
 

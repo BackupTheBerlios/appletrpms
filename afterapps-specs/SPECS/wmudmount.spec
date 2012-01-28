@@ -1,6 +1,6 @@
 %define		name wmudmount
 %define		version 1.8
-%define		release 1%{?dist}
+%define		release 2%{?dist}
 
 Summary:	dockapp to mount filesystems using udisks
 Name:		%name
@@ -9,7 +9,7 @@ Release:	%release
 License:	GPLv2+
 Group:		AfterStep/Applets
 URL:		http://sourceforge.net/projects/wmudmount/
-Source0:	http://www.dockapps.org/download.php/id/836/%{name}-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/project/wmudmount/wmudmount/%{name}-%{version}.tar.gz
 Patch0:		%{name}-%{version}-notify.c.patch
 Patch1:		%{name}-%{version}-configure.ac.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -74,6 +74,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/icons/hicolor/scalable/apps/%{name}-unlock.svg
 
 %changelog
+* Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.8-2
+- shifted URLs to sourceforge.net/projects/wmudmount/.
+
 * Tue May 24 2011 J. Krebs <rpm_speedy@yahoo.com> - 1.8-1
 - new version.
 

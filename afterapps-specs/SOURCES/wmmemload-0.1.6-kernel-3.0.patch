@@ -1,0 +1,14 @@
+--- src/mem_linux.c	2003-11-03 16:06:39.000000000 -0600
++++ src/mem_linux.c	2011-12-10 17:11:26.000000000 -0600
+@@ -49,8 +49,9 @@
+ 
+    /* new format ? (kernel >= 2.5.1pre?) */
+    /* see linux/fs/proc/proc_misc.c */
+-   if (version >= 2 && patchlevel >= 5 && sublevel >= 1 || \
+-       version >= 2 && patchlevel >= 6 && sublevel >= 0)
++   if (version == 2 && patchlevel >= 5 && sublevel >= 1 || \
++       version == 2 && patchlevel >= 6 && sublevel >= 0 || \
++       version >2 )
+       isnewformat = 1;
+ }
+ 

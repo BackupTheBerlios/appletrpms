@@ -1,15 +1,15 @@
 %define		name wmtz
 %define		version 0.7.1
-%define		release 1%{?dist}
+%define		release 2%{?dist}
 
-Summary:	wmtz displays the local time from different time zones
+Summary:	dockapp displays the local time from different zones
 Name:		%name
 Version:	%version
 Release:	%release
 License:	GPLv2
 Group:		AfterStep/Applets
-URL:		http://www.dockapps.org/file.php/id/24
-Source0:	http://www.dockapps.org/download.php/id/885/%{name}/%{name}-%{version}.tar.gz
+URL:		http://dockapps.windowmaker.org/file.php/id/24
+Source0:	http://dockapps.windowmaker.org/download.php/id/885/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	libX11
 Requires:	libXext
@@ -62,6 +62,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc BUGS CHANGES COPYING README wmtz/wmtzrc
 
 %changelog
+* Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.7.1-2
+- shifted URLs to http://dockapps.windowmaker.org.
+
 * Sun Oct 10 2011 J. Krebs <rpm_speedy@yahoo.com> - 0.7.1-1
 - new version.
 

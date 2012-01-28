@@ -1,6 +1,6 @@
 %define		name wmcpum.app
 %define		version 0.1.0
-%define		release 7%{?dist}
+%define		release 8%{?dist}
 
 Summary:	WindowMaker CPU Monitor
 Name:		%name
@@ -8,7 +8,7 @@ Version:	%version
 Release:	%release
 License:	GPLv2+
 Group:		AfterStep/Applets
-URL:		http://www.dockapps.org/file.php/id/263
+URL:		http://dockapps.windowmaker.org/file.php/id/263
 Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	libX11
@@ -53,8 +53,10 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGELOG COPYING
 %{_bindir}/wmcpum
 
-
 %changelog
+* Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.1.0-8
+- shifted URL link to http://dockapps.windowmaker.org.
+
 * Wed Aug 25 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.1.0-7
 - changed URL info to dockapps.org.
 

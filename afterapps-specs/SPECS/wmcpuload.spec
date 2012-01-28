@@ -1,6 +1,6 @@
 %define		name wmcpuload
 %define		version 1.1.0pre5
-%define		release 6%{?dist}
+%define		release 7%{?dist}
 
 Summary:	CPU monitor dockapp which has an LCD look user interface
 Name:		%name
@@ -8,7 +8,7 @@ Version:	%version
 Release:	%release
 License:	GPLv2+
 Group:		AfterStep/Applets
-URL:		http://www.dockapps.org/file.php/id/36
+URL:		http://dockapps.windowmaker.org/file.php/id/36
 Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	libX11
@@ -49,6 +49,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.1.0pre5-7
+- shifted URL link to http://dockapps.windowmaker.org.
+
 * Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 1.1.0pre5-6
 - changed URL info to dockapps.org.
 

@@ -1,6 +1,6 @@
 %define		name wmxkb
 %define		version 1.2.2
-%define		release 9%{?dist}
+%define		release 10%{?dist}
 
 Summary:	A dockable/swallowed XKB groups indicator and switch
 Name:		%name
@@ -8,8 +8,8 @@ Version:	%version
 Release:	%release
 License:	GPLv2+
 Group:		AfterStep/Applets
-URL:		http://www.dockapps.org/file.php/id/221
-Source0:	http://www.dockapps.org/download.php/id/487/%{name}-%{version}.tar.gz
+URL:		http://dockapps.windowmaker.org/file.php/id/221
+Source0:	http://dockapps.windowmaker.org/download.php/id/487/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	libX11
 Requires:	libXext
@@ -52,6 +52,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc COPYING README manual.html WMxkb_flexy WMxkb_nonflexy
 
 %changelog
+* Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-10
+- shifted URLs to http://dockapps.windowmaker.org.
+
 * Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-9
 - updated URL info to dockapps.org.
 

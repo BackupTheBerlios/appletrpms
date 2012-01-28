@@ -1,6 +1,6 @@
 %define		name wmmemload
 %define		version 0.1.6
-%define		release 6%{?dist}
+%define		release 7%{?dist}
 
 Summary:	memory monitor dockapp which displays free memory and swap space
 Name:		%name
@@ -10,6 +10,9 @@ License:	GPLv2+
 Group:		AfterStep/Applets
 URL:		https://sourceforge.net/projects/freshmeat_wmmemload/
 Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
+Patch0:		%{name}-%{version}-man.patch
+Patch1:		%{name}-%{version}-kfbsd-configure.patch
+Patch2:		%{name}-%{version}-kernel-3.0.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	libX11
 Requires:	libXext
@@ -25,6 +28,9 @@ on WMMemMon and WMCPULoad by Seiichi SATO.
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch0
+%patch1
+%patch2
 
 %build
 ./configure --prefix=%{_prefix}
@@ -44,8 +50,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 %doc AUTHORS COPYING ChangeLog THANKS
 
-
 %changelog
+* Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.1.6-7
+- added kernel 3.0, man page, kfsbd patches from debian.
+
 * Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.1.6-6
 - changed URL info to dockapps.org.
 

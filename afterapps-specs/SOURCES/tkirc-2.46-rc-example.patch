@@ -1,0 +1,52 @@
+--- .tkirc2/tkircrc-example	2001-07-21 07:01:13.000000000 -0500
++++ .tkirc2/tkircrc-example	2011-11-29 21:05:09.000000000 -0600
+@@ -45,7 +45,7 @@
+ set lines_max   512
+ 
+ # Where can tkirc find the ircII client?
+-set ircpath     "irc"
++set ircpath     "epic"
+ 
+ # It's also possible to set the width of the margin. This value only 
+ # takes effect, if 'use_margin' is set to '1'.
+@@ -134,7 +134,7 @@
+ 
+ # Do you have channels you often join?
+ set preferred_channels {
+-    "#freebsd" "#linux" "#netbsd" "#netsplit" "#tkirc"
++    "#fedora" "#linux" "#redhat" "#netsplit" "#tkirc" "#afterstep" "#rxvt-unicode"
+ }
+ 
+ # Preferred values for the signoff command.
+@@ -168,9 +168,9 @@
+ 
+ # Some servers and their port numbers...
+ set preferred_servers {
+-    {"irc.server.com"                   6667 "Example server #1"}
+-    {"irc.server.net"                   6668 "Example server #2"}
+-    {"irc.server.org"                   6667 "Example server #3"}
++    {"chat.us.freenode.net"           6667 "FreeNode USA"}
++    {"irc.chat.org"                   6667 "EFNet Random server"}
++    {"irc.galaxynet.org"              6667 "GalaxyNet Main Server"}
+ }
+ 
+ # New versions of the IRC server doesn't transmit away-messages
+@@ -198,7 +198,7 @@
+ #        2 : Press <Return> and you will always be unmarked, if
+ #            you was marked away before.
+ set auto_mark_away    1
+-set auto_away_period  1200
++set auto_away_period  3600
+ set auto_away_text    "automatically marked as being away after 1200 seconds"
+ set auto_unmark_away  1
+ 
+@@ -218,7 +218,8 @@
+ 
+ # Which browser or script do you want to start by clicking on a
+ # highlighted Uniform Resource Locator (URL)?
+-set on_urlclick {~/.tkirc2/netscape.sh "$url"}
++#set on_urlclick {firefox "$url"}
++set on_urlclick {~/.tkirc2/browser.sh "$url"}
+ 
+ # Which tool/procedure do you want to execute by clicking on a
+ # highlighted messageID?

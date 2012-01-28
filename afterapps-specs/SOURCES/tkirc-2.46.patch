@@ -1,0 +1,209 @@
+--- tkirc2	2001-07-21 07:04:45.000000000 -0500
++++ tkirc2	2007-10-03 09:02:36.000000000 -0500
+@@ -1,6 +1,6 @@
+ #! /bin/sh
+ # \
+-exec wish8.3 "$0" "$@"
++exec wish "$0" "$@"
+ 
+ #############################################################################
+ #                                                                           #
+@@ -840,7 +840,7 @@
+ set history_max        20
+ set lines_max          256
+ set lines_all          0
+-set ircpath            "irc"
++set ircpath            "/usr/bin/epic"
+ 
+ set leavetext_limit    80
+ set topic_limit        80
+@@ -867,27 +867,151 @@
+ set preferred_kickreasons {"No flooding"}
+ set preferred_servers {}
+ set default_servers {
+-    {"us.ircnet.org"            6667  "IRCnet - Random US server"}
+-    {"eu.ircnet.org"            6667  "IRCnet - Random EU server"}
+-    {"au.ircnet.org"            6667  "IRCnet - Random AU server"}
+-    {"irc.belwue.de"            6667  "IRCnet - Germany (Belwue)"}
+-    {"irc.fu-berlin.de"         6667  "IRCnet - Germany (Berlin)"}
+-    {"irc.netsurf.de"           6667  "IRCnet - Germany (Netsurf)"}
+-    {"irc.funet.fi"             6667  "IRCnet - Finland (Funet)"}
+-
+-    {"irc.chat.org"             6667  "EFnet - Random server" }
+-    {"irc.nijenrode.nl"         6667  "EFnet - Netherlands"}
+-    {"irc.homelien.no"          6667  "EFnet - Norway"}
+-    {"efnet.demon.co.uk"        6667  "EFnet - United Kingdom"}
+-
+-    {"US.Undernet.Org"          6667  "Undernet - Random US server"}
+-    {"EU.Undernet.Org"          6667  "Undernet - Random EU server"}
+-    {"DE.Undernet.Org"          6667  "Undernet - Germany"}
+-    {"FR.Undernet.Org"          6667  "Undernet - France"}
+-    {"UK.Undernet.Org"          6667  "Undernet - United Kingdom"}
+ 
+-    {"irc.us.dal.net"           6667  "DALnet - Random US server"}
+-    {"irc.eu.dal.net"           6667  "DALnet - Random EU server"}
++    {"california.ablenet.org"       6667  "AbleNET"}
++    {"amazon.ablenet.org"           6667  "AbleNET"}
++    {"agora.ablenet.org"            6667  "AbleNET"}
++    {"extreme.ablenet.org"          6667  "AbleNET"}
++    {"irc.ablenet.org"              6667  "AbleNET"}
++
++    {"irc.afternet.org"             6667  "AfterNET - All Servers"}
++    {"europe.afternet.org"          6667  "AfterNET - Europe"}
++    {"north-america.afternet.org"   6667  "AfterNET - North America"}
++
++    {"fullcomp.au.amiganet.org"     6667  "AmigaNet - Australia"}
++    {"thule.no.amiganet.org"        6667  "AmigaNet - Norway"}
++    {"dynarc.se.amiganet.org"       6667  "AmigaNet - Sweden"}
++    {"spod.uk.amiganet.org"         6667  "AmigaNet - UK"}
++    {"linux.us.amiganet.org"        6667  "AmigaNet - USA (1)"}
++    {"whiterose.us.amiganet.org"    6667  "AmigaNet - USA (2)"}
++
++    {"ca1.arcnet.vapor.com"         6667  "ARCNet - Canada"}
++    {"ch1.arcnet.vapor.com"         6667  "ARCNet - Europe - Sweden (Geneva)"}
++    {"de1.arcnet.vapor.com"         6667  "ARCNet - Europe - Germany"}
++    {"de3.arcnet.vapor.com"         6667  "ARCNet - Europe - Germany"}
++    {"be1.arcnet.vapor.com"         6667  "ARCNet - Europe - Belgium"}
++    {"fr1.arcnet.vapor.com"         6667  "ARCNet - Europe - France"}
++    {"nl3.arcnet.vapor.com"         6667  "ARCNet - Europe - Netherlands"}
++    {"se1.arcnet.vapor.com"         6667  "ARCNet - Europe - Sweden"}
++    {"uk1.arcnet.vapor.com"         6667  "ARCNet - Europe - UK"}
++    {"uk2.arcnet.vapor.com"         6667  "ARCNet - Europe - UK (Bradford)"}
++    {"uk3.arcnet.vapor.com"         6667  "ARCNet - Europe - UK"}
++    {"us1.arcnet.vapor.com"         6667  "ARCNet - USA"}
++    {"us2.arcnet.vapor.com"         6667  "ARCNet - USA"}
++    {"us3.arcnet.vapor.com"         6667  "ARCNet - USA"}
++
++    {"irc.dal.net"                  6667  "DALnet"}
++    {"irc.us.dal.net"               6667  "DALnet - Random US server"}
++    {"irc.eu.dal.net"               6667  "DALnet - Random EU server"}
++
++    {"irc.chat.org"                 6667  "EFnet - Random server" }
++    {"irc.arcti.ca"                 6667  "EFnet - Canada - Calgary, AB"}
++    {"irc.choopa.ca"                6667  "EFnet - Canada - Montreal, QC"}
++    {"efnet.teleglobe.net"          6667  "EFnet - Canada - Montreal, QC"}
++    {"irc.dks.ca"                   6667  "EFnet - Canada - Toronto, ON"}
++    {"irc.igs.ca"                   6667  "EFnet - Canada - Toronto, ON"}
++    {"irc.inet.tele.dk"             6667  "EFnet - Europe - Aarhus, Denmark"}
++    {"efnet.xs4all.nl"              6667  "EFnet - Europe - Amsterdam, Netherlands"}
++    {"irc.du.se"                    6667  "EFnet - Europe - Borlange, Sweden"}
++    {"efnet.cs.hut.fi"              6667  "EFnet - Europe - Helsinki, Finland"}
++    {"irc.efnet.ch"                 6667  "EFnet - Europe - Geneva, Switzerland"}
++    {"efnet.demon.co.uk"            6667  "EFnet - Europe - London, England"}
++    {"irc.efnet.ru"                 6667  "EFnet - Europe - Moscow, Russia"}
++    {"irc.efnet.no"                 6667  "EFnet - Europe - Oslo, Norway"}
++    {"irc.daxnet.no"                6667  "EFnet - Europe - Oslo, Norway"}
++    {"irc.efnet.fr"                 6667  "EFnet - Europe - Paris, France"}
++    {"irc.pte.hu"                   6667  "EFnet - Europe - Pecs, Hungary"}
++    {"irc.swepipe.se"               6667  "EFnet - Europe - Stockholm, Sweden"}
++    {"irc.inter.net.il"             6667  "EFnet - Europe - Tel Aviv, Israel"}
++    {"irc.efnet.pl"                 6667  "EFnet - Europe - Warsaw, Poland"}
++    {"irc.umich.edu"                6667  "EFnet - USA - Ann Arbor, MI"}
++    {"irc.mindspring.com"           6667  "EFnet - USA - Atlanta, GA"}
++    {"chat.efnet.org"               6667  "EFnet - USA - Chicago, IL"}
++    {"ircd.lagged.org"              6667  "EFnet - USA - Chicago, IL"}
++    {"irc.servercentral.net"        6667  "EFnet - USA - Chicago, IL"}
++    {"irc.SHOUTcast.com"            6667  "EFnet - USA - Dulles, Va"}
++    {"irc.he.net"                   6667  "EFnet - USA - Fremont, CA"}
++    {"irc.mzima.net"                6667  "EFnet - USA - Los Angeles, CA"}
++    {"irc.vel.net"                  6667  "EFnet - USA - Los Angeles, CA"}
++    {"irc.blessed.net"              6667  "EFnet - USA - Maitland, FL"}
++    {"irc.eversible.com"            6667  "EFnet - USA - Miami, FL"}
++    {"irc.umn.edu"                  6667  "EFnet - USA - Minneapolis, MN"}
++    {"irc.nac.net"                  6667  "EFnet - USA - New York, NY"}
++    {"irc2.choopa.net"              6667  "EFnet - USA - New York, NY"}
++    {"irc.colosolutions.net"        6667  "EFnet - USA - Orlando, FL"}
++    {"irc.easynews.com"             6667  "EFnet - USA - Phoenix, AZ"}
++    {"irc.blackened.com"            6667  "EFnet - USA - Phoenix, AZ"}
++    {"irc.wh.verio.net"             6667  "EFnet - USA - Reston, VA"}
++    {"irc.Prison.NET"               6667  "EFnet - USA - San Francisco, CA"}
++
++    {"chat.ap.freenode.net"         6667  "FreeNode - Asia/Pacific Rim"}
++    {"tolkien.freenode.net"         6667  "FreeNode - Asia/Pacific Rim - Taoyuan, TW"}
++    {"chat.au.freenode.net"         6667  "FreeNode - Australia"}
++    {"asimov.freenode.net"          6667  "FreeNode - Australia - Brisbane, AU"}
++    {"chat.eu.freenode.net"         6667  "FreeNode - Europe"}
++    {"kornbluth.freenode.net"       6667  "FreeNode - Europe - Frankfurt, DE"}
++    {"orwell.freenode.net"          6667  "FreeNode - Europe - Helsinki, FI"}
++    {"sterling.freenode.net"        6667  "FreeNode - Europe - Hoofddorp, NL"}
++    {"pratchett.freenode.net"       6667  "FreeNode - Europe - London, UK"}
++    {"calvino.freenode.net"         6667  "FreeNode - Europe - Milano, IT"}
++    {"lem.freenode.net"             6667  "FreeNode - Europe - Moscow, RU"}
++    {"adams.freenode.net"           6667  "FreeNode - Europe - Oslo, NO (1)"}
++    {"gibson.freenode.net"          6667  "FreeNode - Europe - Oslo, NO (2)"}
++    {"leguin.freenode.net"          6667  "FreeNode - Europe - Umeå, SE"}
++    {"sendak.freenode.net"          6667  "FreeNode - Europe - Vilnius, LT"}
++    {"chat.us.freenode.net"         6667  "FreeNode - USA"}
++    {"niven.freenode.net"           6667  "FreeNode - USA - Corvallis, OR (1)"}
++    {"zelazny.freenode.net"         6667  "FreeNode - USA - Corvallis, OR (2)"}
++    {"anthony.freenode.net"         6667  "FreeNode - USA - Irvine, CA"}
++    {"kubrick.freenode.net"         6667  "FreeNode - USA - Los Angeles, CA"}
++    {"brown.freenode.net"           6667  "FreeNode - USA - Madison, WI"}
++    {"heinlein.freenode.net"        6667  "FreeNode - USA - Missoula, MT"}
++
++    {"irc.galaxynet.org"            6667  "GalaxyNet"}
++    {"pi.se.galaxynet.org"          6667  "GalaxyNet - Belgium - Hoboken, Antwerp"}
++    {"montreal.qc.ca.galaxynet.org" 6667  "GalaxyNet - Canada - Montreal, QC"}
++    {"ionip.nl.galaxynet.org"       6667  "GalaxyNet - Netherlands - Hoofddorp"}
++    {"underworld.no.galaxynet.org"  6667  "GalaxyNet - Norway - Oslo"}
++    {"pacific.sg.galaxynet.org"     6667  "GalaxyNet - Singapore"}
++    {"singapore.sg.galaxynet.org"   6667  "GalaxyNet - Singapore"}
++    {"destiny.sg.galaxynet.org"     6667  "GalaxyNet - Singapore"}
++    {"Lostworld.US.Galaxynet.org"   6667  "GalaxyNet - USA"}
++    {"oasis.us.galaxynet.org"       6667  "GalaxyNet - USA"}
++    {"prodigy.us.galaxynet.org"     6667  "GalaxyNet - USA"}
++    {"sprynet.us.galaxynet.org"     6667  "GalaxyNet - USA - Earthlink"}
++    {"atlanta.ga.us.galaxynet.org"  6667  "GalaxyNet - USA - Atlanta, GA"}
++    {"Boston.MA.US.GalaxyNet.org"   6667  "GalaxyNet - USA - Boston, MA"}
++    {"relaychat.us.galaxynet.org"   6667  "GalaxyNet - USA - Peerl, NY"}
++    {"odyssey.us.galaxynet.org"     6667  "GalaxyNet - USA - Santa Clara, CA"}
++    {"seattle.wa.us.galaxynet.org"  6667  "GalaxyNet - USA - Seattle, WA"}
++    {"genesis.us.galaxynet.org"     6667  "GalaxyNet - USA - Sterling, VA"}
++    {"exodus.us.galaxynet.org"      6667  "GalaxyNet - USA - Tempe, AZ"}
++
++    {"irc.stealth.net"              5550  "IRCNet"}
++    {"irc.seed.net.tw"              6667  "IRCNet - Asia - Taiwan"}
++    {"au.ircnet.org"                6667  "IRCnet - Australia - Random server"}
++    {"eu.ircnet.org"                6667  "IRCnet - Europe - Random server"}
++    {"ircnet.hinet.hr"              6667  "IRCNet - Europe - Croatia"}
++    {"irc.datacomm.ch"              6667  "IRCNet - Europe - Switzerland"}
++    {"irc.cs.hut.fi"                6667  "IRCNet - Europe - Helsinki, Finland"}
++    {"ircnet.kaptech.fr"            6667  "IRCNet - Europe - France"}
++    {"irc.flashnet.it"              6667  "IRCNet - Europe - Italy"}
++    {"irc.cwitaly.it"               6667  "IRCNet - Europe - Italy"}
++    {"ircnet.easynet.co.uk"         6667  "IRCNet - Europe - United Kingdom"}
++    {"ircnet.demon.co.uk"           6667  "IRCNet - Europe - UK (London)"}
++    {"irc.funet.fi"                 6667  "IRCnet - Europe - Finland (Funet)"}
++    {"random.ircd.de"               6667  "IRCNet - Europe - Germany"}
++    {"irc.belwue.de"                6667  "IRCnet - Europe - Germany (Belwue)"}
++    {"irc.fu-berlin.de"             6667  "IRCnet - Europe - Germany (Berlin)"}
++    {"irc.netsurf.de"               6667  "IRCnet - Europe - Germany (Netsurf)"}
++    {"ircnet.netvision.net.il"      6667  "IRCNet - Mideast - Israel"}
++    {"us.ircnet.org"                6667  "IRCnet - USA Random server"}
++
++    {"US.Undernet.org"              6667  "Undernet - Random US server"}
++    {"EU.Undernet.org"              6667  "Undernet - Random EU server"}
++    {"DE.Undernet.org"              6667  "Undernet - Germany"}
++    {"FR.Undernet.org"              6667  "Undernet - France"}
++    {"UK.Undernet.org"              6667  "Undernet - United Kingdom"}
+ }
+ set preferred_nicknames {}
+ 
+@@ -902,7 +1026,7 @@
+ set auto_away_text    ""
+ set auto_unmark_away  0
+ 
+-set on_urlclick {~/.tkirc2/netscape.sh "$url"}
++set on_urlclick {~/.tkirc2/browser.sh "$url"}
+ set on_msgclick {StringRequest "Which newsserver do you want to use?" "news.server's.name" "Cancel|" "Show article|showarticle \"\$string\" {$msgid}"}
+ 
+ set words_to_complete {}
+@@ -7807,7 +7931,7 @@
+   if {"$irc($inum,serv)" != ""} {
+     set len [string length "$message"]
+     if {$len == 0} {
+-      set message "ircII+tkirc2"
++      set message "epic+tkirc2"
+     }
+     ExecOnCommands signoff $inum window "$irc($inum,mesg)" nick "$irc($inum,nick)" address "[AddressOfNick $inum "$irc($inum,nick)"]" message "$message"
+     catch {write2irc $inum "/signoff $message"}

@@ -1,15 +1,15 @@
 %define		name wmbluecpu
 %define		version 0.9
-%define		release 2%{?dist}
+%define		release 3%{?dist}
 
-Summary:	WMBlueCPU is a cpu monitor
+Summary:	dockapp cpu monitor
 Name:		%name
 Version:	%version
 Release:	%release
 License:	GPLv2+
 Group:		AfterStep/Applets
-URL:		http://www.dockapps.org/file.php/id/167
-Source0:	http://www.dockapps.org/download.php/id/770/%{name}-%{version}.tar.bz2
+URL:		http://dockapps.windowmaker.org/file.php/id/167
+Source0:	http://dockapps.windowmaker.org/download.php/id/770/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-%{version}-Makefile.patch
 Patch1:		%{name}-%{version}-cpu_linux.c.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -55,6 +55,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog README THANKS
 
 %changelog
+* Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.9-3
+- shifted URLs to http://dockapps.windowmaker.org.
+
 * Fri Oct 28 2011 J. Krebs <rpm_speedy@yahoo.com> - 0.9-2
 - added patch for SMP processors to default to CPU0.
 

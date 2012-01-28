@@ -5,7 +5,7 @@
 %define	version	1.0.5
 %define	release	1%{?dist}
 
-Summary:	medit is a GTK-based text editor
+Summary:	a GTK-based text editor
 Name:		%name
 Version:	%version
 Release:	%release

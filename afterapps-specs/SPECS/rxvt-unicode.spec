@@ -1,11 +1,11 @@
 %define aitest	%(rpm -q --queryformat='%{VERSION}' libAfterImage)
 %define aiver	%aitest 
-%define version 9.12
+%define version 9.15
 %define release 1%{?dist}
 %define name	rxvt-unicode
 %define epoch	2
 
-Summary:	rxvt-unicode is a unicode version of rxvt
+Summary:	unicode version of rxvt
 Name:		%name
 Version:	%version
 Release:	%release
@@ -84,6 +84,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/urxvt
 
 %changelog
+* Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 2:9.15-1
+- new version.
+
+* Wed Jan 04 2012 J. Krebs <rpm_speedy@yahoo.com> - 2:9.14-1
+- new version.
+
 * Tue Jul 19 2011 J. Krebs <rpm_speedy@yahoo.com> - 2:9.12-1
 - new version.
 

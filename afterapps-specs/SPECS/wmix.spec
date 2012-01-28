@@ -1,6 +1,6 @@
 %define		name wmix
 %define		version 3.2
-%define		release 6%{?dist}
+%define		release 7%{?dist}
 
 Summary:	dockapp mixer utilizing the OSS mixer API
 Name:		%name
@@ -8,8 +8,8 @@ Version:	%version
 Release:	%release
 License:	GPLv2+
 Group:		AfterStep/Applets
-URL:		http://www.dockapps.org/file.php/id/58
-Source0:	http://www.dockapps.org/download.php/id/528/%{name}-%{version}.tar.gz
+URL:		http://dockapps.windowmaker.org/file.php/id/58
+Source0:	http://dockapps.windowmaker.org/download.php/id/528/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	libX11
 Requires:	libXext
@@ -53,6 +53,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS BUGS COPYING NEWS README sample.wmixrc
 
 %changelog
+* Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 3.2-7
+- shifted URLs to http://dockapps.windowmaker.org.
+
 * Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 3.2-6
 - changed URL info to dockapps.org.
 

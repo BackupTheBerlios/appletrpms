@@ -1,6 +1,6 @@
 %define name	wmdiskmon
 %define version	0.0.2
-%define release	1%{?dist}
+%define release	2%{?dist}
 
 Summary:	A dockapp that monitors your disks usage in a portable way
 Name:		%name
@@ -8,8 +8,8 @@ Version:	%version
 Release:	%release
 License:	GPLv2+
 Group:		AfterStep/Applets
-URL:		http://www.dockapps.org/file.php/id/236
-Source0:	http://www.dockapps.org/download.php/id/584/%{name}-%{version}.tar.gz
+URL:		http://tnemeth.free.fr/projets/dockapps.html
+Source0:	http://tnemeth.free.fr/projets/programmes/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	glibc
 Requires:	libX11
@@ -45,7 +45,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/wmdiskmon.*
 %doc AUTHORS COPYING ChangeLog README THANKS TODO
 
-
 %changelog
+* Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.0.2-2
+- shifted tarball to http://tnemeth.free.fr/projets/dockapps.html
+
 * Fri Jul 15 2011 J. Krebs <rpm_speedy@yahoo.com> - 0.0.2-1
 - Initial build.

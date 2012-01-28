@@ -1,0 +1,11 @@
+--- configure	2003-07-30 10:28:33.000000000 -0500
++++ configure	2011-12-10 17:12:32.000000000 -0600
+@@ -4284,7 +4284,7 @@
+ ignore_wired=no
+ 
+ case ${host_os} in
+-linux*)
++linux*|k*bsd*|gnu*)
+   OS=linux
+   ignore_buffers=yes
+   ignore_cached=yes

@@ -8,7 +8,8 @@ Version:	%version
 Release:	%release
 License:	GPLv2+
 Group:		Applications/System
-Source0:	http://www.linuxhardware.org/%{name}/%{name}-%{version}.tar.gz
+URL:		ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
+Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
 Patch0:		%{name}-%{version}-Makefile.am.patch
 Patch1:		%{name}-%{version}-configure.in.patch
 Patch2:		%{name}-%{version}-gtk220.patch
@@ -50,5 +51,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/pixmaps/xsensors/*
 
 %changelog
+* Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.4-2
+- linuxhardware.org is dead, shifted tarball to ftp.afterstep.org.
+
 * Fri Jun 24 2011 J. Krebs <rpm_speedy@yahoo.com> 0.70-1
 - initial build.
