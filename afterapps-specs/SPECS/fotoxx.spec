@@ -1,5 +1,5 @@
 %define		name fotoxx
-%define		version 12.0.2
+%define		version 12.01.2
 %define		release 1%{?dist}
 
 Summary:	application for processing image files from a digital camera
@@ -117,18 +117,19 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/%{name}/icons/*
-%{_datadir}/%{name}/locales/%{name}-*.po
+%{_datadir}/doc/%{name}/changelog
+%{_datadir}/doc/%{name}/copyright
+%{_datadir}/doc/%{name}/edit*
+%{_datadir}/doc/%{name}/freecode
 %{_datadir}/doc/%{name}/images/*.jpeg
 %{_datadir}/doc/%{name}/images/*.jpg
 %{_datadir}/doc/%{name}/images/*.png
-%{_datadir}/doc/%{name}/changelog
-%{_datadir}/doc/%{name}/copyright
 %{_datadir}/doc/%{name}/README
 %{_datadir}/doc/%{name}/translations
-%{_datadir}/doc/%{name}/edit*
 %{_datadir}/doc/%{name}/userguide-en.html
 %{_datadir}/doc/%{name}/userguide-it.html
+%{_datadir}/%{name}/icons/*
+%{_datadir}/%{name}/locales/%{name}-*.po
 %{_datadir}/pixmaps/*.png
 %{_mandir}/man1/%{name}.*
 

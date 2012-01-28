@@ -1,5 +1,5 @@
---- wminfo/configure	2011-10-30 09:00:56.000000000 -0500
-+++ wminfo/configure	2011-11-29 21:47:40.000000000 -0600
+--- wminfo/configure	2012-01-02 16:28:49.000000000 -0600
++++ wminfo/configure	2012-01-28 10:56:25.000000000 -0600
 @@ -28,22 +28,23 @@
  fi
  if [ "$PREFIX" == "" ]
@@ -38,20 +38,22 @@
  
  wminfo: \$(OBJS)
  	cc \$(FLAGS) -o wminfo \$^ -lXext \$(LIBDIR) \$(LIBS)
-@@ -68,24 +69,23 @@
+@@ -68,26 +69,25 @@
  	rm -f Makefile
  
  install: wminfo
 -	cp -p wminfo \$(BINDIR)/
 -	chmod 755 \$(BINDIR)/wminfo
 -	chown root:root \$(BINDIR)/wminfo
--	cp -p ../contrib/cp1250-up2low ../contrib/cp1251-up2low ../contrib/default.wmi ../contrib/empty.wmi ../contrib/html-iso1 ../contrib/iso1-up2low ../contrib/iso2-up2low ../contrib/iso5-up2low ../contrib/koi8r-up2low ../contrib/plugin ../contrib/punctuation ../contrib/suspend ../contrib/up2low ../contrib/utf8-iso1 ../contrib/utf8-iso2 ../contrib/utf8-iso5 ../contrib/utf8-up2low \$(BINDIR)/
+-	cp -p ../contrib/cp1250-up2low ../contrib/cp1251-up2low ../contrib/default.wmi ../contrib/empty.wmi ../contrib/html-iso1 ../contrib/iso1-up2low ../contrib/iso1-utf8 ../contrib/iso2-up2low ../contrib/iso2-utf8 ../contrib/iso5-up2low ../contrib/iso5-utf8 ../contrib/koi8r-up2low ../contrib/plugin ../contrib/punctuation ../contrib/suspend ../contrib/up2low ../contrib/utf8-iso1 ../contrib/utf8-iso2 ../contrib/utf8-iso5 ../contrib/utf8-up2low \$(BINDIR)/
 -	if [ ! -d \$(MANDIR) ]; then mkdir -p \$(MANDIR); fi
 -	cp -p ../doc/wminfo.1 \$(MANDIR)
 -	if [ ! -d \$(DOCDIR) ]; then mkdir \$(DOCDIR); fi
 -	cp -p ../COPYING ../ChangeLog ../INSTALL ../Plugins-HOWTO ../README ../README.Privacy ../TODO \$(DOCDIR)
 -	if [ ! -d \$(DOCDIR)/contrib ]; then mkdir \$(DOCDIR)/contrib; fi
 -	cp -p ../contrib/* \$(DOCDIR)/contrib
+-	if [ ! -d \$(DOCDIR)/plugins.conky ]; then mkdir \$(DOCDIR)/plugins.conky; fi
+-	cp -p ../plugins.conky/* \$(DOCDIR)/plugins.conky
 -	if [ ! -d \$(DOCDIR)/plugins.offline ]; then mkdir \$(DOCDIR)/plugins.offline; fi
 -	cp -p ../plugins.offline/* \$(DOCDIR)/plugins.offline
 -	if [ ! -d \$(DOCDIR)/plugins.online ]; then mkdir \$(DOCDIR)/plugins.online; fi
@@ -69,6 +71,8 @@
 +	mkdir -p \$(DESTDIR)\$(DOCDIR)
 +	mkdir -p \$(DESTDIR)\$(DOCDIR)/contrib
 +	cp -p ../contrib/* \$(DESTDIR)\$(DOCDIR)/contrib
++	mkdir -p \$(DESTDIR)\$(DOCDIR)/plugins.conky
++	cp -p ../plugins.conky/* \$(DESTDIR)\$(DOCDIR)/plugins.conky
 +	mkdir -p \$(DESTDIR)\$(DOCDIR)/plugins.offline
 +	cp -p ../plugins.offline/* \$(DESTDIR)\$(DOCDIR)/plugins.offline
 +	mkdir -p \$(DESTDIR)\$(DOCDIR)/plugins.online

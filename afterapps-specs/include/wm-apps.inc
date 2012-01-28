@@ -30,12 +30,26 @@ HVCLOCK_URL=http://www.hugovil.com/repository/hvclock/$(HVCLOCK_TAR)
 
 APPLET_LIST += HVCLOCK
 
+MIXER.APP_NAME=Mixer.app
+MIXER.APP_VERSION=1.8.0
+MIXER.APP_TAR=$(MIXER.APP_NAME)-$(MIXER.APP_VERSION).tar.gz
+MIXER.APP_URL=http://www.fukt.bsnet.se/~per/mixer/$(MIXER.APP_TAR)
+
+APPLET_LIST += MIXER.APP
+
 PEKSYSTRAY_NAME=peksystray
 PEKSYSTRAY_VERSION=0.4.0
 PEKSYSTRAY_TAR=$(PEKSYSTRAY_NAME)-$(PEKSYSTRAY_VERSION).tar.bz2
 PEKSYSTRAY_URL=http://downloads.sourceforge.net/project/$(PEKSYSTRAY_NAME)/$(PEKSYSTRAY_NAME)/$(PEKSYSTRAY_TAR)
 
 APPLET_LIST += PEKSYSTRAY
+
+SALMON_NAME=salmon
+SALMON_VERSION=1.2.2
+SALMON_TAR=$(SALMON_NAME)-$(SALMON_VERSION).tar.gz
+SALMON_URL=http://tigr.net/afterstep/download/salmon/$(SALMON_TAR)
+
+APPLET_LIST += SALMON
 
 SPEYES_NAME=speyes
 SPEYES_VERSION=1.2.0
@@ -44,13 +58,12 @@ SPEYES_URL=http://okb-1.org/speyes/$(SPEYES_TAR)
 
 APPLET_LIST += SPEYES
 
-# Will not work with current lm_sensors - will disable for now
-#WMALMS_NAME=wmalms
-#WMALMS_VERSION=1.1.1
-#WMALMS_TAR=$(WMALMS_NAME)-$(WMALMS_VERSION).tar.gz
-#WMALMS_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMALMS_NAME)/$(WMALMS_TAR)
+TEMPERATURE.APP_NAME=Temperature.app
+TEMPERATURE.APP_VERSION=1.4
+TEMPERATURE.APP_TAR=$(TEMPERATURE.APP_NAME)-$(TEMPERATURE.APP_VERSION).tar.gz
+TEMPERATURE.APP_URL=http://www.fukt.bsnet.se/~per/temperature/$(TEMPERATURE.APP_TAR)
 
-#APPLET_LIST += WMALMS
+APPLET_LIST += TEMPERATURE.APP
 
 WMAB_NAME=wmab
 WMAB_VERSION=0.3
@@ -65,6 +78,21 @@ WMACPILOAD_TAR=$(WMACPILOAD_NAME)-$(WMACPILOAD_VERSION).tar.bz2
 WMACPILOAD_URL=http://wmacpiload.tuxfamily.org/download/$(WMACPILOAD_TAR)
 
 APPLET_LIST += WMACPILOAD
+
+# Will not work with current lm_sensors - will disable for now
+#WMALMS_NAME=wmalms
+#WMALMS_VERSION=1.1.1
+#WMALMS_TAR=$(WMALMS_NAME)-$(WMALMS_VERSION).tar.gz
+#WMALMS_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMALMS_NAME)/$(WMALMS_TAR)
+
+#APPLET_LIST += WMALMS
+
+WMBIFF_NAME=wmbiff
+WMBIFF_VERSION=0.4.27
+WMBIFF_TAR=$(WMBIFF_NAME)-$(WMBIFF_VERSION).tar.gz
+WMBIFF_URL=http://downloads.sourceforge.net/project/$(WMBIFF_NAME)/$(WMBIFF_NAME)/$(WMBIFF_TAR)
+
+APPLET_LIST += WMBIFF
 
 WMBLUECLOCK_NAME=wmblueclock
 WMBLUECLOCK_VERSION=0.4
@@ -94,13 +122,6 @@ WMC2D_URL=http://downloads.sourceforge.net/project/$(WMC2D_NAME)/Source/$(WMC2D_
 
 APPLET_LIST += WMC2D
 
-WMCALENDAR_NAME=wmcalendar
-WMCALENDAR_VERSION=0.5.2
-WMCALENDAR_TAR=$(WMCALENDAR_NAME)-$(WMCALENDAR_VERSION).tar.gz
-WMCALENDAR_URL=http://downloads.sourceforge.net/project/$(WMCALENDAR_NAME)/$(WMCALENDAR_NAME)/$(WMCALENDAR_TAR)
-
-APPLET_LIST += WMCALENDAR
-
 WMCALC_NAME=wmcalc
 WMCALC_VERSION=0.4
 WMCALC_TAR=$(WMCALC_NAME)-$(WMCALC_VERSION).tar.gz
@@ -108,6 +129,13 @@ WMCALC_TAR=$(WMCALC_NAME)-$(WMCALC_VERSION).tar.gz
 WMCALC_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMCALC_TAR)
 
 APPLET_LIST += WMCALC
+
+WMCALENDAR_NAME=wmcalendar
+WMCALENDAR_VERSION=0.5.2
+WMCALENDAR_TAR=$(WMCALENDAR_NAME)-$(WMCALENDAR_VERSION).tar.gz
+WMCALENDAR_URL=http://downloads.sourceforge.net/project/$(WMCALENDAR_NAME)/$(WMCALENDAR_NAME)/$(WMCALENDAR_TAR)
+
+APPLET_LIST += WMCALENDAR
 
 WMCHARGEMON_NAME=wmchargemon
 WMCHARGEMON_VERSION=0.3
@@ -369,10 +397,3 @@ WMXKB_TAR=$(WMXKB_NAME)-$(WMXKB_VERSION).tar.gz
 WMXKB_URL=http://dockapps.windowmaker.org/download.php/id/487/$(WMXKB_TAR)
 
 APPLET_LIST += WMXKB
-
-WMBIFF_NAME=wmbiff
-WMBIFF_VERSION=0.4.27
-WMBIFF_TAR=$(WMBIFF_NAME)-$(WMBIFF_VERSION).tar.gz
-WMBIFF_URL=http://downloads.sourceforge.net/project/$(WMBIFF_NAME)/$(WMBIFF_NAME)/$(WMBIFF_TAR)
-
-APPLET_LIST += WMBIFF
