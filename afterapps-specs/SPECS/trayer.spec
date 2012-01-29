@@ -1,7 +1,7 @@
 %define name trayer
 %define version 1.1.4
-%define gitver	412ad31
-%define release 1%{?dist}
+%define gitver	b04805f
+%define release 2%{?dist}
 
 Summary:	A lightweight GTK2-based systray for UNIX desktop
 Name:		%name
@@ -10,7 +10,7 @@ Release:	%release
 License:	GPLv2+
 Group:		User Interface/Desktops
 URL:		https://github.com/sargon/trayer-srg
-Source0:	https://github.com/sargon/trayer-srg/tarball/master/sargon-trayer-srg-%{name}-%{version}-0-g%{gitver}.tar.gz
+Source0:	https://github.com/sargon/trayer-srg/tarball/master/sargon-trayer-srg-%{name}-%{version}-3-g%{gitver}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	atk
 Requires:	cairo
@@ -54,15 +54,22 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{_bindir}
 install -s -m 755 trayer $RPM_BUILD_ROOT%{_bindir}
 
+mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1/
+install -m 644 man/trayer.1 $RPM_BUILD_ROOT%{_mandir}/man1/
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/trayer
 %doc CREDITS COPYING CHANGELOG README TODO
+%{_bindir}/trayer
+%{_mandir}/man1/%{name}.*
 
 %changelog
+* Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.1.4-2
+- new version.
+
 * Fri Dec 30 2011 J. Krebs <rpm_speedy@yahoo.com> - 1.1.4-1
 - new version.
 

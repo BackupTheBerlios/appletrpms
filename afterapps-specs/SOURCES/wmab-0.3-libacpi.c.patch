@@ -1,0 +1,27 @@
+--- wmab/libacpi.c	2002-07-07 05:54:52.000000000 -0500
++++ wmab/libacpi.c	2011-10-30 00:02:07.000000000 -0500
+@@ -52,7 +52,7 @@
+   char *name;
+   char *tmp;
+ 
+-  if (!(acpi = fopen ("/proc/acpi/info", "r")))
++  if (!(acpi = fopen ("/sys/module/acpi/parameters/acpica_version", "r")))
+     {
+       return 1;
+     }
+@@ -100,8 +100,13 @@
+ 
+   if (!(acpi = fopen ("/proc/acpi/ac_adapter/0/status", "r")))
+     if (!(acpi = fopen ("/proc/acpi/ac_adapter/ACAD/state", "r")))
+-      if (!(acpi = fopen ("/proc/acpi/ac_adapter/AC/state", "r")))
+-	return -1;
++      if (!(acpi = fopen ("/proc/acpi/ac_adapter/AC0/state", "r")))
++        if (!(acpi = fopen ("/proc/acpi/ac_adapter/AC/state", "r")))
++          if (!(acpi = fopen ("/proc/acpi/ac_adapter/ADP0/state", "r")))
++            if (!(acpi = fopen ("/proc/acpi/ac_adapter/ADP1/state", "r")))
++              if (!(acpi = fopen ("/proc/acpi/ac_adapter/ADP2/state", "r")))
++                if (!(acpi = fopen ("/proc/acpi/ac_adapter/ADP3/state", "r")))
++	          return -1;
+ 
+   fread (buf, 512, 1, acpi);
+   fclose (acpi);
