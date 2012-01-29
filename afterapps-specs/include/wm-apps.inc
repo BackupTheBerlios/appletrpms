@@ -30,12 +30,13 @@ HVCLOCK_URL=http://www.hugovil.com/repository/hvclock/$(HVCLOCK_TAR)
 
 APPLET_LIST += HVCLOCK
 
-MIXER.APP_NAME=Mixer.app
-MIXER.APP_VERSION=1.8.0
-MIXER.APP_TAR=$(MIXER.APP_NAME)-$(MIXER.APP_VERSION).tar.gz
-MIXER.APP_URL=http://www.fukt.bsnet.se/~per/mixer/$(MIXER.APP_TAR)
+# OSS and Pulseaudio don't seem to work well
+#MIXER.APP_NAME=Mixer.app
+#MIXER.APP_VERSION=1.8.0
+#MIXER.APP_TAR=$(MIXER.APP_NAME)-$(MIXER.APP_VERSION).tar.gz
+#MIXER.APP_URL=http://www.fukt.bsnet.se/~per/mixer/$(MIXER.APP_TAR)
 
-APPLET_LIST += MIXER.APP
+#APPLET_LIST += MIXER.APP
 
 PEKSYSTRAY_NAME=peksystray
 PEKSYSTRAY_VERSION=0.4.0
@@ -65,19 +66,21 @@ TEMPERATURE.APP_URL=http://www.fukt.bsnet.se/~per/temperature/$(TEMPERATURE.APP_
 
 APPLET_LIST += TEMPERATURE.APP
 
-WMAB_NAME=wmab
-WMAB_VERSION=0.3
-WMAB_TAR=$(WMAB_NAME)-$(WMAB_VERSION).tar.gz
-WMAB_URL=http://web.tiscali.it/kalem/wmab/$(WMAB_TAR)
+# Changes in Kernels kernel 2.6.36 and later
+#WMAB_NAME=wmab
+#WMAB_VERSION=0.3
+#WMAB_TAR=$(WMAB_NAME)-$(WMAB_VERSION).tar.gz
+#WMAB_URL=http://web.tiscali.it/kalem/wmab/$(WMAB_TAR)
 
-APPLET_LIST += WMAB
+#APPLET_LIST += WMAB
 
-WMACPILOAD_NAME=wmacpiload
-WMACPILOAD_VERSION=0.2.0
-WMACPILOAD_TAR=$(WMACPILOAD_NAME)-$(WMACPILOAD_VERSION).tar.bz2
-WMACPILOAD_URL=http://wmacpiload.tuxfamily.org/download/$(WMACPILOAD_TAR)
+# Changes in Kernels kernel 2.6.36 and later
+#WMACPILOAD_NAME=wmacpiload
+#WMACPILOAD_VERSION=0.2.0
+#WMACPILOAD_TAR=$(WMACPILOAD_NAME)-$(WMACPILOAD_VERSION).tar.bz2
+#WMACPILOAD_URL=http://wmacpiload.tuxfamily.org/download/$(WMACPILOAD_TAR)
 
-APPLET_LIST += WMACPILOAD
+#APPLET_LIST += WMACPILOAD
 
 # Will not work with current lm_sensors - will disable for now
 #WMALMS_NAME=wmalms
@@ -221,12 +224,13 @@ WMINFO_URL=http://linux-bsd-unix.strefa.pl/$(WMINFO_TAR)
 
 APPLET_LIST += WMINFO
 
-WMIX_NAME=wmix
-WMIX_VERSION=3.2
-WMIX_TAR=$(WMIX_NAME)-$(WMIX_VERSION).tar.gz
-WMIX_URL=http://dockapps.windowmaker.org/download.php/id/528/$(WMIX_TAR)
+# OSS and Pulseaudio don't seem to work well
+#WMIX_NAME=wmix
+#WMIX_VERSION=3.2
+#WMIX_TAR=$(WMIX_NAME)-$(WMIX_VERSION).tar.gz
+#WMIX_URL=http://dockapps.windowmaker.org/download.php/id/528/$(WMIX_TAR)
 
-APPLET_LIST += WMIX
+#APPLET_LIST += WMIX
 
 WMMEMLOAD_NAME=wmmemload
 WMMEMLOAD_VERSION=0.1.6
@@ -370,12 +374,13 @@ WMUSIC_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMUSIC_TAR)
 
 APPLET_LIST += WMUSIC
 
-WMWEATHER_NAME=wmweather
-WMWEATHER_VERSION=2.4.5
-WMWEATHER_TAR=$(WMWEATHER_NAME)_$(WMWEATHER_VERSION).orig.tar.gz
-WMWEATHER_URL=http://ftp.de.debian.org/debian/pool/main/w/wmweather/$(WMWEATHER_TAR)
+# Included in Fedora 15 Repository
+#WMWEATHER_NAME=wmweather
+#WMWEATHER_VERSION=2.4.5
+#WMWEATHER_TAR=$(WMWEATHER_NAME)_$(WMWEATHER_VERSION).orig.tar.gz
+#WMWEATHER_URL=http://ftp.de.debian.org/debian/pool/main/w/wmweather/$(WMWEATHER_TAR)
 
-APPLET_LIST += WMWEATHER
+#APPLET_LIST += WMWEATHER
 
 WMWEATHERPLUS_NAME=wmweather+
 WMWEATHERPLUS_VERSION=2.13

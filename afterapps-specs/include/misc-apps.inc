@@ -76,12 +76,13 @@ EINA_URL=http://launchpad.net/eina/trunk/$(EINA_VERSION)/+download/$(EINA_TAR)
 
 APPLET_LIST += EINA
 
-FOTOXX_NAME=fotoxx
-FOTOXX_VERSION=12.01.2
-FOTOXX_TAR=$(FOTOXX_NAME)-$(FOTOXX_VERSION).tar.gz
-FOTOXX_URL=http://kornelix.squarespace.com/storage/downloads/$(FOTOXX_TAR)
+# Included in Fedora 15 Repository
+#FOTOXX_NAME=fotoxx
+#FOTOXX_VERSION=12.01.2
+#FOTOXX_TAR=$(FOTOXX_NAME)-$(FOTOXX_VERSION).tar.gz
+#FOTOXX_URL=http://kornelix.squarespace.com/storage/downloads/$(FOTOXX_TAR)
 
-APPLET_LIST += FOTOXX
+#APPLET_LIST += FOTOXX
 
 JPEGINFO_NAME=jpeginfo
 JPEGINFO_VERSION=1.6.1
@@ -122,12 +123,13 @@ MEDIT_URL=http://sourceforge.net/projects/mooedit/files/$(MEDIT_NAME)/$(MEDIT_VE
 
 APPLET_LIST += MEDIT
 
-MINED_NAME=mined
-MINED_VERSION=2011.19
-MINED_TAR=$(MINED_NAME)-$(MINED_VERSION).tar.gz
-MINED_URL=http://towo.net/mined/download/$(MINED_TAR)
+# Included in Fedora 15 Repository
+#MINED_NAME=mined
+#MINED_VERSION=2011.19
+#MINED_TAR=$(MINED_NAME)-$(MINED_VERSION).tar.gz
+#MINED_URL=http://towo.net/mined/download/$(MINED_TAR)
 
-APPLET_LIST += MINED
+#APPLET_LIST += MINED
 
 MPCK_NAME=mpck
 MPCK_VERSION=0.19
@@ -136,7 +138,7 @@ MPCK_URL=http://www.checkmate.gissen.nl/$(MPCK_TAR)
 
 APPLET_LIST += MPCK
 
-# Included in Fedora's Repository
+# Included in Fedora 15 Repository
 #PARCELLITE_NAME=parcellite
 #PARCELLITE_VERSION=0.9.1
 #PARCELLITE_TAR=$(PARCELLITE_NAME)-$(PARCELLITE_VERSION).tar.gz
@@ -188,12 +190,13 @@ APPLET_LIST += WORKER
 
 #APPLET_LIST += WORKER-DOC
 
-XBILL_NAME=xbill
-XBILL_VERSION=2.1
-XBILL_TAR=$(XBILL_NAME)-$(XBILL_VERSION).tar.gz
-XBILL_URL=http://www.xbill.org/download/$(XBILL_TAR)
+# Included in RPMForge Fedora 15 Repository
+#XBILL_NAME=xbill
+#XBILL_VERSION=2.1
+#XBILL_TAR=$(XBILL_NAME)-$(XBILL_VERSION).tar.gz
+#XBILL_URL=http://www.xbill.org/download/$(XBILL_TAR)
 
-APPLET_LIST += XBILL
+#APPLET_LIST += XBILL
 
 XSENSORS_NAME=xsensors
 XSENSORS_VERSION=0.70
