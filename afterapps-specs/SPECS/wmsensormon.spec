@@ -1,18 +1,18 @@
-%define name wmsensormon
-%define version 1.2.1
-%define release 7%{?dist}
+%define		name wmsensormon
+%define		version 1.2.1
+%define		release 8%{?dist}
 
-Summary: uses lm_sensors to monitor CPU & sys temps, fan speed, and CPU voltage
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: http://wmsensormon.sourceforge.net/
-Source0: http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires: lm_sensors-devel >= 2.0, lm_sensors-devel < 3.0
-Requires: lm_sensors >= 2.0, lm_sensors < 3.0
+Summary:	uses lm_sensors to monitor CPU & sys temps, fan speed, and CPU voltage
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		AfterStep/Applets
+URL:		http://wmsensormon.sourceforge.net/
+Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRequires:	lm_sensors-devel >= 2.0, lm_sensors-devel < 3.0
+Requires:	lm_sensors >= 2.0, lm_sensors < 3.0
 
 %description
 Wmsensormon is a doc app for WindowMaker that utilizes lm_sensors to
@@ -42,9 +42,12 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %{_bindir}/*
 %{_mandir}/man1/*
-%doc CHANGELOG COPYING INSTALL README TODO
+%doc CHANGELOG COPYING README TODO
 
 %changelog
+* Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.2.1-8
+- updated sourceforge URLs.
+
 * Thu Aug 06 2009 J. Krebs <rpm_speedy@yahoo.com> - 1.2.1-7
 - updated URL info.
 

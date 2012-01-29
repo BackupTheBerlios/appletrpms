@@ -8,7 +8,7 @@ Version:	%version
 Release:	%release
 License:	GPLv1
 Group:		Amusements/Games
-Source0:	http://downloads.sourceforge.net/project/sdlscavenger/sdlscav-145.1_2010_11_5.tgz
+Source0:	http://prdownloads.sourceforge.net/sdlscavenger/sdlscav-145.1_2010_11_5.tgz
 Patch0:		%{name}-%{version}-Makefile.patch
 Patch1:		%{name}-%{version}-names.h.patch
 URL:		http://sourceforge.net/projects/sdlscavenger/

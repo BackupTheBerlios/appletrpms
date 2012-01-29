@@ -1,6 +1,6 @@
 %define		name wmsystemtray
 %define		version 1.2
-%define		release 1%{?dist}
+%define		release 2%{?dist}
 
 Summary:	versatile system tray (freedesktop.org systray protocol) Window Maker dock app
 Name:		%name
@@ -9,7 +9,7 @@ Release:	%release
 License:	GPLv2+
 Group:		AfterStep/Applets
 URL:		http://wmsystemtray.sourceforge.net/
-Source0:	http://easynews.dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
+Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	libICE
 Requires:	libSM
@@ -55,5 +55,8 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
-* Sun Aug 29 2010 J. Krebs <rpm_speedy@yahoo.com> - 1.2
+* Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.2-2
+- updated sourceforge URLs.
+
+* Sun Aug 29 2010 J. Krebs <rpm_speedy@yahoo.com> - 1.2-1
 - initial build.

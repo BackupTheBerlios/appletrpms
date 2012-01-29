@@ -25,7 +25,7 @@
 
 %define		name wmweather+
 %define		version 2.13
-%define		release 1%{?dist}
+%define		release 2%{?dist}
 
 Summary:	A dock app for displaying weather information
 Name:		%name
@@ -33,8 +33,8 @@ Version:	%version
 Release:	%release
 License:	GPLv2+
 Group:		AfterStep/Applets
-URL:		http://sourceforge.net/project/showfiles.php?group_id=60336
-Source0:	http://easynews.dl.sourceforge.net/sourceforge/wmweatherplus/%{name}-%{version}.tar.gz
+URL:		http://sourceforge.net/projects/wmweatherplus/
+Source0:	http://prdownloads.sourceforge.net/wmweatherplus/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	glibc
 Requires:	libcurl
@@ -91,8 +91,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 %doc ChangeLog README HINTS example.conf
 
-
 %changelog
+* Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 2.13-2
+- updated sourceforge URLs.
+
 * Sat Dec 11 2010 J. Krebs <rpm_speedy@yahoo.com> - 2.13-1
 - new version.
 

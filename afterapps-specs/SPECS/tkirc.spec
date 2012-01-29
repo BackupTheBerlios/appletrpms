@@ -8,12 +8,12 @@ Version:	%version
 Release:	%release
 License:	GPLv2+
 Group:		Applications/Multimedia
+URL:		ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
 Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/tkirc%{version}.tar.gz
 Source1:	%{name}-%{version}-netsplit.png
 Source2:	%{name}-%{version}-browser.sh
 Patch0:         %{name}-%{version}.patch
 Patch1:         %{name}-%{version}-rc-example.patch
-URL:		ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	epic
 Requires:	tk
@@ -87,5 +87,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/pixmaps/tkirc-netsplit.png
 
 %changelog
-* Tue Nov 29 2011 J. Krebs <rpm_speedy@yahoo.com> 2.46-1
+* Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 2.46-1
 - initial build.

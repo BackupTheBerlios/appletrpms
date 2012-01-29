@@ -9,7 +9,7 @@ Release:	%release
 License:	GPLv2+
 Group:		AfterStep/Applets
 URL:		http://sourceforge.net/projects/wmudmount/
-Source0:	http://downloads.sourceforge.net/project/wmudmount/wmudmount/%{name}-%{version}.tar.gz
+Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 Patch0:		%{name}-%{version}-notify.c.patch
 Patch1:		%{name}-%{version}-configure.ac.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)

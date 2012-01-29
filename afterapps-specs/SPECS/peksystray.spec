@@ -1,17 +1,25 @@
-%define name peksystray
-%define version 0.4.0
-%define release 4%{?dist}
+%define		name peksystray
+%define		version 0.4.0
+%define		release 5%{?dist}
 
-Summary: peksystray is a dockable systray
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: http://sourceforge.net/projects/peksystray/
-Source0: http://easynews.dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.bz2
-Patch0: %{name}-%{version}-ldadd.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:	a dockable systray
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		AfterStep/Applets
+URL:		http://sourceforge.net/projects/peksystray/
+Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
+Patch0:		%{name}-%{version}-ldadd.patch
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	libICE
+Requires:	libSM
+Requires:	libX11
+Requires:	glibc
+BuildRequires:	libICE-devel
+BuildRequires:	libSM-devel
+BuildRequires:	libX11-devel
+BuildRequires:	glibc-devel
 
 %description
 PekSysTray is a system tray "notification area" dockapp similar to the GNOME
@@ -40,9 +48,12 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %{_bindir}/*
-%doc AUTHORS COPYING ChangeLog INSTALL NEWS README THANKS TODO
+%doc AUTHORS COPYING ChangeLog NEWS README THANKS TODO
 
 %changelog
+* Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.4.0-5
+- updated sourceforge URLs
+
 * Mon Dec 27 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.4.0-4
 - cleanup of spec file.
 

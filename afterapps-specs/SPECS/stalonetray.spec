@@ -1,26 +1,26 @@
 %define name	stalonetray
 %define version	0.8.1
-%define release	1%{?dist}
+%define release	2%{?dist}
 
 Summary:	STand Alone TRAY (notification area) implementation
 Name:		%name
 Version:	%version
 Release:	%release
-License:	GPLv2
+License:	GPLv2+
 Group:		User Interface/Desktops
 URL:		http://sourceforge.net/projects/stalonetray
-Source0:	http://easynews.dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
+Source0:	http://prdownloads.sourceforge.net//%{name}/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	glibc
 Requires:	libICE
 Requires:	libSM
-Requires:	libXpm
 Requires:	libX11
-Requires:	glibc
+Requires:	libXpm
+BuildRequires:	glibc-devel
 BuildRequires:	libICE-devel
 BuildRequires:	libSM-devel
-BuildRequires:	libXpm-devel
 BuildRequires:	libX11-devel
-BuildRequires:	glibc-devel
+BuildRequires:	libXpm-devel
 
 %description
 Stalonetray is a stand-alone freedesktop.org and KDE system tray
@@ -53,6 +53,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man*/*
 
 %changelog
+* Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.8.1-2
+- updated sourceforge URLs.
+
 * Sat Dec 11 2010 J. Krebs <rpm_speedy@yahoo.com> - 0.8.1-1
 - new version.
 

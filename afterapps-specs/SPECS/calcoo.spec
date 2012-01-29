@@ -1,16 +1,16 @@
-%define name calcoo
-%define version 1.3.18
-%define release 2%{?dist}
+%define		name calcoo
+%define		version 1.3.18
+%define		release 2%{?dist}
 
-Summary: calcoo is a RPN and algebraic scientific calculator
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: Applications/Scientific
-URL: http://calcoo.sourceforge.net/
-Source0: http://internap.dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:	RPN and algebraic scientific calculator
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		Applications/Scientific
+URL:		http://calcoo.sourceforge.net/
+Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 Calcoo is a scientific calculator designed to provide maximum
@@ -58,9 +58,12 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %{_bindir}/calcoo
 %{_mandir}/man1/*
-%doc AUTHORS COPYING ChangeLog INSTALL NEWS README
+%doc AUTHORS COPYING ChangeLog NEWS README
 
 %changelog
+* Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.3.18-3
+- updated sourceforge URLs.
+
 * Thu May 27 2010 J. Krebs <rpm_speedy@yahoo.com> - 1.3.18-2
 - added library links to make.
 

@@ -9,7 +9,7 @@ Release:	%release
 License:	GPLv2
 Group:		AfterStep/Applets
 URL:		http://dockapps.windowmaker.org/file.php/id/24
-Source0:	http://dockapps.windowmaker.org/download.php/id/885/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	libX11
 Requires:	libXext
