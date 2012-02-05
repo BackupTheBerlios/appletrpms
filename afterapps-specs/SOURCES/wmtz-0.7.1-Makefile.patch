@@ -1,0 +1,47 @@
+--- wmtz/Makefile	2011-09-05 18:46:58.000000000 -0500
++++ wmtz/Makefile	2012-02-04 13:41:19.000000000 -0600
+@@ -1,5 +1,6 @@
+ CC = gcc
+-LIBDIR = -L/usr/X11R6/lib
++LIBPATH= /usr/lib
++LIBDIR = -L$(LIBPATH)
+ LIBS   = -lXpm -lXext -lX11 -lm
+ FLAGS = -O2
+ DESTDIR = /usr/local
+@@ -10,7 +11,7 @@
+ 
+ 
+ .c.o:
+-	$(CC) -I/usr/X11R6/include $(FLAGS) -c -Wall $< -o $*.o
++	$(CC) -I/usr/include $(FLAGS) -c -Wall $< -o $*.o
+ 
+ wmtz: $(OBJS)
+ 	$(CC) $(FLAGS) -o wmtz $^ -lXext $(LIBDIR) $(LIBS)
+@@ -25,18 +26,15 @@
+ 	rm -f *~
+ 
+ install:: wmtz
+-	cp -f wmtz $(DESTDIR)/bin/
+-	chmod 755 $(DESTDIR)/bin/wmtz
+-	chown root:root $(DESTDIR)/bin/wmtz
+-	mkdir -p $(DESTDIR)/man/man1
+-	cp -f wmtz.1 $(DESTDIR)/man/man1/
+-	chmod 644 $(DESTDIR)/man/man1/wmtz.1
+-	chown root:root $(DESTDIR)/man/man1/wmtz.1
+-	cp -f wmtzrc $(HOME)/.wmtzrc
+-	chmod 600 $(HOME)/.wmtzrc
+-	cp -f wmtzrc /etc/wmtzrc
+-	chmod 644 /etc/wmtzrc
+-	chown root:root /etc/wmtzrc
++	mkdir -p $(DESTDIR)/usr/bin/
++	cp -f wmtz $(DESTDIR)/usr/bin/
++	chmod 755 $(DESTDIR)/usr/bin/wmtz
++	mkdir -p $(DESTDIR)/share/man/man1
++	cp -f wmtz.1 $(DESTDIR)/share/man/man1/
++	chmod 644 $(DESTDIR)/share/man/man1/wmtz.1
++	mkdir -p $(DESTDIR)/etc/
++	cp -f wmtzrc $(DESTDIR)/etc/wmtzrc
++	chmod 644 $(DESTDIR)/etc/wmtzrc
+ 	@echo "wmtz: Installation finished..."
+ 
+ uninstall:: 

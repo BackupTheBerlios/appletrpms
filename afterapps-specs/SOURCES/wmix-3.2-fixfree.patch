@@ -1,0 +1,11 @@
+--- wmix.c	2004-10-27 03:37:52.000000000 -0500
++++ wmix.c	2012-02-04 20:29:20.000000000 -0600
+@@ -134,7 +134,7 @@
+     }
+ 
+     /* handle writing PID file, silently ignore if we can't do it */
+-    pid = calloc(1, strlen(home) + 10);
++    pid = calloc(1, strlen(home) + 11);
+     sprintf(pid, "%s/.wmix.pid", home);
+     fp = fopen(pid, "w");
+     if (fp) {

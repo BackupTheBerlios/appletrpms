@@ -2,7 +2,7 @@
 %define		version 0.7.1
 %define		release 2%{?dist}
 
-Summary:	dockapp displays the local time from different zones
+Summary:	dockapp that displays the local time from different zones
 Name:		%name
 Version:	%version
 Release:	%release
@@ -10,6 +10,8 @@ License:	GPLv2
 Group:		AfterStep/Applets
 URL:		http://dockapps.windowmaker.org/file.php/id/24
 Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
+Patch0:		%{name}-%{version}-version.patch
+Patch1:		%{name}-%{version}-Makefile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	libX11
 Requires:	libXext
@@ -35,11 +37,15 @@ when they are asleep...
 
 %prep
 %setup -q -n %{name}-0.7
+%patch0
+%patch1
 
 %build
 cd wmtz
 
-make LIBDIR=%{_libdir}
+make clean
+
+make LIBPATH=%{_libdir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -56,14 +62,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/wmtz
+%doc BUGS CHANGES COPYING README wmtz/wmtzrc%{_bindir}/wmtz
 %{_mandir}/man1/wmtz.1*
 %{_sysconfdir}/wmtzrc
-%doc BUGS CHANGES COPYING README wmtz/wmtzrc
+
 
 %changelog
 * Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.7.1-2
-- shifted URLs to http://dockapps.windowmaker.org.
+- shifted URLs to http://dockapps.windowmaker.org, added version patch.
 
 * Sun Oct 10 2011 J. Krebs <rpm_speedy@yahoo.com> - 0.7.1-1
 - new version.

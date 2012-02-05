@@ -1,6 +1,6 @@
 %define		name asclock
 %define		version 2.0.12
-%define		release 7%{?dist}
+%define		release 8%{?dist}
 
 Summary:	Clock Applet
 Name:		%{name}
@@ -21,7 +21,7 @@ AfterStep clock applet
 
 %prep
 %setup -q
-%patch0 -b .old
+%patch0
 
 %build
 mv configure configure.old
@@ -50,7 +50,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc COPYING INSTALL README README.THEMES TODO
+%doc COPYING README README.THEMES TODO
 %{_bindir}/asclock
 %{_mandir}/man1/asclock.*
 %{_datadir}/%{name}/Freeamp/beats.xpm
@@ -108,10 +108,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/classic/beats.xpm
 %{_datadir}/%{name}/classic/classic
 %{_datadir}/%{name}/classic/clock.xpm
-%{_datadir}/%{name}/classic/clock.xpm.old
 %{_datadir}/%{name}/classic/config
 %{_datadir}/%{name}/classic/date.xpm
-%{_datadir}/%{name}/classic/date.xpm.old
 %{_datadir}/%{name}/classic/hour.xpm
 %{_datadir}/%{name}/classic/led.xpm
 %{_datadir}/%{name}/classic/minute.xpm
@@ -136,6 +134,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/shaped/weekday.xpm
 
 %changelog
+* Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 2.0.12-8
+- removed some .old files from package.
+
 * Sun May 30 2010 J. Krebs <rpm_speedy@yahoo.com> - 2.0.12-7
 - some spec file cleanup.
 

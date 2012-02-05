@@ -10,6 +10,7 @@ License:	GPLv2
 Group:		AfterStep/Applets
 URL:		http://dockapps.windowmaker.org/file.php/id/130
 Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
+Source1:	%{name}-%{version}.man
 Patch0:		%{name}-%{version}.Makefile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	libX11
@@ -37,17 +38,20 @@ make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
 
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
 install -s -m 755 wmcalc $RPM_BUILD_ROOT%{_bindir}
+mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
+install -m 644 %{SOURCE1} $RPM_BUILD_ROOT%{_mandir}/man1/wmcalc.man
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
 %doc COPYING README wmcalc.conf .wmcalc
+%{_bindir}/wmcalc
+%{_mandir}/man1/wmcalc.*
 
 %changelog
 * Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.4-7

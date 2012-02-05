@@ -10,6 +10,7 @@ License:	GPLv2+
 Group:		AfterStep/Applets
 URL:		http://dockapps.windowmaker.org/file.php/id/58
 Source0:	http://dockapps.windowmaker.org/download.php/id/528/%{name}-%{version}.tar.gz
+Patch0:		%{name}-%{version}-fixfree.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	libX11
 Requires:	libXext

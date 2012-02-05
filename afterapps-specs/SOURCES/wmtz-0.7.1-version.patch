@@ -1,0 +1,17 @@
+--- wmtz/wmtz.c	2011-09-05 18:40:19.000000000 -0500
++++ wmtz/wmtz.c	2012-02-04 12:40:50.000000000 -0600
+@@ -46,12 +46,12 @@
+ /*
+  * Defines
+  */
+-#define WMTZ_VERSION "0.7"
++#define WMTZ_VERSION "0.7.1"
+ #define CHAR_WIDTH 6
+ #define STRSIZE 10
+ #define LMST 1
+ #define GMST 0
+-#define ABOUT "xmessage -center -buttons \"Close\" \"WMTZ - Window Maker Time Zone dockapp v0.7 http://www.geocities.com/jl1n/wmtz/wmtz.html\""
++#define ABOUT "xmessage -center -buttons \"Close\" \"WMTZ - Window Maker Time Zone dockapp v0.7.1 http://www.geocities.com/jl1n/wmtz/wmtz.html\""
+ 
+ 
+ /*

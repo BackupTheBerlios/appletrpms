@@ -10,6 +10,7 @@ License:	GPLv2+
 Group:		AfterStep/Applets
 URL:		http://dockapps.windowmaker.org/file.php/id/188
 Source0:	http://dockapps.windowmaker.org/download.php/id/547/%{name}-%{version}.tar.gz
+Patch0:		%{name}-%{version}-arraysize.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	libX11
 Requires:	libXext
@@ -23,6 +24,7 @@ DockApp that displays your system uptime in realtime.
 
 %prep
 %setup -q
+%patch0
 
 %build
 ./configure --prefix=%{_prefix}

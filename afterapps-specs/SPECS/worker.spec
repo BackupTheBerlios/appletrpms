@@ -1,7 +1,7 @@
 %define avftest	%(rpm -q --queryformat='%{VERSION}' avfs)
 %define avfver	%avftest 
 %define		name worker
-%define		version 2.18.1
+%define		version 2.19.0
 %define		release 1%{?dist}
 
 Summary:	A file manager for the X Window System
@@ -122,6 +122,9 @@ fi
 %{_datadir}/applications/worker.desktop
 
 %changelog
+* Tue Jan 31 2012 J. Krebs <rpm_speedy@yahoo.com> 2.19.0-1
+- new version.
+
 * Sat Oct 01 2011 J. Krebs <rpm_speedy@yahoo.com> 2.18.1-1
 - new version.
 
