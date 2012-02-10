@@ -1,0 +1,96 @@
+--- Makefile	2003-10-03 19:22:07.000000000 -0500
++++ Makefile	2012-02-10 00:53:27.000000000 -0600
+@@ -7,34 +7,51 @@
+ # EXTRA += -DUPSIDE_DOWN_DUCK
+ 
+ # where to install this program
+-PREFIX = /usr/local
++PREFIX = /usr
++DESTDIR = 
+ 
+ # no user serviceable parts below
+ EXTRA += $(WMAN)
++# gtk cflags and gtk lib flags
++GTK2_CFLAGS = $(shell pkg-config gtk+-2.0 --cflags)
++GTK2_LIBS = $(shell pkg-config gtk+-2.0 --libs)
++
++
+ # optimization cflags
+-CFLAGS = -O3 -ansi -Wall `gtk-config --cflags` ${EXTRA}
++#CFLAGS = -O3 -Wall ${EXTRA}
++CFLAGS = ${OPTFLAGS} ${EXTRA}
+ # profiling cflags
+-# CFLAGS = -ansi -Wall -pg -O3 `gtk-config --cflags` ${EXTRA} -DPRO
++# CFLAGS = -ansi -Wall -pg -O3 ${EXTRA} -DPRO
+ # test coverage cflags
+-# CFLAGS = -fprofile-arcs -ftest-coverage -Wall -ansi -g `gtk-config --cflags` ${EXTRA} -DPRO
++# CFLAGS = -fprofile-arcs -ftest-coverage -Wall -ansi -g ${EXTRA} -DPRO
+ 
+ 
+-SHELL=sh
++SHELL = sh
+ OS = $(shell uname -s)
++SRCS = bubblemon.c
+ OBJS = bubblemon.o
+-CC = gcc
++BUBBLEMON = bubblemon
++
++STRIP = strip
++
++CC ?= gcc
++INSTALLMAN = -m 644
++
++LIBS = -lX11
+ 
+ # special things for Linux
+ ifeq ($(OS), Linux)
+-    OBJS += sys_linux.o
+-    LIBS = `gtk-config --libs | sed "s/-lgtk//g"`
+-    INSTALL = -m 755
++	SRCS += sys_linux.c
++	OBJS += sys_linux.o
++	INSTALL = -s -m 755
++	INSTALLMAN = -m 644
+ endif
+ 
+ # special things for FreeBSD
+ ifeq ($(OS), FreeBSD)
++	SRCS += sys_freebsd.c
+     OBJS += sys_freebsd.o
+-    LIBS = `gtk-config --libs | sed "s/-lgtk//g"` -lkvm
++    LIBS = -lkvm
+     INSTALL = -c -g kmem -m 2755 -o root
+ endif
+ 
+@@ -62,20 +79,25 @@
+     ifeq ($(COMPILER), gcc)
+ 	CFLAGS=-O3 -Wall
+     endif
+-    CFLAGS +=`gtk-config --cflags` ${EXTRA}
++    CFLAGS += ${EXTRA}
++	SRCS += sys_sunos.c
+     OBJS += sys_sunos.o
+-    LIBS = `gtk-config --libs` -lkstat -lm
++    LIBS = -lkstat -lm
+     INSTALL = -m 755
+ endif
+ 
++all: $(BUBBLEMON)
+ 
+-all: bubblemon
++bubblemon: clean_obj
++	$(CC) $(LDFLAGS) $(GTK2_CFLAGS) $(CFLAGS) -o $(BUBBLEMON) \
++		$(SRCS) $(LIBS) $(GTK2_LIBS)
+ 
+-bubblemon: $(OBJS)
+-	$(CC) $(CFLAGS) -o bubblemon $(OBJS) $(LIBS)
++clean_obj:
++	rm -rf *.o
+ 
+ clean:
+ 	rm -f bubblemon *.o *.bb* *.gcov gmon.* *.da *~
+ 
+ install:
+-	install $(INSTALL) bubblemon $(PREFIX)/bin
++	mkdir -p $(DESTDIR)$(PREFIX)/bin
++	install $(INSTALL) bubblemon $(DESTDIR)$(PREFIX)/bin
