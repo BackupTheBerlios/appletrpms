@@ -49,9 +49,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
-%{_mandir}/man1/*
 %doc AUTHORS BUGS COPYING NEWS README sample.wmixrc
+%{_bindir}/wmix
+%{_mandir}/man1/wmix.*
 
 %changelog
 * Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 3.2-7

@@ -1,14 +1,5 @@
 --- afterstep/winlist	2007-05-14 16:13:19.000000000 -0500
 +++ afterstep/winlist	2007-11-09 11:26:47.000000000 -0600
-@@ -9,7 +9,7 @@
- *WinListDefaults
- 	Geometry        +0+0
- 	MinSize         10000    #will be truncated to thescreen size
--	MaxRows         3
-+	MaxRows         1
- 	FillRowsFirst
- 	UseSkipList
- 	
 @@ -74,6 +74,6 @@
  # By default WinList will avoid collision with Pager and Wharf
  #*WinListNoCollides "Nedit*"

@@ -1,0 +1,50 @@
+.TH WMXMMS2 1 "March 29, 2008" Debian
+.SH NAME
+wmxmms2 \- A dockable XMMS2 client.
+.SH SYNOPSIS
+.B wmxmms2
+.RB [ \-s | \-\-speed  ]
+.RB [ \-c | \-\-colour ]
+.RB [ \-u | \-\-url    ]
+.br
+.BR "wmxmms2 \-\-h" | \-\-help
+.br
+.BR "wmxmms2 \-\-v" | \-\-version
+.SH DESCRIPTION
+.B wmxmms2
+is a dockable application for use with WindowMarker or other window managers
+that support dockable applets.
+.SH OPTIONS
+This program follow the usual GNU command line syntax, with long
+options starting with two dashes (`-').
+A summary of options is included below.
+.TP
+.BR \-s , \-\-speed
+Scrollspeed for text in ms/char ( gets divided by ten :P ).
+.TP
+.BR \-c , \-\-colour
+Sets colour for text. Default is white.
+.TP
+.BR \-u , \-\-url 
+Address of server.
+.TP
+.BR \-h , \-\-help
+Show summary of options.
+.TP
+.BR \-v , \-\-version
+Show version of program.
+.SH SEE ALSO
+.BR xmms2d (8).
+.SH AUTHOR
+wmxmms2 was written by Remy Bosch.
+.PP
+This manual page was written by Robert Luberda,
+with the aid of
+.BR help2man (1),
+for the Debian project (but may be used by others).
+.SH COPYRIGHT
+Copyright \(co 2005 Remy Bosch.
+.br
+.B wmxmms2 
+is released under the terms of the GPL v2.
+

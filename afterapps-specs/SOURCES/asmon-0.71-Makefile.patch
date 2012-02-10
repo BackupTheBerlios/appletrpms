@@ -1,0 +1,35 @@
+--- asmon/Makefile	1999-06-25 20:35:13.000000000 -0500
++++ asmon/Makefile	2012-02-08 14:45:52.000000000 -0600
+@@ -4,7 +4,9 @@
+ #SOLARIS_LIBS = -lsocket -lkstat
+ #SOLARIS_OBJS = solaris26.o
+ 
+-LIBDIR = -L/usr/X11R6/lib
++DESTDIR=
++PREFIX = /usr
++LIBDIR = -L/usr/lib64 -L/usr/lib
+ LIBS   = -lXpm -lXext -lX11 $(SOLARIS_LIBS)
+ OBJS =  asmon.o $(SOLARIS_OBJS) \
+ 		../wmgeneral/wmgeneral.o \
+@@ -12,16 +14,17 @@
+ 		../wmgeneral/list.o
+ 
+ .c.o:
+-	gcc -c -Wall $(SOLARIS) $< -o $*.o
++	gcc -c -Wall $(CFLAGS) $(SOLARIS) $< -o $*.o
+ 
+ asmon: $(OBJS)
+ 	gcc -o asmon $(OBJS) $(LIBDIR) $(LIBS)
+ 
+ clean::
+ 	for i in $(OBJS) ; do \
+-		rm $$i;\
++		rm -f $$i;\
+ 	done
+-	rm asmon
++	rm -f asmon
+ 
+ install::
+-	cp -f asmon /usr/local/bin
++	mkdir -p $(DESTDIR)$(PREFIX)/bin
++	install -s -m 755 asmon $(DESTDIR)$(PREFIX)/bin

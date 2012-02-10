@@ -1,0 +1,114 @@
+--- fishmon.c	2004-05-12 18:55:59.000000000 -0500
++++ fishmon.c	2012-02-06 20:26:47.000000000 -0600
+@@ -81,6 +81,8 @@
+ static int enable_check_mail = 0;	/* no mail check for default !!!  */
+ static int new_mail = 0;		/* no new mail for default !!!    */
+ static int broken_wm = 0;		/* need broken windowmanager fix? */
++static int clock_analog = 1;            /* display analog clock           */
++static int clock_digital = 0;           /* display digital clock          */
+ 
+ /* 34 sprites:
+  * 0, 2, 4, 6, 8, 10, 12, 14 - fish left
+@@ -277,6 +279,7 @@
+     struct tm *data;
+     time_t cur_time;
+     static time_t old_time;
++    static char buffer[9];
+ 
+     int hr, min, sec;
+     static int osec = -1;
+@@ -296,6 +299,10 @@
+ 	min = data->tm_min;
+ 	sec = data->tm_sec;
+ 
++	/* build digital clock */
++	sprintf(buffer, "%02d %02d %02d", data->tm_hour,
++		data->tm_min, data->tm_sec);
++
+ 	/* hours */
+ 	if ((sec % 15) == 0) {
+ 	    psi = hr * (M_PI / 6.0);
+@@ -339,10 +346,14 @@
+     }
+ 
+     /* must redraw each frame */
+-    anti_line(28, 24, hdx, hdy, 1, 0xbf0000);
+-    anti_line(28, 24, mdx, mdy, 1, 0x00aa00);
+-    anti_line(28, 24, sdx, sdy, 1, 0xc79f2b);
+-
++    if(clock_analog) {
++      anti_line(28, 24, hdx, hdy, 1, 0xbf0000);
++      anti_line(28, 24, mdx, mdy, 1, 0x00aa00);
++      anti_line(28, 24, sdx, sdy, 1, 0xc79f2b);
++    }
++ 
++    if(clock_digital)
++      draw_string(4, 2, buffer);
+ }
+ 
+ static void weed_update(void)
+@@ -543,7 +554,8 @@
+     }
+ 
+     /* now draw the clock face */
+-    for (i = 0; i < 60; i += 5) {
++    if(clock_analog) {
++      for (i = 0; i < 60; i += 5) {
+ 	psi = i * (M_PI / 30.0);
+ 	dx = floor(sin(psi) * 25 * 0.9) + 29;
+ 	dy = floor(-cos(psi) * 22 * 0.9) + 24;
+@@ -559,6 +571,7 @@
+ 	    idx = 28;
+ 	}
+ 	draw_sprite_alpha(dx, dy, idx, 20);
++      }
+     }
+ 
+     curr_time = time(NULL);
+@@ -648,6 +661,7 @@
+ 
+     /* make a copy for the iconwin - parameters are the same */
+     memcpy(&attri, &attr, sizeof(GdkWindowAttr));
++    attri.window_type = GDK_WINDOW_CHILD;
+ 
+     sizehints.flags = USSize;
+     sizehints.width = 64;
+@@ -679,7 +693,6 @@
+     wmhints.window_group = win;
+     wmhints.flags =
+ 	StateHint | IconWindowHint | IconPositionHint | WindowGroupHint;
+-    XSetWMHints(GDK_WINDOW_XDISPLAY(bm.win), win, &wmhints);
+ 
+     bm.gc = gdk_gc_new(bm.win);
+ 
+@@ -693,6 +706,8 @@
+ 
+     gdk_window_show(bm.win);
+ 
++    XSetWMHints(GDK_WINDOW_XDISPLAY(bm.win), win, &wmhints);
++
+ #undef MASK
+ }				/* make_new_fishmon_dockapp */
+ 
+@@ -1028,6 +1043,10 @@
+ 	{ "check-mail", no_argument, &enable_check_mail, 1 },
+ 	{ "b",		no_argument, &broken_wm, 1 },
+ 	{ "broken",	no_argument, &broken_wm, 1 },
++	{ "a",          no_argument, &clock_analog, 0},
++	{ "no-analog",  no_argument, &clock_analog, 0},
++	{ "d",          no_argument, &clock_digital, 1},
++	{ "digital",    no_argument, &clock_digital, 1},
+ 	{ 0, 0, 0, 0 }
+     };
+ 
+@@ -1051,7 +1070,9 @@
+ 	   " -h\t--help\t\tshow this message and exit\n"
+ 	   " -v\t--version\tshow version and exit\n"
+ 	   " -c\t--check-mail\tenables check for new mail\n"
+-	   " -b\t--broken\tactivates broken window manager fix\n\n"
++	   " -b\t--broken\tactivates broken window manager fix\n"
++	   " -a\t--no-analog\tdisables display of analog clock\n"
++	   " -d\t--digital\tenables display of digital clock\n\n"
+ 	   "Yet Another Waste of CPU Cycles! Dock app clock with\n"
+ 	   "shy fish, bubbles and mail check functionality (disabled by default).\n"
+ 	   "Try out the man page wmfishtime (1x).\n");

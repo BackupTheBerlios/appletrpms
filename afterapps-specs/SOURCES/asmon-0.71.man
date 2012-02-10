@@ -1,0 +1,55 @@
+.TH ASMON 1 "April  6, 2000" "Debian GNU/Linux"
+.SH NAME
+asmon \- A system resource monitor dockapp for Afterstep and WindowMaker
+.SH SYNOPSIS
+.B asmon
+[\fIoptions\fP]
+.SH DESCRIPTION
+Asmon is a dockable applet for X11 that monitors system resources. It is
+designed for the WindowMaker Dock or Afterstep Wharf but should work with
+others as well. It displays CPU usage, load average, memory utilization,
+pages and swaps.
+
+The upper most section of the applet displays CPU usage on the left, while
+numerically representing load average on the right.
+
+The middle bar shows memory utilization divided by ticks into shared,
+buffers, and cached respectively, with the number of megabytes used
+represented numerically to the right. 
+
+The lower bar displays information about swap, graphically on the left,
+numerically on the right.
+
+At bottom left are four LEDs, top to bottom, left to right they are: pages
+in, pages out, swap in and swap out. The remainder of the bottom row is
+dedicated to a graphical bar representing the amount of memory that the X
+server is using with the numerical representation to the right, 
+(optionally this section can be used to display uptime).
+.SH OPTIONS
+.TP 8
+.B \-display \fI<display>\fB
+Specify an alternate X display; see \fIX(1)\fP.
+.TP 8
+.B -e \fI<command>\fB
+Execute <command> on mouseclick.
+.TP 8
+.B -u
+Display uptime rather then X memory usage.
+.TP 8
+.B \-v
+Show version information and exit.
+.TP 8
+.B \-h
+Show summary of options.
+.SH "SEE ALSO"
+The WindowMaker or Afterstep documentation and user guides for information
+about applets and docking.
+.SH AUTHOR
+This manual page was written by Paul van Tilburg <paulvt@debian.org>, and
+later updated by Eric Evans <eevans@sym-link.com>, for the Debian GNU/Linux
+system. Permission is granted to copy, distribute and/or modify this
+document under the terms of the GNU General Public License, Version 2 or
+any later version published by the Free Software Foundation.
+
+On Debian systems, the complete text of the GNU General Public License
+can be found in /usr/share/common-licenses/GPL.

@@ -23,28 +23,47 @@
 %endif
 ### END Distro Definitions
 
-%define name wmfire
-%define version 1.2.4
-%define release 1%{?dist}
+%define		name wmfire
+%define		version 1.2.4
+%define		release 2%{?dist}
 
-Summary: wmfire is a configurable cpu, mem, or network monitor
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: http://www.swanson.ukfsn.org/wmfire/
-Source0: http://www.swanson.ukfsn.org/wmfire/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:	configurable cpu, mem, or network monitor dockapp
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		AfterStep/Applets
+URL:		http://www.swanson.ukfsn.org/wmfire/
+Source0:	http://www.swanson.ukfsn.org/wmfire/%{name}-%{version}.tar.gz
+Patch0:		%{name}-%{version}-gtk2.18.patch
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	cairo
+Requires:	fontconfig
+Requires:	freetype
+Requires:	gdk-pixbuf2
+Requires:	glib2
+Requires:	glibc
+Requires:	gtk2
+Requires:	libX11
+Requires:	libXext
+BuildRequires:	cairo-devel
+BuildRequires:	fontconfig-devel
+BuildRequires:	freetype-devel
+BuildRequires:	gdk-pixbuf2-devel
+BuildRequires:	glib2-devel
+BuildRequires:	glibc-devel
+BuildRequires:	gtk2-devel
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
 
 %if %{fedora}
-Requires: libgtop2
-BuildRequires: libgtop2-devel
+Requires:	libgtop2
+BuildRequires:	libgtop2-devel
 %endif
 
 %if %{mdk}
-Requires: libgtop2.0
-BuildRequires: libgtop2.0-devel
+Requires:	libgtop2.0
+BuildRequires:	libgtop2.0-devel
 %endif
 
 %description
@@ -61,6 +80,7 @@ onscreen. The flame color can also be changed.
 
 %prep
 %setup -q
+%patch0
 
 %build
 ./configure --prefix=%{_prefix}
@@ -76,12 +96,15 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
-%{_mandir}/man1/wmfire*
-%doc AUTHORS COPYING ChangeLog INSTALL NEWS README ALL_I_GET_IS_A_GREY_BOX
+%doc AUTHORS COPYING ChangeLog NEWS README ALL_I_GET_IS_A_GREY_BOX
+%{_bindir}/wmfire
+%{_mandir}/man1/wmfire.*
 
 
 %changelog
+* Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> 1.2.4-2
+- added gtk2 patch from gentoo, updated SPEC file.
+
 * Sun Mar 21 2010 J. Krebs <rpm_speedy@yahoo.com> 1.2.4-1
 - new version.
 

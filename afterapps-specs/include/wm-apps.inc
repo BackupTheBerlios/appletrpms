@@ -140,12 +140,13 @@ WMCALENDAR_URL=http://prdownloads.sourceforge.net/$(WMCALENDAR_NAME)/$(WMCALENDA
 
 APPLET_LIST += WMCALENDAR
 
-WMCHARGEMON_NAME=wmchargemon
-WMCHARGEMON_VERSION=0.3
-WMCHARGEMON_TAR=$(WMCHARGEMON_NAME)-$(WMCHARGEMON_VERSION).tar.gz
-WMCHARGEMON_URL=http://dockapps.windowmaker.org/download.php/id/715/$(WMCHARGEMON_TAR)
+# Changes in Kernels kernel 2.6.36 and later
+#WMCHARGEMON_NAME=wmchargemon
+#WMCHARGEMON_VERSION=0.3
+#WMCHARGEMON_TAR=$(WMCHARGEMON_NAME)-$(WMCHARGEMON_VERSION).tar.gz
+#WMCHARGEMON_URL=http://dockapps.windowmaker.org/download.php/id/715/$(WMCHARGEMON_TAR)
 
-APPLET_LIST += WMCHARGEMON
+#APPLET_LIST += WMCHARGEMON
 
 WMCLOCKMON_NAME=wmclockmon
 WMCLOCKMON_VERSION=0.8.1
@@ -232,12 +233,13 @@ APPLET_LIST += WMINFO
 
 #APPLET_LIST += WMIX
 
-WMLAPTOP_NAME=wmlaptop
-WMLAPTOP_VERSION=1.4
-WMLAPTOP_TAR=$(WMLAPTOP_NAME)-$(WMLAPTOP_VERSION).tar.gz
-WMLAPTOP_URL=http://dockapps.windowmaker.org/download.php/id/509/$(WMLAPTOP_TAR)
+# Changes in Kernels kernel 2.6.36 and later
+#WMLAPTOP_NAME=wmlaptop
+#WMLAPTOP_VERSION=1.4
+#WMLAPTOP_TAR=$(WMLAPTOP_NAME)-$(WMLAPTOP_VERSION).tar.gz
+#WMLAPTOP_URL=http://dockapps.windowmaker.org/download.php/id/509/$(WMLAPTOP_TAR)
 
-APPLET_LIST += WMLAPTOP
+#APPLET_LIST += WMLAPTOP
 
 WMMEMLOAD_NAME=wmmemload
 WMMEMLOAD_VERSION=0.1.6
@@ -267,12 +269,27 @@ WMND_URL=http://www.thregr.org/~wavexx/software/wmnd/releases/$(WMND_TAR)
 
 APPLET_LIST += WMND
 
+# Included in Fedora 15 Repository
+#WMNET_NAME=wmnet
+#WMNET_VERSION=1.06
+#WMNET_TAR=$(WMNET_NAME)-$(WMNET_VERSION).tar.gz
+#WMNET_URL=http://dockapps.windowmaker.org/download.php/id/115/$(WMNET_TAR)
+
+#APPLET_LIST += WMNET
+
 WMNETHRU_NAME=wmnethru
 WMNETHRU_VERSION=0.1.1
 WMNETHRU_TAR=$(WMNETHRU_NAME)-$(WMNETHRU_VERSION).tar.gz
 WMNETHRU_URL=http://dockapps.windowmaker.org/download.php/id/693/$(WMNETHRU_TAR)
 
 APPLET_LIST += WMNETHRU
+
+WMNETLOAD_NAME=wmnetload
+WMNETLOAD_VERSION=1.3
+WMNETLOAD_TAR=$(WMNETLOAD_NAME)-$(WMNETLOAD_VERSION).tar.bz2
+WMNETLOAD_URL=http://dockapps.windowmaker.org/download.php/id/353/$(WMNETLOAD_TAR)
+
+APPLET_LIST += WMNETLOAD
 
 WMPOP3LB_NAME=wmpop3lb
 WMPOP3LB_VERSION=2.4.2
@@ -409,3 +426,10 @@ WMXKB_TAR=$(WMXKB_NAME)-$(WMXKB_VERSION).tar.gz
 WMXKB_URL=http://dockapps.windowmaker.org/download.php/id/487/$(WMXKB_TAR)
 
 APPLET_LIST += WMXKB
+
+WMXMMS2_NAME=wmxmms2
+WMXMMS2_VERSION=0.6
+WMXMMS2_TAR=$(WMXMMS2_NAME)-$(WMXMMS2_VERSION).tar.bz2
+WMXMMS2_URL=http://reboli.nl/programs/$(WMXMMS2_TAR)
+
+APPLET_LIST += WMXMMS2

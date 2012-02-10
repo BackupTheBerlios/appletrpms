@@ -1,0 +1,41 @@
+--- Makefile	2001-05-26 15:49:41.000000000 -0500
++++ Makefile	2012-02-06 20:13:45.000000000 -0600
+@@ -1,12 +1,13 @@
+-# For Debian packaging
++# For packaging
+ DESTDIR =
++MANDIR = /usr/share/man
+ 
+ # where to install this program
+-PREFIX = $(DESTDIR)/usr/X11R6
++PREFIX = /usr
+ 
+ # no user serviceable parts below this line
+ # optimization cflags
+-CFLAGS = -O3 -Wall `gtk-config --cflags` ${EXTRA}
++CFLAGS = -O2 -Wall `pkg-config gtk+-2.0 --cflags` ${EXTRA}
+ # profiling cflags
+ # CFLAGS=-ansi -pedantic -Wall -pg -O3 `gtk-config --cflags` ${EXTRA} -DPRO
+ # test coverage cflags
+@@ -16,8 +17,7 @@
+ CC = gcc
+ SHELL = sh
+ OBJS = fishmon.o
+-LIBS = `gtk-config --libs | sed "s/-lgtk//g"`
+-INSTALL = -m 755
++LIBS = `pkg-config gtk+-2.0 --libs` -lX11 -lm
+ 
+ all: wmfishtime
+ 
+@@ -27,7 +27,8 @@
+ clean:
+ 	rm -rf wmfishtime *.o *.bb* *.gcov gmon.* *.da *~ .xvpics
+ 
+-# You're going to have to be root to do this!
+ install:
+-	install $(INSTALL) wmfishtime $(PREFIX)/bin
+-	install $(INSTALL) wmfishtime.1 $(PREFIX)/man/man1
++	mkdir -p $(DESTDIR)/$(PREFIX)/bin
++	mkdir -p $(DESTDIR)/$(MANDIR)/man1
++	install -s -m 755 wmfishtime $(DESTDIR)/$(PREFIX)/bin
++	install -m 644 wmfishtime.1 $(DESTDIR)/$(MANDIR)/man1

@@ -13,14 +13,14 @@ Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.ta
 Patch0:		%{name}-%{version}-version.patch
 Patch1:		%{name}-%{version}-Makefile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	glibc
 Requires:	libX11
 Requires:	libXext
 Requires:	libXpm
-Requires:	glibc
+BuildRequires:	glibc-devel
 BuildRequires:	libX11-devel
 BuildRequires:	libXext-devel
 BuildRequires:	libXpm-devel
-BuildRequires:	glibc-devel
 
 %description
 wmtz is a Window Maker dock app derived from the WMiNET
@@ -62,7 +62,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc BUGS CHANGES COPYING README wmtz/wmtzrc%{_bindir}/wmtz
+%doc BUGS CHANGES COPYING README wmtz/wmtzrc
+%{_bindir}/wmtz
 %{_mandir}/man1/wmtz.1*
 %{_sysconfdir}/wmtzrc
 

@@ -69,6 +69,7 @@ Source9:	%{name}-2.2.7-wharf.alternate
 Patch0:		%{name}-2.2.5-ImageMagick.patch
 Patch1:		%{name}-2.2.7-winlist.patch
 Patch2:		%{name}-2.2.7-pager.patch
+Patch3:		%{name}-%{asver}-cvsupdate.patch
 Distribution:	The AfterStep TEAM
 BuildRoot:	%{_tmppath}/%{name}-%{asver}-%{release}-root-%(%{__id_u} -n)
 %if %{mdk}
@@ -225,6 +226,7 @@ Files needed for software development with libAfterBase.
 %patch0
 %patch1
 %patch2
+%patch3
 
 %build
 CFLAGS=$RPM_OPT_FLAGS \

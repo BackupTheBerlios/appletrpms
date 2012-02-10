@@ -1,0 +1,51 @@
+--- wmfishtime.1	2001-05-26 15:48:25.000000000 -0500
++++ wmfishtime.1	2012-02-06 20:29:30.000000000 -0600
+@@ -2,7 +2,7 @@
+ .\" First parameter, NAME, should be all caps
+ .\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+ .\" other parameters are allowed: see man(7), man(1)
+-.TH WMFISHTIME SECTION "April 19, 2001"
++.TH WMFISHTIME 1 "April 19, 2001"
+ .\" Please adjust this date whenever revising the manpage.
+ .\"
+ .\" Some roff macros, for reference:
+@@ -16,7 +16,8 @@
+ .\" .sp <n>    insert n+1 empty lines
+ .\" for manpage-specific macros, see man(7)
+ .SH NAME
+-wmfishtime \- dockable clock app for WMaker, BlackBox, E, SawFish etc. window manager
++wmfishtime \- dockable clock app for WMaker, BlackBox, E, SawFish etc.
++window manager
+ .SH SYNOPSIS
+ .B wmfishtime
+ .\" .RI [ options ] " none" ...
+@@ -33,8 +34,8 @@
+ .\" TeX users may be more comfortable with the \fB<whatever>\fP and
+ .\" \fI<whatever>\fP escape sequences to invode bold face and italics, 
+ .\" respectively.
+-\fBwmfishtime\fP is a dockable clock application for WMaker, BlackBox, E, SawFish etc.
+-window manager.
++\fBwmfishtime\fP is a dockable clock application for WMaker, BlackBox,
++E, SawFish etc. window manager.
+ 
+ The features include gradient backdrop, anti-aliased hour|minute|second hands,
+ alpha-blended bubbles, a real-time sprite engine, precision accuracy
+@@ -68,8 +69,6 @@
+ .SH SEE ALSO
+ http://www.ne.jp/asahi/linux/timecop/
+ 
+-http://www.ne.jp/asahi/linux/timecop/software/wmfishtime-1.23.tar.gz (original source)
+-
+ http://freshmeat.net/projects/wmfishtime/
+ 
+ .BR wmaker (1)
+@@ -79,7 +78,8 @@
+ 
+ wmfishmon was written by timecop <timecop@japan.co.jp> with contribution from
+ martijn pieterse <pieterse@xs4all.nl>,  antoine nulle <warp@xs4all.nl>,
+-Marcel May <marcel.may@web.de>, tarzeau <tarzeau@space.ch> and Jason Thomas <jason@debian.org>
++Marcel May <marcel.may@web.de>, tarzeau <tarzeau@space.ch> and
++Jason Thomas <jason@debian.org>
+ 
+ 
+ This manual page was written by Marcel May <marcel.may@web.de>,

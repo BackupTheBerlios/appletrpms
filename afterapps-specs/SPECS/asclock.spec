@@ -12,9 +12,17 @@ URL:		http://tigr.net/afterstep/view.php?applet=asclock/data
 Source0:	http://tigr.net/afterstep/download/%{name}/%{name}-%{version}.tar.gz
 Source1:	%{name}-%{version}.config
 Patch0:		%{name}-%{version}.xpm.path.patch
+Patch1:		%{name}-%{version}-gcc41.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires:	libXext libX11 libXpm
-BuildRequires:	imake libXext-devel libXpm-devel libX11-devel
+Requires:	glibc
+Requires:	libX11
+Requires:	libXext
+Requires:	libXpm
+BuildRequires:	imake
+BuildRequires:	glibc-devel
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXpm-devel
 
 %description
 AfterStep clock applet
@@ -22,6 +30,7 @@ AfterStep clock applet
 %prep
 %setup -q
 %patch0
+%patch1
 
 %build
 mv configure configure.old

@@ -1,12 +1,13 @@
 # -*- makefile -*-
 
+# APM and SMP don't play nicely
 # AfterStep apm applet
-ASAPM_NAME=asapm
-ASAPM_VERSION=3.1
-ASAPM_TAR=$(ASAPM_NAME)-$(ASAPM_VERSION).tar.gz
-ASAPM_URL=http://tigr.net/afterstep/download/asapm/$(ASAPM_TAR)
+#ASAPM_NAME=asapm
+#ASAPM_VERSION=3.1
+#ASAPM_TAR=$(ASAPM_NAME)-$(ASAPM_VERSION).tar.gz
+#ASAPM_URL=http://tigr.net/afterstep/download/asapm/$(ASAPM_TAR)
 
-APPLET_LIST += ASAPM
+#APPLET_LIST += ASAPM
 
 #This version of ascd includes the source to libworkman
 ASCD_NAME=ascd
@@ -58,19 +59,21 @@ ASMEM_URL=http://tigr.net/afterstep/download/$(ASMEM_NAME)/$(ASMEM_TAR)
 
 APPLET_LIST += ASMEM
 
-ASMIX_NAME=asmix
-ASMIX_VERSION=1.5
-ASMIX_TAR=$(ASMIX_NAME)-$(ASMIX_VERSION).tar.gz
-ASMIX_URL=http://tigr.net/afterstep/download/$(ASMIX_NAME)/$(ASMIX_TAR)
+#OSS and pulse don't seem to work together
+#ASMIX_NAME=asmix
+#ASMIX_VERSION=1.5
+#ASMIX_TAR=$(ASMIX_NAME)-$(ASMIX_VERSION).tar.gz
+#ASMIX_URL=http://tigr.net/afterstep/download/$(ASMIX_NAME)/$(ASMIX_TAR)
 
-APPLET_LIST += ASMIX
+#APPLET_LIST += ASMIX
 
-ASMIXER_NAME=asmixer
-ASMIXER_VERSION=0.5
-ASMIXER_TAR=$(ASMIXER_NAME)-$(ASMIXER_VERSION).tar.gz
-ASMIXER_URL=http://tigr.net/afterstep/download/$(ASMIXER_NAME)/$(ASMIXER_TAR)
+#OSS and pulse don't seem to work together
+#ASMIXER_NAME=asmixer
+#ASMIXER_VERSION=0.5
+#ASMIXER_TAR=$(ASMIXER_NAME)-$(ASMIXER_VERSION).tar.gz
+#ASMIXER_URL=http://tigr.net/afterstep/download/$(ASMIXER_NAME)/$(ASMIXER_TAR)
 
-APPLET_LIST += ASMIXER
+#APPLET_LIST += ASMIXER
 
 ASMODEM_NAME=asmodem
 
@@ -80,12 +83,12 @@ ASMODEM_URL=http://tigr.net/afterstep/download/$(ASMODEM_NAME)/$(ASMODEM_TAR)
 
 APPLET_LIST += ASMODEM
 
-# there is a "newer" version at http://rio.vg/asmon/, but I think that is hijacked
-# >= 0.63 works fine with 2.6 kernel
+# the "newer" version at http://rio.vg/asmon/, appears to be by one of the original
+# author(s). We'll use that rather than the one from tigr.net.
 ASMON_NAME=asmon
-ASMON_VERSION=0.65
-ASMON_TAR=$(ASMON_NAME)-$(ASMON_VERSION).tar.gz
-ASMON_URL=http://tigr.net/afterstep/download/$(ASMON_NAME)/$(ASMON_TAR)
+ASMON_VERSION=0.71
+ASMON_TAR=$(ASMON_NAME)-$(ASMON_VERSION).tar.bz2
+ASMON_URL=http://rio.vg/$(ASMON_NAME)/$(ASMON_TAR)
 
 APPLET_LIST += ASMON
 
@@ -116,5 +119,4 @@ ASWVDIAL_TAR=$(ASWVDIAL_NAME)-$(ASWVDIAL_VERSION).tar.bz2
 ASWVDIAL_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(ASWVDIAL_TAR)
 
 APPLET_LIST += ASWVDIAL
-
 

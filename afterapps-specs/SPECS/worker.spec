@@ -2,7 +2,7 @@
 %define avfver	%avftest 
 %define		name worker
 %define		version 2.19.0
-%define		release 1%{?dist}
+%define		release 2%{?dist}
 
 Summary:	A file manager for the X Window System
 Name:		%name
@@ -46,8 +46,8 @@ The directories and files are shown in two independent panels
 	--enable-xft \
 	--with-avfs \
 	--with-libmagic \
-	--without-hal
-
+	--without-hal \
+	--without-dbus
 make
 
 %install
@@ -122,6 +122,9 @@ fi
 %{_datadir}/applications/worker.desktop
 
 %changelog
+* Tue Jan 31 2012 J. Krebs <rpm_speedy@yahoo.com> 2.19.0-2
+- dbus has a memory leak, disabled with --without-dbus.
+
 * Tue Jan 31 2012 J. Krebs <rpm_speedy@yahoo.com> 2.19.0-1
 - new version.
 
