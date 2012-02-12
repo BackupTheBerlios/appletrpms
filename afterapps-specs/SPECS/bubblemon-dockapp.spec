@@ -23,28 +23,50 @@
 %endif
 ### END Distro Definitions
 
-%define name bubblemon-dockapp
-%define version 1.46
-%define release 6%{?dist}
+%define		name bubblemon-dockapp
+%define		version 1.46
+%define		release 7%{?dist}
 
-Summary: system monitoring dockapp based-on GNOME BubbleMon
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: http://www.ne.jp/asahi/linux/timecop/
-Source0: http://www.ne.jp/asahi/linux/timecop/software/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:	system monitoring dockapp based-on GNOME BubbleMon
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		AfterStep/Applets
+URL:		http://www.ne.jp/asahi/linux/timecop/
+Source0:	http://www.ne.jp/asahi/linux/timecop/software/%{name}-%{version}.tar.gz
+Patch0:		%{name}-%{version}-Makefile.patch
+Patch1:		%{name}-%{version}-bubblemon.c.patch
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	atk
+Requires:	cairo
+Requires:	fontconfig
+Requires:	freetype
+Requires:	glib2
+Requires:	glibc
+Requires:	libpng
+Requires:	libX11
+Requires:	pango
+BuildRequires:	atk-devel
+BuildRequires:	cairo-devel
+BuildRequires:	fontconfig-devel
+BuildRequires:	freetype-devel
+BuildRequires:	glib2-devel
+BuildRequires:	glibc-devel
+BuildRequires:	libpng-devel
+BuildRequires:	libX11-devel
+BuildRequires:	pango-devel
+
 %if %{mdk}
-Requires: libgtk+1.2
-Buildrequires: libgtk+1.2-devel
+Requires:	libgdk_pixbuf2.0_0
+Buildrequires:	libgdk_pixbuf2.0_0-devel
 %endif
+
 %if %{fedora}
-Requires: gtk+
-Requires: gdk-pixbuf
-BuildRequires: gtk+-devel
-BuildRequires: gdk-pixbuf-devel
+Requires:	gdk-pixbuf2
+Requires:	gtk2
+BuildRequires:	gdk-pixbuf2-devel
+BuildRequires:	gtk2-devel
 %endif
 
 %description
@@ -66,25 +88,29 @@ command-line, if you prefer original "BubbleMon" look.
 
 %prep
 %setup -q
+%patch0
+%patch1
 
 %build
-#./configure --prefix=%{_prefix}
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
-install -s -m 755 bubblemon $RPM_BUILD_ROOT%{_bindir}
+
+make install DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
+%doc ChangeLog README SUPPORTED_SYSTEMS doc/COPYING doc/Xdefaults.sample
 %{_bindir}/*
-%doc ChangeLog INSTALL README SUPPORTED_SYSTEMS doc/COPYING doc/Xdefaults.sample
 
 %changelog
+* Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.46-7
+- updated .spec file, added gentoo patches gor gtk2.
+
 * Fri Jun 15 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.46-6
 - added require for gtk+-devel, gtk+.
 

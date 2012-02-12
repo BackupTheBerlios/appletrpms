@@ -34,11 +34,15 @@ Release:	%release
 License:	GPLv2+
 Group:		AfterStep/Applets
 Source0:	http://dockapps.windowmaker.org/download.php/id/693/%{name}-%{version}.tar.gz
+Patch0:		%{name}-%{version}-version.patch
+Patch1:		%{name}-%{version}-Makefile.patch
 URL:		http://dockapps.windowmaker.org/file.php/id/315
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	glibc
 Requires:	libX11
 Requires:	libXext
 Requires:	libXpm
+BuildRequires:	glibc-devel
 BuildRequires:	libX11-devel
 BuildRequires:	libXext-devel
 BuildRequires:	libXpm-devel
@@ -54,7 +58,7 @@ BuildRequires:	libdockapp-devel
 %endif
 
 %description
-Network Throughput and System Utilization Monitor.
+NEtwork THRoughput and system Utilization monitor.
 Four lines are periodically updated. The first line is
 the time since the last check point. The second, third
 and fourth lines are the average CPU utilization, the
@@ -70,19 +74,16 @@ mouse button.
 
 %prep
 %setup -q -n %{name}
+%patch0
+%patch1
 
 %build
-
-make DESTDIR=%{_bindir}                     \
-	LIBDIR=-L%{_libdir}                 \
-	INCDIR=-I%{_includedir}/X11
+make PREFIX=%{_prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
-
-install -s -m 755 wmnethru $RPM_BUILD_ROOT%{_bindir}/
+make install DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT

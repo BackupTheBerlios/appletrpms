@@ -1,5 +1,5 @@
 %define name	mined
-%define version	2011.19
+%define version	2012.20
 %define release	1%{?dist}
 
 Summary:	a powerful text editor with extensive Unicode and CJK support
@@ -50,13 +50,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mined/bin/wined
 %{_datadir}/mined/bin/wined.bat
 %{_datadir}/mined/bin/xmined
-%{_datadir}/mined/conf_user/Xdefaults.mined
 %{_datadir}/mined/conf_user/konsole/xterm-modified.keytab
 %{_datadir}/mined/conf_user/kp5
+%{_datadir}/mined/conf_user/MINED-VMS.COM
 %{_datadir}/mined/conf_user/mlterm/key
 %{_datadir}/mined/conf_user/mlterm/main
 %{_datadir}/mined/conf_user/profile.mined
 %{_datadir}/mined/conf_user/terminator/options
+%{_datadir}/mined/conf_user/Xdefaults.mined
 %{_datadir}/mined/conf_user/xinitrc.mined
 %{_datadir}/mined/doc_user/cancel.html
 %{_datadir}/mined/doc_user/changes.html
@@ -79,11 +80,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mined/doc_user/index.html
 %{_datadir}/mined/doc_user/keyboard.html
 %{_datadir}/mined/doc_user/logo.gif
-%{_datadir}/mined/doc_user/m.ico
 %{_datadir}/mined/doc_user/menu.png
+%{_datadir}/mined/doc_user/minedfav.ico
+%{_datadir}/mined/doc_user/mined.html
 %{_datadir}/mined/doc_user/mined-html.png
 %{_datadir}/mined/doc_user/mined-mintty.png
 %{_datadir}/mined/doc_user/mined-pw.png
+%{_datadir}/mined/doc_user/minedscr.ico
 %{_datadir}/mined/doc_user/mined-sep.png
 %{_datadir}/mined/doc_user/mined-small-10x20.png
 %{_datadir}/mined/doc_user/mined-small-haninfo.png
@@ -93,12 +96,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mined/doc_user/mined-small-sep.png
 %{_datadir}/mined/doc_user/mined-small-uni.png
 %{_datadir}/mined/doc_user/mined-uni.png
-%{_datadir}/mined/doc_user/mined.html
-%{_datadir}/mined/doc_user/minedfav.ico
 %{_datadir}/mined/doc_user/mnemodoc.html
 %{_datadir}/mined/doc_user/navigate.html
-%{_datadir}/mined/doc_user/new-rot.gif
 %{_datadir}/mined/doc_user/new.gif
+%{_datadir}/mined/doc_user/new-rot.gif
 %{_datadir}/mined/doc_user/overview.html
 %{_datadir}/mined/doc_user/paypal_donate.gif
 %{_datadir}/mined/doc_user/paypal_logo.gif
@@ -116,9 +117,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mined/doc_user/script-thai.gif
 %{_datadir}/mined/doc_user/separated.png
 %{_datadir}/mined/doc_user/soft82_award_130x130.gif
+%{_datadir}/mined/doc_user/softpedia_free_award_f.gif
 %{_datadir}/mined/doc_user/term-big5-cxterm.png
 %{_datadir}/mined/doc_user/term-cygwin.png
 %{_datadir}/mined/doc_user/term-dos.png
+%{_datadir}/mined/doc_user/terminal.png
 %{_datadir}/mined/doc_user/term-mintty.png
 %{_datadir}/mined/doc_user/thankyou.html
 %{_datadir}/mined/doc_user/unicode.html
@@ -141,14 +144,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mined/setup_install/mined.ico
 %{_datadir}/mined/setup_install/mined.png
 %{_datadir}/mined/setup_install/mined.xpm
-%{_datadir}/mined/setup_install/win/MinEd*Web*Manual.url
-%{_datadir}/mined/setup_install/win/MinEd-AD.lnk
-%{_datadir}/mined/setup_install/win/MinEd-PF.lnk
-%{_datadir}/mined/setup_install/win/Uninst-AD.lnk
-%{_datadir}/mined/setup_install/win/Uninst-PF.lnk
 %{_datadir}/mined/setup_install/win/deleteall.bat
 %{_datadir}/mined/setup_install/win/install.sh
+%{_datadir}/mined/setup_install/win/MinEd-AD.lnk
+%{_datadir}/mined/setup_install/win/MinEd-PF.lnk
+%{_datadir}/mined/setup_install/win/MinEd*Web*Manual.url
+%{_datadir}/mined/setup_install/win/Uninst-AD.lnk
 %{_datadir}/mined/setup_install/win/uninstall.sh
+%{_datadir}/mined/setup_install/win/Uninst-PF.lnk
 %{_datadir}/pixmaps/mined.xpm
 %{_mandir}/man1/mined.1.*
 %{_mandir}/man1/minmacs.1.*
@@ -161,7 +164,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGES DESCR LICENCE.GPL PACKAGE.DOC README.creole VERSION
 
 %changelog
-* Wed Nov 16 2011 J. Krebs <rpm_speedy@yahoo.com> - 2011.19-1
+* Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 2012.20-1
 - new version.
 
 * Fri Jul 16 2011 J. Krebs <rpm_speedy@yahoo.com> - 2011.17-1

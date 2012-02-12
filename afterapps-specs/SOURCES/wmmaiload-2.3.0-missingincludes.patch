@@ -1,0 +1,31 @@
+--- wmmaiload-config/actions.c	2005-07-13 14:54:46.000000000 -0500
++++ wmmaiload-config/actions.c	2012-02-11 17:35:19.000000000 -0600
+@@ -3,6 +3,7 @@
+  */
+ 
+ #include <stdlib.h>
++#include <string.h>
+ #include "defines.h"
+ #include "variables.h"
+ #include "dialogs.h"
+--- wmmaiload/dockapp.c	2005-07-12 14:39:47.000000000 -0500
++++ wmmaiload/dockapp.c	2012-02-11 18:34:45.000000000 -0600
+@@ -27,6 +27,7 @@
+ #include <sys/time.h>
+ #include <sys/types.h>
+ #include <unistd.h>
++#include <stdlib.h>
+ 
+ #define WINDOWED_SIZE_W 64
+ #define WINDOWED_SIZE_H 64
+--- wmmaiload-config/main.c	2005-07-13 14:51:28.000000000 -0500
++++ wmmaiload-config/main.c	2012-02-11 17:53:06.000000000 -0600
+@@ -4,6 +4,8 @@
+ 
+ #include <stdio.h>
+ #include <gtk/gtk.h>
++#include <string.h>
++#include <stdlib.h>
+ #include "config.h"
+ #include "defines.h"
+ #include "variables.h"

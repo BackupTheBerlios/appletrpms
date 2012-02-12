@@ -77,12 +77,12 @@ EINA_URL=http://launchpad.net/eina/trunk/$(EINA_VERSION)/+download/$(EINA_TAR)
 APPLET_LIST += EINA
 
 # Included in Fedora 15 Repository
-#FOTOXX_NAME=fotoxx
-#FOTOXX_VERSION=12.01.2
-#FOTOXX_TAR=$(FOTOXX_NAME)-$(FOTOXX_VERSION).tar.gz
-#FOTOXX_URL=http://kornelix.squarespace.com/storage/downloads/$(FOTOXX_TAR)
+FOTOXX_NAME=fotoxx
+FOTOXX_VERSION=12.02
+FOTOXX_TAR=$(FOTOXX_NAME)-$(FOTOXX_VERSION).tar.gz
+FOTOXX_URL=http://kornelix.squarespace.com/storage/downloads/$(FOTOXX_TAR)
 
-#APPLET_LIST += FOTOXX
+APPLET_LIST += FOTOXX
 
 JPEGINFO_NAME=jpeginfo
 JPEGINFO_VERSION=1.6.1
@@ -124,12 +124,12 @@ MEDIT_URL=http://sourceforge.net/projects/mooedit/files/$(MEDIT_NAME)/$(MEDIT_VE
 APPLET_LIST += MEDIT
 
 # Included in Fedora 15 Repository
-#MINED_NAME=mined
-#MINED_VERSION=2011.19
-#MINED_TAR=$(MINED_NAME)-$(MINED_VERSION).tar.gz
-#MINED_URL=http://towo.net/mined/download/$(MINED_TAR)
+MINED_NAME=mined
+MINED_VERSION=2012.20
+MINED_TAR=$(MINED_NAME)-$(MINED_VERSION).tar.gz
+MINED_URL=http://towo.net/mined/download/$(MINED_TAR)
 
-#APPLET_LIST += MINED
+APPLET_LIST += MINED
 
 MPCK_NAME=mpck
 MPCK_VERSION=0.19

@@ -18,6 +18,7 @@ Requires:	libgpg-error
 Requires:	libX11
 Requires:	libXext
 Requires:	libXpm
+Requires:	ruby
 Requires:	zlib  
 BuildRequires:	glibc-devel
 BuildRequires:	gnutls-devel

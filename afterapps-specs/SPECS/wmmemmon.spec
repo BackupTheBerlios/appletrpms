@@ -12,6 +12,14 @@ URL:		http://dockapps.windowmaker.org/file.php/id/37
 Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
 Patch0:		wmmemmon-1.0.2-main.c.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	glibc
+Requires:	libX11
+Requires:	libXext
+Requires:	libXpm
+BuildRequires:	glibc-devel
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXpm-devel
 
 %description
 WMMemMon is a program to monitor memory/swap usages. It is a dockapp that is
@@ -32,8 +40,7 @@ you by turning back-light on.
 make
 
 %install
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/wmmemmon/icons/
-install -m 644 icons/* $RPM_BUILD_ROOT%{_datadir}/wmmemmon/icons/
+rm -rf $RPM_BUILD_ROOT
 
 make install DESTDIR=$RPM_BUILD_ROOT
 
@@ -42,12 +49,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
-%{_mandir}/man1/*
-%dir %{_datadir}/wmmemmon/icons
-%{_datadir}/wmmemmon/icons/*
-%doc AUTHORS COPYING ChangeLog INSTALL NEWS README THANKS TODO
-
+%doc AUTHORS COPYING ChangeLog NEWS README THANKS TODO
+%{_bindir}/wmmemmon
+%{_mandir}/man1/wmmemmon.*
 
 %changelog
 * Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.0.2pre2-8

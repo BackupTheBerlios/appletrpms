@@ -1,5 +1,5 @@
 %define		name fotoxx
-%define		version 12.01.2
+%define		version 12.02
 %define		release 1%{?dist}
 
 Summary:	application for processing image files from a digital camera
@@ -120,7 +120,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/doc/%{name}/changelog
 %{_datadir}/doc/%{name}/copyright
 %{_datadir}/doc/%{name}/edit*
-%{_datadir}/doc/%{name}/freecode
 %{_datadir}/doc/%{name}/images/*.jpeg
 %{_datadir}/doc/%{name}/images/*.jpg
 %{_datadir}/doc/%{name}/images/*.png
@@ -134,7 +133,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/%{name}.*
 
 %changelog
-* Tue Jan 03 2012 J. Krebs <rpm_speedy@yahoo.com> - 12.01.2-1
+* Tue Jan 03 2012 J. Krebs <rpm_speedy@yahoo.com> - 12.02-1
 - new version.
 
 * Sat Oct 01 2011 J. Krebs <rpm_speedy@yahoo.com> - 10.10-1

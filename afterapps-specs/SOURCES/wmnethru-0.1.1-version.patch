@@ -1,0 +1,11 @@
+--- wmnethru.c	2006-09-06 09:54:54.000000000 -0500
++++ wmnethru.c	2012-02-10 21:39:45.000000000 -0600
+@@ -24,7 +24,7 @@
+     "    Left button:  Refresh the data immediately.\n"
+     "    Right button: Reset all data to zero.\n";
+ 
+-char *version = "wmnethru version 0.1";
++char *version = "wmnethru version 0.1.1";
+ char *device = "eth0";
+ 
+ #define WMDA_SIZE 56

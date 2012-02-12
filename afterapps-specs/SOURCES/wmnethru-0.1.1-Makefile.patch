@@ -1,0 +1,26 @@
+--- Makefile	2006-08-21 19:19:44.000000000 -0500
++++ Makefile	2012-02-10 21:39:15.000000000 -0600
+@@ -1,8 +1,10 @@
+ CC     = gcc
+ CFLAGS = -O2 -Wall -g
+-INCDIR = -I/usr/X11R6/include/X11
+-DESTDIR= /usr/local/bin
+-LIBDIR = -L/usr/X11R6/lib
++INCDIR = -I/usr/include/
++DESTDIR=
++PREFIX = /usr
++BINDIR = $(PREFIX)/bin
++LIBDIR = -L/usr/lib -L/usr/lib64
+ LIBS   = -ldockapp -lX11 -lXext -lXpm
+ PIXMAPS= panel.xpm ascii.xpm
+ OBJS   = wmnethru.o
+@@ -15,7 +17,8 @@
+ wmnethru.o: wmnethru.c $(PIXMAPS)
+ 
+ install: wmnethru
+-	install -s wmnethru $(DESTDIR)
++	mkdir -p $(DESTDIR)$(BINDIR)
++	install -s -m 755 wmnethru $(DESTDIR)$(BINDIR)
+ 
+ uninstall:
+ 	rm -f $(DESTDIR)/wmnethru

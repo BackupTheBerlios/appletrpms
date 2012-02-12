@@ -1,0 +1,51 @@
+--- configure	2005-08-26 13:42:54.000000000 -0500
++++ configure	2012-02-11 16:05:01.000000000 -0600
+@@ -4,7 +4,7 @@
+ 
+ 
+ CONFIG="Config.make"
+-DEFAULT_PREFIX="/usr/local"
++DEFAULT_PREFIX="/usr"
+ DEFINES=`awk '/HAVE_/{print $3}' "$CONFIG".in`
+ FEATURES=`echo "$DEFINES" | sed -e 's/-DHAVE_//g'`
+ PREFIX=""
+--- doc/Init.make	2009-02-22 20:41:46.000000000 -0600
++++ doc/Init.make	2012-02-11 16:05:52.000000000 -0600
+@@ -31,5 +31,5 @@
+ 
+ DESTDIR    =
+ ifndef PREFIX
+-  PREFIX   = /usr/local
++  PREFIX   = /usr
+ endif
+--- wmmaiload-config/Init.make	2012-02-11 16:03:40.000000000 -0600
++++ wmmaiload-config/Init.make	2012-02-11 16:04:47.000000000 -0600
+@@ -22,7 +22,7 @@
+ 
+ DESTDIR    =
+ ifndef PREFIX
+-  PREFIX   = /usr/local
++  PREFIX   = /usr
+ endif
+ 
+ 
+--- wmmaiload/Init.make	2005-08-28 14:14:57.000000000 -0500
++++ wmmaiload/Init.make.new	2012-02-11 18:18:19.000000000 -0600
+@@ -31,7 +31,7 @@
+ 
+ DESTDIR    =
+ ifndef PREFIX
+-  PREFIX   = /usr/local
++  PREFIX   = /usr
+ endif
+ 
+ 
+@@ -51,7 +51,7 @@
+ CROSS_COMPILE =
+ USER_CPPFLAGS = $(OPTIONS)
+ USER_CFLAGS   =
+-USER_LDFLAGS  = -L/usr/X11R6/lib -lX11 -lXext -lXpm $(LIB_THREADS) $(LIB_SSL)
++USER_LDFLAGS  = -L/usr/lib -L/usr/lib64 -lcrypto -lX11 -lXext -lXpm $(LIB_THREADS) $(LIB_SSL)
+ 
+ 
+ #*****************************************************************
