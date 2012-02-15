@@ -59,7 +59,7 @@ and it is very popular at Red Hat.
 	--datadir=%{_datadir}      \
 	--localstatedir=/var/games
 
-make
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT

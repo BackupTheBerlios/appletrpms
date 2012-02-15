@@ -6,7 +6,7 @@ Summary:	Unicode Text Editor
 Name:		%name
 Version:	%version
 Release:	%release
-License:	GPL
+License:	GPLv2
 Group:		Applications/Editors
 Source:		http://yudit.org/download/%{name}-%{version}.tar.gz
 Patch0:		%{name}-%{version}.patch0.txt
@@ -37,7 +37,8 @@ GNU (C) 1997-2005 Gaspar Sinai <gsinai@yudit.org>
 
 %build
 ./configure --prefix=%{_prefix} --mandir=%{_mandir}
-make
+
+make %{?_smp_mflags}
 
 %install
 rm -fr $RPM_BUILD_ROOT
@@ -123,7 +124,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGELOG.TXT COPYING.TXT FAQ.TXT README.TXT TODO.TXT doc/*.utf8 doc/notinstalled doc/problems doc/HOWTO-*.txt doc/otfsupport.txt
 
 %changelog
-* Mon Mar 01 2010 J. Krebs <rpm_speedy@yahoo.com> - 2.9.2-2
+* Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 2.9.2-2
   Added patches #1 and #2 from homepage.
 * Mon Mar 01 2010 J. Krebs <rpm_speedy@yahoo.com> - 2.9.2-1
   New version.

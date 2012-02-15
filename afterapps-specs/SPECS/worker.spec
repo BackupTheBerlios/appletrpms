@@ -48,7 +48,8 @@ The directories and files are shown in two independent panels
 	--with-libmagic \
 	--without-hal \
 	--without-dbus
-make
+
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT

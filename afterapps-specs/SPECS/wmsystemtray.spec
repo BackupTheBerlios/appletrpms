@@ -11,6 +11,7 @@ Group:		AfterStep/Applets
 URL:		http://wmsystemtray.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+#Requires:	glibc
 Requires:	libICE
 Requires:	libSM
 Requires:	libX11
@@ -18,6 +19,7 @@ Requires:	libXext
 Requires:	libXfixes
 Requires:	libXmu
 Requires:	libXpm
+BuildRequires:	glibc-devel
 BuildRequires:	libICE-devel
 BuildRequires:	libSM-devel
 BuildRequires:	libX11-devel
@@ -37,7 +39,7 @@ dock app with the ability to display more than just four tray icons.
 %build
 ./configure --prefix=%{_prefix} --mandir=%{_mandir}
 
-make
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT

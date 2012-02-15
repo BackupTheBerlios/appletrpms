@@ -11,6 +11,7 @@ Group:		AfterStep/Applets
 URL:		http://wmpop3lb.jourdain.org/
 Source0:	http://lbj.free.fr/wmpop3/%{name}%{version}.tar.gz
 Patch0:		%{name}-%{version}-fix-RECV-and-try-STAT.patch
+Patch1:		%{name}-%{version}-Makefile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	glibc
 Requires:	libX11
@@ -36,15 +37,19 @@ mailclient.
 %prep
 %setup -q -n %{name}%{version}
 %patch0
+%patch1
 
 %build
 cd wmpop3
-make
+
+make %{?_smp_mflags} PREFIX=%{_prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
-install -s -m 755 wmpop3/wmpop3lb $RPM_BUILD_ROOT%{_bindir}
+
+cd wmpop3
+
+make PREFIX=%{_prefix} DESTDIR=$RPM_BUILD_ROOT install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -52,7 +57,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %doc CHANGE_LOG COPYING README wmpop3/.wmpop3rc*
-%{_bindir}/*
+%{_bindir}/wmpop3lb
 
 
 %changelog

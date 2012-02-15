@@ -1,0 +1,18 @@
+--- pixmaps/main.xpm	2000-04-15 18:06:43.000000000 -0500
++++ pixmaps/main.xpm	2012-02-14 14:23:58.000000000 -0600
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * main_xpm[] = {
++char * main_xpm[] = {
+ "64 64 143 2",
+ "  	c None",
+ ". 	c #000000",
+--- pixmaps/redlight.xpm	2000-04-15 17:29:41.000000000 -0500
++++ pixmaps/redlight.xpm	2012-02-14 14:25:17.000000000 -0600
+@@ -1,5 +1,5 @@
+ /* XPM */
+-static char * redlight_xpm[] = {
++char * redlight_xpm[] = {
+ "3 2 2 1",
+ " 	c None",
+ ".	c #FF0000",

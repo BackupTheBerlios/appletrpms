@@ -67,7 +67,8 @@ point's name.
 
 %build
 ./configure --prefix=%{_prefix} --with-x --mandir=%{_mandir}
-make
+
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT

@@ -1,16 +1,24 @@
-%define name docker
-%define version 1.5
-%define release 4%{?dist}
+%define		name docker
+%define		version 1.5
+%define		release 5%{?dist}
 
-Summary: Docking System Tray
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: http://icculus.org/openbox/2/docker/
-Source0: http://icculus.org/openbox/2/%{name}/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:	Docking System Tray
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		AfterStep/Applets
+URL:		http://icculus.org/openbox/2/docker/
+Source0:	http://icculus.org/openbox/2/%{name}/%{name}-%{version}.tar.gz
+Patch0:		%{name}-%{version}-manpage.patch
+Patch1:		%{name}-%{version}-Makefile.patch
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	glib2
+Requires:	glibc
+Requires:	libX11
+BuildRequires:	glib2-devel
+BuildRequires:	glibc-devel
+BuildRequires:	libX11-devel
 
 %description
 Docker is a docking application (WindowMaker dock app) which
@@ -20,24 +28,34 @@ a system tray without running the KDE/GNOME panel.
 
 %prep
 %setup -q
+%patch0
+%patch1
 
 %build
-make
+make %{?_smp_mflags} \
+	PREFIX=%{_prefix} \
+	MANDIR=%{_mandir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
-install -s -m 755 docker $RPM_BUILD_ROOT%{_bindir}
+
+make DESTDIR=$RPM_BUILD_ROOT \
+	PREFIX=%{_prefix} \
+	MANDIR=%{_mandir} install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
 %doc COPYING README
+%{_bindir}/docker
+%{_mandir}/man1/docker.*
 
 %changelog
+* Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.5-5
+- updated spec file.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.5-4
 - added distro info to release.
 

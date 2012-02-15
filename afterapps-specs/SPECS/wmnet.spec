@@ -33,7 +33,7 @@ low memory, and efficient use of screen real-estate in mind.
 %build
 xmkmf
 
-make
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT

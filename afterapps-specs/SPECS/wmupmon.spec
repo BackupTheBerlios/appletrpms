@@ -27,26 +27,23 @@ DockApp that displays your system uptime in realtime.
 %patch0
 
 %build
-./configure --prefix=%{_prefix}
-make
+./configure --prefix=%{_prefix} --mandir=%{_mandir}
+
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
-mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
-install -s -m 755 src/wmupmon $RPM_BUILD_ROOT%{_bindir}/
-install -m 644 doc/wmupmon.1 $RPM_BUILD_ROOT%{_mandir}/man1/
+make install DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
-%{_mandir}/man1/*
 %doc AUTHORS ChangeLog THANKS README COPYING
-
+%{_bindir}/wmupmon
+%{_mandir}/man1/wmupmon.*
 
 %changelog
 * Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.1.3-7

@@ -33,7 +33,7 @@ and 24 hour mode.
 %patch0
 
 %build
-make PREFIX=%{_prefix}
+make %{?_smp_mflags} PREFIX=%{_prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT

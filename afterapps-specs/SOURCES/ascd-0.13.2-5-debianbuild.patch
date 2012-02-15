@@ -1,0 +1,2019 @@
+--- ascd/README
++++ ascd/README
+@@ -110,7 +110,7 @@
+ 
+   Add a line in your ~/.steprc file:
+ 
+-  *Wharf - - Swallow "ascd" /usr/local/bin/ascd -device /dev/wcd0a &
++  *Wharf - - Swallow "ascd" ascd -device /dev/cdrom &
+ 
+   (customized to your system settings of course!)
+   
+--- ascd/faktory.c
++++ ascd/faktory.c
+@@ -56,13 +56,19 @@
+ int fak_parse_line(char *ligne, char *key, char *arguments)
+ {
+     unsigned int pos = 0;
++    unsigned int len = strlen(ligne);
+ 
+-    if ((strlen(ligne) > 0) && (ligne[0] != '#')) {
+-	while ((ligne[pos] != ' ') && (ligne[pos] != 9)) pos++;
++    if ((len > 0) && (ligne[0] != '#')) {
++	while ((ligne[pos] != ' ') && (ligne[pos] != 9) && (pos < len))
++	    pos++;
+ 	tes_sncpy(key, ligne, pos);
+-	while (((ligne[pos] == ' ') || (ligne[pos] == 9)) && (pos < strlen(ligne))) pos++;
+-	if (pos < strlen(ligne)) strcpy(arguments, ligne + pos);
+-	else strcpy(arguments, "");
++	while (((ligne[pos] == ' ') || (ligne[pos] == 9))
++	       && (pos < len)) 
++	    pos++;
++	if (pos < len)
++	    strcpy(arguments, ligne + pos);
++	else
++	    strcpy(arguments, "");
+ 	if (debug > 2) fprintf(stderr,"++ input: [%s]\n   key:   [%s]\n   args:  [%s]\n", ligne, key, arguments);
+ 	return TRUE;
+     } else {
+--- ascd/ascd.c
++++ ascd/ascd.c
+@@ -690,7 +690,7 @@
+ 
+     strcpy(led_text, "");
+     strcpy(theme, "default");
+-    strcpy(xv, "xv");
++    strcpy(xv, "display");
+     
+     /* the WorkMan database. It's still not used in ascd, but we need this
+        to start the WorkMan code
+--- libworkman/Config
++++ libworkman/Config
+@@ -33,7 +33,7 @@
+ XCOMM -------------------------------------------------------------------
+ XCOMM                        Directory Prefix
+ XCOMM -------------------------------------------------------------------
+-DESTDIR=/usr/local/
++DESTDIR=/usr/
+ 
+ XCOMM -------------------------------------------------------------------
+ XCOMM          LibWorkMan include file target relative to DSTDIR
+@@ -43,6 +43,6 @@
+ 
+ 
+ XCOMM -------------------------------------------------------------------
+-#define SHARED_LIBWORKMAN
++#undef SHARED_LIBWORKMAN
+ LIBDIR=lib
+ 
+--- libworkman/database.c
++++ libworkman/database.c
+@@ -33,6 +33,8 @@
+ #define DBFILE "/.workmandb"
+ #define FUZZFRAMES 75
+ 
++#define ASYNC_CDDB 1
++
+ #include <errno.h>
+ #include <stdio.h>
+ #include <fcntl.h>
+@@ -44,6 +46,10 @@
+ #include <sys/param.h>
+ #include <sys/time.h>
+ #include <sys/stat.h>
++#ifdef ASYNC_CDDB
++#include <signal.h>
++#include <sys/wait.h>
++#endif
+ #include "include/wm_config.h"
+ #include "include/wm_helpers.h"
+ #include "include/wm_struct.h"
+@@ -80,6 +86,11 @@
+ int mark_a = 0;
+ int mark_b = 0;
+ 
++static int _save(int saverc);
++static int check_in_cddb();
++static int wakeup_from_cddb();
++static int cddb_lock = 0;
++
+ 
+ /*
+  *
+@@ -1011,9 +1022,7 @@
+         if (searching > 1) /* A near match has been found. Good enough. */
+             searching = 0;
+ 
+-        cddb_struct2cur();
+ 	return (! searching);
+-
+ } /* search_db() */
+ 
+ /*
+@@ -1164,6 +1173,29 @@
+ 
+ 	free(trklist);
+ 
++	/* If we didn't find it, try CDDB */
++#ifndef ASYNC_CDDB
++	/* Syncronous - wait for query to return */
++	if (cddb.protocol && !found_in_rc && !found_in_db)
++	    check_in_cddb();
++#else
++	/* Asyncronous */
++	if (cddb.protocol && !found_in_rc && !found_in_db && !cddb_lock) {
++	    /* Make sure we only have one request out to CDDB at a time.
++	       In case server is down or something, we don't want to keep
++	       forking children. */
++	    cddb_lock = 1;
++	    signal(SIGCHLD, (sig_t)wakeup_from_cddb);
++	    if (!fork()) {
++		/* Child */
++		int rv;
++		cddb_lock = 1; /* extra safety, can't hurt */
++		rv = check_in_cddb();
++   		exit(rv);
++	    }
++	}
++#endif
++
+ 	if (cur_playnew == -1)
+ 		cur_playnew = 0;
+ 
+@@ -1177,6 +1209,41 @@
+ #endif
+ } /* load() */
+ 
++
++/* Lookup cddb data and save it to workman database */
++static int check_in_cddb()
++{
++    if (!cddb_request()) {
++	/* Found it, let's save it so we don't have to look it
++	   up again. */
++#ifdef DEBUG
++	fprintf(stderr, "\nFound in CDDB:");
++	fprintf(stderr, "%s",  print_cdinfo(cd, 0));
++#endif
++	/* Save in db only, not rc, because we haven't put any
++	   customizations in, and I don't want to clutter the
++	   rc needlessly. */
++	_save(0);
++	return 0;
++    }
++    return -1;
++}
++
++/* Called when the fork above finishes. */
++static int wakeup_from_cddb()
++{
++    int status;
++    cddb_lock = 0;
++    /* Child had new data loaded, but we don't share memory, so we have to
++       reload here for updated data */
++    /* Only reload if child was successful, otherwise we keep trying */
++    wait(&status);
++    if (WIFEXITED(status) && (!WEXITSTATUS(status))) {
++	load();
++    }
++}
++
++
+ /*
+  * Load program settings from the rcfile.
+  */
+@@ -1221,6 +1288,8 @@
+ 	long	curpos;
+ 	int	globesize, hit_cdent = 0, c = 0;
+ 
++	printf("saving globals\n");
++
+ 	if (otherrc)
+ 		wm_strmcpy(&globes, otherrc);
+ 
+@@ -1252,6 +1321,7 @@
+ 
+ 		if(cddb.cddb_server[0])
+ 	 	{
++		    printf("writing cddb server data\n");
+ 			sprintf(temp,"cddbserver %s\n",
+ 				cddb.cddb_server);
+ 			wm_strmcat(&globes, temp);
+@@ -1260,14 +1330,14 @@
+ 		if(cddb.path_to_cgi[0])
+ 	 	{
+ 			sprintf(temp,"cddbpathtocgi %s\n",
+-				cddb.mail_adress);
++				cddb.path_to_cgi);
+ 			wm_strmcat(&globes, temp);
+ 		}
+ 
+ 		if(cddb.proxy_server[0])
+ 	 	{
+ 			sprintf(temp,"cddbproxy %s\n",
+-				cddb.mail_adress);
++				cddb.proxy_server);
+ 			wm_strmcat(&globes, temp);
+ 		}
+ 	}
+@@ -1409,6 +1479,8 @@
+ 		locked = 1;
+ 
+ 	buf = print_cdinfo(cd, pref);
++	if (!buf)
++	    fprintf(stderr, "save_entry: print_cdinfo failed\n");
+ 	len = strlen(buf);	/* doesn't return if there's an error */
+ 
+ 	rcpos = -1;
+@@ -1500,13 +1572,17 @@
+  * list, unless the entry came from another database file) and to the
+  * personal prefs file.
+  */
+-int
+-save( void )
++int save(void)
++{
++    return _save(1);
++}
++
++static int _save(int saverc)
+ {
+ 
+ 	if( wm_db_save_disabled == FALSE )
+ 	{
+-		if (save_entry(rcfile, 1))
++	        if (saverc && save_entry(rcfile, 1))
+ 			return (0);
+ 
+ 		if (cd->whichdb == NULL || access(cd->whichdb, W_OK))
+@@ -1519,4 +1595,4 @@
+ 	} else {
+ 		return( WM_DB_SAVE_DISABLED );
+ 	}
+-} /* save() */
++} /* _save() */
+--- libworkman/include/wm_cdda.h
++++ libworkman/include/wm_cdda.h
+@@ -91,7 +91,6 @@
+  * if there is no support.
+  */
+ #ifdef linux
+-# include <bytesex.h>
+ # include <endian.h>
+ /*
+  * XXX could this be a problem? The results are only 0 and 1 because
+--- libworkman/include/wm_cddb.h
++++ libworkman/include/wm_cddb.h
+@@ -37,6 +37,6 @@
+ void cddb_select();
+ void connect_cddb();
+ void update_cddbserver();
+-void cddb_request();
++int cddb_request();
+ 
+ #endif /* WM_CDDB_H */
+--- libworkman/include/workman/wm_version.h
++++ libworkman/include/workman/wm_version.h
+@@ -0,0 +1,35 @@
++#ifndef WM_VERSION_H
++#define WM_VERSION_H
++/*
++ * $Id: ascd-0.13.2-5-debianbuild.patch,v 1.1 2012/02/15 20:15:25 rpm_speedy Exp $
++ *
++ * This file is part of WorkMan, the civilized CD player library
++ * (c) 1991-1997 by Steven Grimm (original author)
++ * (c) by Dirk Försterling (current 'author' = maintainer)
++ * The maintainer can be contacted by his e-mail address:
++ * milliByte@DeathsDoor.com 
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the Free
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ *
++ * Version information
++ *
++ */
++
++#define WM_LIBVER_MAJOR	1
++#define WM_LIBVER_MINOR 4
++#define WM_LIBVER_PL	2
++#define WM_LIBVER_NAME  "LibWorkMan"
++
++#endif /* WM_VERSION_H */
+--- libworkman/include/workman/wm_helpers.h
++++ libworkman/include/workman/wm_helpers.h
+@@ -0,0 +1,105 @@
++#ifndef WM_HELPERS_H
++#define WM_HELPERS_H
++/*
++ * $Id: ascd-0.13.2-5-debianbuild.patch,v 1.1 2012/02/15 20:15:25 rpm_speedy Exp $
++ *
++ * This file is part of WorkMan, the civilized CD player library
++ * (c) 1991-1997 by Steven Grimm (original author)
++ * (c) by Dirk Försterling (current 'author' = maintainer)
++ * The maintainer can be contacted by his e-mail address:
++ * milliByte@DeathsDoor.com 
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the Free
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ *
++ * Here to be found: Prototypes. Including variable names to be easier
++ * to read.
++ * This is just one more step to a more modular and understandable code.
++ *
++ */
++
++/*
++ * LibWorkMan message levels. I'm not sure how to call them all and which
++ * use they should fulfill. This is not very urgent now, because there
++ * aren't many messages in LibWorkMan now. 
++ */
++#define WM_MSG_LEVEL_NONE	0
++#define WM_MSG_LEVEL_ERROR	1
++#define WM_MSG_LEVEL_TWO	2
++#define WM_MSG_LEVEL_THREE	3
++#define WM_MSG_LEVEL_FOUR	4
++#define WM_MSG_LEVEL_INFO	5
++#define WM_MSG_LEVEL_SIX	6
++#define WM_MSG_LEVEL_SEVEN	7
++#define WM_MSG_LEVEL_EIGHT	8
++#define WM_MSG_LEVEL_DEBUG	9
++
++/*
++ * Message classes. This is somehow a definition of
++ * the message's source.
++ */
++ 
++#define WM_MSG_CLASS_PLATFORM	0x010
++#define WM_MSG_CLASS_SCSI	0x020
++#define WM_MSG_CLASS_CDROM      0x040
++#define WM_MSG_CLASS_DB		0x080
++#define WM_MSG_CLASS_MISC	0x100
++
++#define WM_MSG_CLASS_ALL	0xff0
++
++extern int wm_lib_verbosity;
++
++/*
++ * I did not know any better place...
++ */
++#ifdef DEBUG
++#define CHECKPOINT(t) fprintf(stderr, "%s (%d): %s\n", __FILE__, __LINE__, t );
++#else
++#define CHECKPOINT(t) 
++#endif
++
++#ifndef TRUE
++#define TRUE	1
++#endif
++
++#ifndef FALSE
++#define FALSE	0
++#endif
++
++#ifdef linux
++#include <signal.h>
++/* Linux doesn't have a SIGEMT */
++#if !defined( SIGEMT )
++#  define SIGEMT SIGUNUSED
++#endif
++#endif /* linux */
++
++void		freeup( char **x );
++void	 	wm_strmcat( char **t, char *s);
++void	 	wm_strmcpy( char **t, char *s );
++char *		wm_strdup( char *s );
++/* Somebody's version query unsatisfied? */
++int		wm_libver_major( void );	/* return major internal version number */
++int		wm_libver_minor( void );	/* return minor internal version number */
++int		wm_libver_pl( void );		/* return internal patchlevel number */
++char *		wm_libver_name( void );		/* return internal name (LibWorkMan) */
++char *		wm_libver_number( void );	/* returns string: "<major>.<minor>.<pl>" */
++char *		wm_libver_string( void ); 	/* returns string: "<name> <number>" */
++char *		wm_libver_date( void );		/* returns string: date of compilation */
++void 		wm_lib_set_verbosity( int level ); /* set verbosity level */
++int 		wm_lib_get_verbosity( void );      /* get verbosity level */
++void 		wm_lib_message( unsigned int level, char *format, ... ); /* put out a message on stderr */
++int		wm_susleep( int usec );
++
++#endif /* WM_HELPERS_H */
+--- libworkman/include/workman/wm_cdda.h
++++ libworkman/include/workman/wm_cdda.h
+@@ -0,0 +1,116 @@
++#ifndef WM_CDDA_H
++#define WM_CDDA_H
++/*
++ * $Id: ascd-0.13.2-5-debianbuild.patch,v 1.1 2012/02/15 20:15:25 rpm_speedy Exp $
++ *
++ * This file is part of WorkMan, the civilized CD player library
++ * (c) 1991-1997 by Steven Grimm (original author)
++ * (c) by Dirk Försterling (current 'author' = maintainer)
++ * The maintainer can be contacted by his e-mail address:
++ * milliByte@DeathsDoor.com 
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the Free
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ *
++ */
++
++/*
++ * Information about a particular block of CDDA data.
++ */
++struct cdda_block {
++	unsigned char	status;		/* see below */
++	unsigned char	track;
++	unsigned char	index;
++	unsigned char	minute;
++	unsigned char	second;
++	unsigned char	frame;
++
++	/* Average volume levels, for level meters */
++	unsigned char	lev_chan0;
++	unsigned char	lev_chan1;
++
++	/* Current volume setting (0-255) */
++	unsigned char	volume;
++
++	/* Current balance setting (0-255, 128 = balanced) */
++	unsigned char	balance;
++};
++
++/*
++ * cdda_block status codes.
++ */
++#define WMCDDA_ERROR	0	/* Couldn't read CDDA from disc */
++#define WMCDDA_OK	1	/* Read this block successfully (raw data) */
++#define WMCDDA_PLAYED	2	/* Just played the block in question */
++#define WMCDDA_STOPPED	3	/* Block data invalid; we've just stopped */
++#define WMCDDA_ACK	4	/* Acknowledgement of command from parent */
++#define WMCDDA_DONE	5	/* Chunk of data is done playing */
++#define WMCDDA_EJECTED	6	/* Disc ejected or offline */
++
++/*
++ * Enable or disable CDDA building depending on platform capabilities, and
++ * determine endianness based on architecture.  (Gross!)
++ *
++ * For header-comfort, the macros LITTLE_ENDIAN and BIG_ENDIAN had to be
++ * renamed. At least Linux does have bytesex.h and endian.h for easy
++ * byte-order examination.
++ */
++
++#ifdef sun
++# ifdef SYSV
++#  include <sys/types.h>
++#  include <sys/cdio.h>
++#  ifndef CDROMCDDA
++#   undef BUILD_CDDA
++#  endif
++#  ifdef i386
++#   define WM_LITTLE_ENDIAN 1
++#   define WM_BIG_ENDIAN 0
++#  else
++#   define WM_BIG_ENDIAN 1
++#   define WM_LITTLE_ENDIAN 0
++#  endif
++# else
++#  undef BUILD_CDDA
++# endif
++#endif
++
++/* Linux only allows definition of endianness, because there's no
++ * standard interface for CDROM CDDA functions that aren't available
++ * if there is no support.
++ */
++#ifdef linux
++# include <endian.h>
++/*
++ * XXX could this be a problem? The results are only 0 and 1 because
++ * of the ! operator. How about other linux compilers than gcc ?
++ */
++# define WM_LITTLE_ENDIAN !(__BYTE_ORDER - __LITTLE_ENDIAN)
++# define WM_BIG_ENDIAN !(__BYTE_ORDER - __BIG_ENDIAN)
++#endif
++
++/*
++ * The following code shouldn't take effect now. 
++ * In 1998, the WorkMan platforms don't support __PDP_ENDIAN
++ * architectures.
++ *
++ */
++
++#if !WM_LITTLE_ENDIAN
++#  if !WM_BIG_ENDIAN
++#    error yet unsupported architecture
++	foo bar this is to stop the compiler. 
++#  endif
++#endif
++#endif /* WM_CDDA_H */
+--- libworkman/include/workman/wm_cddb.h
++++ libworkman/include/workman/wm_cddb.h
+@@ -0,0 +1,42 @@
++#ifndef WM_CDDB_H
++#define WM_CDDB_H
++/*
++ * $Id: ascd-0.13.2-5-debianbuild.patch,v 1.1 2012/02/15 20:15:25 rpm_speedy Exp $
++ *
++ * This file is part of WorkMan, the civilized CD player library
++ * (c) 1991-1997 by Steven Grimm (original author)
++ * (c) by Dirk Försterling (current 'author' = maintainer)
++ * The maintainer can be contacted by his e-mail address:
++ * milliByte@DeathsDoor.com 
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the Free
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ *
++ */
++
++
++extern struct wm_cddb cddb;
++extern int cur_cddb_protocol;
++extern char *cur_cddb_server, *cur_cddb_mail_adress,
++	*cur_cddb_path_to_cgi, *cur_cddb_proxy_server;
++
++unsigned int cddb_discid();
++void cddb_struct2cur();
++void cddb_cur2struct();
++void cddb_select();
++void connect_cddb();
++void update_cddbserver();
++void cddb_request();
++
++#endif /* WM_CDDB_H */
+--- libworkman/include/workman/wm_config.h
++++ libworkman/include/workman/wm_config.h
+@@ -0,0 +1,357 @@
++#ifndef WM_CONFIG_H
++#define WM_CONFIG_H
++/*
++ * $Id: ascd-0.13.2-5-debianbuild.patch,v 1.1 2012/02/15 20:15:25 rpm_speedy Exp $
++ *
++ * This file is part of WorkMan, the civilized CD player library
++ * (c) 1991-1997 by Steven Grimm (original author)
++ * (c) by Dirk Försterling (current 'author' = maintainer)
++ * The maintainer can be contacted by his e-mail address:
++ * milliByte@DeathsDoor.com 
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the Free
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ *
++ **********************************************************************
++ *
++ * This file consists of several parts. First, there's a generic,
++ * platform independent part. Set needed options there.
++ * The following parts are platform dependent. You may search for the
++ * names listed below and then set your OS specific options there.
++ * Don't be surprised, if there are no options for your OS. They aren't
++ * needed in any case.
++ * 
++ * The default values should produce a functional WorkMan on every
++ * platform.
++ *
++ *********************
++ * Current platforms:
++ *********************
++ * BSD386
++ * FreeBSD
++ * HP-UX
++ * Irix (SGI)
++ * Linux
++ * News  (Sony NewsOS)
++ * OpenBSD
++ * OSF1
++ * Sun (SunOS/Solaris, Sparc or x86)
++ * SVR4
++ * Ultrix
++ * AIX
++ *
++ * The above order corresponds with the order of the platform specific
++ * options below.
++ */
++
++/******************************************************************
++ * generic options
++ ******************************************************************
++ **   **  ***  ****    **  ****   **    *    **   **    **   *   **
++ *  *  *  ***  ****  *  *  ***  *  **  **  ***  *  *  *  *  * *  **
++ *     *  ***  ****    **  ***     **  **   **  *  *    **  * *  **
++ *  *  *  ***  ****  ****  ***  *  **  **  ***  *  *  *  *  ***  **
++ *  *  *    *    **  ****    *  *  **  **  ****   **  *  *  ***  **
++ ******************************************************************/
++
++/*
++ * This option is obvious. But please do not forget the original
++ * WorkMan version string if you need support.
++ */
++
++#define WORKMAN_NAME "LibWorkMan"
++#define WORKMAN_VERSION "1.4.0"
++ 
++/*
++ * If your CD-ROM drive closes its tray if the device is opened, then
++ * the next define can make WorkMans "Eject" button an "open/close"
++ * button. If it disturbs you, just comment it out.
++ *
++ * ### this is preliminary. It may have no effect for you ###
++ */
++#define CAN_CLOSE 1
++
++/*
++ * Define the following if you want the balance slider to
++ * decrease one channel's volume while increasing the other's
++ */
++/* #define SYMETRIC_BALANCE 1 */
++
++
++/*
++ * Define this if you want CDDA support. Supported systems are:
++ *
++ * - Solaris (2.4 or newer)
++ * --> Linux is on the way. Don't define it now. It would lead to errors only.
++ */
++/*#define BUILD_CDDA 1*/
++
++/*
++ *
++ * This is for experimental cddb support.
++ * This activates the UI component.
++ */
++
++#define CDDB_IN_UI 1
++
++
++/******************************************************************
++ * BSD386
++ ******************************************************************
++ ***     ****    ***    *******  **    ****    ****    ************
++ ***  **  **  ******  *  *****  ******  **  **  **  ***************
++ ***    ******  ****  **  ***  *****  *****    ***     ************
++ ***  **  ******  **  *  ***  ********  **  **  **  **  ***********
++ ***     ****    ***    ***  ******    ****    ****    ************
++ ******************************************************************/
++#ifdef __bsdi__
++
++/*
++ * This lets you use the SoundBlaster Mixer on BSD/386
++ */
++#define SOUNDBLASTER 1
++
++#endif /* __bsdi__ (BSD/386) */
++
++/******************************************************************
++ * FreeBSD
++ ******************************************************************
++ ***      **     ***      **      **     ****    ***    ***********
++ ***  ******  **  **  ******  ******  **  **  ******  *  **********
++ ***    ****     ***    ****    ****    ******  ****  **  *********
++ ***  ******  **  **  ******  ******  **  ******  **  *  **********
++ ***  ******  **  **      **      **     ****    ***    ***********
++ ******************************************************************/
++#if defined(__FreeBSD__) || defined(__NetBSD__)
++
++#define DEFAULT_CD_DEVICE	"/dev/rmatcd0c"
++
++#endif /* freebsd */
++
++/******************************************************************
++ * HP-UX
++ ******************************************************************
++ ***  **  **     *********  **  **  **  ***************************
++ ***  **  **  **  ********  **  ***    ****************************
++ ***      **     ***    **  **  ****  *****************************
++ ***  **  **  ************  **  ***    ****************************
++ ***  **  **  *************    ***  **  ***************************
++ ******************************************************************/
++#if defined(hpux) || defined (__hpux)
++
++#define	DEFAULT_CD_DEVICE	"/dev/rscsi"
++
++#endif /* hpux */
++
++/******************************************************************
++ * Irix
++ ******************************************************************
++ ***      **     ***      **  **  *********************************
++ *****  ****  **  ****  *****    **********************************
++ *****  ****     *****  ******  ***********************************
++ *****  ****  **  ****  *****    **********************************
++ ***      **  **  **      **  **  *********************************
++ ******************************************************************/
++#if defined(sgi)
++
++#define DEFAULT_CD_DEVICE	"/dev/scsi/sc0d6l0"
++
++#endif /* sgi IRIX */
++
++/******************************************************************
++ * Linux
++ ******************************************************************
++ ***  ******      **   ***  **  **  **  **  ***********************
++ ***  ********  ****    **  **  **  ***    ************************
++ ***  ********  ****  *  *  **  **  ****  *************************
++ ***  ********  ****  **    **  **  ***    ************************
++ ***      **      **  ***   ***    ***  **  ***********************
++ ******************************************************************/
++#ifdef linux
++
++/*
++ * Uncomment the following line to have WorkMan send SCSI commands
++ *  directly to the CD-ROM drive.  If you have a SCSI drive you 
++ * probably want this, but it will cause WorkMan to not work on IDE
++ * drives.
++ */
++#define LINUX_SCSI_PASSTHROUGH 1
++
++/*
++ * Which device should be opened by WorkMan at default?
++ */
++#define DEFAULT_CD_DEVICE	"/dev/sbpcd"
++
++/*
++ * Uncomment the following if you use the sbpcd or mcdx device driver.
++ * It shouldn't hurt if you use it on other devices. It'll be nice to
++ * hear from non-sbpcd (or mcdx) users if this is right.
++ */
++/*#define SBPCD_HACK 1*/
++
++/*
++ * Linux Soundcard support
++ */
++#define OSS_SUPPORT 1
++
++/*
++ * This has nothing to do with the above.
++ */
++
++/* #define CURVED_VOLUME */
++ 
++/*
++ * Uncomment the following if you want to try out a better responding
++ * WorkMan, especially with IDE drives. This may work with non-IDE
++ * drives as well. But it may be possible, that it doesn't work at all.
++ * If your drive/driver combination cannot handle the faster access,
++ * the driver will usually hang and you have to reboot your machine.
++ */
++/* #define FAST_IDE 1 */
++
++/*
++ * There are two alternative ways of checking a device containing a
++ * mounted filesystem. Define BSD_MOUNTTEST for the test using
++ * getmntent(). Undefine it for using the SVR4 ustat().
++ * I built in the choice, because it's not clear which method should
++ * be used in Linux. The ustat manpage tells us since 1995, that
++ * fstat() should be used, but I'm too dumb to do so.
++ */
++
++#define BSD_MOUNTTEST 
++
++#endif /* linux */
++
++/******************************************************************
++ * Sony NewsOS
++ ******************************************************************
++ ***   ***  **      **  *****  ***    *****************************
++ ***    **  **  ******  *****  **  ********************************
++ ***  *  *  **    ****  ** **  ****  ******************************
++ ***  **    **  ******  *   *  ******  ****************************
++ ***  ***   **      **    *    ***    *****************************
++ ******************************************************************/
++#if defined(__sony_news) || defined(sony_news)
++
++#define	DEFAULT_CD_DEVICE	"/dev/rsd/b0i6u0p2\0"
++
++#endif
++
++/******************************************************************
++ * OpenBSD
++ ******************************************************************
++ ****    ***     ***      **   ***  **     ****    ***    *********
++ ***  **  **  **  **  ******    **  **  **  **  ******  *  ********
++ ***  **  **     ***    ****  *  *  **    ******  ****  **  *******
++ ***  **  **  ******  ******  **    **  **  ******  **  *  ********
++ ****    ***  ******      **  ***   **     ****    ***    *********
++ ******************************************************************/
++#ifdef __OpenBSD__
++
++#define	DEFAULT_CD_DEVICE	"/dev/rcdrom"
++
++#endif
++
++/******************************************************************
++ * OSF1
++ ******************************************************************
++ ****    ****    ***      ***  ***  *******************************
++ ***  **  **  ******  ******  **    *******************************
++ ***  **  ****  ****    ***  *****  *******************************
++ ***  **  ******  **  ****  ******  *******************************
++ ****    ****    ***  ***  *****      *****************************
++ ******************************************************************/
++#if defined(__osf__)
++
++#define	DEFAULT_CD_DEVICE	"/dev/rcdrom/cd0"
++
++#endif
++
++/******************************************************************
++ * SunOS/Solaris
++ ******************************************************************
++ ****    ***  **  **   ***  ***************************************
++ ***  ******  **  **    **  ***************************************
++ *****  ****  **  **  *  *  ***************************************
++ *******  **  **  **  **    ***************************************
++ ****    ****    ***  ***   ***************************************
++ ******************************************************************/
++#if defined(sun) || defined(__sun__)
++
++/*
++ * Define the following for Solaris 2.x
++ * If you don't want WorkMan to try to activate the SPARCstation 5
++ * internal audio input so you get sound from the workstation, comment
++ * out the CODEC define.
++ */
++
++#define SYSV 1
++#define CODEC 1
++
++/*
++ * set the following to "SUNW,CS4231" for Sun and to "SUNW,sb16"
++ * for PC (with SoundBlaster 16) running Solaris x86
++ * (only important if you define CODEC above)
++ */
++/*#define SUN_AUD_DEV "SUNW,CS4231"*/
++#define SUN_AUD_DEV "SUNW,sbpro"
++
++
++#endif
++
++/******************************************************************
++ * SVR4
++ ******************************************************************
++ ****    ***  ****  **     ***  *  ********************************
++ ***  ******  ****  **  **  **  *  ********************************
++ *****  *****  **  ***     ***      *******************************
++ *******  ***  **  ***  **  *****  ********************************
++ ****    *****    ****  **  *****  ********************************
++ ******************************************************************/
++#if defined(SVR4) && !defined(sun) && !defined(__sun__)
++
++#define DEFAULT_CD_DEVICE       "/dev/rcdrom/cd0"
++
++#endif
++
++/******************************************************************
++ * Ultrix
++ ******************************************************************
++ ***  **  **  *****      **     ***      **  **  ******************
++ ***  **  **  *******  ****  **  ****  *****    *******************
++ ***  **  **  *******  ****     *****  ******  ********************
++ ***  **  **  *******  ****  **  ****  *****    *******************
++ ****    ***      ***  ****  **  **      **  **  ******************
++ ******************************************************************/
++#if defined(ultrix) || defined(__ultrix)
++
++#endif
++
++/******************************************************************
++ * IBM AIX
++ ******************************************************************
++ ****    ***      **  **  *****************************************
++ ***  **  ****  *****    ******************************************
++ ***      ****  ******  *******************************************
++ ***  **  ****  *****    ******************************************
++ ***  **  **      **  **  *****************************************
++ ******************************************************************/
++#if defined(AIXV3)
++
++#define DEFAULT_CD_DEVICE	"/dev/cd0"
++
++#endif /* IBM AIX */
++
++/******************************************************************/ 
++#endif /* WM_CONFIG_H */
+--- libworkman/include/workman/workman.h
++++ libworkman/include/workman/workman.h
+@@ -0,0 +1,51 @@
++#ifndef WORKMAN_H
++#define WORKMAN_H
++/*
++ * $Id: ascd-0.13.2-5-debianbuild.patch,v 1.1 2012/02/15 20:15:25 rpm_speedy Exp $
++ *
++ * This file is part of WorkMan, the civilized CD player library
++ * (c) 1991-1997 by Steven Grimm (original author)
++ * (c) by Dirk Försterling (current 'author' = maintainer)
++ * The maintainer can be contacted by his e-mail address:
++ * milliByte@DeathsDoor.com 
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the Free
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ *
++ * all-in-one libworkman include file.
++ *
++ */
++
++
++/*
++ * wm_config should always be included first
++ */
++#include "wm_config.h" 
++
++#include "workman_defs.h"
++#ifdef BUILD_CDDA
++#include "wm_cdda.h"
++#endif 
++#include "wm_cddb.h"
++#include "wm_cdinfo.h" 
++#include "wm_cdrom.h" 
++#include "wm_database.h" 
++#include "wm_helpers.h" 
++#include "wm_index.h" 
++#include "wm_platform.h" 
++#include "wm_scsi.h" 
++#include "wm_struct.h" 
++
++#endif /* WORKMAN_H */
++
+--- libworkman/include/workman/wm_scsi.h
++++ libworkman/include/workman/wm_scsi.h
+@@ -0,0 +1,48 @@
++#ifndef WM_SCSI_H
++#define WM_SCSI_H
++/*
++ * $Id: ascd-0.13.2-5-debianbuild.patch,v 1.1 2012/02/15 20:15:25 rpm_speedy Exp $
++ *
++ * This file is part of WorkMan, the civilized CD player library
++ * (c) 1991-1997 by Steven Grimm (original author)
++ * (c) by Dirk Försterling (current 'author' = maintainer)
++ * The maintainer can be contacted by his e-mail address:
++ * milliByte@DeathsDoor.com 
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the Free
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ *
++ * SCSI prototypes (scsi.c)
++ * 
++ * This is just one more step to a more modular and understandable code.
++ */
++
++#include "wm_struct.h" 
++
++#define	WM_ERR_SCSI_INQUIRY_FAILED -1
++
++int	wm_scsi_mode_sense( struct wm_drive *d, unsigned char page,
++			    unsigned char *buf );
++int	sendscsi( struct wm_drive *d, void *buf,
++		  unsigned int len, int dir,
++		  unsigned char a0, unsigned char a1,
++		  unsigned char a2, unsigned char a3,
++		  unsigned char a4, unsigned char a5,
++		  unsigned char a6, unsigned char a7,
++		  unsigned char a8, unsigned char a9,
++		  unsigned char a10, unsigned char a11 );
++ int	wm_scsi_get_drive_type( struct wm_drive *d, char *vendor,
++				char *model, char *rev );
++
++#endif /* WM_SCSI_H */
+--- libworkman/include/workman/wm_platform.h
++++ libworkman/include/workman/wm_platform.h
+@@ -0,0 +1,51 @@
++#ifndef WM_PLATFORM_H
++#define WM_PLATFORM_H
++/*
++ * $Id: ascd-0.13.2-5-debianbuild.patch,v 1.1 2012/02/15 20:15:25 rpm_speedy Exp $
++ *
++ * This file is part of WorkMan, the civilized CD player library
++ * (c) 1991-1997 by Steven Grimm (original author)
++ * (c) by Dirk Försterling (current 'author' = maintainer)
++ * The maintainer can be contacted by his e-mail address:
++ * milliByte@DeathsDoor.com 
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the Free
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ *
++ * The platform interface
++ * 
++ * This is just one more step to a more modular and understandable code.
++ */
++
++#include "wm_struct.h"
++
++int wmcd_open( struct wm_drive *d );
++int wmcd_reopen( struct wm_drive *d );
++
++/*
++ * void	keep_cd_open( void );
++ */
++int	wm_scsi( struct wm_drive *d, unsigned char *cdb, int cdblen,
++         	 void *retbuf, int retbuflen, int getreply );
++
++/****************************************
++ *
++ * The drive prototypes.
++ *
++ */
++extern struct wm_drive generic_proto;
++extern struct wm_drive sony_proto;
++extern struct wm_drive toshiba_proto;
++
++#endif /* WM_PLATFORM_H */
+--- libworkman/include/workman/wm_cdinfo.h
++++ libworkman/include/workman/wm_cdinfo.h
+@@ -0,0 +1,78 @@
++#ifndef WM_CDINFO_H
++#define WM_CDINFO_H
++/*
++ * $Id: ascd-0.13.2-5-debianbuild.patch,v 1.1 2012/02/15 20:15:25 rpm_speedy Exp $
++ *
++ * This file is part of WorkMan, the civilized CD player library
++ * (c) 1991-1997 by Steven Grimm (original author)
++ * (c) by Dirk Försterling (current 'author' = maintainer)
++ * The maintainer can be contacted by his e-mail address:
++ * milliByte@DeathsDoor.com 
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the Free
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ *
++ * Prototypes from cdinfo.c
++ * 
++ * This is just one more step to a more modular and understandable code.
++ */
++
++extern char *cur_trackname;		/* Take a guess */
++extern int cur_index;			/* Current index mark */
++extern int cur_frame;			/* Current frame number */
++extern struct wm_play *playlist;		/* = NULL */
++extern struct wm_cdinfo thiscd;
++extern struct wm_cdinfo *cd;
++extern int cur_track;			/* Current track number, starting at 1 */
++extern char *cur_artist;		/* Name of current CD's artist */
++extern char cur_avoid;			/* Avoid flag */
++extern char cur_contd;			/* Continued flag */
++extern char *cur_cdname;		/* Album name */
++extern int cur_nsections;		/* Number of sections currently defined */
++extern int exit_on_eject;
++extern int cur_track;
++extern int cur_pos_abs;
++extern int cur_pos_rel;
++extern int cur_tracklen;
++extern int cur_cdlen;
++extern enum wm_cd_modes cur_cdmode;
++extern int cur_ntracks;
++extern int cur_lasttrack;
++extern int cur_firsttrack;
++extern int cur_listno;
++extern int cur_stopmode;
++
++void	wipe_cdinfo( void );
++void	play_next_entry( int forward );
++void	make_playlist( int playmode, int starttrack );
++int	get_autoplay( void );
++int	get_playmode( void );
++void	pl_find_track( int track );
++void	play_prev_track( int forward );
++void	play_next_track( int forward );
++int	tracklen( int num );
++int	get_default_volume( int track );
++int	split_trackinfo( int pos );
++int	remove_trackinfo( int num );
++void	freeup( char **x );
++int	get_runtime( void );
++char   *trackname( int num );
++void	stash_cdinfo( char *artist, char *cdname, int autoplay, int playmode );
++void	stash_trkinfo( int track, char *songname, int contd, int avoid );
++int	get_avoid( int num );
++int	get_contd( int num );
++void	default_volume( int track, int vol );
++char   *listentry( int num );
++
++#endif /* WM_CDINFO_H */
+--- libworkman/include/workman/wm_struct.h
++++ libworkman/include/workman/wm_struct.h
+@@ -0,0 +1,181 @@
++#ifndef WM_STRUCT_H
++#define WM_STRUCT_H
++/*
++ * $Id: ascd-0.13.2-5-debianbuild.patch,v 1.1 2012/02/15 20:15:25 rpm_speedy Exp $
++ *
++ * This file is part of WorkMan, the civilized CD player library
++ * (c) 1991-1997 by Steven Grimm (original author)
++ * (c) by Dirk Försterling (current 'author' = maintainer)
++ * The maintainer can be contacted by his e-mail address:
++ * milliByte@DeathsDoor.com 
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the Free
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ *
++ */
++
++
++
++/*
++ * Structure for a single track.  This is pretty much self-explanatory --
++ * one of these exists for each track on the current CD.
++ */
++struct wm_trackinfo 
++{
++  char	*songname;	/* Name of song, dynamically allocated */
++  char	*otherdb;	/* Unrecognized info for this track */
++  char	*otherrc;
++  int	length;		/* Length of track in seconds or Kbytes */
++  int	start;		/* Starting position (f+s*75+m*60*75) */
++  int	volume;		/* Per-track volume (1-32, 0 to disable) */
++  int	track;		/* Physical track number */
++  int	section;	/* Section number (0 if track not split) */
++  int	contd;		/* Flag: continuation of previous track */
++  int	avoid;		/* Flag: don't play this track. */
++  int	data;		/* Flag: data track */
++};
++
++/*
++ * Structure for internal playlist management.  The internal playlist is
++ * simply the list of track ranges that are being played currently.  This
++ * is built whenever the CD starts playing; it's used in normal and shuffle
++ * modes as well as playlist mode.
++ *
++ * The "starttime" element represents how much time has elapsed by the time
++ * we get to this entry.  For instance, if the list begins with a 5-minute
++ * track and a 3-minute track, the third entry would have a starttime of 8
++ * minutes.  This is used so that the elapsed play time can be displayed
++ * even in shuffle or playlist modes.
++ *
++ * The last member of the list has a start track of 0, and its starttime is
++ * the total playing time of the playlist (which will usually be overestimated,
++ * since we don't play leadouts in some cases.)
++ */
++struct wm_play 
++{
++  int	start;		/* Start track, or 0 if end of list */
++  int	end;		/* last track plus 1 */
++  int	starttime;	/* Number of seconds elapsed previously */
++};
++
++/*
++ * Structure for playlists (as seen by the user.)  This is simply a name
++ * followed by a zero-terminated list of track numbers to play.  The list
++ * is terminated by a NULL name.
++ */
++struct wm_playlist 
++{
++  char	*name;		/* Name of this playlist */
++  int	*list;		/* List of tracks */
++};
++
++struct wm_cdinfo
++{
++  char	artist[84];	/* Artist's name */
++  char	cdname[84];	/* Disc's name */
++  int	ntracks;	/* Number of tracks on the disc */
++  int	length;		/* Total running time in seconds */
++  int	autoplay;	/* Start playing CD immediately */
++  int	playmode;	/* How to play the CD */
++  int	volume;		/* Default volume (1-32, 0 for none) */
++  struct wm_trackinfo *trk;	/* struct wm_trackinfo[ntracks] */
++  struct wm_playlist *lists;	/* User-specified playlists */
++  char	*whichdb;	/* Which database is this entry from? */
++  char	*otherdb;	/* Unrecognized lines from this entry */
++  char	*otherrc;
++  char	*user;		/* Name of originating user */
++  unsigned int cddbid;  /* CDDB-ID of the current disc */
++  struct cdinfo *next;	/* For browsers, etc. */
++};
++
++/* The global variable "cd" points to the struct for the CD that's playing. */
++extern struct wm_cdinfo *cd;
++
++struct wm_playlist *new_list();
++
++enum wm_cd_modes	
++{
++  WM_CDM_UNKNOWN = -1,
++  WM_CDM_BACK = 0, WM_CDM_TRACK_DONE = 0,
++  WM_CDM_PLAYING = 1,
++  WM_CDM_FORWARD = 2,
++  WM_CDM_PAUSED = 3,
++  WM_CDM_STOPPED = 4,
++  WM_CDM_EJECTED = 5
++};
++
++/*
++ * Drive descriptor structure.  Used for access to low-level routines.
++ */
++struct wm_drive 
++{
++  int	fd;		/* File descriptor, if used by platform */
++  char	vendor[32];	/* Vendor name */
++  char	model[32];	/* Drive model */
++  char  revision[32];   /* Revision of the drive */
++  void	*aux;		/* Pointer to optional platform-specific info */
++  void	*daux;		/* Pointer to optional drive-specific info */
++  
++  int	(*init)();
++  int	(*get_trackcount)();
++  int	(*get_cdlen)();
++  int	(*get_trackinfo)();
++  int	(*get_drive_status)();
++  int	(*get_volume)();
++  int	(*set_volume)();
++  int	(*pause)();
++  int	(*resume)();
++  int	(*stop)();
++  int	(*play)();
++  int	(*eject)();
++  int   (*closetray)();
++};
++
++/*
++ * Structure for information of the usage of cddb.
++ */
++struct wm_cddb {
++        int     protocol;               /* 0-off, 1-cddbp, 2-http, 3-htproxy */
++        char    cddb_server[84];        /* host.domain.name:port */
++        char    mail_adress[84];        /* user@domain.name */
++        char    path_to_cgi[84];        /* (/)path/to/cddb.cgi */
++        char    proxy_server[84];       /* host.domain.name:port */
++};
++extern struct wm_cddb cddb;
++
++
++/*
++ * Each platform has to define generic functions, so may as well declare
++ * them all here to save space.
++ * These functions should never be seen outside libworkman. So I don't care
++ * about the wm_ naming convention here.
++ */
++int     gen_init(),
++        gen_get_trackcount(),
++        gen_get_cdlen(),
++        gen_get_trackinfo(),
++	gen_get_drive_status(),
++	gen_get_volume(),
++	gen_set_volume(),
++	gen_pause(),
++	gen_resume(),
++	gen_stop(),
++	gen_play(),
++	gen_eject(),
++	gen_closetray();
++
++struct wm_drive *find_drive_struct();
++
++
++#endif /* WM_STRUCT_H */
+--- libworkman/wm_helpers.c	1999-03-07 02:36:41.000000000 -0600
++++ libworkman/wm_helpers.c	2012-02-15 10:03:19.000000000 -0600
+@@ -29,6 +29,7 @@
+ static char wm_helpers_id[] = "$Id: ascd-0.13.2-5-debianbuild.patch,v 1.1 2012/02/15 20:15:25 rpm_speedy Exp $";
+ 
+ #include <stdio.h>
++#include <stdlib.h>
+ #include <string.h>
+ #include <malloc.h>
+ #include <errno.h>
+--- libworkman/include/workman/wm_index.h
++++ libworkman/include/workman/wm_index.h
+@@ -0,0 +1,36 @@
++#ifndef WM_INDEX_H
++#define WM_INDEX_H
++/*
++ * $Id: ascd-0.13.2-5-debianbuild.patch,v 1.1 2012/02/15 20:15:25 rpm_speedy Exp $
++ *
++ * This file is part of WorkMan, the civilized CD player library
++ * (c) 1991-1997 by Steven Grimm (original author)
++ * (c) by Dirk Försterling (current 'author' = maintainer)
++ * The maintainer can be contacted by his e-mail address:
++ * milliByte@DeathsDoor.com 
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the Free
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ *
++ * Prototypes for wm_index.c
++ * 
++ * This is just one more step to a more modular and understandable code.
++ */
++
++int	idx_find_entry( char *file, int ntracks, int *tracks,
++		 	int len, int fuzz, unsigned long *pos );
++int	idx_delete_entry(char *file, int track, int fuzz, unsigned long pos );
++int	idx_write_entry( char *file, int track, unsigned long pos );
++
++#endif /* WM_INDEX_H */
+--- libworkman/include/workman/wm_cdrom.h
++++ libworkman/include/workman/wm_cdrom.h
+@@ -0,0 +1,64 @@
++#ifndef WM_CDROM_H
++#define WM_CDROM_H
++/*
++ * $Id: ascd-0.13.2-5-debianbuild.patch,v 1.1 2012/02/15 20:15:25 rpm_speedy Exp $
++ *
++ * This file is part of WorkMan, the civilized CD player library
++ * (c) 1991-1997 by Steven Grimm (original author)
++ * (c) by Dirk Försterling (current 'author' = maintainer)
++ * The maintainer can be contacted by his e-mail address:
++ * milliByte@DeathsDoor.com 
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the Free
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ *
++ * Prototypes from cdrom.c
++ * 
++ * This is just one more step to a more modular and understandable code.
++ */
++
++#define WM_CDS_NO_DISC		0
++#define WM_CDS_DISC_READY	1
++#define WM_CDS_JUST_INSERTED	2
++
++#define WM_STR_GENVENDOR	"Generic"
++#define WM_STR_GENMODEL		"drive"
++#define WM_STR_GENREV		"type"
++
++extern int wm_cd_cur_balance;
++
++
++char *	wm_drive_vendor( void );
++char *	wm_drive_model( void );
++char *	wm_drive_revision( void );
++void 	wm_drive_settype( char *vendor, char *model, char *revision );
++
++int	wm_cd_status( void );
++
++void	wm_cd_play( int start, int pos, int end );
++void	wm_cd_play_chunk( int start, int end, int realstart );
++void	wm_cd_play_from_pos( int pos );
++void	wm_cd_pause( void );
++void	wm_cd_stop( void );
++int	wm_cd_eject( void );
++int     wm_cd_closetray( void );
++int	wm_cd_read_initial_volume( int max );
++
++/*
++ * Following are the missing to rename.
++ */
++int	find_trkind( int track, int index, int start );
++void	cd_volume( int vol, int bal, int max );
++
++#endif /* WM_CDROM_H */
+--- libworkman/include/workman/workman_defs.h
++++ libworkman/include/workman/workman_defs.h
+@@ -0,0 +1,30 @@
++#ifndef WORKMAN_DEFS_H
++#define WORKMAN_DEFS_H
++/*
++ * $Id: ascd-0.13.2-5-debianbuild.patch,v 1.1 2012/02/15 20:15:25 rpm_speedy Exp $
++ *
++ * This file is part of WorkMan, the civilized CD player program
++ * (c) 1991-1997 by Steven Grimm (original author)
++ * (c) by Dirk Försterling (current 'author' = maintainer)
++ * The maintainer can be contacted by his e-mail address:
++ * milliByte@DeathsDoor.com 
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * #defined CONSTANTS
++ * 
++ * Too bad this file seems to be so empty...
++ *
++ */
++
++#include "wm_version.h"
++
++#endif /* WORKMAN_DEFS_H */
+--- libworkman/include/workman/wm_database.h
++++ libworkman/include/workman/wm_database.h
+@@ -0,0 +1,44 @@
++#ifndef WM_DATABASE_H
++#define WM_DATABASE_H
++/*
++ * $Id: ascd-0.13.2-5-debianbuild.patch,v 1.1 2012/02/15 20:15:25 rpm_speedy Exp $
++ *
++ * This file is part of WorkMan, the civilized CD player library
++ * (c) 1991-1997 by Steven Grimm (original author)
++ * (c) by Dirk Försterling (current 'author' = maintainer)
++ * The maintainer can be contacted by his e-mail address:
++ * milliByte@DeathsDoor.com 
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the Free
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ *
++ * Prototypes for WorkMan database
++ * 
++ * This is just one more step to a more modular and understandable code.
++ */
++
++
++#define WM_DB_SAVE_ERROR	1
++#define WM_DB_SAVE_DISABLED	2
++ 
++int wm_db_get_playnew( void );
++void	split_workmandb( void );
++int	save( void );
++void	load( void );
++void	load_settings( void );
++
++extern int wm_db_save_disabled;
++extern int cur_playnew;
++
++#endif /* WM_DATABASE_H */
+--- libworkman/cddb.c	1999-05-27 01:37:10.000000000 -0500
++++ libworkman/cddb.c	2012-02-15 10:02:51.000000000 -0600
+@@ -34,6 +34,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <strings.h>
++#include <string.h>
+ #include <unistd.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>
+@@ -49,6 +50,12 @@
+ #include "include/wm_cdinfo.h"
+ #include "include/wm_helpers.h"
+ 
++#ifdef DEBUG
++#define Trace(x)  fprintf x
++#else
++#define Trace(x)
++#endif
++
+ /*
+  * This is for identifying WorkMan at CDDB servers
+  */
+@@ -57,41 +64,9 @@
+ 
+ struct wm_cddb cddb;
+ 
+-int cur_cddb_protocol;
+-char *cur_cddb_server;
+-char *cur_cddb_mail_adress;
+-char *cur_cddb_path_to_cgi;
+-char *cur_cddb_proxy_server;
+-
+ int Socket;
+ FILE *Connection;
+ 
+-/*
+- *
+- */
+-void
+-cddb_cur2struct(void)
+-{
+-	cddb.protocol = cur_cddb_protocol;
+-	strcpy(cddb.cddb_server,  cur_cddb_server);
+-	strcpy(cddb.mail_adress,  cur_cddb_mail_adress);
+-	strcpy(cddb.path_to_cgi,  cur_cddb_path_to_cgi);
+-	strcpy(cddb.proxy_server, cur_cddb_proxy_server);
+-} /* cddb_cur2struct() */
+-
+-/*
+- *
+- */
+-void
+-cddb_struct2cur(void)
+-{
+-	cur_cddb_protocol = cddb.protocol;
+-	cur_cddb_server =       (cddb.cddb_server);
+-	cur_cddb_mail_adress =  (cddb.mail_adress);
+-	cur_cddb_path_to_cgi =  (cddb.path_to_cgi);
+-	cur_cddb_proxy_server = (cddb.proxy_server);
+-} /* cddb_struct2cur() */
+-
+ 
+ /*
+  * Subroutine from cddb_discid
+@@ -146,23 +121,17 @@
+ 	return ((n % 0xff) << 24 | t << 8 | thiscd.ntracks);
+ } /* cddb_discid() */
+ 
+-/*
+- * Split a string into two components according to the first occurance of
+- * the delimiter.
+- */
+-char *
+-string_split(char *line, char delim)
++
++/* Split string at delim */
++char *string_split(char *line, char delim)
+ {
+ 	char *p1;
+ 
+-	for (p1=line;*p1;p1++)
+-	{
+-		if(*p1 == delim)
+-		{
++	p1 = strchr(line, (int)delim);
++	if (p1) {
+ 			*p1 = 0;
+ 			return ++p1;
+ 		}
+-	}
+ 	return (NULL);
+ } /* string_split() */
+ 
+@@ -176,8 +145,18 @@
+ 	char mail[84],*host;
+ 	
+ 	strcpy(mail,cddb.mail_adress);
+-	host=string_split(mail,'@');
+-	
++	host = string_split(mail,'@');
++	if (!host) {
++	    int len;
++	    if (getlogin())
++		strncpy(mail, getlogin(), 83);
++	    else
++		strcpy(mail, "nobody");
++	    len = strlen(mail);
++	    host = mail + len + 1;
++	    gethostname(host, 83-len);
++	    Trace((stderr, "default email %s@%s\n", mail, host)); 
++	}
+ 	sprintf(line,"%shello%c%s%c%s%c%s%c%s",
+ 		delim == ' ' ? "cddb " : "&",
+ 		delim == ' ' ? ' ' : '=',
+@@ -193,26 +172,40 @@
+ int
+ connect_open(void)
+ {
+-	char *host;
++	char host[200], *prt;
+ 	struct hostent *hp;
+ 	struct sockaddr_in soc_in;
+-	int port;
++	int port = 0;
++
++	Trace((stderr, "opening connection to cddb server\n"));
++
++	/* in case of failure */
++	Connection = NULL;
+ 	
+ 	if(cddb.protocol == 3) /* http proxy */
+-	  host = strdup(cddb.proxy_server);
++	    strcpy(host, cddb.proxy_server);
+ 	else
+-	  host = strdup(cddb.cddb_server);
+-	/*	
+-	 * t=string_split(host,':'); 
+-	 */
+-	port=atoi(string_split(host,':'));
++	    strcpy(host, cddb.cddb_server);
++
++	Trace((stderr, "host %s\n", host));
++
++	prt = string_split(host,':'); 
++	if (prt)
++	    port = atoi(prt);
++	
++	/* Defaults */
+ 	if(!port)
+-	  port=8880;
++	    if (cddb.protocol == 1)
++		port = 888;
++	    else
++		port = 80;
++	if (cddb.path_to_cgi[0] == 0)
++	    sprintf(cddb.path_to_cgi, "/~cddb/cddb.cgi");
+ 
+-	printf("%s:%d\n",host,port);
+-	hp  =gethostbyname(host);
++	Trace((stderr, "%s : %d\n",host,port));
+   
+-	if (hp == NULL)
++	hp = gethostbyname(host);
++	if (!hp)
+ 	{
+ 		static struct hostent def;
+ 		static struct in_addr defaddr;
+@@ -220,10 +213,12 @@
+ 		static char namebuf[128];
+ 		int inet_addr();
+ 		
++		Trace((stderr, "gethostbyname failed: %s\n", host));
++		
+ 		defaddr.s_addr = inet_addr(host);
+ 		if (defaddr.s_addr == -1) 
+ 		{
+-			printf("unknown host: %s\n", host);
++			Trace((stderr, "unknown host: %s\n", host));
+ 			return (-1);
+ 		}
+ 		strcpy(namebuf, host);
+@@ -234,6 +229,7 @@
+ 		def.h_aliases = 0;
+ 		hp = &def;
+ 	}
++	
+ 	soc_in.sin_family = hp->h_addrtype;
+ 	bcopy(hp->h_addr, (char *)&soc_in.sin_addr, hp->h_length);
+ 	soc_in.sin_port = htons(port);
+@@ -274,6 +270,8 @@
+ {
+ 	char c;
+     
++	/* FIXME timeout, return empty string (not null) */
++    
+ 	while ((c = getc(Connection)) != '\n')
+ 	{
+ 		*line = c;
+@@ -298,15 +296,15 @@
+ 	{
+ 		connect_getline(tempbuf);
+ 		
+-		t=string_split(tempbuf,'=');
+-		if(t != NULL)
++		t = string_split(tempbuf,'=');
++		if (t != NULL)
+ 		{
+ 			type=tempbuf[0];
+ 			
+ 			if(strncmp("TITLE",tempbuf+1,5))
+ 			  continue;
+ 			
+-			if('D' == type)
++			if(type == 'D')
+ 			{
+ 				/*
+ 				 * Annahme: "Interpret / Titel" ist falsch.
+@@ -326,18 +324,11 @@
+ 				}
+ 				strcpy(cd->artist,t);
+ 			}
+-			
+-			if('T' == type)
++			else if(type == 'T')
+ 			{
+ 				trknr=atoi(tempbuf+6);
+-				/*
+-				 * printf("Track %d:%s\n",trknr,t);
+-				 */
+ 				wm_strmcpy(&cd->trk[trknr].songname,t);
+ 			}
+-			/*
+-			 * fprintf(stderr, "%s %s\n",tempbuf,t);
+-			 */
+ 		}
+ 	}
+ } /* connect_read_entry() */
+@@ -372,22 +363,22 @@
+ 	char tempbuf[2000];
+ 	
+ 	write(Socket, "GET ", 4);
+-	printf("GET ");
++	Trace((stderr, "GET "));
+ 	if(cddb.protocol == 3)
+ 	{
+ 		write(Socket, "http://", 7);
+ 		write(Socket, cddb.cddb_server, strlen(cddb.cddb_server));
+-		printf("http://%s",cddb.cddb_server);
++		Trace((stderr, "http://%s",cddb.cddb_server));
+ 	}
+ 	write(Socket, cddb.path_to_cgi, strlen(cddb.path_to_cgi));
+ 	write(Socket, "?cmd=" ,5);
+ 	write(Socket, line, strlen(line));
+-	printf("%s?cmd=%s",cddb.path_to_cgi,line);
++	Trace((stderr, "%s?cmd=%s",cddb.path_to_cgi,line));
+ 	string_makehello(tempbuf,'+');
+ 	write(Socket, tempbuf, strlen(tempbuf));
+-	printf("%s",tempbuf);
++	Trace((stderr, "%s",tempbuf));
+ 	write(Socket, "&proto=1 HTTP/1.0\n\n", 19);
+-	printf("&proto=1 HTTP/1.0\n");
++	Trace((stderr, "&proto=1 HTTP/1.0\n"));
+ 	do
+ 	  connect_getline(tempbuf);
+ 	while(strcmp(tempbuf,""));
+@@ -406,120 +397,111 @@
+ 
+ /*
+  * The main routine called from the ui
++ * returns 0 on success, -1 on err
+  */
+-void
++int 
+ cddb_request(void)
+ {
+ 	int i;
+ 	char tempbuf[2000];
+ 	extern int cur_ntracks;
+-	
+-	int status;
++	int status, rv = 0;
+ 	char category[20];
+ 	unsigned int id;
+ 	
+-	strcpy(cddb.cddb_server,"localhost:888");
+-	strcpy(cddb.mail_adress,"svolli@bigfoot.com");
+-	/*
+-	 * cddb.protocol = 1;
+-	 */
+ 	wipe_cdinfo();
+ 	
+ 	switch(cddb.protocol)
+ 	{
+ 	 case 1: /* cddbp */
+-		printf("USING CDDBP\n");
+-		printf("open\n");
+-		connect_open();
++		Trace((stderr, "USING CDDBP\n"));
++		Trace((stderr, "open\n"));
++		if (connect_open()) { 
++		    Trace((stderr, "connect failed.\n"));
++		    return -1;
++		}
+ 		connect_getline(tempbuf);
+-		printf("[%s]\n",tempbuf);
+-		/*
+-		 * if(atoi(tempbuf) == 201) return;
+-		 */
+-
+-		/*
+-		 * strcpy(tempbuf,"cddb hello svolli bigfoot.com Eierkratzer eins");
+-		 */
++		Trace((stderr, "[%s]\n",tempbuf));
++
+ 		string_makehello(tempbuf,' ');
+-		fprintf(stderr, "%s\n", tempbuf);
++		Trace((stderr, "%s\n", tempbuf));
+ 		cddbp_send(tempbuf);
+ 		connect_getline(tempbuf);
+-		printf("[%s]\n",tempbuf);
++		Trace((stderr, "[%s]\n",tempbuf));
+ 		
+-		printf("query\n");
++		Trace((stderr, "query\n"));
+ 		sprintf(tempbuf, "cddb query %08x %d",thiscd.cddbid,thiscd.ntracks);
+ 		for (i = 0; i < cur_ntracks; i++)
+ 		  if (thiscd.trk[i].section < 2)
+ 		    sprintf(tempbuf + strlen(tempbuf), " %d",
+ 			    thiscd.trk[i].start);
+ 		sprintf(tempbuf + strlen(tempbuf), " %d\n", thiscd.length);
+-		printf(">%s<\n",tempbuf);
++		Trace((stderr, ">%s<\n",tempbuf));
+ 		cddbp_send(tempbuf);
+ 		connect_getline(tempbuf);
+-		printf("[%s]\n",tempbuf);
++		Trace((stderr, "[%s]\n",tempbuf));
+ 		
+ 		status=atoi(tempbuf);
+-		/*
+-		 * fprintf(stderr, "status:%d\n",status);
+-		 * fprintf(stderr,"category:%s\n",category);
+-		 * fprintf(stderr,"id:%s\n",id);
+-		 */
++		Trace((stderr, "status:%d\n",status));
++	
+ 		if(status == 200) /* Exact match */
+ 		{
+ 			sscanf(tempbuf,"%d %s %08x",&status,category,&id);
+ 			cddbp_read(category,id);
+ 			connect_read_entry();
+ 		}
+-		
+-		if(status == 211) /* Unexact match, multiple possible
++		else if(status == 211) /* Unexact match, multiple possible
+ 				   * Hack: always use first. */
+ 		{
+ 			connect_getline(tempbuf);
++			Trace((stderr, "[%s]\n",tempbuf));
+ 			sscanf(tempbuf,"%s %08x",category,&id);
+-			while(strcmp(tempbuf,"."))
++			while(strcmp(tempbuf,".")) {
+ 			  connect_getline(tempbuf);
++			  Trace((stderr, "ignoring [%s]\n",tempbuf));
++			}
+ 			cddbp_read(category,id);
+ 			connect_read_entry();
+ 		}
+-		
++		else 
++		    rv = -1;
+ 		cddbp_send("quit");
+ 		connect_close();
+-		printf("close\n");
+-		break;
++		Trace((stderr, "close\n"));
++		return rv;
+ 	 case 2: /* http */
+ 	 case 3: /* http proxy */
+-		printf("USING HTTP%s\n",
+-		       (cddb.protocol == 3) ? " WITH PROXY" : "");
+-		printf("query\n");
++		Trace((stderr, "USING HTTP%s\n",
++		       (cddb.protocol == 3) ? " WITH PROXY" : ""));
++		Trace((stderr, "query\n"));
+ 		sprintf(tempbuf, "cddb+query+%08x+%d",thiscd.cddbid,thiscd.ntracks);
+ 		for (i = 0; i < cur_ntracks; i++)
+ 		  if (thiscd.trk[i].section < 2)
+ 		    sprintf(tempbuf + strlen(tempbuf), "+%d",
+ 			    thiscd.trk[i].start);
+ 		sprintf(tempbuf + strlen(tempbuf), "+%d", thiscd.length);
+-		printf(">%s<\n",tempbuf);
+-		connect_open();
++		Trace((stderr, ">%s<\n",tempbuf));
++		if (connect_open()) { 
++		    Trace((stderr, "connect failed.\n"));
++		    return -1;
++		}
+ 		http_send(tempbuf);
+ 		connect_getline(tempbuf);
+-		printf("[%s]\n",tempbuf);
++		Trace((stderr, "[%s]\n",tempbuf));
+ 		
+ 		status=atoi(tempbuf);
+-		/*
+-		 * fprintf(stderr, "status:%d\n",status);
+-		 * fprintf(stderr, "category:%s\n",category);
+-		 * fprintf(stderr, "id:%s\n",id);
+-		 */
+-
+ 		if(status == 200) /* Exact match */
+ 		{
+ 			connect_close();
+-			connect_open();
++			if (connect_open()) { 
++			    Trace((stderr, "connect failed.\n"));
++			    return -1;
++			}	
+ 			sscanf(tempbuf,"%d %s %08x",&status,category,&id);
+ 			http_read(category,id);
+ 			connect_read_entry();
+ 		}
+-		
+-		if(status == 211) /* Unexact match, multiple possible
++		else if(status == 211) /* Unexact match, multiple possible
+ 				   * Hack: always use first. */
+ 		{
+ 			connect_getline(tempbuf);
+@@ -527,15 +509,24 @@
+ 			while(strcmp(tempbuf,"."))
+ 			  connect_getline(tempbuf);
+ 			connect_close();
+-			connect_open();
++			if (connect_open()) { 
++			    Trace((stderr, "connect failed.\n"));
++			    return -1;
++			}	
+ 			http_read(category,id);
+ 			connect_read_entry();
+ 		}
++		else 
++		    rv = -1;
+ 		/* moved close above break */
+ 		connect_close();
+-		break;
++		return rv;
+ 	 default: /* off */
+ 		break;
+ 	}
++	return -1;
+ } /* cddb_request() */
+ 
++
++
++

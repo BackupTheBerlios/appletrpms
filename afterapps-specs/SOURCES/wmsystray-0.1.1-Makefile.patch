@@ -1,0 +1,27 @@
+--- Makefile	2004-02-29 22:35:47.000000000 -0600
++++ Makefile	2012-02-14 00:57:52.000000000 -0600
+@@ -1,7 +1,8 @@
+ prefix=/usr
+ bindir = ${prefix}/bin
+ mandir = ${prefix}/share/man
+-INSTALL = /bin/install
++destdir =
++INSTALL = /usr/bin/install
+ INSTALLPROG = ${INSTALL} -m 0755
+ INSTALLMAN = ${INSTALL} -m 0644
+ 
+@@ -15,10 +16,10 @@
+ 	rm -f wmsystray.deb
+ 
+ install: wmsystray/wmsystray
+-	mkdir -p ${bindir}
+-	mkdir -p ${mandir}/man1
+-	${INSTALLPROG} wmsystray/wmsystray ${bindir}/wmsystray
+-	${INSTALLMAN} doc/wmsystray.1 ${mandir}/man1/wmsystray.1
++	mkdir -p ${destdir}${bindir}
++	mkdir -p ${destdir}${mandir}/man1
++	${INSTALLPROG} wmsystray/wmsystray ${destdir}${bindir}/wmsystray
++	${INSTALLMAN} doc/wmsystray.1 ${destdir}${mandir}/man1/wmsystray.1
+ 
+ deb: wmsystray/wmsystray
+ 	echo 2.0 > debian-binary

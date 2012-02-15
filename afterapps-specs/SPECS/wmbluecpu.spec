@@ -35,7 +35,7 @@ right corner, and a usage history chart at the bottom.
 %patch1
 
 %build
-make PREFIX=%{_prefix}
+make %{?_smp_mflags} PREFIX=%{_prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT

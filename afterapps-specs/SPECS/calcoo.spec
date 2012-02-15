@@ -44,7 +44,8 @@ other calculator programs are:
 
 %build
 ./configure --prefix=%{_prefix} --mandir=%{_mandir}
-make LIBS=" -lm"
+
+make %{?_smp_mflags} LIBS=" -lm"
 
 %install
 rm -rf $RPM_BUILD_ROOT

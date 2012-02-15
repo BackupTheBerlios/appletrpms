@@ -35,7 +35,7 @@ rm -rf asmon/*.o
 rm -rf wmgeneral/*.o
 
 cd asmon
-make PREFIX=%{_prefix}
+make  %{?_smp_mflags} PREFIX=%{_prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT

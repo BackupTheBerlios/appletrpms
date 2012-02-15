@@ -35,19 +35,19 @@ docking.
 CFLAGS="-lX11" \
 ./configure --prefix=%{_prefix} --libdir=%{_libdir}
 
-make
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
-install -s -m 755 src/peksystray $RPM_BUILD_ROOT%{_bindir}
+
+make install DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
+%{_bindir}/peksystray
 %doc AUTHORS COPYING ChangeLog NEWS README THANKS TODO
 
 %changelog

@@ -1,59 +1,71 @@
-%define name Temperature.app
-%define version 1.4
-%define release 12%{?dist}
+%define		name Temperature.app
+%define		version 1.5
+%define		release 1%{?dist}
 
-Summary: WM applet gets temperature every 15 minutes
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: http://www.fukt.bsnet.se/~per/temperature/
-Source0: http://www.fukt.bsnet.se/~per/temperature/%{name}-%{version}.tar.gz
-Patch0: Temperature.app-1.4-frog-6.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: wget xorg-x11-fonts-ISO8859-1-75dpi xorg-x11-fonts-ISO8859-1-100dpi freetype
-BuildRequires: gcc-c++
+Summary:	WM applet gets temperature every 15 minutes
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		AfterStep/Applets
+# The original homepage and download URLs are active, but dated.
+#URL:		http://www.fukt.bsnet.se/~per/temperature/
+#Source0:	http://www.fukt.bsnet.se/~per/temperature/%{name}-%{version}.tar.gz
+# Get newer version (with Frog's patch) from dockapps.windowmaker.org.
+URL:		http://dockapps.windowmaker.org/file.php/id/86
+Source0:	http://dockapps.windowmaker.org/download.php/id/816/%{name}-%{version}.tar.gz
+Patch0:		%{name}-%{version}-Makefile.patch
+Patch1:		%{name}-%{version}-xpm.patch
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	freetype
+Requires:	glibc
+Requires:	libgcc
+Requires:	libstdc++
+Requires:	libX11
+Requires:	libXext
+Requires:	libXft
+Requires:	libXpm
+Requires:	wget   
+Requires:	xorg-x11-fonts-ISO8859-1-100dpi
+Requires:	xorg-x11-fonts-ISO8859-1-75dpi
+BuildRequires:	gcc-c++
+BuildRequires:	glibc-devel
+BuildRequires:	libstdc++-devel
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXft-devel
+BuildRequires:	libXpm-devel
 
 %description
 Temperature.app is a Window Maker applet which fetches local
-temperature information every 15 minutes from
-
-    http://weather.noaa.gov
-
-and displays it (in Celsius or Fahrenheit).
-
-The v6 patch from Frog at:
-
-    http://www.unetz.com/schaepe/DOCKAPPS/dockapps.html
-
-has been added to allow for pressure, wind, and windchill.
-
+temperature information from http://weather.noaa.gov every 15 
+minutes and displays it (in Celsius or Fahrenheit).
 
 %prep
 %setup -q
-
 %patch0
+%patch1
 
 %build
-make X11_BINDIR=%{_bindir}
+make %{?_smp_mflags} X11_BINDIR=%{_bindir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
-
-make install DESTDIR=$RPM_BUILD_ROOT
+make install-x11 X11_BINDIR=%{_bindir} DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
-%doc ChangeLog INSTALL README COPYING
+%doc ChangeLog README COPYING
+%{_bindir}/Temperature.app
 
 %changelog
+* Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.5-1
+- new version.
+
 * Fri Jul 31 2009 J. Krebs <rpm_speedy@yahoo.com> - 1.4-12
 - updated URLs.
 

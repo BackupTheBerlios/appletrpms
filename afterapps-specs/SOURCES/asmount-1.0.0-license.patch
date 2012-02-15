@@ -1,0 +1,54 @@
+--- LICENSE	1969-12-31 18:00:00.000000000 -0600
++++ LICENSE	2012-02-13 22:16:49.000000000 -0600
+@@ -0,0 +1,51 @@
++Asmount is based on Asmodem which in turn is based on asmail.
++
++Asmail is assigned the GPLv2 License.
++
++
++**** From asmount.c: ****
++
++/*****************************************************************************/
++/*	asmount - AfterStep Mounter					     */
++/*	Version 1.0.0						             */
++/*	By Erik Johnsson						     */
++/*                                                                           */
++/*	zaphod@linux.nu 						     */
++/*	http://www.cs.hope.edu/~malda/					     */
++/*      based on AfterStep Modem                  			     */
++/*									     */
++/*****************************************************************************/
++
++
++**** From asmodem: ****
++
++COPYRIGHT
++---------
++        All asmodem type modifications are Copyright(c) 1996 Rob
++	Malda.
++
++	This program is based on Asmail which is
++	Copyright (c) 1996 by Per Liden. No guarantees 
++	or warranties are provided, use this program at your own risk. 
++	It may be freely copied and used as long as this copyright-notice 
++	is left intact.
++
++
++**** From asmail: ****
++
++asmail is the mailbox monitor utility for X Windows.
++Copyright (c) 2002-2004 Albert Dorofeev <albert@tigr.net>
++
++   This program is free software; you can redistribute it and/or modify
++   it under the terms of the GNU General Public License as published by
++   the Free Software Foundation; version 2 dated June, 1991.
++
++   This program is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++   GNU General Public License for more details.
++
++   You should have received a copy of the GNU General Public License
++   along with this program;  if not, write to the Free Software
++   Foundation, Inc., 675 Mass Ave., Cambridge, MA 02139, USA.
++

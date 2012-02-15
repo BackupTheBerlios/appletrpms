@@ -240,7 +240,7 @@ CFLAGS=$RPM_OPT_FLAGS \
 	--with-helpcommand="urxvt -e man"         \
 	--with-imageloader="feh --bg-center"
 
-make
+make %{?_smp_mflags}
 
 if [[ -x /usr/bin/sgml2html ]]; then sgml2html doc/afterstep.sgml; fi
 cd src/ASDocGen && ./ASDocGen -l log.html -t html && cd ../..

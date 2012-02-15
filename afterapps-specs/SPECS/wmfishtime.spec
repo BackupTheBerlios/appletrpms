@@ -87,7 +87,7 @@ If $MAIL is not set, nothing happens.
 %patch2
 
 %build
-make PREFIX=%{_prefix} MANDIR=%{_mandir}
+make  %{?_smp_mflags} PREFIX=%{_prefix} MANDIR=%{_mandir}
 
 %install
 rm -rf $RPM_BUILD_ROOT

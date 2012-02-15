@@ -30,7 +30,8 @@ graphically see (and set) the power management status of his laptop.
 
 %build
 ./configure --exec-prefix=%{_prefix} --prefix=%{_prefix} --includedir=%{_includedir} CPUFLAGS="-march=athlon64"
-make
+
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT

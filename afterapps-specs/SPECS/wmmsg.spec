@@ -10,7 +10,6 @@ License:	GPLv2+
 Group:		AfterStep/Applets
 URL:		http://swapspace.net/~matt/wmmsg/
 Source0:	http://swapspace.net/~matt/wmmsg/%{name}-%{version}.tar.gz
-Source1:	wmmsgrc-example
 Patch0:		%{name}-%{version}-alt-desktop.patch
 Patch1:		%{name}-%{version}-use_gtk2.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -49,21 +48,20 @@ or any other useful location. Works with Gaim, X-Chat, etc.
 
 %build
 ./configure --prefix=%{_prefix} --mandir=%{_mandir}
-make
+
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 make install DESTDIR=$RPM_BUILD_ROOT
 
-cp %{SOURCE1} .
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING ChangeLog README plugins/* wmmsgrc-example
+%doc AUTHORS COPYING ChangeLog README plugins/* wmmsgrc
 %{_bindir}/wmmsg
 %{_bindir}/wmmsg_notify
 %{_mandir}/man1/wmmsg.1.gz

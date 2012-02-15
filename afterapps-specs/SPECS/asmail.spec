@@ -1,6 +1,6 @@
 %define		name asmail
 %define		version 2.1
-%define		release 2%{?dist}
+%define		release 3%{?dist}
 
 Summary:	Afterstep Mail Applet
 Name:		%{name}
@@ -11,9 +11,20 @@ Group:		AfterStep/Applets
 URL:		http://tigr.net/afterstep/view.php?applet=asmail/data
 Source0:	http://tigr.net/afterstep/download/%{name}/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires:	libICE libSM libX11 libXext libXpm openssl
-BuildRequires:	libICE-devel libSM-devel libX11-devel
-BuildRequires:	libXext-devel libXpm-devel openssl-devel
+Requires:	glibc
+Requires:	libICE
+Requires:	libSM
+Requires:	libX11
+Requires:	libXext
+Requires:	libXpm
+Requires:	openssl
+BuildRequires:	glibc-devel
+BuildRequires:	libICE-devel
+BuildRequires:	libSM-devel
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXpm-devel
+BuildRequires:	openssl-devel
 
 %description
 The application is an AfterStep look & feel multiple e-mail
@@ -38,7 +49,10 @@ animation for the status update.
 %build
 ./configure --prefix=%{_prefix}
 
-make LIBS_X="-L%{_libdir} -lX11 -lSM -lICE -lXpm -lXext -lcrypto"
+make  %{?_smp_mflags} \
+	AFTER_MAN_DIR=%{_mandir}/man1 \
+	AFTER_RCMAN_DIR=%{_mandir}/man5 \
+	LIBS_X="-L%{_libdir} -lX11 -lSM -lICE -lXpm -lXext -lcrypto"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -59,7 +73,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc CHANGES INSTALL LICENSE README TODO
+%doc CHANGES LICENSE README TODO
 %{_bindir}/asmail
 %{_datadir}/%{name}/pixmaps/e-no.xpm
 %{_datadir}/%{name}/pixmaps/e0.xpm
@@ -130,6 +144,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man5/asmailrc.*
 
 %changelog
+* Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> 2.1-3
+- updated spec file.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> 2.1-2
 - cleaned up spec file.
 

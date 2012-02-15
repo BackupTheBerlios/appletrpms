@@ -46,7 +46,7 @@ A lightweight GTK2-based systray for UNIX desktop.
 %setup -q -n sargon-trayer-srg-%{gitver}
 
 %build
-make PREFIX=%{_prefix}
+make %{?_smp_mflags} PREFIX=%{_prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT

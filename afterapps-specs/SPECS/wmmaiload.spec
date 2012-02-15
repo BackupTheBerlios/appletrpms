@@ -51,8 +51,9 @@ wmmaiload monitors your mbox mail files for new and total mails.
 %patch2
 
 %build
-./configure
-make
+./configure --prefix=%{_prefix} 
+
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT

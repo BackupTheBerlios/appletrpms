@@ -33,12 +33,16 @@ Monitors:
 
 %build
 cd wmsm
-make
+
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 mkdir -p $RPM_BUILD_ROOT%{_bindir}
+
 cd wmsm
+
 install -s -m 755 wmsm $RPM_BUILD_ROOT%{_bindir}
 
 %clean

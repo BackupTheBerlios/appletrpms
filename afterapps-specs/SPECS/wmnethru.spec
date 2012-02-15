@@ -78,7 +78,7 @@ mouse button.
 %patch1
 
 %build
-make PREFIX=%{_prefix}
+make %{?_smp_mflags} PREFIX=%{_prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -91,7 +91,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %doc ChangeLog README
-%{_bindir}/*
+%{_bindir}/wmnethru
 
 %changelog
 * Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> 0.1.1-5

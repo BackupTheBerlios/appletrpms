@@ -1,0 +1,23 @@
+--- wmtimer/Makefile	2004-01-04 18:30:50.000000000 -0600
++++ wmtimer/Makefile	2012-02-13 11:32:20.000000000 -0600
+@@ -1,6 +1,9 @@
+ CC     = gcc
+-LIBDIR = -L/usr/X11R6/lib -L/usr/lib
++LIBDIR = -L/usr/lib -L/usr/lib64
+ LIBS   = -lXpm -lXext -lX11 -lpthread `pkg-config --libs gtk+-2.0`
++DESTDIR=
++PREFIX = /usr
++BINDIR = $(PREFIX)/bin
+ CFLAGS = `pkg-config --cflags gtk+-2.0`
+ 
+ OBJS =	wmtimer.o \
+@@ -16,7 +19,8 @@
+ 	$(CC) -Wall -g -o wmtimer $^ $(LIBDIR) $(LIBS)
+ 
+ install:
+-	cp wmtimer /usr/local/bin/
++	mkdir -p $(DESTDIR)$(BINDIR)
++	install -m 755 wmtimer $(DESTDIR)$(BINDIR)
+ 
+ clean:
+ 	rm -f wmtimer $(OBJS)

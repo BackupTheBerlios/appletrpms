@@ -45,17 +45,18 @@ cd wmtz
 
 make clean
 
-make LIBPATH=%{_libdir}
+make %{?_smp_mflags} \
+	LIBPATH=%{_libdir} \
+	PREFIX=%{_prefix} \
+	MANDIR=%{_mandir} \
+	SYSCONFDIR=%{_sysconfdir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
-mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}
-install -s -m 755 wmtz/wmtz $RPM_BUILD_ROOT%{_bindir}
-install -m 644 wmtz/wmtz.1 $RPM_BUILD_ROOT%{_mandir}/man1/
-install -m 644 wmtz/wmtzrc $RPM_BUILD_ROOT%{_sysconfdir}
+cd wmtz
+
+make install DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT

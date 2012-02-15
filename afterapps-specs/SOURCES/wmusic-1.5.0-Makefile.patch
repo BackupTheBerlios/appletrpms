@@ -1,0 +1,25 @@
+--- src/Makefile.in	2004-02-26 20:53:10.000000000 -0600
++++ src/Makefile.in	2012-02-15 13:13:46.000000000 -0600
+@@ -4,6 +4,8 @@
+ 
+ PREFIX = @prefix@
+ 
++DESTDIR =
++
+ SRCS = wmusic.c ../libdockapp/dacallback.c ../libdockapp/dacolor.c \
+ 	../libdockapp/daevent.c ../libdockapp/damain.c \
+ 	../libdockapp/dapixmap.c ../libdockapp/darect.c
+@@ -18,11 +20,8 @@
+ all:		wmusic
+ 
+ install:	all
+-	if test ! -d $(PREFIX); then mkdir -p $(PREFIX); fi
+-
+-	if test ! -d $(PREFIX)/bin; then mkdir -p $(PREFIX)/bin; fi
+-
+-	@INSTALL@ -c -m 755 -s wmusic $(PREFIX)/bin
++	mkdir -p $(DESTDIR)$(PREFIX)/bin
++	@INSTALL@ -c -m 755 -s wmusic $(DESTDIR)$(PREFIX)/bin
+ 
+ wmusic:		$(OBJS) $(IFLAGS)
+ 	gcc -g -o wmusic $(OBJS) $(LDFLAGS)

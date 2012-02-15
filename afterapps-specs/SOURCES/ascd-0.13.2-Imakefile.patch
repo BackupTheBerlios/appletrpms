@@ -1,0 +1,33 @@
+--- ascd/Imakefile	1999-09-04 18:24:23.000000000 -0500
++++ ascd/Imakefile	2012-02-15 00:08:40.000000000 -0600
+@@ -5,11 +5,11 @@
+ BINDIR		= CBINDIR
+ MANDIR		= CMANDIR
+ THEMESDIR	= CTHDIR
+-MOREFLAGS	= -I/usr/local/include -I/usr/X11R6/include -I.
++MOREFLAGS	= -I/usr/local/include -I/usr/include -I.
+ CCOPTIONS	= $(MOREFLAGS)
+ SYS_LIBRARIES	= $(XLIB) -lXpm
+ 
+-LOCAL_LIBRARIES = -L../libworkman -lworkman -L/usr/local/lib
++LOCAL_LIBRARIES = -L../libworkman -lworkman -L/usr/lib -L/usr/lib64
+ 
+ SRCS_OPT1 =
+ SRCS_OPT2 =
+@@ -54,10 +54,10 @@
+ 
+ install::
+ 	@echo "Installing themes..."
+-	@cp themes/themes.tar $(THEMESDIR)
+-	@cp themes/default.tar $(THEMESDIR)
+-	@cd $(THEMESDIR) ; tar xf themes.tar
+-	@cd $(THEMESDIR) ; tar xf default.tar
+-	@cd $(THEMESDIR) ; rm themes.tar
+-	@cd $(THEMESDIR) ; rm default.tar
++	@cp themes/themes.tar $(DESTDIR)$(THEMESDIR)
++	@cp themes/default.tar $(DESTDIR)$(THEMESDIR)
++	@cd $(DESTDIR)$(THEMESDIR) ; tar xf themes.tar
++	@cd $(DESTDIR)$(THEMESDIR) ; tar xf default.tar
++	@cd $(DESTDIR)$(THEMESDIR) ; rm themes.tar
++	@cd $(DESTDIR)$(THEMESDIR) ; rm default.tar
+ 	@echo "Done."

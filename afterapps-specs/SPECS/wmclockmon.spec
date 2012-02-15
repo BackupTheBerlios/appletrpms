@@ -84,11 +84,9 @@ a configuration tool for the package.
 %patch0
 
 %build
-#autoreconf -i
-#automake-1.4 --add-missing
-
 ./configure --prefix=%{_prefix} --mandir=%{_mandir}
-make
+
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT

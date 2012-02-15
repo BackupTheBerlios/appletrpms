@@ -75,7 +75,8 @@ external command.
 
 %build
 ./configure --prefix=%{_prefix} --mandir=%{_mandir}
-make X_EXTRA_LIBS=" -lm"
+
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -87,9 +88,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
-%{_mandir}/man1/*
 %doc ChangeLog README HINTS example.conf
+%{_bindir}/wmweather+
+%{_mandir}/man1/wmweather+.*
 
 %changelog
 * Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 2.13-2

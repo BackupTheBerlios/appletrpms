@@ -1,8 +1,8 @@
 %define name	hvclock
 %define version	1.0.2
-%define release	1%{?dist}
+%define release	2%{?dist}
 
-Summary:	hvclock is a "DockApp" analog clock and calendar application
+Summary:	a dockapp analog clock and calendar application
 Name:		%name
 Version:	%version
 Release:	%release
@@ -11,6 +11,32 @@ Group:		AfterStep/Applets
 URL:		http://www2.hugovil.com:8080/en/hvclock/
 Source0:	%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	atk
+Requires:	cairo
+Requires:	fontconfig
+Requires:	freetype
+Requires:	gdk-pixbuf2
+Requires:	glib2
+Requires:	glibc
+Requires:	gtk2
+Requires:	libICE
+Requires:	libpng
+Requires:	libSM
+Requires:	libX11
+Requires:	pango
+BuildRequires:	atk-devel
+BuildRequires:	cairo-devel
+BuildRequires:	fontconfig-devel
+BuildRequires:	freetype-devel
+BuildRequires:	gdk-pixbuf2-devel
+BuildRequires:	glib2-devel
+BuildRequires:	glibc-devel
+BuildRequires:	gtk2-devel
+BuildRequires:	libICE-devel
+BuildRequires:	libpng-devel
+BuildRequires:	libSM-devel
+BuildRequires:	libX11-devel
+BuildRequires:	pango-devel
 
 %description
 hvclock is a "DockApp" analog clock and calendar application.
@@ -21,7 +47,8 @@ Versions 1.0.0 and later provide anti-aliasing via Cairo.
 
 %build
 ./configure --prefix=%{_prefix} --mandir=%{_mandir}
-make
+
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -33,11 +60,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
-%{_mandir}/man1/*
-%doc AUTHORS COPYING ChangeLog INSTALL NEWS README TODO
+%{_bindir}/hvclock
+%{_mandir}/man1/hvclock.*
+%doc AUTHORS COPYING ChangeLog NEWS README TODO
 
 %changelog
+* Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.0.2-2
+- updated spec file.
+
 * Wed Mar 23 2011 J. Krebs <rpm_speedy@yahoo.com> - 1.0.2-1
 - new version.
 

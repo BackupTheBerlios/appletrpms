@@ -1,16 +1,30 @@
-%define name salmon
-%define version 1.2.2
-%define release 5%{?dist}
+%define		name salmon
+%define		version 1.2.2
+%define		release 6%{?dist}
 
-Summary: Still Another Load MONitor
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: http://www.tigr.net/afterstep/view.php?applet=salmon/data
-Source0: http://tigr.net/afterstep/download/salmon/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:	Sill Another Load MONitor
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2
+Group:		AfterStep/Applets
+URL:		http://www.tigr.net/afterstep/view.php?applet=salmon/data
+Source0:	http://tigr.net/afterstep/download/salmon/%{name}-%{version}.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	glibc
+Requires:	libICE
+Requires:	libjpeg-turbo
+Requires:	libSM
+Requires:	libX11
+Requires:	libXext
+Requires:	libXpm
+BuildRequires:	glibc-devel
+BuildRequires:	libICE-devel
+BuildRequires:	libjpeg-turbo-devel
+BuildRequires:	libSM-devel
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXpm-devel
 
 %description
 A resource utilization monitor that can display the current
@@ -26,7 +40,8 @@ the moon.
 
 %build
 ./configure --prefix=%{_prefix}
-make
+
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -42,11 +57,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
-%{_mandir}/man1/*
-%doc CHANGES INSTALL LICENSE README COPYING
+%doc CHANGES LICENSE README COPYING
+%{_bindir}/salmon
+%{_mandir}/man1/salmon.*
 
 %changelog
+* Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-6
+- updated spec file.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-5
 - added distro info to release.
 

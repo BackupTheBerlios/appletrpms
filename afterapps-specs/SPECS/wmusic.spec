@@ -1,6 +1,6 @@
 %define		name wmusic
 %define		version	 1.5.0
-%define		release	 6%{?dist}
+%define		release	 7%{?dist}
 
 Summary:	Windowmaker dockapp that remote controls xmms
 Name:		%name
@@ -10,6 +10,7 @@ License:	GPLv2+
 Group:		AfterStep/Applets
 URL:		http://home.jtan.com/~john/wmusic/
 Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
+Patch0:		%{name}-%{version}-Makefile.patch
 Requires:	xmms >= 1.0.0
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	glib
@@ -19,14 +20,18 @@ Requires:	libX11
 Requires:	libXext
 Requires:	libXi
 Requires:	libXpm
+Requires:	libXxf86dga
+Requires:	libXxf86vm
 Requires:	xmms
-BuildRequires:	glib-devel
 BuildRequires:	glibc-devel
+BuildRequires:	glib-devel
 BuildRequires:	gtk+-devel
 BuildRequires:	libX11-devel
 BuildRequires:	libXext-devel
 BuildRequires:	libXi-devel
 BuildRequires:	libXpm-devel
+BuildRequires:	libXxf86dga-devel
+BuildRequires:	libXxf86vm-devel
 BuildRequires:	xmms-devel >= 1.0.0
 
 %description
@@ -37,39 +42,33 @@ of the features:
 - Time and Playlist position display
 - Super stylee rotating arrow
 - Hiding of the xmms windows (on startup and through middle-click)
-- AfterStep users, add this line to ~/GNUstep/Library/AfterStep/wharf:
-	*Wharf wmusic - Swallow "wmusic" wmusic -w &
-- Sawfish users, grab Tiger-T's DockMill theme, and apply it to the running
-  dockapp with the -w flag on. See the theme's README for more details.
-- KDE users can use the "Dock Application Bar" to dock wmusic, don't forget
-  the -w flag to launch wmusic. Right-Click on Kicker, then pick:
-  Add->Extension->Dock Application Bar
-
 
 %prep
-%setup -q -n %name-%version
+%setup -q
+%patch0
 
 %build
 ./configure --prefix=%{_prefix}
-make
+
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
-
-install -s -m 755 src/wmusic $RPM_BUILD_ROOT%{_bindir}
+make DESTDIR=$RPM_BUILD_ROOT install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
 %doc COPYING README
-
+%{_bindir}/wmusic
 
 %changelog
+* Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.5.0-7
+- updated spec file.
+
 * Mon Aug 23 2010 J. Krebs <rpm_speedy@yahoo.com> - 1.5.0-6
 - added requires and buildrequires.
 

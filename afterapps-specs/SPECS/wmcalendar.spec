@@ -75,22 +75,22 @@ cp %{SOURCE1} ogo2ical
 %build
 cd Src
 
-make
+make %{?_smp_mflags} PREFIX=%{_prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
-mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
-install -s -m 755 Src/wmCalendar $RPM_BUILD_ROOT%{_bindir}/
-install -m 644 Src/wmCalendar.1 $RPM_BUILD_ROOT%{_mandir}/man1/
+
+cd Src
+
+make install DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
-%{_mandir}/man1/*
+%{_bindir}/wmCalendar
+%{_mandir}/man1/wmCalendar.*
 %doc BUGS CHANGES COPYING HINTS README TODO ogo2ical
 
 %changelog

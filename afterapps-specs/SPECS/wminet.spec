@@ -1,16 +1,24 @@
-%define name wminet
-%define version 3.0.0
-%define release 4%{?dist}
+%define		name wminet
+%define		version 3.0.0
+%define		release 5%{?dist}
 
-Summary: dockapp for monitoring internet connections to/from your computer
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: http://www.swanson.ukfsn.org/#wminet
-Source0: http://www.swanson.ukfsn.org/wmdock/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:	dockapp for monitoring internet connections to/from your computer
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		AfterStep/Applets
+URL:		http://www.swanson.ukfsn.org/#wminet
+Source0:	http://www.swanson.ukfsn.org/wmdock/%{name}-%{version}.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	glibc
+Requires:	libX11
+Requires:	libXext
+Requires:	libXpm
+BuildRequires:	glibc-devel
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXpm-devel
 
 %description
 Very useful dock app for monitoring internet connections to and
@@ -29,24 +37,26 @@ nfs mounts and lpd queues has been removed from the original.
 
 %build
 ./configure --prefix=%{_prefix}
-make
+
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
 
-install -s -m 755 src/wminet $RPM_BUILD_ROOT%{_bindir}
+make install DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
-%doc AUTHORS COPYING ChangeLog INSTALL NEWS README wminetrc
-
+%doc AUTHORS COPYING ChangeLog NEWS README wminetrc
+%{_bindir}/wminet
 
 %changelog
+* Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 3.0.0-5
+- updated spec file.
+
 * Fri Apr 13 2007 J. Krebs <rpm_speedy@yahoo.com> - 3.0.0-4
 - added distro info to release.
 

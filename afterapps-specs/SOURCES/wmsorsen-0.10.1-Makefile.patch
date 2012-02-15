@@ -1,0 +1,27 @@
+--- wmsorsen/Makefile	2007-05-16 15:27:58.000000000 -0500
++++ wmsorsen/Makefile	2012-02-15 12:41:40.000000000 -0600
+@@ -7,7 +7,13 @@
+ 
+ CFLAGS = -Wall -O3
+ 
+-LIB = -L/usr/X11R6/lib -lXpm -lXext -lX11 -lsensors
++LIB = -L/usr/lib -L/usr/lib64 -lXpm -lXext -lX11 -lsensors
++
++PREFIX = /usr
++
++BINDIR = $(PREFIX)/bin
++
++DESTDIR =
+ 
+ INSTALL = /usr/bin/install
+ 
+@@ -30,7 +36,5 @@
+ 	$(RM) -f ../wmgeneral/*.o
+ 
+ install:
+-	$(INSTALL) $(PROG) $(DESTDIR)/usr/local/bin/
+-
+-uninstall:
+-	$(RM) -f $(DESTDIR)/usr/local/bin/$(PROG)
++	mkdir -p $(DESTDIR)$(BINDIR)
++	$(INSTALL) $(PROG) $(DESTDIR)$(BINDIR)

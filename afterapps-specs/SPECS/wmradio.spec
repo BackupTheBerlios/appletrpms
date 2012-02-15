@@ -14,17 +14,17 @@ Source1:	%{name}-setup-README
 Patch0:		%{name}-%{version}-Makefile.in.patch
 Patch1:		%{name}-%{version}-radio.c.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Buildrequires:	glibc-devel
-Buildrequires:	libv4l-devel >= 0.8.3
-Buildrequires:	libX11-devel
-Buildrequires:	libXext-devel
-Buildrequires:	libXpm-devel
 Requires:	glibc
 Requires:	libv4l
 Requires:	libX11
 Requires:	libXext
 Requires:	libXpm
 Requires:	python < 3.0
+Buildrequires:	glibc-devel
+Buildrequires:	libv4l-devel >= 0.8.3
+Buildrequires:	libX11-devel
+Buildrequires:	libXext-devel
+Buildrequires:	libXpm-devel
 
 %description
 wmradio is FM radio card applet for WindowMaker 
@@ -37,7 +37,7 @@ wmradio is FM radio card applet for WindowMaker
 %build
 cp %{SOURCE1} .
 ./configure --prefix=%{_prefix} --libdir=%{_libdir} --disable-libxosd --disable-gnome
-make all
+make %{?_smp_mflags} all
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -64,6 +64,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.9-10
+- updated spec file.
+
 * Tue May 24 2011 J. Krebs <rpm_speedy@yahoo.com> - 0.9-9
 - shifted from kernel-headers to libv4l-devel for videodev.h.
 

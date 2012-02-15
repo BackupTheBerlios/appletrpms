@@ -2,15 +2,15 @@
 %define aiver	%aitest 
 %define	name	aterm
 %define	version	1.0.1
-%define	release	4%{?dist}
+%define	release	5%{?dist}
 %define epoch	2
 
-Summary:	aterm - terminal emulator in an X window
+Summary:	terminal emulator in an X window
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
 Epoch:		%{epoch}
-License:	GPL
+License:	GPLv2+
 Group:		Applications/X11
 URL:		http://aterm.sourceforge.net
 Patch0:		%{name}-%{version}-main.c.patch
@@ -22,7 +22,7 @@ BuildRequires:	libAfterImage-devel
 Requires:	libAfterImage >= %{aiver}
 
 %description
-aterm, version %{version}, is a colour vt102 terminal emulator based on
+aterm, version %{version}, is a color vt102 terminal emulator based on
 rxvt 2.4.8 with Alfredo Kojima's additions of fast transparency,
 intended as an xterm(1) replacement for users who do not require
 features such as Tektronix 4014 emulation and toolkit-style
@@ -39,15 +39,21 @@ tied to any libraries, and can be used anywhere.
 %patch2
 
 CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%{_prefix} \
-	--enable-utmp --enable-background-image --with-term=rxvt \
-	--enable-transparency --enable-graphics --disable-backspace-key \
-	--disable-delete-key --enable-xgetdefault --mandir=%{_mandir}
+	--enable-utmp \
+	--enable-background-image \
+	--with-term=rxvt \
+	--enable-transparency \
+	--enable-graphics \
+	--disable-backspace-key \
+	--disable-delete-key \
+	--enable-xgetdefault \
+	--mandir=%{_mandir}
 
 %build
-make
+make %{?_smp_mflags}
 
 %install
-[ -d $RPM_BUILD_ROOT ] && rm -rf $RPM_BUILD_ROOT;
+rm -rf $RPM_BUILD_ROOT;
 mkdir -p $RPM_BUILD_ROOT%{_prefix}
 
 make DESTDIR=$RPM_BUILD_ROOT install
@@ -71,7 +77,7 @@ desktop-file-install --vendor "" --delete-original \
   %{name}.desktop
 
 %clean
-[ -d $RPM_BUILD_ROOT ] && rm -rf $RPM_BUILD_ROOT;
+rm -rf $RPM_BUILD_ROOT;
 
 %files
 %defattr(-,root,root)
@@ -79,9 +85,11 @@ desktop-file-install --vendor "" --delete-original \
 %{_bindir}/aterm
 %{_mandir}/man1/aterm*
 %{_datadir}/applications/*.desktop
-#%config(missingok) /etc/X11/wmconfig/aterm
 
 %changelog
+* Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> 2:1.0.1-5
+- updated spec file.
+
 * Mon Jun 02 2008 J. Krebs <rpm_speedy@yahoo.com> 2:1.0.1-4
 - cleaned-up LD_LIBRARY_PATH info.
 - added patch for stropts.h - Fedora 9 and later don't ship it.

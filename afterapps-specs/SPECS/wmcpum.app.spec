@@ -37,12 +37,16 @@ Monitors:
 
 %build
 cd wmcpum
-make
+
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 mkdir -p $RPM_BUILD_ROOT%{_bindir}
+
 cd wmcpum
+
 install -s -m 755 wmcpum $RPM_BUILD_ROOT%{_bindir}
 
 %clean

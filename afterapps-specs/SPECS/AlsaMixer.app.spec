@@ -40,7 +40,7 @@ for URL's), only connection to ALSA driver was added.
 %patch0
 
 %build
-make
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT

@@ -10,8 +10,8 @@ License:	GPLv2
 Group:		AfterStep/Applets
 URL:		http://tigr.net/afterstep/view.php?applet=asclock/data
 Source0:	http://tigr.net/afterstep/download/%{name}/%{name}-%{version}.tar.gz
-Source1:	%{name}-%{version}.config
-Patch0:		%{name}-%{version}.xpm.path.patch
+Patch0:		%{name}-%{version}-configure.patch
+Patch1:		%{name}-%{version}.xpm.path.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	glibc
 Requires:	libX11
@@ -29,19 +29,20 @@ AfterStep clock applet
 %prep
 %setup -q
 %patch0
+%patch1
 
 %build
-mv configure configure.old
-cp %{SOURCE1} configure
 ./configure
-make
+
+make %{?_smp_mflags} \
+	BINDIR=%{_bindir} \
+	MANDIR=%{_mandir}/man1
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 make BINDIR=$RPM_BUILD_ROOT%{_bindir} \
     MANDIR=$RPM_BUILD_ROOT%{_mandir}/man1 \
-    DOCDIR=$RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version} \
     install install.man
 
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}
@@ -59,7 +60,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %doc COPYING README README.THEMES TODO
 %{_bindir}/asclock
-%{_mandir}/man1/asclock.*
 %{_datadir}/%{name}/Freeamp/beats.xpm
 %{_datadir}/%{name}/Freeamp/clock.xpm
 %{_datadir}/%{name}/Freeamp/config
@@ -139,6 +139,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/shaped/month.xpm
 %{_datadir}/%{name}/shaped/second.xpm
 %{_datadir}/%{name}/shaped/weekday.xpm
+%{_mandir}/man1/asclock.*
 
 %changelog
 * Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 2.0.12-8

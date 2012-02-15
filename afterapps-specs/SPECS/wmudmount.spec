@@ -49,7 +49,7 @@ percentage (similar to wmfsm).
 
 ./configure --prefix=%{_prefix} --mandir=%{_mandir}
 
-make LIBS=" -lm -lX11"
+make %{?_smp_mflags} LIBS=" -lm -lX11"
 
 %install
 rm -rf $RPM_BUILD_ROOT

@@ -34,7 +34,8 @@ on WMMemMon and WMCPULoad by Seiichi SATO.
 
 %build
 ./configure --prefix=%{_prefix}
-make
+
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT

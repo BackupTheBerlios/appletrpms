@@ -1,4 +1,4 @@
---- wmsystray/Makefile.orig	2004-03-01 10:15:26.000000000 +0100
+--- wmsystray/Makefile	2004-03-01 10:15:26.000000000 +0100
 +++ wmsystray/Makefile	2004-03-01 10:15:37.000000000 +0100
 @@ -1,7 +1,8 @@
  include ../Rules.make
@@ -10,7 +10,7 @@
  LDFLAGS = ${X11LDFLAGS} -lXpm
  
  OBJS = main.o ui.o systray.o xpms.o
---- xembed/Makefile.orig	2004-03-01 10:15:43.000000000 +0100
+--- xembed/Makefile	2004-03-01 10:15:43.000000000 +0100
 +++ xembed/Makefile	2004-03-01 10:15:58.000000000 +0100
 @@ -1,6 +1,7 @@
  include ../Rules.make

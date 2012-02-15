@@ -1,13 +1,13 @@
 %define imagepath /pixmaps/backgrounds
 %define	name Propaganda
 %define	version	1.0
-%define release 3%{?dist}
+%define release 4%{?dist}
 
 Summary:	Propaganda - Desktop backgrounds and tiles
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-License:	GPL
+License:	GPLv2+
 Group:		Graphical desktop/Other
 URL:		http://propaganda.system12.com/
 Source:		ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/Propaganda-EVERYTHING.tar.bz2
@@ -348,6 +348,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}%{imagepath}/%{name}-For-E
 
 %changelog
+* Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.0-4
+- updated spec file.
+
 * Mon Nov 23 2009 J. Krebs <rpm_speedy@yahoo.com> - 1.0-3
 - spec file cleanup (odd-ball spaces).
 

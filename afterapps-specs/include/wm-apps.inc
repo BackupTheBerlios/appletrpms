@@ -60,9 +60,9 @@ SPEYES_URL=http://okb-1.org/speyes/$(SPEYES_TAR)
 APPLET_LIST += SPEYES
 
 TEMPERATURE.APP_NAME=Temperature.app
-TEMPERATURE.APP_VERSION=1.4
+TEMPERATURE.APP_VERSION=1.5
 TEMPERATURE.APP_TAR=$(TEMPERATURE.APP_NAME)-$(TEMPERATURE.APP_VERSION).tar.gz
-TEMPERATURE.APP_URL=http://www.fukt.bsnet.se/~per/temperature/$(TEMPERATURE.APP_TAR)
+TEMPERATURE.APP_URL=http://dockapps.windowmaker.org/download.php/id/816/$(TEMPERATURE.APP_TAR)
 
 APPLET_LIST += TEMPERATURE.APP
 
@@ -405,13 +405,12 @@ WMUSIC_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMUSIC_TAR)
 
 APPLET_LIST += WMUSIC
 
-# Included in Fedora 15 Repository
-#WMWEATHER_NAME=wmweather
-#WMWEATHER_VERSION=2.4.5
-#WMWEATHER_TAR=$(WMWEATHER_NAME)_$(WMWEATHER_VERSION).orig.tar.gz
-#WMWEATHER_URL=http://ftp.de.debian.org/debian/pool/main/w/wmweather/$(WMWEATHER_TAR)
+WMWEATHER_NAME=wmweather
+WMWEATHER_VERSION=2.4.5
+WMWEATHER_TAR=$(WMWEATHER_NAME)_$(WMWEATHER_VERSION).orig.tar.gz
+WMWEATHER_URL=http://ftp.de.debian.org/debian/pool/main/w/wmweather/$(WMWEATHER_TAR)
 
-#APPLET_LIST += WMWEATHER
+APPLET_LIST += WMWEATHER
 
 WMWEATHERPLUS_NAME=wmweather+
 WMWEATHERPLUS_VERSION=2.13

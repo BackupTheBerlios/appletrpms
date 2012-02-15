@@ -92,7 +92,7 @@ command-line, if you prefer original "BubbleMon" look.
 %patch1
 
 %build
-make
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT

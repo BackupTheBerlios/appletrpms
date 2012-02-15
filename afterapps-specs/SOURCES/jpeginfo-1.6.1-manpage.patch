@@ -1,0 +1,16 @@
+--- jpeginfo.1	2002-12-10 03:47:30.000000000 -0600
++++ jpeginfo.1	2012-02-12 11:13:54.000000000 -0600
+@@ -76,11 +76,11 @@
+ .RS
+ .TP
+ .B all
+-files containing any type of errors/warnings, not nessessary preventing 
++files containing any type of errors/warnings, not necessary preventing 
+ the decoding. (default)
+ .TP
+ .B erronly
+-only files with serious errors (ie. cannot be decoded at all).
++only files with serious errors (i.e., cannot be decoded at all).
+ 
+ 
+ .SH BUGS

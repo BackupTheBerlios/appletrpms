@@ -34,7 +34,7 @@ Stalonetray works with virtually any EWMH-compliant window manager.
 %build
 ./configure --prefix=%{_prefix}
 
-make
+make %{?_smp_mflags}
 
 make check
 
@@ -49,8 +49,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %doc README NEWS COPYING AUTHORS ChangeLog stalonetrayrc.sample stalonetray.html stalonetray.xml
-%{_bindir}/*
-%{_mandir}/man*/*
+%{_bindir}/stalonetray
+%{_mandir}/man1/stalonetray.*
 
 %changelog
 * Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.8.1-2

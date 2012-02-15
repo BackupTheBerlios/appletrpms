@@ -19,9 +19,9 @@
  #include "dockapp.h"
  
  #define WINDOWED_SIZE_W 64
---- Src/Makefile	2003-07-15 18:19:26.000000000 +0300
-+++ Src/Makefile	2008-05-03 10:11:48.000000000 +0300
-@@ -1,19 +1,15 @@
+--- Src/Makefile	2003-07-15 10:19:26.000000000 -0500
++++ Src/Makefile	2012-02-13 12:59:22.000000000 -0600
+@@ -1,19 +1,18 @@
 -CC     = gcc
 +CC     ?= gcc
  INCLUDES  = `pkg-config --cflags gtk+-2.0` -I. 
@@ -36,7 +36,10 @@
 -DESTDIR= /usr/local
 -LIBDIR = -L/usr/lib -L${X11BASE}/lib -L/usr/local/lib
 +CFLAGS +=  $(INCLUDES) -DICON_TYPE=$(ICON_TYPE)
++LIBDIR = -L/usr/lib -L/usr/lib64
 +PREFIX = /usr
++DESTDIR =
++MANDIR = $(PREFIX)/share/man
  PACKAGE = wmCalendar
  
  # for Linux
@@ -45,7 +48,7 @@
  # for Solaris (untested!!!)
  # LIBS   = -lXpm -lX11 -lXext -lsocket -lnsl -lical
  
-@@ -30,7 +26,7 @@
+@@ -30,7 +29,7 @@
  all:	wmCalendar.o wmCalendar 
  
  wmCalendar: $(OBJECTS) 
@@ -54,7 +57,7 @@
  
  wmCalendar.o: wmCalendar_master.xpm   wmCalendar_master2.xpm
  clean:
-@@ -40,6 +36,8 @@
+@@ -40,6 +39,8 @@
  	rm -f wmCalendar
  
  install:: wmCalendar
@@ -62,6 +65,6 @@
 -	install -c -m 0644 wmCalendar.1 $(DESTDIR)/man/man1 
 +	install -d $(DESTDIR)$(PREFIX)/bin
 +	install -m 0755 wmCalendar $(DESTDIR)$(PREFIX)/bin
-+	install -d $(DESTDIR)$(PREFIX)/share/man/man1
-+	install -m 0644 wmCalendar.1 $(DESTDIR)$(PREFIX)/share/man/man1 
++	install -d $(DESTDIR)$(MANDIR)/man1
++	install -m 0644 wmCalendar.1 $(DESTDIR)$(MANDIR)/man1 
  

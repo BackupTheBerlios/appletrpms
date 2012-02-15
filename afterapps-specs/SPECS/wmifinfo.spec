@@ -1,16 +1,17 @@
-%define name wmifinfo
-%define version 0.09
-%define release 5%{?dist}
+%define		name wmifinfo
+%define		version 0.09
+%define		release 6%{?dist}
 
-Summary: wmifinfo shows basic network info for all available interfaces
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: http://www.zevv.nl/play/code/wmifinfo/
-Source0: http://www.zevv.nl/play/code/%{name}/%{name}-%{version}.tgz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:	wmifinfo shows basic network info for all available interfaces
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		AfterStep/Applets
+URL:		http://www.zevv.nl/play/code/wmifinfo/
+Source0:	http://www.zevv.nl/play/code/%{name}/%{name}-%{version}.tgz
+Patch0:		%{name}-%{version}-Makefile.patch
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 wmifinfo is a simple applet showing basic network info for
@@ -22,24 +23,29 @@ click calls ifup/ifdown scripts.
 
 %prep
 %setup -q
+%patch0
 
 %build
-make
+make %{?_smp_mflags} PREFIX=%{_prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
-install -s -m 755 wmifinfo $RPM_BUILD_ROOT%{_bindir}
+
+make DESTDIR=$RPM_BUILD_ROOT \
+	PREFIX=%{_prefix} install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
 %doc README
+%{_bindir}/%{name}
 
 %changelog
+* Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.09-6
+- updated spec file.
+
 * Sat Nov 24 2007 J. Krebs <rpm_speedy@yahoo.com> - 0.09-5
 - updated URL info.
 

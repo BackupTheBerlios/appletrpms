@@ -1,0 +1,23 @@
+--- aswvdial/Makefile	2004-02-16 06:52:47.000000000 -0600
++++ aswvdial/Makefile	2012-02-14 11:08:57.000000000 -0600
+@@ -1,5 +1,8 @@
+-LIBDIR = -L/usr/X11R6/lib -L/usr/local/lib -L/opt/gnome/lib -lxml
+-INCDIR = -I/usr/X11R6/include -I/usr/local/include -I/opt/gnome/include
++LIBDIR = -L/usr/lib -L/usr/lib64 -L/opt/gnome/lib -lxml
++INCDIR = -I/usr/include -I/usr/local/include -I/opt/gnome/include
++PREFIX = /usr
++BINDIR = $(PREFIX)/bin
++DESTDIR =
+ LIBS   = -lXpm -lXext -lX11 -lxml
+ OBJS = 	strlcpy.o\
+ 	main.o\
+@@ -23,3 +26,9 @@
+ 		rm $$i;\
+ 	done
+ 	rm aswvdial
++
++install::
++	mkdir -p $(DESTDIR)$(BINDIR)
++	install -m 755 aswvdial $(DESTDIR)$(BINDIR)
++	install -m 755 netdown $(DESTDIR)$(BINDIR)
++	install -m 755 netup $(DESTDIR)$(BINDIR)

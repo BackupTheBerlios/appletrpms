@@ -1,48 +1,70 @@
-%define name speyes
-%define version 1.2.0
-%define release 6%{?dist}
+%define		name speyes
+%define		version 1.2.0
+%define		release 7%{?dist}
 
-Summary: South Park-themed wmeyes
-Name: %name
-Version: %version
-Release: %release
-License: GPL
-Group: AfterStep/Applets
-URL: http://okb-1.org/speyes/speyes.html
-Source0: http://okb-1.org/speyes/%{name}-%{version}.tar.gz
-Source1: %{name}.man
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: libXmu
-Buildrequires: libXmu-devel imake
+Summary:	South Park-themed xeyes dockapp
+Name:		%name
+Version:	%version
+Release:	%release
+License:	GPLv2+
+Group:		AfterStep/Applets
+URL:		http://okb-1.org/speyes/speyes.html
+Source0:	http://okb-1.org/speyes/%{name}-%{version}.tar.gz
+Source1:	%{name}.man
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	glibc
+Requires:	libICE
+Requires:	libSM
+Requires:	libX11
+Requires:	libXext
+Requires:	libXmu
+Requires:	libXpm
+Requires:	libXt
+BuildRequires:	glibc-devel
+BuildRequires:	imake
+BuildRequires:	libICE-devel
+BuildRequires:	libSM-devel
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXmu-devel
+BuildRequires:	libXpm-devel
+BuildRequires:	libXt-devel
 
 %description
-South Park-themed wmeyes.
+South Park-themed xeyes dockapp.
 
 %prep
 %setup -q
 
 %build
 cp %{SOURCE1} .
+
 xmkmf
-make
+
+make %{?_smp_mflags} \
+	BINDIR=%{_bindir} \
+	MANDIR=%{_mandir}/man1
 
 %install
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
-mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
-install -s -m 755 speyes $RPM_BUILD_ROOT%{_bindir}/
-install -m 644 speyes.man $RPM_BUILD_ROOT%{_mandir}/man1/speyes.1
+rm -rf $RPM_BUILD_ROOT
+
+make BINDIR=%{_bindir} \
+	MANDIR=%{_mandir}/man1 \
+	DESTDIR=$RPM_BUILD_ROOT install install.man
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
-%{_mandir}/man1/*
 %doc CHANGES README COPYING
-
+%{_bindir}/speyes
+%{_mandir}/man1/speyes.*
 
 %changelog
+* Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.8.0-7
+- updated spec file.
+
 * Fri Jul 31 2009 J. Krebs <rpm_speedy@yahoo.com> - 1.8.0-6
 - added build require for imake.
 

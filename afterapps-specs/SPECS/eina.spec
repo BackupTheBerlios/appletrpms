@@ -12,7 +12,6 @@ Source0:	http://launchpad.net/eina/trunk/%{version}/+download/%{name}-%{version}
 Patch0:		%{name}-%{version}-docs-pkgconfig.patch
 URL:		http://eina.sourceforge.net/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
 Requires:	atk
 Requires:	cairo
 Requires:	cairo-gobject
@@ -41,7 +40,6 @@ Requires:	mesa-libGL
 Requires:	pango
 Requires:	sqlite
 Requires:	unique
-
 BuildRequires:	atk-devel
 BuildRequires:	cairo-devel
 BuildRequires:	cairo-gobject-devel
@@ -109,11 +107,7 @@ This package contains documentation for eina.
 %build
 ./configure --prefix=%{_prefix} --libdir=%{_libdir} --disable-static
 
-# Remove Rpath
-#sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
-#sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
-
-make
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT

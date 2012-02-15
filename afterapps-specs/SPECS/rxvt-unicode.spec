@@ -47,7 +47,7 @@ Xft fonts.
 		--with-xpm-library=%{_libdir} \
 		--enable-afterimage
 
-make CFLAGS="${RPM_OPT_FLAGS}"
+make %{?_smp_mflags} CFLAGS="${RPM_OPT_FLAGS}"
 
 %install
 rm -rf $RPM_BUILD_ROOT

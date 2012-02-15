@@ -11,6 +11,7 @@ Group:		AfterStep/Applets
 URL:		http://www.darkops.net/wmtimer/
 Source0:	http://www.darkops.net/%{name}/%{name}-%{version}.tar.gz
 Patch0:		%{name}-%{version}-counter-fix.patch
+Patch1:		%{name}-%{version}-Makefile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	atk
 Requires:	cairo
@@ -49,15 +50,19 @@ the command line or the GTK GUI.
 %prep
 %setup -q
 %patch0
+%patch1
 
 %build
 cd wmtimer
-make
+
+make %{?_smp_mflags} PREFIX=%{_prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
-install -s -m 755 wmtimer/wmtimer $RPM_BUILD_ROOT%{_bindir}
+
+cd wmtimer
+
+make PREFIX=%{_prefix} DESTDIR=$RPM_BUILD_ROOT install
 
 %clean
 rm -rf $RPM_BUILD_ROOT

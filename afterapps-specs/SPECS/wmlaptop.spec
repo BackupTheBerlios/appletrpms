@@ -32,7 +32,7 @@ wmlaptop is a WindowMaker dockapp that includes all that a linux user with a lap
 %patch1
 
 %build
-make LIBDIR='-L%{_libdir}'
+make %{?_smp_mflags} LIBDIR='-L%{_libdir}'
 
 %install
 rm -rf $RPM_BUILD_ROOT

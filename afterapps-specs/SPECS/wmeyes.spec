@@ -40,16 +40,16 @@ cp %{SOURCE1} .
 
 xmkmf
 
-make
+make %{?_smp_mflags} \
+	BINDIR=%{_bindir} \
+	MANDIR=%{_mandir}/man1
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
-mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
-
-install -s -m 755 wmeyes $RPM_BUILD_ROOT%{_bindir}/
-install -m 644 wmeyes.man $RPM_BUILD_ROOT%{_mandir}/man1/wmeyes.1
+make BINDIR=%{_bindir} \
+	MANDIR=%{_mandir}/man1 \
+	DESTDIR=$RPM_BUILD_ROOT install install.man
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -57,12 +57,12 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %doc ChangeLog README LICENSE
-%{_bindir}/*
-%{_mandir}/man1/*
+%{_bindir}/wmeyes
+%{_mandir}/man1/wmeyes.*
 
 %changelog
 * Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.2-7
-- Updated requires.
+- Updated spec file.
 
 * Fri Jul 31 2009 J. Krebs <rpm_speedy@yahoo.com> - 1.2-6
 - added build requires for imake.

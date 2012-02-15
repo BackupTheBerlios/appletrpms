@@ -44,7 +44,8 @@ wmbiff's with differrent configs).
 
 %build
 ./configure --prefix=%{_prefix} --mandir=%{_mandir} --libdir=%{_libdir} 
-make
+
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT

@@ -23,7 +23,7 @@ mined is a powerful text editor with extensive Unicode and CJK support.
 %setup -q
 
 %build
-make -C src -f makefile.linux PREFIX=%{_prefix} LIBDIR=%{_libdir} GLDOPTS=" -ltinfo "
+make %{?_smp_mflags} -C src -f makefile.linux PREFIX=%{_prefix} LIBDIR=%{_libdir} GLDOPTS=" -ltinfo "
 
 %install
 rm -rf $RPM_BUILD_ROOT
