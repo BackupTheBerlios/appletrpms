@@ -12,12 +12,6 @@ URL:		http://dockapps.windowmaker.org/file.php/id/253
 Source0:	http://dockapps.windowmaker.org/download.php/id/517/%{name}-%{version}.tar.gz
 Patch0:		AlsaMixer.app-0.1-Makefile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires:	alsa-lib-devel
-BuildRequires:	glibc-devel
-BuildRequires:	libstdc++-devel
-BuildRequires:	libX11-devel
-BuildRequires:	libXext-devel
-BuildRequires:	libXpm-devel
 Requires:	alsa-lib
 Requires:	glibc
 Requires:	libgcc
@@ -25,6 +19,13 @@ Requires:	libstdc++
 Requires:	libX11
 Requires:	libXext
 Requires:	libXpm
+BuildRequires:	alsa-lib-devel
+BuildRequires:	gcc-c++
+BuildRequires:	glibc-devel
+BuildRequires:	libstdc++-devel
+BuildRequires:	libX11-devel
+BuildRequires:	libXext-devel
+BuildRequires:	libXpm-devel
 
 %description
 AlsaMixer.app is a mixer utility for Linux systems with ALSA sound driver.

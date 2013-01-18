@@ -1,5 +1,5 @@
 %define		name fotoxx
-%define		version 12.02
+%define		version 13.01.2
 %define		release 1%{?dist}
 
 Summary:	application for processing image files from a digital camera
@@ -8,18 +8,22 @@ Version:	%{version}
 Release:	%{release}
 License:	GPLv3+
 Group:		Applications/Multimedia
-URL:		http://kornelix.squarespace.com/%{name}/
-Source0:	http://kornelix.squarespace.com/storage/downloads/%{name}-%{version}.tar.gz
+URL:		http://www.kornelix.com/fotoxx.html
+Source0:	http://www.kornelix.com/uploads/1/3/0/3/13035936/%{name}-%{version}.tar.gz
 Patch0:		%{name}-11.11-Makefile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	atk
 Requires:	cairo
+Requires:	cairo-gobject
+Requires:	dcraw
 Requires:	exiv2
 Requires:	fontconfig
 Requires:	freetype
+Requires:	gdk-pixbuf2
 Requires:	glib2
 Requires:	glibc
-Requires:	gtk2
+Requires:	gtk3
+Requires:	libgcc
 Requires:	libpng
 Requires:	libstdc++
 Requires:	libtiff
@@ -32,7 +36,7 @@ Buildrequires:	freeimage-devel
 Buildrequires:	gcc-c++
 Buildrequires:	glib2-devel
 Buildrequires:	glibc-devel
-Buildrequires:	gtk2-devel
+Buildrequires:	gtk3-devel
 Buildrequires:	libpng-devel
 Buildrequires:	libstdc++-devel
 Buildrequires:	libtiff-devel
@@ -74,7 +78,9 @@ made with a digital camera.
 %patch0
 
 %build
-make %{?_smp_mflags} PREFIX=%{_prefix}
+make %{?_smp_mflags} \
+	PREFIX=%{_prefix} \
+	LIBS=" `pkg-config --libs gtk+-3.0` -lpthread"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -91,13 +97,14 @@ Terminal=false
 Encoding=UTF-8
 Type=Application" > %{name}.desktop
                                                                                 
-#mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 desktop-file-install --vendor "" --delete-original \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications                   \
-  --add-category X-Red-Hat-Extra                                  \
-  --add-category GTK                                              \
-  --add-category 2DGraphics                                       \
-  --add-category Graphics	                                  \
+  --dir $RPM_BUILD_ROOT%{_datadir}/applications \
+  --add-category Graphics \
+  --add-mime-type image/png \
+  --add-mime-type image/jpeg \
+  --add-mime-type image/tiff \
+  --add-mime-type image/bmp \
+  --add-mime-type image/gif \
   %{name}.desktop
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/pixmaps/
@@ -120,12 +127,19 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/doc/%{name}/changelog
 %{_datadir}/doc/%{name}/copyright
 %{_datadir}/doc/%{name}/edit*
+#%{_datadir}/doc/%{name}/freecode
 %{_datadir}/doc/%{name}/images/*.jpeg
 %{_datadir}/doc/%{name}/images/*.jpg
 %{_datadir}/doc/%{name}/images/*.png
+%{_datadir}/doc/%{name}/KB-shortcuts
+%{_datadir}/doc/%{name}/KB-shortcuts-ca
+%{_datadir}/doc/%{name}/KB-shortcuts-es
 %{_datadir}/doc/%{name}/README
+%{_datadir}/doc/%{name}/README-ca
+%{_datadir}/doc/%{name}/README-es
 %{_datadir}/doc/%{name}/translations
 %{_datadir}/doc/%{name}/userguide-en.html
+%{_datadir}/doc/%{name}/userguide-es.html
 %{_datadir}/doc/%{name}/userguide-it.html
 %{_datadir}/%{name}/icons/*
 %{_datadir}/%{name}/locales/%{name}-*.po
@@ -133,7 +147,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/%{name}.*
 
 %changelog
-* Tue Jan 03 2012 J. Krebs <rpm_speedy@yahoo.com> - 12.02-1
+* Mon Jan 14 2012 J. Krebs <rpm_speedy@yahoo.com> - 13.01.2-1
 - new version.
 
 * Sat Oct 01 2011 J. Krebs <rpm_speedy@yahoo.com> - 10.10-1

@@ -1,34 +1,49 @@
---- Makefile	2008-09-14 17:47:28.000000000 -0500
-+++ Makefile	2010-08-23 23:24:08.000000000 -0500
-@@ -1,10 +1,7 @@
+--- Makefile	2012-02-27 20:11:53.000000000 -0600
++++ Makefile	2012-02-27 21:13:35.000000000 -0600
+@@ -1,7 +1,7 @@
  # Makefile
  
  # Installation directory
 -PREFIX=/usr/local
--
--# USE Xft for the menu
--USE_XFT=yes
 +PREFIX=/usr
  
- VERSION=0.4
- 
-@@ -14,18 +11,13 @@
+ # USE Xft for the menu
+ USE_XFT=yes
+@@ -11,10 +11,11 @@
+ BINDIR=$(PREFIX)/bin
+ MANPREFIX=$(PREFIX)/share/man
+ MANDIR=$(MANPREFIX)/man1
++DESTDIR=
  PROG=wmblueclock
  MANUAL=$(PROG).1
  OBJS=main.o menu.o
 -LIBS=-L/usr/X11R6/lib -lX11 -lXext -lXpm
-+LIBS=-L/usr/X11R6/lib -L/usr/lib -L/usr/lib64 -lX11 -lXext -lXpm -lXft
++LIBS=-L/usr/lib -L/usr/lib64 -lX11 -lXext -lXpm -lXft
  CFLAGS=-O2 -Wall -DVERSION=\"$(VERSION)\"
  
  CC=gcc
- RM=rm -rf
+@@ -22,8 +23,8 @@
  INST=install
  
--ifeq ($(USE_XFT),yes)
+ ifeq ($(USE_XFT),yes)
 -CFLAGS += -DUSE_XFT $(shell xft-config --cflags)
 -LIBS += $(shell xft-config --libs)
--endif
--
- all: $(PROG)
++CFLAGS += -DUSE_XFT -I/usr/include/freetype2
++LIBS += -lXft
+ endif
  
- $(PROG): $(OBJS)
+ all: $(PROG)
+@@ -36,8 +37,11 @@
+ clean:
+ 	$(RM) *.o $(PROG) *~ *.bak *.BAK .xvpics
+ install: $(PROG) $(MANUAL)
+-	$(INST) -m 755 $(PROG) $(BINDIR)
+-	$(INST) -m 644 $(MANUAL) $(MANDIR)
++	mkdir -p $(DESTDIR)$(BINDIR)
++	$(INST) -m 755 $(PROG) $(DESTDIR)$(BINDIR)
++	mkdir -p $(DESTDIR)$(MANDIR)
++	$(INST) -m 644 $(MANUAL) $(DESTDIR)$(MANDIR)
++
+ uninstall:
+ 	$(RM) $(BINDIR)/$(PROG)
+ 	$(RM) $(MANDIR)/$(MANUAL)

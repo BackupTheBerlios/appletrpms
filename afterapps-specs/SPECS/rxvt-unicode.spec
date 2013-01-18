@@ -1,6 +1,6 @@
 %define aitest	%(rpm -q --queryformat='%{VERSION}' libAfterImage)
 %define aiver	%aitest 
-%define version 9.15
+%define version 9.16
 %define release 1%{?dist}
 %define name	rxvt-unicode
 %define epoch	2
@@ -61,6 +61,7 @@ Comment=rxvt-unicode is a unicode version of rxvt
 Exec=urxvt
 Terminal=false
 Type=Application" > %{name}.desktop
+Icon=terminal.png
                                                                                 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 desktop-file-install --vendor "" --delete-original \
@@ -84,6 +85,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/urxvt
 
 %changelog
+* Thu Dec 27 2012 J. Krebs <rpm_speedy@yahoo.com> - 2:9.16-1
+- new version.
+
 * Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 2:9.15-1
 - new version.
 

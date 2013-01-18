@@ -61,7 +61,7 @@ Icon=yudit.png
 Type=Application
 Terminal=false
 Encoding=UTF-8
-Categories=Application;TextEditors;
+Categories=Utility;TextEditors;
 EOF
 
 %clean

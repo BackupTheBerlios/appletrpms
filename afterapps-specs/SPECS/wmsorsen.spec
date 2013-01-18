@@ -19,6 +19,7 @@ Requires:	libX11
 Requires:	libXext
 Requires:	libXpm
 Requires:	lm_sensors >= 3.0.0,
+BuildRequires:	gcc-c++
 BuildRequires:	glibc-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libX11-devel

@@ -90,6 +90,13 @@ APPLET_LIST += TEMPERATURE.APP
 
 #APPLET_LIST += WMALMS
 
+WMAUDA_NAME=wmauda
+WMAUDA_VERSION=0.9
+WMAUDA_TAR=$(WMAUDA_NAME)-$(WMAUDA_VERSION).tar.gz
+WMAUDA_URL=http://www.netswarm.net/misc/$(WMAUDA_TAR)
+
+APPLET_LIST += WMAUDA
+
 WMBIFF_NAME=wmbiff
 WMBIFF_VERSION=0.4.27
 WMBIFF_TAR=$(WMBIFF_NAME)-$(WMBIFF_VERSION).tar.gz
@@ -219,13 +226,13 @@ WMINET_URL=http://www.swanson.ukfsn.org/wmdock/$(WMINET_TAR)
 APPLET_LIST += WMINET
 
 WMINFO_NAME=wminfo
-WMINFO_VERSION=2.5.2
+WMINFO_VERSION=4.0.0
 WMINFO_TAR=$(WMINFO_NAME)-$(WMINFO_VERSION).tar.gz
 WMINFO_URL=http://linux-bsd-unix.strefa.pl/$(WMINFO_TAR)
 
 APPLET_LIST += WMINFO
 
-# OSS and Pulseaudio don't seem to work well
+# OSS and Pulseaudio don't seem to wMakefileork well
 #WMIX_NAME=wmix
 #WMIX_VERSION=3.2
 #WMIX_TAR=$(WMIX_NAME)-$(WMIX_VERSION).tar.gz
@@ -270,7 +277,7 @@ WMMSG_URL=http://swapspace.net/~matt/wmmsg/$(WMMSG_TAR)
 APPLET_LIST += WMMSG
 
 WMND_NAME=wmnd
-WMND_VERSION=0.4.16
+WMND_VERSION=0.4.17
 WMND_TAR=$(WMND_NAME)-$(WMND_VERSION).tar.gz
 WMND_URL=http://www.thregr.org/~wavexx/software/wmnd/releases/$(WMND_TAR)
 
@@ -305,12 +312,12 @@ WMPOP3LB_URL=http://lbj.free.fr/wmpop3/$(WMPOP3LB_TAR)
 
 APPLET_LIST += WMPOP3LB
 
-WMPOWER_NAME=wmpower
-WMPOWER_VERSION=0.5.0
-WMPOWER_TAR=$(WMPOWER_NAME)-$(WMPOWER_VERSION).tar.bz2
-WMPOWER_URL=http://linux-bsd-unix.strefa.pl/$(WMPOWER_TAR)
+WMPOWERPLUS_NAME=wmpower+
+WMPOWERPLUS_VERSION=1.0.1
+WMPOWERPLUS_TAR=$(WMPOWERPLUS_NAME)-$(WMPOWERPLUS_VERSION).tar.gz
+WMPOWERPLUS_URL=http://linux-bsd-unix.strefa.pl/wmpower+-1.0.1.tar.gz
 
-APPLET_LIST += WMPOWER
+APPLET_LIST += WMPOWERPLUS
 
 WMPPP_NAME=wmppp
 WMPPP_VERSION=1.3.0
@@ -385,7 +392,7 @@ WMTZ_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMTZ_TAR)
 APPLET_LIST += WMTZ
 
 WMUDMOUNT_NAME=wmudmount
-WMUDMOUNT_VERSION=1.8
+WMUDMOUNT_VERSION=1.13
 WMUDMOUNT_TAR=$(WMUDMOUNT_NAME)-$(WMUDMOUNT_VERSION).tar.gz
 WMUDMOUNT_URL=http://prdownloads.sourceforge.net/$(WMUDMOUNT_NAME)/$(WMUDMOUNT_TAR)
 

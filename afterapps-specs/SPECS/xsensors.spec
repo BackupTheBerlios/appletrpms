@@ -8,8 +8,8 @@ Version:	%version
 Release:	%release
 License:	GPLv2+
 Group:		Applications/System
-URL:		ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
-Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.gz
+URL:		http://www.linuxhardware.org/xsensors/
+Source0:	http://www.linuxhardware.org/xsensors/%{name}-%{version}.tar.gz
 Patch0:		%{name}-%{version}-Makefile.am.patch
 Patch1:		%{name}-%{version}-configure.in.patch
 Patch2:		%{name}-%{version}-gtk220.patch

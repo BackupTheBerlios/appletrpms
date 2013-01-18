@@ -12,11 +12,15 @@ URL:		http://wmc2d.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/project/%{name}/Source/%{name}-2011-04-29-17.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	glibc
-Requires:	libxcb >= 1.7
+Requires:	libxcb >= 1.8
 Requires:	xcb-util >= 0.3.8
+Requires:	xcb-util-image >= 0.3.8
+Requires:	xcb-util-wm >= 0.3.8
 BuildRequires:	glibc-devel
-BuildRequires:	libxcb-devel >= 1.7
+BuildRequires:	libxcb-devel >= 1.8
 BuildRequires:	xcb-util-devel >= 0.3.8
+BuildRequires:	xcb-util-image-devel >= 0.3.8
+BuildRequires:	xcb-util-wm-devel >= 0.3.8
 
 %description
 This is a small dockapp, which shows the core temperature and cpu frequency
@@ -37,7 +41,7 @@ external libraries required.
 
 %build
 
-make %{?_smp_mflags}
+make %{?_smp_mflags} PREFIX=%{_prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT

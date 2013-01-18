@@ -8,8 +8,8 @@ Version:	%version
 Release:	%release
 License:	GPLv2+
 Group:		Applications/Multimedia
-URL:		ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
-Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/tkirc%{version}.tar.gz
+URL:		http://www.netsplit.de/tkirc2/
+Source0:	http://netsplit.de/tkirc2/%{name}%{version}.tar.gz
 Source1:	%{name}-%{version}-netsplit.png
 Source2:	%{name}-%{version}-browser.sh
 Patch0:         %{name}-%{version}.patch

@@ -1,6 +1,6 @@
 %define		name calcoo
 %define		version 1.3.18
-%define		release 2%{?dist}
+%define		release 3%{?dist}
 
 Summary:	RPN and algebraic scientific calculator
 Name:		%name
@@ -52,18 +52,35 @@ rm -rf $RPM_BUILD_ROOT
 
 make install DESTDIR=$RPM_BUILD_ROOT
 
+#Install application link for X-Windows
+echo -e "[Desktop Entry]
+Name=Calcoo RPN Scientific Calculator
+Comment=Perform arithmetic, scientific or financial calculations
+Exec=calcoo
+Icon=accessories-calculator
+Terminal=false
+Encoding=UTF-8
+Type=Application" > %{name}.desktop
+                                                                                
+desktop-file-install --vendor "" --delete-original \
+  --dir $RPM_BUILD_ROOT%{_datadir}/applications \
+  --add-category Utility \
+  --add-category Calculator \
+  %{name}.desktop
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/calcoo
-%{_mandir}/man1/*
 %doc AUTHORS COPYING ChangeLog NEWS README
+%{_bindir}/calcoo
+%{_datadir}/applications/calcoo.desktop
+%{_mandir}/man1/calcoo*
 
 %changelog
 * Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.3.18-3
-- updated sourceforge URLs.
+- updated sourceforge URLs, added desktop entry.
 
 * Thu May 27 2010 J. Krebs <rpm_speedy@yahoo.com> - 1.3.18-2
 - added library links to make.

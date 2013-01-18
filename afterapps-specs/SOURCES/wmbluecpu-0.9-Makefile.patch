@@ -1,35 +1,52 @@
---- Makefile	2008-07-03 00:34:57.000000000 -0500
-+++ Makefile	2010-08-23 23:28:38.000000000 -0500
-@@ -1,10 +1,7 @@
+--- Makefile	2012-02-27 20:15:52.000000000 -0600
++++ Makefile	2012-02-27 21:13:55.000000000 -0600
+@@ -1,7 +1,7 @@
  # Makefile
  
  # Installation directory
 -PREFIX=/usr/local
--
--# Use Xft for the menu
--USE_XFT=yes
 +PREFIX=/usr
  
- VERSION=0.9
- 
-@@ -19,19 +16,9 @@
+ # Use Xft for the menu
+ USE_XFT=yes
+@@ -11,6 +11,7 @@
+ BINDIR=$(PREFIX)/bin
+ MANPREFIX=$(PREFIX)/share/man
+ MANDIR=$(MANPREFIX)/man1
++DESTDIR=
+ PROG=wmbluecpu
+ MANUAL=$(PROG).1
+ OBJS=main.o menu.o
+@@ -19,7 +20,7 @@
  OS=$(shell uname -s)
  #For Linux:
  ifeq ($(OS),Linux)
 -LIBS=-L/usr/X11R6/lib -lX11 -lXext -lXpm
-+LIBS=-L/usr/X11R6/lib -L/usr/lib -L/usr/lib64 -lX11 -lXext -lXpm -lXft
++LIBS=-L/usr/lib -L/usr/lib64 -lX11 -lXext -lXpm
  OBJS += cpu_linux.o
  endif
--#For FreeBSD:
--ifeq ($(OS),FreeBSD)
--LIBS=-L/usr/X11R6/lib -lX11 -lXext -lXpm -lkvm
--OBJS += cpu_freebsd.o
--endif
--
--ifeq ($(USE_XFT),yes)
+ #For FreeBSD:
+@@ -29,8 +30,8 @@
+ endif
+ 
+ ifeq ($(USE_XFT),yes)
 -CFLAGS += -DUSE_XFT $(shell xft-config --cflags)
 -LIBS += $(shell xft-config --libs)
--endif
++CFLAGS += -DUSE_XFT -I/usr/include/freetype2
++LIBS += -lXft
+ endif
  
  CC=gcc
- RM=rm -rf
+@@ -47,8 +48,10 @@
+ clean:
+ 	$(RM) *.o $(PROG) *~ *.bak *.BAK .xvpics
+ install: $(PROG) $(MANUAL)
+-	$(INST) -m 755 $(PROG) $(BINDIR)
+-	$(INST) -m 644 $(MANUAL) $(MANDIR)
++	mkdir -p $(DESTDIR)$(BINDIR)
++	$(INST) -m 755 $(PROG) $(DESTDIR)$(BINDIR)
++	mkdir -p $(DESTDIR)$(MANDIR)
++	$(INST) -m 644 $(MANUAL) $(DESTDIR)$(MANDIR)
+ uninstall:
+ 	$(RM) $(BINDIR)/$(PROG)
+ 	$(RM) $(MANDIR)/$(MANUAL)

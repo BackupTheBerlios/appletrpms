@@ -65,7 +65,7 @@ Source5: 	AfterStep.menumethod
 Source6: 	afterstep.desktop.xsessions
 Source7: 	afterstep.desktop.wm-properties
 Source8:	afterstep.fedora.README
-Source9:	%{name}-2.2.7-wharf.alternate
+Source9:	%{name}-2.2.11-wharf.alternate
 Patch0:		%{name}-2.2.5-ImageMagick.patch
 Patch1:		%{name}-2.2.7-winlist.patch
 Patch2:		%{name}-2.2.7-pager.patch

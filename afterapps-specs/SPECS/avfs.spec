@@ -1,6 +1,6 @@
 %define	name 	avfs
-%define	version	1.0.0
-%define	release	2%{?dist}
+%define	version	1.0.1
+%define	release	1%{?dist}
 
 Summary:	Enables programs to look inside archived/compressed files, access remote files
 Name:		%{name}
@@ -71,6 +71,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.*a
 
 %changelog
+* Wed Jun 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.0.1-1
+- New version.
+
 * Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.0.0-2
 - updated spec file.
 

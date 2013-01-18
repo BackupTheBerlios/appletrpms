@@ -12,13 +12,15 @@ URL:		http://dockapps.windowmaker.org/file.php/id/344
 Source0:	http://dockapps.windowmaker.org/download.php/id/772/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-%{version}-Makefile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	glibc
 Requires:	libX11
 Requires:	libXext
 Requires:	libXft
 Requires:	libXpm
+BuildRequires:	glibc-devel
 BuildRequires:	libX11-devel
 BuildRequires:	libXext-devel
-Requires:	libXft-devel
+BuildRequires:	libXft-devel
 BuildRequires:	libXpm-devel
 Obsoletes:	WMBlueClock
 
@@ -37,21 +39,17 @@ make %{?_smp_mflags} PREFIX=%{_prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
-mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
 
-install -s -m 755 wmblueclock $RPM_BUILD_ROOT%{_bindir}
-install -m 644 wmblueclock.1 $RPM_BUILD_ROOT%{_mandir}/man1/
+make install DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/*
-%{_mandir}/man1/*
 %doc AUTHORS COPYING README THANKS TODO
-
+%{_bindir}/%{name}
+%{_mandir}/man1/%{name}.*
 
 %changelog
 * Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.4-2

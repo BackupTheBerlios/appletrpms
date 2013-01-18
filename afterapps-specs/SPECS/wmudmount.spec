@@ -1,6 +1,6 @@
 %define		name wmudmount
-%define		version 1.8
-%define		release 2%{?dist}
+%define		version 1.13
+%define		release 1%{?dist}
 
 Summary:	dockapp to mount filesystems using udisks
 Name:		%name
@@ -10,8 +10,6 @@ License:	GPLv2+
 Group:		AfterStep/Applets
 URL:		http://sourceforge.net/projects/wmudmount/
 Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-Patch0:		%{name}-%{version}-notify.c.patch
-Patch1:		%{name}-%{version}-configure.ac.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	dbus-libs
 Requires:	dbus-glib
@@ -22,6 +20,7 @@ Requires:	gtk2
 Requires:	libgnome-keyring
 Requires:	libnotify
 Requires:	libX11
+Requires:	udisks
 BuildRequires:	dbus-glib-devel
 BuildRequires:	glib2-devel
 BuildRequires:	glibc-devel
@@ -41,15 +40,13 @@ percentage (similar to wmfsm).
 %prep
 
 %setup -q
-%patch0
-%patch1
 
 %build
 ./bootstrap
 
 ./configure --prefix=%{_prefix} --mandir=%{_mandir}
 
-make %{?_smp_mflags} LIBS=" -lm -lX11"
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -74,7 +71,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/icons/hicolor/scalable/apps/%{name}-unlock.svg
 
 %changelog
-* Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.8-2
+* Sun Apr 29 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.13-1
+- new version.
+
+* Thu Feb 23 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.11-1
 - shifted URLs to sourceforge.net/projects/wmudmount/.
 
 * Tue May 24 2011 J. Krebs <rpm_speedy@yahoo.com> - 1.8-1

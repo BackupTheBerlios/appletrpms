@@ -2,17 +2,18 @@
 %define pythver %pythtst
 
 %define	name 	medit
-%define	version	1.0.5
+%define	version	1.1.92
 %define	release	1%{?dist}
 
-Summary:	a GTK-based text editor
+Summary:	medit is a GTK-based text editor
 Name:		%name
 Version:	%version
 Release:	%release
 License:	GPLv2, LGPLv2.1+, BSD and MIT License
 Group:		Applications/Editors
 URL:		http://mooedit.sourceforge.net/
-Source0:	http://sourceforge.net/projects/mooedit/files/medit/%{version}/%{name}-%{version}.tar.bz2
+Source0:	http://downloads.sourceforge.net/project/mooedit/%{name}/1.1.2/%{name}-1.1.92-devel.tar.bz2
+#Source0:	http://downloads.sourceforge.net/project/mooedit/%{name}/%{version}/%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	atk
 Requires:	cairo
@@ -32,7 +33,6 @@ Requires:	python < 3.0
 Requires:	python >= %{pythver}
 Buildrequires:	atk-devel
 Buildrequires:	cairo-devel
-Buildrequires:	gcc-c++
 Buildrequires:	gettext
 Buildrequires:	glib2-devel
 Buildrequires:	glibc-devel
@@ -54,12 +54,14 @@ Provides:	mooedit
 medit is a GTK-based text editor.
 
 %prep
-%setup -q
+#%setup -q
+%setup -q -n %{name}-1.1.92-devel
 
 %build
 ./configure --prefix=%{_prefix} --libdir=%{_libdir} --with-python
 
 make VERBOSE=1 %{?_smp_mflags} \
+	LIBS=" -lgmodule-2.0 " \
 	MOO_PYTHON_LIB_DIR=%{python_sitelib}/medit-1/python \
 	MOO_PYTHON_PLUGIN_DIR=%{python_sitelib}/medit-1/plugins
 
@@ -116,9 +118,6 @@ fi
 %{_datadir}/medit-1/language-specs/*.xml
 %{_datadir}/medit-1/language-specs/check.sh
 %{_datadir}/medit-1/language-specs/language2.rng
-%{_datadir}/medit-1/scripts/moo-open-html-help
-%{_datadir}/medit-1/scripts/xdg-email
-%{_datadir}/medit-1/scripts/xdg-open
 %dir %{python_sitelib}/medit-1/plugins/
 %{python_sitelib}/medit-1/plugins/python.ini
 %{python_sitelib}/medit-1/plugins/python.py
@@ -145,6 +144,15 @@ fi
 %{_mandir}/man1/%{name}.*
 
 %changelog
+* Tue Nov 27 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.1.2-1
+- new version.
+
+* Sun Jul 29 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.1.1-1
+- new version.
+
+* Sun Mar 04 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.1.0-1
+- new version.
+
 * Sun Oct 23 2011 J. Krebs <rpm_speedy@yahoo.com> - 1.0.5-1
 - new version.
 

@@ -1,5 +1,5 @@
 %define name	mined
-%define version	2012.20
+%define version	2012.22
 %define release	1%{?dist}
 
 Summary:	a powerful text editor with extensive Unicode and CJK support
@@ -164,6 +164,12 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGES DESCR LICENCE.GPL PACKAGE.DOC README.creole VERSION
 
 %changelog
+* Wed Jun 20 2012 J. Krebs <rpm_speedy@yahoo.com> - 2012.22-1
+- new version.
+
+* Wed Jun 20 2012 J. Krebs <rpm_speedy@yahoo.com> - 2012.20-1
+- new version.
+
 * Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 2012.20-1
 - new version.
 

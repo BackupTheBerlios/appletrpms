@@ -1,0 +1,80 @@
+--- wminfo/configure	2012-10-31 09:05:31.000000000 -0500
++++ wminfo/configure	2013-01-09 18:46:14.585400946 -0600
+@@ -28,27 +28,28 @@
+ fi
+ if [ "$PREFIX" == "" ]
+ then
+-    PREFIX=/usr/local
++    PREFIX=/usr
+ fi
+ 
+ FILE=Makefile
+ 
+ > $FILE
+ echo PREFIX=$PREFIX >> $FILE
+-echo PACKAGE=wminfo-$version >> $FILE
++echo PACKAGE=wminfo >> $FILE
+ echo >> $FILE
+ echo BINDIR=\$\(PREFIX\)/bin >> $FILE
+-echo DOCDIR=\$\(PREFIX\)/doc/\$\(PACKAGE\) >> $FILE
+-echo MANDIR=\$\(PREFIX\)/man/man1 >> $FILE
++echo DOCDIR=\$\(PREFIX\)/share/doc/\$\(PACKAGE\) >> $FILE
++echo MANDIR=\$\(PREFIX\)/share/man/man1 >> $FILE
+ echo >> $FILE
+ cat >> $FILE <<EOF
+-LIBDIR = -L/usr/X11R6/lib
++LIBDIR = -L/usr/lib -L/usr/lib64
+ LIBS   = -lXpm -lXext -lX11
++DESTDIR=
+ CFLAGS = -march=native -O2 -pipe
+ OBJS   = wminfo.o ../wmgeneral/wmgeneral.o ../wmgeneral/misc.o ../wmgeneral/list.o
+ 
+ .c.o:
+-	gcc -I/usr/X11R6/share/include \$(CFLAGS) -c -Wall \$< -o \$*.o
++	gcc -I/usr/include \$(CFLAGS) -c -Wall \$< -o \$*.o
+ 
+ wminfo: \$(OBJS)
+ 	gcc \$(CFLAGS) -o wminfo \$^ -lXext \$(LIBDIR) \$(LIBS) && strip --strip-unneeded wminfo
+@@ -75,30 +76,30 @@
+ 	rm -f Makefile
+ 
+ install: wminfo
+-	cp -p wminfo \$(BINDIR)
+-	chmod 755 \$(BINDIR)/wminfo
+-	chown root:root \$(BINDIR)/wminfo
++	mkdir -p \$(DESTDIR)\$(BINDIR)
++	cp -p wminfo \$(DESTDIR)\$(BINDIR)
++	chmod 755 \$(DESTDIR)\$(BINDIR)/wminfo
+ 
+ 	for f in \$(CONTRIB) \\
+-	; do cp -p ../contrib/\$\$f \$(BINDIR) ; done
++	; do cp -p ../contrib/\$\$f \$(DESTDIR)\$(BINDIR) ; done
+ 
+-	if [ ! -d \$(MANDIR) ]; then mkdir -p \$(MANDIR); fi
++	mkdir -p \$(DESTDIR)\$(MANDIR)
+ 
+-	cp -p ../man/wminfo.1 \$(MANDIR)
++	cp -p ../man/wminfo.1 \$(DESTDIR)\$(MANDIR)
+ 
+-	if [ ! -d \$(DOCDIR) ]; then mkdir \$(DOCDIR); fi
++	mkdir -p \$(DESTDIR)\$(DOCDIR)
+ 
+ 	for f in \$(DOCS) \\
+-	; do cp -p ../\$\$f \$(DOCDIR) ; done
++	; do cp -p ../\$\$f \$(DESTDIR)\$(DOCDIR) ; done
+ 
+ 	for d in contrib \$(DIRS) \\
+-	; do if [ ! -d \$(DOCDIR)/\$\$d ]; then mkdir \$(DOCDIR)/\$\$d; fi ; \\
+-	cp -p ../\$\$d/* \$(DOCDIR)/\$\$d ; done
++	; do if [ ! -d \$(DESTDIR)\$(DOCDIR)/\$\$d ]; then mkdir \$(DESTDIR)\$(DOCDIR)/\$\$d; fi ; \\
++	cp -p ../\$\$d/* \$(DESTDIR)\$(DOCDIR)/\$\$d ; done
+ 
+ 	for d in \$(DIRS) \\
+-	; do if [ ! -x \$(DOCDIR)/\$\$d/run-all-wminfo-plugins ]; then ln -s \$(BINDIR)/run-all-wminfo-plugins \$(DOCDIR)/\$\$d/run-all-wminfo-plugins; fi ; done
++	; do if [ ! -x \$(DOCDIR)/\$\$d/run-all-wminfo-plugins ]; then ln -s \$(BINDIR)/run-all-wminfo-plugins \$(DESTDIR)\$(DOCDIR)/\$\$d/run-all-wminfo-plugins; fi ; done
+ 
+-	if [ ! -x \$(BINDIR)/\$\$d/empty.wmi ]; then ln -s \$(BINDIR)/bash-empty.wmi \$(BINDIR)/\$\$d/empty.wmi; fi
++	if [ ! -x \$(DESTDIR)\$(BINDIR)/\$\$d/empty.wmi ]; then ln -s \$(BINDIR)/bash-empty.wmi \$(DESTDIR)\$(BINDIR)/\$\$d/empty.wmi; fi
+ 
+ uninstall:
+ 	for f in wminfo empty.wmi \$(CONTRIB) \\

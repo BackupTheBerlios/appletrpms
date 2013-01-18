@@ -1,16 +1,17 @@
 %define avftest	%(rpm -q --queryformat='%{VERSION}' avfs)
 %define avfver	%avftest 
 %define		name worker
-%define		version 2.19.0
-%define		release 2%{?dist}
+%define		version 2.19.6
+%define		release 1%{?dist}
 
 Summary:	A file manager for the X Window System
 Name:		%name
 Version:	%version
 Release:	%release
+Epoch:		2
 License:	GPLv2+
 Group:		Applications/File
-Source0:	http://www.boomerangsworld.de/%{name}/downloads/%{name}-%{version}.tar.gz
+Source0:	http://www.boomerangsworld.de/cms/%{name}/downloads/%{name}-%{version}.tar.bz2
 URL:		http://www.boomerangsworld.de/%{name}/
 Requires:	avfs >= %{avftest}
 Requires:	file-libs
@@ -27,6 +28,7 @@ Requires:	libXpm
 BuildRequires:	avfs-devel
 BuildRequires:	bzip2-devel
 BuildRequires:	file-devel
+BuildRequires:	gcc-c++
 BuildRequires:	libX11-devel
 BuildRequires:	libXft-devel
 BuildRequires:	libXpm-devel
@@ -40,6 +42,13 @@ The directories and files are shown in two independent panels
 %prep
 %setup -q
 
+#Fix Man pages(UTF-8)
+for f in ChangeLog man/fr/worker.1 man/it/worker.1; do
+	iconv -f ISO-8859-1 -t UTF-8 $f > $f.new && \
+	touch -r $f $f.new && \
+	mv $f.new $f
+done
+
 %build
 ./configure --prefix=%{_prefix} \
 	--mandir=%{_mandir} \
@@ -47,7 +56,7 @@ The directories and files are shown in two independent panels
 	--with-avfs \
 	--with-libmagic \
 	--without-hal \
-	--without-dbus
+	--with-dbus
 
 make %{?_smp_mflags}
 
@@ -105,6 +114,7 @@ fi
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING ChangeLog NEWS README README_LARGEFILES THANKS
 %{_bindir}/worker
+%{_datadir}/applications/worker.desktop
 %{_datadir}/icons/hicolor/*/apps/worker.xpm
 %{_datadir}/worker/catalogs/*.catalog
 %{_datadir}/worker/catalogs/*.catalog.coms
@@ -112,17 +122,30 @@ fi
 %{_datadir}/worker/catalogs/*.catalog.flags
 %{_datadir}/worker/catalogs/*.catalog.flags.utf8
 %{_datadir}/worker/catalogs/*.catalog.utf8
-%{_datadir}/worker/scripts/*.sh
+%{_datadir}/worker/config-*
+%{_datadir}/worker/hints-english
+%{_datadir}/worker/hints-english.utf8
 %{_datadir}/worker/scripts/displaywrapper_worker
+%{_datadir}/worker/scripts/*.sh
 %{_datadir}/worker/scripts/xeditor
 %{_datadir}/worker/scripts/xliwrapper_worker
-%{_datadir}/worker/config-*
 %{_mandir}/fr/man1/worker.*
 %{_mandir}/it/man1/worker.*
 %{_mandir}/man1/worker.*
-%{_datadir}/applications/worker.desktop
 
 %changelog
+* Thu Nov 22 2012 J. Krebs <rpm_speedy@yahoo.com> 2:2.19.6-1
+- new version.
+
+* Fri Sep 07 2012 J. Krebs <rpm_speedy@yahoo.com> 2:2.19.5-1
+- new version.
+
+* Sat Apr 07 2012 J. Krebs <rpm_speedy@yahoo.com> 2:2.19.2-1
+- new version.
+
+* Mon Feb 20 2012 J. Krebs <rpm_speedy@yahoo.com> 2:2.19.1-1
+- new version, memory leak fixed, enabled dbus.
+
 * Tue Jan 31 2012 J. Krebs <rpm_speedy@yahoo.com> 2.19.0-2
 - dbus has a memory leak, disabled with --without-dbus.
 

@@ -1,31 +1,6 @@
-### BEGIN Distro Defines
-%define mdk  %(if [ -e /etc/mandrake-release ]; then echo 1; else echo 0; fi;)
-%{?_with_mdk:   %{expand: %%global mdk 1}}
-
-%define fedora  %(if [ -e /etc/fedora-release ]; then echo 1; else echo 0; fi;)
-%{?_with_fedora:   %{expand: %%global fedora 1}}
-
-%define suse %(if [ -e /etc/SuSE-release ]; then echo 1; else echo 0; fi;)
-%{?_with_suse:   %{expand: %%global suse 1}}
-
-%define generic 1
-
-%if %{mdk}
-  %define generic 0
-%endif
-
-%if %{fedora}
-  %define generic 0
-%endif
-
-%if %{suse}
-  %define generic 0
-%endif
-### END Distro Definitions
-
 %define		name wmweather+
 %define		version 2.13
-%define		release 2%{?dist}
+%define		release 3%{?dist}
 
 Summary:	A dock app for displaying weather information
 Name:		%name
@@ -43,8 +18,9 @@ Requires:	libSM
 Requires:	libX11
 Requires:	libXext
 Requires:	libXpm
+Requires:	pcre
 Requires:	w3c-libwww
-Requires:	WindowMaker
+Requires:	WINGs-libs >= 0.95.0
 BuildRequires:	glibc-devel
 BuildRequires:	libcurl-devel
 BuildRequires:	libICE-devel
@@ -52,18 +28,9 @@ BuildRequires:	libSM-devel
 BuildRequires:	libX11-devel
 BuildRequires:	libXext-devel
 BuildRequires:	libXpm-devel
-BuildRequires:	w3c-libwww-devel
-BuildRequires:	WindowMaker-devel
-
-%if %{mdk}
-Requires:	libpcre0
-BuildRequires:	libpcre0-devel
-%endif
-
-%if %{fedora}
-Requires:	pcre
 BuildRequires:	pcre-devel
-%endif
+BuildRequires:	w3c-libwww-devel
+BuildRequires:	WINGs-devel >= 0.95.0
 
 %description
 wmweather+ downloads current conditions, forecast data, and optionally a
@@ -74,7 +41,10 @@ external command.
 %setup -q
 
 %build
-./configure --prefix=%{_prefix} --mandir=%{_mandir}
+./configure --prefix=%{_prefix} \
+	--exec-prefix=%{_prefix} \
+	--libdir=%{_libdir} \
+	--with-libwraster=%{_prefix}
 
 make %{?_smp_mflags}
 
@@ -93,6 +63,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/wmweather+.*
 
 %changelog
+* Sat Feb 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 2.13-3
+- added buildrequires and requires for WINGs.
+
 * Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 2.13-2
 - updated sourceforge URLs.
 

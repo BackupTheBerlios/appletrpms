@@ -56,7 +56,7 @@ LCD_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(LCD_TAR)
 #APPLET_LIST += LCD
 
 AVFS_NAME=avfs
-AVFS_VERSION=1.0.0
+AVFS_VERSION=1.0.1
 AVFS_TAR=$(AVFS_NAME)-$(AVFS_VERSION).tar.gz
 AVFS_URL=http://downloads.sourceforge.net/project/avf/$(AVFS_NAME)/$(AVFS_VERSION)/$(AVFS_TAR)
 
@@ -69,20 +69,27 @@ CALCOO_URL=http://prdownloads.sourceforge.net/$(CALCOO_NAME)/$(CALCOO_TAR)
 
 APPLET_LIST += CALCOO
 
-EINA_NAME=eina
-EINA_VERSION=0.14.0
-EINA_TAR=$(EINA_NAME)-$(EINA_VERSION).tar.gz
-EINA_URL=http://launchpad.net/eina/trunk/$(EINA_VERSION)/+download/$(EINA_TAR)
+#EINA_NAME=eina
+#EINA_VERSION=0.14.0
+#EINA_TAR=$(EINA_NAME)-$(EINA_VERSION).tar.gz
+#EINA_URL=http://launchpad.net/eina/trunk/$(EINA_VERSION)/+download/$(EINA_TAR)
 
-APPLET_LIST += EINA
+#APPLET_LIST += EINA
 
 # Included in Fedora 15 Repository
 FOTOXX_NAME=fotoxx
-FOTOXX_VERSION=12.02
+FOTOXX_VERSION=13.01.2
 FOTOXX_TAR=$(FOTOXX_NAME)-$(FOTOXX_VERSION).tar.gz
-FOTOXX_URL=http://kornelix.squarespace.com/storage/downloads/$(FOTOXX_TAR)
+FOTOXX_URL=http://www.kornelix.com/uploads/1/3/0/3/13035936/$(FOTOXX_TAR)
 
 APPLET_LIST += FOTOXX
+
+GNAC_NAME=gnac
+GNAC_VERSION=0.2.4
+GNAC_TAR=$(GNAC_NAME)-$(GNAC_VERSION).tar.bz2
+GNAC_URL=http://prdownloads.sourceforge.net/$(GNAC_NAME)/$(GNAC_TAR)
+
+APPLET_LIST += GNAC
 
 JPEGINFO_NAME=jpeginfo
 JPEGINFO_VERSION=1.6.1
@@ -117,19 +124,22 @@ APPLET_LIST += JPEGINFO
 #APPLET_LIST += LIBWRASTER
 
 MEDIT_NAME=medit
-MEDIT_VERSION=1.0.5
-MEDIT_TAR=$(MEDIT_NAME)-$(MEDIT_VERSION).tar.bz2
-MEDIT_URL=http://sourceforge.net/projects/mooedit/files/$(MEDIT_NAME)/$(MEDIT_VERSION)/$(MEDIT_TAR)
-
+MEDIT_VERSION=1.1.2
+#  Deveopment TARBALL
+#MEDIT_TAR=$(MEDIT_NAME)-$(MEDIT_VERSION)-devel.tar.bz2
+#MEDIT_URL=http://downloads.sourceforge.net/project/mooedit/$(MEDIT_NAME)/unstable-1.0.9x/1.0.97/$(MEDIT_TAR)
+#  Standard TARBALL
+MEDIT_TAR=$(MEDIT_NAME)-1.1.92-devel.tar.bz2
+MEDIT_URL=http://downloads.sourceforge.net/project/mooedit/$(MEDIT_NAME)/$(MEDIT_VERSION)/$(MEDIT_TAR)
 APPLET_LIST += MEDIT
 
 # Included in Fedora 15 Repository
-MINED_NAME=mined
-MINED_VERSION=2012.20
-MINED_TAR=$(MINED_NAME)-$(MINED_VERSION).tar.gz
-MINED_URL=http://towo.net/mined/download/$(MINED_TAR)
+#MINED_NAME=mined
+#MINED_VERSION=2012.22
+#MINED_TAR=$(MINED_NAME)-$(MINED_VERSION).tar.gz
+#MINED_URL=http://towo.net/mined/download/$(MINED_TAR)
 
-APPLET_LIST += MINED
+#APPLET_LIST += MINED
 
 MPCK_NAME=mpck
 MPCK_VERSION=0.19
@@ -146,12 +156,12 @@ APPLET_LIST += MPCK
 #
 #APPLET_LIST += PARCELLITE
 
-SDLSCAVENGER_NAME=sdlscavenger
-SDLSCAVENGER_VERSION=1.4.5.1_2010_11_5
-SDLSCAVENGER_TAR=sdlscav-145.1_2010_11_5.tgz
-SDLSCAVENGER_URL=http://prdownloads.sourceforge.net/$(SDLSCAVENGER_NAME)/$(SDLSCAVENGER_TAR)
+#SDLSCAVENGER_NAME=sdlscavenger
+#SDLSCAVENGER_VERSION=1.4.5.1_2010_11_5
+#SDLSCAVENGER_TAR=sdlscav-145.1_2010_11_5.tgz
+#SDLSCAVENGER_URL=http://prdownloads.sourceforge.net/$(SDLSCAVENGER_NAME)/$(SDLSCAVENGER_TAR)
 
-APPLET_LIST += SDLSCAVENGER
+#APPLET_LIST += SDLSCAVENGER
 
 STALONETRAY_NAME=stalonetray
 STALONETRAY_VERSION=0.8.1
@@ -168,16 +178,16 @@ TKIRC_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(TKIRC_TAR)
 APPLET_LIST += TKIRC
 
 TRAYER_NAME=trayer
-TRAYER_VERSION=1.1.4
-TRAYER_TAR=sargon-trayer-srg-$(TRAYER_NAME)-$(TRAYER_VERSION)-3-gb04805f.tar.gz
+TRAYER_VERSION=1.1.5
+TRAYER_TAR=sargon-trayer-srg-$(TRAYER_NAME)-$(TRAYER_VERSION)-1-g3478b35.tar.gz
 TRAYER_URL=https://github.com/sargon/trayer-srg/tarball/master/$(TRAYER_TAR)
 
 APPLET_LIST += TRAYER
 
 WORKER_NAME=worker
-WORKER_VERSION=2.19.0
-WORKER_TAR=$(WORKER_NAME)-$(WORKER_VERSION).tar.gz
-WORKER_URL=http://www.boomerangsworld.de/worker/downloads/$(WORKER_TAR)
+WORKER_VERSION=2.19.6
+WORKER_TAR=$(WORKER_NAME)-$(WORKER_VERSION).tar.bz2
+WORKER_URL=http://www.boomerangsworld.de/cms/worker/downloads/$(WORKER_TAR)
 
 APPLET_LIST += WORKER
 

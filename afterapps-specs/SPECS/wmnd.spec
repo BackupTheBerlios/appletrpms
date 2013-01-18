@@ -1,6 +1,6 @@
 %define name	wmnd
-%define version	0.4.16
-%define release	2%{?dist}
+%define version	0.4.17
+%define release	1%{?dist}
 
 Summary:	wmnd is a network monitoring dockapp
 Name:		%name
@@ -10,8 +10,7 @@ License:	GPLv2+
 Group:		AfterStep/Applets
 URL:		http://www.thregr.org/~wavexx/software/wmnd/
 Source0:	http://www.thregr.org/~wavexx/software/wmnd/releases/%{name}-%{version}.tar.gz
-Patch0:		%{name}-%{version}-make-byte-packet-counters-64-bit.patch
-Patch1:		%{name}-%{version}-ld.patch
+Patch0:		%{name}-0.4.16-make-byte-packet-counters-64-bit.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	glibc
 Requires:	libICE
@@ -38,7 +37,6 @@ drivers. Enjoy!
 %prep
 %setup -q
 %patch0
-%patch1
 
 %build
 ./configure --prefix=%{_prefix} --mandir=%{_mandir}
@@ -50,7 +48,7 @@ rm -rf $RPM_BUILD_ROOT
 
 make install DESTDIR=$RPM_BUILD_ROOT
 
-rm -rf $RPM_BUILD_ROOT%{_datadir}/wmndrc
+rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/wmnd/examples/wmndrc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -62,6 +60,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/wmnd.*
 
 %changelog
+* Wed Jun 21 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.4.17-1
+- new version.
+
 * Wed Oct 19 2011 J. Krebs <rpm_speedy@yahoo.com> - 0.4.16-2
 - added requires and buildrequires, added packet counter & ld patches.
 

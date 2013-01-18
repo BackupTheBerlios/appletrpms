@@ -1,36 +1,51 @@
---- Makefile	2008-09-14 17:41:01.000000000 -0500
-+++ Makefile	2010-08-24 07:37:21.000000000 -0500
-@@ -1,10 +1,7 @@
+--- Makefile	2012-02-27 20:18:57.000000000 -0600
++++ Makefile	2012-02-27 21:12:33.000000000 -0600
+@@ -1,7 +1,7 @@
  # Makefile
  
  # Installation directory
 -PREFIX=/usr/local
--
--# Use Xft for the menu
--USE_XFT=yes
 +PREFIX=/usr
  
- VERSION=0.12
- 
-@@ -18,20 +15,10 @@
+ # Use Xft for the menu
+ USE_XFT=yes
+@@ -12,13 +12,14 @@
+ BINDIR=$(PREFIX)/bin
+ MANPREFIX=$(PREFIX)/share/man
+ MANDIR=$(MANPREFIX)/man1
++DESTDIR=
+ MANUAL=$(PROG).1
+ OBJS=main.o menu.o
+ CFLAGS=-O2 -Wall -DVERSION=\"$(VERSION)\"
  
  OS=$(shell uname -s)
  ifeq ($(OS),Linux)
 -LIBS=-L/usr/X11R6/lib -lX11 -lXext -lXpm
-+LIBS=-L/usr/X11R6/lib -L/usr/lib -L/usr/lib64 -lX11 -lXext -lXpm -lXft
++LIBS=-I/usr/include/freetype2 -L/usr/lib -L/usr/lib64 -lX11 -lXext -lXpm
  OBJS+=mem_linux.o
  endif
  
--ifeq ($(OS),FreeBSD)
--LIBS=-L/usr/X11R6/lib -lX11 -lXext -lXpm -lkvm
--OBJS+=mem_freebsd.o
--endif
--
--ifeq ($(USE_XFT),yes)
+@@ -28,8 +29,8 @@
+ endif
+ 
+ ifeq ($(USE_XFT),yes)
 -CFLAGS += -DUSE_XFT $(shell xft-config --cflags)
 -LIBS += $(shell xft-config --libs)
--endif
--
++CFLAGS += -DUSE_XFT -I/usr/include/freetype2
++LIBS += -lXft
+ endif
+ 
  CC=gcc
- RM=rm -rf
- INST=install
+@@ -46,8 +47,10 @@
+ clean:
+ 	$(RM) *.o $(PROG) *~ *.bak *.BAK .xvpics
+ install: $(PROG) $(MANUAL)
+-	$(INST) -m 755 $(PROG) $(BINDIR)
+-	$(INST) -m 644 $(MANUAL) $(MANDIR)
++	mkdir -p $(DESTDIR)$(BINDIR)
++	$(INST) -m 755 $(PROG) $(DESTDIR)$(BINDIR)
++	mkdir -p $(DESTDIR)$(MANDIR)
++	$(INST) -m 644 $(MANUAL) $(DESTDIR)$(MANDIR)
+ uninstall:
+ 	$(RM) $(BINDIR)/$(PROG)
+ 	$(RM) $(MANDIR)/$(MANUAL)
