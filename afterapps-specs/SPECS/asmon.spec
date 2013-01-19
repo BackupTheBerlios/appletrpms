@@ -1,6 +1,6 @@
 %define		name asmon
 %define		version 0.71
-%define		release 1%{?dist}
+%define		release 2%{?dist}
 
 Summary:	AS system monitor
 Name:		%name
@@ -8,8 +8,8 @@ Version:	%version
 Release:	%release
 License:	GPLv2+
 Group:		AfterStep/Applets
-URL:		http://rio.vg/asmon/
-Source0:	http://rio.vg/%{name}/%{name}-%{version}.tar.bz2
+URL:		ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/
+Source0:	ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/%{name}-%{version}.tar.bz2
 Source1:	%{name}-%{version}.man
 Patch0:		%{name}-%{version}-Makefile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -56,6 +56,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/asmon.*
 
 %changelog
+* Fri Jan 18 2013 J. Krebs <rpm_speedy@yahoo.com> - 0.71-2
+- provided new tarball link.
+
 * Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.71-1
 - new version.
 

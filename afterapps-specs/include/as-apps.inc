@@ -89,7 +89,7 @@ APPLET_LIST += ASMODEM
 ASMON_NAME=asmon
 ASMON_VERSION=0.71
 ASMON_TAR=$(ASMON_NAME)-$(ASMON_VERSION).tar.bz2
-ASMON_URL=http://rio.vg/$(ASMON_NAME)/$(ASMON_TAR)
+ASMON_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(ASMON_TAR)
 
 APPLET_LIST += ASMON
 

@@ -19,7 +19,7 @@ APPLET_LIST += BUBBLEMON-DOCKAPP
 DOCKER_NAME=docker
 DOCKER_VERSION=1.5
 DOCKER_TAR=$(DOCKER_NAME)-$(DOCKER_VERSION).tar.gz
-DOCKER_URL=http://icculus.org/openbox/2/$(DOCKER_NAME)/$(DOCKER_TAR)
+DOCKER_URL=http://dockapps.windowmaker.org/download.php/id/510/$(DOCKER_TAR)
 
 APPLET_LIST += DOCKER
 
@@ -135,7 +135,6 @@ APPLET_LIST += WMC2D
 WMCALC_NAME=wmcalc
 WMCALC_VERSION=0.4
 WMCALC_TAR=$(WMCALC_NAME)-$(WMCALC_VERSION).tar.gz
-#WMCALC_URL=http://gentoo.mirrors.easynews.com/linux/gentoo/distfiles/$(WMCALC_TAR)
 WMCALC_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(WMCALC_TAR)
 
 APPLET_LIST += WMCALC
@@ -232,7 +231,7 @@ WMINFO_URL=http://linux-bsd-unix.strefa.pl/$(WMINFO_TAR)
 
 APPLET_LIST += WMINFO
 
-# OSS and Pulseaudio don't seem to wMakefileork well
+# OSS and Pulseaudio don't seem to work well
 #WMIX_NAME=wmix
 #WMIX_VERSION=3.2
 #WMIX_TAR=$(WMIX_NAME)-$(WMIX_VERSION).tar.gz
@@ -351,7 +350,7 @@ APPLET_LIST += WMSM.APP
 WMSORSEN_NAME=wmsorsen
 WMSORSEN_VERSION=0.10.1
 WMSORSEN_TAR=$(WMSORSEN_NAME)-$(WMSORSEN_VERSION).tar.bz2
-WMSORSEN_URL=http://www.boomerangsworld.de/cms/dockapps/$(WMSORSEN_NAME)/downloads/$(WMSORSEN_TAR)
+WMSORSEN_URL=http://www.boomerangsworld.de/cms/dockapps/downloads/$(WMSORSEN_TAR)
 
 APPLET_LIST += WMSORSEN
 

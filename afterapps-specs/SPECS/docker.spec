@@ -1,6 +1,6 @@
 %define		name docker
 %define		version 1.5
-%define		release 5%{?dist}
+%define		release 6%{?dist}
 
 Summary:	Docking System Tray
 Name:		%name
@@ -8,8 +8,8 @@ Version:	%version
 Release:	%release
 License:	GPLv2+
 Group:		AfterStep/Applets
-URL:		http://icculus.org/openbox/2/docker/
-Source0:	http://icculus.org/openbox/2/%{name}/%{name}-%{version}.tar.gz
+URL:		http://dockapps.windowmaker.org/file.php/id/251
+Source0:	http://dockapps.windowmaker.org/download.php/id/510/%{name}-%{version}.tar.gz
 Patch0:		%{name}-%{version}-manpage.patch
 Patch1:		%{name}-%{version}-Makefile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -53,6 +53,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/docker.*
 
 %changelog
+* Fri Jan 18 2013 J. Krebs <rpm_speedy@yahoo.com> - 1.5-6
+- updated tarball link.
+
 * Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.5-5
 - updated spec file.
 

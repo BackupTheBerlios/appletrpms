@@ -1,6 +1,6 @@
 %define name	wmsorsen
 %define version	0.10.1
-%define release	2%{?dist}
+%define release	3%{?dist}
 
 Summary:	dockapp for window maker for displaying hardware sensor values.
 Name:		%name
@@ -9,7 +9,7 @@ Release:	%release
 License:	GPLv2+
 Group:		AfterStep/Applets
 URL:		http://www.boomerangsworld.de/cms/dockapps/wmsorsen/index?lang=en
-Source0:	http://www.boomerangsworld.de/cms/dockapps/wmsorsen/downloads/%{name}-%{version}.tar.bz2
+Source0:	http://www.boomerangsworld.de/cms/dockapps/downloads/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-%{version}-Makefile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	glibc
@@ -58,6 +58,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGELOG COPYING README wmsorsen/wmsorsenrc
 
 %changelog
+* Fri Jan 18 2013 J. Krebs <rpm_speedy@yahoo.com> - 0.10.1-3
+- updated tarball link.
+
 * Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.10.1-2
 - updated spec file.
 
