@@ -1,5 +1,5 @@
 %define version 0.70
-%define release 2%{?dist}
+%define release 3%{?dist}
 %define name	xsensors
 
 Summary:	displays motherboard sensor information via lm_sensors
@@ -58,6 +58,21 @@ make %{?_smp_mflags}
 rm -rf $RPM_BUILD_ROOT
 
 make install DESTDIR=$RPM_BUILD_ROOT
+#Install application link for X-Windows
+echo -e "[Desktop Entry]
+Name=Xsensors
+Comment=Displays motherboard sensor information via lm_sensors
+Exec=xsensors
+Icon=utilities-system-monitor
+Terminal=false
+Encoding=UTF-8
+Type=Application" > %{name}.desktop
+                                                                                
+desktop-file-install --vendor "" --delete-original \
+  --dir $RPM_BUILD_ROOT%{_datadir}/applications \
+  --add-category Monitor \
+  --add-category System \
+  %{name}.desktop
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -67,8 +82,12 @@ rm -rf $RPM_BUILD_ROOT
 %doc ABOUT-NLS AUTHORS BUGS COPYING ChangeLog NEWS README TODO
 %{_bindir}/xsensors
 %{_datadir}/pixmaps/xsensors/default.xpm
+%{_datadir}/applications/xsensors.desktop
 
 %changelog
+* Sat Jan 19 2013 J. Krebs <rpm_speedy@yahoo.com> - 0.70-3
+- linuxhardware.org is alive, added desktop entry.
+
 * Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.70-2
 - linuxhardware.org is dead, shifted tarball to ftp.afterstep.org.
 
