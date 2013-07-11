@@ -1,6 +1,6 @@
---- wminfo/configure	2012-10-31 09:05:31.000000000 -0500
-+++ wminfo/configure	2013-01-09 18:46:14.585400946 -0600
-@@ -28,27 +28,28 @@
+--- wminfo/configure	2013-04-08 14:07:20.000000000 -0500
++++ wminfo/configure	2013-07-10 18:39:06.428976736 -0500
+@@ -28,7 +28,7 @@
  fi
  if [ "$PREFIX" == "" ]
  then
@@ -9,19 +9,19 @@
  fi
  
  FILE=Makefile
+@@ -36,19 +36,20 @@
  
- > $FILE
- echo PREFIX=$PREFIX >> $FILE
--echo PACKAGE=wminfo-$version >> $FILE
-+echo PACKAGE=wminfo >> $FILE
- echo >> $FILE
- echo BINDIR=\$\(PREFIX\)/bin >> $FILE
--echo DOCDIR=\$\(PREFIX\)/doc/\$\(PACKAGE\) >> $FILE
--echo MANDIR=\$\(PREFIX\)/man/man1 >> $FILE
-+echo DOCDIR=\$\(PREFIX\)/share/doc/\$\(PACKAGE\) >> $FILE
-+echo MANDIR=\$\(PREFIX\)/share/man/man1 >> $FILE
- echo >> $FILE
  cat >> $FILE <<EOF
+ PREFIX=$PREFIX
+-PACKAGE=wminfo-$version
++PACKAGE=wminfo
+ 
+ BINDIR=\$(PREFIX)/bin
+-DOCDIR=\$(PREFIX)/doc/\$(PACKAGE)
+-MANDIR=\$(PREFIX)/man/man1
++DOCDIR=\$(PREFIX)/share/doc/\$(PACKAGE)
++MANDIR=\$(PREFIX)/share/man/man1
+ 
 -LIBDIR = -L/usr/X11R6/lib
 +LIBDIR = -L/usr/lib -L/usr/lib64
  LIBS   = -lXpm -lXext -lX11
@@ -33,18 +33,25 @@
 -	gcc -I/usr/X11R6/share/include \$(CFLAGS) -c -Wall \$< -o \$*.o
 +	gcc -I/usr/include \$(CFLAGS) -c -Wall \$< -o \$*.o
  
- wminfo: \$(OBJS)
+ all: \$(OBJS)
  	gcc \$(CFLAGS) -o wminfo \$^ -lXext \$(LIBDIR) \$(LIBS) && strip --strip-unneeded wminfo
-@@ -75,30 +76,30 @@
+@@ -75,34 +76,33 @@
  	rm -f Makefile
  
- install: wminfo
+ install:
 -	cp -p wminfo \$(BINDIR)
 -	chmod 755 \$(BINDIR)/wminfo
 -	chown root:root \$(BINDIR)/wminfo
+-
+-	cp -p regex \$(BINDIR)
+-	chmod 755 \$(BINDIR)/regex
+-	chown root:root \$(BINDIR)/regex
 +	mkdir -p \$(DESTDIR)\$(BINDIR)
 +	cp -p wminfo \$(DESTDIR)\$(BINDIR)
 +	chmod 755 \$(DESTDIR)\$(BINDIR)/wminfo
++
++	cp -p regex \$(DESTDIR)\$(BINDIR)
++	chmod 755 \$(DESTDIR)\$(BINDIR)/regex
  
  	for f in \$(CONTRIB) \\
 -	; do cp -p ../contrib/\$\$f \$(BINDIR) ; done
@@ -56,7 +63,7 @@
 -	cp -p ../man/wminfo.1 \$(MANDIR)
 +	cp -p ../man/wminfo.1 \$(DESTDIR)\$(MANDIR)
  
--	if [ ! -d \$(DOCDIR) ]; then mkdir \$(DOCDIR); fi
+-	if [ ! -d \$(DOCDIR) ]; then mkdir -p \$(DOCDIR); fi
 +	mkdir -p \$(DESTDIR)\$(DOCDIR)
  
  	for f in \$(DOCS) \\
@@ -77,4 +84,4 @@
 +	if [ ! -x \$(DESTDIR)\$(BINDIR)/\$\$d/empty.wmi ]; then ln -s \$(BINDIR)/bash-empty.wmi \$(DESTDIR)\$(BINDIR)/\$\$d/empty.wmi; fi
  
  uninstall:
- 	for f in wminfo empty.wmi \$(CONTRIB) \\
+ 	for f in wminfo regex empty.wmi \$(CONTRIB) \\

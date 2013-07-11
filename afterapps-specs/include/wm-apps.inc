@@ -225,7 +225,7 @@ WMINET_URL=http://www.swanson.ukfsn.org/wmdock/$(WMINET_TAR)
 APPLET_LIST += WMINET
 
 WMINFO_NAME=wminfo
-WMINFO_VERSION=4.0.0
+WMINFO_VERSION=4.1.1
 WMINFO_TAR=$(WMINFO_NAME)-$(WMINFO_VERSION).tar.gz
 WMINFO_URL=http://linux-bsd-unix.strefa.pl/$(WMINFO_TAR)
 

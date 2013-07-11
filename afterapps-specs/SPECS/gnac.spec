@@ -1,5 +1,5 @@
 %define name	gnac
-%define version	0.2.4
+%define version	0.2.4.1
 %define release	1%{?dist}
 
 Summary:	GTK2/Gnome audio convertion application
@@ -84,5 +84,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/gnac.*
 
 %changelog
+* Sat Mar 23 2013 J. Krebs <rpm_speedy@yahoo.com> - 0.2.4.1-1
+- New version.
+
 * Mon Apr 30 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.2.4-1
 - Initial build.

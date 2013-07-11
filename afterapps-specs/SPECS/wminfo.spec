@@ -1,5 +1,5 @@
 %define		name wminfo
-%define		version 4.0.0
+%define		version 4.1.1
 %define		release 1%{?dist}
 
 Summary:	dockapp that displays text-format information using the plugin 
@@ -10,7 +10,7 @@ License:	GPLv2+
 Group:		AfterStep/Applets
 URL:		http://linux-bsd-unix.strefa.pl/index.en.html
 Source0:	http://linux-bsd-unix.strefa.pl/%{name}-%{version}.tar.gz
-Patch0:		%{name}-4.0.0-configure.patch
+Patch0:		%{name}-4.1.1-configure.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	glibc
 Requires:	libX11
@@ -57,6 +57,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/dos-unix
 %{_bindir}/empty.wmi
 %{_bindir}/forecast
+%{_bindir}/format
 %{_bindir}/html-iso1
 %{_bindir}/html-iso2
 %{_bindir}/html-iso5
@@ -68,10 +69,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/netmon
 %{_bindir}/plugin
 %{_bindir}/punctuation
+%{_bindir}/regex
 %{_bindir}/run-all-wminfo-plugins
 %{_bindir}/suspend
 %{_bindir}/sysmon
 %{_bindir}/time+date
+%{_bindir}/timestring
 %{_bindir}/traffic
 %{_bindir}/utf8-iso1
 %{_bindir}/utf8-iso2
@@ -152,7 +155,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/doc/%{name}/plugins.conky/conky.multi-system2.wmi
 %{_datadir}/doc/%{name}/plugins.conky/conky.multi-time.wmi
 %{_datadir}/doc/%{name}/plugins.conky/conky.netmon.wmi
-%{_datadir}/doc/%{name}/plugins.conky/conky.patch
 %{_datadir}/doc/%{name}/plugins.conky/conky.swap.wmi
 %{_datadir}/doc/%{name}/plugins.conky/conky.sysmon.wmi
 %{_datadir}/doc/%{name}/plugins.conky/conky.thinkpad.wmi
@@ -361,14 +363,70 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/doc/%{name}/samples/quick-utf8-iso5.wmi
 %{_datadir}/doc/%{name}/samples/README.samples
 %{_datadir}/doc/%{name}/samples/run-all-wminfo-plugins
-%{_datadir}/doc/%{name}/samples/test-00-50.wmi
-%{_datadir}/doc/%{name}/samples/test-50-00.wmi
 %{_datadir}/doc/%{name}/samples/test.html
 %{_datadir}/doc/%{name}/THANKS
 %{_datadir}/doc/%{name}/TODO
+%{_datadir}/doc/wminfo/contrib/format
+%{_datadir}/doc/wminfo/contrib/timestring
+%{_datadir}/doc/wminfo/plugins.conky/conky-1.8.1.patch
+%{_datadir}/doc/wminfo/plugins.conky/conky-1.9.0.patch
+%{_datadir}/doc/wminfo/plugins.system/iching
+%{_datadir}/doc/wminfo/plugins.system/iching.cfg
+%{_datadir}/doc/wminfo/plugins.system/iching.wmi
+%{_datadir}/doc/wminfo/plugins.system/messages.wmi
+%{_datadir}/doc/wminfo/plugins.system/README.iching.wmi
+%{_datadir}/doc/wminfo/plugins.system/secure.wmi
+%{_datadir}/doc/wminfo/plugins.system/syslog.wmi
+%{_datadir}/doc/wminfo/plugins.system/wrapper-logfiles.wmi
+%{_datadir}/doc/wminfo/README.regex
+%{_datadir}/doc/wminfo/samples/color01t-800080.wmi
+%{_datadir}/doc/wminfo/samples/color02p-ff00ff.wmi
+%{_datadir}/doc/wminfo/samples/color03t-ff80ff.wmi
+%{_datadir}/doc/wminfo/samples/color04s-8000ff.wmi
+%{_datadir}/doc/wminfo/samples/color05t-000080.wmi
+%{_datadir}/doc/wminfo/samples/color06p-0000ff.wmi
+%{_datadir}/doc/wminfo/samples/color07t-8080ff.wmi
+%{_datadir}/doc/wminfo/samples/color08s-0080ff.wmi
+%{_datadir}/doc/wminfo/samples/color09t-008080.wmi
+%{_datadir}/doc/wminfo/samples/color10p-00ffff.wmi
+%{_datadir}/doc/wminfo/samples/color11t-80ffff.wmi
+%{_datadir}/doc/wminfo/samples/color12s-00ff80.wmi
+%{_datadir}/doc/wminfo/samples/color13t-008000.wmi
+%{_datadir}/doc/wminfo/samples/color14p-00ff00.wmi
+%{_datadir}/doc/wminfo/samples/color15t-80ff80.wmi
+%{_datadir}/doc/wminfo/samples/color16s-80ff00.wmi
+%{_datadir}/doc/wminfo/samples/color17t-808000.wmi
+%{_datadir}/doc/wminfo/samples/color18p-ffff00.wmi
+%{_datadir}/doc/wminfo/samples/color19t-ffff80.wmi
+%{_datadir}/doc/wminfo/samples/color20s-ff8000.wmi
+%{_datadir}/doc/wminfo/samples/color21t-800000.wmi
+%{_datadir}/doc/wminfo/samples/color22p-ff0000.wmi
+%{_datadir}/doc/wminfo/samples/color23t-ff8080.wmi
+%{_datadir}/doc/wminfo/samples/color24s-ff0080.wmi
+%{_datadir}/doc/wminfo/samples/colors.html
+%{_datadir}/doc/wminfo/samples/colors.jpg
+%{_datadir}/doc/wminfo/samples/dziadek.wmi
+%{_datadir}/doc/wminfo/samples/gray-000000.wmi
+%{_datadir}/doc/wminfo/samples/gray-202020.wmi
+%{_datadir}/doc/wminfo/samples/gray-404040.wmi
+%{_datadir}/doc/wminfo/samples/gray-606060.wmi
+%{_datadir}/doc/wminfo/samples/gray-808080-bright.wmi
+%{_datadir}/doc/wminfo/samples/gray-808080-dark.wmi
+%{_datadir}/doc/wminfo/samples/gray-a0a0a0.wmi
+%{_datadir}/doc/wminfo/samples/gray-c0c0c0.wmi
+%{_datadir}/doc/wminfo/samples/gray-e0e0e0.wmi
+%{_datadir}/doc/wminfo/samples/gray-ffffff.wmi
+%{_datadir}/doc/wminfo/samples/last-day.wmi
+%{_datadir}/doc/wminfo/samples/mondays-child.wmi
+%{_datadir}/doc/wminfo/samples/test-01-50.wmi
+%{_datadir}/doc/wminfo/samples/test-50-01.wmi
+%{_datadir}/doc/wminfo/samples/timestring.wmi
 %{_mandir}/man1/%{name}.1.gz
 
 %changelog
+* Wed Jul 10 2013 J. Krebs <rpm_speedy@yahoo.com> - 4.1.1-1
+- New version.
+
 * Wed Jan 09 2013 J. Krebs <rpm_speedy@yahoo.com> - 4.0.0-1
 - New version.
 

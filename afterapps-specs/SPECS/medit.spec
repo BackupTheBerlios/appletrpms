@@ -2,7 +2,7 @@
 %define pythver %pythtst
 
 %define	name 	medit
-%define	version	1.1.92
+%define	version	1.1.96
 %define	release	1%{?dist}
 
 Summary:	medit is a GTK-based text editor
@@ -12,7 +12,7 @@ Release:	%release
 License:	GPLv2, LGPLv2.1+, BSD and MIT License
 Group:		Applications/Editors
 URL:		http://mooedit.sourceforge.net/
-Source0:	http://downloads.sourceforge.net/project/mooedit/%{name}/1.1.2/%{name}-1.1.92-devel.tar.bz2
+Source0:	http://downloads.sourceforge.net/project/mooedit/%{name}/unstable-1.1.9x/%{name}-%{version}-devel.tar.bz2
 #Source0:	http://downloads.sourceforge.net/project/mooedit/%{name}/%{version}/%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	atk
@@ -55,7 +55,7 @@ medit is a GTK-based text editor.
 
 %prep
 #%setup -q
-%setup -q -n %{name}-1.1.92-devel
+%setup -q -n %{name}-%{version}-devel
 
 %build
 ./configure --prefix=%{_prefix} --libdir=%{_libdir} --with-python
@@ -144,7 +144,10 @@ fi
 %{_mandir}/man1/%{name}.*
 
 %changelog
-* Tue Nov 27 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.1.2-1
+* Fri May 17 2013 J. Krebs <rpm_speedy@yahoo.com> - 1.1.96-1
+- new version.
+
+* Tue Nov 27 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.1.92-1
 - new version.
 
 * Sun Jul 29 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.1.1-1

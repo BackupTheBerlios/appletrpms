@@ -1,5 +1,5 @@
 %define		name fotoxx
-%define		version 13.01.2
+%define		version 13.07
 %define		release 1%{?dist}
 
 Summary:	application for processing image files from a digital camera
@@ -23,6 +23,7 @@ Requires:	gdk-pixbuf2
 Requires:	glib2
 Requires:	glibc
 Requires:	gtk3
+Requires:	lcms2
 Requires:	libgcc
 Requires:	libpng
 Requires:	libstdc++
@@ -37,6 +38,7 @@ Buildrequires:	gcc-c++
 Buildrequires:	glib2-devel
 Buildrequires:	glibc-devel
 Buildrequires:	gtk3-devel
+Buildrequires:	lcms2-devel
 Buildrequires:	libpng-devel
 Buildrequires:	libstdc++-devel
 Buildrequires:	libtiff-devel
@@ -125,29 +127,49 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/doc/%{name}/changelog
+%{_datadir}/doc/%{name}/changelog-ca
+%{_datadir}/doc/%{name}/changelog-es
 %{_datadir}/doc/%{name}/copyright
-%{_datadir}/doc/%{name}/edit*
-#%{_datadir}/doc/%{name}/freecode
-%{_datadir}/doc/%{name}/images/*.jpeg
-%{_datadir}/doc/%{name}/images/*.jpg
-%{_datadir}/doc/%{name}/images/*.png
-%{_datadir}/doc/%{name}/KB-shortcuts
-%{_datadir}/doc/%{name}/KB-shortcuts-ca
-%{_datadir}/doc/%{name}/KB-shortcuts-es
+%{_datadir}/doc/%{name}/fotoxx-release
+%{_datadir}/doc/%{name}/freecode
 %{_datadir}/doc/%{name}/README
 %{_datadir}/doc/%{name}/README-ca
 %{_datadir}/doc/%{name}/README-es
 %{_datadir}/doc/%{name}/translations
-%{_datadir}/doc/%{name}/userguide-en.html
-%{_datadir}/doc/%{name}/userguide-es.html
-%{_datadir}/doc/%{name}/userguide-it.html
-%{_datadir}/%{name}/icons/*
-%{_datadir}/%{name}/locales/%{name}-*.po
+%{_datadir}/doc/%{name}/translations-ca
+%{_datadir}/doc/%{name}/translations-es
+%{_datadir}/%{name}/data/edit-menus
+%{_datadir}/%{name}/data/edit-menus-ca
+%{_datadir}/%{name}/data/edit-menus-es
+%{_datadir}/%{name}/data/images/*.jpeg
+%{_datadir}/%{name}/data/images/*.jpg
+%{_datadir}/%{name}/data/images/*.png
+%{_datadir}/%{name}/data/KB-shortcuts
+%{_datadir}/%{name}/data/KB-shortcuts-ca
+%{_datadir}/%{name}/data/KB-shortcuts-es
+%{_datadir}/%{name}/data/quickstart-ca.html
+%{_datadir}/%{name}/data/quickstart-de.html
+%{_datadir}/%{name}/data/quickstart-en.html
+%{_datadir}/%{name}/data/quickstart-es.html
+%{_datadir}/%{name}/data/quickstart-it.html
+%{_datadir}/%{name}/data/quickstart-pt.html
+%{_datadir}/%{name}/data/userguide-en.html
+%{_datadir}/%{name}/data/userguide-es.html
+%{_datadir}/%{name}/data/userguide-it.html
+%{_datadir}/%{name}/icons/edit-funcs/*.png
+%{_datadir}/%{name}/icons/*.png
+%{_datadir}/%{name}/locales/translate-*.po
 %{_datadir}/pixmaps/*.png
 %{_mandir}/man1/%{name}.*
 
 %changelog
-* Mon Jan 14 2012 J. Krebs <rpm_speedy@yahoo.com> - 13.01.2-1
+* Fri Jul 05 2013 J. Krebs <rpm_speedy@yahoo.com> - 13.07-1
+- new version.
+
+* Mon Feb 11 2013 J. Krebs <rpm_speedy@yahoo.com> - 13.02.1-1
+- new version.
+
+* Mon Jan 14 2013 J. Krebs <rpm_speedy@yahoo.com> - 13.01.2-1
 - new version.
 
 * Sat Oct 01 2011 J. Krebs <rpm_speedy@yahoo.com> - 10.10-1

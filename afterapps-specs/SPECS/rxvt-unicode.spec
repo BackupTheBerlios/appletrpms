@@ -1,6 +1,6 @@
 %define aitest	%(rpm -q --queryformat='%{VERSION}' libAfterImage)
 %define aiver	%aitest 
-%define version 9.16
+%define version 9.18
 %define release 1%{?dist}
 %define name	rxvt-unicode
 %define epoch	2
@@ -85,6 +85,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/urxvt
 
 %changelog
+* Tue Apr 02 2013 J. Krebs <rpm_speedy@yahoo.com> - 2:9.18-1
+- new version.
+
 * Thu Dec 27 2012 J. Krebs <rpm_speedy@yahoo.com> - 2:9.16-1
 - new version.
 

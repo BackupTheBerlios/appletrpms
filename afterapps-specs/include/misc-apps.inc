@@ -78,14 +78,14 @@ APPLET_LIST += CALCOO
 
 # Included in Fedora 15 Repository
 FOTOXX_NAME=fotoxx
-FOTOXX_VERSION=13.01.2
+FOTOXX_VERSION=13.07
 FOTOXX_TAR=$(FOTOXX_NAME)-$(FOTOXX_VERSION).tar.gz
 FOTOXX_URL=http://www.kornelix.com/uploads/1/3/0/3/13035936/$(FOTOXX_TAR)
 
 APPLET_LIST += FOTOXX
 
 GNAC_NAME=gnac
-GNAC_VERSION=0.2.4
+GNAC_VERSION=0.2.4.1
 GNAC_TAR=$(GNAC_NAME)-$(GNAC_VERSION).tar.bz2
 GNAC_URL=http://prdownloads.sourceforge.net/$(GNAC_NAME)/$(GNAC_TAR)
 
@@ -124,13 +124,10 @@ APPLET_LIST += JPEGINFO
 #APPLET_LIST += LIBWRASTER
 
 MEDIT_NAME=medit
-MEDIT_VERSION=1.1.2
-#  Deveopment TARBALL
-#MEDIT_TAR=$(MEDIT_NAME)-$(MEDIT_VERSION)-devel.tar.bz2
-#MEDIT_URL=http://downloads.sourceforge.net/project/mooedit/$(MEDIT_NAME)/unstable-1.0.9x/1.0.97/$(MEDIT_TAR)
-#  Standard TARBALL
-MEDIT_TAR=$(MEDIT_NAME)-1.1.92-devel.tar.bz2
-MEDIT_URL=http://downloads.sourceforge.net/project/mooedit/$(MEDIT_NAME)/$(MEDIT_VERSION)/$(MEDIT_TAR)
+MEDIT_VERSION=1.1.96
+MEDIT_TAR=$(MEDIT_NAME)-$(MEDIT_VERSION)-devel.tar.bz2
+MEDIT_URL=http://downloads.sourceforge.net/project/mooedit/$(MEDIT_NAME)/unstable-1.1.9x/$(MEDIT_TAR)
+#MEDIT_URL=http://downloads.sourceforge.net/project/mooedit/$(MEDIT_NAME)/$(MEDIT_VERSION)/$(MEDIT_TAR)
 APPLET_LIST += MEDIT
 
 # Included in Fedora 15 Repository
@@ -185,7 +182,7 @@ TRAYER_URL=https://github.com/sargon/trayer-srg/tarball/master/$(TRAYER_TAR)
 APPLET_LIST += TRAYER
 
 WORKER_NAME=worker
-WORKER_VERSION=2.19.6
+WORKER_VERSION=3.0.0
 WORKER_TAR=$(WORKER_NAME)-$(WORKER_VERSION).tar.bz2
 WORKER_URL=http://www.boomerangsworld.de/cms/worker/downloads/$(WORKER_TAR)
 
