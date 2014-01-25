@@ -1,8 +1,8 @@
 %define		name salmon
 %define		version 1.2.2
-%define		release 6%{?dist}
+%define		release 7%{?dist}
 
-Summary:	Sill Another Load MONitor
+Summary:	Sill Another Load MONitor applet for AfterStep and WindowMaker
 Name:		%name
 Version:	%version
 Release:	%release
@@ -10,6 +10,7 @@ License:	GPLv2
 Group:		AfterStep/Applets
 URL:		http://www.tigr.net/afterstep/view.php?applet=salmon/data
 Source0:	http://tigr.net/afterstep/download/salmon/%{name}-%{version}.tar.gz
+Patch0:		%{name}-%{version}-read_mem.c.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	glibc
 Requires:	libICE
@@ -37,6 +38,7 @@ the moon.
 
 %prep
 %setup -q
+%patch0
 
 %build
 ./configure --prefix=%{_prefix}
@@ -62,6 +64,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/salmon.*
 
 %changelog
+* Wed Jul 17 2013 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-7
+- added build patch for Fedora 19.
+
 * Wed Jan 25 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.2.2-6
 - updated spec file.
 

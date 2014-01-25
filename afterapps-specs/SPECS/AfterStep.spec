@@ -39,12 +39,12 @@
 ### END Distro Definitions
 
 %define	name AfterStep
-%define	asver		2.2.11
-%define	libaiver	1.20
+%define	asver		2.2.12
+%define	libaiver	1.21
 %define	libabver	1.14
-%define	libairel	3%{?dist}
-%define	libabrel	3%{?dist}
-%define release 3%{?dist}
+%define	libairel	1%{?dist}
+%define	libabrel	4%{?dist}
+%define release 1%{?dist}
 %define epoch 20
 
 Summary:	AfterStep Window Manager (NeXTalike)
@@ -69,7 +69,19 @@ Source9:	%{name}-2.2.11-wharf.alternate
 Patch0:		%{name}-2.2.5-ImageMagick.patch
 Patch1:		%{name}-2.2.7-winlist.patch
 Patch2:		%{name}-2.2.7-pager.patch
-Patch3:		%{name}-%{asver}-cvsupdate.patch
+Patch3:		%{name}-2.2.12-afterstep.c.patch
+Patch4:		%{name}-2.2.12-AfterStep.desktop.in.patch
+Patch5:		%{name}-2.2.12-AfterStep.session.patch
+Patch6:		%{name}-2.2.12-asapp.c.patch
+Patch7:		%{name}-2.2.12-asimagexml.c.patch
+Patch8:		%{name}-2.2.12-asinternals.h.patch
+Patch9:		%{name}-2.2.12-char2uni.c.patch
+Patch10:	%{name}-2.2.12-dbus.c.patch
+Patch11:	%{name}-2.2.12-events.c.patch
+Patch12:	%{name}-2.2.12-hints.c.patch
+Patch13:	%{name}-2.2.12-Propaganda-include.patch
+Patch14:	%{name}-2.2.12-timer.c.patch
+Patch15:	%{name}-2.2.12-timer.h.patch
 Distribution:	The AfterStep TEAM
 BuildRoot:	%{_tmppath}/%{name}-%{asver}-%{release}-root-%(%{__id_u} -n)
 %if %{mdk}
@@ -222,11 +234,23 @@ Requires:	libAfterBase = %{epoch}:%{libabver}-%{libabrel}
 Files needed for software development with libAfterBase.
 
 %prep
-%setup -q
+%setup -q -n afterstep-devel-%{asver}
 %patch0
 %patch1
 %patch2
 %patch3
+%patch4
+%patch5
+%patch6
+%patch7
+%patch8
+%patch9
+%patch10
+%patch11
+%patch12
+%patch13
+%patch14
+%patch15
 
 %build
 CFLAGS=$RPM_OPT_FLAGS \
@@ -240,7 +264,8 @@ CFLAGS=$RPM_OPT_FLAGS \
 	--with-helpcommand="urxvt -e man"         \
 	--with-imageloader="feh --bg-center"
 
-make %{?_smp_mflags}
+#make %{?_smp_mflags}
+make
 
 if [[ -x /usr/bin/sgml2html ]]; then sgml2html doc/afterstep.sgml; fi
 cd src/ASDocGen && ./ASDocGen -l log.html -t html && cd ../..
@@ -307,14 +332,22 @@ install -m 0755 %{SOURCE5} $RPM_BUILD_ROOT%{_sysconfdir}/menu-methods/AfterStep
 %multiarch_binaries $RPM_BUILD_ROOT%{_bindir}/asgtk-config
 %endif
 
+
+rm -rf $RPM_BUILD_ROOT%{_libdir}/libASGTK.a
+rm -rf $RPM_BUILD_ROOT%{_libdir}/libAfterBase.a
+rm -rf $RPM_BUILD_ROOT%{_libdir}/libAfterConf.a
+rm -rf $RPM_BUILD_ROOT%{_libdir}/libAfterImage.a
+rm -rf $RPM_BUILD_ROOT%{_libdir}/libAfterStep.a
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%doc ChangeLog NEW README* TEAM UPGRADE doc/languages doc/licences doc/code TODO doc/*.html doc/licences/COPYING*
+%doc ChangeLog NEW README* TEAM doc/languages doc/licences doc/code TODO doc/*.html doc/licences/COPYING*
 %doc src/ASDocGen/html/*html
 %{_bindir}/ASFileBrowser
+%{_bindir}/ASMount
 %{_bindir}/ASRun
 %{_bindir}/ASWallpaper
 %{_bindir}/Animate
@@ -343,9 +376,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/postcard.sh
 %dir %{_datadir}/afterstep
 %{_datadir}/afterstep/*
-%{_libdir}/libASGTK.so.1*
-%{_libdir}/libAfterConf.so.1*
-%{_libdir}/libAfterStep.so.1*
+%{_libdir}/libASGTK.so
+%{_libdir}/libASGTK.so.1
+%{_libdir}/libASGTK.so.1.05
+%{_libdir}/libAfterConf.so
+%{_libdir}/libAfterConf.so.1
+%{_libdir}/libAfterConf.so.1.17
+%{_libdir}/libAfterStep.so
+%{_libdir}/libAfterStep.so.1
+%{_libdir}/libAfterStep.so.1.17
 %{_mandir}/man1/*
 # this is evil hack, but I can't get it to work otherwise on mdk
 %if !%{fedora}
@@ -373,9 +412,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_includedir}/libAfterConf
 %dir %{_includedir}/libAfterStep
 %dir %{_includedir}/libASGTK
-%{_libdir}/libASGTK.so
-%{_libdir}/libAfterConf.so
-%{_libdir}/libAfterStep.so
 %{_includedir}/libAfterConf/*
 %{_includedir}/libAfterStep/*
 %{_includedir}/libASGTK/*
@@ -438,10 +474,13 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 
 %changelog
+* Fri Dec 27 2013 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.12-1
+- new version.
+
 * Thu Oct 27 2011 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.11-3
 - added build require for libjpeg-turbo-devel.
 
-* Fri Jul 20 2011 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.11-2
+* Fri Jul 22 2011 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.11-2
 - updated wharf to reflect applications usable with lm_sensors 3.0+, PulseAudio.
 
 * Fri Jan 14 2011 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.11-1
@@ -465,7 +504,7 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 * Mon Mar 24 2008 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.8-2
 - Pager fix added to fix issues when swallowed by Wharf.
 
-* Wed Mar 17 2008 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.8-1
+* Wed Mar 19 2008 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.8-1
 - new version.
 
 * Thu Dec 06 2007 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.7-4
@@ -512,10 +551,10 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 * Mon Nov 20 2006 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.4-1
 - new version.
 
-* Tue Oct 11 2006 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.3-1
+* Wed Oct 11 2006 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.3-1
 - new version.
 
-* Wed May 25 2006 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.2-1
+* Thu May 25 2006 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.2-1
 - new version.
 
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> - 20:2.2.1-3
@@ -579,7 +618,7 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 * Sat Feb 26 2005 Sean Dague <sean@dague.net> 20:2.00.02-2
 - brought up to 2.00.02 release
 
-* Wed Sep 28 2004 Graydon Saunders <graydon@epiphyte.net> 2.00.00
+* Wed Sep 29 2004 Graydon Saunders <graydon@epiphyte.net> 2.00.00
 - added %%{prefix}
 - added the man pages to the -libs package
 

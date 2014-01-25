@@ -2,7 +2,7 @@
 %define pythver %pythtst
 
 %define	name 	medit
-%define	version	1.1.96
+%define	version	1.1.97
 %define	release	1%{?dist}
 
 Summary:	medit is a GTK-based text editor
@@ -144,6 +144,9 @@ fi
 %{_mandir}/man1/%{name}.*
 
 %changelog
+* Sun Dec 07 2013 J. Krebs <rpm_speedy@yahoo.com> - 1.1.97-1
+- new version.
+
 * Fri May 17 2013 J. Krebs <rpm_speedy@yahoo.com> - 1.1.96-1
 - new version.
 

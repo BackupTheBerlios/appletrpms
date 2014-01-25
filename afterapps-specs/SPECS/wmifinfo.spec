@@ -1,6 +1,6 @@
 %define		name wmifinfo
 %define		version 0.09
-%define		release 6%{?dist}
+%define		release 7%{?dist}
 
 Summary:	wmifinfo shows basic network info for all available interfaces
 Name:		%name
@@ -12,6 +12,8 @@ URL:		http://www.zevv.nl/play/code/wmifinfo/
 Source0:	http://www.zevv.nl/play/code/%{name}/%{name}-%{version}.tgz
 Patch0:		%{name}-%{version}-Makefile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	libXpm
+BuildRequires:	libXpm-devel
 
 %description
 wmifinfo is a simple applet showing basic network info for
@@ -43,6 +45,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/%{name}
 
 %changelog
+* Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.09-7
+- updated package requirements.
+
 * Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.09-6
 - updated spec file.
 

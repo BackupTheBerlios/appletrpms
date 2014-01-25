@@ -1,6 +1,6 @@
 %define	name 	avfs
 %define	version	1.0.1
-%define	release	1%{?dist}
+%define	release	2%{?dist}
 
 Summary:	Enables programs to look inside archived/compressed files, access remote files
 Name:		%{name}
@@ -10,6 +10,9 @@ License:	GPLv2+ and LGPLv2+
 Group:		Applications/Archiving
 URL:		http://sourceforge.net/projects/avf
 Source0:	http://downloads.sourceforge.net/project/avf/%{name}/%{version}/%{name}-%{version}.tar.gz
+Patch0:		%{name}-%{version}-archive.c.patch
+Patch1:		%{name}-%{version}-state.c.patch
+Patch2:		%{name}-%{version}-utar.c.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	fuse
 Requires:	glibc
@@ -38,6 +41,9 @@ Development libraries and header files for %{name}
 
 %prep
 %setup -q
+%patch0
+%patch1
+%patch2
 
 %build
 ./configure --prefix=%{_prefix} --libdir=%{_libdir} --enable-fuse
@@ -71,6 +77,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.*a
 
 %changelog
+* Sat Nov 23 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.0.1-2
+- added cvs overflow patches.
+
 * Wed Jun 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 1.0.1-1
 - New version.
 

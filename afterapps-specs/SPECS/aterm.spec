@@ -2,7 +2,7 @@
 %define aiver	%aitest 
 %define	name	aterm
 %define	version	1.0.1
-%define	release	5%{?dist}
+%define	release	6%{?dist}
 %define epoch	2
 
 Summary:	terminal emulator in an X window
@@ -87,6 +87,9 @@ rm -rf $RPM_BUILD_ROOT;
 %{_datadir}/applications/*.desktop
 
 %changelog
+* Thu Jul 18 2013 J. Krebs <rpm_speedy@yahoo.com> 2:1.0.1-6
+- updated for build against libAfterImage 1.21.
+
 * Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> 2:1.0.1-5
 - updated spec file.
 
@@ -117,7 +120,7 @@ rm -rf $RPM_BUILD_ROOT;
 - built-under added to the name of the rpm. Added obsolete
 - for libAfterStep.
 
-* Wed May 25 2006 J. Krebs <rpm_speedy@yahoo.com> 1.0.0-5
+* Fri May 25 2006 J. Krebs <rpm_speedy@yahoo.com> 1.0.0-5
 - rebuild to coincide with AS 2.2.2 release.
 
 * Tue Mar 21 2006 J. Krebs <rpm_speedy@yahoo.com> 1.0.0-4

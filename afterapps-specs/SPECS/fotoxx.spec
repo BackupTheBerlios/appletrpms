@@ -1,5 +1,5 @@
 %define		name fotoxx
-%define		version 13.07
+%define		version 14.01.1
 %define		release 1%{?dist}
 
 Summary:	application for processing image files from a digital camera
@@ -10,7 +10,7 @@ License:	GPLv3+
 Group:		Applications/Multimedia
 URL:		http://www.kornelix.com/fotoxx.html
 Source0:	http://www.kornelix.com/uploads/1/3/0/3/13035936/%{name}-%{version}.tar.gz
-Patch0:		%{name}-11.11-Makefile.patch
+Patch0:		%{name}-13.08-Makefile.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	atk
 Requires:	cairo
@@ -116,6 +116,7 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/%{name}/locales/*/%{name}.po.old
 rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/%{name}/fotoxx.man
 rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/%{name}/freshmeat
 rm -rf $RPM_BUILD_ROOT%{_datadir}/%{name}/data/desktop
+rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/%{name}/freecode*
 
 desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
@@ -126,36 +127,38 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/doc/%{name}/changelog
-%{_datadir}/doc/%{name}/changelog-ca
-%{_datadir}/doc/%{name}/changelog-es
+%{_datadir}/doc/%{name}/changelog.gz
 %{_datadir}/doc/%{name}/copyright
-%{_datadir}/doc/%{name}/fotoxx-release
-%{_datadir}/doc/%{name}/freecode
-%{_datadir}/doc/%{name}/README
+%{_datadir}/doc/%{name}/%{name}-release
+%{_datadir}/doc/%{name}/README-en
 %{_datadir}/doc/%{name}/README-ca
 %{_datadir}/doc/%{name}/README-es
-%{_datadir}/doc/%{name}/translations
+%{_datadir}/doc/%{name}/translations-en
 %{_datadir}/doc/%{name}/translations-ca
 %{_datadir}/doc/%{name}/translations-es
-%{_datadir}/%{name}/data/edit-menus
+%{_datadir}/%{name}/data/edit-menus-en
 %{_datadir}/%{name}/data/edit-menus-ca
 %{_datadir}/%{name}/data/edit-menus-es
-%{_datadir}/%{name}/data/images/*.jpeg
+%{_datadir}/%{name}/data/favorites/menu-config
+%{_datadir}/%{name}/data/favorites/menu-config-pixbuf-009.png
+#%{_datadir}/%{name}/data/images/*.jpeg
 %{_datadir}/%{name}/data/images/*.jpg
 %{_datadir}/%{name}/data/images/*.png
-%{_datadir}/%{name}/data/KB-shortcuts
+%{_datadir}/%{name}/data/KB-shortcuts-en
 %{_datadir}/%{name}/data/KB-shortcuts-ca
 %{_datadir}/%{name}/data/KB-shortcuts-es
 %{_datadir}/%{name}/data/quickstart-ca.html
 %{_datadir}/%{name}/data/quickstart-de.html
 %{_datadir}/%{name}/data/quickstart-en.html
 %{_datadir}/%{name}/data/quickstart-es.html
+%{_datadir}/%{name}/data/quickstart-fr.html
 %{_datadir}/%{name}/data/quickstart-it.html
 %{_datadir}/%{name}/data/quickstart-pt.html
+%{_datadir}/%{name}/data/slideshow-tone.oga
 %{_datadir}/%{name}/data/userguide-en.html
 %{_datadir}/%{name}/data/userguide-es.html
 %{_datadir}/%{name}/data/userguide-it.html
+%{_datadir}/%{name}/data/tags_defined
 %{_datadir}/%{name}/icons/edit-funcs/*.png
 %{_datadir}/%{name}/icons/*.png
 %{_datadir}/%{name}/locales/translate-*.po
@@ -163,7 +166,19 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/%{name}.*
 
 %changelog
-* Fri Jul 05 2013 J. Krebs <rpm_speedy@yahoo.com> - 13.07-1
+* Sat Jan 04 2014 J. Krebs <rpm_speedy@yahoo.com> - 14.01.1-1
+- new version.
+
+* Sat Aug 31 2013 J. Krebs <rpm_speedy@yahoo.com> - 13.09.1-1
+- new version.
+
+* Sun Aug 11 2013 J. Krebs <rpm_speedy@yahoo.com> - 13.08.1-1
+- new version.
+
+* Wed Jul 17 2013 J. Krebs <rpm_speedy@yahoo.com> - 13.07.1-2
+- typos.
+
+* Mon Jul 15 2013 J. Krebs <rpm_speedy@yahoo.com> - 13.07.1-1
 - new version.
 
 * Mon Feb 11 2013 J. Krebs <rpm_speedy@yahoo.com> - 13.02.1-1
@@ -253,7 +268,7 @@ rm -rf $RPM_BUILD_ROOT
 * Sat Aug 16 2008 J. Krebs <rpm_speedy@yahoo.com> - 5.0.3-1
 - new version.
 
-* Sun Jul 12 2008 J. Krebs <rpm_speedy@yahoo.com> - 4.9-1
+* Sat Jul 12 2008 J. Krebs <rpm_speedy@yahoo.com> - 4.9-1
 - new version.
 
 * Sat Jun 21 2008 J. Krebs <rpm_speedy@yahoo.com> - 4.7-1
@@ -274,7 +289,7 @@ rm -rf $RPM_BUILD_ROOT
 * Mon Apr 21 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.41-1
 - new version.
 
-* Sat Apr 18 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.40-1
+* Fri Apr 18 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.40-1
 - new version.
 
 * Sat Apr 12 2008 J. Krebs <rpm_speedy@yahoo.com> - 0.39-1

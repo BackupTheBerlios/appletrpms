@@ -1,6 +1,6 @@
 %define		name wmbiff
 %define		version 0.4.27
-%define		release 6%{?dist}
+%define		release 7%{?dist}
 
 Summary:	A dockable/swallowed mail notifier
 Name:		%name
@@ -10,6 +10,8 @@ License:	GPLv2+
 Group:		AfterStep/Applets
 URL:		http://wmbiff.sf.net
 Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+Patch0:		%{name}-%{version}-gnutls-3.patch
+Patch1:		%{name}-%{version}-invalid-strncpy.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	glibc
 Requires:	gnutls  
@@ -41,6 +43,8 @@ wmbiff's with differrent configs).
 
 %prep
 %setup -q
+%patch0
+%patch1
 
 %build
 ./configure --prefix=%{_prefix} --mandir=%{_mandir} --libdir=%{_libdir} 
@@ -66,6 +70,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/skins/wmbiff-master-led.xpm
 
 %changelog
+* Wed Jul 17 2013 J. Krebs <rpm_speedy@yahoo.com> - 0.4.27-7
+- patches from gentoo team to deal with gnutls & mbox errors
+
 * Sat Jan 28 2012 J. Krebs <rpm_speedy@yahoo.com> - 0.4.27-6
 - updated sourceforge URLs
 

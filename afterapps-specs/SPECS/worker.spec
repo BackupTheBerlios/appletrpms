@@ -1,7 +1,7 @@
 %define avftest	%(rpm -q --queryformat='%{VERSION}' avfs)
 %define avfver	%avftest 
 %define		name worker
-%define		version 3.0.0
+%define		version 3.3.0
 %define		release 1%{?dist}
 
 Summary:	A file manager for the X Window System
@@ -134,6 +134,9 @@ fi
 %{_mandir}/man1/worker.*
 
 %changelog
+* Tue Jan 21 2014 J. Krebs <rpm_speedy@yahoo.com> 2:3.3.0-1
+- new version.
+
 * Mon Jun 24 2013 J. Krebs <rpm_speedy@yahoo.com> 2:3.0.0-1
 - new version.
 
