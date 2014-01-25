@@ -1,0 +1,13 @@
+--- libAfterImage/char2uni.c	2013-05-01 08:34:11.000000000 -0500
++++ libAfterImage/char2uni.c	2013-12-26 22:13:56.000000000 -0600
+@@ -810,8 +810,8 @@
+ 		return CHARSET_ISO8859_1;
+ 	}else if( name[0] == 'I' || name[0] == 'i' ) /* ISO... or IBM819*/
+ 	{
+-		if( name[1] == 'S' && name[1] == 's' )
+-			if( name[2] == 'O' && name[2] == 'o' )
++		if( name[1] == 'S' || name[1] == 's' )
++			if( name[2] == 'O' || name[2] == 'o' )
+ 			{
+ 				int pos = ( name[3] == '-' || name[3] == '_' )?4:3 ;
+ 				if( name[pos] == '8' )

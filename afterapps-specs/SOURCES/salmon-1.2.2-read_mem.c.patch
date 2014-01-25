@@ -1,0 +1,10 @@
+--- read_mem.c	2004-07-11 15:31:28.000000000 -0500
++++ read_mem.c	2013-07-17 09:02:37.882979938 -0500
+@@ -26,6 +26,7 @@
+ #include <fcntl.h>
+ #include <unistd.h>
+ #include <string.h>
++#include <time.h>
+ 
+ #include "state.h"
+ #include "config.h"

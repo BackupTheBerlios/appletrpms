@@ -1,0 +1,29 @@
+--- src/afterstep/asinternals.h	2013-05-01 08:34:11.000000000 -0500
++++ src/afterstep/asinternals.h	2013-12-26 22:16:13.000000000 -0600
+@@ -393,7 +393,7 @@
+ 
+ extern struct ASWindow *ColormapWin;
+ 
+-extern int 			 ASDBus_fd;
++extern int 			 ASDBusConnected;
+ 
+ extern struct ASVector *Modules;               /* dynamically resizable array of module_t data structures */
+ #define MODULES_LIST    VECTOR_HEAD(module_t,*Modules)
+@@ -570,9 +570,16 @@
+ void display_progress( Bool new_line, const char *msg_format, ... );
+ 
+ /*************************** dbus.c ***************************************/
++typedef struct 	ASDBusFd  {
++	int fd;
++	Bool readable;
++} ASDBusFd;
++
+ int asdbus_init();
++ASVector* asdbus_getFds();
++void asdbus_handleDispatches ();
+ void asdbus_shutdown();
+-void asdbus_process_messages ();
++void asdbus_process_messages (ASDBusFd*);
+ 
+ char *asdbus_RegisterSMClient(const char *sm_client_id);
+ void asdbus_Notify(const char *summary, const char *body, int timeout);

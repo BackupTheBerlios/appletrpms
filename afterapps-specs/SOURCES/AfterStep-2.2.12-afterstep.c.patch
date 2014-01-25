@@ -1,0 +1,40 @@
+--- src/afterstep/afterstep.c	2013-05-01 08:34:11.000000000 -0500
++++ src/afterstep/afterstep.c	2013-12-27 12:24:09.000000000 -0600
+@@ -45,7 +45,7 @@
+ ASFlagType AfterStepStartupFlags = 0;
+ 
+ /* DBUS stuff is separated into dbus.c */
+-int ASDBus_fd = -1;
++Bool ASDBusConnected = False;
+ char *GnomeSessionClientID = NULL;
+ 
+ /* Config : */
+@@ -194,7 +194,7 @@
+ 	}
+ 
+ 
+-	ASDBus_fd = asdbus_init ();
++	ASDBusConnected = asdbus_init ();
+ 
+ 	XSetWindowBackground (dpy, Scr.Root, Scr.asv->black_pixel);
+ 	Scr.Look.desktop_animation_tint = get_random_tint_color ();
+@@ -207,8 +207,8 @@
+ 		show_progress ("AfterStep v.%s is starting up ...", VERSION);
+ 		display_progress (True, "AfterStep v.%s is starting up ...", VERSION);
+ 	}
+-
+-	if (ASDBus_fd >= 0) {
++//sleep_a_millisec(1000);
++	if (ASDBusConnected) {
+ 		show_progress ("Successfuly accured Session DBus connection.");
+ 		GnomeSessionClientID = asdbus_RegisterSMClient (SMClientID_string);
+ 		if (GnomeSessionClientID != NULL) {
+@@ -922,7 +922,7 @@
+ 	/* Really make sure that the connection is closed and cleared! */
+ 	XSync (dpy, 0);
+ 
+-	if (ASDBus_fd >= 0) {
++	if (ASDBusConnected) {
+ 		if (GnomeSessionClientID != NULL)
+ 			asdbus_UnregisterSMClient (GnomeSessionClientID);
+ 		asdbus_shutdown ();

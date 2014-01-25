@@ -1,0 +1,10 @@
+--- libAfterBase/timer.h	2013-05-01 08:34:11.000000000 -0500
++++ libAfterBase/timer.h	2013-12-26 22:12:49.000000000 -0600
+@@ -46,6 +46,7 @@
+ Bool timer_remove_by_data (void *data);
+ void timer_remove_all ();
+ Bool timer_find_by_data (void *data);
++void tv_add_ms(struct timeval *tv, time_t msec);
+ 
+ #ifdef __cplusplus
+ }

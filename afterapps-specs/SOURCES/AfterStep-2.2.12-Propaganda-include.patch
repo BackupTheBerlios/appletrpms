@@ -1,0 +1,12 @@
+--- afterstep/start/1_Desktop/Pictures/Propaganda_Images/.include	1969-12-31 18:00:00.000000000 -0600
++++ afterstep/start/1_Desktop/Pictures/Propaganda_Images/.include	2013-10-06 22:53:20.169383666 -0500
+@@ -0,0 +1,9 @@
++RecentSubmenuItems 0
++SmallMiniPixmap Folder-JFK
++keepname
++
++include "/usr/share/backgrounds/Propaganda" BackgroundForeign
++include "~/Pictures/Propaganda" BackgroundForeign
++
++Comment "Propaganda tiles & images. If you do not see anything here - then please download the archive from ftp://ftp.afterstep.org/backgrounds and place into ~/Pictures."
++

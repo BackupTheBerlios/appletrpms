@@ -1,0 +1,14 @@
+--- libAfterStep/hints.c	2013-05-01 08:34:11.000000000 -0500
++++ libAfterStep/hints.c	2013-12-26 22:15:02.000000000 -0600
+@@ -2981,9 +2981,9 @@
+ 	if (clean->client_host)
+ 		func (stream, "CLEAN.client_host = \"%s\";\n", clean->client_host);
+ 	if (clean->client_cmd)
+-		func (stream, "CLEAN.client_cmd = \"%s\";\n", clean->client_cmd);
++		func (stream, "CLEAN.client_cmd = \"%s\";\n", clean->client_cmd);	
+ 
+-	func (stream, "CLEAN.extwm_window_type = \"%s\";\n", clean->extwm_window_type);
++    func (stream, "CLEAN.extwm_window_type = \"0x%lX\";\n", clean->extwm_window_type);
+ }
+ 
+ void
