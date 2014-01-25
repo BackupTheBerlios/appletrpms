@@ -90,12 +90,14 @@ APPLET_LIST += TEMPERATURE.APP
 
 #APPLET_LIST += WMALMS
 
-WMAUDA_NAME=wmauda
-WMAUDA_VERSION=0.9
-WMAUDA_TAR=$(WMAUDA_NAME)-$(WMAUDA_VERSION).tar.gz
-WMAUDA_URL=http://www.netswarm.net/misc/$(WMAUDA_TAR)
+# libmcs has been deprecated under newer versions of GSettings and is not included
+# in Fedora 19 and later.
+#WMAUDA_NAME=wmauda
+#WMAUDA_VERSION=0.9
+#WMAUDA_TAR=$(WMAUDA_NAME)-$(WMAUDA_VERSION).tar.gz
+#WMAUDA_URL=http://www.netswarm.net/misc/$(WMAUDA_TAR)
 
-APPLET_LIST += WMAUDA
+#APPLET_LIST += WMAUDA
 
 WMBIFF_NAME=wmbiff
 WMBIFF_VERSION=0.4.27

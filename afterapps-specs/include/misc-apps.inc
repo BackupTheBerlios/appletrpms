@@ -78,7 +78,7 @@ APPLET_LIST += CALCOO
 
 # Included in Fedora 15 Repository
 FOTOXX_NAME=fotoxx
-FOTOXX_VERSION=13.07
+FOTOXX_VERSION=14.01.1
 FOTOXX_TAR=$(FOTOXX_NAME)-$(FOTOXX_VERSION).tar.gz
 FOTOXX_URL=http://www.kornelix.com/uploads/1/3/0/3/13035936/$(FOTOXX_TAR)
 
@@ -124,7 +124,7 @@ APPLET_LIST += JPEGINFO
 #APPLET_LIST += LIBWRASTER
 
 MEDIT_NAME=medit
-MEDIT_VERSION=1.1.96
+MEDIT_VERSION=1.1.97
 MEDIT_TAR=$(MEDIT_NAME)-$(MEDIT_VERSION)-devel.tar.bz2
 MEDIT_URL=http://downloads.sourceforge.net/project/mooedit/$(MEDIT_NAME)/unstable-1.1.9x/$(MEDIT_TAR)
 #MEDIT_URL=http://downloads.sourceforge.net/project/mooedit/$(MEDIT_NAME)/$(MEDIT_VERSION)/$(MEDIT_TAR)
@@ -175,14 +175,16 @@ TKIRC_URL=ftp://ftp.afterstep.org/stable/rpms/misc-tarballs/$(TKIRC_TAR)
 APPLET_LIST += TKIRC
 
 TRAYER_NAME=trayer
-TRAYER_VERSION=1.1.5
-TRAYER_TAR=sargon-trayer-srg-$(TRAYER_NAME)-$(TRAYER_VERSION)-1-g3478b35.tar.gz
-TRAYER_URL=https://github.com/sargon/trayer-srg/tarball/master/$(TRAYER_TAR)
+TRAYER_VERSION=1.1.6
+#TRAYER_TAR=sargon-trayer-srg-$(TRAYER_NAME)-$(TRAYER_VERSION)-1-g3478b35.tar.gz
+TRAYER_TAR=$(TRAYER_NAME)-$(TRAYER_VERSION).tar.gz
+#TRAYER_URL=https://github.com/sargon/trayer-srg/tarball/master/$(TRAYER_TAR)
+TRAYER_URL=https://github.com/sargon/trayer-srg/archive/$(TRAYER_TAR)
 
 APPLET_LIST += TRAYER
 
 WORKER_NAME=worker
-WORKER_VERSION=3.0.0
+WORKER_VERSION=3.3.0
 WORKER_TAR=$(WORKER_NAME)-$(WORKER_VERSION).tar.bz2
 WORKER_URL=http://www.boomerangsworld.de/cms/worker/downloads/$(WORKER_TAR)
 
